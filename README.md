@@ -224,12 +224,13 @@ CREDITS
 ------------------------------------------------------------------------
 BeamDog / Overhaul Games: for the Infinity Engine and inspiring this mod
 K4thos: for giving us the awesome playground (EET) in which to mod
-DavidW: for the lovely macros included in alter_script.tpa
+DavidW: for the lovely macros included in alter_script.tpa as well as guidance on encapsulation and immutability
 Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
 Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
 Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
 You can all thank subtledoctor for timers having the option to skip sailing times
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
+Bubb and CamDawg for helping me get through a cut-scene/override fiasco - LOVE YOU FOREVER!!!
 The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
@@ -260,17 +261,4 @@ The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under
 
 Endless BG1 components are used with the permission of the mod's author, jastey.
 
-    © 2020 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
 
