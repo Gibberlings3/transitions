@@ -3,7 +3,6 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneMode()
 		SetGlobal("C#st_ImoenInGroupKD","GLOBAL",99)
 		SetGlobal("BD_TURNOFF_GEARSCRIPT","BD0120",1)  // Tomb Safehouse  First Floor
 		SetGlobal("BD0120_START","GLOBAL",1)
@@ -38,7 +37,6 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneMode()
 		ActionOverride("Belt",ForceSpell(Player1,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
 		ActionOverride("Belt",ForceSpell(Player2,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
 		ActionOverride("Belt",ForceSpell(Player3,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
