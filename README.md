@@ -250,9 +250,9 @@ HISTORY
 Version 1
 -first public release
 
-============================================================================
+------------------------------------------------------------------------
 LEGAL INFORMATION
-============================================================================
+------------------------------------------------------------------------
 Transitions is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
 This mod is also not developed, supported, or endorsed by BioWare, Black Isle Studios, Interplay Entertainment Corp., Overhaul Games or Beamdog. All other trademarks and copyrights are property of their respective owners.
 
