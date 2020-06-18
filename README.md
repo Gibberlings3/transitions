@@ -1,41 +1,12 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@lzenner
-lzenner /
-transitions
-Private
-
-1
-0
-
-    0
-
-Code
-Issues 0
-Pull requests 0
-Actions
-Projects 0
-Security 0
-Insights
-
-    Settings
-
-transitions/readme.transitions.english.txt
-@lzenner lzenner Initial commit 948eb8a 1 hour ago
-258 lines (192 sloc) 21.4 KB
 -------------------------------------------------
 ---               Transitions                 ---
 ---    		    for EET		      ---
 ---                by Lauriel                 ---
 -------------------------------------------------
 
-
+------------------------------------------------------------------------
 GENERAL
-
+------------------------------------------------------------------------
 This mod requires EET.  It is not compatible with other games at this time.
 
 The Transitions mod will provide a mechanism to remain in the BGI "world" after Sarevok is defeated.  It is aware of, compatible with, and plays off of jastey's Endless BG1 and Imoen Forever mods, though they are not required.
@@ -50,7 +21,9 @@ In order to plug the plot hole dealing with Sarevok's sword, he can be given his
 
 There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  Good and neutral aligned protagonists will receive Cure Serious Wounds and evil aligned protagonists will receive Cause Serious Wounds.  They weren't my first choice.  I wanted Greenstone Amulet's Mind Shield and Algernon's Cloak Charm Creature, but that's a bit more complicated than I can take on at the moment.  It is my desire to put those in at a future time.
 
+------------------------------------------------------------------------
 DESCRIPTION
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 1 Main Component (Required)
@@ -190,9 +163,9 @@ There are 2 options for the timer portion:
 Option 1: Don't include sailing time to and from Balduran's Isle in the world timers
 Option 2: Sailing time (46 days) counts against world timers
 
-
+------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
-
+------------------------------------------------------------------------
 jastey's palace treasurer
 Close any open quests that will be impossible to continue after Sarevok is dead
 Clean-up quests should use the quest journal
@@ -213,14 +186,14 @@ Clean up unique items that might be duplicated due playing areas out of normal s
 Make sure there are consequenses to returning to BG before name is cleared
 Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
 
-
+------------------------------------------------------------------------
 COMPATABIITY NOTES
-
+------------------------------------------------------------------------
 There are no known compatability issues at this time
 
-
+------------------------------------------------------------------------
 INSTALLATION
-
+------------------------------------------------------------------------
 It may be necessary to install transitions before?/after? NPC mods.
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
@@ -246,8 +219,9 @@ Run WeInstall transitions in your game folder to install the mod. Then run wine 
 
 If you have installation problems or encounter any bugs, please post your bug report in one of the forum threads.
 
+------------------------------------------------------------------------
 CREDITS
-
+------------------------------------------------------------------------
 BeamDog / Overhaul Games: for the Infinity Engine and inspiring this mod
 K4thos: for giving us the awesome playground (EET) in which to mod
 DavidW: for the lovely macros included in alter_script.tpa
@@ -258,8 +232,9 @@ You can all thank subtledoctor for timers having the option to skip sailing time
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
+------------------------------------------------------------------------
 USED TOOLS AND RESSOURCES
-
+------------------------------------------------------------------------
 The Transitions Mod was created using the resources provided by the IESDP (https://gibberlings3.github.io/iesdp/index.htm) and with the following software:
 
 Near Infinity			https://github.com/Argent77/NearInfinity/releases/latest
@@ -269,13 +244,13 @@ Modding communities, tutorials and technical assistance:
 
 The Gibberlings Three		http://gibberlings3.net
 
-
+------------------------------------------------------------------------
 HISTORY
-
+------------------------------------------------------------------------
 Version 1
 -first public release
 
-
+============================================================================
 LEGAL INFORMATION
 ============================================================================
 Transitions is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
@@ -284,7 +259,6 @@ This mod is also not developed, supported, or endorsed by BioWare, Black Isle St
 The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ ). The Sarevok Unique Items from the Endless BGI Mod and Transitions are therefore licensed under "Creative Commons" von Nicolas Peters.
 
 Endless BG1 components are used with the permission of the mod's author, jastey.
-============================================================================
 
     © 2020 GitHub, Inc.
     Terms
