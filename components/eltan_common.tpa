@@ -1,0 +1,20 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Common elements to the component that adds in Duke Eltan's reward and romance //
+// Included via eltan_house0-2 tpa files                                         //
+// Item strings are in game.tra                                                  //
+///////////////////////////////////////////////////////////////////////////////////
+
+// Make sure Eltan is alive and in position in the Ducal Palace
+// if the protagonist delivered him safely to the harbor master
+EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/BG0108c.baf~
+
+// Modify his dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_eltan.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Make sure he's no longer with the Harbor Master
+LAF UPDATE_BCS
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0702~			// like my_new_BG0146
+		bcs_name = ~BG0702~			// like BG0146
+END

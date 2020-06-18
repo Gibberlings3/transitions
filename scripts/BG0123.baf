@@ -1,0 +1,20 @@
+///////////////////////////////////////////////////////////////////
+// Spawn flaming fist healers when they exit the temple          //
+// if they still have the sword                                  // 
+// Can happen if they leave before killing all of Sarevok's crew //
+// Included via ffhealers.tpa                                    //
+///////////////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("#L_FFHealersSpawned","MYAREA",0)
+	PartyHasItem("SW2H16")
+	CombatCounter(0)
+	!ActuallyInCombat()
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFHealersSpawned","MYAEA",1)
+		SetGlobal("C#st_FFHealerSpawn","GLOBAL",1)
+		CreateCreature("#LffHlr1",[1893.1531],6)
+		CreateCreature("#LffHlr2",[1848.1585],6)
+		Continue()
+END

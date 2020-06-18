@@ -1,0 +1,37 @@
+//////////////////////////////////
+// Tazok Quest                  //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	Exists("Tazok")
+	Exists("#LBandit")
+THEN
+	RESPONSE #100
+		ActionOverride("Tazok",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		ActionOverride("#LBandit",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",2)
+	Global("#L_TazokSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TazokSpawned","MYAREA",1)
+		// Tazok and 6 beefed up bandits
+		CreateCreature("TAZOK2",[3141.1392],E)  // Tazok
+		CreateCreature("#LBandit",[3352.1292],S)  // Bandit
+		CreateCreature("#LBandit",[3441.1311],SW)  // Bandit
+		CreateCreature("#LBandit",[3132.1585],SW)  // Bandit
+		CreateCreature("#LBandit",[3369.1609],N)  // Bandit
+		CreateCreature("#LBandit",[2944.1441],E)  // Bandit
+		CreateCreature("#LBandit",[2993.1473],E)  // Bandit
+		ActionOverride("Tazok",StartDialogNoSet(Player1))
+		Continue()
+END

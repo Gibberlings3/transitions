@@ -1,0 +1,13 @@
+//////////////////////////////////////////////////////
+// Sets Global for Tamoko's suicide by Flaming Fist //
+// Patched via tamoko.tpa                           //
+//////////////////////////////////////////////////////
+
+IF
+	Global("#L_TamokoSet","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TamokoSet","MYAREA",1)
+		SetGlobal("#L_TamokoDie","GLOBAL",1)
+		Continue()
+END

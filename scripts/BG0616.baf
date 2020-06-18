@@ -1,0 +1,13 @@
+/////////////////////////////////////////////////
+// Clean-up of merhant in Iron Throne buliding //
+// Compiled via town_chatter.tpa               //
+/////////////////////////////////////////////////
+
+IF 
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Exists("Dhanial")
+THEN
+	RESPONSE #100
+		ActionOverride("DHANIAL",DestroySelf())
+		Continue()
+END

@@ -1,0 +1,32 @@
+/////////////////////////////////////////////////////////////////
+// Optional component that has Elminster make an appearance    //
+// outside the Ducal Palace and talks to PC again              //
+// This is the original unused dialogue from BG1               //
+// Modified version of what jastey uses in her Endless BG1 mod //
+/////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION elminster BEGIN
+	// Build a new dialogue file for Elminster using the original strrefs
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster.d~
+
+	// Build a new Elminster with the dialogue file plugged in
+	COPY_EXISTING ~ELMIN5.cre~ ~override/#LELMN01.cre~
+		WRITE_ASCII 0x280 ~#LELMN01~ #32 // set DV
+		WRITE_EVALUATED_ASCII 0x2cc ~#LELMN01~ #8   // dialogue
+
+	// Delete jastey's Elminster spawning code, if it's there
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 1
+		STR_VAR 
+			script = BG0200
+			match = ~SetGlobal("C#st_SarevokElminster","MYAREA",1)~
+	END
+
+	// Spawn the new Elminster outside the Ducal Palace after Sarevok is dead
+	COPY_EXISTING ~BG0200.BCS~ ~override~
+	   DECOMPILE_AND_PATCH BEGIN 
+	      APPEND_FILE TEXT ~%mod_root%/scripts/BG0200b.baf~
+	   END
+	BUT_ONLY_IF_IT_CHANGES
+END

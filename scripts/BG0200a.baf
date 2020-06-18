@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////
+// Opens the door to the Ducal Palace after Sarevok has been defeated //
+// And spawns the guards out front                                    //
+// Patched via main_common.tpa                                        //
+////////////////////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("#L_BG1PalaceOpen","MYAREA",0)
+THEN
+	RESPONSE #100
+       	CreateCreature("#LDPGrd1",[1890.2746],0)
+       	CreateCreature("#LDPGrd2",[2069.2776],0)
+		OpenDoor("Door0108")
+		TriggerActivation("Dor0108",TRUE)
+		SetGlobal("#L_BG1PalaceOpen","MYAREA",1)
+		Continue()
+END
+
+

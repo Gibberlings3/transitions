@@ -1,0 +1,50 @@
+/////////////////////////////////////////////////
+// Opens the way to the PC's house in Beregost //
+// Patched via eltan_house2.tpa                //
+/////////////////////////////////////////////////
+
+IF
+	Global("#L_HouseBeregost","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",0)
+THEN
+	RESPONSE #100
+		AddMapNote([980.1030],@1013)
+		MoveContainerContents("BG3347*Container1","#LBG3347*PlayerChest00")
+		MoveContainerContents("BG3348*Container1","#LBG3347*PlayerChest00")
+		MoveContainerContents("BG3348*Container2","#LBG3347*PlayerChest00")
+		CloseDoor("Port3347")
+		SmallWait(1)
+		Lock("Port3347")
+		TriggerActivation("Door3347",FALSE)
+		TriggerActivation("Door#lbg3347",TRUE)
+		SmallWait(1)
+		SetGlobal("#L_HousePrepped","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_HouseBeregost","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",1)
+	Global("#L_DoorTimerSet","MYAREA",0)
+	OpenState("Port3347",TRUE)
+THEN
+	RESPONSE #100
+		// Keeping the door open for 10 seconds should be more than enough time 
+		RealSetGlobalTimer("#L_DoorTimer","MYAREA",10)
+		SetGlobal("#L_DoorTimerSet","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_DoorTimerSet","MYAREA",1)
+	RealGlobalTimerExpired("#L_DoorTimer","MYAREA")
+THEN
+	RESPONSE #100
+		CloseDoor("Port3347")
+		SmallWait(1)
+		Lock("Port3347")
+		SmallWait(1)
+		SetGlobal("#L_DoorTimerSet","MYAREA",0)
+		Continue()
+END
+

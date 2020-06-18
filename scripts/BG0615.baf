@@ -1,0 +1,25 @@
+//////////////////////////////////
+// Tamoko Quest                 //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	Exists("Tamoko")
+THEN
+	RESPONSE #100
+		ActionOverride("Tamoko",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_TamokoSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TamokoSpawned","MYAREA",1)
+		CreateCreature("Tamoko",[643.468],NW)  // Tamoko
+		Wait(2)
+		ActionOverride("Tamoko",MakeGlobalOverride())
+		ActionOverride("Tamoko",StartDialogNoSet(Player1))
+		Continue()
+END

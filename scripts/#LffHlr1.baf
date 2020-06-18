@@ -1,0 +1,13 @@
+//////////////////////////////////////////////////////////
+// New class script file for new flaming fist healer #1 //
+// Just starts dialogue with the protagonist            //
+// Compiled and attached via ffhealer.tpa               //
+//////////////////////////////////////////////////////////
+IF
+	See(Player1)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		StartDialogNoSet(Player1)
+		Continue()
+END

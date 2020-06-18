@@ -1,0 +1,62 @@
+IF
+	Global("BD_Plot","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneMode()
+		SetGlobal("C#st_ImoenInGroupKD","GLOBAL",99)
+		SetGlobal("BD_TURNOFF_GEARSCRIPT","BD0120",1)  // Tomb Safehouse  First Floor
+		SetGlobal("BD0120_START","GLOBAL",1)
+		SetGlobal("BD_Init_Gold","BD0120",1)  // Tomb Safehouse  First Floor
+		SetGlobal("BD_Plot","GLOBAL",1)
+		SetGlobal("SOD_fromimport","GLOBAL",2)
+		SetGlobal("bd_leaving2_ot","GLOBAL",99)
+		SetGlobal("BD_SMIMP","BD0120",1)  // Tomb Safehouse  First Floor
+		ActionOverride("Belt",ForceSpell(Player1,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player2,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player3,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player4,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player5,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player6,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		Wait(3)
+		FadeToColor([30.0],0)
+		Wait(1)
+		LeaveAreaLUA("BD0120","",[905.1615],NE)  // Tomb Safehouse  First Floor
+		ActionOverride(Player2,LeaveAreaLUA("BD0120","",[728.1602],E))  // Tomb Safehouse  First Floor
+		ActionOverride(Player3,LeaveAreaLUA("BD0120","",[776.1602],E))  // Tomb Safehouse  First Floor
+		ActionOverride(Player4,LeaveAreaLUA("BD0120","",[776.1744],NE))  // Tomb Safehouse  First Floor
+		ActionOverride(Player5,LeaveAreaLUA("BD0120","",[840.1746],NE))  // Tomb Safehouse  First Floor
+		ActionOverride(Player6,LeaveAreaLUA("BD0120","",[824.1782],NE))  // Tomb Safehouse  First Floor
+		Wait(1)
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	GlobalGT("BD_Plot","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneMode()
+		ActionOverride("Belt",ForceSpell(Player1,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player2,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player3,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player4,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player5,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		ActionOverride("Belt",ForceSpell(Player6,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		Wait(3)
+		FadeToColor([30.0],0)
+		Wait(1)
+		LeaveAreaLUA("BD0120","",[905.1615],NE)  // Tomb Safehouse  First Floor
+		ActionOverride(Player2,LeaveAreaLUA("BD0120","",[728.1602],E))  // Tomb Safehouse  First Floor
+		ActionOverride(Player3,LeaveAreaLUA("BD0120","",[776.1602],E))  // Tomb Safehouse  First Floor
+		ActionOverride(Player4,LeaveAreaLUA("BD0120","",[776.1744],NE))  // Tomb Safehouse  First Floor
+		ActionOverride(Player5,LeaveAreaLUA("BD0120","",[840.1746],NE))  // Tomb Safehouse  First Floor
+		ActionOverride(Player6,LeaveAreaLUA("BD0120","",[824.1782],NE))  // Tomb Safehouse  First Floor
+		Wait(1)
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+

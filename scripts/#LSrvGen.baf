@@ -1,0 +1,34 @@
+/////////////////////////////////////////////////////////
+// New general script file for new palace servant      //
+// Stops them from wandering around when first spawned //
+// Compiled and attached via main_common.tpa           //
+/////////////////////////////////////////////////////////
+IF
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Allegiance(Myself,NEUTRAL)
+THEN
+	RESPONSE #100
+		Enemy()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		RunAwayFromNoLeaveArea(NearestEnemyOf(Myself),150)
+END
+
+IF
+	AttackedBy([ANYONE],DEFAULT)
+THEN
+	RESPONSE #100
+		RunAwayFromNoLeaveArea(LastAttackerOf(Myself),150)
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		NoAction()
+END
+

@@ -1,0 +1,16 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Modification to initial room of Korlasz quest to use a different intro scene //
+// Patched via main_common.tpa                                                  //
+//////////////////////////////////////////////////////////////////////////////////
+IF
+	Global("#L_IntroPlayed","MYAREA",0)
+	Global("#L_SarvQuests","GLOBAL",8)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_IntroPlayed","MYAREA",1)
+		FadeToColor([1.0],0)
+		ClearAllActions() 
+		SetCursorState(FALSE)
+		StartCutSceneMode()
+		StartCutSceneEx("#L_Cut05",TRUE)
+END

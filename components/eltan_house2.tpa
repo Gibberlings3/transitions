@@ -1,0 +1,84 @@
+///////////////////////////////////////////////////////////////////
+// Optional component that adds the 3 story house in Beregost to //
+// the list of properties available as a reward from Duke Eltan  //
+// Item strings are in game.tra                                  //
+///////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
+	ACTION_IF !((MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 60) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 61)) BEGIN
+		INCLUDE ~%mod_root%/components/eltan_common.tpa~
+	END
+
+	// Add the key he gives to the protagonist for their new house in Beregost
+	COPY ~%mod_root%/objects/#LKey.itm~ ~override/#LKey03.itm~
+		SAY NAME1 @1009 /* ~<CHARNAME>'s House Key~ */
+		SAY NAME2 @1009 /* ~<CHARNAME>'s House Key~ */
+		SAY UNIDENTIFIED_DESC @1012
+		SAY IDENTIFIED_DESC @1012
+
+	COPY_EXISTING ~BG3300.ARE~ ~override~
+		// Change the name of the door leading into BG3347
+		// or else we can't control it because it has the same name 
+		// as the travel trigger region
+		LPF CHANGE_DOOR_NAME
+			STR_VAR
+				old_name = ~Door3347~
+				new_name = ~Port3347~
+		END
+
+		// Clone the travel trigger leading into the house so we can 
+		// have the door lead to a custom area
+		LPF GW_CLONE_TRAVEL_TRIGGER
+			INT_VAR
+				GW_Flags_new = 256 // Deactivated
+			STR_VAR
+				GW_Name_old = ~Door3347~
+				GW_Name_new = ~Door#lbg3347~
+				GW_Dest_new = ~#LBG3347~
+				GW_Key_new = ~~      // Clear out the key if one exists
+				GW_Script_new = ~~   // Clear out the script if one exists
+		END
+
+		// Need to modify the door object in BG3300 leading into the house 
+		// in case that one is chosen as their reward
+		LPF ALTER_AREA_DOOR
+			INT_VAR
+				lock_difficulty = 100
+			STR_VAR
+				door_name = ~Port3347~
+				door_open_sound = ~AMB_D22B~
+				door_key = ~#LKey03~
+		END
+
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Also need to add a new area that can be attached to the door
+	// if/when it is chosen as a reward
+	COPY ~%mod_root%/areas/#LBG3347.ARE~ ~override~
+	COPY ~%mod_root%/areas/#LBG3348.ARE~ ~override~
+
+	// Update the script used on all PC residences to include the one in front of the ducal palace
+	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
+	   DECOMPILE_AND_PATCH BEGIN 
+			// Move the contents from this house's chest to the ducal palace chest when they go there
+			REPLACE_TEXTUALLY ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1)~ ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1) MoveContainerContents("#LBG3347*PlayerChest00","#LBD0103*PlayerChest00")~
+
+			// Add the block where the ducal palace chest contents get move to the house
+			APPEND_FILE TEXT ~%mod_root%/scripts/#LPCRoomc.baf~
+		END
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Prep PC's house in Beregost
+	LAF UPDATE_BCS
+		STR_VAR 
+			baf_location = EVAL ~%mod_root%/scripts/~
+			baf_name = ~BG3300~
+			bcs_name = ~BG3300~
+	END
+
+	// Update the dialogue of the servant who welcomes them
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/house2_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+	// Set the global to indicate that the cabin in Beregost is available as a reward
+	EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/BG0108e.baf~
+END

@@ -1,0 +1,65 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This is a straight import from jastey's Endless BG1 mod                                   //
+// It's from her main component, so it'll be in the game already if that mod is loaded       //
+// It wreaks havoc with some sections of my code so no matter if it's loaded here or there   //
+// I'll still need to modify the files afterwards.                                           //
+// The only thing we edit is we take the strings out of her GAME.TRA file and put it into    //
+// endless.tra then make sure all .d files in sarevok_cleanup_more use that .tra file like:  //
+// COMPILE EVALUATE_BUFFER ~.../cleanup_more.d~ USING ~%tra_loc%/%s/endless.tra~             //
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION town_chatter BEGIN
+	// Might be needed for imported Endless BG1 components
+	/* custom definitions: eet */
+	OUTER_SPRINT ~bgee_only~ ~False()~
+	OUTER_SPRINT ~sod~ ~~
+	OUTER_SPRINT ~eet_only~ ~~
+	OUTER_SPRINT ~start_bg1end_sod_cutscene~ ~ClearAllActions() StartCutSceneMode() StartCutScene("c#st2sod")~
+	OUTER_SPRINT ~move_to_bg2~ ~ClearAllActions() CreateCreatureObject("K#TELBGT",Player1,0,0,0)~
+	OUTER_SPRINT ~bdresurr~ ~bdresurr~
+	OUTER_SPRINT ~bddispel~ ~bddispel~
+	OUTER_SPRINT ~clearcld~ ~clearcld~
+	OUTER_SPRINT ~BELT~ ~BELT~
+	OUTER_SET BGTIMOENPState0 = 0 
+	OUTER_SET BGTIMOENPState4 = 4
+
+	// From her general.tpa - it's used all over
+	// We'll have to undo this for certain NPCs (like Denkod)
+	/* define script for cres without DV: DestroySelf() after Sarevok's death */
+	<<<<<<<< .../c#stdstr.baf
+
+	IF
+		GlobalGT("SarevokBehavior","GLOBAL",0)
+		OR(2)
+			Dead("Sarevok")
+			!AreaCheck("%ThievesMaze%")
+	THEN
+		RESPONSE #100
+	        DestroySelf()
+	END
+
+	>>>>>>>>
+
+	COMPILE EVALUATE_BUFFER ~.../c#stdstr.baf~
+
+	// Her files that are brought over
+	INCLUDE ~%mod_root%/components/sarevok_cleanup.tpa~
+	INCLUDE ~%mod_root%/components/sarevok_cleanup_more.tpa~
+
+	// Fix folks if cleanup_maze is loaded
+	ACTION_IF (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 40) THEN BEGIN
+		INCLUDE ~%mod_root%/components/fix_maze.tpa~
+	END
+
+	// Set global that will switch on post-Sarevok chatter
+	COPY_EXISTING ~BG0153.BCS~ ~override~
+		DECOMPILE_AND_PATCH BEGIN 
+			APPEND_FILE TEXT ~%mod_root%/scripts/BG0153b.baf~
+		END
+	BUT_ONLY_IF_IT_CHANGES
+
+	// There's also a merchant in the iron throne that needs to be taken out
+	ACTION_IF !( (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 20) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 21) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 22) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 23) ) THEN BEGIN
+		EXTEND_BOTTOM ~BG0616.BCS~ ~%mod_root%/scripts/BG0616.baf~
+	END
+END

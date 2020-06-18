@@ -1,0 +1,59 @@
+//////////////////////////////////
+// Angelo and Winski Quests     //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	OR(3)
+		Exists("Winski2")
+		Exists("Galdor")
+		Exists("#LffBad")
+THEN
+	RESPONSE #100
+		ActionOverride("Winski2",DestroySelf())
+		ActionOverride("Galdor",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		ActionOverride("#LffBad",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",1)
+	Global("#L_AngeloSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AngeloSpawned","MYAREA",1)
+		// Angelo and 6 rogue Flaming Fist
+		CreateCreature("GALDOR",[848.2170],W) 
+		CreateCreature("#LffBad",[611.2066],S)
+		CreateCreature("#LffBad",[639.2007],S)
+		CreateCreature("#LffBad",[895.2066],SW)
+		CreateCreature("#LffBad",[978.1991],SW)
+		CreateCreature("#LffBad",[1052.2192],W)
+		CreateCreature("#LffBad",[1093.2123],W)
+		ActionOverride("GALDOR",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",4)
+	Global("#L_WinskiSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_WinskiSpawned","MYAREA",1)
+		// Winski and 6 rogue Flaming Fist
+		CreateCreature("#LWINSKI",[2300.2100],SE) 
+		CreateCreature("#LffBad",[2418.2272],S)
+		CreateCreature("#LffBad",[2366.2531],NE)
+		CreateCreature("#LffBad",[2740.2551],NW)
+		CreateCreature("#LffBad",[2909.2662],NW)
+		CreateCreature("#LffBad",[2196.1960],SE)
+		CreateCreature("#LffBad",[2537.2254],SE)
+		ActionOverride("WINSKI2",StartDialogueNoSet(Player1))
+		Continue()
+END

@@ -1,0 +1,60 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Spawn the Flaming Fist Healers inside the temple as well as do a quick       //
+// cut scene where the bodies will be destroyed if the group went outside with  //
+// the sword and re-entere the temple                                           //
+// Modified version of jastey's FF Healers so they'll confiscate the sword      //
+// Patched via ffhealer.tpa                                                     //
+////////////////////////////////////////////////////////////////////////////////// 
+IF
+	Dead("Sarevok")
+	Global("#L_FFHealersSpawned","MYAREA",0)
+	OR(2)
+		Dead("GALDOR")   //Angelo
+		!Exists("GALDOR")   //Angelo
+	OR(2)
+		Dead("SEMAJ")  
+		!Exists("SEMAJ")  
+	OR(2)
+		Dead("Tazok")   
+		!Exists("Tazok")
+	PartyHasItem("SW2H16")
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFHealersSpawned","MYAREA",1)
+		SetGlobal("C#st_FFHealerSpawn","GLOBAL",1)
+		CreateCreature("#LffHlr1",[869.1097],8)
+		CreateCreature("#LffHlr2",[934.1101],8)
+		Continue()
+END
+
+// If they took the sword out of the temple before the FF healers spawned
+// (which can happen if they've chosen to not have the gang retreat when Sarevok is killed
+// or there's an area spell which keeps them in combat as they exit)
+// the FF healers will spawn just outside the temple to confiscate the sword
+// Then they'll escape that area (appearing to enter the temple)
+// so if the player returns to the temple, everyone will be gone
+// The traps will still be set because the healers out there don't ask about the traps
+IF
+	Dead("Sarevok")
+	Global("#L_SwordTaken","GLOBAL",1)
+	OR(4)
+		Exists("Sarevok")
+		Exists("GALDOR")
+		Exists("SEMAJ")
+		Exists("Tazok")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		FadeToColor([1.0],0)
+		SmallWait(1)
+		ActionOverride("Sarevok",DestroySelf())
+		ActionOverride("Galdor",DestroySelf()) 
+		ActionOverride("Semaj",DestroySelf())
+		ActionOverride("Tazok",DestroySelf())
+		FadeFromColor([1.0],0)
+		SmallWait(1)
+		MultiPlayerSync()
+		EndCutSceneMode()
+		Continue()
+END

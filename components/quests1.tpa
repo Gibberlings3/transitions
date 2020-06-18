@@ -1,0 +1,9 @@
+/////////////////////////////////////////////////////////////////////////////////
+// Optional component that adds bounty quests for all of Sarevok's supporters  //
+// This option has Sarevok's survivors behave as normal                        //
+/////////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION quests1 BEGIN
+	INCLUDE ~%mod_root%/components/quests_common.tpa~
+	INCLUDE ~%mod_root%/components/tamoko.tpa~
+END

@@ -1,0 +1,74 @@
+///////////////////////////////////////////////
+// Winski's race scrip (battle commands)     //
+// Compiled and linked via quests_common.tpa //
+///////////////////////////////////////////////
+
+IF
+	StateCheck(Myself,STATE_PANIC)
+THEN
+	RESPONSE #100
+		RandomWalkContinuous()
+END
+
+
+IF
+	Global("WinskiBehavior","GLOBAL",0)
+	See([PC])
+THEN
+	RESPONSE #100
+		ReallyForceSpell(NearestEnemyOf(Myself),WIZARD_HORROR)
+		SetGlobal("WinskiBehavior","GLOBAL",1)
+END
+
+IF
+	Global("WinskiBehavior","GLOBAL",1)
+	See([PC])
+THEN
+	RESPONSE #100
+		Spell([PC],WIZARD_MELF_ACID_ARROW)  // SPWI506.SPL
+		SetGlobal("WinskiBehavior","GLOBAL",2)
+END
+
+IF
+	Global("WinskiBehavior","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		Spell(NearestEnemyOf(Myself),WIZARD_FIREBALL)  // SPWI304.SPL (Fireball)
+		SetGlobal("WinskiBehavior","GLOBAL",2)
+END
+
+IF
+	Global("WinskiBehavior","GLOBAL",2)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		Spell(NearestEnemyOf(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  
+		SetGlobal("WinskiBehavior","GLOBAL",3)
+END
+
+
+
+IF
+	See(NearestEnemyOf(Myself))
+	HaveSpell(WIZARD_FIREBALL)  // SPWI304.SPL (Fireball)
+THEN
+	RESPONSE #100
+		Spell(NearestEnemyOf(Myself),WIZARD_FIREBALL)  // SPWI304.SPL (Fireball)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	HaveSpell(WIZARD_MAGIC_MISSILE)  // SPWI112.SPL (Magic Missile)
+THEN
+	RESPONSE #100
+		Spell(NearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)  // SPWI112.SPL (Magic Missile)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOf(Myself),45)
+END
+

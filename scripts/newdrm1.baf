@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////
+// Interrupt the group's first rest after Sarevok is defeated //
+// Play ENDMOVIE and grant PC new bhaal-spawn power           //
+// Patched via main0.tpa                                      //
+////////////////////////////////////////////////////////////////
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_Dream1","GLOBAL",0)
+	OR(2)
+		Alignment(Player1,MASK_GOOD)
+		Alignment(Player1,MASK_GENEUTRAL)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Dream1","GLOBAL",1)
+		StartMovie("ENDMOVIE")
+	    AddSpecialAbility("SPIN200")  // Cure Serious Wounds
+		RestParty()
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_Dream1","GLOBAL",0)
+	Alignment(Player1,MASK_EVIL)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Dream1","GLOBAL",1)
+		StartMovie("ENDMOVIE")
+		AddSpecialAbility("SPIN202")  // Cause Serious Wounds
+		RestParty()
+		Continue()
+END

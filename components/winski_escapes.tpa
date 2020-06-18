@@ -1,0 +1,16 @@
+////////////////////////////////////////////////////////////////
+// Removes Winski from the thieves maze after Sarevok is dead // 
+// to make him available for a bounty quest                   //
+// Included via quests0 - 3 tpa files and clean_maze.tpa      //
+////////////////////////////////////////////////////////////////
+
+// Make sure Winski has a death variable (same as BG1NPC Project) */
+COPY_EXISTING ~winski2.cre~ ~override~
+	WRITE_ASCII 0x280 ~winski2~ #32  // set DV
+
+LAF UPDATE_BCS
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~
+		baf_name = ~BG0146~
+		bcs_name = ~BG0146~
+END

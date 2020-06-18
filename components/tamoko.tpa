@@ -1,0 +1,13 @@
+//////////////////////////////////////
+// Tamoko's quest - harsher version //
+// Called from quests0-1.tpa        //
+//////////////////////////////////////
+
+// Set the global for Tamoko's death scene
+EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/BG0108h.baf~
+
+// Have Tamoko initiate dialogue outside Iron Throne
+EXTEND_BOTTOM ~BG1200.BCS~ ~%mod_root%/scripts/BG1200_tamoko.baf~
+
+// New dialogue for this scene
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tamoko_die.d~ USING ~%tra_loc%/%s/dialogues.tra~

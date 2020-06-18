@@ -1,0 +1,259 @@
+//////////////////////////////////////////////////////////////
+// Modified version of the intro scene to the Korlasz quest //
+// Patched via main_common.tpa                              //
+//////////////////////////////////////////////////////////////
+IF
+	InMyArea("minsc")  // Minsc
+	InMyArea("IMOEN2")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ApplySpellRES("bdslow","intro_follower2")  // No such index
+		ActionOverride("intro_follower2",Polymorph(FIGHTER_FEMALE_HUMAN))
+		SetGlobalTimer("BD_Ammon_stop","BD0120",TWO_MINUTES)
+		UndoExplore()
+		SetAreaScript("#L_Skip",OVERRIDE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",1)
+		SetCutSceneBreakable(TRUE)
+		UndoExplore()
+		CreateCreature("cutspy",[1284.1235],S)  // No such index
+		MoveViewPoint([1400.1200],INSTANT)
+		ActionOverride("intro_follower1",FaceObject("intro_follower2"))
+		ActionOverride("intro_follower2",FaceObject("intro_follower1"))
+		FadeFromColor([40.0],0)
+		Wait(1)
+		DisplayStringWait("intro_follower1",266857)  // Sarevok's dead. Everything's a mess. We should have gotten out of the city days ago.
+		DisplayStringHead("intro_follower2",266858)  // No chance of that now. But Korlasz knows what she's doing and— Hey, did you hear that?
+		Wait(3)
+		PlaySound("amb_m30")
+		Wait(1)
+		ActionOverride("intro_follower2",FaceObject("door07"))
+		SmallWait(6)
+		ActionOverride("intro_follower1",FaceObject("door07"))
+		Wait(1)
+		ActionOverride("intro_follower2",MoveToPoint([1288.1351]))
+		Wait(2)
+		DisplayStringWait("intro_follower1",266859)  // We'd better tell the boss. Come on.
+		ActionOverride("intro_follower1",MoveToPoint([1772.1414]))
+		SmallWait(10)
+		ActionOverride("intro_follower2",MoveToPoint([1772.1414]))
+		Wait(1)
+		ActionOverride("BDFF1002",JumpToPoint([1050.1558]))
+		ActionOverride("BDFF1002",FaceObject("door07"))
+		MoveViewPoint([970.1568],BD_NORMAL)
+		Wait(4)
+		ActionOverride("cutspy",DestroySelf())
+		ActionOverride("intro_follower1",DestroySelf())
+		ActionOverride("intro_follower2",DestroySelf())
+		FaceObject("door07")
+		CreateCreature("cutspy",[959.1622],S)  // No such index
+		Wait(1)
+		OpenDoor("door07")
+		DisplayStringWait("IMOEN2",265038)  // Ugh, smells like moldy bones down here.
+		ApplySpellRES("bdslow","BDFF1002")  // No such index0
+		ActionOverride("BDFF1002",MoveToPoint([919.1545]))
+		DisplayStringWait("minsc",265039)  // *sniff* *sniff* Bones and EVIL! That is the stench which Minsc sniffs.
+		ActionOverride("BDFF1002",FaceObject(Player1))
+		DisplayStringHead("BDFF1001",265040)  // This chamber is secure, hero. We can proceed when you're ready.
+		Wait(2)
+		SetCutSceneBreakable(FALSE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",0)
+		SetGlobal("bd_plot","global",10)
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
+		ActionOverride("cutspy",DestroySelf())
+		AddJournalEntry(256379,QUEST)
+		SetAreaScript("",OVERRIDE)
+		EndCutSceneMode()
+END
+
+
+IF
+	!InMyArea("minsc")  // Minsc
+	InMyArea("IMOEN2")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ApplySpellRES("bdslow","intro_follower2")  // No such index
+		ActionOverride("intro_follower2",Polymorph(FIGHTER_FEMALE_HUMAN))
+		SetGlobalTimer("BD_Ammon_stop","BD0120",TWO_MINUTES)
+		UndoExplore()
+		SetAreaScript("#L_Skip",OVERRIDE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",1)
+		SetCutSceneBreakable(TRUE)
+		UndoExplore()
+		CreateCreature("cutspy",[1284.1235],S)  // No such index
+		MoveViewPoint([1400.1200],INSTANT)
+		ActionOverride("intro_follower1",FaceObject("intro_follower2"))
+		ActionOverride("intro_follower2",FaceObject("intro_follower1"))
+		FadeFromColor([40.0],0)
+		Wait(1)
+		DisplayStringWait("intro_follower1",266857)  // Sarevok's dead. Everything's a mess. We should have gotten out of the city days ago.
+		DisplayStringHead("intro_follower2",266858)  // No chance of that now. But Korlasz knows what she's doing and— Hey, did you hear that?
+		Wait(3)
+		PlaySound("amb_m30")
+		Wait(1)
+		ActionOverride("intro_follower2",FaceObject("door07"))
+		SmallWait(6)
+		ActionOverride("intro_follower1",FaceObject("door07"))
+		Wait(1)
+		ActionOverride("intro_follower2",MoveToPoint([1288.1351]))
+		Wait(2)
+		DisplayStringWait("intro_follower1",266859)  // We'd better tell the boss. Come on.
+		ActionOverride("intro_follower1",MoveToPoint([1772.1414]))
+		SmallWait(10)
+		ActionOverride("intro_follower2",MoveToPoint([1772.1414]))
+		Wait(1)
+		ActionOverride("BDFF1002",JumpToPoint([1050.1558]))
+		ActionOverride("BDFF1002",FaceObject("door07"))
+		MoveViewPoint([970.1568],BD_NORMAL)
+		Wait(4)
+		ActionOverride("cutspy",DestroySelf())
+		ActionOverride("intro_follower1",DestroySelf())
+		ActionOverride("intro_follower2",DestroySelf())
+		FaceObject("door07")
+		CreateCreature("cutspy",[959.1622],S)  // No such index
+		Wait(1)
+		OpenDoor("door07")
+		DisplayStringWait("IMOEN2",265038)  // Ugh, smells like moldy bones down here.
+		ApplySpellRES("bdslow","BDFF1002")  // No such index0
+		ActionOverride("BDFF1002",MoveToPoint([919.1545]))
+		ActionOverride("BDFF1002",FaceObject(Player1))
+		DisplayStringHead("BDFF1001",265040)  // This chamber is secure, hero. We can proceed when you're ready.
+		Wait(2)
+		SetCutSceneBreakable(FALSE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",0)
+		SetGlobal("bd_plot","global",10)
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
+		ActionOverride("cutspy",DestroySelf())
+		AddJournalEntry(256379,QUEST)
+		SetAreaScript("",OVERRIDE)
+		EndCutSceneMode()
+END
+
+
+IF
+	InMyArea("minsc")  // Minsc
+	!InMyArea("IMOEN2")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ApplySpellRES("bdslow","intro_follower2")  // No such index
+		ActionOverride("intro_follower2",Polymorph(FIGHTER_FEMALE_HUMAN))
+		SetGlobalTimer("BD_Ammon_stop","BD0120",TWO_MINUTES)
+		UndoExplore()
+		SetAreaScript("#L_Skip",OVERRIDE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",1)
+		SetCutSceneBreakable(TRUE)
+		UndoExplore()
+		CreateCreature("cutspy",[1284.1235],S)  // No such index
+		MoveViewPoint([1400.1200],INSTANT)
+		ActionOverride("intro_follower1",FaceObject("intro_follower2"))
+		ActionOverride("intro_follower2",FaceObject("intro_follower1"))
+		FadeFromColor([40.0],0)
+		Wait(1)
+		DisplayStringWait("intro_follower1",266857)  // Sarevok's dead. Everything's a mess. We should have gotten out of the city days ago.
+		DisplayStringHead("intro_follower2",266858)  // No chance of that now. But Korlasz knows what she's doing and— Hey, did you hear that?
+		Wait(3)
+		PlaySound("amb_m30")
+		Wait(1)
+		ActionOverride("intro_follower2",FaceObject("door07"))
+		SmallWait(6)
+		ActionOverride("intro_follower1",FaceObject("door07"))
+		Wait(1)
+		ActionOverride("intro_follower2",MoveToPoint([1288.1351]))
+		Wait(2)
+		DisplayStringWait("intro_follower1",266859)  // We'd better tell the boss. Come on.
+		ActionOverride("intro_follower1",MoveToPoint([1772.1414]))
+		SmallWait(10)
+		ActionOverride("intro_follower2",MoveToPoint([1772.1414]))
+		Wait(1)
+		ActionOverride("BDFF1002",JumpToPoint([1050.1558]))
+		ActionOverride("BDFF1002",FaceObject("door07"))
+		MoveViewPoint([970.1568],BD_NORMAL)
+		Wait(4)
+		ActionOverride("cutspy",DestroySelf())
+		ActionOverride("intro_follower1",DestroySelf())
+		ActionOverride("intro_follower2",DestroySelf())
+		FaceObject("door07")
+		CreateCreature("cutspy",[959.1622],S)  // No such index
+		Wait(1)
+		OpenDoor("door07")
+		ApplySpellRES("bdslow","BDFF1002")  // No such index0
+		ActionOverride("BDFF1002",MoveToPoint([919.1545]))
+		DisplayStringWait("minsc",265039)  // *sniff* *sniff* Bones and EVIL! That is the stench which Minsc sniffs.
+		ActionOverride("BDFF1002",FaceObject(Player1))
+		DisplayStringHead("BDFF1001",265040)  // This chamber is secure, hero. We can proceed when you're ready.
+		Wait(2)
+		SetCutSceneBreakable(FALSE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",0)
+		SetGlobal("bd_plot","global",10)
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
+		ActionOverride("cutspy",DestroySelf())
+		AddJournalEntry(256379,QUEST)
+		SetAreaScript("",OVERRIDE)
+		EndCutSceneMode()
+END
+
+
+IF
+	!InMyArea("minsc")  // Minsc
+	!InMyArea("IMOEN2")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ApplySpellRES("bdslow","intro_follower2")  // No such index
+		ActionOverride("intro_follower2",Polymorph(FIGHTER_FEMALE_HUMAN))
+		SetGlobalTimer("BD_Ammon_stop","BD0120",TWO_MINUTES)
+		UndoExplore()
+		SetAreaScript("#L_Skip",OVERRIDE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",1)
+		SetCutSceneBreakable(TRUE)
+		UndoExplore()
+		CreateCreature("cutspy",[1284.1235],S)  // No such index
+		MoveViewPoint([1400.1200],INSTANT)
+		ActionOverride("intro_follower1",FaceObject("intro_follower2"))
+		ActionOverride("intro_follower2",FaceObject("intro_follower1"))
+		FadeFromColor([40.0],0)
+		Wait(1)
+		DisplayStringWait("intro_follower1",266857)  // Sarevok's dead. Everything's a mess. We should have gotten out of the city days ago.
+		DisplayStringHead("intro_follower2",266858)  // No chance of that now. But Korlasz knows what she's doing and— Hey, did you hear that?
+		Wait(3)
+		PlaySound("amb_m30")
+		Wait(1)
+		ActionOverride("intro_follower2",FaceObject("door07"))
+		SmallWait(6)
+		ActionOverride("intro_follower1",FaceObject("door07"))
+		Wait(1)
+		ActionOverride("intro_follower2",MoveToPoint([1288.1351]))
+		Wait(2)
+		DisplayStringWait("intro_follower1",266859)  // We'd better tell the boss. Come on.
+		ActionOverride("intro_follower1",MoveToPoint([1772.1414]))
+		SmallWait(10)
+		ActionOverride("intro_follower2",MoveToPoint([1772.1414]))
+		Wait(1)
+		ActionOverride("BDFF1002",JumpToPoint([1050.1558]))
+		ActionOverride("BDFF1002",FaceObject("door07"))
+		MoveViewPoint([970.1568],BD_NORMAL)
+		Wait(4)
+		ActionOverride("cutspy",DestroySelf())
+		ActionOverride("intro_follower1",DestroySelf())
+		ActionOverride("intro_follower2",DestroySelf())
+		FaceObject("door07")
+		CreateCreature("cutspy",[959.1622],S)  // No such index
+		Wait(1)
+		OpenDoor("door07")
+		ApplySpellRES("bdslow","BDFF1002")  // No such index0
+		ActionOverride("BDFF1002",MoveToPoint([919.1545]))
+		ActionOverride("BDFF1002",FaceObject(Player1))
+		DisplayStringHead("BDFF1001",265040)  // This chamber is secure, hero. We can proceed when you're ready.
+		Wait(2)
+		SetCutSceneBreakable(FALSE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",0)
+		SetGlobal("bd_plot","global",10)
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
+		ActionOverride("cutspy",DestroySelf())
+		AddJournalEntry(256379,QUEST)
+		SetAreaScript("",OVERRIDE)
+		EndCutSceneMode()
+END
+

@@ -1,0 +1,35 @@
+//////////////////////////////////
+// Cythandria Quest             //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	Exists("CYTHAN")
+THEN
+	RESPONSE #100
+		ActionOverride("CYTHAN",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",5)
+	Global("#L_CythanSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_CythanSpawned","MYAREA",1)
+		// Cythandria is alone
+		CreateCreature("CYTHAN",[305.543],SE)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",5)
+	Global("#L_CythanSpawned","MYAREA",1)
+	TriggerOverride("Cythan",See([PC]))
+	Global("#L_CythanSpoke","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_CythanSpoke","MYAREA",1)
+		ActionOverride("Cythan",StartDialogNoSet(Player1))
+		Continue()
+END

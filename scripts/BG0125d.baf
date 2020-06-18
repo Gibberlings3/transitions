@@ -1,0 +1,33 @@
+/////////////////////////////////////////////////////
+// Survivors of the final battle with Sarevok flee //
+// when Sarevok is killed in order to make more    //
+// clean-up bounty quests available                //
+// Patched via survivors_flee.tpa                  //
+/////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("#L_SemajHasFled","MYAREA",0)
+THEN
+	RESPONSE #100
+		ActionOverride("SEMAJ",StartDialogueNoSet("SEMAJ"))
+  		Continue()
+END
+
+IF
+	Dead("Sarevok")
+	Global("#L_AngeloHasFled","MYAREA",0)
+THEN
+	RESPONSE #100
+		ActionOverride("GALDOR",StartDialogueNoSet("GALDOR"))
+  		Continue()
+END
+
+IF
+	Dead("Sarevok")
+	Global("#L_TazokHasFled","MYAREA",0)
+THEN
+	RESPONSE #100
+		ActionOverride("Tazok",StartDialogueNoSet("Tazok"))
+  		Continue()
+END
+

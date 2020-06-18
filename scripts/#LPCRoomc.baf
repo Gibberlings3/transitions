@@ -1,0 +1,16 @@
+//////////////////////////////////////////////
+// Updates needed for the house in Beregost //
+// To be put at the end of the file         //
+// Patched via eltan_house2.tpa             //
+//////////////////////////////////////////////
+
+IF
+	AreaCheck("#LBG3347")	// House in Beregost
+	!Global("#L_PlayerChestLocation","GLOBAL",4)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",4)
+		MoveContainerContents("#LBD0103*PlayerChest00","#LBG3347*PlayerChest00")
+		SmallWait(1)
+		Continue()
+END

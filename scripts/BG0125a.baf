@@ -1,0 +1,18 @@
+//////////////////////////////////////////////////////////////////
+// Replaces other blocks that would cause the game to go to SoD //
+// or that play the end movie                                   //
+// It just makes sure Sarevok is dead and that                  //
+// the group is out of combat                                   //
+// Patched via main0.tpa                                        //
+//////////////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("#L_BG1SarevokDead","GLOBAL",0)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+  		SetGlobal("#L_BG1SarevokDead","GLOBAL",1)
+		SetGlobal("C#st_BG1End","GLOBAL",1)
+		TriggerActivation("Door0123",TRUE)
+  		Continue()
+END

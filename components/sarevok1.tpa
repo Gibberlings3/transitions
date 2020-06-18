@@ -1,0 +1,22 @@
+///////////////////////////////////////////////////////////////////////////
+// Optional component that gives Sarevok his sword and custom items      //
+// This option just put the items into his inventory                     //
+///////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION sarevok1 BEGIN
+	// Put the items into the game
+	// and removes jastey's code that drops it
+	// We either equip him with the items or put it into his inventory
+	INCLUDE ~%mod_root%/components/sarevok_items.tpa~
+
+	// Put the items into Sarevok's inventory so they'll drop when he dies
+	COPY_EXISTING ~SAREVO.CRE~ ~override~
+	   ADD_CRE_ITEM ~SW2H16~ #0 #0 #0 ~NONE~ ~INV1~
+	   ADD_CRE_ITEM ~#LSrvArm~ #0 #0 #0 ~NONE~ ~INV2~
+	   ADD_CRE_ITEM ~#LSrvHlm~ #0 #0 #0 ~NONE~ ~INV3~
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Modified version of jastey's flaming fist healers
+	// so they will confiscate the sword
+	INCLUDE ~%mod_root%/components/ffhealer.tpa~
+END

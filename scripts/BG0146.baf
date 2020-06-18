@@ -1,0 +1,22 @@
+/////////////////////////////////////////////////////////
+// Get rid of Winski's body from the thieves' maze     //
+// Patched via winski_escapes.tpa and cleanup_maze.tpa //
+/////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Exists("winski2")
+THEN
+	RESPONSE #100
+		// We don't want him to visibly disappear
+		// We want him to be gone when we wander back in
+		CutSceneId(Player1)
+		FadeToColor([1.0],0)
+		SmallWait(1)
+		ActionOverride("winski2",DestroySelf())
+		Wait(1)
+		FadeFromColor([30.0],0)
+		Wait(1)
+		MultiPlayerSync()
+		EndCutSceneMode()
+		Continue()
+END

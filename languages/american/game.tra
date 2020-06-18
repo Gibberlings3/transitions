@@ -1,0 +1,104 @@
+///////////////////////////////////////////////
+// STRINGS NEEDED FOR SAREVOK'S CUSTOM ITEMS //
+///////////////////////////////////////////////
+@1001   = ~Sarevok's Plate Mail Armor~
+@1002   = ~Full plate armor is the best armor a warrior can buy, both in appearance and protection.  The perfectly fitted interlocking plates are specially angled to deflect arrows and blows, and the entire suit is carefully adorned with rich engraving and embossed detail.  
+
+This unusually heavy armor belonged to Sarevok.
+
+STATISTICS:
+
+Armor Class: -1
+Weight: 70
+Requires: 15 Strength~
+@1003   = ~Full plate armor is the best armor a warrior can buy, both in appearance and protection.  The perfectly fitted interlocking plates are specially angled to deflect arrows and blows, and the entire suit is carefully adorned with rich engraving and embossed detail.  
+
+This unusually heavy armor belonged to Sarevok. It is enchanted to give protection against magic.
+
+STATISTICS:
+   +30% Magic Resistance
+
+Armor Class: -1
+Weight: 70
+Requires: 15 Strength~
+@1004   = ~Sarevok's Helmet~
+@1005   = ~This class of decorative helmet, made of reinforced leather or metal, covers the face and head. Eye slits and breathing holes come highly recommended.   
+
+This helmet belonged to Sarevok.
+
+STATISTICS:
+
+Armor Class Bonus:  None
+Special:  Protects Against Critical Hits
+Weight: 2~
+@1006   = ~This class of decorative helmet, made of reinforced leather or metal, covers the face and head. Eye slits and breathing holes come highly recommended.   
+
+This helmet belonged to Sarevok. It is enchanted to give protection against magic.
+
+STATISTICS:
+
+Special:  Protects Against Critical Hits
+   +5% Magic Resistance
+Weight: 2~
+
+//////////////////////////////////////////////////////
+// STRINGS NEEDED FOR CUSTOM FLAMING FIST CREATURES //
+//////////////////////////////////////////////////////
+@1007	= ~Flaming Fist Healer~
+@1008	= ~Flaming Fist Scout~
+
+////////////////////////////////////////////////////
+// STRINGS NEEDED FOR CUSTOM KEYS FROM DUKE ELTAN //
+////////////////////////////////////////////////////
+@1009	= ~<CHARNAME>'s House Key~
+@1010	= ~This is the key to <CHARNAME>'s house in Baldur's Gate.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
+@1011	= ~This is the key to <CHARNAME>'s cabin in High Hedge.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
+@1012	= ~This is the key to <CHARNAME>'s house in Beregost.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
+
+//////////////////////////////////////////
+// STRING NEEDED FOR PCs HOUSE MAP NOTE //
+//////////////////////////////////////////
+@1013	= ~<CHARNAME>'s House~
+
+///////////////////////////////////////////
+// STRINGS NEEDED FOR MULTIPLE KEY RINGS //
+///////////////////////////////////////////
+@1014	= ~Black Key Ring~
+@1015	= ~Silver Key Ring~
+@1016	= ~Brass Key Ring~
+@1017	= ~Steel Key Ring~
+@1018	= ~Iron Key Ring~
+@1019	= ~Copper Key Ring~
+@1020	= ~A latch on this heavy black ring allows it to open on a hinge. Dozens of keys may be threaded on the ring to keep them organized.
+
+STATISTICS:
+
+Weight: 0~
+@1021	= ~A latch on this heavy silver ring allows it to open on a hinge. Dozens of keys may be threaded on the ring to keep them organized.
+
+STATISTICS:
+
+Weight: 0~
+@1022	= ~A latch on this heavy brass ring allows it to open on a hinge. Dozens of keys may be threaded on the ring to keep them organized.
+
+STATISTICS:
+
+Weight: 0~
+@1023	= ~A latch on this heavy iron ring allows it to open on a hinge. Dozens of keys may be threaded on the ring to keep them organized.
+
+STATISTICS:
+
+Weight: 0~
+@1024	= ~A latch on this heavy copper ring allows it to open on a hinge. Dozens of keys may be threaded on the ring to keep them organized.
+
+STATISTICS:
+
+Weight: 0~
+
+// Rogue Flaming Fist Mercenaries used in cleanup quests
+@1025	= ~Rogue Flaming Fist Mercenary~
+
+//////////////////////////////////////////////////////////////////////
+// STRING USED WHEN CLICKING ROPE IN KORLASZ DUNGEON THE FIRST TIME //
+//////////////////////////////////////////////////////////////////////
+@1026	= ~A sturdy rope hanging down into the tomb offers the only viable exit from the house of the dead.  Use it when you are ready to leave.~

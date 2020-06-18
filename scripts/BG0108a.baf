@@ -1,0 +1,123 @@
+//////////////////////////////////////////////////////////////
+// Makes sure Dukes Belt and Liia are alive and in position //
+// and sets up their dialogue cues                          //
+// Patched via main_common.tpa                              //
+//////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_BG1PositionDukes","MYAREA",0)
+	Dead("LIIA")
+THEN
+	RESPONSE #100
+		ActionOverride("LIIA",DestroySelf())
+		SetGlobal("SPRITE_IS_DEADLIIA","GLOBAL",0)
+		CreateCreature("LIIA",[680.356],S)
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_BG1PositionDukes","MYAREA",0)
+	!Exists("LIIA")
+THEN
+	RESPONSE #100
+		CreateCreature("LIIA",[680.356],S)
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_BG1PositionDukes","MYAREA",0)
+	Exists("LIIA")
+THEN
+	RESPONSE #100
+		ApplySpellRES("bddispel","LIIA")  // No such index
+		SmallWait(1)
+		ActionOverride("LIIA",JumpToPoint([680.356]))
+		ActionOverride("LIIA",Face(S))
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Dead("BELT")  // Belt
+	Global("#L_BG1PositionDukes","MYAREA",0)
+THEN
+	RESPONSE #100
+		ActionOverride("BELT",DestroySelf())
+		SetGlobal("SPRITE_IS_DEADBELT","GLOBAL",0)
+		CreateCreature("BELT",[735.371],S)  // Belt
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_BG1PositionDukes","MYAREA",0)
+	!Exists("BELT")
+THEN
+	RESPONSE #100
+		CreateCreature("BELT",[735.371],S)  // Belt
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_BG1PositionDukes","MYAREA",0)
+	Exists("BELT")
+THEN
+	RESPONSE #100
+		ApplySpellRES("bddispel","BELT")  // No such index
+		SmallWait(1)
+		ActionOverride("BELT",JumpToPoint([735.371]))
+		ActionOverride("BELT",Face(S))
+		SetGlobal("#L_BG1PositionDukes","MYAREA",1)
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_TalkedToDukes","GLOBAL",2)
+	IsValidForPartyDialogue("IMOEN2")
+	Global("#L_ImTrainRsp","MYAREA",0)
+THEN
+	RESPONSE #100
+		ActionOverride("LIIA",StartDialogueNoSet("IMOEN2"))
+		Continue()
+END
+
+IF
+	Global("#L_TalkedToDukes","GLOBAL",2)
+	!IsValidForPartyDialogue("IMOEN2")
+	Global("#L_LiiaTalkedToPC","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_LiiaTalkedToPC","MYAREA",1)
+		ActionOverride("LIIA",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+IF
+	Global("#L_TalkedToDukes","GLOBAL",3)
+	Global("#L_BeltInitiatedQuests","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_BeltInitiatedQuests","MYAREA",1)
+		SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)
+		ActionOverride("BELT",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+IF
+	Global("#L_TalkedToDukes","GLOBAL",1)
+	Global("#L_EltanInstalled","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TalkedToDukes","GLOBAL",2)
+		Continue()
+END
+

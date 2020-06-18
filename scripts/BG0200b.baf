@@ -1,0 +1,13 @@
+//////////////////////////////////////////////////
+// Spawns Elminster outside of the Ducal Palace //
+// Patched via elminster.tpa                    //
+//////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("#L_Elminster1Spawned","MYAREA",0)
+THEN
+	RESPONSE #100
+        CreateCreature("#LELMN01",[1962.2834],0)
+		SetGlobal("#L_Elminster1Spawned","MYAREA",1)
+		Continue()
+END

@@ -1,0 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Sets a global indicating that the house in Beregost is available for a reward //
+// Patched via eltan_house2.tpa                                                  //
+///////////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_HouseBeregost","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_HouseBeregost","GLOBAL",1)
+		Continue()
+END

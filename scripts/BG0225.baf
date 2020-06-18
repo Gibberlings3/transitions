@@ -1,0 +1,129 @@
+//////////////////////////////////
+// Cloudwulfe Quest             //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	OR(7)
+		Exists("ZHALIMAR") 
+		Exists("GARDUSH") 
+		Exists("NAAMAN") 
+		Exists("DIYAB") 
+		Exists("AASIM") 
+		Exists("ALAI")
+		Exists("EMITAR3")
+THEN
+	RESPONSE #100
+		ActionOverride("ZHALIMAR",DestroySelf())
+		ActionOverride("GARDUSH",DestroySelf())
+		ActionOverride("NAAMAN",DestroySelf())
+		ActionOverride("DIYAB",DestroySelf())
+		ActionOverride("AASIM",DestroySelf())
+		ActionOverride("ALAI",DestroySelf())
+		ActionOverride("EMITAR3",DestroySelf())
+		ActionOverride("EMITAR3",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_GardushSpawned","MYAREA",0)
+	!Dead("GARDUSH")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_GardushSpawned","MYAREA",1)
+		// Gardush
+		CreateCreature("GARDUS",[1848.2091],E)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_NaamanSpawned","MYAREA",0)
+	!Dead("NAAMAN")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_NaamanSpawned","MYAREA",1)
+		// Naaman
+		CreateCreature("NAAMAN",[2105.2210],NE)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_DiyabSpawned","MYAREA",0)
+	!Dead("DIYAB")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_DiyabSpawned","MYAREA",1)
+		// Diyab
+		CreateCreature("DIYAB",[2610.2074],W)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_AasimSpawned","MYAREA",0)
+	!Dead("AASIM")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AasimSpawned","MYAREA",1)
+		// Aasim
+		CreateCreature("AASIM",[2654.1939],W)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_AlaiSpawned","MYAREA",0)
+	!Dead("ALAI")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AlaiSpawned","MYAREA",1)
+		// Aasim
+		CreateCreature("ALAI",[2580.1703],W)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_DoppleSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_DoppleSpawned","MYAREA",1)
+		// Dopplegangers
+		CreateCreature("EMITAR3",[2133.2061],N)
+		CreateCreature("NOBLPA",[1655.1915],W)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Dead("ZHALIMAR")
+	Global("#L_ZhalimarSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		// There will be no dialogue
+		ActionOverride("GARDUSH",Enemy())
+		ActionOverride("NAAMAN",Enemy())
+		ActionOverride("DIYAB",Enemy())
+		ActionOverride("AASIM",Enemy())
+		ActionOverride("ALAI",Enemy())
+		ActionOverride("EMITAR3",ApplySpell(Myself,DOPPLEGANGER_CHANGE_DEFAULT_LESSER))
+		// The dopple noble will change automatically
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Global("#L_ZhalimarSpawned","MYAREA",0)
+	!Dead("ZHALIMAR")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ZhalimarSpawned","MYAREA",1)
+		// Zhalimar Cloudwulfe
+		CreateCreature("ZHALIM",[2488.1947],W)
+		Continue()
+END
+

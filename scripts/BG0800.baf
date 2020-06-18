@@ -1,0 +1,79 @@
+//////////////////////////////////
+// Tazok and Cythandria Quests  //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	OR(3)
+		Exists("#LffEsc1")
+		Exists("#LffEsc2")
+		Exists("#LffEsc3")
+THEN
+	RESPONSE #100
+		ActionOverride("#LffEsc1",DestroySelf())
+		ActionOverride("#LffEsc2",DestroySelf())
+		ActionOverride("#LffEsc3",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",2)
+	Global("#L_FFSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFSpawned","MYAREA",1)
+		// 3 Flaming Fist outside the sewer entrance
+		CreateCreature("#LffEsc1",[1085.1485],SE)
+		CreateCreature("#LffEsc2",[1154.1449],S)
+		CreateCreature("#LffEsc3",[1212.1444],S)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",5)
+	GlobalLT("#L_FFSpawned","MYAREA",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFSpawned","MYAREA",2)
+		// 3 Flaming Fist outside the Elfsong Tavern
+		CreateCreature("#LffEsc1",[1600.2500],N)
+		CreateCreature("#LffEsc2",[1650.2540],N)
+		CreateCreature("#LffEsc3",[1620.2424],N)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",2)
+	Dead("TAZOK")
+	TriggerOverride("#LffEsc2",See([PC]))
+	Global("#L_QuestCleanup","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_QuestCleanup","MYAREA",1)
+		ActionOverride("#LffEsc2",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",5)
+	Global("#L_CythanSurrend","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ActionOverride("#LffEsc1",DestroySelf())
+		ActionOverride("#LffEsc3",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",5)
+	OR(2)
+		Dead("Cythan")
+		Global("#L_CythanSurrend","GLOBAL",1)
+	TriggerOverride("#LffEsc2",See([PC]))
+	GlobalLT("#L_QuestCleanup","MYAREA",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_QuestCleanup","MYAREA",2)
+		ActionOverride("#LffEsc2",StartDialogueNoSet(Player1))
+		Continue()
+END

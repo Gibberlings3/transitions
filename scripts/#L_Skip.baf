@@ -1,0 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+// Modified version of the short version of the intro scene version to the Korlasz quest //
+// Patched via main_common.tpa                                                           //
+///////////////////////////////////////////////////////////////////////////////////////////
+IF
+	CutSceneBroken()
+THEN
+	RESPONSE #100
+		SetCutSceneBreakable(FALSE)
+		StartCutSceneMode()
+		ClearAllActions()
+		ActionOverride(Player1,ClearActions(Myself))
+		FadeToColor([0.0],0)
+		SetCursorState(FALSE)
+		SetAreaScript("",OVERRIDE)
+		SetGlobal("#L_CUTSCENE_BREAK","GLOBAL",0)
+		SetGlobal("bd_plot","global",10)
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
+		SmallWait(11)
+		MoveViewPoint([970.1568],INSTANT)
+		ActionOverride("cutspy",DestroySelf())
+		CreateCreature("cutspy",[959.1622],S)  // No such index
+		ActionOverride("intro_follower1",DestroySelf())
+		ActionOverride("intro_follower2",DestroySelf())
+		ActionOverride("BDFF1002",JumpToPoint([919.1545]))
+		ActionOverride("BDFF1002",FaceObject(Player1))
+		ActionOverride(Player1,FaceObject("door07"))
+		OpenDoor("door07")
+		SmallWait(11)
+		FadeFromColor([10.0],0)
+		AddJournalEntry(256379,QUEST)
+		EndCutSceneMode()
+END

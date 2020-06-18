@@ -1,0 +1,16 @@
+//////////////////////////////////////////////////////////
+// If the PC ever meets Rinnie - set her up as a global //
+// so we can move her to the other house if the PC      //
+// chooses her house as their residence                 //
+// If they've never met her, they won't miss her        //
+// Patched via eltan.tpa                                //
+//////////////////////////////////////////////////////////
+
+IF
+	Global("#L_RinnieGlobified","GLOBAL",0)
+THEN
+	RESPONSE #100
+		ActionOverride("Rinnie",MakeGlobalOverride())
+		SetGlobal("#L_RinnieGlobified","GLOBAL",1)
+		Continue()
+END

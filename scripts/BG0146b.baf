@@ -1,0 +1,12 @@
+///////////////////////////////////////////////////////////////////////////
+// Removes Voleta from the thieves' maze after Sarevok has been defeated //
+// Patched via cleanup_maze.tpa                                          //
+///////////////////////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Exists("VOLETA")
+THEN
+	RESPONSE #100
+		ActionOverride("VOLETA",DestroySelf())
+		Continue()
+END

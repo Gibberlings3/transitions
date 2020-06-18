@@ -1,0 +1,52 @@
+///////////////////////////////////////////
+// Opens the way to the PC's house in BG //
+// Parsed via eltan.tpa                  //
+///////////////////////////////////////////
+
+IF
+	Global("#L_HouseBGate1","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",0)
+THEN
+	RESPONSE #100
+		AddMapNote([1217.2715],@1013)
+		MoveContainerContents("BG0006*Container1","#LBG0006*PlayerChest00")
+		MoveContainerContents("BG0006*Container2","#LBG0006*Container2")
+		MoveContainerContents("BG0006*Container3","#LBG0006*Container3")
+		CloseDoor("Port0006")
+		SmallWait(1)
+		Lock("Port0006")
+		TriggerActivation("Door0006",FALSE)
+		TriggerActivation("Door#LBG0006",TRUE)
+		SmallWait(1)
+		SetGlobal("#L_HousePrepped","MYAREA",1)
+		// Try to move Rinnie
+		MoveGlobal("BG0008","Rinnie",[303.257])
+		Continue()
+END
+
+IF
+	Global("#L_HouseBGate1","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",1)
+	Global("#L_DoorTimerSet","MYAREA",0)
+	OpenState("Port0006",TRUE)
+THEN
+	RESPONSE #100
+		// Keeping the door open for 10 seconds should be more than enough time 
+		RealSetGlobalTimer("#L_DoorTimer","MYAREA",10)
+		SetGlobal("#L_DoorTimerSet","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_DoorTimerSet","MYAREA",1)
+	RealGlobalTimerExpired("#L_DoorTimer","MYAREA")
+THEN
+	RESPONSE #100
+		CloseDoor("Port0006")
+		SmallWait(1)
+		Lock("Port0006")
+		SmallWait(1)
+		SetGlobal("#L_DoorTimerSet","MYAREA",0)
+		Continue()
+END
+

@@ -1,0 +1,48 @@
+///////////////////////////////////////////////////
+// Opens the way to the PC's cabin in High Hedge //
+// Patched via eltan_house1.tpa                  //
+///////////////////////////////////////////////////
+
+IF
+	Global("#L_HouseHHedge","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",0)
+THEN
+	RESPONSE #100
+		AddMapNote([1760.1470],@1013)
+		MoveContainerContents("BG3201*Container1","#LBG3201*PlayerChest00")
+		CloseDoor("Port3201")
+		SmallWait(1)
+		Lock("Port3201")
+		TriggerActivation("Door3201",FALSE)
+		TriggerActivation("Door#lbg3201",TRUE)
+		SmallWait(1)
+		SetGlobal("#L_HousePrepped","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_HouseHHedge","GLOBAL",2)
+	Global("#L_HousePrepped","MYAREA",1)
+	Global("#L_DoorTimerSet","MYAREA",0)
+	OpenState("Port3201",TRUE)
+THEN
+	RESPONSE #100
+		// Keeping the door open for 10 seconds should be more than enough time 
+		RealSetGlobalTimer("#L_DoorTimer","MYAREA",10)
+		SetGlobal("#L_DoorTimerSet","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_DoorTimerSet","MYAREA",1)
+	RealGlobalTimerExpired("#L_DoorTimer","MYAREA")
+THEN
+	RESPONSE #100
+		CloseDoor("Port3201")
+		SmallWait(1)
+		Lock("Port3201")
+		SmallWait(1)
+		SetGlobal("#L_DoorTimerSet","MYAREA",0)
+		Continue()
+END
+

@@ -1,0 +1,9 @@
+///////////////////////////////////////////////////////////////////////
+// Optional component that deals with Imoen learning magic with Liia //
+// Just pseudo training for now                                      //
+// Allows for training to be postponed to the start of SoD           //
+///////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION liia BEGIN
+	EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/bg0108b.baf~
+END

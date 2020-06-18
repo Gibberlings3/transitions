@@ -1,0 +1,71 @@
+/////////////////////////////////////////////////////////////////////////
+// Spawn servant in the protagonist's quarters (whereever they may be) //
+// Updates the contents of PC's chest                                  //
+// Patched via main_common.tpa, main_2                                 //
+// Linked into all custom areas used as the PC's personal quarters     //
+/////////////////////////////////////////////////////////////////////////
+
+// First check if Imoen is staying in the room
+// If she is, set a local on her so she talks to the PC
+// but not about joining up
+IF
+	Global("#L_ImoenInPalace","GLOBAL",1)
+	AreaCheck("#LBD0103")
+	Global("#L_ImoenFixed","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ImoenFixed","MYAREA",1)
+		ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2))
+		Continue()
+END
+
+// Spawn the servant the first time the PC enters their room in palace
+// OR their residence whereever it may be
+IF
+	Global("#L_ServantSpawned","MYAREA",0)
+	Global("#L_AcceptedRoom","GLOBAL",1)
+	AreaCheck("#LBD0103")
+THEN
+	RESPONSE #100
+		ContainerEnable("PlayerChest00",TRUE)
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[491.308],6)
+    	Continue()
+END
+
+IF
+	Global("#L_ServantSpawned","MYAREA",0)
+	OR(2)
+		AreaCheck("#LBG0006")
+		AreaCheck("#LBG3347")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[491.308],6)
+    	Continue()
+END
+
+// Have the servant welcome the PC
+IF
+	Exists("#LDPSrv1")
+THEN
+	RESPONSE #100
+		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+// Move everything from the PC's chest whereever it is at the moment
+// to their chest whereever they are located now
+// Will need to update to this for every possible house award
+// OMG!  SAPIENT PEARWOOD!
+// Or busy servants ... who knows.
+IF
+	AreaCheck("#LBD0103")	// Room in the palace
+	!Global("#L_PlayerChestLocation","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",1)
+		SmallWait(1)
+		Continue()
+END
+

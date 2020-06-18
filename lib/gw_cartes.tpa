@@ -1,0 +1,171 @@
+///////////////////////////////////////////////////////////////////////////////////
+//                                                                               //
+// F O N C T I O N S   A P P E L É E S   P A R   L A   P R O C É D U R E   T P 2 //
+// by Gwendolyne                                                                 //
+// modified by Lauriel                                                           //
+//                                                                               //
+///////////////////////////////////////////////////////////////////////////////////
+
+/* ====================================================================================== *
+ * FONCTION GW_REINCLUDE : INTÉGRATION d'une sous-routine tp2 dans une routine existante. *
+ * ====================================================================================== */
+
+DEFINE_PATCH_FUNCTION GW_REINCLUDE
+	STR_VAR	GW_input = ""		// Liste de commandes ou de fonctions à effectuer.
+BEGIN
+	
+	INNER_ACTION BEGIN
+		<<<<<<<< temp_file
+			%GW_input%
+		>>>>>>>>
+		COPY - temp_file ~temp_file2~ EVALUATE_BUFFER
+	END
+
+	PATCH_REINCLUDE ~temp_file2~
+
+END	// of DEFINE_PATCH_FUNCTION
+
+
+/* ================================================================================ *
+ * FONCTION GW_CLONE_TRAVEL_TRIGGER : RECHERCHE d'UN TRAVEL TRIGGER POUR LE CLONER. *
+ * ================================================================================ */
+
+DEFINE_PATCH_FUNCTION ~GW_CLONE_TRAVEL_TRIGGER~
+	INT_VAR 
+		GW_Flags_new = 9999	// Optional Added by Lauriel - default is to use whatever is in the original
+	STR_VAR 
+		GW_Dest_old = ""	// Optional Carte de destination à trouver - Made optional by Lauriel - default is to use the one that matches the passed name (GW_Name_old) - either destination or name must be provided
+		GW_Name_old = ""	// Optional Added by Lauriel - default is to use the first one found for the given destination - either destination or name must be provided
+		GW_Dest_new = ""	// Required Carte de destination du trigger cloné.
+		GW_Name_new = ""	// Required Nom du trigger cloné.
+        GW_Entre_new = ""  	// Optional - Entrance name - default is to use whatever is in the original (pardon the lame play on words - I can't help myself)
+        GW_Key_new = "NO CHANGE" // Optional - default is to use the original
+        GW_Script_new = "NO CHANGE" // Optional - default is to use the original
+	RET 
+		GW_clone_trigger		// Variable définissant si on clone un trigger ==> 0 = Non - 1 = Oui
+		GW_add_trigger			// Chaîne de caractères définissant la fonction ADD_AREA_REGION
+BEGIN
+	SET GW_clone_trigger = 0
+	SET GW_Name_len = 8
+	SPRINT GW_ab_RT_Vx ""
+	SPRINT GW_add_trigger ""
+	READ_SHORT 0x5a "GW_region_num"			// Count of regions
+	READ_LONG  0x5c "GW_region_off"			// Offset to regions
+	READ_LONG  0x7c "GW_vert_off"			// Offset to vertices
+	READ_SHORT 0x80 "GW_vert_num"			// Count of vertices
+
+	PATCH_IF ("%GW_Name_old%" STR_EQ "" = 0) THEN BEGIN   // They provided a region name
+		SET GW_Name_len = STRING_LENGTH ~%GW_Name_old%~
+	END
+
+	// Added by Lauriel
+	// Either region name or destination needs to be provided
+	// On réduit le temps de traitement de la fonction.
+	PATCH_IF (("%GW_Name_old%" STR_EQ "" = 0) OR ("%GW_Dest_old%" STR_EQ "" = 0)) THEN BEGIN
+		FOR (i = 0 ; ((i < GW_region_num) AND (GW_clone_trigger = 0)); ++i) BEGIN		// Pour chaque région
+			// Section added by Lauriel
+			// There are cases where there is more than one region leading to the same destination
+			// Need to also optionally include the name of the region in this case
+			READ_ASCII ("%GW_region_off%" + 0x00 + (0xC4 * i)) "region_name" (%GW_Name_len%)  // Region Name
+			READ_ASCII ("%GW_region_off%" + 0x38 + (0xC4 * i)) "destination" (8) NULL	// Destination area (for travel regions)
+
+			// Modified by Lauriel to test both the name and the destination
+			PATCH_IF (("%region_name%" STR_EQ "%GW_Name_old%" = 1) OR ("%GW_Name_old%" STR_EQ "" = 1)) AND (("%destination%" STRING_COMPARE_CASE "%GW_Dest_old%" = 0) OR ("%GW_Dest_old%" STR_EQ "" = 1)) THEN BEGIN	// Si on a trouvé un travel trigger mentionnant la variable %GW_Dest_old%, on lit les valeurs de ses champs
+
+				READ_SHORT ("%GW_region_off%" + 0x20 + (i * 0xC4)) region_type
+				READ_SHORT ("%GW_region_off%" + 0x22 + (i * 0xC4)) box_left			// Minimum bounding box of this point LEFT
+				READ_SHORT ("%GW_region_off%" + 0x24 + (i * 0xC4)) box_top			// Minimum bounding box of this point TOP
+				READ_SHORT ("%GW_region_off%" + 0x26 + (i * 0xC4)) box_right		// Minimum bounding box of this point RIGHT
+				READ_SHORT ("%GW_region_off%" + 0x28 + (i * 0xC4)) box_bottom		// Minimum bounding box of this point BOTTOM
+				READ_SHORT ("%GW_region_off%" + 0x2a + (i * 0xC4)) nb_vertices		// Count of vertices composing the perimeter of this region
+				READ_LONG  ("%GW_region_off%" + 0x2c + (i * 0xC4)) first_vertex		// Index of first vertex for this region
+				READ_LONG  ("%GW_region_off%" + 0x34 + (i * 0xC4)) cursor			// Cursor index (cursors.bam)
+				READ_ASCII ("%GW_region_off%" + 0x40 + (i * 0xC4)) entrance			// Entrance name in destination area (for travel regions)
+				READ_LONG  ("%GW_region_off%" + 0x60 + (i * 0xC4)) flags
+				READ_LONG  ("%GW_region_off%" + 0x64 + (i * 0xC4)) info_text		// Information text (for info points)
+				READ_SHORT ("%GW_region_off%" + 0x68 + (i * 0xC4)) trap_det			// Trap detection difficulty (%)
+				READ_SHORT ("%GW_region_off%" + 0x6a + (i * 0xC4)) trap_rem			// Trap removal difficulty (%)
+				READ_SHORT ("%GW_region_off%" + 0x6c + (i * 0xC4)) trap_set			// Region is trapped (0=No, 1=Yes)
+				READ_SHORT ("%GW_region_off%" + 0x6e + (i * 0xC4)) trap_detected	// Trap detection difficulty (%)
+				READ_SHORT ("%GW_region_off%" + 0x70 + (i * 0xC4)) launch_X			// Trap launch location X
+				READ_SHORT ("%GW_region_off%" + 0x72 + (i * 0xC4)) launch_Y			// Trap launch location Y
+				READ_ASCII ("%GW_region_off%" + 0x74 + (i * 0xC4)) key (8) NULL		// Key item
+				READ_ASCII ("%GW_region_off%" + 0x7c + (i * 0xC4)) script (8) NULL	// Region script
+				READ_SHORT ("%GW_region_off%" + 0x84 + (i * 0xC4)) alt_X			// Alternative use point X coordinate
+				READ_SHORT ("%GW_region_off%" + 0x86 + (i * 0xC4)) alt_Y			// Alternative use point Y coordinate
+
+				SPRINT GW_ab_RT_Vx ""
+				FOR (j = 0 ; j < nb_vertices ; ++j) BEGIN	// Pour chaque vertex du trigger, on stocke ses coordonnées X et Y.
+					SET vertex_offset = ("%GW_vert_off%" +        ((j + first_vertex) * 0x04))
+					READ_SHORT ("%GW_vert_off%" +        ((j + first_vertex) * 0x04))	vertex_X
+					READ_SHORT ("%GW_vert_off%" + 0x02 + ((j + first_vertex) * 0x04))	vertex_Y
+
+					SPRINT ab_RT_Vx_X_j EVAL "ab_RT_Vx_X_%j%"
+					SPRINT ab_RT_Vx_Y_j EVAL "ab_RT_Vx_Y_%j%"
+
+					SPRINT GW_ab_RT_Vertex EVAL "ab_RT_Vx_X_%j% = %vertex_X% ab_RT_Vx_Y_%j% = %vertex_Y% "
+					SPRINT GW_ab_RT_Vx EVAL "%GW_ab_RT_Vx%%GW_ab_RT_Vertex%"
+
+				END	// of Looping through vertex
+				SET GW_clone_trigger = 1		// On a trouvé un travel trigger à cloner.
+
+			END		// of PATCH_IF ("%destination%" STRING_COMPARE_CASE "%GW_Destination%" = 0)
+
+		END		// of Looping through Regions
+
+		// On a trouvé un travel trigger à cloner : on stocke ses variables pour le cloner.
+		PATCH_IF (GW_clone_trigger = 1) THEN BEGIN	
+
+			SPRINT GW_add_trigger "LPF ~ADD_AREA_REGION_TRIGGER~ INT_VAR ab_RT_Type = %region_type% ab_RT_BbLX = %box_left% ab_RT_BbLY = %box_top% ab_RT_BbHX = %box_right% ab_RT_BbHY = %box_bottom% ab_RT_VxPr = %nb_vertices% ab_RT_CuId = %cursor%"
+
+			// This section added by Lauriel to allow for adding in
+			// the new region in an inactive state
+			PATCH_IF (GW_Flags_new < 9999) THEN BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Fbit = %GW_Flags_new%"
+			END ELSE BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Fbit = %flags%"
+			END
+
+			SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Itxt = %info_text% ab_RT_TDtD = %trap_det% ab_RT_TRmD = %trap_rem% ab_RT_TSet = %trap_set% ab_RT_TDet = %trap_detected% ab_RT_LPoX = %launch_X% ab_RT_LPoY = %launch_Y% ab_RT_ALPX = %alt_X% ab_RT_ALPY = %alt_Y%"
+
+			SPRINT GW_add_trigger EVAL "%GW_add_trigger% %GW_ab_RT_Vx% STR_VAR ab_RT_Name = ~%GW_Name_new%~ ab_RT_Dest = ~%GW_Dest_new%~"
+
+			// Modified by Lauriel to allow for new entrance
+			PATCH_IF ("%GW_Entre_new%" STR_EQ "" = 0) THEN BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_EntN = ~%GW_Entre_new%~"
+			END ELSE BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_EntN = ~%entrance%~"
+			END
+
+			// Modified by Lauriel to allow for new keys or clearing out a key
+			// Cas particulier : si la variable %key% est vide, on ne la prend pas un compte pour éviter ) la fonction ADD_AREA_TRIGGER de bugger.
+			PATCH_IF (("%key%" STRING_COMPARE_CASE "") AND ("%GW_Key_new%" STR_EQ "NO CHANGE" = 1)) 
+			THEN BEGIN	
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_KeyI = ~%key%~"
+			END ELSE PATCH_IF (("%GW_Key_new%" STR_EQ "" = 0) AND ("%GW_Key_new%" STR_EQ "NO CHANGE" = 0)) 
+			THEN BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_KeyI = ~%GW_Key_new%~"
+			END
+
+			// Modified by Lauriel to allow for new script or clearing the old one
+			// Cas particulier : si la variable %script% est vide, on ne la prend pas un compte pour éviter ) la fonction ADD_AREA_TRIGGER de bugger.
+			PATCH_IF (("%script%" STRING_COMPARE_CASE "") AND ("%GW_Script_new%" STR_EQ "NO CHANGE" = 1))
+			THEN BEGIN	
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Rbcs = ~%script%~"
+			END ELSE PATCH_IF (("%GW_Script_new%" STR_EQ "" = 0) AND ("%GW_Script_new%" STR_EQ "NO CHANGE" = 0)) 
+			THEN BEGIN
+				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Rbcs = ~%GW_Script_new%~"
+			END
+
+			SPRINT GW_add_trigger EVAL "%GW_add_trigger% END"
+
+			// Lauriel added call to reinclude
+			// To make it easier to use
+			LPF GW_REINCLUDE
+				STR_VAR GW_input = EVAL ~%GW_add_trigger%~
+			END
+
+		END				// of PATCH_IF (GW_clone_trigger = 1)
+	END 			// of PATCH_IF required parameters provided
+END				// of DEFINE_PATCH_FUNCTION
+

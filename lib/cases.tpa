@@ -1,0 +1,545 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                             //
+// Adds proper and upper case player 1 pronouns into tokentxt.2da for EE Infinity Engine games //
+// by Lauriel                                                                                  //
+// with the help of @Grammarsalad, @subtledoctor, @grodrigues, @Mike1072, and @jastey          //
+//                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION INSTALL_PROPER_CASES BEGIN
+
+	// Set up array of pronouns to be entered into the token table
+	ACTION_DEFINE_ASSOCIATIVE_ARRAY pronouns BEGIN 
+		HESHE => 0
+		HIMHER => 0
+		HISHER => 0
+		HISHERS => 0		// Will add lower case as well as PRO_HISHERS
+		BOYGIRL => 0
+		MANWOMAN => 0
+		LORDLADY => 0
+		SIRMAAM => 0
+		MASTERMISTRESS => 0
+		BROTHERSISTER => 0
+		SONDAUGHTER => 0
+		FATHERMOTHER => 0	// Will add lower case as well as PRO_FATHERMOTHER
+		DADMOM => 0			// Will add lower case as well as PRO_DADMOM
+		PAPAMAMA => 0		// Will add lower case as well as PRO_PAPAMAMA
+		MALEFEMALE => 0
+	END
+
+	COPY_EXISTING ~TOKENTXT.2DA~ ~override~
+		READ_2DA_ENTRIES_NOW curList 3
+
+		// I'm not going to use row 0 since that's normally reserved in 2DA files
+		SET newRow = 1
+
+		// Check what's there against list of pronouns we'll be adding
+		// so we don't duplicate tokens
+		FOR (iRow = 1; iRow < curList; ++iRow) BEGIN
+			// Make sure we don't tromp on any previous line numbers
+			READ_2DA_ENTRY_FORMER curList iRow 0 usedRow
+			PATCH_IF (usedRow >= newRow) THEN BEGIN SET newRow = usedRow + 1 END
+
+			READ_2DA_ENTRY_FORMER curList iRow 1 strToken
+			PATCH_MATCH ~%strToken%~ WITH 
+				~PROPER_HESHE~ BEGIN SET $pronouns("HESHE") = 1 END 
+				~UPPER_HESHE~ BEGIN SET $pronouns("HESHE") += 2 END 
+				~PROPER_HIMHER~ BEGIN SET $pronouns("HIMHER") = 1 END 
+				~UPPER_HIMHER~ BEGIN SET $pronouns("HIMHER") += 2 END 
+				~PROPER_HISHER~ BEGIN SET $pronouns("HISHER") = 1 END 
+				~UPPER_HISHER~ BEGIN SET $pronouns("HISHER") += 2 END 
+				~PROPER_HISHERS~ BEGIN SET $pronouns("HISHERS") = 1 END 
+				~UPPER_HISHERS~ BEGIN SET $pronouns("HISHERS") += 2 END 
+				~PRO_HISHERS~ BEGIN SET $pronouns("HISHERS") += 4 END 
+				~PROPER_BOYGIRL~ BEGIN SET $pronouns("BOYGIRL") = 1 END 
+				~UPPER_BOYGIRL~ BEGIN SET $pronouns("BOYGIRL") += 2 END 
+				~PROPER_MANWOMAN~ BEGIN SET $pronouns("MANWOMAN") = 1 END 
+				~UPPER_MANWOMAN~ BEGIN SET $pronouns("MANWOMAN") += 2 END 
+				~PROPER_LORDLADY~ BEGIN SET $pronouns("LORDLADY") = 1 END 
+				~UPPER_LORDLADY~ BEGIN SET $pronouns("LORDLADY") += 2 END 
+				~PROPER_SIRMAAM~ BEGIN SET $pronouns("SIRMAAM") = 1 END 
+				~UPPER_SIRMAAM~ BEGIN SET $pronouns("SIRMAAM") += 2 END 
+				~PROPER_MASTERMISTRESS~ BEGIN SET $pronouns("MASTERMISTRESS") = 1 END 
+				~UPPER_MASTERMISTRESS~ BEGIN SET $pronouns("MASTERMISTRESS") += 2 END 
+				~PROPER_BROTHERSISTER~ BEGIN SET $pronouns("BROTHERSISTER") = 1 END 
+				~UPPER_BROTHERSISTER~ BEGIN SET $pronouns("BROTHERSISTER") += 2 END 
+				~PROPER_SONDAUGHTER~ BEGIN SET $pronouns("SONDAUGHTER") = 1 END 
+				~UPPER_SONDAUGHTER~ BEGIN SET $pronouns("SONDAUGHTER") += 2 END 
+				~PROPER_FATHERMOTHER~ BEGIN SET $pronouns("FATHERMOTHER") = 1 END 
+				~UPPER_FATHERMOTHER~ BEGIN SET $pronouns("FATHERMOTHER") += 2 END 
+				~PRO_FATHERMOTHER~ BEGIN SET $pronouns("FATHERMOTHER") += 4 END 
+				~PROPER_DADMOM~ BEGIN SET $pronouns("DADMOM") = 1 END 
+				~UPPER_DADMOM~ BEGIN SET $pronouns("DADMOM") += 2 END 
+				~PRO_DADMOM~ BEGIN SET $pronouns("DADMOM") += 4 END 
+				~PROPER_PAPAMAMA~ BEGIN SET $pronouns("PAPAMAMA") = 1 END 
+				~UPPER_PAPAMAMA~ BEGIN SET $pronouns("PAPAMAMA") += 2 END 
+				~PRO_PAPAMAMA~ BEGIN SET $pronouns("PAPAMAMA") += 4 END 
+				~PROPER_MALEFEMALE~ BEGIN SET $pronouns("MALEFEMALE") = 1 END 
+				~UPPER_MALEFEMALE~ BEGIN SET $pronouns("MALEFEMALE") += 2 END 
+				DEFAULT // do nothing
+			END
+		END
+
+		PATCH_IF ($pronouns("HESHE") = 0 OR $pronouns("HESHE") = 2) THEN BEGIN
+			// Add the missing pronoun to the token table
+			SPRINT strTra @900000
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_HESHE           1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_HESHE           1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_HESHE           1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HESHE") = 0 OR $pronouns("HESHE") = 1) THEN BEGIN
+			SPRINT strTra @900000
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_HESHE            1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_HESHE            1           35         1          0          %strTra%~		
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_HESHE            1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HIMHER") = 0 OR $pronouns("HIMHER") = 2) THEN BEGIN
+			SPRINT strTra @900001
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_HIMHER          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_HIMHER          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_HIMHER          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HIMHER") = 0 OR $pronouns("HIMHER") = 1) THEN BEGIN
+			SPRINT strTra @900001
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_HIMHER           1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_HIMHER           1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_HIMHER           1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HISHER") = 0 OR $pronouns("HISHER") = 2) THEN BEGIN
+			SPRINT strTra @900002
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_HISHER          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_HISHER          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_HISHER          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HISHER") = 0 OR $pronouns("HISHER") = 1) THEN BEGIN
+			SPRINT strTra @900002
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_HISHER           1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_HISHER           1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_HISHER           1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HISHERS") = 0 OR $pronouns("HISHERS") = 2 OR $pronouns("HISHERS") = 4 OR $pronouns("HISHERS") = 6) THEN BEGIN
+			SPRINT strTra @900003
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_HISHERS         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_HISHERS         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_HISHERS         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HISHERS") = 0 OR $pronouns("HISHERS") = 1 OR $pronouns("HISHERS") = 4 OR $pronouns("HISHERS") = 5) THEN BEGIN
+			SPRINT strTra @900003
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_HISHERS          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_HISHERS          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_HISHERS          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("HISHERS") < 4) THEN BEGIN
+			SPRINT strTra @900003
+			TO_LOWER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PRO_HISHERS            1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PRO_HISHERS            1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PRO_HISHERS            1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("BOYGIRL") = 0 OR $pronouns("BOYGIRL") = 2) THEN BEGIN
+			SPRINT strTra @900004
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_BOYGIRL         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_BOYGIRL         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_BOYGIRL         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("BOYGIRL") = 0 OR $pronouns("BOYGIRL") = 1) THEN BEGIN
+			SPRINT strTra @900004
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_BOYGIRL          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_BOYGIRL          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_BOYGIRL          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MANWOMAN") = 0 OR $pronouns("MANWOMAN") = 2) THEN BEGIN
+			SPRINT strTra @900005
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_MANWOMAN        1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_MANWOMAN        1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_MANWOMAN        1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MANWOMAN") = 0 OR $pronouns("MANWOMAN") = 1) THEN BEGIN
+			SPRINT strTra @900005
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_MANWOMAN         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_MANWOMAN         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_MANWOMAN         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("LORDLADY") = 0 OR $pronouns("LORDLADY") = 2) THEN BEGIN
+			SPRINT strTra @900006
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_LORDLADY        1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_LORDLADY        1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_LORDLADY        1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("LORDLADY") = 0 OR $pronouns("LORDLADY") = 1) THEN BEGIN
+			SPRINT strTra @900006
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_LORDLADY         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_LORDLADY         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_LORDLADY         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("SIRMAAM") = 0 OR $pronouns("SIRMAAM") = 2) THEN BEGIN
+			SPRINT strTra @900007
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_SIRMAAM         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_SIRMAAM         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_SIRMAAM         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("SIRMAAM") = 0 OR $pronouns("SIRMAAM") = 1) THEN BEGIN
+			SPRINT strTra @900007
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_SIRMAAM          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_SIRMAAM          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_SIRMAAM          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MASTERMISTRESS") = 0 OR $pronouns("MASTERMISTRESS") = 2) THEN BEGIN
+			SPRINT strTra @900008
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_MASTERMISTRESS  1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_MASTERMISTRESS  1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_MASTERMISTRESS  1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MASTERMISTRESS") = 0 OR $pronouns("MASTERMISTRESS") = 1) THEN BEGIN
+			SPRINT strTra @900008
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_MASTERMISTRESS   1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_MASTERMISTRESS   1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_MASTERMISTRESS   1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("BROTHERSISTER") = 0 OR $pronouns("BROTHERSISTER") = 2) THEN BEGIN
+			SPRINT strTra @900009
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_BROTHERSISTER   1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_BROTHERSISTER   1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_BROTHERSISTER   1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("BROTHERSISTER") = 0 OR $pronouns("BROTHERSISTER") = 1) THEN BEGIN
+			SPRINT strTra @900009
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_BROTHERSISTER    1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_BROTHERSISTER    1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_BROTHERSISTER    1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("SONDAUGHTER") = 0 OR $pronouns("SONDAUGHTER") = 2) THEN BEGIN
+			SPRINT strTra @900010
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_SONDAUGHTER     1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_SONDAUGHTER     1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_SONDAUGHTER     1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("SONDAUGHTER") = 0 OR $pronouns("SONDAUGHTER") = 1) THEN BEGIN
+			SPRINT strTra @900010
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_SONDAUGHTER      1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_SONDAUGHTER      1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_SONDAUGHTER      1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("FATHERMOTHER") = 0 OR $pronouns("FATHERMOTHER") = 2 OR $pronouns("FATHERMOTHER") = 4 OR $pronouns("FATHERMOTHER") = 6) THEN BEGIN
+			SPRINT strTra @900011
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_FATHERMOTHER    1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_FATHERMOTHER    1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_FATHERMOTHER    1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("FATHERMOTHER") = 0 OR $pronouns("FATHERMOTHER") = 1 OR $pronouns("FATHERMOTHER") = 4 OR $pronouns("FATHERMOTHER") = 5) THEN BEGIN
+			SPRINT strTra @900011
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_FATHERMOTHER     1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_FATHERMOTHER     1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_FATHERMOTHER     1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("FATHERMOTHER") < 4) THEN BEGIN
+			SPRINT strTra @900011
+			TO_LOWER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PRO_FATHERMOTHER       1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PRO_FATHERMOTHER       1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PRO_FATHERMOTHER       1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("DADMOM") = 0 OR $pronouns("DADMOM") = 2 OR $pronouns("DADMOM") = 4 OR $pronouns("DADMOM") = 6) THEN BEGIN
+			SPRINT strTra @900012
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_DADMOM          1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_DADMOM          1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_DADMOM          1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("DADMOM") = 0 OR $pronouns("DADMOM") = 1 OR $pronouns("DADMOM") = 4 OR $pronouns("DADMOM") = 5) THEN BEGIN
+			SPRINT strTra @900012
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_DADMOM           1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_DADMOM           1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_DADMOM           1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("DADMOM") < 4) THEN BEGIN
+			SPRINT strTra @900012
+			TO_LOWER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PRO_DADMOM             1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PRO_DADMOM             1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PRO_DADMOM             1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("PAPAMAMA") = 0 OR $pronouns("PAPAMAMA") = 2 OR $pronouns("PAPAMAMA") = 4 OR $pronouns("PAPAMAMA") = 6) THEN BEGIN
+			SPRINT strTra @900013
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_PAPAMAMA        1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_PAPAMAMA        1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_PAPAMAMA        1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("PAPAMAMA") = 0 OR $pronouns("PAPAMAMA") = 1 OR $pronouns("PAPAMAMA") = 4 OR $pronouns("PAPAMAMA") = 5) THEN BEGIN
+			SPRINT strTra @900013
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_PAPAMAMA         1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_PAPAMAMA         1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_PAPAMAMA         1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("PAPAMAMA") < 4) THEN BEGIN
+			SPRINT strTra @900013
+			TO_LOWER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PRO_PAPAMAMA           1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PRO_PAPAMAMA           1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PRO_PAPAMAMA           1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MALEFEMALE") = 0 OR $pronouns("MALEFEMALE") = 2) THEN BEGIN
+			SPRINT strTra @900014
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        PROPER_MALEFEMALE      1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         PROPER_MALEFEMALE      1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          PROPER_MALEFEMALE      1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+		PATCH_IF ($pronouns("MALEFEMALE") = 0 OR $pronouns("MALEFEMALE") = 1) THEN BEGIN
+			SPRINT strTra @900014
+			TO_UPPER strTra
+			// Add the missing pronoun to the token table
+			PATCH_IF (%newRow% > 99) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%        UPPER_MALEFEMALE       1           35         1          0          %strTra%~
+			END ELSE PATCH_IF (%newRow% > 9) THEN BEGIN
+				SPRINT EVAL addLine ~%newRow%         UPPER_MALEFEMALE       1           35         1          0          %strTra%~
+			END ELSE BEGIN
+				SPRINT EVAL addLine ~%newRow%          UPPER_MALEFEMALE       1           35         1          0          %strTra%~
+			END
+			INSERT_2DA_ROW %newRow% 3 ~%addLine%~
+			SET newRow += 1
+		END
+	BUT_ONLY_IF_IT_CHANGES
+END

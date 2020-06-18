@@ -1,0 +1,42 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Change rope in Korlasz Dungeon lead to the palace instead of starting dialogue //
+// Strings used are in game.tra                                                   //
+// Patched via main_common.tpa                                                    //
+////////////////////////////////////////////////////////////////////////////////////
+
+IF
+	Clicked([ANYONE])
+	Global("#L_SarvQuests","GLOBAL",8)
+	Global("#L_RopeClick","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_RopeClick","MYAREA",1)
+		DisplayStringPoint([790.1630],@1026) // Describes how to use rope
+		// Purposely leaving out the continue...
+END
+
+IF
+	Clicked([ANYONE])
+	Global("#L_SarvQuests","GLOBAL",8)
+THEN
+	RESPONSE #100
+		ClearAllActions() 
+		StartCutSceneMode()
+		CutSceneId(Player1)
+		SmallWait(2)
+		FadeToColor([30.0],0)
+		Wait(1)
+		// Having them exit behind Helm's temple
+		ActionOverride(Player1,LeaveAreaLUA("BG0200","",[1473.532],W))
+		ActionOverride(Player2,LeaveAreaLUA("BG0200","",[1398.500],W))
+		ActionOverride(Player3,LeaveAreaLUA("BG0200","",[1412.548],W))
+		ActionOverride(Player4,LeaveAreaLUA("BG0200","",[1509.474],W))
+		ActionOverride(Player5,LeaveAreaLUA("BG0200","",[1552.525],W))
+		ActionOverride(Player6,LeaveAreaLUA("BG0200","",[1483.581],W))
+		Wait(1)
+		FadeFromColor([30.0],0)
+		Wait(1)
+		MultiPlayerSync()
+		EndCutSceneMode()
+		// Purposely leaving out the continue...
+END

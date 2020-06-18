@@ -1,0 +1,14 @@
+//////////////////////////////////////////////////////////
+// Addition to Belt's override script so he talks to PC //
+// after Sarevok has been defeated                      //
+// Parsed via main_common.tpa                           //
+//////////////////////////////////////////////////////////
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Range(Player1,15)
+	Global("#L_TalkedToDukes","GLOBAL",0)
+THEN
+	RESPONSE #100
+		StartDialog("belt",Player1)
+		Continue()
+END

@@ -1,0 +1,15 @@
+///////////////////////////////////////////////////////////////
+// Updates needed for the house in front of the Ducal Palace //
+// Patched via eltan.tpa                                     //
+///////////////////////////////////////////////////////////////
+
+IF
+	AreaCheck("#LBG0006")	// House in front of the palace
+	!Global("#L_PlayerChestLocation","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",2)
+		MoveContainerContents("#LBD0103*PlayerChest00","#LBG0006*PlayerChest00")
+		SmallWait(1)
+		Continue()
+END

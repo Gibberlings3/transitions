@@ -1,0 +1,290 @@
+BACKUP ~weidu_external/backup/transitions~
+SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net which doesn't exist yet because I'm a newb, but hopefully it'll be there before this gets distributed to anyone.  #RunOnSentencesRUs~
+VERSION ~v0.1~
+
+README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
+
+ALWAYS
+   ACTION_IF !VARIABLE_IS_SET deja_vu BEGIN
+      // Global static variables used by WeiDU
+      OUTER_SPRINT mod_root "transitions"
+      OUTER_SPRINT external_loc "weidu_external"
+      OUTER_SPRINT tra_base "languages"
+      OUTER_SPRINT base_language "american"
+      OUTER_SPRINT workspace "%external_loc%/workspace/%mod_root%"
+      OUTER_SPRINT tra_loc "%workspace%/%tra_base%"
+
+      // Makes external working directories
+      // And copies language files to them
+      INCLUDE ~%mod_root%/lib/run_once.tpa~
+      LAF DO_RUN_ONCE END
+
+      // Variables used to point to files
+      // Included mostly because of bringing in Endless components
+      // But they are handy to use even without that
+      INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
+
+      // Library functions used throughout
+      INCLUDE ~%mod_root%/lib/alter_script.tpa~
+      INCLUDE ~%mod_root%/lib/gw_cartes.tpa~
+      INCLUDE ~%mod_root%/lib/change_door_name.tpa~
+      INCLUDE ~%mod_root%/lib/update_bcs.tpa~
+   END
+
+   // This needs to be run before every component for some reason
+   // It has something to do with languages that use a different character set
+   // Why just converting it once and having the output stored (which happens)
+   // is not good enough, I'm not sure I'll ever understand or really believe
+   // but who cares, honestly, if it's done once or a thousand times
+   ACTION_DEFINE_ARRAY thismod_noconvert BEGIN setup END
+   ACTION_DEFINE_ARRAY thismod_reload BEGIN game cases END
+
+   LAF HANDLE_CHARSETS 
+      INT_VAR 
+         infer_charsets = 1 
+      STR_VAR 
+         iconv_path = EVAL "%mod_root%/%tra_base%/iconv"
+         tra_path = EVAL "%tra_loc%"
+         noconvert_array = thismod_noconvert
+         reload_array = thismod_reload
+   END
+
+   ACTION_IF NOT GAME_IS ~eet~ BEGIN
+      FAIL @1
+   END
+
+   ACTION_IF !VARIABLE_IS_SET deja_vu BEGIN
+      // This actually installs changes to a 2da file so want it to run after the game check
+      INCLUDE ~%mod_root%/lib/cases.tpa~
+      LAF INSTALL_PROPER_CASES END
+
+      OUTER_SET deja_vu = 1
+   END
+END
+
+// Can't use variables here for some reason
+// Not sure why we use both folders, but that's what the example did
+LANGUAGE ~American English~ ~american~   
+   ~transitions/languages/american/setup.tra~
+   ~weidu_external/workspace/transitions/languages/american/setup.tra~
+   ~transitions/languages/american/game.tra~
+   ~weidu_external/workspace/transitions/languages/american/game.tra~
+   ~transitions/languages/american/cases.tra~
+   ~weidu_external/workspace/transitions/languages/american/cases.tra~
+
+/////////////////////////////////////////////////////////////////////////
+// MAIN COMPONENT: ALLOW CONTINUED PLAY AFTER SAREVOK IS DEFEATED      //
+// OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR GAME CONTINUATION //
+// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC       //
+// This component has three options from which to select               //
+/////////////////////////////////////////////////////////////////////////
+BEGIN @3    // MOD 0
+// This option removes the movie from the end of the fight
+// so it can be used in a dream sequence later on
+SUBCOMPONENT @2
+LABEL MAIN_DREAM
+INCLUDE ~transitions/components/main0.tpa~
+LAF main0 END
+
+//////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @4       // MOD 1
+// This option leaves the movie at the end of the fight and skips the new bhaal-spawn powers
+// but makes the necessary changes so the the player can keep playing
+SUBCOMPONENT @2
+LABEL MAIN_NO_DREAM
+INCLUDE ~transitions/components/main1.tpa~
+LAF main1 END
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @9       // MOD 2
+// This option just leaves EndlessBG1 main component as is except
+// adds one of my global variables that I'll need later
+SUBCOMPONENT @2
+LABEL MAIN_USE_ENDLESS
+REQUIRE_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @10
+INCLUDE ~transitions/components/main2.tpa~
+LAF main2 END
+
+
+//////////////////////////////////////////////
+// DECIDE HOW TO HANDLE SAREVOK'S EQUIPMENT //
+// This component has three options         //
+//////////////////////////////////////////////
+BEGIN @6       // MOD 10
+DESIGNATED  10
+// This option has Sarevok equip his equipment
+// Will make the fight slightly more difficult
+SUBCOMPONENT @5
+LABEL EQUIPMENT_EQUIPPED
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/sarevok0.tpa~
+LAF sarevok0 END
+
+//////////////////////////////////////////////////////////////////////////////////////
+BEGIN @7       // MOD 11
+// This option places Sarevok's equipment into his inventory
+SUBCOMPONENT @5
+LABEL EQUIPMENT_IN_INVENTORY
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/sarevok1.tpa~
+LAF sarevok1 END
+
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @9       // MOD 12
+// This option just leaves EndlessBG1 handling of Sarevok's items
+SUBCOMPONENT @5
+LABEL EQUIPMENT_USE_ENDLESS
+REQUIRE_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 2 @10
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+
+
+/////////////////////////////////////
+// CLEAN-UP QUESTS                 //
+// This component has four options //
+/////////////////////////////////////
+BEGIN @13       // MOD 20
+DESIGNATED 20
+// This option has Sarevok's survivors flee upon his death to give more quests
+SUBCOMPONENT @12
+LABEL QUESTS_FLEE_HARSH
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/quests0.tpa~
+LAF quests0 END
+
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @14       // MOD 21
+// This option doesn't alter the behavior of the Sarevok's supporters in the final BGI battle
+SUBCOMPONENT @12
+LABEL QUESTS_NO_FLEE_HARSH
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/quests1.tpa~
+LAF quests1 END
+
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @15       // MOD 22
+// This is option 1 with a gentler Tamoko quest
+SUBCOMPONENT @12
+LABEL QUESTS_FLEE_GENTLE
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/quests2.tpa~
+LAF quests2 END
+
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @16       // MOD 23
+// This is option 2 with a gentler Tamoko quest
+SUBCOMPONENT @12
+LABEL QUESTS_NO_FLEE_GENTLE
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/quests3.tpa~
+LAF quests3 END
+
+
+/////////////////////////////////////////////////////////
+// CLEAN UP TOWNFOLK CHATTER WITH REFERENCE TO SAREVOK //
+// This is jastey's code taken directly from her       //
+// Endless BG1 mod                                     //
+/////////////////////////////////////////////////////////
+BEGIN @18      // MOD 30
+DESIGNATED 30
+LABEL CHATTER
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
+INCLUDE ~transitions/components/town_chatter.tpa~
+LAF town_chatter END
+
+
+/////////////////////////////////////////////
+// CLEAN-UP WOUNDED FROM THE THIEVES' MAZE //
+/////////////////////////////////////////////
+BEGIN @17       // MOD 40
+DESIGNATED 40
+LABEL MAZE
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/cleanup_maze.tpa~
+LAF cleanup_maze END
+
+
+///////////////////////////////////////////////////////////////////
+// HAVE ELMINSTER MAKE AN APPEARANCE OUTSIDE OF THE DUCAL PALACE //
+// This is pretty much what jastey includes in Endless BG1 but   //
+// since I have no idea which module it is, I'm going to redo it //
+///////////////////////////////////////////////////////////////////
+BEGIN @20      // MOD 50
+DESIGNATED 50
+LABEL ELMINSTER
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/elminster.tpa~
+LAF elminster END
+
+
+///////////////////////////////////
+// DUKE ELTAN'S REWARD           //                   
+// The Baldur's Gate North house //
+///////////////////////////////////
+BEGIN @28   // MOD 60
+DESIGNATED 60
+LABEL ELTAN_HOUSE_BG_N
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/eltan_house0.tpa~
+LAF eltan_house0 END
+
+/////////////////////////
+// DUKE ELTAN'S REWARD //
+// CABIN IN HIGH HEDGE //
+/////////////////////////
+BEGIN @25   // MOD 61
+LABEL ELTAN_HOUSE_HEDGE
+// This component adds the cabin in High Hedge as a possible reward from Duke Eltan
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/eltan_house1.tpa~
+LAF eltan_house1 END
+
+
+//////////////////////////
+// DUKE ELTAN'S REWARD  //
+// HOUSE IN NW BEREGOST //
+//////////////////////////
+BEGIN @26   // MOD 62
+LABEL ELTAN_HOUSE_BEREGOST_NW
+// This component adds the large grey house in NW Beregost as a possible reward from Duke Eltan
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/eltan_house2.tpa~
+LAF eltan_house2 END
+
+
+/////////////////////////////////////////
+// LIIA OFFERS TO TRAIN IMOEN IN MAGIC //
+/////////////////////////////////////////
+BEGIN @11   // MOD 70
+DESIGNATED 70
+LABEL LIIA
+// This component has Liia allow Imoen to postpone magic training until beginning of SoD
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/liia.tpa~
+LAF liia END
+
+
+////////////////////////////////////////////
+// WORLD EVENT TIMERS                     //
+// This component has 2 different options //
+////////////////////////////////////////////
+BEGIN @30   // MOD 80
+DESIGNATED 80
+LABEL TIMERS_SKIP_SAILING
+// This option will skip the sailing time to and from Balduran's Isle
+SUBCOMPONENT @29
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/timers_common.tpa~
+LAF timers_common END
+INCLUDE ~transitions/components/timers_skip_sail.tpa~
+LAF timers_skip_sail END
+
+////////////////////////////////////////////////////////////////////////////////////////
+// This option counts sailing time
+BEGIN @31   // MOD 61
+SUBCOMPONENT @29
+LABEL TIMERS_NO_SKIP_SAILING
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/timers_common.tpa~
+LAF timers_common END
+

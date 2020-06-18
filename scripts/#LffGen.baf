@@ -1,0 +1,41 @@
+//////////////////////////////////////////////////////////
+// New general script file for new flaming fist healers //
+// Stops them from wandering around when first spawned  //
+// Compiled and attached via ffhealer.tpa               //
+//////////////////////////////////////////////////////////
+IF
+	StateCheck(Myself,STATE_PANIC)
+THEN
+	RESPONSE #100
+		RandomWalkContinuous()
+END
+
+IF
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Allegiance(Myself,NEUTRAL)
+THEN
+	RESPONSE #100
+		Enemy()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOf(Myself),30)
+END
+
+IF
+	AttackedBy([ANYONE],DEFAULT)
+THEN
+	RESPONSE #100
+		Attack(LastAttackerOf(Myself))
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		NoAction()
+END
+

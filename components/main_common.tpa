@@ -1,0 +1,229 @@
+/////////////////////////////////////////////////////////
+// Actions common to all options of the main component //
+// Included via main0-2.tpa but only once              //
+/////////////////////////////////////////////////////////
+
+ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
+   // Remove remnant of block left behind by jastey
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 0
+      STR_VAR
+         script = BG0125
+         match = ~StartCutSceneEx("BDSODTRN",TRUE)~
+   END
+   // Remove jastey's code to prep the dukes in the palace - we do it differently
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 0
+      STR_VAR
+         script = BG0108
+         match = ~C#st_RearrangeDukes~
+   END
+END
+
+// Palace personnel dialogues
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/palace_personnel.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// New general script file for new palace servant
+// Stops it from wandering around when first spawned
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSrvGen.baf~
+
+// Palace gate guards
+COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd1.cre~
+   WRITE_ASCII 0x280 ~#LDPGrd1~ #32 // set DV
+   WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
+
+COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd2.cre~
+   WRITE_ASCII 0x280 ~#LDPGrd2~ #32 // set DV
+   WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
+
+// Palace servant on the 3rd floor
+COPY_EXISTING ~servan.cre~ ~override/#LDPSrv1.cre~
+   WRITE_ASCII 0x280 ~#LDPSrv1~ #32 // set DV
+   WRITE_ASCII 0x2cc ~#LDPSrv1~ #8 // set dialogue file
+   WRITE_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+
+// Open the palace gates
+// And place friendly guards
+COPY_EXISTING ~BG0200.BCS~ ~override~
+   DECOMPILE_AND_PATCH BEGIN 
+      APPEND_FILE TEXT ~%mod_root%/scripts/BG0200a.baf~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Place the servant in the custom SoD version of the third floor
+// This is a common script used in all PC personal quarters
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LPCRoom.baf~
+
+// Modified copy of SoD's version of the third floor
+COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
+
+// Open the way to the PCs rooms
+LAF UPDATE_BCS
+   STR_VAR
+      baf_location = EVAL ~%mod_root%/scripts/~
+      baf_name = ~BG0109~
+      bcs_name = ~BG0109~
+END
+
+// Add 2 new inactive exit travel triggers leading from the 2nd floor to the new 3rd floor
+// Activate the new ones and deactive the original ones when/if the PC and/or Imoen take up residence
+COPY_EXISTING ~BG0109.ARE~ ~override~
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110a~
+         GW_Name_new = ~Door#lbd0103a~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109a~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110b~
+         GW_Name_new = ~Door#lbd0103b~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109b~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Update Duke Belt's dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Update Duke Liia's dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_liia.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Update Duke Belt's override script so he'll initiate conversation when PC first arrives in palace
+EXTEND_TOP ~BELT.BCS~ ~%mod_root%/scripts/Belt_Add.baf~
+
+// Make sure Duke Belt and Liia are alive and in position inside the Ducal Palace
+// Also sets up dialogue cues
+COPY_EXISTING ~BG0108.BCS~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      APPEND_FILE TEXT ~%mod_root%/scripts/BG0108a.baf~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Add key rings to Black Lily, Silence, Sorcery Sundries (both BG1 and SoD versions), 
+// the quartermaster in SoD and Ribald's in BG2 just for good measure
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR01.ITM~ 
+   SAY NAME1 @1014 /* ~Black Key Ring~ */
+   SAY NAME2 @1014 /* ~Black Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1020
+   SAY IDENTIFIED_DESC @1020
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR01.STO~ 
+   SAY 0x0c @1014
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STOBLACK.sto~ ~override~   // Black Lily
+   ADD_STORE_ITEM ~#LKEYR01~ AFTER ~SLNG11~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR02.ITM~ 
+   SAY NAME1 @1015 /* ~Silver Key Ring~ */
+   SAY NAME2 @1015 /* ~Silver Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1021
+   SAY IDENTIFIED_DESC @1021
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR02.STO~ 
+   SAY 0x0c @1015
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STO0703.STO~ ~override~  // BG Sorcerer's Sundries
+   ADD_STORE_ITEM ~#LKEYR02~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR03.ITM~ 
+   SAY NAME1 @1016 /* ~Brass Key Ring~ */
+   SAY NAME2 @1016 /* ~Brass Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1022
+   SAY IDENTIFIED_DESC @1022
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR03.STO~ 
+   SAY 0x0c @1016
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKAZZRE.STO~ ~override~  // Kazzrem inside BD Sorcerer's Sundries
+   ADD_STORE_ITEM ~#LKEYR03~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR04.ITM~ 
+   SAY NAME1 @1017 /* ~Steel Key Ring~ */
+   SAY NAME2 @1017 /* ~Steel Key Ring~ */
+   // Current description already says steel
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR04.STO~ 
+   SAY 0x0c @1017
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDBELEG4.sto~ ~override~   // Quartermaster Belegarm
+   ADD_STORE_ITEM ~#LKEYR04~ AFTER ~BAG31~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR05.ITM~ 
+   SAY NAME1 @1018 /* ~Iron Key Ring~ */
+   SAY NAME2 @1018 /* ~Iron Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1023
+   SAY IDENTIFIED_DESC @1023
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR05.STO~ 
+   SAY 0x0c @1018
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STOSILEN.sto~ ~override~   // Silence
+   ADD_STORE_ITEM ~#LKEYR05~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDKEYR.ITM~ ~override/#LKEYR06.ITM~ 
+   SAY NAME1 @1019 /* ~Copper Key Ring~ */
+   SAY NAME2 @1019 /* ~Copper Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1024
+   SAY IDENTIFIED_DESC @1024
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKEYR.STO~ ~override/#LKEYR06.STO~ 
+   SAY 0x0c @1019
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~RIBALD.sto~ ~override~   // Ribald's Adventurer Mart
+   ADD_STORE_ITEM ~#LKEYR06~ AFTER ~BAG02~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+// New cut scene called from Duke Belt's dialogue for Korlasz quest
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut04.baf~
+
+// Update BDRope.bcs so that when someone clicks on it, it'll take the party to the surface
+// instead of starting the ending dialogue
+COPY_EXISTING ~BDRope.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Clicked([ANYONE])~ ~Clicked([ANYONE]) !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+EXTEND_TOP ~BDRope.bcs~ ~%mod_root%/scripts/BDRope.baf~
+
+// Update 1st Korlasz Safehouse area script so no group or equipment swaps
+COPY_EXISTING ~BD0120.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY ~Global("K#NewGame","BD0120",0)~ ~Global("K#NewGame","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY ~Global("K#StoryMode","BD0120",0)~ ~Global("K#StoryMode","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY ~GlobalLT("bd_plot","global",2)~ ~GlobalLT("bd_plot","global",2) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY ~!InMyArea("IMOEN2")~ ~!InMyArea("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Use a modified intro scene
+LAF INSERT_SCRIPT_BLOCK
+   INT_VAR 
+      insert_above = 0
+      only_once = 1
+   STR_VAR 
+      script = BD0120
+      match = ~GlobalLT("bd_plot","global",2)~
+      match1 = ~StartCutSceneEx("bdintro",TRUE)~
+      insert = ~%mod_root%/scripts/bd0120.baf~
+END
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut05.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Skip.baf~
+

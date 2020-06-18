@@ -1,0 +1,22 @@
+/////////////////////////////////////////////////////
+// Survivors of the final battle with Sarevok flee //
+// when Sarevok is killed in order to make more    //
+// clean-up bounty quests available                //
+// Included via quests0.tpa and quests2.tpa        //
+/////////////////////////////////////////////////////
+
+// Modify existing Tazok dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tazok_flees.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Modify Angelo (GALDOR) dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_flees.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Modify Semaj dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_flees.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Area script to trigger dialogues
+COPY_EXISTING ~BG0125.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN 
+		APPEND_FILE TEXT ~%mod_root%/scripts/BG0125d.baf~
+	END
+BUT_ONLY_IF_IT_CHANGES

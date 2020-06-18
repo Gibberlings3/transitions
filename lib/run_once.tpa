@@ -1,0 +1,20 @@
+DEFINE_ACTION_FUNCTION DO_RUN_ONCE BEGIN
+   MKDIR "%external_loc%"
+   MKDIR "%external_loc%/workspace"
+   MKDIR "%workspace%"
+   MKDIR "%tra_loc%"
+   MKDIR "%tra_loc%/%base_language%"
+   MKDIR "%tra_loc%/%LANGUAGE%"
+
+   ACTION_BASH_FOR "%mod_root%/%tra_base%/%LANGUAGE%" ".*\.tra" BEGIN
+      COPY "%BASH_FOR_FILESPEC%" "%tra_loc%/%LANGUAGE%"
+   END
+
+   ACTION_MATCH "%LANGUAGE%" WITH
+      %base_language% BEGIN /* DO NOTHING - IT'S ALREADY DONE */ END
+      DEFAULT
+         ACTION_BASH_FOR "%mod_root%/%tra_base%/%base_language%" ".*\.tra" BEGIN
+            COPY "%BASH_FOR_FILESPEC%" "%tra_loc%/%base_language%"
+         END
+   END
+END

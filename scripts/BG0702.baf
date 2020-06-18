@@ -1,0 +1,34 @@
+//////////////////////////////////////////////////////////////////////////
+// Make sure the injured Duke Eltan is no longer with the Harbor Master //
+// Patched via eltan.tpa                                                //
+//////////////////////////////////////////////////////////////////////////
+
+IF
+	Exists("C#RE1ELT")
+	InMyArea("C#RE1ELT")
+	Dead("Sarevok")
+THEN
+	RESPONSE #100
+        ActionOverride("C#RE1ELT",DestroySelf())
+        Continue()
+END
+
+IF
+	Exists("ELTAN")
+	InMyArea("ELTAN")
+	Dead("Sarevok")
+THEN
+	RESPONSE #100
+        ActionOverride("ELTAN",DestroySelf())
+        Continue()
+END
+
+IF
+	Exists("ELTAN2")
+	InMyArea("ELTAN2")
+	Dead("Sarevok")
+THEN
+	RESPONSE #100
+        ActionOverride("ELTAN2",DestroySelf())
+        Continue()
+END

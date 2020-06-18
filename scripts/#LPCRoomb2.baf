@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////
+// Spawn the servant the first time the PC enters the cabin in High Hedge //
+// This section goes in the beginning of the file                         //
+// Patched from eltan_house1.tpa                                          //
+/////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_ServantSpawned","MYAREA",0)
+	AreaCheck("#LBG3201")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[350.240],SW)
+    	Continue()
+END

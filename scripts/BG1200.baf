@@ -1,0 +1,86 @@
+//////////////////////////////////
+// Tamoko and Cloudwulfe Quests //
+// Parsed via quests_common.tpa //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	OR(3)
+		Exists("#LffEsc1")
+		Exists("#LffEsc2")
+		Exists("#LffEsc3")
+THEN
+	RESPONSE #100
+		ActionOverride("#LffEsc1",DestroySelf())
+		ActionOverride("#LffEsc2",DestroySelf())
+		ActionOverride("#LffEsc3",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_FFSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFSpawned","MYAREA",1)
+		// 3 Flaming Fist outside the Iron Throne building
+		CreateCreature("#LffEsc1",[245.860],NE)
+		CreateCreature("#LffEsc2",[590.800],NW)
+		CreateCreature("#LffEsc3",[420.790],N)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	GlobalLT("#L_FFSpawned","MYAREA",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FFSpawned","MYAREA",2)
+		// 3 Flaming Fist outside the sewer entrance
+		CreateCreature("#LffEsc1",[158.910],SE)
+		CreateCreature("#LffEsc2",[214.1023],NE)
+		CreateCreature("#LffEsc3",[403.870],W)
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_TamokoSurrend","GLOBAL",1)
+	Global("#L_TamokoDie","GLOBAL",0)
+THEN
+	RESPONSE #100
+		ActionOverride("#LffEsc1",DestroySelf())
+		ActionOverride("#LffEsc3",DestroySelf())
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",6)
+	OR(2)
+		Dead("Tamoko")
+		Global("#L_TamokoSurrend","GLOBAL",1)
+	Global("#L_TamokoDie","GLOBAL",0)
+	TriggerOverride("#LffEsc2",See([PC]))
+	Global("#L_Quest6Cleanup","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Quest6Cleanup","MYAREA",1)
+		ActionOverride("#LffEsc2",StartDialogueNoSet(Player1))
+		Continue()
+END
+
+IF
+	Global("#L_SarvQuests","GLOBAL",7)
+	Dead("ZHALIMAR") 
+	Dead("GARDUSH") 
+	Dead("NAAMAN") 
+	Dead("DIYAB") 
+	Dead("AASIM") 
+	Dead("ALAI")
+	TriggerOverride("#LffEsc2",See([PC]))
+	Global("#L_Quest7Cleanup","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Quest7Cleanup","MYAREA",1)
+		ActionOverride("#LffEsc2",StartDialogueNoSet(Player1))
+		Continue()
+END

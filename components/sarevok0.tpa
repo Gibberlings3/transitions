@@ -1,0 +1,25 @@
+///////////////////////////////////////////////////////////////////////////
+// Optional component that gives Sarevok his sword and custom items      //
+// This option equips his armor and helmet making the fight a bit harder //
+///////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION sarevok0 BEGIN
+	// Put the items into the game
+	// and removes jastey's code that drops it
+	// We either equip him with the items or put it into his inventory
+	INCLUDE ~%mod_root%/components/sarevok_items.tpa~
+
+	// The the non-droppable but non-descript sword he uses in the fight is actually 
+	// a +5 weapon and is much more powerfull than his BG2 version
+	// So we just put the BG2 version in his inventory so it'll drop when he dies
+	COPY_EXISTING ~SAREVO.CRE~ ~override~
+	//   ADD_CRE_ITEM ~SW2H16~ #0 #0 #0 ~NONE~ ~WEAPON1~ EQUIP TWOHANDED
+	   ADD_CRE_ITEM ~SW2H16~ #0 #0 #0 ~NONE~ ~INV1~
+	   ADD_CRE_ITEM ~#LSrvArm~ #0 #0 #0 ~NONE~ ~ARMOR~
+	   ADD_CRE_ITEM ~#LSrvHlm~ #0 #0 #0 ~NONE~ ~HELMET~
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Modified version of jastey's flaming fist healers
+	// so they will confiscate the sword
+	INCLUDE ~%mod_root%/components/ffhealer.tpa~
+END

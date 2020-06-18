@@ -1,0 +1,2 @@
+DEFINE_ACTION_FUNCTION timers_skip_sail BEGIN
+END

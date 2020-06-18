@@ -1,0 +1,41 @@
+//////////////////////////////////
+// Tamoko Quest - harsh version //
+// Parsed via tamoko.tpa        //
+//////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_TamokoSurrend","GLOBAL",1)
+	Global("#L_TamokoDie","GLOBAL",1)
+	Global("#L_TamokoMoved","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TamokoMoved","GLOBAL",1)
+		MoveGlobal("BG1200","Tamoko",[412.748])
+		Wait(2)
+END
+
+IF 
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_TamokoSurrend","GLOBAL",1)
+	Global("#L_TamokoDie","GLOBAL",1)
+	Global("#L_TamokoTalk","MYAREA",0)
+	TriggerOverride("Tamoko",See([PC]))
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TamokoTalk","MYAREA",1)
+		ActionOverride("Tamoko",StartDialogueNoSet(Player1))
+END
+
+IF 
+	Global("#L_SarvQuests","GLOBAL",6)
+	Global("#L_TamokoSurrend","GLOBAL",1)
+	Global("#L_TamokoDie","GLOBAL",1)
+	Dead("Tamoko")
+	Global("#L_Quest6Cleanup","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Quest6Cleanup","MYAREA",1)
+		ActionOverride("#LffEsc3",StartDialogueNoSet(Player1))
+END
+
+

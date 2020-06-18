@@ -1,0 +1,35 @@
+////////////////////////////////
+// INSTALLATION SETUP STRINGS //
+////////////////////////////////
+@0 		= ~Transitions~
+@1		= ~This mod is only compatible with EET~
+@2		= ~1 - MAIN COMPONENT: Allow continued play after Sarevok is defeated~
+@3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
+@4		= ~Play BGI ending movie after Sarevok is defeated and skip new bhaal-spawn power~
+@5		= ~2 - Give Sarevok his armor, helm, and sword~
+@6		= ~Equipped~
+@7		= ~In inventory only~
+@8		= ~Requires main component of this or Endless BG1 mods to be installed~
+@9		= ~Just use what EndlessBG1 has already installed~
+@10		= ~Requires Endless BG1 mod to be installed~
+@11		= ~10 - Add Duke Liia Jannath's offer to train Imoen in magic~
+@12		= ~3 - Clean-up Quests~
+@13		= ~Those supporters that are still alive when Sarevok dies immediately flee the area (to give more clean-up quests)~
+@14		= ~Behavior of the Sarevok's supporters in the final BGI battle is unchanged~
+@15		= ~Option 1 and use gentler Tamoko quest~
+@16		= ~Option 2 and use gentler Tamoko quest~
+@17		= ~5 - Clean up the wounded from the thieves' maze~
+@18		= ~4 - Clean up the town folk chatter with regard to Sarevok~
+@19		= ~Already installed with Endless BG1 mod~
+@20		= ~6 - Elminster makes an appearance outside of the Ducal Palace~
+@21 	= ~7 - Add Duke Eltan's reward and romance~
+@22		= ~Hint at future romance~
+@23		= ~Mature version~
+@24		= ~Steamy verison~
+@25		= ~8 - Duke Eltan's reward option: Cabin in High Hedge~
+@26		= ~9 - Duke Eltan's reward option: Grey house in NW Beregost~
+@27		= ~Requires Duke Eltan's reward and romance to be installed~
+@28		= ~7 - Duke Eltan's reward option: House near Ducal Palace~
+@29		= ~11 - Add World Event Timers~
+@30		= ~Don't include sailing time to and from Balduran's Isle in the world timers~
+@31		= ~Sailing time (46 days) counts against world timers~

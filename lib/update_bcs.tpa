@@ -1,0 +1,39 @@
+//////////////////////////////////
+//                              //
+// Action function UPDATE_BCS   //
+// by Lauriel                   //
+//                              //
+// Useful when you're not sure  //
+// if the BCS file is 0 length  //
+//                              //
+//////////////////////////////////
+
+DEFINE_ACTION_FUNCTION UPDATE_BCS
+	INT_VAR
+		action_taken = 1		// 0 = APPEND_FILE TEXT, 1 = EXTEND_TOP, 2 = EXTEND_BOTTOM
+	STR_VAR
+		baf_location = ""		// like ~mymod/bafs/~
+		baf_name = ""			// like my_new_BG0146
+		bcs_name = ""			// like BG0146
+BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%bcs_name%.BCS~ THEN BEGIN
+		ACTION_MATCH %action_taken% WITH 
+			1 BEGIN EXTEND_TOP ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ END
+			2 BEGIN	EXTEND_BOTTOM ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ END
+			0 BEGIN
+				COPY_EXISTING ~%bcs_name%.BCS~ ~override~
+					DECOMPILE_AND_PATCH BEGIN
+						APPEND_FILE TEXT ~%baf_location%%baf_name%.BAF~
+					END
+				BUT_ONLY_IF_IT_CHANGES
+			END
+			DEFAULT // do nothing
+		END
+	END ELSE BEGIN
+		COMPILE EVALUATE_BUFFER ~%baf_location%%baf_name%.BAF~
+		ACTION_IF ~%baf_name%~ STR_EQ ~%bcs_name%~ = 0 THEN BEGIN
+			COPY ~override/%baf_name%.BCS~ ~override/%bcs_name%.BCS~
+			DELETE ~override/%baf_name%.BCS~
+		END
+	END
+END

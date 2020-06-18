@@ -1,0 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////////////
+// Sets a global indicating that the house in High Hedge is available for a reward //
+// Patched via eltan_house1.tpa                                                    //
+/////////////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_HouseHHedge","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_HouseHHedge","GLOBAL",1)
+		Continue()
+END

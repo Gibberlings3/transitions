@@ -1,0 +1,215 @@
+///////////////////////////////////////////////////////
+// Actions common to all the quest selection options //
+// Called from quests0-3.tpa                         //
+///////////////////////////////////////////////////////
+
+INCLUDE ~%mod_root%/components/winski_escapes.tpa~
+
+// Change the room variable that limits quests to only Korlasz
+COPY_EXISTING ~BG0108.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY ~SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)~ ~SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",0)~
+	END
+BUT_ONLY_IF_IT_CHANGES
+
+// 3 Flaming Fist escort that wait for those who surrender
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc1.cre~
+	SAY NAME1 @1007 /* ~Flaming Fist Escort~ */
+	SAY NAME2 @1007 /* ~Flaming Fist Escort~ */
+	WRITE_ASCII 0x280 ~#LffEsc1~ #32 // set DV
+  	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc2.cre~
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc2~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc3.cre~
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc3~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
+// Rogue Flaming Fist Mercenary
+COPY_EXISTING ~FLAMANG.CRE~ ~override/#LffBad.cre~
+	SAY NAME1 @1025 // ~Rogue Flaming Fist Mercenary~ 
+	SAY NAME2 @1025 // ~Rogue Flaming Fist Mercenary~ 
+	WRITE_LONG 0x0014 250 // XP
+	WRITE_LONG 0x001c 100 // Gold
+	WRITE_SHORT 0x0024 60 // Current HP
+	WRITE_SHORT 0x0026 60 // Max HP
+	WRITE_SHORT 0x0046 4 // Natural AC
+	WRITE_SHORT 0x0048 4 // Effective AC
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+	WRITE_ASCII 0x280 ~#LffBad~ #32 // set DV
+BUT_ONLY_IF_IT_CHANGES
+
+// Beefed up Rogue
+COPY_EXISTING ~BANDITC.CRE~ ~override/#LBandit.cre~
+	WRITE_LONG 0x0014 250 // XP
+	WRITE_LONG 0x001c 100 // Gold
+	WRITE_SHORT 0x0024 60 // Current HP
+	WRITE_SHORT 0x0026 60 // Max HP
+	WRITE_SHORT 0x0046 4 // Natural AC
+	WRITE_SHORT 0x0048 4 // Effective AC
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+	WRITE_BYTE 0x0270 255 // Enemy
+	WRITE_ASCII 0x280 ~#LBandit~ #32 // set DV
+BUT_ONLY_IF_IT_CHANGES
+
+// Attach new Angelo dialogue file to his CRE
+COPY_EXISTING ~GALDOR.CRE~ ~override~
+    WRITE_ASCII 0x2cc ~GALDOR~ #8   // dialogue
+
+// Attach new Semaj dialogue file to his CRE
+COPY_EXISTING ~SEMAJ.CRE~ ~override~
+    WRITE_ASCII 0x2cc ~SEMAJ~ #8   // dialogue
+
+// Toned down Winski
+COPY_EXISTING ~WINSKI.CRE~ ~override/#LWINSKI.CRE~
+	WRITE_SHORT 0x0024 85 // Current HP
+	WRITE_SHORT 0x0026 85 // Max HP
+	WRITE_SHORT 0x0046 4 // Natural AC
+	WRITE_SHORT 0x0048 4 // Effective AC
+	WRITE_BYTE 0x0060 0 // Magic Resistance
+	WRITE_BYTE 0x0061 0 // Slashing Resistance
+	WRITE_BYTE 0x0062 0 // Crushing Resistance
+	WRITE_BYTE 0x0063 0 // Missile Resistance
+	WRITE_ASCII 0x258 ~#LWinski~ // Race script (battle commands)
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+	WRITE_BYTE 0x0270 255 // Enemy
+	WRITE_ASCII 0x280 ~winski2~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LWinski~ #8   // dialogue
+BUT_ONLY_IF_IT_CHANGES
+
+// Dialogues for the Flaming Fist escort that wait for those who surrender
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ffescort.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// New Angelo (GALDOR) dialogue file
+ACTION_IF !FILE_EXISTS_IN_GAME ~GALDOR.DLG~ THEN BEGIN
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_begin.d~	// Just builds an empty dialogue file
+END
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Updated Tazok (TAZOK2) dialogue file
+ACTION_IF !FILE_EXISTS_IN_GAME ~TAZOK2.DLG~ THEN BEGIN
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tazok_begin.d~	// Just builds an empty dialogue file
+END
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tazok_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// New Semaj dialogue file
+ACTION_IF !FILE_EXISTS_IN_GAME ~SEMAJ.DLG~ THEN BEGIN
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_begin.d~	// Just builds an empty dialogue file
+END
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Winski's race script and dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LWinski.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LWinski.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Updated Cythandria (CYTHAN) dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/cythan.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Updated Tamoko (TAMOKO) dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tamoko.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Updated Zhalimar's (ZHALIM) dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/zhalim.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Angelo and Winski Quests
+// 3 Flaming Fist outside the sewer entrance (BG1100)
+// Sewers where Angelo and Winski are hiding (BG0224)
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG1100~			// like my_new_BG0146
+		bcs_name = ~BG1100~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0224~			// like my_new_BG0146
+		bcs_name = ~BG0224~			// like BG0146
+END
+
+// Tazok and Cythandria Quests (for the flaming fist portion)
+// 3 Flaming Fist outside the sewer entrance (BG0800)
+// Sewers where Tazok is hiding (BG0226)
+// Elfsong Tavern where Cythandria is staying (BG706)
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0800~			// like my_new_BG0146
+		bcs_name = ~BG0800~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0226~			// like my_new_BG0146
+		bcs_name = ~BG0226~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0706~			// like my_new_BG0146
+		bcs_name = ~BG0706~			// like BG0146
+END
+
+// Semaj Quest
+// 3 Flaming Fist outside the Blushing Mermaid (BG0300)
+// He's alone in the Under Cellar (BG0112)
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0300~			// like my_new_BG0146
+		bcs_name = ~BG0300~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0112~			// like my_new_BG0146
+		bcs_name = ~BG0112~			// like BG0146
+END
+
+// Tamoko and Cloudwulfe Quests
+// 3 Flaming Fist outside the Iron Throne building (BG1200)
+// Floor where Tamoko can be found (BG0615)
+// Sewer where Cloudwulfe is hiding (BG0225)
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG1200~			// like my_new_BG0146
+		bcs_name = ~BG1200~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0615~			// like my_new_BG0146
+		bcs_name = ~BG0615~			// like BG0146
+END
+LAF UPDATE_BCS	// default is extend top
+	STR_VAR
+		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+		baf_name = ~BG0225~			// like my_new_BG0146
+		bcs_name = ~BG0225~			// like BG0146
+END
+// Update script that makes these guys poof in chapter 7 (in which these quests take place)
+COPY_EXISTING ~LeaveCh7.bcs~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY ~Global("Chapter","GLOBAL",7)~ ~Global("Chapter","GLOBAL",7) !AreaCheck("BG0225")~
+	END
+BUT_ONLY_IF_IT_CHANGES
+
+// Get rid of merchant in the iron throne
+EXTEND_BOTTOM ~BG0616.BCS~ ~%mod_root%/scripts/BG0616.baf~
+

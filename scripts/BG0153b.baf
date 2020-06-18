@@ -1,0 +1,12 @@
+//////////////////////////////////////////////////////////////////////////
+// This will switch the townfolk chatter over to post Sarevok dialogues //
+// Patched via town_chatter.tpa                                         //
+//////////////////////////////////////////////////////////////////////////
+IF
+	Dead("Sarevok")
+	Global("C#st_HeroOfBG","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("C#st_HeroOfBG","GLOBAL",1)
+		Continue()
+END

@@ -1,0 +1,32 @@
+//////////////////////////////////////////////////////////////
+// jastey's Endless BG1 wreaks havoc with areas of this mod //
+// This section will undo the ones that messes with         //
+// Denkod, Winski, and Voleta                               //
+// Included via cleanup_maze.tpa and town_chatter.tpa       //
+//////////////////////////////////////////////////////////////
+
+// Don't let Denkod be destroyed
+LAF DELETE_SCRIPT_BLOCK
+	INT_VAR
+		only_once = 1
+	STR_VAR
+		script = BG0153
+		match = ~!Global("C#st_DenkodTalk","MYAREA",1)~
+		match1 = ~Dead("Sarevok")~
+		match2 = ~ActionOverride("DENKOD",DestroySelf())~
+END
+
+// Don't let Voleta be destroyed too soon
+COPY_EXISTING ~VOLETA.cre~ ~override~
+    WRITE_EVALUATED_ASCII 0x260 ~~ #8 // General Script
+
+// Don't let Winski be destroyed too soon
+LAF DELETE_SCRIPT_BLOCK
+	INT_VAR
+		only_once = 1
+	STR_VAR
+		script = BG0146
+		match = ~ActionOverride("WINSKI2",DestroySelf())~
+		match1 = ~InMyArea("WINSKI2")~
+END
+

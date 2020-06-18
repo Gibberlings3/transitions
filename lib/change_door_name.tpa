@@ -1,0 +1,39 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// Changes the name of a door object                                                    //
+// by Lauriel                                                                           //
+//                                                                                      //
+// Needed when they're named the same as the travel trigger region associated with them //
+// or else you can't close or lock the door via script                                  //
+//                                                                                      //
+// Much of the code is adapted from Gwendolyn's Fonctions Appelees par la procedure tp2 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+DEFINE_PATCH_FUNCTION CHANGE_DOOR_NAME
+	STR_VAR	
+		old_name = ""		// required
+		new_name = ""		// required
+BEGIN
+	SET found_door = 0
+	SET old_name_len = STRING_LENGTH ~%old_name%~
+
+	WHILE ( STRING_LENGTH ~%old_name%~ > STRING_LENGTH ~%new_name%~) BEGIN
+		SET new_name = ~%new_name% ~	// I don't know if this is a good idea or not - never tested
+	END
+
+	READ_SHORT 0xa4 "door_cnt"		// Count of door objects
+	READ_LONG  0xa8 "door_off"		// Offset to door objects
+
+	PATCH_IF (("%old_name%" STR_EQ "" = 0) AND ("%new_name%" STR_EQ "" = 0)) THEN BEGIN
+		FOR (i = 0 ; ((i < door_cnt) AND (found_door = 0)); ++i) BEGIN
+			READ_ASCII ("%door_off%" + 0x00 + (0xC8 * i)) "door_name" (%old_name_len%)  // Door Name
+
+			PATCH_IF ("%door_name%" STR_EQ "%old_name%" = 1) THEN BEGIN
+				WRITE_EVALUATED_ASCII ("%door_off%" + 0x00 + (0xC8 * i)) ~%new_name%~
+				SET found_door = 1
+			END
+		END
+	END
+END
+

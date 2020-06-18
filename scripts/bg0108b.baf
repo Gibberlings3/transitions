@@ -1,0 +1,12 @@
+////////////////////////////////////////////////////////
+// Set global to indicate Liia component is installed //
+// Parsed via liia.tpa                                //
+////////////////////////////////////////////////////////
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_LiiaInstalled","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_LiiaInstalled","GLOBAL",1)
+		Continue()
+END

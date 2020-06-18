@@ -1,0 +1,80 @@
+/////////////////////////////////////////////////////////////////////////
+// Flaming Fist come to the Undercity Temple or just outside its doors //
+// Modified version of jastey's Endless BG1 mod                        //
+// Included via sarevok0.tpa and sarevok1.tpa                          //
+/////////////////////////////////////////////////////////////////////////
+
+// New class script file for new flaming fist healer #1
+// It just initiates the dialogue with the protagonist
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffHlr1.baf~ 
+
+// New general script file for new flaming fist healers
+// Stops them from wandering around when first spawned
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffGen.baf~
+
+// New Cut Scene scripts for healing the party, disarming the traps, and destroying bodies
+// Two for inside the temple, the other for just outside
+// 1-Inside heals group, takes care of traps and bodies
+// 2-Outside heals group only
+// 3-Inside just destroys the bodies
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut01.baf~  // Inside the temple - all actions
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut02.baf~  // Outside the temple - just heal
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut03.baf~  // Inside the temple - just the bodies
+
+// Dialogue file for flaming fist healer #1
+// Cut scenes are called and sword is confiscated during the dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ffhealer.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// New creature files
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffHlr1.cre~
+  SAY NAME1 @1007 /* ~Flaming Fist Healer~ */
+  SAY NAME2 @1007 /* ~Flaming Fist Healer~ */
+  WRITE_ASCII 0x280 ~#LffHlr1~ #32 // set DV
+  WRITE_ASCII 0x2cc ~#LffHlr1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~#LffHlr1~ #8   // class script - initiate dialogue
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffHlr2.cre~
+  SAY NAME1 @1008 // ~Flaming Fist Scout~
+  SAY NAME2 @1008 // ~Flaming Fist Scout~
+  WRITE_ASCII 0x280 ~#LffHlr2~ #32 // set DV
+  WRITE_ASCII 0x2cc ~#LffHlr2~ #8   // dialogue - doesn't exist, stops it from talking?
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+
+// See if jastey's custom items for Sarevok are installed
+COPY_EXISTING ~BG0125.BCS~ ~override~
+  DECOMPILE_AND_PATCH BEGIN 
+    COUNT_REGEXP_INSTANCES ~Global("C#st_SarevoksItems","MYAREA",0)~ sarevokItemsInstalled
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF (sarevokItemsInstalled > 0) BEGIN
+   // Replace the block where jastey spawns her flaming fist healers
+   // with modified version where they confiscate the sword
+   LAF REPLACE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 1
+      STR_VAR
+         script = BG0125
+         match = ~C#st_FFHealerSpawn~
+         insert = ~%mod_root%/scripts/BG0125c.baf~
+   END
+END ELSE BEGIN
+   // Add block where flaming fist healers are spawned
+   COPY_EXISTING ~BG0125.BCS~ ~override~
+      DECOMPILE_AND_PATCH BEGIN 
+         APPEND_FILE TEXT ~%mod_root%/scripts/BG0125c.baf~
+      END
+   BUT_ONLY_IF_IT_CHANGES
+END
+
+// Spawn flaming fist healers when they exit the temple
+// if they still have the sword
+// Can happen ... 
+COPY_EXISTING ~BG0123.BCS~ ~override~
+   DECOMPILE_AND_PATCH BEGIN 
+      APPEND_FILE TEXT ~%mod_root%/scripts/BG0123.baf~
+   END
+BUT_ONLY_IF_IT_CHANGES
+

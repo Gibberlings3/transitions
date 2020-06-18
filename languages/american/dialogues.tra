@@ -1,0 +1,293 @@
+// ffhealer.d
+@2000	= ~<CHARNAME>! The Dukes sent us to see to your well-being. We will take care of the bodies of Sarevok and his cohorts.~
+@2001	= ~We've also come to collect Sarevok's sword.  The dukes don't want it to become a rallying symbol for his minions.~
+@2002	= ~Would you like us to heal you and disarm the traps while we're here?~
+@2003	= ~Uh, sure.  Go ahead.~
+@2004	= ~No thanks, I'll manage on my own.~
+@2005	= ~You've done a great deed for the city, <CHARNAME>, indeed for the entire Sword Coast.~
+@2006	= ~Return to the Palace when you are ready and speak to the Dukes, they wish to thank you. Fare well.~
+@2007	= ~With pleasure. Please hold still for a moment...~
+@2008	= ~That should do it.~
+@2009	= ~Would you like us to heal you while we're here?~
+@2010	= ~We'll just get the bodies out of the way.~
+
+// angelo1.d
+@2011	= ~<PROPER_HESHE> is too strong for us!  Run for your lives!~ [1AMERC05]
+
+// semaj1.d
+@2012	= ~Sarevok has been defeated?!  This cannot be!  Flee while you can!~ [DEMONV08]
+
+// tazok1.d
+@2013	= ~Noooo!  Retreat!  Retreat!~ [HOBGL05]
+
+// denkod.d
+@2014	= ~Aaarg!~
+@2015	= ~Calm down.  We won't hurt you.~
+@2016	= ~BOO!~
+@2017	= ~Oh!  It's you again!~ 
+@2018	= ~I have to say, be careful with wearin' that. For a second I thought you were him! Was 'bout ta go to my dagger, I was.~
+@2019	= ~Hah!~
+@2020	= ~Of course you were.~
+@2021	= ~We could tell our lives were in imminent danger.~
+@2022	= ~Warning noted.~
+@2023	= ~Are you the last?  Is this over?  The Fist were here in droves, haulin' up the dead and wounded.~
+@2024	= ~My nerves can't handle this. I'm gonna find a nice quiet place to lay low.  Way too much traffic here for my taste!~
+@2025	= ~Boo!  It isn't nice to laugh at the frightened little man...although it is pretty funny!~
+@2026	= ~For once I agree with thine rodent.~
+
+// palace_personnel.d 1 of 3 (continued at 2058 and 2091)
+@2027	= ~Go right in, <SIRMAAM>. The Dukes wish to speak to you.~
+@2028	= ~Go right in, <SIRMAAM>.~
+@2029	= ~It's a pleasure to see you again, <SIRMAAM>.~
+@2030	= ~Pleasant <DAYNIGHTALL> to you, <SIRMAAM>.~
+@2031	= ~The Dukes will be most pleased to see you again, <SIRMAAM>.~
+@2032	= ~You are welcome to walk right in, <SIRMAAM>.~
+@2033	= ~I think <CHARNAME> is cute.~
+
+// duke_belt.d 1 of 2 (continued at 2130)
+@2034	= ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~
+@2035	= ~You are truly the Hero of Baldur's Gate.~
+@2036	= ~News of your victory has already reached us, as has Sarevok's sword.~
+@2037	= ~Thank you for agreeing to let us keep it safe.~
+@2038	= ~You're quite welcome.  I'm happy to oblige.~
+@2039	= ~I really didn't have much choice in the matter.~
+@2040	= ~Be that as it may, we would like to reimburse you for the sword and reward you for saving this city.~
+@2041	= ~I believe 3000 gold should cover the value of the sword.~
+@2042	= ~That should more than cover it, thank you.~
+@2043	= ~I guess that's a fair price.~
+@2044	= ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~
+@2045	= ~Please feel free to come and go as you wish.~
+@2046	= ~That's very generous of you.  Thank you!~
+@2047	= ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~
+@2048	= ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~
+@2049	= ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~
+@2050	= ~I'm sorry we can't be more generous at this time.~
+@2051 	= ~Your suite is on the third floor.  A servant will be there to show you around.~
+@2052	= ~I'm sorry to hear that.  Please let me know if you change your mind.~
+@2053	= ~I'm sorry you feel that way.  Please let me know if you change your mind.~
+@2054	= ~Hello again, <CHARNAME>.  Have you changed your mind?~
+@2055	= ~No, I haven't.  Goodbye.~
+@2056	= ~Yes, I'll take the room.~
+@2057	= ~Greetings, <GABBER>.  It's a pleasure to see you again.~
+
+// palace_personnel.d 2 of 3 (continued from 2033 - continued at 2091)
+@2058	= ~Greetings, <SIRMAAM>. Please leave the cellar, you should not be here.~
+@2059	= ~Greetings, <SIRMAAM>.~
+@2060	= ~Welcome, <PRO_SIRMAAM>.~
+@2061	= ~These rooms can serve as your residence whenever you are in the city.~
+@2062	= ~The chest on the far left of the room is for your personal use.  It is quite secure.~
+@2063	= ~M'<PROPER_LORDLADY>, it has been an honor to serve the Hero of Baldur's Gate.~
+@2064	= ~Please help yourself to whatever is already inside.~
+
+// duke_eltan.d 1 of 2 (continued at 2096)
+@2065	= ~<CHARNAME>, I need to personally thank you for saving my life.~
+@2066	= ~I have properties here in the city as well in and around Beregost.  I'd be honored if you'd accept one as a thank you.~
+@2067	= ~That's not necessary.  I was just doing my duty.~
+@2068	= ~You have my attention.~
+@2069	= ~That's very generous of you.  Thank you!~
+@2070	= ~It was way above the call of duty.~
+@2071	= ~Which of these properties would suit you best? ::Shows you a list of potential properties::~
+@2072	= ~I'd prefer the one in Beregost.~
+@2073	= ~I'd prefer the cabin in High Hedge.~
+@2074	= ~I'd prefer the one in front of the Ducal Palace.~
+@2075	= ~That's the large grey house on the upper west side.~
+@2076	= ~Ahh, a place in the woods.  Be careful not to bother the grumpy mage that will be your neighbor.~
+@2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
+@2078	= ~Here's your key.~
+@2079	= ~While looking intently into your eyes he says, "With your permission, I'll stop by later to see how you're settling in."~
+@2080	= ~Uhm..sure, if you'd like.~
+@2081	= ~Oh that's very kind of you but hardly necessary.~  // Clueless answer - thinks she said 'no thank you' while he heard 'yes'
+@2082	= ~Actually, I'd prefer if you didn't.  I'd not like the attention it would draw.~
+@2083	= ~I would like.  I would like very much.~  // (OMG THAT IS SO CREEPY!)
+@2084	= ~It will be a pleasure, I assure you.~
+@2085	= ~As you will.  But feel free to visit me here or at the Flaming Fist headquarters if you should change your mind.~
+@2086	= ~Yes I have.  I'd be honored to have you stop by.~
+@2087	= ~I've recently done some renovations to the place.  I hope you like them.~
+@2088	= ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~
+@2089	= ~Yes, I'd like that.~
+@2090	= ~I look forward to it.~
+
+// palace_personnel.d 3 of 3 (continued from 2064) ... Duke Eltan's servant inside the PC's house
+@2091	= ~Welcome to your new home, <PRO_SIRMAAM>.~
+@2092	= ~It can serve as your residence for as long as you own the key.~
+@2093	= ~The chest here is for your personal use.  It is quite secure.~
+@2094	= ~The previous occupants of the house have moved on.  I'm afraid I don't know to where.~
+@2095	= ~The previous resident has moved next door, in case you are interested in visiting her.~
+
+// duke_eltan.d Duke Eltan's introduction of Scar 2 or 2 (continued from @2090)
+@2096	= ~There is someone here who would like to talk you, <CHARNAME>.~
+@2097	= ~<CHARNAME>, I need to personally thank you for saving my life and the life of my friend.~
+@2098	= ~I have nothing more to say to you.~
+
+// duke_liia.d Duke Liia offers magic training to Imoen
+@2099	= ~Imoen, I sense a real talent for magic within you, child.  Are you interested in learning how to hone this skill?~
+@2100	= ~It would require you stay here in the palace with me.  There would be a lot of study.~
+@2101	= ~Go ahead, Imoen.  You've always wanted this.~
+@2102	= ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~
+@2103	= ~You will come visit, <CHARNAME>!  Promise!~
+@2104	= ~Oh!  Here's my equipment.  I won't need it while studying magic.~
+@2105	= ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~
+@2106	= ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~
+@2107	= ~Goodbye, <CHARNAME>.  Thanks for everything.~
+@2108	= ~Good luck, Imoen.  I'll come visit!~
+@2109	= ~Good bye, Imoen.  Good luck.~
+@2110	= ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
+@2111	= ~As you wish, child.  Come see me if you change your mind.~
+@2112	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with us to study magic.~
+@2113	= ~Feel free to visit her on the 3rd floor whenever you'd like.~
+@2114	= ~Thank you.  I'll do that.~
+@2115	= ~Maybe...someday.~
+@2116	= ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~
+@2117	= ~One moment <CHARNAME>, I need to speak with Imoen.~
+@2118	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~
+@2119	= ~Greetings Imoen.  Have you come about magic training?~
+@2120	= ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~
+@2121	= ~I can hardly wait to get started!  See ya!~
+@2122	= ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~
+@2123	= ~Can you wait a few days, Imoen?  I really need you right now.~
+@2124	= ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~
+@2125	= ~As you will, Imoen. Come see me when you're ready.~
+@2126	= ~See ya, kid.  Try not to burn down the place.~
+
+// duke_liia.d Imoen in her room before SoD
+// I should really break this out into a separate .d file, but it
+// is all installed together, so no biggie
+@2127	= ~Oh, hello <CHARNAME>!  I can't talk right now.  I have to memorize this list of spells!~
+@2128	= ~Who knew this magic stuff was so much actual work?!~
+@2129	= ~I'll leave you to it, then.~
+
+// duke_belt.d Duke Belt 2 of 2 offering quests to PC
+@2130	= ~<CHARNAME>, if you have the time, I'd like your help in rounding up the last of Sarevok's supporters.~
+@2131	= ~Angelo was spotted heading down into the sewers behind the Flaming Fist Headquarters accompanied by some rogue Flaming Fist.~
+@2132	= ~We would like to hire you to being him to justice, dead or alive.~
+@2133	= ~I'd prefer dead.~
+@2134	= ~Dead or alive!~
+@2135	= ~Not a problem.  I'll be back as soon as he's taken care of.~
+@2136	= ~Oh, this will be a pleasure.  Consider it done.~
+@2137	= ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~
+@2138	= ~I'm not a bounty hunter.  I'm afraid you'll have to hire someone else.  I'll be on my way now.~
+@2139	= ~I will make sure there are Flaming Fist to escort him to a cell if he surrenders.~
+@2140	= ~Thank you.~
+@2141	= ~I doubt that will be necessary.~
+@2142	= ~Dead or ALIVE!~
+@2143	= ~Very well.  Let me know when you are ready.~
+@2144	= ~What did you have in mind?~
+@2145	= ~As you wish.~
+@2146	= ~Hello again, <GABBER>.  Is <CHARNAME> ready to help us clear up the rest of Sarevok's supporters?~
+@2147	= ~Hello again, <CHARNAME>.  Are you ready to help us clear up the rest of Savevok's supporters?~
+@2148	= ~I'd prefer to skip this one.~
+@2149	= ~Hello again!  Have you dealt with Angelo yet?~
+@2150	= ~No, I'll be back when he's taken care of.~
+@2151	= ~Not yet.  Where was he again?~
+@2152	= ~Well done <CHARNAME>!  Word has reached us on your success.~
+@2153	= ~Your reward is well earned, as is a rest.~
+@2154	= ~Tazok was spotted heading down into the sewers in front of the Rogues Guild Hall with a troop of thugs.~
+@2155	= ~Hello again!  Have you dealt with Tazok yet?~
+@2156	= ~Semaj was spotted going into the Blushing Mermaid.  It's possible he was headed to the Undercellar.~
+@2157	= ~Hello again!  Have you dealt with Semaj yet?~
+@2158	= ~I'm here about the room, actually.  I'll take it.~
+@2159	= ~Winski Peroate was spotted heading down into the sewers across the street from the Flaming Fist Headquarters aided by some rogue Flaming Fist.~
+@2160	= ~Hello again!  Have you dealt with Winski yet?~
+@2161	= ~Cythandria was spotted heading into the Elfsong Tavern~ 
+@2162	= ~Hello again!  Have you dealt with Cythandria yet?~
+@2163	= ~Tamoko was spotted heading into the Iron Throne Headquarters~ 
+@2164	= ~Hello again!  Have you dealt with Tamoko yet?~
+@2165	= ~Zhalimar Cloudwulfe and his crew were spotted heading into the sewers in front of the Iron Throne Headquarters~ 
+@2166	= ~Hello again!  Have you dealt with Cloudwulfe yet?~
+@2167	= ~The remainder of Zhalimar Cloudwulfe's crew were spotted heading into the sewers in front of the Iron Throne Headquarters~
+@2168	= ~Hello again!  Have you dealt with Cloudwulfe's crew yet?~
+@2169	= ~Sarevok's last known supporter, Korlasz, was spotted heading into her family crypt.~ 
+@2170	= ~Hello again!  Have you dealt with Korlasz yet?~
+@2171	= ~No, I'll be back when she's taken care of.~
+@2172	= ~Not yet.  Where was she again?~
+@2173	= ~Not a problem.  I'll be back as soon as she's taken care of.~
+@2174	= ~We would like to hire you to being her to justice, dead or alive.~
+@2175	= ~I've spoken with her and let her go.  She is not a danger to anyone.~
+@2176	= ~Her freedom is not yours to give, <CHARNAME>.  The courts will decide her fate.~
+@2177	= ~Her freedom may not be up to me, but her capture will not involve me.  I pass.~
+@2178	= ~Not a problem.  I'll be back as soon as they're taken care of.~
+@2179	= ~I will make sure there are Flaming Fist to escort her to a cell if she surrenders.~
+@2180	= ~I will make sure there are Flaming Fist to escort them to a cell if they surrender.~
+@2181	= ~No, I'll be back when they're taken care of.~
+@2182	= ~Not yet.  Where were they again?~
+@2183	= ~We would like to hire you to being them to justice, dead or alive.~
+@2184	= ~How do I find this crypt?~
+@2185	= ~Hold still, I'll send you there.~
+@2186	= ~I will make sure a contingent of Flaming Fist is there to back you up.~
+
+// NPC Quest dialogues
+@2187	= ~Get away from me.  I have nothing to say to you.~
+@2188	= ~Greetings, <SIRMAAM>.  We're here to escort any survivors to cells.~
+@2189	= ~You again!  Will you never just go away!~
+@2190	= ~Not in your lifetime!~
+@2191	= ~Come along peacefully and you may live.~
+@2192	= ~We'll see about that.  Attack!~
+
+// Quick addition to Duke Belt's dialogue
+@2193	= ~Me too!~
+
+// NPC Quest Dialogues continued
+@2194	= ~No survivors?~
+@2195	= ~I'm afraid not.~
+@2196	= ~We'll inform the Dukes.  I'm sure they'll want to talk to you again.~
+@2197	= ~When you've rested and had a chance to heal your wounds, come talk to me.  I'll have more work for you.~
+@2198	= ~Ok, I'll be back shortly.~
+@2199	= ~I'm done being your bounty hunter.  Hire someone else.~
+@2200	= ~I'm ready to go now.  What's the job?~
+@2201	= ~Excellent!~
+@2202	= ~You! Again! This time you die, <PRO_RACE>!~
+@2203	= ~Well, one of us will at any rate.~
+@2204	= ~Attack!~
+@2205	= ~Never!~
+@2206	= ~You! What do you want now?!~
+@2207	= ~Ha!  I have a better idea!~
+@2208	= ~Oh, the merciful one isn't so merciful after all!~
+@2209	= ~Rot away in some jail cell?!  I think not!~
+@2210	= ~So my choice is the noose or death by a bhaal-spawn?~
+@2211	= ~I don't think you'll be hung for sharing a bed with Sarevok.  You'll at least have a better chance at survival this way.~
+@2212	= ~You'll die for certain if you choose to fight.~
+@2213	= ~No, you have just one choice, you lying bitch.  Any last words?~
+@2214	= ~I'd rather see if I can take you with me!~
+@2215	= ~I'll see you in hell!~
+@2216	= ~Fine!  I surrender!~
+@2217	= ~How ironic.~
+@2218	= ~<PROPER_SIRMAAM>, I stayed behind to inform you that the prisoner has been taken into custody.~
+@2219	= ~I'll inform the Dukes.  I'm sure they'll want to talk to you again.~
+@2220	= ~You?  What do you want?!~
+@2221	= ~The Dukes sent me to bring you in dead or alive.~
+@2222	= ~There are Flaming Fist waiting for you outside.~
+@2223	= ~Hello again, <CHARNAME>.  What is it you seek here?~
+@2224	= ~I see.  My soul is ready to face you in one final battle.~
+@2225	= ~I would testify for you at your trial.  I doubt being in love will be a hanging offense.~
+@2226	= ~Battle is not necessary, Tamoko.~
+@2227	= ~I do not choose to die by execution.  I would rather go out with honor.~
+@2228	= ~You would not do this if you knew to whom you speak.~
+@2229	= ~I know you helped Sarevok kill my foster father.  I recognized you from that night.~
+@2230	= ~And yet, you would forgive me.  You would help me?~
+@2231	= ~What you did, you did for misguided love.  I can forgive that.~
+@2232	= ~You truly are nothing like your brother, after all.~
+@2233	= ~Then let's end this.  The last of my foster father's murders will fall this <DAYNIGHT>.~
+@2234	= ~Please leave me be.  I have much to think about.~
+@2235	= ~I've changed my mind about the room.  I'd like to check it out.~
+@2236	= ~I'm sorry <CHARNAME>.  I will follow Sarevok, but my blood will not be on your hands.~
+@2237	= ~No!  Don't do this!~
+@2238	= ~It is done...~
+@2239	= ~The last of my foster father's murders has fallen. May he rest in peace.~
+@2240	= ~I'm sorry, <PRO_SIRMAAM>.  She grabbed my sword before I could stop her.~
+@2241	= ~It isn't your fault.  I don't know if anyone could have saved her.~
+@2242	= ~We'll take away the body and inform the Dukes.  I'm sure they'll want to talk to you again.~
+@2243	= ~Please see that she receives a proper burial.  Thank you.~
+@2244	= ~I'm sorry, <CHARNAME>, we waited for you as long as we could. We've found someone else to bring in the rest of Sarevok's followers.~
+@2245	= ~We were going to hire you to bring in the remaining followers of Sarevok, but time was of the essence and we couldn't wait.  We found someone else to clean up the mess.~
+@2246	= ~Good.  Hopefully that means the assassination attempts will stop.~
+@2247	= ~I recognize you.  You are foolish enough to follow us?  Die fool!~
+
+// Pre-Korlasz training for Imoen by Belt or Liia if I4E not loaded
+@2248	= ~Oh, Imoen, Duke Liia wanted me to convey an invitatation to you for magic instruction.~
+@2249	= ~If you're interested, you can get started upstairs immediately.~
+@2250	= ~Really?!  How exciting!~
+@2251 	= ~Wait! Duke Liia, I've decided to take you up on your offer.~
+@2252	= ~I'll give you some time to go find someone to replace Imoen in your party, <CHARNAME>.~
+@2253	= ~Actually, your party doesn't seem fit enough to take on another task at the moment.~
+@2254	= ~Come back when everyone is healthy and rested.~
+

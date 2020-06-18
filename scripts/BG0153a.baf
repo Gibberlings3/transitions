@@ -1,0 +1,18 @@
+/////////////////////////////////////////////////////////////////////////
+// Sets up the thieves' guild area script to start dialogue for Denkod //
+// with the protagonist after Sarevok has been defeated so he can      //
+// explain what happened to the wounded that were in the thieves' maze //
+// Patched via cleanup_maze.tpa                                        //
+/////////////////////////////////////////////////////////////////////////
+IF
+	!Dead("DENKOD")  // Denkod
+	InMyArea("DENKOD")
+	InMyArea(Player1)
+	Dead("Sarevok")
+	Global("#L_DenkodTalk","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_DenkodTalk","MYAREA",1)
+		ActionOverride("DENKOD",StartDialogueNoSet(Player1))
+		Continue()
+END

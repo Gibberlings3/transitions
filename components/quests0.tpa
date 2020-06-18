@@ -1,0 +1,10 @@
+/////////////////////////////////////////////////////////////////////////////////
+// Optional component that adds bounty quests for all of Sarevok's supporters  //
+// This option has Sarevok's survivors flee upon his death to give more quests //
+/////////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION quests0 BEGIN
+	INCLUDE ~%mod_root%/components/quests_common.tpa~
+	INCLUDE ~%mod_root%/components/survivors_flee.tpa~
+	INCLUDE ~%mod_root%/components/tamoko.tpa~
+END

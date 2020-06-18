@@ -1,0 +1,12 @@
+/////////////////////////////////////////////////////////////////////
+// Component that adds world event timers to auto-advance the game //
+/////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION timers_common BEGIN
+	// Area script to trigger dialogues
+	COPY_EXISTING ~BG0125.BCS~ ~override~
+		DECOMPILE_AND_PATCH BEGIN 
+			APPEND_FILE TEXT ~%mod_root%/scripts/BG0125_timers.baf~
+		END
+	BUT_ONLY_IF_IT_CHANGES
+END

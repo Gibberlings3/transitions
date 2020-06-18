@@ -1,0 +1,38 @@
+////////////////////////////////////////////////////////////////////////////
+// Sarevok gets his unique items.                                         //
+// A HUGE thank you to Tantalus for permission to use his beautiful BAMs! //
+// And DANKE SHOEN jastey for the example on how to add them to the game! //
+// Strings are in game.tra                                                //
+// Included via Sarevok0.tpa and Sarevok1.tpa                             //
+////////////////////////////////////////////////////////////////////////////
+COPY ~%mod_root%/objects/sarevok/bam/.~ ~override~
+
+COPY ~%mod_root%/objects/sarevok/itm/#LSrvArm.itm~ ~override~
+	SAY NAME1 @1001 /* ~Sarevok's Plate Mail Armor~ */
+	SAY NAME2 @1001 /* ~Sarevok's Plate Mail Armor~ */
+	SAY UNIDENTIFIED_DESC @1002
+	SAY IDENTIFIED_DESC @1003
+
+COPY ~%mod_root%/objects/sarevok/itm/#LSrvHlm.itm~ ~override~
+	SAY NAME1 @1004 /* ~Sarevok's Helm~ */
+	SAY NAME2 @1004 /* ~Sarevok's Helm~ */
+	SAY UNIDENTIFIED_DESC @1005
+	SAY IDENTIFIED_DESC @1006
+
+// See if jastey's custom items for Sarevok are installed
+COPY_EXISTING ~BG0125.BCS~ ~override~
+  DECOMPILE_AND_PATCH BEGIN 
+    COUNT_REGEXP_INSTANCES ~Global("C#st_SarevoksItems","MYAREA",0)~ sarevokItemsInstalled
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF (sarevokItemsInstalled > 0) BEGIN
+   // Remove block where jastey manually drops the items after Sarevok's death
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 1
+      STR_VAR 
+         script = BG0125
+         match = ~Global("C#st_SarevoksItems","MYAREA",0)~
+   END
+END
