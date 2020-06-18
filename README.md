@@ -49,9 +49,7 @@ The custom BAMs for armor and helmet were created by Tantalus for his Mod "Sarev
 Shout out to jastey for letting me know about these and for the example on how to add them to the game and for letting me hijack her flaming fist healers from her Endless BG1 mod
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult
-
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected
-
 Option 3: Just use whatever Endless BG1 has already installed (of course, only if that mod is actually already installed)
 
 ------------------------------------------------------------------------
