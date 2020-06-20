@@ -204,7 +204,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR")~ THEN BELT_QUEST_1_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",2) Dead("Tazok")~ THEN BELT_QUEST_2_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -257,7 +257,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",3) Dead("SEMAJ")~ THEN BELT_QUEST_3_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -287,7 +287,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",4) Dead("winski2")~ THEN BELT_QUEST_4_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -317,7 +317,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",5) OR(2) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ THEN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -356,7 +356,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",6) OR(2) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ THEN BELT_QUEST_6_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -365,7 +365,7 @@ APPEND BELT
 	//////////////////////////////////////////////////////////////////////////
 	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(5000) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -389,7 +389,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",8) OR(2) Dead("bdkorlas") Global("BD_KORLASZ_SURRENDER","GLOBAL",1)~ THEN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
 	END
 END
 
