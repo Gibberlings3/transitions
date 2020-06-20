@@ -180,7 +180,7 @@ APPEND BELT
 	END
 
 	IF ~~ THEN BELT_QUESTS_ALL_DONE
-		SAY ~This is where the group will break up and the attacks from Caerlar begin~
+		SAY ~This is where some of your group may leave, and I will ask you what you want to do next~
 		IF ~~ THEN DO ~SetGlobal("#L_GroupSplit","GLOBAL",1)~ EXIT
 	END
 
@@ -379,17 +379,17 @@ APPEND BELT
 		++ @2148 /* ~I'd prefer to skip this one.~ */ + BELT_QUESTS_SKIP_ALL
 	END
 
-	IF ~Global("#L_SarvQuests","GLOBAL",8) Global("#L_KorlaszDone","GLOBAL",0)~ THEN BELT_QUEST_8_NOT_DONE_YET
-		SAY	@2170 /* ~Hello again!  Are you ready for Korlasz yet?~ */
+	IF ~Global("#L_SarvQuests","GLOBAL",8) GlobalLT("BD_Korlasz_Fight","GLOBAL",2)~ THEN BELT_QUEST_8_NOT_DONE_YET
+		SAY	@2170 /* ~Hello again!  Have you dealt with Korlasz yet?~ */
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
-		++ @2184 /* ~I'm ready to go, but how do I find this crypt?~ */ + START_KORLASZ
+		++ @2184 /* ~How do I find this crypt?~ */ + START_KORLASZ
 		++ @2137 /* ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~ */ + BELT_QUESTS_LATER
 		++ @2148 /* ~I'd prefer to skip this one.~ */ + BELT_QUESTS_SKIP_THIS
 	END
 
-	IF ~Global("#L_SarvQuests","GLOBAL",8) Global("#L_KorlaszDone","GLOBAL",1)~ THEN BELT_QUEST_5_DONE
+	IF ~Global("#L_SarvQuests","GLOBAL",8) Global("BD_Korlasz_Fight","GLOBAL",2)~ THEN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(5000) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
+		IF ~~ THEN DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
 	END
 END
 
