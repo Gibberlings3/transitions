@@ -244,7 +244,6 @@ LAF INSERT_SCRIPT_BLOCK
       insert = ~%mod_root%/scripts/bd0130.baf~
 END
 
-
 // Modified dialogues for Flaming Fist escorts in Korlasz Dungeon
 // Removes calls to Imoen's dialogue if doing quest
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/bdff1000.d~ USING ~%tra_loc%/%s/dialogues.tra~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/bdff100x.d~ USING ~%tra_loc%/%s/dialogues.tra~
