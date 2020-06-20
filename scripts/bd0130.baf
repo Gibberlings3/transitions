@@ -1,0 +1,29 @@
+///////////////////////////////////////////////////////////////////////////////
+// Modification to 2nd level of Korlasz quest to side set final hand-holding //
+// Patched via main_common.tpa                                               //
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	!Global("BD_Korlasz_Fight","BD0130",2)
+	Global("#L_SarvQuests","GLOBAL",8)
+	OR(2)
+		Dead("bdkorlas")  // Korlasz
+		Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetGlobal("BD_Korlasz_Fight","BD0130",2)
+END
+
+IF 
+	Global("#L_SarvQuests","GLOBAL",8)
+	TriggerOverride("BDFF1000",Range(Player1,15))
+	Global("BD_Korlasz_Fight","BD0130",2)
+THEN
+	RESPONSE #100
+		SetGlobal("BDSH_Imoen_Floor","GLOBAL",3)
+		SetGlobal("BDSH_Rope","GLOBAL",1)
+		SetGlobal("BD_Plot","GLOBAL",40)
+ 		ActionOverride("BDFF1000",Dialogue(Player1))
+		ActionOverride("BDFF1001",EscapeAreaObject("Tranbd0120rope"))
+		ActionOverride("BDFF1002",EscapeAreaObject("Tranbd0120rope"))
+END

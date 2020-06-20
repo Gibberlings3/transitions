@@ -282,12 +282,9 @@
 @2246	= ~Good.  Hopefully that means the assassination attempts will stop.~
 @2247	= ~I recognize you.  You are foolish enough to follow us?  Die fool!~
 
-// Pre-Korlasz training for Imoen by Belt or Liia if I4E not loaded
-@2248	= ~Oh, Imoen, Duke Liia wanted me to convey an invitatation to you for magic instruction.~
-@2249	= ~If you're interested, you can get started upstairs immediately.~
-@2250	= ~Really?!  How exciting!~
-@2251 	= ~Wait! Duke Liia, I've decided to take you up on your offer.~
-@2252	= ~I'll give you some time to go find someone to replace Imoen in your party, <CHARNAME>.~
-@2253	= ~Actually, your party doesn't seem fit enough to take on another task at the moment.~
-@2254	= ~Come back when everyone is healthy and rested.~
-
+// Flaming Fist escorts in Korlasz dungeon
+@2248	= ~We'll wait for you here...just in case.~
+@2249	= ~Congratulations on a job well done, <PRO_SIRMAAM>.~
+@2250	= ~We're heading to the upper level.  Follow when you're ready.~
+@2251	= ~Thank you.  I'm heading out now.~
+@2252	= ~Very well.  We'll escort the prisoner to her cell.~
