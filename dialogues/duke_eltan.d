@@ -8,7 +8,7 @@
 // Though, if she's in the group, he should probably want to haul her off to prison
 ADD_STATE_TRIGGER BDELTAN 0 ~Global("#L_EltanTalkedToCorwin","MYAREA",0) AreaCheck("BD0102")~
 REPLACE_TRIGGER_TEXT BDELTAN ~Global("k9Sharteel_Talk_ELTAN","GLOBAL",0)~ ~Global("k9Sharteel_Talk_ELTAN","GLOBAL",0) GlobalGT("BD_plot","GLOBAL",40)~
-REPLACE_ACTION_TEXT BDELTAN ~SetGlobal("bd_plot_003","bd0102",1)~ ~SetGlobal("bd_plot_003","bd0102",1) Global("#L_EltanTalkedToCorwin","MYAREA",1)~
+REPLACE_ACTION_TEXT BDELTAN ~SetGlobal("bd_plot_003","bd0102",1)~ ~SetGlobal("bd_plot_003","bd0102",1) SetGlobal("#L_EltanTalkedToCorwin","MYAREA",1)~
 
 // Add Palace dialogue
 APPEND BDELTAN
