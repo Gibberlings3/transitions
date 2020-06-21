@@ -247,3 +247,9 @@ END
 // Modified dialogues for Flaming Fist escorts in Korlasz Dungeon
 // Removes calls to Imoen's dialogue if doing quest
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/bdff100x.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Modified version of Korlasz's Journal with no mention of refugees
+COPY_EXISTING ~BDSHKORJ.ITM~ ~override~
+   SAY UNIDENTIFIED_DESC @1027
+   SAY IDENTIFIED_DESC @1027
+BUT_ONLY_IF_IT_CHANGES

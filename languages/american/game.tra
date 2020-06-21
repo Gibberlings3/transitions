@@ -102,3 +102,30 @@ Weight: 0~
 // STRING USED WHEN CLICKING ROPE IN KORLASZ DUNGEON THE FIRST TIME //
 //////////////////////////////////////////////////////////////////////
 @1026	= ~A sturdy rope hanging down into the tomb offers the only viable exit from the house of the dead.  Use it when you are ready to leave.~
+
+//////////////////////////////////////////////////////////
+// MODIFIED VERSION OF KORLASZ'S JOURNAL (BDSHKORJ.ITM) //
+//////////////////////////////////////////////////////////
+@1027 = ~(This journal spans the last six months. Certain entries strike you as being important.)
+
+S. and I had a long talk last night. Everything he says makes so much sense. I offered him my family crypt to use as a safehouse, and he accepted. The old motifs to the Dead Three seem particularly appropriate now. I often meditate by the symbol of Bhaal and think on his teachings, and on how his influence is returning to the land.
+
+...
+
+Today, S. mentioned that his plans are progressing quickly. He'll be gone for a week or two conducting research in an old tomb somewhere near Bridgefort. I lack his leadership capabilities, but I should be able to manage the followers while he's gone
+
+...
+
+Last night, S. told me the groundwork has been laid for the next phase of his plan. He's moving into new quarters in the Iron Throne. I'll miss our talks, but I'm glad he's gaining the recognition he deserves. He'll change the face of the Sword Coast when he claims his birthright. All will know the power of Bhaal through him.
+
+...
+
+Received word that S. has been killed. I can scarcely believe it. I didn't think anyone could bring about his end. I don't know what to do next. For now, I'll keep the followers safe and stay away from the Flaming Fist.
+
+...
+
+The Flaming Fist is making it impossible to leave the city. There are guards at every gate thanks to their hunt for S. supporters. A hooded figure contacted me yesterday and offered a large sum of money if I could steal Sarevok's sword and deliver it to his agents in Athkatla. The money could be enough to bribe our way out of the city. I agreed. I had little choice.
+
+...
+
+With the help of my allies, we've stolen Sarevok's sword from the Ducal Palace. I wish I could keep it myself, but its sale will fund the safe escape of me and the others. Must be careful in how we store the blade for its trip to Waukeen's Promenade in Athkatla. Apparently, it's no good if the blood's wiped off.~
