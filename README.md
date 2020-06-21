@@ -166,6 +166,7 @@ Option 2: Sailing time (46 days) counts against world timers
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
+Allow all non-modded BG1 NPCs to stay after Korlasz
 jastey's palace treasurer
 Close any open quests that will be impossible to continue after Sarevok is dead
 Clean-up quests should use the quest journal
@@ -176,13 +177,13 @@ Updated bhaal-spawn powers (mind shield and charm creature)
 Scrolling text to cut scene before dream movie starts or after it ends
 Group reactions to new dream
 Access to a palace physician/cleric
-Conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause
+Conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
 Duke Eltan romance
 A house across from the Flaming Fist HQ for Eltan to offer as a reward
-Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2
+Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
 Distribute group's possessions from the end of SoD to stores in Athkatla 
 Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
-Clean up unique items that might be duplicated due playing areas out of normal sequence
+Clean up unique items that might be duplicated due to playing areas out of normal sequence
 Make sure there are consequenses to returning to BG before name is cleared
 Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
 
