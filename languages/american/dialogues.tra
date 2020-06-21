@@ -288,3 +288,17 @@
 @2250	= ~We're heading to the upper level.  Follow when you're ready.~
 @2251	= ~Thank you.  I'm heading out now.~
 @2252	= ~Very well.  We'll escort the prisoner to her cell.~
+
+// Bhaal documentation in Korlasz dungeon quest
+@2253	= ~<CHARNAME>, one moment.  The Korlasz family are known to have worshipped The Dead Three over the years.~
+@2254	= ~If you find any documents or research on them, Bhaal especially, please bring them to me.~
+@2255	= ~I will, of course, reimburse you for them.~
+@2256	= ~Oh by the way, <CHARNAME>, Duke Jannath is looking for research on The Dead Three.~
+@2257	= ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~
+@2258	= ~Yes, I found some on Bhaal~
+@2259	= ~Most excellent!  I will give you 6000 gold for the lot.~
+@2260	= ~That's incredibly generous of you.  Glad to be of service!~
+@2261	= ~Ok now.  Hold still.~
+@2262	= ~No, I'm sorry.  I wasn't able to find anything.~
+@2263	= ~I will give you 6000 gold for the lot.~
+

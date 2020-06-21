@@ -363,7 +363,7 @@ APPEND BELT
 	// Cloudwulfe et al speciic
 	// Most of it is in the CHAIN section below
 	//////////////////////////////////////////////////////////////////////////
-	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BELT_QUEST_5_DONE
+	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BELT_QUEST_7_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
 	END
@@ -385,11 +385,6 @@ APPEND BELT
 		++ @2184 /* ~How do I find this crypt?~ */ + START_KORLASZ
 		++ @2137 /* ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~ */ + BELT_QUESTS_LATER
 		++ @2148 /* ~I'd prefer to skip this one.~ */ + BELT_QUESTS_SKIP_THIS
-	END
-
-	IF ~Global("#L_SarvQuests","GLOBAL",8) OR(2) Dead("bdkorlas") Global("BD_KORLASZ_SURRENDER","GLOBAL",1)~ THEN BELT_QUEST_5_DONE
-		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
 	END
 END
 
@@ -513,8 +508,32 @@ CHAIN
 CHAIN
 	IF ~~ THEN BELT START_KORLASZ
 		@2185 /* ~Hold still, I'll send you there.~ */
+		= IF ~!InMyArea("LIIA")~ @2256 /* ~Oh by the way, <CHARNAME>, Duke Jannath is looking for research on The Dead Three.~ */
+		= IF ~!InMyArea("LIIA")~ @2254 /* ~If you find any documents or research on them, Bhaal especially, please bring them to me.~ */
+		= IF ~!InMyArea("LIIA")~ @2255 /* ~I will, of course, reimburse you for them.~ */
+		== LIIA	IF ~InMyArea("LIIA")~ @2253 /* ~<CHARNAME>, one moment.  The Korlasz family are known to have worshipped The Dead Three over the years.~ */
+	    = IF ~InMyArea("LIIA")~ @2254 /* ~If you find any documents or research on them, Bhaal especially, please bring them to me.~ */
+		= IF ~InMyArea("LIIA")~ @2255	/* ~I will, of course, reimburse you for them.~ */
+		== BELT @2261 /* ~Ok now.  Hold still.~ */
 		= IF ~!InMyArea("BDELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 		== BDELTAN IF ~InMyArea("BDELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 	END
 	IF ~~ DO ~ClearAllActions() StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ EXIT
+
+CHAIN
+	IF ~Global("#L_SarvQuests","GLOBAL",8) OR(2) Dead("bdkorlas") Global("BD_KORLASZ_SURRENDER","GLOBAL",1)~ THEN BELT BELT_QUEST_8_DONE
+		@2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
+		= IF ~!InMyArea("LIIA")~ @2257 /* ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~ */ 
+		== LIIA IF ~InMyArea("LIIA")~ @2257 /* ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~ */
+	END
+	+ ~PartyHasItem("BDSHBHR")~ + @2258 /* ~Yes, I found some on Bhaal~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BHAAL_BOOKS_REWARD
+	+ ~!PartyHasItem("BDSHBHR")~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
+
+CHAIN 
+	IF ~~ THEN BELT BHAAL_BOOKS_REWARD
+		@2201 /* ~Excellent!~ */
+		= IF ~!InMyArea("LIIA")~ @2263 /* ~I will give you 6000 gold for the lot.~ */
+		== LIIA IF ~InMyArea("LIIA")~ @2259 /* ~Most excellent!  I will give you 6000 gold for the lot.~ */
+	END
+	++ @2260 /* ~That's incredibly generous of you.  Glad to be of service!~ */ DO ~TakePartyItem("BDSHBHR") DestroyItem("BDSHBHR") GiveGoldForce(6000)~ + BELT_QUESTS_ALL_DONE
 
