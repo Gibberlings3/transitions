@@ -129,3 +129,6 @@ The Flaming Fist is making it impossible to leave the city. There are guards at 
 ...
 
 With the help of my allies, we've stolen Sarevok's sword from the Ducal Palace. I wish I could keep it myself, but its sale will fund the safe escape of me and the others. Must be careful in how we store the blade for its trip to Waukeen's Promenade in Athkatla. Apparently, it's no good if the blood's wiped off.~
+
+// Info region near where group exits from Korlasz family crypt
+@1028	= ~Sealed exit from the Korlasz family crypt~
