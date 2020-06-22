@@ -123,30 +123,7 @@ A special case has been put in for Imoen when the unfinished SoD component of I4
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.
 
-Ten game-days after the death of Sarevok, the cleanup quests including Korlasz, will become unavailable.  They can be done any time previous.  A messenger will attempt to illicit the aid of the PC after 8 game-days, with the caveat that each stage of the clean up allows for 2 days to reach the next stage before the messenger is sent or the ten-day timer is allowed to expire.  The completion or refusal of the Korlasz dungeon quest or the ten day timer expiring will trigger the dispersion of party members, except for those listed below.  
-NOTE: The party will not break up due to this timer if in any of the ToSC areas before the demon is dealt with.  The messenger must find the party and give the 2-day warning before this timer will be allowed to expire and he will not pester them while in ToSC areas before the demon is dispatched.
-
-The following NPCs will remain in the group or will be available to recruit after the party disperses unless a mod changes their default behavior:
-	- Alora
-	- Branwen
-	- Dynaheir
-	- Eldoth
-	- Faldorn
-	- Garrick
-	- Imoen if not in training and Liia component installed
-	- Kagain
-	- Kivan
-	- Minsc
-	- Monteron
-	- Quayle
-	- Rasaad
-	- Skie
-	- Viconia
-	- Xan
-	- Xzar
-	- Yeslick
-	- all custom BG1 NPCs unless programmed to leave by their mods
-NOTE: If timers are NOT installed, Coran and Safana won't leave your group until you select to start either SoD or BG2.  With timers, they'll run off to Elfsong Tavern together and won't be recruitable. 
+Ten game-days after the death of Sarevok, the cleanup quests including Korlasz, will become unavailable.  They can be done any time previous.  A messenger will attempt to illicit the aid of the PC after 8 game-days, with the caveat that each stage of the clean up allows for 2 days to reach the next stage before the messenger is sent or the ten-day timer is allowed to expire.  The completion or refusal of the Korlasz dungeon quest or the ten day timer expiring will trigger exit dialogues of some party members.  Whether or not unmodded NPCs actually leave or not is left up to the roleplaying preferences of the player.
 
 Twenty-five game-days after the death of Sarevok or fifteen days after the Korlasz dungeon is completed (which ever is later), Caelar elites will attack and the town of Baldur's Gate will be limited to the SoD version of the city.  They will continue to attack at random intervals with growing forces for another twenty-one game-days or until the PC joins the coalition or until the PC is overwhelmed by them (after which he/she will wake up in Dragonspear castle).  Note: ToSC areas are safe zones until the demon has been dispatched.
 
@@ -166,7 +143,6 @@ Option 2: Sailing time (46 days) counts against world timers
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-Allow all non-modded BG1 NPCs to stay after Korlasz
 jastey's palace treasurer
 Close any open quests that will be impossible to continue after Sarevok is dead
 Clean-up quests should use the quest journal

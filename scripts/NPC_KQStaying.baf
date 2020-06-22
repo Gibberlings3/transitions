@@ -1,0 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Block added to canned NPC scripts if they'll be staying at the end of Korlasz //
+// but they still want to hold a conversation for some reason or another         //
+// Compiled via main_common.tpa                                                  //
+///////////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_StayingAfterKorlasz","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_StayingAfterKorlasz","LOCALS",1)
+		Continue()
+END

@@ -278,3 +278,48 @@ COPY_EXISTING ~BG0200.ARE~ ~override~
          ab_RT_Name = "#L_KorlaszExit"
    END
 BUT_ONLY_IF_IT_CHANGES
+
+// Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD
+// Dialogues are not actually required no matter which variable is used: leaving, staying or choice
+// If no variable is set, no dialogue is initiated and the NPC stays
+// If the staying variable is set, dialogue is attempted but optional and the NPC stays
+// If the leaving variable is set, dialogue is attempted but optional and the NPC leaves
+// If the choice variable is set, dialogue is attempted but optional
+//   After the 1st dialogue attempt, variables are checked again 
+//     If the variable has been changed to leave or stay, another dialogue is attempted
+//     If changed to leaving, the NPC leaves after the 2nd dialogue attempt, otherwise the NPC stays
+//   Can be used to just have 2 dialogues without any intention of leaving
+// I got squishy and decided to put the leaving after Korlasz up to the player
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/post_korlasz.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+EXTEND_TOP ~JAHEIRA.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+
+//EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~DYNAHEIR.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~FALDORN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+EXTEND_TOP ~GARRICK.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+EXTEND_TOP ~IMOEN2.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~KAGAIN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~KIVAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~MINSC.BCS~ ~%mod_root%/scripts/NPC_KQLeaving.baf~
+//EXTEND_TOP ~MONTARON.BCS~ ~%mod_root%/scripts/NPC_KQLeaving.baf~
+//EXTEND_TOP ~QUAYLE.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~RASAAD.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~SAFANA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~SHARTEEL.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~SKIE.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~TIAX.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~VICONIA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~XZAR.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+//EXTEND_TOP ~YESLICK.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
+
+// Changes to PC's script to process end-of-Korlasz dialogues
+EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/player1_KQCheckGroup.baf~

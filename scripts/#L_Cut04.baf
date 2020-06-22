@@ -9,7 +9,7 @@ THEN
 		SetGlobal("BD_Init_Gold","BD0120",1)  // Tomb Safehouse  First Floor
 		SetGlobal("BD_Plot","GLOBAL",1)
 		SetGlobal("SOD_fromimport","GLOBAL",2)
-		SetGlobal("bd_leaving2_ot","GLOBAL",99)
+//		SetGlobal("bd_leaving2_ot","GLOBAL",99)
 		SetGlobal("BD_SMIMP","BD0120",1)  // Tomb Safehouse  First Floor
 		ActionOverride("Belt",ForceSpell(Player1,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
 		ActionOverride("Belt",ForceSpell(Player2,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)

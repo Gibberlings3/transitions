@@ -180,8 +180,27 @@ APPEND BELT
 	END
 
 	IF ~~ THEN BELT_QUESTS_ALL_DONE
-		SAY ~This is where some of your group may leave, and I will ask you what you want to do next~
-		IF ~~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ EXIT
+		SAY @2272 /* ~I've had a special gift made for you.  It will allow for one wish.~ */
+		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
+		= ~Well, it will be a nice little thingie once I actually get it made~
+		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("XBOW03",Player1,1,0,0)~ + BELT_NOW_WHAT
+	END
+
+	IF ~~ THEN BELT_NOW_WHAT
+		SAY @2264 /* ~So, <CHARNAME>, what are your plans now?~ */
+		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","MYAREA",1)~ EXIT
+		+ ~OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2266 /* ~I'm going to settle into my new house and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","MYAREA",3)~ EXIT
+		+ ~!Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_ImoenInPalace","GLOBAL",1) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2268	/* ~I'm going to visit Imoen and then go home and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","MYAREA",2)~ EXIT
+		+ ~!PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2267 /* ~I think I'll go to Elfsong and celebrate for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","MYAREA",4)~ EXIT
+		+ ~!Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_ImoenInPalace","GLOBAL",1) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2269 /* ~I'm going to visit Imoen and then head to Elfsong to celebrate for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","MYAREA",2)~ EXIT
+		++ @2270 /* ~I have places to go, things to do, people to see.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_FUN
+		++ @2271 /* ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartBG2","MYAREA",1)~ EXIT
+	END
+
+	IF ~~ THEN BELT_FUN
+		SAY @2275 /* ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~ */
+		+ ~Dead("DEATHK")~ + @2276 /* ~I've already been there.  Interesting is ... one way to describe it.~ */ EXIT
+	    + ~!Dead("DEATHK")~ + @2277 /* ~Sounds like fun.  I'll check it out.~ */ DO ~SetGlobal("#L_LetsHaveFun","GLOBAL",1)~ EXIT
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -384,7 +403,7 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2184 /* ~How do I find this crypt?~ */ + START_KORLASZ
 		++ @2137 /* ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~ */ + BELT_QUESTS_LATER
-		++ @2148 /* ~I'd prefer to skip this one.~ */ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ + BELT_QUESTS_SKIP_ALL
 	END
 END
 

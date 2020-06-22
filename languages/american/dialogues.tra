@@ -302,3 +302,27 @@
 @2262	= ~No, I'm sorry.  I wasn't able to find anything.~
 @2263	= ~I will give you 6000 gold for the lot.~
 
+// Post-Korlasz BG1 wrap-up dialogue with Belt
+@2264	= ~So, <CHARNAME>, what are your plans now?~
+@2265	= ~I think I'll go up stairs and sleep for a week.~
+@2266	= ~I'm going to settle into my new house and sleep for a week.~
+@2267	= ~I think I'll go to Elfsong and celebrate for a week.~
+@2268	= ~I'm going to visit Imoen and then go home and sleep for a week.~
+@2269	= ~I'm going to visit Imoen and then head to Elfsong to celebrate for a week.~
+@2270	= ~I have places to go, things to do, people to see.~
+@2271	= ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~
+@2272	= ~I've had a special gift made for you.  It will allow for one wish.~
+@2273	= ~It's a personal thank you for all you've done for the city.~
+@2274	= ~Thank you.  That's very kind of you.~
+@2275	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~
+@2276	= ~I've already been there.  Interesting is ... one way to describe it.~
+@2277	= ~Sounds like fun.  I'll check it out.~
+
+// Post-Korlasz exit dialogues
+@2278	= ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~
+@2279	= ~Please don't go yet.  I still need you, for just a few more days.~
+@2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
+@2281	= ~Of course you may leave, just not with that equipment.~
+@2282	= ~I understand, your knighthood awaits.  Best of luck to you on your journey.~
+@2283	= ~As you wish.  I owe you that at least.~
+@2284	= ~It has been an honor.  Farewell.~
