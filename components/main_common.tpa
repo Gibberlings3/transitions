@@ -303,6 +303,7 @@ END
 //EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~JAHEIRA.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+//EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
