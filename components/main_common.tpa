@@ -290,8 +290,15 @@ BUT_ONLY_IF_IT_CHANGES
 //     If changed to leaving, the NPC leaves after the 2nd dialogue attempt, otherwise the NPC stays
 //   Can be used to just have 2 dialogues without any intention of leaving
 // I got squishy and decided to put the leaving after Korlasz up to the player
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/post_korlasz.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+COPY_EXISTING ~AJANTIS.BCS~ ~override~ // See if Ajantis has already been set up
+  DECOMPILE_AND_PATCH BEGIN 
+    COUNT_REGEXP_INSTANCES ~AfterKorlasz~ Ajantis_SetUp
+  END
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF !(Ajantis_SetUp > 0) BEGIN
+   COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/pk_ajantj.d~ USING ~%tra_loc%/%s/dialogues.tra~
+   EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+END
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
