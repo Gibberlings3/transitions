@@ -280,13 +280,12 @@ COPY_EXISTING ~BG0200.ARE~ ~override~
 BUT_ONLY_IF_IT_CHANGES
 
 // Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD
-// Dialogues are not actually required no matter which variable is used: leaving, staying or choice
-// If no variable is set, no dialogue is initiated and the NPC stays
-// If the staying variable is set, dialogue is attempted and the NPC stays
-// If the leaving variable is set, dialogue is attempted and the NPC leaves
-// If the choice variable is set, dialogue is attempted
+// If no variable is set to 1, no dialogue is initiated and the NPC stays
+// If the staying variable is set to 1, dialogue is attempted and the NPC stays
+// If the leaving variable is set to 1, dialogue is attempted and the NPC leaves
+// If the choice variable is set to 1, dialogue is attempted
 //   After the 1st dialogue attempt, variables are checked again 
-//     If the variable has been changed to leave or stay, another dialogue is attempted
+//     If the staying or leaving variable has been set to 1, another dialogue is attempted
 //     If changed to leaving, the NPC leaves after the 2nd dialogue attempt, otherwise the NPC stays
 //   Can be used to just have 2 dialogues without any intention of leaving
 // I got squishy and decided to put the leaving after Korlasz up to the player
