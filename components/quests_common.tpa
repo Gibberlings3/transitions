@@ -145,7 +145,7 @@ END
 // Tazok and Cythandria Quests (for the flaming fist portion)
 // 3 Flaming Fist outside the sewer entrance (BG0800)
 // Sewers where Tazok is hiding (BG0226)
-// Elfsong Tavern where Cythandria is staying (BG706)
+// Elfsong Tavern where Cythandria is staying (BG0706)
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
