@@ -3,39 +3,55 @@
 // Compiled via timers_common.tpa      //
 /////////////////////////////////////////
 
+// Refugee wave triggers and counters
 IF
 	GlobalGT("#L_NextWaveTimer","GLOBAL",0)
 	GlobalTimerExpired("#L_NextWaveTimer","GLOBAL")
+	GlobalLT("#L_LastWaveSet","GLOBAL",3) // We're only doing 3 waves for the time being
+	GlobalLT("#L_WavesToSet","GLOBAL",3)
 THEN
 	RESPONSE #100
 		IncrementGlobal("#L_WavesToSet","GLOBAL",1)
 		SetGlobalTimer("#L_NextWaveTimer","GLOBAL",SEVEN_DAYS)
 END
 
+// Clean up quests time limit
+// 8 days to the messenger - 2 more days after that
 IF
 	Global("#L_QuestMsgSent","GLOBAL",0)
 	GlobalLT("#L_SarvQuests","GLOBAL",99)
 	GlobalGT("#L_SendQuestMsgr","GLOBAL",0)
-	GlobalTimerExpired("#L_SendQuestMsgr","GLOBAL")
+	GlobalTimerExpired("#L_SendQuestMsgr","GLOBAL") // 8 days
 	OR(2)
 		Global("#L_QuestTimer","GLOBAL",0)
-		GlobalTimerExpired("#L_QuestTimer","GLOBAL")
+		GlobalTimerExpired("#L_QuestTimer","GLOBAL") // 2 days since last quest update
 	Global("#L_MsgOK","MYAREA",1)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_QuestMsgSent","GLOBAL",1)
-		SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)
+		SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS) // They have 2 days to complete quests
 		// To Do...Send the messenger
 		Continue()
 END
 
+// End of Korlasz exit dialogues
+IF
+	Global("#L_QuestMsgSent","GLOBAL",1)
+	GlobalLT("#L_SarvQuests","GLOBAL",99)
+	GlobalTimerExpired("#L_QuestTimer","GLOBAL")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SarvQuests","GLOBAL",99) // This kicks off the dialogues
+END
+
+// Messenger to notify PC of attack in the palace (start of SoD)
 IF
 	Global("#L_SoDMsgSent","GLOBAL",0)
 	Global("EndOfBG1","GLOBAL",0)
 	GlobalGT("#L_StartSoD","GLOBAL",0)
-	GlobalTimerExpired("#L_StartSoD","GLOBAL")
-	GlobalGT("#L_SoDNotBefore","GLOBAL",0)
-	GlobalTimerExpired("#L_SoDNotBefore","GLOBAL")
+	GlobalTimerExpired("#L_StartSoD","GLOBAL") // there's at least 25 days after Sarevok is killed
+	GlobalGT("#L_SoDNotBefore","GLOBAL",0) 
+	GlobalTimerExpired("#L_SoDNotBefore","GLOBAL") // there's at least 15 days after quests finished
 	Global("#L_MsgOK","MYAREA",1)
 THEN
 	RESPONSE #100
