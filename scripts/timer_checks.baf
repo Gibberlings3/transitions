@@ -13,6 +13,7 @@ THEN
 	RESPONSE #100
 		IncrementGlobal("#L_WavesToSet","GLOBAL",1)
 		SetGlobalTimer("#L_NextWaveTimer","GLOBAL",SEVEN_DAYS)
+		Continue()
 END
 
 // Clean up quests time limit
@@ -39,9 +40,13 @@ IF
 	Global("#L_QuestMsgSent","GLOBAL",1)
 	GlobalLT("#L_SarvQuests","GLOBAL",99)
 	GlobalTimerExpired("#L_QuestTimer","GLOBAL")
+	!AreaType(DUNGEON)
+	CombatCounter(0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_SarvQuests","GLOBAL",99) // This kicks off the dialogues
+		SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)
+		Continue()
 END
 
 // Messenger to notify PC of attack in the palace (start of SoD)

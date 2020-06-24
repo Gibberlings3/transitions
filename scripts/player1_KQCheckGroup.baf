@@ -3,6 +3,9 @@
 // Compiled via main_common.tpa                                                                       //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Continue()s intentionally left out of these blocks
+// Do not add them back in - it'll break this section if they're in there
+// The script needs to exit after each block so variables are reset
 IF
 	Global("#L_SarvQuests","GLOBAL",99)
 	Global("#L_KQChecking","MYAREA",0)
@@ -374,4 +377,5 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_SarvQuests","GLOBAL",100) // Finished!
+		Continue()	// Can continue after the last one
 END
