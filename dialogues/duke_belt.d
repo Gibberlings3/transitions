@@ -58,7 +58,7 @@ APPEND BELT
 		IF ~InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuestsInProg","MYAREA",2) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
 		SAY @2054 /* ~Hello again, <CHARNAME>.  Have you changed your mind?~ */
 		++ @2055 /* ~No, I haven't.  Goodbye.~ */ + NO_CHANGE
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2056 /* ~Yes, I'll take the room.~ */ + ROOM_TAKEN
@@ -75,28 +75,34 @@ APPEND BELT
 		IF ~Global("#L_SarvQuests","GLOBAL",99) Global("#L_GroupSplit","GLOBAL",0)~ + BELT_QUESTS_ALL_DONE
 	END
 
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuestsInProg","MYAREA",2) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
 		IF ~~ THEN EXIT
 	END
 
-	IF ~Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL") Global("#L_SarvQuests","GLOBAL",0)~ THEN BEGIN BELT_TOO_LATE
+	IF ~Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL") Global("#L_SarvQuestsInProg","MYAREA",0)~ THEN BEGIN BELT_TOO_LATE
 		SAY @2245 /* ~We were going to hire you to bring in the remaining followers of Sarevok, but time was of the essence and we couldn't wait.  We found someone else to clean up the mess.~ */
 		++ @2246 /* ~Good.  Hopefully that means the assassination attempts will stop.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
 	END
 
+	IF ~Global("#L_SarvQuestsInProg","MYAREA",1) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL")~ THEN BEGIN BELT_QUEST_50_LATE
+		SAY @2244 /* ~I'm sorry, <CHARNAME>, we waited for you as long as we could. We've found someone else to bring in the rest of Sarevok's followers.~ */
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2)~ + ROOM_TAKEN
+		++ @2246 /* ~Good.  Hopefully that means the assassination attempts will stop.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2)~ + BELT_QUESTS_ALL_DONE
+	END	
+
 	IF ~Global("#L_TalkedToDukes","GLOBAL",3) OR(2) Global("#L_QuestMsgSent","GLOBAL",0) !GlobalTimerExpired("#L_QuestTimer","GLOBAL") Global("#L_SarvQuests","GLOBAL",0)~ THEN BEGIN BELT_BEGIN_QUESTS
 		SAY @2130 /* ~<CHARNAME>, if you have the time, I'd like your help in rounding up the last of the Sarevok's supporters.~ */
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest1","MYAREA",0) !Dead("GALDOR")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",1) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_1a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest2","MYAREA",0) !Dead("Tazok") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",2) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_2a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest3","MYAREA",0) !Dead("SEMAJ") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",3) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_3a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest4","MYAREA",0) !Dead("winski2") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",4) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_4a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest5","MYAREA",0) !Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",5) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_5a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest6","MYAREA",0) !Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",6) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_6a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest7","MYAREA",0) OR(6) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",7) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_7a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1) OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ZHALIMAR") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("GARDUSH") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("NAAMAN") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("DIYAB") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("AASIM") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ALAI")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",8) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_8a
-		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",8) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_8a
-		++ @2137 /* ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",50) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUESTS_LATER
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest1","MYAREA",0) !Dead("GALDOR")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",1) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_1a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest2","MYAREA",0) !Dead("Tazok") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",2) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_2a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest3","MYAREA",0) !Dead("SEMAJ") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",3) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_3a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest4","MYAREA",0) !Dead("winski2") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",4) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_4a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest5","MYAREA",0) !Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",5) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_5a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest6","MYAREA",0) !Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",6) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_6a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) Global("#L_SkipQuest7","MYAREA",0) OR(6) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI") OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",7) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_7a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",0) OR(2) Global("#L_SkipQuest1","MYAREA",1) Dead("GALDOR") OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ") OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1) OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ZHALIMAR") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("GARDUSH") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("NAAMAN") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("DIYAB") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("AASIM") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ALAI")~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",8) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_8a
+		+ ~Global("#L_OnlyDoKorlaszQuest","MYAREA",1)~ + @2144 /* ~What did you have in mind? */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",8) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUEST_8a
+		++ @2137 /* ~I have things to wrap up first.  I'll be back when I'm ready to take on more work.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",1) SetGlobal("#L_SarvQuests","GLOBAL",50) SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS)~ + BELT_QUESTS_LATER
 		++ @2138 /* ~I'm not a bounty hunter.  I'm afraid you'll have to hire someone else.  I'll be on my way now.~ */ + BELT_QUESTS_SKIP_ALL
 	END
 
@@ -107,14 +113,8 @@ APPEND BELT
 
 	IF ~~ THEN BELT_QUESTS_SKIP_ALL
 		SAY @2145 /* ~As you wish.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~+ BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2) SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~+ BELT_QUESTS_ALL_DONE
 	END
-
-	IF ~GlobalLT("#L_SarvQuests","GLOBAL",99) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL")~ THEN BEGIN BELT_QUEST_50_LATE
-		SAY @2244 /* ~I'm sorry, <CHARNAME>, we waited for you as long as we could. We've found someone else to bring in the rest of Sarevok's followers.~ */
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + ROOM_TAKEN
-		++ @2246 /* ~Good.  Hopefully that means the assassination attempts will stop.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
-	END	
 
 	IF ~Global("#L_SarvQuests","GLOBAL",50) !IsGabber(Player1)~ THEN BEGIN BELT_QUEST_50a
 		SAY @2146 /* ~Hello again, <GABBER>.  Is <CHARNAME> ready to help us clear up the rest of Sarevok's supporters? */
@@ -183,7 +183,7 @@ APPEND BELT
 		SAY @2272 /* ~I've had a special gift made for you.  It will allow for one wish.~ */
 		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
 		= ~Well, it will be a nice little thingie once I actually get it made~
-		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("XBOW03",Player1,1,0,0) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + BELT_NOW_WHAT
+		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2) GiveItemCreate("XBOW03",Player1,1,0,0) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + BELT_NOW_WHAT
 	END
 
 	IF ~~ THEN BELT_NOW_WHAT
