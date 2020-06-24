@@ -6,8 +6,8 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	// Area script to set up timers
 	EXTEND_BOTTOM ~BG0125.BCS~ ~%mod_root%/scripts/BG0125_timers.baf~
 
-	// Put timer checks in DPLAYER3
-	EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/timer_checks.baf~
+	// Put timer checks in BALDUR.BCS
+	EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/timer_checks.baf~
 
 	// Set up areas to accept NPC errand runners when timers expire
 	// Doing it manually since I have no control over area flags or new areas being installed

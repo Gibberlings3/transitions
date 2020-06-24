@@ -328,5 +328,6 @@ END
 //EXTEND_TOP ~XZAR.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~YESLICK.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 
-// Changes to PC's script to process end-of-Korlasz dialogues
-EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/player1_KQCheckGroup.baf~
+// Process end-of-Korlasz dialogues no matter where they are
+// in case the player installs timers 
+EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/player1_KQCheckGroup.baf~
