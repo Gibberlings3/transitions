@@ -318,7 +318,7 @@
 @2276	= ~I've already been there.  Interesting is ... one way to describe it.~
 @2277	= ~Sounds like fun.  I'll check it out.~
 
-// Post-Korlasz exit dialogues
+// Post-Korlasz exit dialogues for Ajantis
 @2278	= ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~
 @2279	= ~Please don't go yet.  I still need you, for just a few more days.~
 @2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
@@ -326,3 +326,14 @@
 @2282	= ~I understand, your knighthood awaits.  Best of luck to you on your journey.~
 @2283	= ~As you wish.  I owe you that at least.~
 @2284	= ~It has been an honor.  Farewell.~
+
+// Refugee dialogues
+@2285	= ~We travelled all the way here from High Moor because they burnt down our farms.  We don't know who they were, only that they are still out there and their number is growing.  Will Baldur's Gate help us, we don't feel safe outside the city walls?~
+@2286	= ~They burned everything down - after taking all our livestock. Why would anyone do that?~
+@2287	= ~So many angry men, and they destroy everything in their wake. I really hope we're safe here in the south.~
+@2288 	= ~They asked us to join them, and then they started rampaging and killing... We fled with what few belongings we could carry.~
+@2289 	= ~They destroyed the whole village - and I don't want to know what they did to the villagers who didn't flee soon enough!~
+@2290 	= ~Join them! Join them! On a crusade of plundering and killing those murderers asked us to join them! I fled as soon as I could.~
+@2291	= ~Mooooooom! The stranger is talking to me!!~
+@2292	= ~I lost my puppy!~
+@2293	= ~I wanna go home.~

@@ -3,10 +3,145 @@
 /////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION timers_common BEGIN
-	// Area script to trigger dialogues
-	COPY_EXISTING ~BG0125.BCS~ ~override~
-		DECOMPILE_AND_PATCH BEGIN 
-			APPEND_FILE TEXT ~%mod_root%/scripts/BG0125_timers.baf~
-		END
-	BUT_ONLY_IF_IT_CHANGES
+	// Area script to set up timers
+	EXTEND_BOTTOM ~BG0125.BCS~ ~%mod_root%/scripts/BG0125_timers.baf~
+
+	// Put timer checks in DPLAYER3
+	EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/timer_checks.baf~
+
+	// Set up areas to accept NPC errand runners when timers expire
+	// Doing it manually since I have no control over area flags or new areas being installed
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0100							// NW BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0200							// N BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0300							// NE BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0600							// W BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0700							// C BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0800							// E BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG1100							// SW BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG1200							// S BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG1300							// SE BG
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG0900							// BRIDGE
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG2300							// FAI
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG3300							// BEREGOST
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG4800							// NASHKEL
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_areas						// like my_new_BG0146
+			bcs_name = BG4000							// GULLYKIN
+	END
+
+	// Refugee CREs (taken directly from jastey's EBG1 except for naming)
+	COPY_EXISTING ~FTOBE2.cre~ ~override/#LRfgF01.cre~ // Female #1
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgF01~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgAdt~ #8 // set dialogue file
+	    WRITE_EVALUATED_ASCII 0x268 ~~ #8   // Default script
+
+	COPY_EXISTING ~FTOBE5.cre~ ~override/#LRfgF02.cre~ // Female #2
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgF02~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgAdt~ #8 // set dialogue file
+	    WRITE_EVALUATED_ASCII 0x268 ~~ #8   // Default script
+
+	COPY_EXISTING ~MTBE3.cre~ ~override/#LRfgM01.cre~ // Male #1
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgM01~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgAdt~ #8 // set dialogue file
+	    WRITE_EVALUATED_ASCII 0x260 ~~ #8   // General script
+
+	COPY_EXISTING ~MTBE4.cre~ ~override/#LRfgM02.cre~ // Male #2
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgM02~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgAdt~ #8 // set dialogue file
+
+	COPY_EXISTING ~BOYBA1.cre~ ~override/#LRfgB01.cre~	// Boy
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgB01~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgChl~ #8 // set dialogue file
+	    WRITE_EVALUATED_ASCII 0x268 ~~ #8   // Default script
+
+	COPY_EXISTING ~GIRBA1.cre~ ~override/#LRfgG01.cre~	// Girl
+	    SAY NAME1 @1029 /* Refugee */
+	    SAY NAME2 @1029 /* Refugee */
+	    WRITE_ASCII 0x280 ~#LRfgG01~ #32 // set DV
+	    WRITE_ASCII 0x2cc ~#LRfgChl~ #8 // set dialogue file
+	    WRITE_EVALUATED_ASCII 0x268 ~~ #8   // Default script
+
+	// Refugee dialogue
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/refugees.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+	// Set up BG north to spawn the refugees
+	EXTEND_BOTTOM ~BG0200.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
 END
+

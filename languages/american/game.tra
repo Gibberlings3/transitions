@@ -132,3 +132,10 @@ With the help of my allies, we've stolen Sarevok's sword from the Ducal Palace. 
 
 // Info region near where group exits from Korlasz family crypt
 @1028	= ~Sealed exit from the Korlasz family crypt~
+
+// Refugees
+@1029	= ~Refugee~
+@1030	= ~Refugees from the Far North
+
+Refugees are arriving in Baldur's Gate, telling about some brutal movement far up north in High Moor, burning down farms and villages.~
+

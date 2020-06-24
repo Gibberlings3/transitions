@@ -1,2 +1,11 @@
+/////////////////////////////////////////////////////
+// Component that adds sailing time to event timer //
+/////////////////////////////////////////////////////
+
 DEFINE_ACTION_FUNCTION timers_skip_sail BEGIN
+	// TO DO...
+	// Just need to increment global timers 46 days if they sail to the island
+	// Do it before world time is incremented in the cut-scenes
+	// This would include the refugee wave timer, quest timer, sod-start timer, and arrest timer
+	// And any visits by creepy dude
 END

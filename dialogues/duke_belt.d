@@ -107,7 +107,7 @@ APPEND BELT
 
 	IF ~~ THEN BELT_QUESTS_SKIP_ALL
 		SAY @2145 /* ~As you wish.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~+ BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~+ BELT_QUESTS_ALL_DONE
 	END
 
 	IF ~GlobalLT("#L_SarvQuests","GLOBAL",99) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL")~ THEN BEGIN BELT_QUEST_50_LATE
@@ -183,7 +183,7 @@ APPEND BELT
 		SAY @2272 /* ~I've had a special gift made for you.  It will allow for one wish.~ */
 		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
 		= ~Well, it will be a nice little thingie once I actually get it made~
-		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("XBOW03",Player1,1,0,0)~ + BELT_NOW_WHAT
+		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("XBOW03",Player1,1,0,0) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + BELT_NOW_WHAT
 	END
 
 	IF ~~ THEN BELT_NOW_WHAT
