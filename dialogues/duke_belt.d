@@ -80,12 +80,12 @@ APPEND BELT
 		IF ~~ THEN EXIT
 	END
 
-	IF ~Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL") Global("#L_SarvQuestsInProg","MYAREA",0)~ THEN BEGIN BELT_TOO_LATE
+	IF ~Global("#L_TalkedToDukes","GLOBAL",3) GlobalGT("#L_QuestMsgSent","GLOBAL",0) GlobalTimerExpired("#L_QuestTimer","GLOBAL") Global("#L_SarvQuestsInProg","MYAREA",0)~ THEN BEGIN BELT_TOO_LATE
 		SAY @2245 /* ~We were going to hire you to bring in the remaining followers of Sarevok, but time was of the essence and we couldn't wait.  We found someone else to clean up the mess.~ */
 		++ @2246 /* ~Good.  Hopefully that means the assassination attempts will stop.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
 	END
 
-	IF ~Global("#L_SarvQuestsInProg","MYAREA",1) Global("#L_QuestMsgSent","GLOBAL",1) GlobalTimerExpired("#L_QuestTimer","GLOBAL")~ THEN BEGIN BELT_QUEST_50_LATE
+	IF ~Global("#L_SarvQuestsInProg","MYAREA",1) GlobalGT("#L_QuestMsgSent","GLOBAL",0) GlobalTimerExpired("#L_QuestTimer","GLOBAL")~ THEN BEGIN BELT_QUEST_50_LATE
 		SAY @2244 /* ~I'm sorry, <CHARNAME>, we waited for you as long as we could. We've found someone else to bring in the rest of Sarevok's followers.~ */
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2)~ + ROOM_TAKEN
 		++ @2246 /* ~Good.  Hopefully that means the assassination attempts will stop.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","MYAREA",2)~ + BELT_QUESTS_ALL_DONE
