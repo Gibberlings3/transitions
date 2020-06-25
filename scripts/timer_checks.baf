@@ -31,19 +31,13 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_QuestMsgSent","GLOBAL",1)
 		SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS) // They have 2 days to complete quests
-		CreateCreatureObjectOffset("#LffEsc1",Player1,[-100.0])
-		CreateCreatureObjectOffset("#LffEsc2",Player1,[100.0])
-		CreateCreatureObjectOffset("#LffEsc3",Player1,[0.-100])
-		ActionOverride("#LffEsc1",FaceObject(Player1))
-		ActionOverride("#LffEsc2",FaceObject(Player1))
-		ActionOverride("#LffEsc3",FaceObject(Player1))
-		ActionOverride("#LffEsc1",Dialogue(Player1))
+		// To Do...Send the messenger
 		Continue()
 END
 
 // End of Korlasz exit dialogues
 IF
-	GlobalGT("#L_QuestMsgSent","GLOBAL",0)
+	Global("#L_QuestMsgSent","GLOBAL",1)
 	GlobalLT("#L_SarvQuests","GLOBAL",99)
 	GlobalTimerExpired("#L_QuestTimer","GLOBAL")
 	!AreaType(DUNGEON)
