@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 // Flaming Fist come to the Undercity Temple or just outside its doors //
 // Modified version of jastey's Endless BG1 mod                        //
 // Included via sarevok0.tpa and sarevok1.tpa                          //
@@ -7,10 +7,6 @@
 // New class script file for new flaming fist healer #1
 // It just initiates the dialogue with the protagonist
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffHlr1.baf~ 
-
-// New general script file for new flaming fist healers
-// Stops them from wandering around when first spawned
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffGen.baf~
 
 // New Cut Scene scripts for healing the party, disarming the traps, and destroying bodies
 // Two for inside the temple, the other for just outside
