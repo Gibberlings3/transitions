@@ -12,6 +12,34 @@ COPY_EXISTING ~BG0108.BCS~ ~override~
 	END
 BUT_ONLY_IF_IT_CHANGES
 
+// 3 Flaming Fist escort that wait for those who surrender
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc1.cre~
+	SAY NAME1 @1007 /* ~Flaming Fist Escort~ */
+	SAY NAME2 @1007 /* ~Flaming Fist Escort~ */
+	WRITE_ASCII 0x280 ~#LffEsc1~ #32 // set DV
+  	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc2.cre~
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc2~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc3.cre~
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc3~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
+BUT_ONLY_IF_IT_CHANGES
+
 // Rogue Flaming Fist Mercenary
 COPY_EXISTING ~FLAMANG.CRE~ ~override/#LffBad.cre~
 	SAY NAME1 @1025 // ~Rogue Flaming Fist Mercenary~ 
@@ -63,6 +91,9 @@ COPY_EXISTING ~WINSKI.CRE~ ~override/#LWINSKI.CRE~
 	WRITE_ASCII 0x280 ~winski2~ #32 // set DV
 	WRITE_ASCII 0x2cc ~#LWinski~ #8   // dialogue
 BUT_ONLY_IF_IT_CHANGES
+
+// Dialogues for the Flaming Fist escort that wait for those who surrender
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ffescort.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 // New Angelo (GALDOR) dialogue file
 ACTION_IF !FILE_EXISTS_IN_GAME ~GALDOR.DLG~ THEN BEGIN
