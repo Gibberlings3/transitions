@@ -3,7 +3,7 @@
 // Parsed via quests_common.tpa //
 //////////////////////////////////
 IF
-	Global("#L_SarvQuests","GLOBAL",99)
+	GlobalGT("#L_SarvQuests","GLOBAL",98)
 	OR(3)
 		Exists("#LffEsc1")
 		Exists("#LffEsc2")

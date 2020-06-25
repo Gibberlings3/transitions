@@ -8,10 +8,6 @@
 // It just initiates the dialogue with the protagonist
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffHlr1.baf~ 
 
-// New general script file for new flaming fist healers
-// Stops them from wandering around when first spawned
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffGen.baf~
-
 // New Cut Scene scripts for healing the party, disarming the traps, and destroying bodies
 // Two for inside the temple, the other for just outside
 // 1-Inside heals group, takes care of traps and bodies
