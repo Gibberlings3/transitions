@@ -139,3 +139,7 @@ With the help of my allies, we've stolen Sarevok's sword from the Ducal Palace. 
 
 Refugees are arriving in Baldur's Gate, telling about some brutal movement far up north in High Moor, burning down farms and villages.~
 
+// Item that is given by belt (3 versions - usable, broken, drained)
+@1031	= ~Duke Belt's Gift to <CHARNAME>~
+@1032	= ~This item is able to grant you a limited number of specific wishes.~
+@1033	= ~Use the item~

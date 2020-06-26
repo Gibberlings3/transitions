@@ -366,3 +366,24 @@ END
 // Process end-of-Korlasz dialogues no matter where they are
 // in case the player installs timers 
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/player1_KQCheckGroup.baf~
+
+// The 'magic' item given by Duke Belt that will allow for game advancement
+//   and getting to BG1 and SoD versions of the palace
+// PC will find unusable broken remnants of it in Chateau Irenicus
+//   if it's in their inventory at the time of capture
+// PC will find a 'drained' unusable version of it in their personal chest
+//   if it is transfered to their stronghold in BG2
+COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
+   SAY NAME1 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY NAME2 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY UNIDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   SAY IDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   WRITE_LONG (0x0018) 2093 // Critical Item, Dropable, Displayable, Not Copyable, Conversable
+   WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
+   WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
+
+// The dialogue for the item
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
+APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~

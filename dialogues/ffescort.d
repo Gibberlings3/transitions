@@ -4,12 +4,17 @@ IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 		SAY @2294 /* ~<PROPER_SIRMAAM>, the Dukes have sent me to request your aid in rounding up the remaining supporters of Sarevok.~ */
 		++ @2295 /* ~Ok, let's go.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) ClearAllActions() StartCutSceneMode() StartCutSceneEx("#L_Cut06",TRUE)~ EXIT
 		++ @2296 /* ~I'll be there shortly.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2)~ + QUEST_HURRY
-		++ @2297 /* ~Tell the Dukes I'm not interested in being their bounty hunter.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + QUEST_SKIP
+		++ @2297 /* ~Tell the Dukes I'm not interested in being their bounty hunter.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) SetGlobal("#L_SarvQuestsInProg","GLOBAL",2) SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + QUEST_GIFT
 	END
 
 	IF ~~ THEN QUEST_HURRY
 		SAY @2298 /* ~Please hurry, <PROPER_SIRMAAM>.  Time is of the essence.~ */
 		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
+	END
+
+	IF ~~ THEN QUEST_GIFT
+		SAY @2300 /* ~Duke Belt wished for us to give you this token of his appreciation.~ */
+		++ @2301 /* ~Please give him my thanks. That was thoughtful.~ */ DO ~GiveItemCreate("#LAdvGm1",Player1,1,0,0)~+ QUEST_SKIP
 	END
 
 	IF ~~ THEN QUEST_SKIP

@@ -308,10 +308,10 @@
 @2266	= ~I'm going to settle into my new house and sleep for a week.~
 @2267	= ~I think I'll go to Elfsong and celebrate for a week.~
 @2268	= ~I'm going to visit Imoen and then go home and sleep for a week.~
-@2269	= ~I'm going to visit Imoen and then head to Elfsong to celebrate for a week.~
+@2269	= ~I'm going to visit Imoen and then head to the Elfsong to celebrate for a week.~
 @2270	= ~I have places to go, things to do, people to see.~
 @2271	= ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~
-@2272	= ~I've had a special gift made for you.  It will allow for one wish.~
+@2272	= ~I've had a special gift made for you.  It will allow for a limited number of wishes.~
 @2273	= ~It's a personal thank you for all you've done for the city.~
 @2274	= ~Thank you.  That's very kind of you.~
 @2275	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~
@@ -345,3 +345,17 @@
 @2297	= ~Tell the Dukes I'm not interested in being their bounty hunter.~
 @2298	= ~Please hurry, <PROPER_SIRMAAM>.  Time is of the essence.~
 @2299	= ~As you wish, <PRO_SIRMAAM>.~ 
+@2300	= ~Duke Belt wished for us to give you this token of his appreciation.~
+@2301	= ~Please give him my thanks. That was thoughtful.~
+
+// Game Advance Item
+@2302	= ~You hear a voice, remarkably similar to Duke Belt's, echo strangely in your mind~
+@2303	= ~So, <CHARNAME>, what would you like to do?~
+@2304	= ~I'd like to go to my room in the palace and sleep for a week.~
+@2305	= ~I'd like to go home and sleep for a week.~
+@2306	= ~I'd like to go to the Elfsong Tavern and celebrate for a week.~
+@2307	= ~I'd like to visit Imoen and then go home and sleep for a week.~
+@2308	= ~I'd like to visit Imoen and then head to the Elfsong to celebrate for a week.~
+@2309	= ~Nothing at this time.~
+@2310	= ~I like to gather a group and explore a bit, maybe see what's south of Nashkel.~
+@2311	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  It could prove quite interesting.~
