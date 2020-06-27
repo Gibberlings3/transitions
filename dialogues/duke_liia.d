@@ -61,13 +61,14 @@ APPEND IMOENP_
 END
 
 APPEND IMOEN2J
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_ImTrainRsp","MYAREA",1)~ THEN BEGIN IMOEN_LIIA_1
+	IF ~Global("#L_ImTrainRsp","MYAREA",1)~ THEN BEGIN IMOEN_LIIA_1
 		SAY @2103 /* ~You will come visit, <CHARNAME>!  Promise!~ */
 		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","MYAREA",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
+		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","MYAREA",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_MSG_4a
+		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","MYAREA",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
 	END
 
-	IF~GlobalGT("#L_TalkedToDukes","GLOBAL",1) OR(2) Global("#L_ImTrainRsp","MYAREA",3) Global("#L_ImTrainRsp","MYAREA",2) Global("#L_LiiaInstalled","GLOBAL",0)~ THEN BEGIN IMOEN_LIIA_2b
+	IF~OR(2) Global("#L_ImTrainRsp","MYAREA",3) Global("#L_ImTrainRsp","MYAREA",2) Global("#L_LiiaInstalled","GLOBAL",0)~ THEN BEGIN IMOEN_LIIA_2b
 		SAY @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
 		= @2103 /* ~You will come visit, <CHARNAME>!  Promise!~ */
 		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
@@ -114,4 +115,28 @@ CHAIN
 	++ @2109 /* ~Good bye, Imoen.  Good luck.~ */  EXIT
 	++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ EXIT
 
+CHAIN
+	IF ~~ THEN IMOEN2J IMOEN_MSG_4a
+		@2121 /* ~I can hardly wait to get started!  See ya!~ */
+	END
+	// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
+	+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_MSG_4b
+
+CHAIN
+	IF ~~ THEN IMOEN2J IMOEN_MSG_4b
+		@2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
+		= @2107 /* ~Goodbye, <CHARNAME>.  Thanks for everything.~ */
+		== ~#LFFEsc1~ @2122 /* ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~ */	
+		DO  ~SetGlobal("#L_ImTrainRsp","MYAREA",6) SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",LeaveParty()) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea()) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~
+	END
+	++ @2108 /* ~Good luck, Imoen.  I'll come visit!~ */ EXIT
+	++ @2109 /* ~Good bye, Imoen.  Good luck.~ */  EXIT
+	++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ EXIT
 
