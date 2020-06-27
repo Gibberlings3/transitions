@@ -21,6 +21,4 @@ BEGIN ~#LAdvGm1~
 		IF ~~ THEN DO ~SetGlobal("#L_LetsHaveFun","GLOBAL",1)~ EXIT
 	END
 
-TEST CHANGE
-
 
