@@ -315,23 +315,14 @@ COPY_EXISTING ~BG0200.ARE~ ~override~
 BUT_ONLY_IF_IT_CHANGES
 
 // Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD
-// If no variable is set to 1, no dialogue is initiated and the NPC stays
-// If the staying variable is set to 1, dialogue is attempted and the NPC stays
-// If the leaving variable is set to 1, dialogue is attempted and the NPC leaves
-// If the choice variable is set to 1, dialogue is attempted
-//   After the 1st dialogue attempt, variables are checked again 
-//     If the staying or leaving variable has been set to 1, another dialogue is attempted
-//     If changed to leaving, the NPC leaves after the 2nd dialogue attempt, otherwise the NPC stays
-//   Can be used to just have 2 dialogues without any intention of leaving
-// I got squishy and decided to put the leaving after Korlasz up to the player
 COPY_EXISTING ~AJANTIS.BCS~ ~override~ // See if Ajantis has already been set up
   DECOMPILE_AND_PATCH BEGIN 
-    COUNT_REGEXP_INSTANCES ~AfterKorlasz~ Ajantis_SetUp
+    COUNT_REGEXP_INSTANCES CASE_INSENSITIVE EXACT_MATCH ~Global("#L_SarvQuests","GLOBAL",99)~ Ajantis_SetUp
   END
 BUT_ONLY_IF_IT_CHANGES
 ACTION_IF !(Ajantis_SetUp > 0) BEGIN
    COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/pk_ajantj.d~ USING ~%tra_loc%/%s/dialogues.tra~
-   EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
+   EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/pk_ajan.baf~
 END
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
@@ -362,10 +353,6 @@ END
 //EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~XZAR.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~YESLICK.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
-
-// Process end-of-Korlasz dialogues no matter where they are
-// in case the player installs timers 
-EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/player1_KQCheckGroup.baf~
 
 // The 'magic' item given by Duke Belt that will allow for game advancement
 //   and getting to BG1 and SoD versions of the palace

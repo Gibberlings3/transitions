@@ -46,11 +46,9 @@ IF
 	GlobalGT("#L_QuestMsgSent","GLOBAL",0)
 	GlobalLT("#L_SarvQuests","GLOBAL",99)
 	GlobalTimerExpired("#L_QuestTimer","GLOBAL")
-	!AreaType(DUNGEON)
-	CombatCounter(0)
 THEN
 	RESPONSE #100
-		SetGlobal("#L_SarvQuests","GLOBAL",99) // This kicks off the dialogues
+		SetGlobal("#L_SarvQuests","GLOBAL",99) // This kicks off post-Korlasz dialogues if there are any
 		SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)
 		Continue()
 END
