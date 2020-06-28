@@ -5,6 +5,7 @@
 IF
 	Global("#L_SarvQuests","GLOBAL",99)
 	Global("#L_AjanPK","GLOBAL",0)
+	GlobalLT("EndOfBG1","GLOBAL",1)
 	!AreaType(DUNGEON)
 	CombatCounter(0)
 THEN

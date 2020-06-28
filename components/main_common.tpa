@@ -322,7 +322,6 @@ COPY_EXISTING ~AJANTIS.BCS~ ~override~ // See if Ajantis has already been set up
 BUT_ONLY_IF_IT_CHANGES
 ACTION_IF !(Ajantis_SetUp > 0) BEGIN
    COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/pk_ajantj.d~ USING ~%tra_loc%/%s/dialogues.tra~
-   COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/pk_ajantp.d~ USING ~%tra_loc%/%s/dialogues.tra~
    EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/pk_ajan.baf~
 END
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
