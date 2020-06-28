@@ -5,5 +5,5 @@
 ///////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION liia BEGIN
-	EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/bg0108b.baf~
+	EXTEND_TOP ~BG0125.BCS~ ~%mod_root%/scripts/bg0125_liia.baf~
 END
