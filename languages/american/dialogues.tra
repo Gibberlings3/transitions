@@ -368,6 +368,7 @@ f
 @2282	= ~I understand, your knighthood awaits.  Best of luck to you on your journey.~
 @2283	= ~As you wish.  I owe you that at least.~
 @2284	= ~It has been an honor.  Farewell.~
+@2316	= ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~
 
 // Refugee dialogues
 // refugees.d
@@ -412,3 +413,5 @@ f
 @2313	= ~Please give her my thanks but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
 @2314	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying at the Ducal Palace to study magic with Grand Duke Jannath.~
 @2315	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~
+
+// @2316 Up with pk_ajantj.d
