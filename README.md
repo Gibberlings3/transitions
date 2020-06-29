@@ -144,6 +144,7 @@ Option 2: Sailing time (46 days) counts against world timers
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
 jastey's palace treasurer
+Add better Korlasz loot to stores if quest is skipped
 Close any open quests that will be impossible to continue after Sarevok is dead
 Clean-up quests should use the quest journal
 Check/Update all remaining BG1 NPCs
