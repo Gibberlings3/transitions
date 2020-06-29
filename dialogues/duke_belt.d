@@ -182,7 +182,6 @@ APPEND BELT
 	IF ~~ THEN BELT_QUESTS_ALL_DONE
 		SAY @2272 /* ~I've had a special gift made for you.  It will allow for one wish.~ */
 		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
-		= ~Well, it will be a nice little thingie once I actually get it made~
 		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~SetGlobal("#L_SarvQuestsInProg","GLOBAL",2) GiveItemCreate("#LAdvGm1",Player1,1,0,0) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + BELT_NOW_WHAT
 	END
 
