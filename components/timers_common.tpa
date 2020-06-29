@@ -144,7 +144,7 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	// Set up BG north to spawn the refugees
 	EXTEND_BOTTOM ~BG0200.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
 
-	// Travel to Palace cut-scene
+	// Travel to Palace cut-scene used by messengers
 	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut06.baf~	
 END
 

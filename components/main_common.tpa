@@ -136,6 +136,9 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/d
 // Update Duke Liia's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_liia.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
+// Update Imoen's dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
 // Update Duke Belt's override script so he'll initiate conversation when PC first arrives in palace
 EXTEND_TOP ~BELT.BCS~ ~%mod_root%/scripts/Belt_Add.baf~
 

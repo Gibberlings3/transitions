@@ -29,11 +29,11 @@
 @2019	= ~Hah!~
 @2020	= ~Of course you were.~
 @2021	= ~We could tell our lives were in imminent danger.~
+@2025	= ~Boo!  It isn't nice to laugh at the frightened little man...although it is pretty funny!~
+@2026	= ~For once I agree with thine rodent.~
 @2022	= ~Warning noted.~
 @2023	= ~Are you the last?  Is this over?  The Fist were here in droves, haulin' up the dead and wounded.~
 @2024	= ~My nerves can't handle this. I'm gonna find a nice quiet place to lay low.  Way too much traffic here for my taste!~
-@2025	= ~Boo!  It isn't nice to laugh at the frightened little man...although it is pretty funny!~
-@2026	= ~For once I agree with thine rodent.~
 
 // palace_personnel.d 
 // Guards outside the palace
@@ -51,10 +51,10 @@
 // Servant in the 3rd floor room
 @2061	= ~These rooms can serve as your residence whenever you are in the city.~
 @2062	= ~The chest on the far left of the room is for your personal use.  It is quite secure.~
-@2063	= ~M'<PROPER_LORDLADY>, it has been an honor to serve the Hero of Baldur's Gate.~
 @2064	= ~Please help yourself to whatever is already inside.~
+@2063	= ~M'<PROPER_LORDLADY>, it has been an honor to serve the Hero of Baldur's Gate.~
 
-// duke_belt.d 1 of 2 (continued at 2130)
+// duke_belt.d
 @2034	= ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~
 @2035	= ~You are truly the Hero of Baldur's Gate.~
 @2036	= ~News of your victory has already reached us, as has Sarevok's sword.~
@@ -79,11 +79,13 @@
 @2055	= ~No, I haven't.  Goodbye.~
 @2056	= ~Yes, I'll take the room.~
 @2057	= ~Greetings, <GABBER>.  It's a pleasure to see you again.~
+
 // duke_belt.d Duke Belt offering quests to PC
 @2130	= ~<CHARNAME>, if you have the time, I'd like your help in rounding up the last of Sarevok's supporters.~
 @2131	= ~Angelo was spotted heading down into the sewers behind the Flaming Fist Headquarters accompanied by some rogue Flaming Fist.~
 @2132	= ~We would like to hire you to being him to justice, dead or alive.~
 @2133	= ~I'd prefer dead.~
+@2193	= ~Me too!~
 @2134	= ~Dead or alive!~
 @2135	= ~Not a problem.  I'll be back as soon as he's taken care of.~
 @2136	= ~Oh, this will be a pleasure.  Consider it done.~
@@ -137,8 +139,6 @@
 @2184	= ~How do I find this crypt?~
 @2185	= ~Hold still, I'll send you there.~
 @2186	= ~I will make sure a contingent of Flaming Fist is there to back you up.~
-// Quick addition to Duke Belt's dialogue
-@2193	= ~Me too!~
 @2197	= ~When you've rested and had a chance to heal your wounds, come talk to me.  I'll have more work for you.~
 @2198	= ~Ok, I'll be back shortly.~
 @2199	= ~I'm done being your bounty hunter.  Hire someone else.~
@@ -149,10 +149,9 @@
 @2245	= ~We were going to hire you to bring in the remaining followers of Sarevok, but time was of the essence and we couldn't wait.  We found someone else to clean up the mess.~
 @2246	= ~Good.  Hopefully that means the assassination attempts will stop.~
 
-
 // 2058 - @2064 up in palace_personnel.d
 
-// duke_eltan.d 1 of 2 (continued at 2096)
+// duke_eltan.d
 @2065	= ~<CHARNAME>, I need to personally thank you for saving my life.~
 @2066	= ~I have properties here in the city as well in and around Beregost.  I'd be honored if you'd accept one as a thank you.~
 @2067	= ~That's not necessary.  I was just doing my duty.~
@@ -179,7 +178,8 @@
 @2088	= ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~
 @2089	= ~Yes, I'd like that.~
 @2090	= ~I look forward to it.~
-// duke_eltan.d Duke Eltan's introduction of Scar 2 or 2 (continued from @2090)
+
+// duke_eltan.d Duke Eltan's introduction of Scar
 @2096	= ~There is someone here who would like to talk you, <CHARNAME>.~
 @2097	= ~<CHARNAME>, I need to personally thank you for saving my life and the life of my friend.~
 @2098	= ~I have nothing more to say to you.~
@@ -195,10 +195,21 @@
 // @2096-2098 up with duke_eltan.d
 
 // duke_liia.d Duke Liia offers magic training to Imoen
+@2117	= ~One moment <CHARNAME>, I need to speak with Imoen.~
 @2099	= ~Imoen, I sense a real talent for magic within you, child.  Are you interested in learning how to hone this skill?~
 @2100	= ~It would require you stay here in the palace with me.  There would be a lot of study.~
 @2101	= ~Go ahead, Imoen.  You've always wanted this.~
 @2102	= ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~
+@2123	= ~Can you wait a few days, Imoen?  I really need you right now.~
+@2112	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with us to study magic.~
+@2113	= ~Feel free to visit her on the 3rd floor whenever you'd like.~
+@2114	= ~Thank you.  I'll do that.~
+@2115	= ~Maybe...someday.~
+@2118	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~
+@2119	= ~Greetings Imoen.  Have you come about magic training?~
+@2120	= ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~
+
+// imoen_training.d
 @2103	= ~You will come visit, <CHARNAME>!  Promise!~
 @2104	= ~Oh!  Here's my equipment.  I won't need it while studying magic.~
 @2105	= ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~
@@ -208,27 +219,23 @@
 @2109	= ~Good bye, Imoen.  Good luck.~
 @2110	= ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
 @2111	= ~As you wish, child.  Come see me if you change your mind.~
-@2112	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with us to study magic.~
-@2113	= ~Feel free to visit her on the 3rd floor whenever you'd like.~
-@2114	= ~Thank you.  I'll do that.~
-@2115	= ~Maybe...someday.~
 @2116	= ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~
-@2117	= ~One moment <CHARNAME>, I need to speak with Imoen.~
-@2118	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~
-@2119	= ~Greetings Imoen.  Have you come about magic training?~
-@2120	= ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~
 @2121	= ~I can hardly wait to get started!  See ya!~
 @2122	= ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~
-@2123	= ~Can you wait a few days, Imoen?  I really need you right now.~
 @2124	= ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~
 @2125	= ~As you will, Imoen. Come see me when you're ready.~
 @2126	= ~See ya, kid.  Try not to burn down the place.~
-// duke_liia.d Imoen in her room before SoD
-// I should really break this out into a separate .d file, but it
-// is all installed together, so no biggie
+
+// imoen_training.d Imoen in her room before SoD
 @2127	= ~Oh, hello <CHARNAME>!  I can't talk right now.  I have to memorize this list of spells!~
 @2128	= ~Who knew this magic stuff was so much actual work?!~
 @2129	= ~I'll leave you to it, then.~
+
+// imoen_training.d kickout additions
+@2318	= ~Ya know, <CHARNAME>, I'd really like to take Duke Liia up on her magic training offer.~
+@2319	= ~If you don't need me any more, I'm going to go talk to her.~
+@2320	= ~Fine!  Be that way!  I have a better place to be, anyway!~
+@2321	= ~No, I'll be right back, don't go anywhere.~
 
 // @2130-2186 up with duke_belt.d
 
@@ -305,7 +312,7 @@
 @2231	= ~What you did, you did for misguided love.  I can forgive that.~
 @2232	= ~You truly are nothing like your brother, after all.~
 @2234	= ~Please leave me be.  I have much to think about.~
-f
+
 // @2235 up in duke_belt.d
 
 // tamoko_die.d
@@ -360,7 +367,7 @@ f
 @2277	= ~Sounds like fun.  I'll check it out.~
 
 // Post-Korlasz exit dialogues for Ajantis
-// pk_ajantj.d
+// pk_ajantis.d
 @2278	= ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~
 @2279	= ~Please don't go yet.  I still need you, for just a few more days.~
 @2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
@@ -412,6 +419,9 @@ f
 @2312	= ~You can accompany us back to the palace, if you'd like.~
 @2313	= ~Please give her my thanks but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
 @2314	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying at the Ducal Palace to study magic with Grand Duke Jannath.~
+@2317	= ~You can visit her there whenever you'd like.  Her suite is on the third floor.~
 @2315	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~
 
 // @2316 Up with pk_ajantj.d
+// @2317 is with ffescort.d quest msg relaying Liia's offer to train Imoen in magic
+// @2318-21 is up with imoen_training.d

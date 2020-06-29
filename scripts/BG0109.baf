@@ -1,13 +1,23 @@
 /////////////////////////////////////////////////////////////////////////////
 // Moves everything from original 3rd floor to PC's chest on new 3rd floor //
 // Opens the way to the PC's suite - modified version of BD0103            //
+// Moves Imoen into her room if she's in training                          //
 // Parsed via main_common.tpa                                              //
 /////////////////////////////////////////////////////////////////////////////
 
 IF
+	Global("#L_ImoenInPalace","GLOBAL",1)
+	Global("#L_ImoenInRoom","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ImoenInRoom","MYAREA",1)
+		MoveGlobal("#LBD0103","IMOEN2",[960.680])
+		Continue()
+END
+
+IF
 	Global("#L_PCRoomPrepped","MYAREA",0)
 	Global("#L_AcceptedRoom","GLOBAL",1)
-	Global("#L_ImoenInPalace","GLOBAL",0)
 THEN
 	RESPONSE #100
     	MoveContainerContents("BG0110*Container1","#LBD0103*PlayerChest00")
@@ -26,48 +36,3 @@ THEN
 		Continue()
 END
 
-IF
-	Global("#L_PCRoomPrepped","MYAREA",0)
-	Global("#L_AcceptedRoom","GLOBAL",1)
-	Global("#L_ImoenInPalace","GLOBAL",1)
-THEN
-	RESPONSE #100
-		MoveGlobal("#LBD0103","IMOEN2",[960.680])
-    	MoveContainerContents("BG0110*Container1","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container2","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container3","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container4","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container5","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container6","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container7","#LBD0103*PlayerChest00")
-    	MoveContainerContents("BG0110*Container8","#LBD0103*PlayerChest00")
-		TriggerActivation("Door0110a",FALSE)
-		TriggerActivation("Door0110b",FALSE)
-		TriggerActivation("Door#lbd0103a",TRUE)
-		TriggerActivation("Door#lbd0103b",TRUE)
-		SetGlobal("#L_PCRoomPrepped","MYAREA",1)
-		Continue()
-END
-
-IF
-	Global("#L_PCRoomPrepped","MYAREA",0)
-	Global("#L_AcceptedRoom","GLOBAL",0)
-	Global("#L_ImoenInPalace","GLOBAL",1)
-THEN
-	RESPONSE #100
-		MoveGlobal("#LBD0103","IMOEN2",[960.680])
-		MoveContainerContents("BG0110*Container1","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container2","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container3","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container4","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container5","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container6","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container7","#LBD0103*Imoen_equipment")
-    	MoveContainerContents("BG0110*Container8","#LBD0103*Imoen_equipment")
-		TriggerActivation("Door0110a",FALSE)
-		TriggerActivation("Door0110b",FALSE)
-		TriggerActivation("Door#lbd0103a",TRUE)
-		TriggerActivation("Door#lbd0103b",TRUE)
-		SetGlobal("#L_PCRoomPrepped","MYAREA",1)
-		Continue()
-END
