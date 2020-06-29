@@ -236,6 +236,7 @@
 @2319	= ~If you don't need me any more, I'm going to go talk to her.~
 @2320	= ~Fine!  Be that way!  I have a better place to be, anyway!~
 @2321	= ~No, I'll be right back, don't go anywhere.~
+@2322	= ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training.~
 
 // @2130-2186 up with duke_belt.d
 
@@ -424,4 +425,4 @@
 
 // @2316 Up with pk_ajantj.d
 // @2317 is with ffescort.d quest msg relaying Liia's offer to train Imoen in magic
-// @2318-21 is up with imoen_training.d
+// @2318-22 is up with imoen_training.d

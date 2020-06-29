@@ -7,6 +7,11 @@
 
 REPLACE_TRIGGER_TEXT IMOEN2J ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_ACTION_TEXT IMOENP_ ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("imoen2",JoinParty())~
+EXTEND_TOP IMOENP_ 2 #2 
+	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0)~ THEN 
+		REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + SEE_YA
+	END
+
 
 APPEND IMOENP_
 	IF WEIGHT #-999 ~Global("#L_ImoenInPalace","GLOBAL",1) AreaCheck("#LBD0103") Global("KickedOut","LOCALS",2)~ THEN BEGIN IMOEN_IN_ROOM
@@ -60,6 +65,11 @@ APPEND IMOENP_
 		SAY @2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
 		++ @2109 /* ~Good bye, Imoen.  Good luck.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
 		++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	END
+
+	IF ~~ THEN SEE_YA
+		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
+		IF ~~ THEN DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
 	END
 END
 
