@@ -18,8 +18,8 @@ END
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
 	OR(2)
-		Global("#LAjanSoD","GLOBAL",0)
-		GlobalTimerExpired("#LAjanSoD","GLOBAL")
+		Global("#L_AjanSoD","GLOBAL",0)
+		GlobalTimerExpired("#L_AjanSoD","GLOBAL")
 THEN
 	RESPONSE #100
 		Dialogue(Player1)
