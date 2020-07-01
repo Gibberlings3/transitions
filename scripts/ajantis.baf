@@ -1,0 +1,27 @@
+///////////////////////////////////////////////////////
+// Kicks off post-korlasz and pre-SoD exit dialogues //
+// Parsed via main_common.tpa                        //
+///////////////////////////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	Global("#L_AjanPK","GLOBAL",0)
+	GlobalLT("EndOfBG1","GLOBAL",1)
+	!AreaType(DUNGEON)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AjanPK","GLOBAL",1)
+		Dialogue(Player1)
+		Continue()
+END
+
+IF
+	GlobalGT("EndOfBG1","GLOBAL",0)
+	OR(2)
+		Global("#LAjanSoD","GLOBAL",0)
+		GlobalTimerExpired("#LAjanSoD","GLOBAL")
+THEN
+	RESPONSE #100
+		Dialogue(Player1)
+		Continue()
+END

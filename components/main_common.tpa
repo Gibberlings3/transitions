@@ -319,13 +319,15 @@ BUT_ONLY_IF_IT_CHANGES
 
 // Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD
 COPY_EXISTING ~AJANTIS.BCS~ ~override~ // See if Ajantis has already been set up
-  DECOMPILE_AND_PATCH BEGIN 
-    COUNT_REGEXP_INSTANCES CASE_INSENSITIVE EXACT_MATCH ~Global("#L_SarvQuests","GLOBAL",99)~ Ajantis_SetUp
-  END
+   DECOMPILE_AND_PATCH BEGIN 
+      // If either of these are setup, then Ajantis is modded and we don't do his exit dialogues
+      COUNT_REGEXP_INSTANCES CASE_INSENSITIVE EXACT_MATCH ~Global("#L_SarvQuests","GLOBAL",99)~ PKAjantis_SetUp
+      COUNT_REGEXP_INSTANCES CASE_INSENSITIVE EXACT_MATCH ~Global("EndOfBG1","GLOBAL",1)~ SoDAjantis_SetUp
+   END
 BUT_ONLY_IF_IT_CHANGES
-ACTION_IF !(Ajantis_SetUp > 0) BEGIN
-   COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/pk_ajantis.d~ USING ~%tra_loc%/%s/dialogues.tra~
-   EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/pk_ajantis.baf~
+ACTION_IF !(PKAjantis_SetUp > 0) AND !(SoDAjantis_SetUp > 0) BEGIN
+   COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ajantis.d~ USING ~%tra_loc%/%s/dialogues.tra~
+   EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/ajantis.baf~
 END
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~

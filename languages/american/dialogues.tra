@@ -423,6 +423,11 @@
 @2317	= ~You can visit her there whenever you'd like.  Her suite is on the third floor.~
 @2315	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~
 
-// @2316 Up with pk_ajantj.d
+// @2316 Up with pk_ajantis.d
 // @2317 is with ffescort.d quest msg relaying Liia's offer to train Imoen in magic
 // @2318-22 is up with imoen_training.d
+
+// sod_ajantis.d exit dialogue just before SoD starts
+@2323	= ~I will be leaving in a minute to report to my superiors.~
+@2324	= ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~
+@2325	= ~Excuse me, I must leave.  Farewell.~

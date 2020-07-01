@@ -24,6 +24,17 @@ APPEND_EARLY AJANTJ
 		SAY @2284 /* ~It has been an honor.  Farewell.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",3) LeaveParty() EscapeArea()~ EXIT
 	END
+
+	IF WEIGHT #-998 ~Global("#LAjanSoD","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) GlobalGT("#L_StartCaelarAttack","GLOBAL",0)~ THEN BEGIN PRE_SOD_WARNING
+		SAY @2323 /* ~I will be leaving in a minute to report to my superiors.~ */
+		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
+		IF ~~ THEN DO ~SetGlobalTimer("#LAjanSoD","GLOBAL",ONE_MINUTE)~ EXIT
+	END
+
+	IF WEIGHT #-997 ~GlobalGT("#LAjanSoD","GLOBAL",0) GlobalTimerExpired("#LAjanSoD","GLOBAL") Global("#LAjanSodLeft","GLOBAL",0)~ THEN BEGIN PRE_SOD_LEAVE
+		SAY @2284 /* ~It has been an honor.  Farewell.~ */
+		IF ~~ THEN DO ~SetGlobal("#LAjanSodLeft","GLOBAL",1) LeaveParty() EscapeArea()~ EXIT
+	END
 END
 
 APPEND_EARLY AJANTP
@@ -37,5 +48,15 @@ APPEND_EARLY AJANTP
 		SAY @2316 /* ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~ */
 		= @2284 /* ~It has been an honor.  Farewell.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",3) EscapeArea()~ EXIT
+	END
+
+	IF WEIGHT #-997 ~GlobalGT("EndOfBG1","GLOBAL",0) GlobalGT("#LAjanSoD","GLOBAL",0) Global("#LAjanSodLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
+		SAY @2284 /* ~It has been an honor.  Farewell.~ */
+		IF ~~ THEN DO ~SetGlobal("#LAjanSodLeft","GLOBAL",1) EscapeArea()~ EXIT
+	END
+
+	IF WEIGHT #-996 ~GlobalGT("EndOfBG1","GLOBAL",0) Global("#LAjanSodLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
+		SAY @2325 /* ~Excuse me, I must leave.  Farewell.~ */
+		IF ~~ THEN DO ~SetGlobal("#LAjanSodLeft","GLOBAL",1) EscapeArea()~ EXIT
 	END
 END
