@@ -6,6 +6,7 @@ IF
 	Global("#L_SarvQuests","GLOBAL",99)
 	Global("#L_AjanPK","GLOBAL",0)
 	GlobalLT("EndOfBG1","GLOBAL",1)
+	IsValidForPartyDialogue("Ajantis")
 	!AreaType(DUNGEON)
 	CombatCounter(0)
 THEN
@@ -17,9 +18,12 @@ END
 
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
+	IsValidForPartyDialogue("Ajantis")
 	OR(2)
 		Global("#L_AjanSoD","GLOBAL",0)
 		GlobalTimerExpired("#L_AjanSoD","GLOBAL")
+	!AreaType(DUNGEON)
+	CombatCounter(0)
 THEN
 	RESPONSE #100
 		Dialogue(Player1)
