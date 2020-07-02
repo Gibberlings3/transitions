@@ -33,10 +33,12 @@ END
 
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
+	Global("#L_AjantisOkInBG1Areas","GLOBAL",0)
 	!InPartyAllowDead("Ajantis")
 	AreaFlag(BG1AREA)
 THEN
 	RESPONSE #100
+		Global("#L_AjantisOkInBG1Areas","GLOBAL",1)
 		DestroySelf()
 END
 
