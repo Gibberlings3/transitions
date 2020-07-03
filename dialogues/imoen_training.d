@@ -3,15 +3,12 @@
 // Patched via main_common.tpa                          //
 //////////////////////////////////////////////////////////
 
-// TODO: Add training option to the list of available responses when kickout = 1
-
 REPLACE_TRIGGER_TEXT IMOEN2J ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_ACTION_TEXT IMOENP_ ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("imoen2",JoinParty())~
 EXTEND_TOP IMOENP_ 2 #2 
 	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0)~ THEN 
 		REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + SEE_YA
 	END
-
 
 APPEND IMOENP_
 	IF WEIGHT #-999 ~Global("#L_ImoenInPalace","GLOBAL",1) AreaCheck("#LBD0103") Global("KickedOut","LOCALS",2)~ THEN BEGIN IMOEN_IN_ROOM
@@ -87,6 +84,35 @@ APPEND IMOEN2J
 		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_MSG_4a
 		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
+	END
+
+	IF ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("EndofBG1","GLOBAL",1) OR(2) !Global("C#IM_ImoenComesBackSoD","GLOBAL",0) !Global("C#IM_ImoenInSoD","GLOBAL",1)~ THEN BEGIN PRE_SOD_TRAIN
+		SAY @2325 /* ~I've decided to take Duke Jannath up on her offer to train me in magic.~ */
+		= @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
+		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
+		IF ~~ THEN DO ~ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_ITEM_4a
+		IF ~InMyArea("#LFFEsc1")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_MSG_4a
+		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
+	END
+
+	IF ~~ THEN IMOEN_ITEM_4a
+		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
+		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
+		+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_ITEM_4b
+	END
+
+	IF ~~ THEN IMOEN_ITEM_4b
+		SAY @2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
+		= @2107 /* ~Goodbye, <CHARNAME>.  Thanks for everything.~ */
+		++ @2109 /* ~Good bye, Imoen.  Good luck.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",LeaveParty()) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",LeaveParty()) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
 	END
 END
 

@@ -201,6 +201,9 @@
 @2101	= ~Go ahead, Imoen.  You've always wanted this.~
 @2102	= ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~
 @2123	= ~Can you wait a few days, Imoen?  I really need you right now.~
+@2111	= ~As you wish, child.  Come see me if you change your mind.~
+@2125	= ~As you will, Imoen. Come see me when you're ready.~
+@2122	= ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~
 @2112	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with us to study magic.~
 @2113	= ~Feel free to visit her on the 3rd floor whenever you'd like.~
 @2114	= ~Thank you.  I'll do that.~
@@ -216,14 +219,11 @@
 @2106	= ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~
 @2107	= ~Goodbye, <CHARNAME>.  Thanks for everything.~
 @2108	= ~Good luck, Imoen.  I'll come visit!~
-@2109	= ~Good bye, Imoen.  Good luck.~
+@2109	= ~Good bye, Imoen.  Good luck.~0
 @2110	= ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
-@2111	= ~As you wish, child.  Come see me if you change your mind.~
 @2116	= ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~
 @2121	= ~I can hardly wait to get started!  See ya!~
-@2122	= ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~
 @2124	= ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~
-@2125	= ~As you will, Imoen. Come see me when you're ready.~
 @2126	= ~See ya, kid.  Try not to burn down the place.~
 
 // imoen_training.d Imoen in her room before SoD
@@ -368,7 +368,7 @@
 @2277	= ~Sounds like fun.  I'll check it out.~
 
 // Post-Korlasz exit dialogues for Ajantis
-// pk_ajantis.d
+// ajantis.d
 @2278	= ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~
 @2279	= ~Please don't go yet.  I still need you, for just a few more days.~
 @2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
@@ -423,11 +423,15 @@
 @2317	= ~You can visit her there whenever you'd like.  Her suite is on the third floor.~
 @2315	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~
 
-// @2316 Up with pk_ajantis.d
+// @2316 Up with ajantis.d
 // @2317 is with ffescort.d quest msg relaying Liia's offer to train Imoen in magic
 // @2318-22 is up with imoen_training.d
+// @2323-25 is up with ajantis.d
 
-// sod_ajantis.d exit dialogue just before SoD starts
+// ajantis.d exit dialogue just before SoD starts
 @2323	= ~I will be leaving in a minute to report to my superiors.~
 @2324	= ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~
-@2325	= ~Excuse me, I must leave.  Farewell.~
+
+// Imoen leaves to go into training at the beginning of SoD
+// imoen_training.d
+@2325	= ~I've decided to take Duke Jannath up on her offer to train me in magic.~
