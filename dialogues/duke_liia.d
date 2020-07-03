@@ -21,7 +21,7 @@ APPEND LIIA
 
 	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
 		SAY @2118 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~ */
-		IF ~~ THEN EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",6)~ EXIT
 	END
 
 	IF ~Global("#L_TalkedToDukes","GLOBAL",2) InPartyAllowDead("IMOEN2") !IsValidForPartyDialogue("IMOEN2") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_3
