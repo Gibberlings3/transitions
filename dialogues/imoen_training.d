@@ -86,7 +86,7 @@ APPEND IMOEN2J
 		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("IMOEN2",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
 	END
 
-	IF ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("EndofBG1","GLOBAL",1) OR(2) !Global("C#IM_ImoenComesBackSoD","GLOBAL",0) !Global("C#IM_ImoenInSoD","GLOBAL",1)~ THEN BEGIN PRE_SOD_TRAIN
+	IF ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("EndofBG1","GLOBAL",1) OR(3) GlobalLT("#L_StartCaelarAttack","GLOBAL",3) !Global("C#IM_ImoenComesBackSoD","GLOBAL",0) !Global("C#IM_ImoenInSoD","GLOBAL",1)~ THEN BEGIN PRE_SOD_TRAIN
 		SAY @2325 /* ~I've decided to take Duke Jannath up on her offer to train me in magic.~ */
 		= @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
 		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
