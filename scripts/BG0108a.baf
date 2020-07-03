@@ -136,6 +136,9 @@ IF
 THEN
 	RESPONSE #100
 		ClearAllActions() 
-		StartCutSceneMode()
+		SetCutSceneLite(TRUE)
 		StartCutSceneEx("#L_Cut07",TRUE)
+		// Have to set this or the cut scene will be on auto-repeat ad nauseum
+		// Because we're running the cut scene while allowing scripts to run in the background
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
 END
