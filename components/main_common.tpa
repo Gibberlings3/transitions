@@ -388,3 +388,7 @@ END
 
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
+
+// Cut scene that starts SoD
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
+

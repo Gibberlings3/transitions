@@ -1,0 +1,61 @@
+////////////////////////////////////////////////////////////////
+// Travel to where the player wants to be at the start of SoD //
+// Parsed via main_common.tpa                                 //
+////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		FadeToColor([30.0],0)
+		Wait(3)
+		// This will actually do something soon
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		FadeToColor([30.0],0)
+		Wait(3)
+		// This will actually do something soon
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		FadeToColor([30.0],0)
+		Wait(3)
+		// This will actually do something soon
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		FadeToColor([30.0],0)
+		Wait(3)
+		// This will actually do something soon
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+

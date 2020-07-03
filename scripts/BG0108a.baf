@@ -121,3 +121,21 @@ THEN
 		Continue()
 END
 
+// Initiates SoD if any of the exits are within sight and range of Player1
+// Basically, the player is going to head out of the room
+IF
+	Global("#L_SarvQuests","GLOBAL",100)
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",5)
+	Global("EndOfBG1","GLOBAL",1)
+	OR(4)
+		TriggerOverride(Player1,LOS("Door0109a",15))
+		TriggerOverride(Player1,LOS("Door0109b",15))
+		TriggerOverride(Player1,LOS("Door0111",15))
+		TriggerOverride(Player1,LOS("Door0200",15))
+THEN
+	RESPONSE #100
+		ClearAllActions() 
+		StartCutSceneMode()
+		StartCutSceneEx("#L_Cut07",TRUE)
+END
