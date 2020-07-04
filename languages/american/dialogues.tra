@@ -443,3 +443,13 @@
 @2329	= ~I too will be leaving.~
 @2330	= ~<CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.~
 @2331	= ~No more arguments, I will be leaving in just a few moments.~
+
+// Khalid's post Korlasz and Pre-Sod exit dialogues and interjections
+@2332	= ~I-I should be going as well.~
+@2333	= ~If you insist.~
+@2334	= ~Goodbye.~
+@2335	= ~I must go as well~
+@2336	= ~<CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.~
+@2337	= ~Now <CHARNAME>, I really m-must insist.  I c-cannot stay any longer.~
+@2338	= ~Yes, *we* should go.~ 
+@2339	= ~Yes, *we* really must go.~

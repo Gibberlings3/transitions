@@ -323,11 +323,12 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ajantis.d~ USING ~%tra_loc%/%s/dia
 EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/ajantis.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/jaheira.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~JAHEIRA.BCS~ ~%mod_root%/scripts/jaheira.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/khalid.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/khalid.baf~
 
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
-//EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
