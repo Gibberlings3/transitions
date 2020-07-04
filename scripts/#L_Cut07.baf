@@ -7,12 +7,8 @@ IF
 	TRUE()
 THEN
 	RESPONSE #100
-		// Open the doors back up and fade to black in all cases
+		// Fade to black in all cases
 		CutSceneId(Player1)
-		TriggerActivation("Door0109a",TRUE)
-		TriggerActivation("Door0109b",TRUE)
-		TriggerActivation("Door0111",TRUE)
-		TriggerActivation("Door0200",TRUE)
 		FadeToColor([30.0],0)
 		Wait(3)
 		Continue()
@@ -66,7 +62,6 @@ THEN
 		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
 		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
 		LeaveAreaLUA("bd0103","",[534.263],SW)
-//		LeaveAreaLUA("bd0103","",[215.396],SE)
 		MultiPlayerSync()
 		// Keep changes to the group done in BD0103.BCS invisible
 END
