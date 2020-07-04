@@ -6,57 +6,61 @@
 // ToDo: Give him a split of the gold but destroy most of it immediately
 // 		in case he's in SoD or BG2 because he wouldn't carry much with him
 
-APPEND_EARLY AJANTJ
-	IF WEIGHT #-999 ~GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_AjanPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN BEGIN POST_KORLASZ_ASK
-		SAY @2278 /* ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~ */
-		+ ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
-		+ ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
-		++ @2281 /* ~Of course you may leave, but not with that armor.~ */  + POST_KORLASZ_STAY
-		++ @2282 /* ~I understand.  You are eager for your knighthood.  Best of luck to you on your journey.~ */ + POST_KORLASZ_LEAVE
+CHAIN
+	IF WEIGHT #-999 ~Global("#L_AjantisModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN AJANTJ POST_KORLASZ_ASK
+		@2278 /* ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~ */
+		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */
 	END
+	+ ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
+	+ ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
+	++ @2281 /* ~Of course you may leave, but not with that equipment.~ */  + POST_KORLASZ_STAY
+	++ @2282 /* ~I understand.  Now is as good a time as any to say our farewells.~ */ + POST_KORLASZ_LEAVE
 
-	IF ~~ THEN BEGIN POST_KORLASZ_STAY
-		SAY @2283 /* ~As you wish.  I owe you that at least.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",2)~ EXIT
+CHAIN
+	IF ~~ THEN AJANTJ POST_KORLASZ_STAY
+		@2283 /* ~As you wish.  I owe you that at least.~ */
+		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2327 /* ~So be it.~ */
 	END
+	IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",2)~ EXIT
 
-	IF ~~ THEN BEGIN POST_KORLASZ_LEAVE
-		SAY @2284 /* ~It has been an honor.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",3) LeaveParty() EscapeArea()~ EXIT
+CHAIN
+	IF ~~ THEN AJANTJ POST_KORLASZ_LEAVE
+		@2284 /* ~It has been an honor.  Farewell.~ */
+		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 /* ~Take care of yourself.~ */ DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~
 	END
+	IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ EXIT
 
-	IF WEIGHT #-998 ~Global("#L_AjanSoD","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0)~ THEN BEGIN PRE_SOD_WARNING
-		SAY @2323 /* ~I will be leaving in a minute to report to my superiors.~ */
+CHAIN
+	IF WEIGHT #-998 ~Global("#L_AjantisModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0)~ THEN AJANTJ PRE_SOD_WARNING
+		@2323 /* ~I will be leaving in a minute to report to my superiors.~ */
 		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
-		IF ~~ THEN DO ~SetGlobalTimer("#L_AjanSoD","GLOBAL",ONE_MINUTE)~ EXIT
+		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2329 /* ~I too will be leaving.~ */
 	END
+	IF ~~ THEN DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
 
-	IF WEIGHT #-997 ~GlobalGT("#L_AjanSoD","GLOBAL",0) GlobalTimerExpired("#L_AjanSoD","GLOBAL") Global("#L_AjanSoDLeft","GLOBAL",0)~ THEN BEGIN PRE_SOD_LEAVE
-		SAY @2284 /* ~It has been an honor.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanSoDLeft","GLOBAL",1) LeaveParty() EscapeArea()~ EXIT
+CHAIN
+	IF WEIGHT #-997 ~Global("#L_AjantisModded","GLOBAL",0) GlobalGT("#L_NPCSoD","GLOBAL",0) GlobalTimerExpired("#L_NPCSoD","GLOBAL") Global("#L_NPCSoDLeft","GLOBAL",0)~ THEN AJANTJ PRE_SOD_LEAVE
+		@2284 /* ~It has been an honor.  Farewell.~ */
+		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 /* ~Take care of yourself.~ */ DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~		
 	END
-END
+	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ EXIT
+
 
 APPEND_EARLY AJANTP
-	IF WEIGHT #-999 ~GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalGT("#L_AjanPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_FINALLY
+	IF WEIGHT #-999 ~Global("#L_AjantisModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalGT("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_FINALLY
 		// We've already done the 'I'm eager' spiel
 		SAY @2284 /* ~It has been an honor.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",3) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 
-	IF WEIGHT #-998 ~GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) Global("#L_AjanPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE
+	IF WEIGHT #-998 ~Global("#L_AjantisModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) Global("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE
 		SAY @2316 /* ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~ */
 		= @2284 /* ~It has been an honor.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanPK","GLOBAL",3) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 
-	IF WEIGHT #-997 ~GlobalGT("EndOfBG1","GLOBAL",0) GlobalGT("#L_AjanSoD","GLOBAL",0) Global("#L_AjanSoDLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
+	IF WEIGHT #-997 ~Global("#L_AjantisModded","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0) GlobalGT("#L_NPCSoD","GLOBAL",0) Global("#L_NPCSoDLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
 		SAY @2284 /* ~It has been an honor.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanSoDLeft","GLOBAL",1) EscapeArea()~ EXIT
-	END
-
-	IF WEIGHT #-996 ~GlobalGT("EndOfBG1","GLOBAL",0) Global("#L_AjanSoDLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
-		SAY @2325 /* ~Excuse me, I must leave.  Farewell.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_AjanSoDLeft","GLOBAL",1) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 END

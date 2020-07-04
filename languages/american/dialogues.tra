@@ -97,7 +97,7 @@
 @2142	= ~Dead or ALIVE!~
 @2143	= ~Very well.  Let me know when you are ready.~
 @2144	= ~What did you have in mind?~
-@2145	= ~As you wish.~
+@2145	= ~As you wish.~ [BD69824]
 @2146	= ~Hello again, <GABBER>.  Is <CHARNAME> ready to help us clear up the rest of Sarevok's supporters?~
 @2147	= ~Hello again, <CHARNAME>.  Are you ready to help us clear up the rest of Savevok's supporters?~
 @2148	= ~I'd prefer to skip this one.~
@@ -180,7 +180,7 @@
 @2090	= ~I look forward to it.~
 
 // duke_eltan.d Duke Eltan's introduction of Scar
-@2096	= ~There is someone here who would like to talk you, <CHARNAME>.~
+@2096	= ~There is someone here who would like to talk to you, <CHARNAME>.~
 @2097	= ~<CHARNAME>, I need to personally thank you for saving my life and the life of my friend.~
 @2098	= ~I have nothing more to say to you.~
 
@@ -373,10 +373,10 @@
 @2279	= ~Please don't go yet.  I still need you, for just a few more days.~
 @2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
 @2281	= ~Of course you may leave, just not with that equipment.~
-@2282	= ~I understand, your knighthood awaits.  Best of luck to you on your journey.~
-@2283	= ~As you wish.  I owe you that at least.~
-@2284	= ~It has been an honor.  Farewell.~
-@2316	= ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~
+@2282	= ~I understand.  Now is as good a time as any to say our farewells.~
+@2283	= ~As you wish.  I owe you that at least.~ [AJANT20]
+@2284	= ~It has been an honor.  Farewell.~ [AJANT17]
+@2316	= ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~ [AJANT21]
 
 // Refugee dialogues
 // refugees.d
@@ -435,3 +435,11 @@
 // Imoen leaves to go into training at the beginning of SoD
 // imoen_training.d
 @2325	= ~I've decided to take Duke Jannath up on her offer to train me in magic.~
+
+// Jaheira's post Korlasz and Pre-Sod exit dialogues and interjections
+@2326	= ~I too have other places to be.~
+@2327	= ~So be it.~
+@2328	= ~Take care of yourself.~
+@2329	= ~I too will be leaving.~
+@2330	= ~<CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.~
+@2331	= ~No more arguments, I will be leaving in just a few moments.~
