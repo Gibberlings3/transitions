@@ -1,0 +1,21 @@
+///////////////////////////////////////
+// Skips first part of Caelar attack //
+// Parsed via main_common.tpa        //
+///////////////////////////////////////
+
+IF
+	GlobalLT("BD_PLOT","GLOBAL",51)
+	Global("#L_SkipFirstHalfCA","GLOBAL",1)
+THEN
+	RESPONSE #100
+		FadeToColor([1.0],0)
+		MultiPlayerSync()
+		StartCutSceneMode()
+		SetGlobal("bd_npc_camp_chapter","global",1)
+		SetGlobal("BD_PLOT","GLOBAL",51)
+		ActionOverride(Player1,ChangeAIScript("bdplayer",OVERRIDE))
+		FadeFromColor([20.0],0)
+		EndCutSceneMode()		
+		ActionOverride("IMOEN2",DestroySelf())
+		SetGlobal("bd_001_plot","bd0103",1)
+END

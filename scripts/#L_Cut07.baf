@@ -42,7 +42,7 @@ THEN
 		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
 		LeaveAreaLUA("bd0103","",[215.396],SE)
 		MultiPlayerSync()
-		// Keep changes to the group done in BD0103.bcs invisible 
+		// Keep changes to the group done in BD0103.BCS invisible 
 END
 
 IF
@@ -51,10 +51,24 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Start the 2nd half of the attack scene
-		FadeFromColor([30.0],0)
+		// Start with the 2nd half of the attack scene
+		SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
+		LeaveAreaLUA("bd0103","",[534.263],SW)
+//		LeaveAreaLUA("bd0103","",[215.396],SE)
 		MultiPlayerSync()
-		EndCutSceneMode()
+		// Keep changes to the group done in BD0103.BCS invisible
 END
 
 IF
