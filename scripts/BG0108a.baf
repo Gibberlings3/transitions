@@ -120,25 +120,3 @@ THEN
 		SetGlobal("#L_TalkedToDukes","GLOBAL",2)
 		Continue()
 END
-
-// Initiates SoD if any of the exits are within sight and range of Player1
-// Basically, the player is going to head out of the room
-IF
-	Global("#L_SarvQuests","GLOBAL",100)
-	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
-	GlobalLT("#L_StartCaelarAttack","GLOBAL",5)
-	Global("EndOfBG1","GLOBAL",1)
-	OR(4)
-		TriggerOverride(Player1,LOS("Door0109a",15))
-		TriggerOverride(Player1,LOS("Door0109b",15))
-		TriggerOverride(Player1,LOS("Door0111",15))
-		TriggerOverride(Player1,LOS("Door0200",15))
-THEN
-	RESPONSE #100
-		ClearAllActions() 
-		SetCutSceneLite(TRUE)
-		StartCutSceneEx("#L_Cut07",TRUE)
-		// Have to set this or the cut scene will be on auto-repeat ad nauseum
-		// Because we're running the cut scene while allowing scripts to run in the background
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-END

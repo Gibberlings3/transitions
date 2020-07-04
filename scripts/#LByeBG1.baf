@@ -1,0 +1,17 @@
+//////////////////////////////////////////////////////////////////////
+// Interrupts attempted exit from palace to start either SoD or BG2 //
+// Compiled via main_common.tpa and attached to all BG0108 exits    //
+//////////////////////////////////////////////////////////////////////
+IF
+	Clicked([ANYONE])
+	Range([PC],15)
+	Global("#L_SarvQuests","GLOBAL",100)
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",5)
+	Global("EndOfBG1","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ClearAllActions() 
+		SetCutSceneLite(TRUE)
+		StartCutSceneEx("#L_Cut07",TRUE)
+END

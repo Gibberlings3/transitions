@@ -389,6 +389,33 @@ END
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
+// Script to attach to palace exits to start SoD or BG2 when attempting to leave
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
+
+// Modify palace exits to have a script that will kick off SoD when used
+COPY_EXISTING ~BG0108.ARE~ ~override~
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0109a~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0109b~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0111~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0200~
+         region_script = ~#LByeBG1.BCS~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
 
@@ -407,4 +434,3 @@ COPY_EXISTING ~BD0103.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BD_PARTY_ITEMS","BD0103",0)~ ~Global("BD_PARTY_ITEMS","BD0103",0) !Global("#L_SkipFirstHalfCA","GLOBAL",1)~
    END
 BUT_ONLY_IF_IT_CHANGES
-
