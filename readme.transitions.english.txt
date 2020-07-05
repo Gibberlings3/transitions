@@ -138,7 +138,7 @@ Twenty-five game-days after the first Caelar elite attack if the PC isn't workin
 There are 2 options for the timer portion:
 
 Option 1: Don't include sailing time to and from Balduran's Isle in the world timers
-Option 2: Sailing time (46 days) counts against world timers
+Option 2: Sailing time (47 days) counts against world timers
 
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
