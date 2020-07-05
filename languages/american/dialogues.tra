@@ -453,3 +453,12 @@
 @2337	= ~Now <CHARNAME>, I really m-must insist.  I c-cannot stay any longer.~
 @2338	= ~Yes, *we* should go.~ 
 @2339	= ~Yes, *we* really must go.~
+
+// Dorn's post Korlasz and Pre-Sod exit dialogues and interjections
+@2340	= ~Me as well.~
+@2341	= ~I can stay for a little while.~
+@2342	= ~I feel we will meet again.~
+@2343	= ~Time to go!~
+@2344	= ~<CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.~
+@2345	= ~I have no choice in the matter, <CHARNAME>.  It's time for me to go.~
+@2346	= ~Until we meet again.~

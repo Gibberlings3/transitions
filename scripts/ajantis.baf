@@ -12,9 +12,9 @@ IF
 	CombatCounter(0)
 THEN
 	RESPONSE #100
+		ClearAllActions()
 		SetGlobal("#L_NPCPK","GLOBAL",1)
 		Dialogue(Player1)
-		Continue()
 END
 
 IF
@@ -29,8 +29,8 @@ IF
 	CombatCounter(0)
 THEN
 	RESPONSE #100
+		ClearAllActions()
 		Dialogue(Player1)
-		Continue()
 END
 
 IF
