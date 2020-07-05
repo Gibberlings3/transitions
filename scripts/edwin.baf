@@ -1,0 +1,46 @@
+///////////////////////////////////////////////////////
+// Kicks off post-korlasz and pre-SoD exit dialogues //
+// Parsed via main_common.tpa                        //
+///////////////////////////////////////////////////////
+IF
+	Global("#L_SarvQuests","GLOBAL",99)
+	Global("#L_NPCPK","GLOBAL",0)
+	Global("#L_EdwinModded","GLOBAL",0)
+	GlobalLT("EndOfBG1","GLOBAL",1)
+	IsValidForPartyDialogue(MYSELF)
+	!AreaType(DUNGEON)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		ClearAllActions()
+		SetGlobal("#L_NPCPK","GLOBAL",1)
+		Dialogue(Player1)
+END
+
+IF
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	Global("EndOfBG1","GLOBAL",1)
+	Global("#L_EdwinModded","GLOBAL",0)
+	IsValidForPartyDialogue(MYSELF)
+	OR(2)
+		Global("#L_NPCSoD","GLOBAL",0)
+		GlobalTimerExpired("#L_NPCSoD","GLOBAL")
+	!AreaType(DUNGEON)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		ClearAllActions()
+		Dialogue(Player1)
+END
+
+IF
+	GlobalGT("EndOfBG1","GLOBAL",0)
+	Global("#L_EdwinOkInBG1Areas","GLOBAL",0)
+	Global("#L_EdwinModded","GLOBAL",0)
+	!InPartyAllowDead(MYSELF)
+	AreaType(BG1AREA)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_EdwinOkInBG1Areas","GLOBAL",1)
+		DestroySelf()
+END

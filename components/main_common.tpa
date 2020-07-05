@@ -327,9 +327,10 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/khalid.d~ USING ~%tra_loc%/%s/dial
 EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/khalid.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/dorn.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/dorn.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/edwin.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/edwin.baf~
 
 //EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
-//EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 //EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/NPC_KQChoice.baf~
 
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~

@@ -462,3 +462,12 @@
 @2344	= ~<CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.~
 @2345	= ~I have no choice in the matter, <CHARNAME>.  It's time for me to go.~
 @2346	= ~Until we meet again.~
+
+// Edwin's post Korlasz and Pre-Sod exit dialogues and interjections
+@2347	= ~(gives you an exaggerated yawn)~
+@2348	= ~Fine. (sigh)~
+@2349	= ~Finally!~
+@2350	= ~I'm so done.~
+@2351	= ~I've just about had all I can take of this.  Are we just about done?~
+@2352	= ~I think I speak for everyone here when I say, I've had it.  I'm done!~
+@2353	= ~I'm outta here!~
