@@ -1,7 +1,7 @@
 // ffhealer.d
 @2000	= ~<CHARNAME>! The Dukes sent us to see to your well-being. We will take care of the bodies of Sarevok and his cohorts.~
 @2001	= ~We've also come to collect Sarevok's sword.  The dukes don't want it to become a rallying symbol for his minions.~
-@2002	= ~Would you like us to heal you and disarm the traps while we're here?~
+@2002	= ~Would you like us to heal you and disarm any traps while we're here?~
 @2003	= ~Uh, sure.  Go ahead.~
 @2004	= ~No thanks, I'll manage on my own.~
 @2005	= ~You've done a great deed for the city, <CHARNAME>, indeed for the entire Sword Coast.~
@@ -219,7 +219,7 @@
 @2106	= ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~
 @2107	= ~Goodbye, <CHARNAME>.  Thanks for everything.~
 @2108	= ~Good luck, Imoen.  I'll come visit!~
-@2109	= ~Good bye, Imoen.  Good luck.~0
+@2109	= ~Good bye, Imoen.  Good luck.~
 @2110	= ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
 @2116	= ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~
 @2121	= ~I can hardly wait to get started!  See ya!~

@@ -334,6 +334,8 @@ EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/neera.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/baeloth.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 
+// These just get exit dialogues for the beginning of SoD
+
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
@@ -363,23 +365,17 @@ EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 //   if it's in their inventory at the time of capture
 // PC will find a 'drained' unusable version of it in their personal chest
 //   if it is transfered to their stronghold in BG2
-// The item and/or the dialogue might be added by a romance mod to add
-//   an option to go chase after their departed lover so check before adding
-ACTION_IF !FILE_EXISTS_IN_GAME ~#LAdvGm1.itm~ BEGIN
-   COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
-      SAY NAME1 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
-      SAY NAME2 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
-      SAY UNIDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
-      SAY IDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
-      WRITE_LONG (0x0018) 2093 // Critical Item, Dropable, Displayable, Not Copyable, Conversable
-      WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
-      WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
-END
+COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
+   SAY NAME1 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY NAME2 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY UNIDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   SAY IDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   WRITE_LONG (0x0018) 2093 // Critical Item, Dropable, Displayable, Not Copyable, Conversable
+   WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
+   WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
 
-ACTION_IF !FILE_EXISTS_IN_GAME ~#LAdvGm1.d~ BEGIN
-   // The dialogue for the item
-   COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
-END
+// The dialogue for the item
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~

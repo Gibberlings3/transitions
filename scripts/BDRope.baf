@@ -1,8 +1,8 @@
-////////////////////////////////////////////////////////////////////////////////////
-// Change rope in Korlasz Dungeon lead to the palace instead of starting dialogue //
-// Strings used are in game.tra                                                   //
-// Patched via main_common.tpa                                                    //
-////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// Change rope in Korlasz Dungeon to exit instead of starting dialogue //
+// Strings used are in game.tra                                        //
+// Patched via main_common.tpa                                         //
+/////////////////////////////////////////////////////////////////////////
 
 IF
 	Clicked([ANYONE])
