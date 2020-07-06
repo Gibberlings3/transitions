@@ -61,7 +61,7 @@ CHAIN
 	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("Jaheira",LeaveParty()) ActionOverride("Jaheira",EscapeArea())~ EXIT	
 
 
-APPEND_EARLY JAHEIJ
+APPEND_EARLY JAHEIP
 	IF WEIGHT #-999 ~Global("#L_JaheriaModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalGT("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_FINALLY
 		SAY @2328 /* ~Take care of yourself.~ */ 
 		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
