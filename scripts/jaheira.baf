@@ -5,6 +5,7 @@
 IF
 	Global("#L_SarvQuests","GLOBAL",99)
 	Global("#L_NPCPK","GLOBAL",0)
+	Global("#L_JaheiraModded","GLOBAL",0)
 	GlobalLT("EndOfBG1","GLOBAL",1)
 	IsValidForPartyDialogue(MYSELF)
 	!AreaType(DUNGEON)
@@ -19,6 +20,7 @@ END
 IF
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	Global("EndOfBG1","GLOBAL",1)
+	Global("#L_JaheiraModded","GLOBAL",0)
 	IsValidForPartyDialogue(MYSELF)
 	OR(2)
 		Global("#L_NPCSoD","GLOBAL",0)
@@ -34,6 +36,7 @@ END
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
 	Global("#L_JaheiraOkInBG1Areas","GLOBAL",0)
+	Global("#L_JaheiraModded","GLOBAL",0)
 	!InPartyAllowDead(MYSELF)
 	AreaType(BG1AREA)
 THEN

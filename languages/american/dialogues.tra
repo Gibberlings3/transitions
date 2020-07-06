@@ -468,7 +468,7 @@
 @2348	= ~Fine. (sigh)~
 @2349	= ~Finally!~
 @2350	= ~I'm so done.~
-@2351	= ~I've just about had all I can take of this.  Are we just about done?~
+@2351	= ~I've just about had all I can take of this.  Are we done yet?~
 @2352	= ~I think I speak for everyone here when I say, I've had it.  I'm done!~
 @2353	= ~I'm outta here!~
 
@@ -479,3 +479,11 @@
 @2357	= ~Yes, I really do have to go.~
 @2358	= ~You're in the clear now, right?  Can I go?~
 @2359	= ~You're great and all, but I really have to get outta here.~
+
+// Baeloth's post Korlasz and Pre-Sod exit dialogues and interjections
+@2360	= ~You hog all the limelight.~
+@2361	= ~Have it your way, as always!~
+@2362	= ~Look for my name in lights, I'm bowing out of this dump!~
+@2363	= ~I couldn't agree more.~
+@2364	= ~This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!~
+@2365	= ~The spot lights can wait no longer, <CHARNAME>. Stardom!  A spectacular stage!  No!  No arguments!  That is where I'm headed now.~ 

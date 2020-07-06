@@ -6,6 +6,7 @@
 IF
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	Global("EndofBG1","GLOBAL",1)
+	Global("#L_ImoenModded","GLOBAL",0)
 	IsValidForPartyDialogue("IMOEN2")
 	!AreaType(DUNGEON)
 	CombatCounter(0)
@@ -22,6 +23,7 @@ END
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
 	Global("#L_ImoenOkInBG1Areas","GLOBAL",0)
+	Global("#L_ImoenModded","GLOBAL",0)
 	!InPartyAllowDead("IMOEN2")
 	AreaType(BG1AREA)
 THEN
