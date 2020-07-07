@@ -7,7 +7,7 @@
 // 		in case he's in SoD or BG2 because he wouldn't carry much with him
 
 CHAIN
-	IF WEIGHT #-999 ~Global("#L_AjantisModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN AJANTJ POST_KORLASZ_ASK
+	IF WEIGHT #-999 ~Global("#L_AjantisModded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN AJANTJ POST_KORLASZ_ASK
 		@2278 /* ~I am eager to present our accomplishments before my superiors, but I will stay if you need me.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */
 		== KHALIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2338 /* ~Yes, *we* should go.~ */ 

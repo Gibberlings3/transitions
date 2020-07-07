@@ -30,7 +30,6 @@ IF
 THEN
 	RESPONSE #100
 		ClearAllActions()
-		SetGlobal("#L_AjantisPK","GLOBAL",1)
 		Dialogue(Player1)
 END
 

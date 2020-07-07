@@ -4,10 +4,10 @@
 /////////////////////////////////////////////////////////////////////////
 
 // ToDo: Give her a split of the gold but destroy most of it immediately
-// 		in case he's in SoD or BG2 because she wouldn't carry much with her
+// 		in case she's joins in SoD or BG2 because she wouldn't carry much with her
 
 CHAIN
-	IF WEIGHT #-999 ~Global("#L_JaheriaModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN JAHEIJ POST_KORLASZ_ASK
+	IF WEIGHT #-999 ~Global("#L_JaheriaModded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN JAHEIJ POST_KORLASZ_ASK
 		@2330 /* ~<CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.~ */
 		== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2338	/* ~Yes, *we* should go.~ */ 
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */
@@ -46,7 +46,7 @@ CHAIN
 	IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("Jaheira",LeaveParty()) ActionOverride("Jaheira",EscapeArea())~ EXIT
 
 CHAIN
-	IF WEIGHT #-998 ~Global("#L_JaheriaModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0)~ THEN JAHEIJ PRE_SOD_WARNING
+	IF WEIGHT #-998 ~Global("#L_JaheriaModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) GlobalGT("#L_StartCaelarAttack","GLOBAL",0)~ THEN JAHEIJ PRE_SOD_WARNING
 		@2331 /* ~No more arguments, I will be leaving in just a few moments.~ */
 		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
 		== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2339 /* ~Yes, *we* really must go.~ */ 
@@ -74,18 +74,21 @@ CHAIN
 
 
 APPEND_EARLY JAHEIP
-	IF WEIGHT #-999 ~Global("#L_JaheriaModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalGT("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_FINALLY
+	// Post-Korlasz Pre-Sod/BG2
+	IF WEIGHT #-999 ~Global("#L_JaheriaModded","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) Global("#L_JaheiraPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE1
+		// Didn't lead the conversation when Korlasz was handed in
+		// Or wasn't in the group at the time
+		// So hasn't given her 'I'm eager to leave' spiel
+		// Let her say it now
+		SAY @2369 /* ~<CHARNAME>, you are safe now and I have places I should be.~ */
 		SAY @2328 /* ~Take care of yourself.~ */ 
-		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 
-	IF WEIGHT #-998 ~Global("#L_JaheriaModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) Global("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE
+	IF WEIGHT #-998 ~Global("#L_JaheriaModded","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) Global("#L_JaheiraPK","GLOBAL",1)~ THEN BEGIN POST_KORLASZ_GOODBYE2
+		// We've already done the 'I'm eager' spiel
+		// She's being let go from group after initially being asked to stay
 		SAY @2328 /* ~Take care of yourself.~ */ 
-		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
-	END
-
-	IF WEIGHT #-997 ~Global("#L_JaheriaModded","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0) GlobalGT("#L_NPCSoD","GLOBAL",0) Global("#L_NPCSoDLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
-		SAY @2328 /* ~Take care of yourself.~ */ 
-		IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 END

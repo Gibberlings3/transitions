@@ -443,6 +443,7 @@
 @2329	= ~I too will be leaving.~
 @2330	= ~<CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.~
 @2331	= ~No more arguments, I will be leaving in just a few moments.~
+@2369	= ~<CHARNAME>, you are safe now and I have places I should be.~
 
 // Khalid's post Korlasz and Pre-Sod exit dialogues and interjections
 @2332	= ~I-I should be going as well.~
@@ -492,3 +493,5 @@
 @2366	= ~<CHARNAME>, I can wait no longer to begin my epic ballad.  I must insist that it is time to part ways.~
 @2367	= ~I can't wait any longer, either.~
 @2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
+
+// 2369 - up with their respective exit dialogues 
