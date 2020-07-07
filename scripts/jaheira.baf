@@ -50,6 +50,7 @@ THEN
 		Dialogue(Player1)
 END
 
+// Post BG1
 IF
 	GlobalGT("EndOfBG1","GLOBAL",0)
 	Global("#L_JaheiraOkInBG1Areas","GLOBAL",0)
