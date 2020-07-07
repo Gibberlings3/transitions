@@ -47,7 +47,7 @@ CHAIN
 	IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ EXIT
 
 CHAIN
-	IF WEIGHT #-998 ~Global("#L_AjantisModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) Global("EndOfBG1","GLOBAL",1)~ THEN AJANTJ PRE_SOD_WARNING
+	IF WEIGHT #-998 ~Global("#L_AjantisModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) GlobalGT("#L_StartCaelarAttack","GLOBAL",0)~ THEN AJANTJ PRE_SOD_WARNING
 		@2323 /* ~I will be leaving in a minute to report to my superiors.~ */
 		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2329 /* ~I too will be leaving.~ */
