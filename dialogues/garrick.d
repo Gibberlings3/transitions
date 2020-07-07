@@ -7,7 +7,7 @@
 // 		in case he's in SoD or BG2 because he would spend some
 
 CHAIN
-	IF WEIGHT #-998 ~Global("#L_GarrickModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0)~ THEN GARRIJ PRE_SOD_WARNING
+	IF WEIGHT #-998 ~Global("#L_GarrickModded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) Global("#L_StartCaelarAttack","GLOBAL",1)~ THEN GARRIJ PRE_SOD_WARNING
 		@2366 /* ~<CHARNAME>, I can wait no longer to begin my epic ballad.  I must insist that it is time to part ways.~ */
 		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2329 /* ~I too will be leaving.~ */
@@ -34,22 +34,3 @@ CHAIN
 	END
 	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) ActionOverride("Garrick",LeaveParty()) ActionOverride("Garrick",EscapeArea())~ EXIT
 
-
-APPEND_EARLY GARRIP
-	IF WEIGHT #-999 ~Global("#L_GarrickModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) GlobalGT("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_FINALLY
-		// We've already done the 'I'm eager' spiel
-		SAY @2368 /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */
-		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
-	END
-
-	IF WEIGHT #-998 ~Global("#L_GarrickModded","GLOBAL",0) GlobalLT("EndOfBG1","GLOBAL",1) Global("#l_SarvQuests","GLOBAL",99) Global("#L_NPCPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE
-//		SAY @2316 /* ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~ */
-		SAY @2368 /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */
-		IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
-	END
-
-	IF WEIGHT #-997 ~Global("#L_GarrickModded","GLOBAL",0) GlobalGT("EndOfBG1","GLOBAL",0) GlobalGT("#L_NPCSoD","GLOBAL",0) Global("#L_NPCSoDLeft","GLOBAL",0)~ THEN BEGIN IN_SOD_TIME_TO_GO
-		SAY @2368 /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */
-		IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
-	END
-END
