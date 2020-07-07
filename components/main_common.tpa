@@ -335,6 +335,8 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/baeloth.d~ USING ~%tra_loc%/%s/dia
 EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 
 // These just get exit dialogues for the beginning of SoD
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/garrick.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~GARRICK.BCS~ ~%mod_root%/scripts/garrick.baf~
 
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
@@ -342,7 +344,6 @@ EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 //EXTEND_TOP ~DYNAHEIR.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~FALDORN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
-//EXTEND_TOP ~GARRICK.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~IMOEN2.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~KAGAIN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~KIVAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~

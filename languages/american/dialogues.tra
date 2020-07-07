@@ -487,3 +487,8 @@
 @2363	= ~I couldn't agree more.~
 @2364	= ~This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!~
 @2365	= ~The spot lights can wait no longer, <CHARNAME>. Stardom!  A spectacular stage!  No!  No arguments!  That is where I'm headed now.~ 
+
+// Garrick's pre-SoD exit dialogue and interjections 
+@2366	= ~<CHARNAME>, I can wait no longer to begin my epic ballad.  I must insist that it is time to part ways.~
+@2367	= ~I can't wait any longer, either.~
+@2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
