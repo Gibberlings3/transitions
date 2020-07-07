@@ -81,7 +81,7 @@ APPEND_EARLY JAHEIP
 		// So hasn't given her 'I'm eager to leave' spiel
 		// Let her say it now
 		SAY @2369 /* ~<CHARNAME>, you are safe now and I have places I should be.~ */
-		SAY @2328 /* ~Take care of yourself.~ */ 
+		= @2328 /* ~Take care of yourself.~ */ 
 		IF ~~ THEN DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 
