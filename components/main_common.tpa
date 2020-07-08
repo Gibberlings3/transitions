@@ -318,9 +318,10 @@ COPY_EXISTING ~BG0200.ARE~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD
+// Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD and BG2
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ajantis.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/ajantis.baf~
+// Jaheira and Khalid don't get BG2 exit dialogues, they'll stick with the PC
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/jaheira.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~JAHEIRA.BCS~ ~%mod_root%/scripts/jaheira.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/khalid.d~ USING ~%tra_loc%/%s/dialogues.tra~
@@ -334,13 +335,13 @@ EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/neera.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/baeloth.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 
-// These just get exit dialogues for the beginning of SoD
+// These just get exit dialogues for the beginning of SoD and BG2
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/garrick.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~GARRICK.BCS~ ~%mod_root%/scripts/garrick.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/xan.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/xan.baf~
 
-
+// These still need to be done
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
 //EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/NPC_KQStaying.baf~
