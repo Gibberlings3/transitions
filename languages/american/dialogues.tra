@@ -473,6 +473,7 @@
 @2351	= ~I've just about had all I can take of this.  Are we done yet?~
 @2352	= ~I think I speak for everyone here when I say, I've had it.  I'm done!~
 @2353	= ~I'm outta here!~
+@2371	= ~I've just about had all I can take of this.~
 
 // Neera's post Korlasz and Pre-Sod exit dialogues and interjections
 @2354	= ~I do have plans, yes.~
@@ -495,4 +496,4 @@
 @2367	= ~I can't wait any longer, either.~
 @2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
 
-// 2369 - 70 up with their respective exit dialogues 
+// 2369 - 71 up with their respective exit dialogues 
