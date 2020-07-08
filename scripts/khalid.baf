@@ -17,7 +17,7 @@ THEN
 	RESPONSE #100
 		ClearAllActions()
 		SetGlobal("#L_KhalidPK","GLOBAL",1)
-		Global("#L_NPCPK","GLOBAL",1)
+		SetGlobal("#L_NPCPK","GLOBAL",1)
 		Dialogue(Player1)
 END
 
