@@ -9,6 +9,7 @@ IF
 	Global("#L_DornModded","GLOBAL",0)
 	Global("EndOfBG1","GLOBAL",0)
 	Global("#L_DornPK","GLOBAL",0)
+	Global("#L_NPCPK","GLOBAL",0)
 	IsValidForPartyDialogue(MYSELF)
 	!AreaType(DUNGEON)
 	CombatCounter(0)
@@ -16,6 +17,7 @@ THEN
 	RESPONSE #100
 		ClearAllActions()
 		SetGlobal("#L_DornPK","GLOBAL",1)
+		SetGlobal("#L_NPCPK","GLOBAL",1)
 		Dialogue(Player1)
 END
 

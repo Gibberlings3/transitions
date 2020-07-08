@@ -9,6 +9,7 @@ IF
 	Global("#L_KhalidModded","GLOBAL",0)
 	Global("EndOfBG1","GLOBAL",0)
 	Global("#L_KhalidPK","GLOBAL",0)
+	Global("#L_NPCPK","GLOBAL",0)
 	IsValidForPartyDialogue(MYSELF)
 	!AreaType(DUNGEON)
 	CombatCounter(0)
@@ -16,6 +17,7 @@ THEN
 	RESPONSE #100
 		ClearAllActions()
 		SetGlobal("#L_KhalidPK","GLOBAL",1)
+		Global("#L_NPCPK","GLOBAL",1)
 		Dialogue(Player1)
 END
 
