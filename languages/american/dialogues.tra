@@ -454,6 +454,7 @@
 @2337	= ~Now <CHARNAME>, I really m-must insist.  I c-cannot stay any longer.~
 @2338	= ~Yes, *we* should go.~ 
 @2339	= ~Yes, *we* really must go.~
+@2370	= ~Now that you are s-safe, I m-must be on my way.~
 
 // Dorn's post Korlasz and Pre-Sod exit dialogues and interjections
 @2340	= ~Me as well.~
@@ -494,4 +495,4 @@
 @2367	= ~I can't wait any longer, either.~
 @2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
 
-// 2369 - up with their respective exit dialogues 
+// 2369 - 70 up with their respective exit dialogues 
