@@ -497,3 +497,8 @@
 @2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
 
 // 2369 - 71 up with their respective exit dialogues 
+
+// Xan's pre-SoD/BG2 exit dialogue and interjections
+@2372	= ~I'm amazed we've made it this far, <CHARNAME>.  I need to report back before our luck inevitably runs out.~
+@2373	= ~I need to report back to Evereska.~
+@2374	= ~Farewell though I certainly shall not.~
