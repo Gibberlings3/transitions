@@ -324,15 +324,15 @@ BUT_ONLY_IF_IT_CHANGES
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ajantis.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/ajantis.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/jaheira.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~JAHEIRA.BCS~ ~%mod_root%/scripts/jaheira.baf~
+EXTEND_TOP ~JAHEIRA_.BCS~ ~%mod_root%/scripts/jaheira.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/khalid.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~KHALID.BCS~ ~%mod_root%/scripts/khalid.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/dorn.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~DORN.BCS~ ~%mod_root%/scripts/dorn.baf~
+EXTEND_TOP ~DORN_.BCS~ ~%mod_root%/scripts/dorn.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/edwin.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~EDWIN.BCS~ ~%mod_root%/scripts/edwin.baf~
+EXTEND_TOP ~EDWIN_.BCS~ ~%mod_root%/scripts/edwin.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/neera.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~NEERA.BCS~ ~%mod_root%/scripts/neera.baf~
+EXTEND_TOP ~NEERA_.BCS~ ~%mod_root%/scripts/neera.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/baeloth.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 
@@ -340,28 +340,28 @@ EXTEND_TOP ~BAELOTH.BCS~ ~%mod_root%/scripts/baeloth.baf~
 // They have no compelling reason to leave right away
 // An argument could be made for Xan, but I think he's not as eager as Ajantis to get going
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/garrick.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~GARRICK.BCS~ ~%mod_root%/scripts/garrick.baf~
+EXTEND_TOP ~GARRICK_.BCS~ ~%mod_root%/scripts/garrick.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/xan.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/xan.baf~
 
 // These still need to be done
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/alora.baf~
-//EXTEND_TOP ~BRANWEN.BCS~ ~%mod_root%/scripts/branwen.baf~
+//EXTEND_TOP ~BRANWEN_.BCS~ ~%mod_root%/scripts/branwen.baf~
 //EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/coran.baf~
 //EXTEND_TOP ~DYNAHEIR.BCS~ ~%mod_root%/scripts/dynaheir.baf~
 //EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/eldoth.baf~
-//EXTEND_TOP ~FALDORN.BCS~ ~%mod_root%/scripts/faldorn.baf~
+//EXTEND_TOP ~FALDORN_.BCS~ ~%mod_root%/scripts/faldorn.baf~
 //EXTEND_TOP ~KAGAIN.BCS~ ~%mod_root%/scripts/kagain.baf~
 //EXTEND_TOP ~KIVAN.BCS~ ~%mod_root%/scripts/kivan.baf~
-//EXTEND_TOP ~MINSC.BCS~ ~%mod_root%/scripts/minsc.baf~
+//EXTEND_TOP ~MINSC_.BCS~ ~%mod_root%/scripts/minsc.baf~
 //EXTEND_TOP ~MONTARON.BCS~ ~%mod_root%/scripts/montaron.baf~
 //EXTEND_TOP ~QUAYLE.BCS~ ~%mod_root%/scripts/quayle.baf~
-//EXTEND_TOP ~RASAAD.BCS~ ~%mod_root%/scripts/rasaad.baf~
+//EXTEND_TOP ~RASAAD_.BCS~ ~%mod_root%/scripts/rasaad.baf~
 //EXTEND_TOP ~SAFANA.BCS~ ~%mod_root%/scripts/safana.baf~
 //EXTEND_TOP ~SHARTEEL.BCS~ ~%mod_root%/scripts/sharteel.baf~
-//EXTEND_TOP ~SKIE.BCS~ ~%mod_root%/scripts/skie.baf~
+//EXTEND_TOP ~SKIE_.BCS~ ~%mod_root%/scripts/skie.baf~
 //EXTEND_TOP ~TIAX.BCS~ ~%mod_root%/scripts/tiax.baf~
-//EXTEND_TOP ~VICONIA.BCS~ ~%mod_root%/scripts/viconia.baf~
+//EXTEND_TOP ~VICONIA_.BCS~ ~%mod_root%/scripts/viconia.baf~
 //EXTEND_TOP ~XZAR.BCS~ ~%mod_root%/scripts/xzar.baf~
 //EXTEND_TOP ~YESLICK.BCS~ ~%mod_root%/scripts/yeslick.baf~
 

@@ -31,7 +31,6 @@ IF
 	CombatCounter(0)
 THEN
 	RESPONSE #100
-		ClearAllActions()
 		Dialogue(Player1)
 END
 
