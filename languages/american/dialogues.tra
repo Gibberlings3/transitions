@@ -499,6 +499,11 @@
 // 2369 - 71 up with their respective exit dialogues 
 
 // Xan's pre-SoD/BG2 exit dialogue and interjections
-@2372	= ~I'm amazed we've made it this far, <CHARNAME>.  I need to report back before our luck inevitably runs out.~
+@2372	= ~I'm amazed we've made it thus far, <CHARNAME>.  I need to report back before our luck inevitably runs out.~
 @2373	= ~I need to report back to Evereska.~
 @2374	= ~Farewell though I certainly shall not.~
+
+// Minsc's pre-SoD exit dialogue and interjections
+@2375	= ~Boo is tired and needs a break from all the butt-kicking.  Just a short one.  We'll be near by if you need us.~
+@2376	= ~Boo is weary and must rest!~
+@2377	= ~If you need us, look for us at the Three Old Kegs.~

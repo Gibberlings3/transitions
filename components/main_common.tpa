@@ -343,6 +343,8 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/garrick.d~ USING ~%tra_loc%/%s/dia
 EXTEND_TOP ~GARRICK_.BCS~ ~%mod_root%/scripts/garrick.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/xan.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/xan.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/minsc.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~MINSC_.BCS~ ~%mod_root%/scripts/minsc.baf~
 
 // These still need to be done
 //EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/alora.baf~
@@ -353,7 +355,6 @@ EXTEND_TOP ~XAN.BCS~ ~%mod_root%/scripts/xan.baf~
 //EXTEND_TOP ~FALDORN_.BCS~ ~%mod_root%/scripts/faldorn.baf~
 //EXTEND_TOP ~KAGAIN.BCS~ ~%mod_root%/scripts/kagain.baf~
 //EXTEND_TOP ~KIVAN.BCS~ ~%mod_root%/scripts/kivan.baf~
-//EXTEND_TOP ~MINSC_.BCS~ ~%mod_root%/scripts/minsc.baf~
 //EXTEND_TOP ~MONTARON.BCS~ ~%mod_root%/scripts/montaron.baf~
 //EXTEND_TOP ~QUAYLE.BCS~ ~%mod_root%/scripts/quayle.baf~
 //EXTEND_TOP ~RASAAD_.BCS~ ~%mod_root%/scripts/rasaad.baf~
