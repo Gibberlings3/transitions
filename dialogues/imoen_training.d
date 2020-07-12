@@ -20,14 +20,52 @@ APPEND IMOENP_
 	IF WEIGHT #-997 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_ImTrainRsp","GLOBAL",0) Global("KickedOut","LOCALS",0) HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ANGRY_TRAIN
 		SAY @2320 /* ~Fine!  Be that way!  I have a better place to be, anyway!~ */
 		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
-		+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_TRAIN_2b
-		+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_TRAIN_2b
-		+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_TRAIN_2b
+		// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
+		+ ~PartyGoldLT(4000) NumInParty(2)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) NumInParty(3)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(6000) NumInParty(4)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(7000) NumInParty(5)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(8000) NumInParty(6)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2b
+		+ ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2b
+		+ ~!PartyGoldLT(50000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2b
+		+ ~!PartyGoldLT(75000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2b
+		+ ~!PartyGoldLT(100000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2b
+		+ ~!PartyGoldLT(125000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2b
+		+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2b
 	END
 
 	IF WEIGHT #-998 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_ImTrainRsp","GLOBAL",0) Global("KickedOut","LOCALS",0) !HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ASK_TRAIN
@@ -40,14 +78,52 @@ APPEND IMOENP_
 	IF ~~ THEN IMOEN_TRAIN_1
 		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
 		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
-		+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_TRAIN_2a
-		+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_TRAIN_2a
-		+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_TRAIN_2a
+		// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
+		+ ~PartyGoldLT(4000) NumInParty(2)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) NumInParty(3)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(6000) NumInParty(4)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(7000) NumInParty(5)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(8000) NumInParty(6)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2a
+		+ ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_TRAIN_2a
+		+ ~!PartyGoldLT(50000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2a
+		+ ~!PartyGoldLT(75000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2a
+		+ ~!PartyGoldLT(100000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2a
+		+ ~!PartyGoldLT(125000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2a
+		+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_TRAIN_2a
 	END
 
 	IF ~~ THEN IMOEN_TRAIN_2a
@@ -98,14 +174,52 @@ APPEND IMOEN2J
 	IF ~~ THEN IMOEN_ITEM_4a
 		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
 		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
-		+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_ITEM_4b
-		+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_ITEM_4b
-		+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_ITEM_4b
+		// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
+		+ ~PartyGoldLT(4000) NumInParty(2)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) NumInParty(3)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(6000) NumInParty(4)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(7000) NumInParty(5)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(8000) NumInParty(6)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+		+ ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(50000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(75000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(100000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(125000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_ITEM_4b
+		+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_ITEM_4b
 	END
 
 	IF ~~ THEN IMOEN_ITEM_4b
@@ -138,14 +252,53 @@ CHAIN
 		@2121 /* ~I can hardly wait to get started!  See ya!~ */
 	END
 	// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
-	+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_LIIA_4b
-	+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_LIIA_4b
-	+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_LIIA_4b
+	// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
+	+ ~PartyGoldLT(4000) NumInParty(2)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(5000) NumInParty(3)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(6000) NumInParty(4)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(7000) NumInParty(5)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(8000) NumInParty(6)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_LIIA_4b
+	+ ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_LIIA_4b
+	+ ~!PartyGoldLT(50000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_LIIA_4b
+	+ ~!PartyGoldLT(75000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_LIIA_4b
+	+ ~!PartyGoldLT(100000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_LIIA_4b
+	+ ~!PartyGoldLT(125000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_LIIA_4b
+	+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_LIIA_4b
+
 
 CHAIN
 	IF ~~ THEN IMOEN2J IMOEN_LIIA_4b
@@ -163,14 +316,52 @@ CHAIN
 		@2121 /* ~I can hardly wait to get started!  See ya!~ */
 	END
 	// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
-	+ ~PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1500))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(5000) !PartyGoldLT(4000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(10000) !PartyGoldLT(5000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(20000) !PartyGoldLT(10000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(30000) !PartyGoldLT(20000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(40000) !PartyGoldLT(30000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000))~ + IMOEN_MSG_4b
-	+ ~PartyGoldLT(50000) !PartyGoldLT(40000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000))~ + IMOEN_MSG_4b
-	+ ~!PartyGoldLT(50000)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000))~ + IMOEN_MSG_4b
+	// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
+	+ ~PartyGoldLT(4000) NumInParty(2)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(5000) NumInParty(3)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(6000) NumInParty(4)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(7000) NumInParty(5)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(8000) NumInParty(6)~ +@2126 DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("IMOEN2",ChangeAIScript("",CLASS)) ActionOverride("IMOEN2",ChangeAIScript("",DEFAULT)) ActionOverride("IMOEN2",ChangeAIScript("",OVERRIDE)) ActionOverride("IMOEN2",SetNumTimesTalkedTo(1)) ActionOverride("IMOEN2",EscapeArea())~ EXIT
+	+ ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(1000)) ActionOverride("IMOEN2",DestroyGold(500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2000)) ActionOverride("IMOEN2",DestroyGold(1000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(2500)) ActionOverride("IMOEN2",DestroyGold(1250))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(5000)) ActionOverride("IMOEN2",DestroyGold(2500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(10000)) ActionOverride("IMOEN2",DestroyGold(5000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(15000)) ActionOverride("IMOEN2",DestroyGold(7500))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_MSG_4b
+	+ ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(20000)) ActionOverride("IMOEN2",DestroyGold(10000))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(50000) NumInParty(2)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(75000) NumInParty(3)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(100000) NumInParty(4)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(125000) NumInParty(5)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
+	+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
 
 CHAIN
 	IF ~~ THEN IMOEN2J IMOEN_MSG_4b
