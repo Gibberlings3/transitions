@@ -14,6 +14,7 @@ IF
 		GlobalTimerExpired("#L_NPCSoD","GLOBAL")
 	!AreaType(DUNGEON)
 	CombatCounter(0)
+	False()
 THEN
 	RESPONSE #100
 		ClearAllActions()

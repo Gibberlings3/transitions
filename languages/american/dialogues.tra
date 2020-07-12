@@ -507,3 +507,7 @@
 @2375	= ~Boo is tired and needs a break from all the butt-kicking.  Just a short one.  We'll be near by if you need us.~
 @2376	= ~Boo is weary and must rest!~
 @2377	= ~If you need us, look for us at the Three Old Kegs.~
+
+// PC responses to pre-SoD/BG2 exit dialogues when there is and isn't gold to share
+@2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
+@2379	= ~Thank you for your help.  I can finally relax a little~
