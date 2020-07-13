@@ -1,0 +1,34 @@
+//////////////////////////////////////
+// Kicks off pre-SoD exit dialogues //
+// Parsed via main_common.tpa       //
+//////////////////////////////////////
+
+// Pre-SoD
+IF
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	Global("EndOfBG1","GLOBAL",1)
+	Global("#L_DynaheirModded","GLOBAL",0)
+	IsValidForPartyDialogue(MYSELF)
+	OR(2)
+		Global("#L_NPCSoD","GLOBAL",0)
+		GlobalTimerExpired("#L_NPCSoD","GLOBAL")
+	!AreaType(DUNGEON)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		ClearAllActions()
+		Dialogue(Player1)
+END
+
+// Post BG1
+IF
+	GlobalGT("EndOfBG1","GLOBAL",0)
+	Global("#L_DynaheirOkInBG1Areas","GLOBAL",0)
+	Global("#L_DynaheirModded","GLOBAL",0)
+	!InPartyAllowDead(MYSELF)
+	AreaType(BG1AREA)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_DynaheirOkInBG1Areas","GLOBAL",1)
+		DestroySelf()
+END
