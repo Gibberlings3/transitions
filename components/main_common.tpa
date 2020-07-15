@@ -347,9 +347,10 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/minsc.d~ USING ~%tra_loc%/%s/dialo
 EXTEND_TOP ~MINSC_.BCS~ ~%mod_root%/scripts/minsc.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/dynaheir.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~DYNAHEIR.BCS~ ~%mod_root%/scripts/dynaheir.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/alora.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/alora.baf~
 
 // These still need to be done
-//EXTEND_TOP ~ALORA.BCS~ ~%mod_root%/scripts/alora.baf~
 //EXTEND_TOP ~BRANWEN_.BCS~ ~%mod_root%/scripts/branwen.baf~
 //EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/coran.baf~
 //EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/eldoth.baf~

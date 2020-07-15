@@ -18,6 +18,7 @@ CHAIN
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2363	/* ~I couldn't agree more.~ */
 		== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2367 /* ~I can't wait any longer, either.~ */
 		== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2373 /* ~I need to report back to Evereska.~ */
+		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2390 /* ~Yeah, think I'll check out...mmm somewhere..not here.~ */
 	END
 	// @2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
 	// @2379	= ~Thank you for your help.  I can finally relax a little~
@@ -82,6 +83,7 @@ CHAIN
 		== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2368 /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */ DO ~SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) ActionOverride("GARRICK",LeaveParty()) ActionOverride("GARRICK",EscapeArea())~
 		== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2374 /* ~Farewell though I certainly shall not.~ */ DO ~SetGlobal("L_XanOkInBG1Areas","GLOBAL",1) ActionOverride("XAN",LeaveParty()) ActionOverride("XAN",EscapeArea())~
 		== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2388 /* ~Farewell until we meet again.~ */ DO ~SetGlobal("L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~
+		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2391 /* ~See ya 'round!~ */ DO ~SetGlobal("L_AloraOkInBG1Areas","GLOBAL",1) ActionOverride("ALORA",LeaveParty()) ActionOverride("ALORA",EscapeArea())~
 	END
 	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_MinscOkInBG1Areas","GLOBAL",1) ActionOverride("Minsc",LeaveParty()) ActionOverride("Minsc",EscapeArea())~ EXIT
 
