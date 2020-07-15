@@ -527,3 +527,8 @@
 @2389	= ~You sure have kept me busy!  It's been fun but I think I'll find less dangerous fun somewhere ... not here.~
 @2390	= ~Yeah, think I'll check out...mmm somewhere..not here.~
 @2391	= ~See ya 'round!~
+
+// Branwen's pre-SoD/BG2 exit dialogue
+@2392	= ~You are a fine warrior, <CHARNAME>, but I will now go my own way.~
+@2393	= ~Aye, our time together is at an end.~
+@2394	= ~Tempus watch over you!~

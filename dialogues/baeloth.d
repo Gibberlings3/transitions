@@ -59,6 +59,7 @@ CHAIN
 		== MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0)~ @2376 /* ~Boo is weary and must rest!~ */
 		== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2381	/* ~Aye, a rest will do us all good.~ */
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2390 /* ~Yeah, think I'll check out...mmm somewhere..not here.~ */
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2393 /* ~Aye, our time together is at an end.~ */
 	END
 	// @2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
 	// @2379	= ~Thank you for your help.  I can finally relax a little~
@@ -130,6 +131,7 @@ CHAIN
 		== MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2386 /* ~He said to make sure to pick up some fresh pumpkin seeds.~ */ DO ~SetGlobal("L_MinscOkInBG1Areas","GLOBAL",1) ActionOverride("MINSC",LeaveParty()) ActionOverride("MINSC",EscapeArea())~
 		== DYNAHJ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2387 /* ~sigh~ */  DO ~SetGlobal("L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2391 /* ~See ya 'round!~ */ DO ~SetGlobal("L_AloraOkInBG1Areas","GLOBAL",1) ActionOverride("ALORA",LeaveParty()) ActionOverride("ALORA",EscapeArea())~
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2394 /* ~Tempus watch over you!~ */ DO ~SetGlobal("L_BranwenOkInBG1Areas","GLOBAL",1) ActionOverride("Branwen",LeaveParty()) ActionOverride("Branwen",EscapeArea())~
 	END
 	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("Baeloth",LeaveParty()) ActionOverride("Baeloth",EscapeArea())~ EXIT
 
@@ -144,6 +146,7 @@ CHAIN
 		== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2367 /* ~I can't wait any longer, either.~ */
 		== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2373 /* ~I need to report back to Evereska.~ */
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2390 /* ~Yeah, think I'll check out...mmm somewhere..not here.~ */
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2393 /* ~Aye, our time together is at an end.~ */
 	END
 	// @2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
 	// @2379	= ~Thank you for your help.  I can finally relax a little~
@@ -203,6 +206,7 @@ CHAIN
 		== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2368 /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */ DO ~SetGlobal("L_GarrickOkInBG1Areas","GLOBAL",1) ActionOverride("GARRICK",LeaveParty()) ActionOverride("GARRICK",EscapeArea())~
 		== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2374 /* ~Farewell though I certainly shall not.~ */ DO ~SetGlobal("L_XanOkInBG1Areas","GLOBAL",1) ActionOverride("XAN",LeaveParty()) ActionOverride("XAN",EscapeArea())~
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2391 /* ~See ya 'round!~ */ DO ~SetGlobal("L_AloraOkInBG1Areas","GLOBAL",1) ActionOverride("ALORA",LeaveParty()) ActionOverride("ALORA",EscapeArea())~
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2394 /* ~Tempus watch over you!~ */ DO ~SetGlobal("L_BranwenOkInBG1Areas","GLOBAL",1) ActionOverride("Branwen",LeaveParty()) ActionOverride("Branwen",EscapeArea())~
 	END
 	IF ~~ THEN DO ~SetGlobal("#L_NPCBG2Left","GLOBAL",1) SetGlobal("L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("Baeloth",LeaveParty()) ActionOverride("Baeloth",EscapeArea())~ EXIT
 
