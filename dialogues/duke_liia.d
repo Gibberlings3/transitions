@@ -12,17 +12,17 @@ APPEND LIIA
 		++ @2123 /* ~Can you wait a few days, Imoen?  I really need you right now.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",3) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 	END
 
-	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",0) Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
+	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
 		SAY @2112 /* ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with me to study magic.~ */
 		= @2113 /* ~Feel free to visit her on the 3rd floor whenever you'd like.~ */
 		++ @2114 /* ~Thank you.  I'll do that.~ */ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680])~ EXIT
 		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680])~ EXIT
 	END
 
-	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
-		SAY @2118 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",6)~ EXIT
-	END
+//	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
+//		SAY @2118 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~ */
+//		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",6)~ EXIT
+//	END
 
 	IF ~Global("#L_TalkedToDukes","GLOBAL",2) InPartyAllowDead("IMOEN2") !IsValidForPartyDialogue("IMOEN2") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_3
 		SAY @2117 /* ~One moment <CHARNAME>, I need to speak with Imoen.~ */

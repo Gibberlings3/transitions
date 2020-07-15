@@ -14,8 +14,8 @@ IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 	IF ~~ THEN QUEST_HURRY
 		SAY @2298 /* ~Please hurry, <PROPER_SIRMAAM>.  Time is of the essence.~ */
 		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",0)~ + INFORM_IMOEN_IN_TRAINING 
+//		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
+		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2")~ + INFORM_IMOEN_IN_TRAINING 
 		IF ~Global("#L_TalkedToDukes","GLOBAL",0) InPartyAllowDead("IMOEN2") !IsValidForPartyDialogue("IMOEN2")~ + HEAL_IMOEN
 		IF ~Global("#L_TalkedToDukes","GLOBAL",0) IsValidForPartyDialogue("IMOEN2")~ + IMOEN_OFFER_TRAINING
 	END
@@ -28,8 +28,8 @@ IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 	IF ~~ THEN QUEST_SKIP
 		SAY @2299 /* ~As you wish, <PRO_SIRMAAM>.~ */
 		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",0)~ + INFORM_IMOEN_IN_TRAINING 
+//		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
+		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("IMOEN2")~ + INFORM_IMOEN_IN_TRAINING 
 		IF ~Global("#L_TalkedToDukes","GLOBAL",0) InPartyAllowDead("IMOEN2") !IsValidForPartyDialogue("IMOEN2")~  + HEAL_IMOEN
 		IF ~Global("#L_TalkedToDukes","GLOBAL",0) IsValidForPartyDialogue("IMOEN2")~ + IMOEN_OFFER_TRAINING
 	END
@@ -47,10 +47,10 @@ IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 		++ @2123 /* ~Can you wait a few days, Imoen?  I really need you right now.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",3) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 	END
 
-	IF ~~ THEN INFORM_IMOEN_CAN_TRAIN
-		SAY @2315 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~ */
-		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-	END
+//	IF ~~ THEN INFORM_IMOEN_CAN_TRAIN
+//		SAY @2315 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~ */
+//		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
+//	END
 
 	IF ~~ THEN INFORM_IMOEN_IN_TRAINING
 		SAY @2314 /* ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying at the Ducal Palace to study magic with Grand Duke Jannath.~ */
