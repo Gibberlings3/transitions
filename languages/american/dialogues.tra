@@ -532,3 +532,8 @@
 @2392	= ~You are a fine warrior, <CHARNAME>, but I will now go my own way.~
 @2393	= ~Aye, our time together is at an end.~
 @2394	= ~Tempus watch over you!~
+
+// Coran's pre-SoD/BG2 exit dialogue
+@2395	= ~This has been fun, <CHARNAME>, but it is time for me to leave.~
+@2396	= ~Yes, it is time we part ways.~
+@2397	= ~Farewell my friend.~

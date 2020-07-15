@@ -4,11 +4,11 @@
 /////////////////////////////////////////////////////////////////////////
 
 CHAIN
-	IF WEIGHT #-999 ~Global("#L_KhalidModded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN KHALIJ POST_KORLASZ_ASK
+	IF WEIGHT #-999 ~Global("#L_KhalidModded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN KHALIJ POST_KORLASZ_ASK
 		@2336 /* ~<CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2338 /* ~Yes, *we* should go.~ */ 
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */
-		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#l_DornModded","GLOBAL",0)~ @2340	/* ~Me as well.~ */
+		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2340	/* ~Me as well.~ */
 		== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2347 /* ~(gives you an exaggerated yawn)~ */
 		== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2354 /* ~I do have plans, yes.~ */
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2360 /* ~You hog all the limelight.~ */
@@ -23,7 +23,7 @@ CHAIN
 		@2333 /* ~If you insist.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2327 /* ~So be it.~ */
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2283 /* ~As you wish.  I owe you that at least.~ */
-		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#l_DornModded","GLOBAL",0)~ @2341	/* ~I can stay for a little while.~ */
+		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2341	/* ~I can stay for a little while.~ */
 		== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2348 /* ~Fine. (sigh)~ */
 		== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2355 /* ~Ok, for a little while.~ */
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2361	/* ~Have it your way, as always!~ */
@@ -35,7 +35,7 @@ CHAIN
 		@2334 /* ~Goodbye.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 /* ~Take care of yourself.~ */ DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2284 /* ~It has been an honor.  Farewell.~ */ DO ~SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~
-		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#l_DornModded","GLOBAL",0)~ @2346 /* ~Until we meet again.~ */ DO ~SetGlobal("L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~
+		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2346 /* ~Until we meet again.~ */ DO ~SetGlobal("L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~
 		== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2349 /* ~Finally!~ */ DO ~SetGlobal("L_EdwinOkInBG1Areas","GLOBAL",1) ActionOverride("EDWIN",LeaveParty()) ActionOverride("EDWIN",EscapeArea())~
 		== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2356 /* ~See ya!  Good luck and all.~ */ DO ~SetGlobal("L_NeeraOkInBG1Areas","GLOBAL",1) ActionOverride("NEERA",LeaveParty()) ActionOverride("NEERA",EscapeArea())~
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2362 /* ~Look for my name in lights, I'm bowing out of this dump!~ */ DO ~SetGlobal("L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("BAELOTH",LeaveParty()) ActionOverride("BAELOTH",EscapeArea())~
@@ -48,7 +48,7 @@ CHAIN
 		= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2339 /* ~Yes, *we* really must go.~ */ 
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2329 /* ~I too will be leaving.~ */
-		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#l_DornModded","GLOBAL",0)~ @2343 /* ~Time to go!~ */
+		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2343 /* ~Time to go!~ */
 		== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2350 /* ~I'm so done.~ */
 		== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2357 /* ~Yes, I really do have to go.~ */
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2363	/* ~I couldn't agree more.~ */
@@ -57,7 +57,8 @@ CHAIN
 		== MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0)~ @2376 /* ~Boo is weary and must rest!~ */
 		== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2381	/* ~Aye, a rest will do us all good.~ */
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2390 /* ~Yeah, think I'll check out...mmm somewhere..not here.~ */
-		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2393 /* ~Aye, our time together is at an end.~ */
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#L_BranwenModded","GLOBAL",0)~ @2393 /* ~Aye, our time together is at an end.~ */
+		== CORANJ IF ~IsValidForPartyDialogue("CORAN") Global("#L_CoranModded","GLOBAL",0)~ @2396 /* ~Yes, it is time we part ways.~ */
 	END
 	// @2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
 	// @2379	= ~Thank you for your help.  I can finally relax a little~
@@ -114,7 +115,7 @@ CHAIN
 		@2334 /* ~Goodbye.~ */
 		== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 /* ~Take care of yourself.~ */ DO ~SetGlobal("L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~
 		== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2284 /* ~It has been an honor.  Farewell.~ */ DO ~SetGlobal("L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~
-		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#l_DornModded","GLOBAL",0)~ @2346 /* ~Until we meet again.~ */ DO ~SetGlobal("L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",DestroyGold(0)) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~
+		== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2346 /* ~Until we meet again.~ */ DO ~SetGlobal("L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",DestroyGold(0)) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~
 		== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2353 /*~I'm outta here!~ */ DO ~SetGlobal("L_EdwinOkInBG1Areas","GLOBAL",1) ActionOverride("EDWIN",LeaveParty()) ActionOverride("EDWIN",EscapeArea())~
 		== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2356 /* ~See ya!  Good luck and all.~ */ DO ~SetGlobal("L_NeeraOkInBG1Areas","GLOBAL",1) ActionOverride("NEERA",LeaveParty()) ActionOverride("NEERA",EscapeArea())~
 		== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2362 /* ~Look for my name in lights, I'm bowing out of this dump!~ */ DO ~SetGlobal("L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("BAELOTH",LeaveParty()) ActionOverride("BAELOTH",EscapeArea())~
@@ -129,14 +130,15 @@ CHAIN
 		== MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2386 /* ~He said to make sure to pick up some fresh pumpkin seeds.~ */ DO ~SetGlobal("L_MinscOkInBG1Areas","GLOBAL",1) ActionOverride("MINSC",LeaveParty()) ActionOverride("MINSC",EscapeArea())~
 		== DYNAHJ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2387 /* ~sigh~ */  DO ~SetGlobal("L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~
 		== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2391 /* ~See ya 'round!~ */ DO ~SetGlobal("L_AloraOkInBG1Areas","GLOBAL",1) ActionOverride("ALORA",LeaveParty()) ActionOverride("ALORA",EscapeArea())~
-		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#LBranwenModded","GLOBAL",0)~ @2394 /* ~Tempus watch over you!~ */ DO ~SetGlobal("L_BranwenOkInBG1Areas","GLOBAL",1) ActionOverride("Branwen",LeaveParty()) ActionOverride("Branwen",EscapeArea())~
+		== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#L_BranwenModded","GLOBAL",0)~ @2394 /* ~Tempus watch over you!~ */ DO ~SetGlobal("L_BranwenOkInBG1Areas","GLOBAL",1) ActionOverride("Branwen",LeaveParty()) ActionOverride("Branwen",EscapeArea())~
+		== CORANJ IF ~IsValidForPartyDialogue("CORAN") Global("#L_CoranModded","GLOBAL",0)~ @2397 /* ~Farewell my friend.~ */ DO ~SetGlobal("L_CoranOkInBG1Areas","GLOBAL",1) ActionOverride("Coran",LeaveParty()) ActionOverride("Coran",EscapeArea())~
 	END
 	IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("L_KhalidOkInBG1Areas","GLOBAL",1) ActionOverride("Khalid",LeaveParty()) ActionOverride("Khalid",EscapeArea())~ EXIT
 
 
 APPEND_EARLY KHALIP
 	// Post-Korlasz Pre-Sod/BG2
-	IF WEIGHT #-999 ~Global("#L_KhalidModded","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) Global("#L_KhalidPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE1
+	IF WEIGHT #-999 ~Global("#L_KhalidModded","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_KhalidPK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE1
 		// Didn't lead the conversation when Korlasz was handed in
 		// Or wasn't in the group at the time
 		// So hasn't given his 'I'm eager to leave' spiel
@@ -146,7 +148,7 @@ APPEND_EARLY KHALIP
 		IF ~~ THEN DO ~SetGlobal("L_KhalidOkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
 	END
 
-	IF WEIGHT #-998 ~Global("#L_KhalidModded","GLOBAL",0) Global("#l_SarvQuests","GLOBAL",99) Global("#L_KhalidPK","GLOBAL",1)~ THEN BEGIN POST_KORLASZ_GOODBYE2
+	IF WEIGHT #-998 ~Global("#L_KhalidModded","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_KhalidPK","GLOBAL",1)~ THEN BEGIN POST_KORLASZ_GOODBYE2
 		// We've already done the 'I'm eager' spiel
 		// He's being let go from group after initially being asked to stay
 		SAY @2334 /* ~Goodbye.~ */
