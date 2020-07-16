@@ -537,3 +537,8 @@
 @2395	= ~This has been fun, <CHARNAME>, but it is time for me to leave.~
 @2396	= ~Yes, it is time we part ways.~
 @2397	= ~Farewell my friend.~
+
+// Eldoth's pre-SoD/BG2 exit dialogue
+@2398	= ~This is all just too tedius!  I'm leaving!~
+@2399	= ~It's about time we all came to our senses!  I'll be leaving too.~
+@2400	= ~Ta ta!~

@@ -353,9 +353,10 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/branwen.d~ USING ~%tra_loc%/%s/dia
 EXTEND_TOP ~BRANWEN_.BCS~ ~%mod_root%/scripts/branwen.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/coran.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/coran.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/eldoth.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/eldoth.baf~
 
 // These still need to be done
-//EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/eldoth.baf~
 //EXTEND_TOP ~FALDORN_.BCS~ ~%mod_root%/scripts/faldorn.baf~
 //EXTEND_TOP ~KAGAIN.BCS~ ~%mod_root%/scripts/kagain.baf~
 //EXTEND_TOP ~KIVAN.BCS~ ~%mod_root%/scripts/kivan.baf~
