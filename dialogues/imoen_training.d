@@ -3,7 +3,7 @@
 // Patched via main_common.tpa                          //
 //////////////////////////////////////////////////////////
 
-REPLACE_TRIGGER_TEXT IMOEN2J ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
+REPLACE_TRIGGER_TEXT IMOEN2_ ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_ACTION_TEXT IMOENP_ ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("imoen2",JoinParty())~
 EXTEND_TOP IMOENP_ 2 #2 
 	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0)~ THEN 
@@ -146,7 +146,7 @@ APPEND IMOENP_
 	END
 END
 
-APPEND IMOEN2J
+APPEND IMOEN2_
 	IF WEIGHT #-999 ~Global("#L_ImTrainRsp","GLOBAL",1)~ THEN BEGIN IMOEN_TRAINING_RSP_1
 		SAY @2103 /* ~You will come visit, <CHARNAME>!  Promise!~ */
 		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
@@ -231,24 +231,24 @@ APPEND IMOEN2J
 END
 
 CHAIN	
-	IF WEIGHT #-996 ~InMyArea("LIIA") Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2J IMOEN_LIIA_TRAIN_RSP_2
+	IF WEIGHT #-996 ~InMyArea("LIIA") Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2_ IMOEN_LIIA_TRAIN_RSP_2
 		@2110 /* ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~ */
 		DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImTrainRsp","GLOBAL",99)~
 		== LIIA @2111 /* ~As you wish, child.  Come see me if you change your mind.~ */ EXIT
 
 CHAIN
-	IF WEIGHT #-995 ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2J IMOEN_LIIA_3
+	IF WEIGHT #-995 ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2_ IMOEN_LIIA_3
 		@2124 /* ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~ */
 		DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImTrainRsp","GLOBAL",99)~
 		== LIIA @2125 /* ~As you will, Imoen. Come see me when you're ready.~ */ EXIT
 
 CHAIN	
-	IF WEIGHT #-994 ~!InMyArea("LIIA") OR(2) Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2J IMOEN_MSG_TRAIN_RSP_2_OR_3
+	IF WEIGHT #-994 ~!InMyArea("LIIA") OR(2) Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN IMOEN2_ IMOEN_MSG_TRAIN_RSP_2_OR_3
 		@2313 /* ~Please give her my thanks but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~ */
 		== ~#LFFEsc1~ @2145 /* ~As you wish.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",99) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
 
 CHAIN
-	IF ~~ THEN IMOEN2J IMOEN_LIIA_4a
+	IF ~~ THEN IMOEN2_ IMOEN_LIIA_4a
 		@2121 /* ~I can hardly wait to get started!  See ya!~ */
 	END
 	// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
@@ -301,7 +301,7 @@ CHAIN
 
 
 CHAIN
-	IF ~~ THEN IMOEN2J IMOEN_LIIA_4b
+	IF ~~ THEN IMOEN2_ IMOEN_LIIA_4b
 		@2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
 		= @2107 /* ~Goodbye, <CHARNAME>.  Thanks for everything.~ */
 		== LIIA @2122 /* ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~ */	
@@ -312,7 +312,7 @@ CHAIN
 	++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ EXIT
 
 CHAIN
-	IF ~~ THEN IMOEN2J IMOEN_MSG_4a
+	IF ~~ THEN IMOEN2_ IMOEN_MSG_4a
 		@2121 /* ~I can hardly wait to get started!  See ya!~ */
 	END
 	// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
@@ -364,7 +364,7 @@ CHAIN
 	+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("IMOEN2",TakePartyGold(25000)) ActionOverride("IMOEN2",DestroyGold(12500))~ + IMOEN_MSG_4b
 
 CHAIN
-	IF ~~ THEN IMOEN2J IMOEN_MSG_4b
+	IF ~~ THEN IMOEN2_ IMOEN_MSG_4b
 		@2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
 		= @2107 /* ~Goodbye, <CHARNAME>.  Thanks for everything.~ */
 		== ~#LFFEsc1~ @2122 /* ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~ */	
