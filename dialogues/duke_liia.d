@@ -29,14 +29,14 @@ APPEND LIIA
 		IF ~~ DO ~ApplySpellRES("IMOEN2","bdresurr") ApplySpellRES("IMOEN2","bddispel") ApplySpellRES("IMOEN2","sppr713")~ EXIT
 	END
 
-	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0) !Global("#L_ImoenInPalace","GLOBAL",1) IsGabber("IMOEN2")~ THEN BEGIN LIIA_99a
+	IF ~!Global("#L_ImoenInPalace","GLOBAL",1) IsGabber("IMOEN2")~ THEN BEGIN LIIA_99a
 		SAY @2119 /* ~Greetings Imoen.  Have you come about magic training?~ */
 		++ @2101 /* ~Go ahead, Imoen.  You've always wanted this.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",1) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 		++ @2102 /* ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",2) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 		++ @2123 /* ~Can you wait a few days, Imoen?  I really need you right now.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",3) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 	END
 
-	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0) !Global("#L_ImoenInPalace","GLOBAL",1) !IsGabber("IMOEN2")~ THEN BEGIN LIIA_99b
+	IF ~!Global("#L_ImoenInPalace","GLOBAL",1) !IsGabber("IMOEN2")~ THEN BEGIN LIIA_99b
 		SAY @2120 /* ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~ */
 		++ @2101 /* ~Go ahead, Imoen.  You've always wanted this.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",1) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
 		++ @2102 /* ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",2) ActionOverride("IMOEN2",StartDialogueNoSet(Player1))~ EXIT
