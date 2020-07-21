@@ -321,6 +321,294 @@ BUT_ONLY_IF_IT_CHANGES
 // Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD and BG2
 // NOTE: Jaheira, Khalid, Minsc, and Dynaheir don't get BG2 exit dialogues, they'll stick with the PC
 // Imoen is dealt with separately
+ACTION_DEFINE_ARRAY npc_list BEGIN
+   Ajantis
+   Jaheira
+   Khalid
+   Dorn
+   Edwin
+   Neera
+   Baeloth
+   Garrick
+   Xan
+   Minsc
+   Dynaheir
+   Alora
+   Branwen
+   Coran
+   Eldoth
+   Montaron
+   Xzar
+   Faldorn
+   Kagain
+   Kivan
+   Quayle
+   Rasaad
+   Safana
+   Sharteel
+   Skie
+   Tiax
+   Viconia
+   Yeslick
+END
+
+OUTER_SET npc_num = 0
+
+// Additions to all NPCs (except Imoen)
+ACTION_PHP_EACH npc_list AS _ => npc_name BEGIN
+
+   ACTION_IF npc_num < 7 THEN BEGIN
+      OUTER_SPRINT pk ~// Post-Korlasz while in party
+IF
+   Global("#L_SarvQuests","GLOBAL",99)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   Global("EndOfBG1","GLOBAL",0)
+   Global("#L_%npc_name%PK","GLOBAL",0)
+   Global("#L_NPCPK","GLOBAL",0)
+   IsValidForPartyDialogue(MYSELF)
+   !AreaType(DUNGEON)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      ClearAllActions()
+      SetGlobal("#L_%npc_name%PK","GLOBAL",1)
+      SetGlobal("#L_NPCPK","GLOBAL",1)
+      Dialogue(Player1)
+END
+
+// Post-Korlasz while not in party
+IF
+   Global("#L_SarvQuests","GLOBAL",99)
+   Global("EndOfBG1","GLOBAL",0)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   !InPartyAllowDead(MYSELF)
+   See(Player1)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      Dialogue(Player1)
+END
+~
+   END ELSE BEGIN
+      OUTER_SPRINT pk ~~
+   END
+
+   ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) THEN BEGIN
+      OUTER_SPRINT bg ~~
+   END ELSE BEGIN
+      OUTER_SPRINT bg ~// Pre-BG2
+IF
+   Global("#L_StartBG2","GLOBAL",1)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   IsValidForPartyDialogue(MYSELF)
+   OR(2)
+      Global("#L_NPCBG2","GLOBAL",0)
+      GlobalTimerExpired("#L_NPCBG2","GLOBAL")
+   !AreaType(DUNGEON)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      ClearAllActions()
+      Dialogue(Player1)
+END
+~
+   END
+
+   <<<<<<<< .../npc_add.baf
+   // Post-Korlasz
+   %pk%
+
+   // Pre-SoD
+   IF
+      GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+      Global("EndOfBG1","GLOBAL",1)
+      Global("#L_%npc_name%Modded","GLOBAL",0)      // NPC isn't modded
+      IsValidForPartyDialogue(MYSELF)
+      OR(2)
+         Global("#L_NPCSoD","GLOBAL",0)
+         GlobalTimerExpired("#L_NPCSoD","GLOBAL")
+      !AreaType(DUNGEON)
+      CombatCounter(0)
+      OR(2)
+         GlobalGT("#L_StartCaelarAttack","GLOBAL",2)     // Imoen staying in the group
+         !InPartyAllowDead("IMOEN2")
+   THEN
+      RESPONSE #100
+         ClearAllActions()
+         Dialogue(Player1)
+   END
+
+   // Pre-BG2
+   %bg%
+
+   // Post BG1
+   IF
+      GlobalGT("EndOfBG1","GLOBAL",0)
+      Global("#L_%npc_name%OkInBG1Areas","GLOBAL",0)
+      Global("#L_%npc_name%Modded","GLOBAL",0)
+      !InPartyAllowDead(MYSELF)
+      AreaType(BG1AREA)
+   THEN
+      RESPONSE #100
+         SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1)
+         DestroySelf()
+   END
+   >>>>>>>>
+   EXTEND_TOP ~%npc_name%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
+
+   // Exit dialogues
+
+   // Initial post_Korlasz interjections
+   OUTER_SPRINT pk_i1 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2340 /* ~Me as well.~ */~~~~~
+   OUTER_SPRINT pk_i2 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */~~~~~
+   OUTER_SPRINT pk_i3 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2338 /* ~Yes, *we* should go.~ */ 
+      == KHALIJ IF ~OR(2) !IsValidForPartyDialogue("JAHEIRA") !Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2332 /* ~I-I should be going as well.~ */~~~~~
+   OUTER_SPRINT pk_i4 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2340   /* ~Me as well.~ */~~~~~
+   OUTER_SPRINT pk_i5 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2347 /* ~(gives you an exaggerated yawn)~ */~~~~~
+   OUTER_SPRINT pk_i6 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2354 /* ~I do have plans, yes.~ */~~~~~
+   OUTER_SPRINT pk_i7 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2360 /* ~You hog all the limelight.~ */~~~~~
+
+   // Staying after Korlasz interjections
+   OUTER_SPRINT pk_s1 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2283 /* ~As you wish.  I owe you that at least.~ */~~~~~
+   OUTER_SPRINT pk_s2 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2327 /* ~So be it.~ */~~~~~
+   OUTER_SPRINT pk_s3 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2333  /* ~If you insist.~ */~~~~~
+   OUTER_SPRINT pk_s4 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2341   /* ~I can stay for a little while.~ */~~~~~
+   OUTER_SPRINT pk_s5 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2348 /* ~Fine. (sigh)~ */~~~~~
+   OUTER_SPRINT pk_s6 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2355 /* ~Ok, for a little while.~ */~~~~~
+   OUTER_SPRINT pk_s7 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2361 /* ~Have it your way, as always!~ */~~~~~
+
+   // Leaving after Korlasz interjections
+   OUTER_SPRINT pk_l1 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2284 DO ~SetGlobal("#L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ /* ~It has been an honor.  Farewell.~ */~~~~~
+   OUTER_SPRINT pk_l2 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 DO ~SetGlobal("#L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~ /* ~Take care of yourself.~ */~~~~~
+   OUTER_SPRINT pk_l3 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2334 DO ~SetGlobal("#L_KhalidOkInBG1Areas","GLOBAL",1) ActionOverride("KHALID",LeaveParty()) ActionOverride("KHALID",EscapeArea())~ /* ~Goodbye.~ */~~~~~
+   OUTER_SPRINT pk_l4 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2346 DO ~SetGlobal("#L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~   /* ~Until we meet again.~ */~~~~~
+   OUTER_SPRINT pk_l5 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2349 DO ~SetGlobal("#L_EdwinOkInBG1Areas","GLOBAL",1) ActionOverride("EDWIN",LeaveParty()) ActionOverride("EDWIN",EscapeArea())~ /* ~Finally!~ */~~~~~
+   OUTER_SPRINT pk_l6 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2356 DO ~SetGlobal("#L_NeeraOkInBG1Areas","GLOBAL",1) ActionOverride("NEERA",LeaveParty()) ActionOverride("NEERA",EscapeArea())~ /* ~See ya!  Good luck and all.~ */~~~~~
+   OUTER_SPRINT pk_l7 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2362 DO ~SetGlobal("#L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("BAELOTH",LeaveParty()) ActionOverride("BAELOTH",EscapeArea())~ /* ~Look for my name in lights, I'm bowing out of this dump!~ */~~~~~
+
+   ACTION_MATCH %npc_num% WITH
+      0 BEGIN
+         OUTER_SPRINT npc_jfile ~AJANTJ~
+         OUTER_SPRINT pk_init ~@2278~ // I am eager to present our accomplishments before my superiors, but I will stay if you need me.
+         OUTER_SPRINT pk_i1 ~~
+         OUTER_SPRINT pk_stay ~@2283~ // As you wish.  I owe you that at least.
+         OUTER_SPRINT pk_s1 ~~
+         OUTER_SPRINT pk_leave ~@2284~ // It has been an honor.  Farewell.
+         OUTER_SPRINT pk_l1 ~~
+      END
+      1 BEGIN
+         OUTER_SPRINT npc_jfile ~JAHEIJ~
+         OUTER_SPRINT pk_init ~@2330~ // <CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.
+         OUTER_SPRINT pk_i2 ~~
+         OUTER_SPRINT pk_stay ~@2327~ // So be it.
+         OUTER_SPRINT pk_s2 ~~
+         OUTER_SPRINT pk_leave ~@2328~ // Take care of yourself.
+         OUTER_SPRINT pk_l2 ~~
+      END
+      2 BEGIN
+         OUTER_SPRINT npc_jfile ~KHALIJ~
+         OUTER_SPRINT pk_init ~@2336~ // <CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.
+         OUTER_SPRINT pk_i3 ~~
+         OUTER_SPRINT pk_stay ~@2333~ // If you insist.
+         OUTER_SPRINT pk_s3 ~~
+         OUTER_SPRINT pk_leave ~@2334~ // Goodbye.
+         OUTER_SPRINT pk_l3 ~~
+      END
+      3 BEGIN
+         OUTER_SPRINT npc_jfile ~DORNJ_~
+         OUTER_SPRINT pk_init ~@2344~ // <CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.
+         OUTER_SPRINT pk_i4 ~~
+         OUTER_SPRINT pk_stay ~@2341~ // I can stay for a little while.
+         OUTER_SPRINT pk_s4 ~~
+         OUTER_SPRINT pk_leave ~@2342~ // I feel we will meet again.
+         OUTER_SPRINT pk_l4 ~~
+      END
+      4 BEGIN
+         OUTER_SPRINT npc_jfile ~EDWINJ_~
+         OUTER_SPRINT pk_init ~@2351~ // I've just about had all I can take of this.  Are we just about done?
+         OUTER_SPRINT pk_i5 ~~
+         OUTER_SPRINT pk_stay ~@2348~ // Fine. (sigh)
+         OUTER_SPRINT pk_s5 ~~
+         OUTER_SPRINT pk_leave ~@2349~ // Finally!
+         OUTER_SPRINT pk_l5 ~~
+      END
+      5 BEGIN
+         OUTER_SPRINT npc_jfile ~NEERAJ_~
+         OUTER_SPRINT pk_init ~@2358~ // You're in the clear now, right?  Can I go?
+         OUTER_SPRINT pk_i6 ~~
+         OUTER_SPRINT pk_stay ~@2355~ // Ok, for a little while.
+         OUTER_SPRINT pk_s6 ~~
+         OUTER_SPRINT pk_leave ~@2356~ // See ya!  Good luck and all.
+         OUTER_SPRINT pk_l6 ~~
+      END
+      6 BEGIN
+         OUTER_SPRINT npc_jfile ~BAELOTHJ~
+         OUTER_SPRINT pk_init ~@2364~ // This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!
+         OUTER_SPRINT pk_i7 ~~
+         OUTER_SPRINT pk_stay ~@2361~ // Have it your way, as always!~
+         OUTER_SPRINT pk_s7 ~~
+         OUTER_SPRINT pk_leave ~@2362~ // Look for my name in lights, I'm bowing out of this dump!      
+         OUTER_SPRINT pk_l7 ~~
+      END
+      DEFAULT
+         OUTER_SPRINT pk_init ~~
+   END
+
+   ACTION_IF npc_num < 7 THEN BEGIN
+      <<<<<<<< .../npc_add.d
+
+      CHAIN
+         IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN %npc_jfile% POST_KORLASZ_ASK
+            %pk_init%
+            %pk_i1%
+            %pk_i2%
+            %pk_i3%
+            %pk_i4%
+            %pk_i5%
+            %pk_i6%
+            %pk_i7%
+         END
+         + ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
+         + ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
+         ++ @2281 /* ~Of course you may leave, but not with that equipment.~ */  + POST_KORLASZ_STAY
+         ++ @2282 /* ~I understand.  Now is as good a time as any to say our farewells.~ */ + POST_KORLASZ_LEAVE
+
+      CHAIN
+         IF ~~ THEN %npc_jfile% POST_KORLASZ_STAY
+            %pk_stay%
+            %pk_s1%
+            %pk_s2%
+            %pk_s3%
+            %pk_s4%
+            %pk_s5%
+            %pk_s6%
+            %pk_s7%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",2)~ EXIT
+
+      CHAIN
+         IF ~~ THEN %npc_jfile% POST_KORLASZ_LEAVE
+            %pk_leave%
+            %pk_l1%
+            %pk_l2%
+            %pk_l3%
+            %pk_l4%
+            %pk_l5%
+            %pk_l6%
+            %pk_l7%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%npc_name%",LeaveParty()) ActionOverride("%npc_name%",EscapeArea())~ EXIT
+      >>>>>>>>
+      COMPILE EVALUATE_BUFFER ~.../npc_add.d~ USING ~%tra_loc%/%s/dialogues.tra~
+   END
+
+   // Initial pre-SoD interjections
+
+
+   OUTER_SET npc_num = npc_num + 1
+END
+
+/*
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ajantis.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~AJANTIS.BCS~ ~%mod_root%/scripts/ajantis.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/jaheira.d~ USING ~%tra_loc%/%s/dialogues.tra~
@@ -355,6 +643,7 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/coran.d~ USING ~%tra_loc%/%s/dialo
 EXTEND_TOP ~CORAN.BCS~ ~%mod_root%/scripts/coran.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/eldoth.d~ USING ~%tra_loc%/%s/dialogues.tra~
 EXTEND_TOP ~ELDOTH.BCS~ ~%mod_root%/scripts/eldoth.baf~
+*/
 
 // These still need to be done
 //EXTEND_TOP ~FALDORN_.BCS~ ~%mod_root%/scripts/faldorn.baf~
