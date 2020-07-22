@@ -1,0 +1,9 @@
+//////////////////////////////////////////////////////
+// Additional NPC file info left out of eet_cmpvars //
+//////////////////////////////////////////////////////
+
+// Missing BG1 NPC
+OUTER_SPRINT "BAELOTH_BCS" "BAELOTH"
+OUTER_SPRINT "BAELOTH_JOINED" "BAELOTHJ"
+OUTER_SPRINT "BAELOTH_POST" "BAELOTHP" 
+

@@ -20,9 +20,8 @@ ALWAYS
       LAF DO_RUN_ONCE END
 
       // Variables used to point to files
-      // Included mostly because of bringing in Endless components
-      // But they are handy to use even without that
       INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
+      INCLUDE ~%mod_root%/lib/#l_eet_cmpvars.tpa~
 
       // Library functions used throughout
       INCLUDE ~%mod_root%/lib/alter_script.tpa~

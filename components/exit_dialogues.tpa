@@ -1,0 +1,644 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD and BG2   //
+// NOTE: Jaheira, Khalid, Minsc, and Dynaheir don't get BG2 exit dialogues, they'll stick with the PC //
+// Imoen is dealt with separately                                                                     //
+// Called via main_common.tpa                                                                         //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Keep the order - depending upon certain NPCs being in certain places in the list
+// I could fix that but I'm ok with not rearranging the order
+ACTION_DEFINE_ARRAY npc_list BEGIN
+   Ajantis
+   Jaheira
+   Khalid
+   Dorn
+   Edwin
+   Neera
+   Baeloth
+   Garrick
+   Xan
+   Minsc
+   Dynaheir
+   Alora
+   Branwen
+   Coran
+   Eldoth
+   Montaron
+   Xzar
+   Faldorn
+   Kagain
+   Kivan
+   Quayle
+   Rasaad
+   Safana
+   Sharteel
+   Skie
+   Tiax
+   Viconia
+   Yeslick
+END
+
+OUTER_SET max_num = 15
+
+// Additions to all NPCs (except Imoen)
+//OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
+OUTER_FOR (npc_num = 0; npc_num < max_num; ++npc_num) BEGIN 
+
+   OUTER_SPRINT npc_name $npc_list("%npc_num%")
+   OUTER_SPRINT upper_name "%npc_name%"
+   ACTION_TO_UPPER upper_name
+   OUTER_SPRINT bcs_file EVAL EVAL ~%%upper_name%_BCS%~
+   OUTER_SPRINT join_file EVAL EVAL ~%%upper_name%_JOINED%~ 
+   OUTER_SPRINT post_file EVAL EVAL ~%%upper_name%_POST%~
+   OUTER_SPRINT take_my_stuff ~~~~~= @2324 /* ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~ */~~~~~
+
+   ACTION_IF npc_num < 7 THEN BEGIN
+      OUTER_SPRINT pk ~// Post-Korlasz while in party
+IF
+   Global("#L_SarvQuests","GLOBAL",99)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   Global("EndOfBG1","GLOBAL",0)
+   Global("#L_%npc_name%PK","GLOBAL",0)
+   Global("#L_NPCPK","GLOBAL",0)
+   IsValidForPartyDialogue(MYSELF)
+   !AreaType(DUNGEON)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      ClearAllActions()
+      SetGlobal("#L_%npc_name%PK","GLOBAL",1)
+      SetGlobal("#L_NPCPK","GLOBAL",1)
+      Dialogue(Player1)
+END
+
+// Post-Korlasz while not in party
+IF
+   Global("#L_SarvQuests","GLOBAL",99)
+   Global("EndOfBG1","GLOBAL",0)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   !InPartyAllowDead(MYSELF)
+   See(Player1)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      Dialogue(Player1)
+END
+~
+   END ELSE BEGIN
+      OUTER_SPRINT pk ~~
+   END
+
+   ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) THEN BEGIN
+      OUTER_SPRINT bg ~~
+   END ELSE BEGIN
+      OUTER_SPRINT bg ~// Pre-BG2
+IF
+   Global("#L_StartBG2","GLOBAL",1)
+   Global("#L_%npc_name%Modded","GLOBAL",0)
+   IsValidForPartyDialogue(MYSELF)
+   OR(2)
+      Global("#L_NPCBG2","GLOBAL",0)
+      GlobalTimerExpired("#L_NPCBG2","GLOBAL")
+   !AreaType(DUNGEON)
+   CombatCounter(0)
+THEN
+   RESPONSE #100
+      ClearAllActions()
+      Dialogue(Player1)
+END
+~
+   END
+
+   <<<<<<<< .../npc_add.baf
+   // Post-Korlasz
+   %pk%
+
+   // Pre-SoD
+   IF
+      GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+      Global("EndOfBG1","GLOBAL",1)
+      Global("#L_%npc_name%Modded","GLOBAL",0)      // NPC isn't modded
+      IsValidForPartyDialogue(MYSELF)
+      OR(2)
+         Global("#L_NPCSoD","GLOBAL",0)
+         GlobalTimerExpired("#L_NPCSoD","GLOBAL")
+      !AreaType(DUNGEON)
+      CombatCounter(0)
+      OR(2)
+         GlobalGT("#L_StartCaelarAttack","GLOBAL",2)     // Imoen staying in the group
+         !InPartyAllowDead("IMOEN2")
+   THEN
+      RESPONSE #100
+         ClearAllActions()
+         Dialogue(Player1)
+   END
+
+   // Pre-BG2
+   %bg%
+
+   // Post BG1
+   IF
+      GlobalGT("EndOfBG1","GLOBAL",0)
+      Global("#L_%npc_name%OkInBG1Areas","GLOBAL",0)
+      Global("#L_%npc_name%Modded","GLOBAL",0)
+      !InPartyAllowDead(MYSELF)
+      AreaType(BG1AREA)
+   THEN
+      RESPONSE #100
+         SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1)
+         DestroySelf()
+   END
+   >>>>>>>>
+   EXTEND_TOP ~%bcs_file%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
+
+   // Initial post_Korlasz interjections
+   OUTER_SPRINT pk_i0 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2340 /* ~Me as well.~ */~~~~~
+   OUTER_SPRINT pk_i1 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2326 /* ~I too have other places to be.~ */~~~~~
+   OUTER_SPRINT pk_i2 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2338 /* ~Yes, *we* should go.~ */ 
+      == KHALIJ IF ~OR(2) !IsValidForPartyDialogue("JAHEIRA") !Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2332 /* ~I-I should be going as well.~ */~~~~~
+   OUTER_SPRINT pk_i3 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2340   /* ~Me as well.~ */~~~~~
+   OUTER_SPRINT pk_i4 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2347 /* ~(gives you an exaggerated yawn)~ */~~~~~
+   OUTER_SPRINT pk_i5 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2354 /* ~I do have plans, yes.~ */~~~~~
+   OUTER_SPRINT pk_i6 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2360 /* ~You hog all the limelight.~ */~~~~~
+
+   // Staying after Korlasz interjections
+   OUTER_SPRINT pk_s0 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2283 /* ~As you wish.  I owe you that at least.~ */~~~~~
+   OUTER_SPRINT pk_s1 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2327 /* ~So be it.~ */~~~~~
+   OUTER_SPRINT pk_s2 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2333  /* ~If you insist.~ */~~~~~
+   OUTER_SPRINT pk_s3 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2341   /* ~I can stay for a little while.~ */~~~~~
+   OUTER_SPRINT pk_s4 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2348 /* ~Fine. (sigh)~ */~~~~~
+   OUTER_SPRINT pk_s5 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2355 /* ~Ok, for a little while.~ */~~~~~
+   OUTER_SPRINT pk_s6 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2361 /* ~Have it your way, as always!~ */~~~~~
+
+   // Leaving after Korlasz interjections
+   OUTER_SPRINT pk_l0 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2284 DO ~SetGlobal("#L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ /* ~It has been an honor.  Farewell.~ */~~~~~
+   OUTER_SPRINT pk_l1 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 DO ~SetGlobal("#L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~ /* ~Take care of yourself.~ */~~~~~
+   OUTER_SPRINT pk_l2 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2334 DO ~SetGlobal("#L_KhalidOkInBG1Areas","GLOBAL",1) ActionOverride("KHALID",LeaveParty()) ActionOverride("KHALID",EscapeArea())~ /* ~Goodbye.~ */~~~~~
+   OUTER_SPRINT pk_l3 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2346 DO ~SetGlobal("#L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~   /* ~Until we meet again.~ */~~~~~
+   OUTER_SPRINT pk_l4 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2349 DO ~SetGlobal("#L_EdwinOkInBG1Areas","GLOBAL",1) ActionOverride("EDWIN",LeaveParty()) ActionOverride("EDWIN",EscapeArea())~ /* ~Finally!~ */~~~~~
+   OUTER_SPRINT pk_l5 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2356 DO ~SetGlobal("#L_NeeraOkInBG1Areas","GLOBAL",1) ActionOverride("NEERA",LeaveParty()) ActionOverride("NEERA",EscapeArea())~ /* ~See ya!  Good luck and all.~ */~~~~~
+   OUTER_SPRINT pk_l6 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2362 DO ~SetGlobal("#L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("BAELOTH",LeaveParty()) ActionOverride("BAELOTH",EscapeArea())~ /* ~Look for my name in lights, I'm bowing out of this dump!~ */~~~~~
+
+   // Initial pre-SoD/BG2 interjections
+   OUTER_SPRINT exit_i0 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2329 /* ~I too will be leaving.~ */~~~~~
+   OUTER_SPRINT exit_i1 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2335 /* ~I must go as well~ */~~~~~
+   OUTER_SPRINT exit_i2 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2339 /* ~Yes, *we* really must go.~ */ 
+      == KHALIJ IF ~OR(2) !IsValidForPartyDialogue("JAHEIRA") !Global("#L_JaheriaModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2335 /* ~I must go as well~ */~~~~~
+   OUTER_SPRINT exit_i3 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2343 /* ~Time to go!~ */~~~~~
+   OUTER_SPRINT exit_i4 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2350 /* ~I'm so done.~ */~~~~~
+   OUTER_SPRINT exit_i5 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2357 /* ~Yes, I really do have to go.~ */~~~~~
+   OUTER_SPRINT exit_i6 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2363 /* ~I couldn't agree more.~ */~~~~~
+   OUTER_SPRINT exit_i7 ~~~~~== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2367 /* ~I can't wait any longer, either.~ */~~~~~
+   OUTER_SPRINT exit_i8 ~~~~~== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2373 /* ~I need to report back to Evereska.~ */~~~~~
+   OUTER_SPRINT exit_i9 ~~~~~== MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0)~ @2376 /* ~Boo is weary and must rest!~ */~~~~~
+   OUTER_SPRINT exit_i10 ~~~~~== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2381 /* ~Aye, a rest will do us all good.~ */~~~~~
+   OUTER_SPRINT exit_i11 ~~~~~== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2390 /* ~Yeah, think I'll check out...mmm somewhere..not here.~ */~~~~~
+   OUTER_SPRINT exit_i12 ~~~~~== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#L_BranwenModded","GLOBAL",0)~ @2393 /* ~Aye, our time together is at an end.~ */~~~~~
+   OUTER_SPRINT exit_i13 ~~~~~== CORANJ IF ~IsValidForPartyDialogue("CORAN") Global("#L_CoranModded","GLOBAL",0)~ @2396 /* ~Yes, it is time we part ways.~ */~~~~~
+   OUTER_SPRINT exit_i14 ~~~~~== ELDOTJ IF ~IsValidForPartyDialogue("ELDOTH") Global("#L_EldothModded","GLOBAL",0)~ @2399 /* ~It's about time we all came to our senses!  I'll be leaving too.~ */~~~~~
+
+   // Departing pre-SoD/BG2 interjections
+   OUTER_SPRINT exit_l0 ~~~~~== AJANTJ IF ~IsValidForPartyDialogue("AJANTIS") Global("#L_AjantisModded","GLOBAL",0)~ @2284 DO ~SetGlobal("#L_AjantisOkInBG1Areas","GLOBAL",1) ActionOverride("AJANTIS",LeaveParty()) ActionOverride("AJANTIS",EscapeArea())~ /* ~It has been an honor.  Farewell.~ */~~~~~
+   OUTER_SPRINT exit_l1 ~~~~~== JAHEIJ IF ~IsValidForPartyDialogue("JAHEIRA") Global("#L_JaheriaModded","GLOBAL",0)~ @2328 DO ~SetGlobal("#L_JaheiraOkInBG1Areas","GLOBAL",1) ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",EscapeArea())~ /* ~Take care of yourself.~ */~~~~~
+   OUTER_SPRINT exit_l2 ~~~~~== KHALIJ IF ~IsValidForPartyDialogue("KHALID") Global("#L_KhalidModded","GLOBAL",0)~ @2334 DO ~SetGlobal("#L_KhalidOkInBG1Areas","GLOBAL",1) ActionOverride("KHALID",LeaveParty()) ActionOverride("KHALID",EscapeArea())~ /* ~Goodbye.~ */~~~~~
+   OUTER_SPRINT exit_l3 ~~~~~== DORNJ_ IF ~IsValidForPartyDialogue("DORN") Global("#L_DornModded","GLOBAL",0)~ @2346 DO ~SetGlobal("#L_DornOkInBG1Areas","GLOBAL",1) ActionOverride("DORN",DestroyGold(0)) ActionOverride("DORN",LeaveParty()) ActionOverride("DORN",EscapeArea())~ /* ~Until we meet again.~ */~~~~~
+   OUTER_SPRINT exit_l4 ~~~~~== EDWINJ_ IF ~IsValidForPartyDialogue("EDWIN") Global("#L_EdwinModded","GLOBAL",0)~ @2353 DO ~SetGlobal("#L_EdwinOkInBG1Areas","GLOBAL",1) ActionOverride("EDWIN",LeaveParty()) ActionOverride("EDWIN",EscapeArea())~ /*~I'm outta here!~ */~~~~~
+   OUTER_SPRINT exit_l5 ~~~~~== NEERAJ_ IF ~IsValidForPartyDialogue("NEERA") Global("#L_NeeraModded","GLOBAL",0)~ @2356 DO ~SetGlobal("#L_NeeraOkInBG1Areas","GLOBAL",1) ActionOverride("NEERA",LeaveParty()) ActionOverride("NEERA",EscapeArea())~ /* ~See ya!  Good luck and all.~ */~~~~~
+   OUTER_SPRINT exit_l6 ~~~~~== BAELOTHJ IF ~IsValidForPartyDialogue("BAELOTH") Global("#L_BaelothModded","GLOBAL",0)~ @2362 DO ~SetGlobal("#L_BaelothOkInBG1Areas","GLOBAL",1) ActionOverride("BAELOTH",LeaveParty()) ActionOverride("BAELOTH",EscapeArea())~ /* ~Look for my name in lights, I'm bowing out of this dump!~ */~~~~~
+   OUTER_SPRINT exit_l7 ~~~~~== GARRIJ IF ~IsValidForPartyDialogue("GARRICK") Global("#L_GarrickModded","GLOBAL",0)~ @2368 DO ~SetGlobal("#L_GarrickOkInBG1Areas","GLOBAL",1) ActionOverride("GARRICK",LeaveParty()) ActionOverride("GARRICK",EscapeArea())~ /* ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~ */~~~~~
+   OUTER_SPRINT exit_l8 ~~~~~== XANJ IF ~IsValidForPartyDialogue("XAN") Global("#L_XanModded","GLOBAL",0)~ @2374 DO ~SetGlobal("#L_XanOkInBG1Areas","GLOBAL",1) ActionOverride("XAN",LeaveParty()) ActionOverride("XAN",EscapeArea())~ /* ~Farewell though I certainly shall not.~ */~~~~~
+   OUTER_SPRINT exit_l9 ~~~~~== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0) OR(2)!IsValidForPartyDialogue("MINSC") GlobalGT("#L_MinscModded","GLOBAL",0)~ @2382 DO ~SetGlobal("#L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~ /* ~If thou hast need of me, I shall be lodging at the Three Old Kegs. */~~~~~
+   OUTER_SPRINT exit_l10 ~~~~~== DYNAHJ IF ~IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0) IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0)~ @2382 /* ~If thou hast need of me, I shall be lodging at the Three Old Kegs. */
+      == MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) OR(2) !IsValidForPartyDialogue("DYNAHEIR") GlobalGT("#L_DynaheirModded","GLOBAL",0)~ @2377 /* ~If you need us, look for us at the Three Old Kegs.~ */ DO ~SetGlobal("#L_MinscOkInBG1Areas","GLOBAL",1) ActionOverride("MINSC",LeaveParty()) ActionOverride("MINSC",EscapeArea())~
+      == MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2377 /* ~If you need us, look for us at the Three Old Kegs.~ */
+      == DYNAHJ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2384 /* ~I just said that.~ */
+      == MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2385 /* ~Oh, sorry, I didn't hear you.  I was talking to Boo.~ */
+      == MINSCJ_ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2386 /* ~He said to make sure to pick up some fresh pumpkin seeds.~ */ DO ~SetGlobal("#L_MinscOkInBG1Areas","GLOBAL",1) ActionOverride("MINSC",LeaveParty()) ActionOverride("MINSC",EscapeArea())~
+      == DYNAHJ IF ~IsValidForPartyDialogue("MINSC") Global("#L_MinscModded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2387 DO ~SetGlobal("#L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~ /* ~sigh~ */~~~~~
+   OUTER_SPRINT exit_l11 ~~~~~== ALORAJ IF ~IsValidForPartyDialogue("ALORA") Global("#L_AloraModded","GLOBAL",0)~ @2391 DO ~SetGlobal("#L_AloraOkInBG1Areas","GLOBAL",1) ActionOverride("ALORA",LeaveParty()) ActionOverride("ALORA",EscapeArea())~ /* ~See ya 'round!~ */~~~~~
+   OUTER_SPRINT exit_l12 ~~~~~== BRANWJ IF ~IsValidForPartyDialogue("BRANWEN") Global("#L_BranwenModded","GLOBAL",0)~ @2394 DO ~SetGlobal("#L_BranwenOkInBG1Areas","GLOBAL",1) ActionOverride("Branwen",LeaveParty()) ActionOverride("Branwen",EscapeArea())~ /* ~Tempus watch over you!~ */~~~~~
+   OUTER_SPRINT exit_l13 ~~~~~== CORANJ IF ~IsValidForPartyDialogue("CORAN") Global("#L_CoranModded","GLOBAL",0)~ @2397 DO ~SetGlobal("#L_CoranOkInBG1Areas","GLOBAL",1) ActionOverride("Coran",LeaveParty()) ActionOverride("Coran",EscapeArea())~ /* ~Farewell my friend.~ */~~~~~
+   OUTER_SPRINT exit_l14 ~~~~~== ELDOTJ IF ~IsValidForPartyDialogue("ELDOTH") Global("#L_EldothModded","GLOBAL",0)~ @2400 DO ~SetGlobal("#L_EldothOkInBG1Areas","GLOBAL",1) ActionOverride("Eldoth",LeaveParty()) ActionOverride("Eldoth",EscapeArea())~ /* ~Ta ta!~ */~~~~~
+
+   // Initiating Exit dialogues and avoiding duplicate lines
+   ACTION_MATCH %npc_num% WITH
+      0 BEGIN
+         // Ajantis
+         OUTER_SPRINT pk_init ~@2278~ // I am eager to present our accomplishments before my superiors, but I will stay if you need me.
+         OUTER_SPRINT pk_i0 ~~
+         OUTER_SPRINT pk_stay ~@2283~ // As you wish.  I owe you that at least.
+         OUTER_SPRINT pk_s0 ~~
+         OUTER_SPRINT pk_leave ~@2284~ // It has been an honor.  Farewell.
+         OUTER_SPRINT pk_l0 ~~
+         OUTER_SPRINT exit_init ~@2323~ // I will be leaving in a minute to report to my superiors.
+         OUTER_SPRINT exit_i0 ~~
+         OUTER_SPRINT exit_leave ~@2284~ // It has been an honor.  Farewell.
+         OUTER_SPRINT exit_l0 ~~
+      END
+      1 BEGIN
+         // Jaheira
+         OUTER_SPRINT pk_init ~@2330~ // <CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.
+         OUTER_SPRINT pk_i1 ~~
+         OUTER_SPRINT pk_stay ~@2327~ // So be it.
+         OUTER_SPRINT pk_s1 ~~
+         OUTER_SPRINT pk_leave ~@2328~ // Take care of yourself.
+         OUTER_SPRINT pk_l1 ~~
+         OUTER_SPRINT exit_init ~@2331~ // No more arguments, I will be leaving in just a few moments.
+         OUTER_SPRINT exit_i1 ~~
+         OUTER_SPRINT exit_leave ~@2328~ // Take care of yourself.
+         OUTER_SPRINT exit_l1 ~~
+      END
+      2 BEGIN
+         // Khalid
+         OUTER_SPRINT pk_init ~@2336~ // <CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.
+         OUTER_SPRINT pk_i2 ~~
+         OUTER_SPRINT pk_stay ~@2333~ // If you insist.
+         OUTER_SPRINT pk_s2 ~~
+         OUTER_SPRINT pk_leave ~@2334~ // Goodbye.
+         OUTER_SPRINT pk_l2 ~~
+         OUTER_SPRINT exit_init ~@2337~ // Now <CHARNAME>, I really m-must insist.  I c-cannot stay any longer.
+         OUTER_SPRINT exit_i2 ~~
+         OUTER_SPRINT exit_leave ~@2334~ // Goodbye.
+         OUTER_SPRINT exit_l2 ~~
+      END
+      3 BEGIN
+         // Dorn
+         OUTER_SPRINT pk_init ~@2344~ // <CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.
+         OUTER_SPRINT pk_i3 ~~
+         OUTER_SPRINT pk_stay ~@2341~ // I can stay for a little while.
+         OUTER_SPRINT pk_s3 ~~
+         OUTER_SPRINT pk_leave ~@2342~ // I feel we will meet again.
+         OUTER_SPRINT pk_l3 ~~
+         OUTER_SPRINT exit_init ~@2345~ // I have no choice in the matter, <CHARNAME>.  It's time for me to go.
+         OUTER_SPRINT exit_i3 ~~
+         OUTER_SPRINT exit_leave ~@2346~ // Until we meet again.
+         OUTER_SPRINT exit_l3 ~~
+      END
+      4 BEGIN
+         // Edwin
+         OUTER_SPRINT pk_init ~@2351~ // I've just about had all I can take of this.  Are we just about done?
+         OUTER_SPRINT pk_i4 ~~
+         OUTER_SPRINT pk_stay ~@2348~ // Fine. (sigh)
+         OUTER_SPRINT pk_s4 ~~
+         OUTER_SPRINT pk_leave ~@2349~ // Finally!
+         OUTER_SPRINT pk_l4 ~~
+         OUTER_SPRINT exit_init ~@2352~ // I think I speak for everyone here when I say, I've had it.  I'm done!
+         OUTER_SPRINT exit_i4 ~~
+         OUTER_SPRINT exit_leave ~@2353~ // I'm outta here!
+         OUTER_SPRINT exit_l4 ~~
+      END
+      5 BEGIN
+         // Neera
+         OUTER_SPRINT pk_init ~@2358~ // You're in the clear now, right?  Can I go?
+         OUTER_SPRINT pk_i5 ~~
+         OUTER_SPRINT pk_stay ~@2355~ // Ok, for a little while.
+         OUTER_SPRINT pk_s5 ~~
+         OUTER_SPRINT pk_leave ~@2356~ // See ya!  Good luck and all.
+         OUTER_SPRINT pk_l5 ~~
+         OUTER_SPRINT exit_init ~@2359~ // You're great and all, but I really have to get outta here.
+         OUTER_SPRINT exit_i5 ~~
+         OUTER_SPRINT exit_leave ~@2356~ // See ya!  Good luck and all.
+         OUTER_SPRINT exit_l5 ~~
+      END
+      6 BEGIN
+         // Baeloth
+         OUTER_SPRINT pk_init ~@2364~ // This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!
+         OUTER_SPRINT pk_i6 ~~
+         OUTER_SPRINT pk_stay ~@2361~ // Have it your way, as always!~
+         OUTER_SPRINT pk_s6 ~~
+         OUTER_SPRINT pk_leave ~@2362~ // Look for my name in lights, I'm bowing out of this dump!      
+         OUTER_SPRINT pk_l6 ~~
+         OUTER_SPRINT exit_init ~@2365~ // The spot lights can wait no longer, <CHARNAME>. Stardom!  A spectacular stage!  No!  No arguments!  That is where I'm headed now.
+         OUTER_SPRINT exit_i6 ~~
+         OUTER_SPRINT exit_leave ~@2362~ // Look for my name in lights, I'm bowing out of this dump!  
+         OUTER_SPRINT exit_l6 ~~
+      END
+      7 BEGIN
+         // Garrick
+         OUTER_SPRINT exit_init ~@2366~ // <CHARNAME>, I can wait no longer to begin my epic ballad.  I must insist that it is time to part ways.
+         OUTER_SPRINT exit_i7 ~~
+         OUTER_SPRINT exit_leave ~@2368~ // Farewell, <CHARNAME>.  I shall immortalize your name in song!
+         OUTER_SPRINT exit_l7 ~~
+      END
+      8 BEGIN
+         // Xan
+         OUTER_SPRINT exit_init ~@2372~ // I'm amazed we've made it this far, <CHARNAME>.  I need to report back before our luck inevitably runs out.
+         OUTER_SPRINT exit_i8 ~~
+         OUTER_SPRINT exit_leave ~@2374~ // Farewell though I certainly shall not.
+         OUTER_SPRINT exit_l8 ~~
+      END
+      9 BEGIN
+         // Minsc
+         OUTER_SPRINT exit_init ~@2375~ // Boo is tired and needs a break from all the butt-kicking.  Just a short one.  We'll be near by if you need us.
+         OUTER_SPRINT exit_i9 ~~
+         OUTER_SPRINT exit_leave ~@2377~ // If you need us, look for us at the Three Old Kegs.
+         OUTER_SPRINT exit_l9 ~~
+      END
+      10 BEGIN
+         // Dynaheir
+         OUTER_SPRINT exit_init ~@2380~ // I am in dire need of a short rest.  I shall not go afar off, but I must go for awhile.
+         OUTER_SPRINT take_my_stuff ~~~~~= @2383  /* ~If I am carrying aught thou would'st prefer to keep, let us exchange equipment now.~ */~~~~~
+         OUTER_SPRINT exit_i10 ~~
+         OUTER_SPRINT exit_leave ~@2382~ // If thou hast need of me, I shall be lodging at the Three Old Kegs.
+         OUTER_SPRINT exit_l10 ~~
+      END
+      11 BEGIN
+         // Alora
+         OUTER_SPRINT exit_init ~@2389~ // You sure have kept me busy!  It's been fun but I think I'll find less dangerous fun somewhere ... not here.
+         OUTER_SPRINT exit_i11 ~~
+         OUTER_SPRINT exit_leave ~@2391~ // See ya 'round!
+         OUTER_SPRINT exit_l11 ~~
+      END
+      12 BEGIN
+         // Branwen
+         OUTER_SPRINT exit_init ~@2392~ // You are a fine warrior, <CHARNAME>, but I will now go my own way.
+         OUTER_SPRINT exit_i12 ~~
+         OUTER_SPRINT exit_leave ~@2394~ // Tempus watch over you!
+         OUTER_SPRINT exit_l12 ~~
+      END
+      13 BEGIN
+         // Coran
+         OUTER_SPRINT exit_init ~@2395~ // This has been fun, <CHARNAME>, but it is time for me to leave.
+         OUTER_SPRINT exit_i13 ~~
+         OUTER_SPRINT exit_leave ~@2397~ // Farewell my friend.
+         OUTER_SPRINT exit_l13 ~~
+      END
+      14 BEGIN
+         // Eldoth
+         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
+         OUTER_SPRINT exit_i14 ~~
+         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_l14 ~~
+      END
+      15 BEGIN
+         // Montaron
+         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
+         OUTER_SPRINT exit_i15 ~~
+         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_l15 ~~
+      END
+      DEFAULT
+         OUTER_SPRINT pk_init ~~
+   END
+
+   // Start building the optional sections of the dialogue file
+   ACTION_IF npc_num < 7 THEN BEGIN
+      // Only the first seven in our list would prefer to leave after Korlasz
+      OUTER_SPRINT post_korlasz ~~~~~
+      CHAIN
+         IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN %join_file% POST_KORLASZ_ASK
+            %pk_init%
+            %pk_i0%
+            %pk_i1%
+            %pk_i2%
+            %pk_i3%
+            %pk_i4%
+            %pk_i5%
+            %pk_i6%
+         END
+         + ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
+         + ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
+         ++ @2281 /* ~Of course you may leave, but not with that equipment.~ */  + POST_KORLASZ_STAY
+         ++ @2282 /* ~I understand.  Now is as good a time as any to say our farewells.~ */ + POST_KORLASZ_LEAVE
+
+      CHAIN
+         IF ~~ THEN %join_file% POST_KORLASZ_STAY
+            %pk_stay%
+            %pk_s0%
+            %pk_s1%
+            %pk_s2%
+            %pk_s3%
+            %pk_s4%
+            %pk_s5%
+            %pk_s6%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",2)~ EXIT
+
+      CHAIN
+         IF ~~ THEN %join_file% POST_KORLASZ_LEAVE
+            %pk_leave%
+            %pk_l0%
+            %pk_l1%
+            %pk_l2%
+            %pk_l3%
+            %pk_l4%
+            %pk_l5%
+            %pk_l6%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+      ~~~~~
+
+      OUTER_SPRINT pk_post_file ~~~~~APPEND_EARLY %post_file%
+   IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_%npc_name%PK","GLOBAL",0)~ THEN BEGIN POST_KORLASZ_GOODBYE1
+      // Didn't lead the conversation when Korlasz was handed in
+      // Or wasn't in the group at the time
+      // So hasn't given their 'I'm eager' spiel
+      // Let them say it now
+      SAY %pk_init%
+      = %pk_leave%
+      IF ~~ THEN DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
+   END
+
+   IF WEIGHT #-998 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) Global("#L_%npc_name%PK","GLOBAL",1)~ THEN BEGIN POST_KORLASZ_GOODBYE2
+      // We've already done the 'I'm eager' spiel
+      // They're being let go from group after initially being asked to stay
+      SAY %pk_leave%
+      IF ~~ THEN DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) EscapeArea()~ EXIT
+   END
+END
+ ~~~~~
+   END ELSE BEGIN
+      OUTER_SPRINT post_korlasz ~~
+      OUTER_SPRINT pk_post_file ~~
+   END
+
+   // Not everyone leaves before BG2
+   // Jaheira, Khalid, Minsc, and Dynaheir will stay if in the group
+   ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) THEN BEGIN
+      OUTER_SPRINT pre_bg2 ~~
+   END ELSE BEGIN
+      OUTER_SPRINT pre_bg2 ~~~~~
+      CHAIN
+         IF WEIGHT #-996 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_NPCBG2","GLOBAL",0) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% PRE_BG2_WARNING
+            %exit_init%
+            %take_my_stuff%
+            %exit_i0%
+            %exit_i3%
+            %exit_i4%
+            %exit_i5%
+            %exit_i6%
+            %exit_i7%
+            %exit_i8%
+            %exit_i11%
+            %exit_i12%
+            %exit_i13%
+            %exit_i14%
+         END
+         // @2378 = ~Here!  Take you're share of the gold before you leave.  You've earned it.~
+         // @2379 = ~Thank you for your help.  I can finally relax a little~
+         + ~PartyGoldLT(4000) NumInParty(2)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5000) NumInParty(3)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(6000) NumInParty(4)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(7000) NumInParty(5)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(8000) NumInParty(6)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(50000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(75000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(100000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(125000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(150000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+
+      CHAIN
+         IF WEIGHT #-995 ~Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_NPCBG2","GLOBAL",0) GlobalTimerExpired("#L_NPCBG2","GLOBAL") Global("#L_NPCBG2Left","GLOBAL",0)~ THEN %join_file% PRE_BG2_GOODBYE
+            %exit_leave%
+            %exit_l0%
+            %exit_l3%
+            %exit_l4%
+            %exit_l5%
+            %exit_l6%
+            %exit_l7%
+            %exit_l8%
+            %exit_l11%
+            %exit_l12%
+            %exit_l13%
+            %exit_l14%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCBG2Left","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
+   END
+
+   // Put it all together
+   <<<<<<<< .../npc_add.d
+      %post_korlasz%
+
+      // Everyone leaves the group prior to SoD
+      CHAIN
+         IF WEIGHT #-998 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_NPCSoD","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) GlobalGT("#L_StartCaelarAttack","GLOBAL",0)~ THEN %join_file% PRE_exit_WARNING
+            %exit_init%
+            %take_my_stuff%
+            %exit_i0%
+            %exit_i1%
+            %exit_i2%
+            %exit_i3%
+            %exit_i4%
+            %exit_i5%
+            %exit_i6%
+            %exit_i7%
+            %exit_i8%
+            %exit_i9%
+            %exit_i10%
+            %exit_i11%
+            %exit_i12%
+            %exit_i13%
+            %exit_i14%
+         END
+         // @2378 = ~Here!  Take you're share of the gold before you leave.  You've earned it.~
+         // @2379 = ~Thank you for your help.  I can finally relax a little~
+         + ~PartyGoldLT(4000) NumInParty(2)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5000) NumInParty(3)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(6000) NumInParty(4)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(7000) NumInParty(5)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(8000) NumInParty(6)~ +@2379 DO ~SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5000) !PartyGoldLT(4000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(7000) !PartyGoldLT(5000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(9000) !PartyGoldLT(6000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(11000) !PartyGoldLT(7000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(13000) !PartyGoldLT(8000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(1000)) ActionOverride(Player3,TakePartyGold(1000)) ActionOverride(Player4,TakePartyGold(1000)) ActionOverride(Player5,TakePartyGold(1000)) ActionOverride(Player6,TakePartyGold(1000)) ActionOverride(Player2,DestroyGold(900)) ActionOverride(Player3,DestroyGold(900)) ActionOverride(Player4,DestroyGold(900)) ActionOverride(Player5,DestroyGold(900)) ActionOverride(Player6,DestroyGold(900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(5500) !PartyGoldLT(5000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(8000) !PartyGoldLT(7000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(10500) !PartyGoldLT(9000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(13000) !PartyGoldLT(11000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(15500) !PartyGoldLT(13000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2000)) ActionOverride(Player3,TakePartyGold(2000)) ActionOverride(Player4,TakePartyGold(2000)) ActionOverride(Player5,TakePartyGold(2000)) ActionOverride(Player6,TakePartyGold(2000)) ActionOverride(Player2,DestroyGold(1900)) ActionOverride(Player3,DestroyGold(1900)) ActionOverride(Player4,DestroyGold(1900)) ActionOverride(Player5,DestroyGold(1900)) ActionOverride(Player6,DestroyGold(1900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(10000) !PartyGoldLT(5500) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(15000) !PartyGoldLT(8000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(20000) !PartyGoldLT(10500) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(25000) !PartyGoldLT(13000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(15500) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(2500)) ActionOverride(Player3,TakePartyGold(2500)) ActionOverride(Player4,TakePartyGold(2500)) ActionOverride(Player5,TakePartyGold(2500)) ActionOverride(Player6,TakePartyGold(2500)) ActionOverride(Player2,DestroyGold(2400)) ActionOverride(Player3,DestroyGold(2400)) ActionOverride(Player4,DestroyGold(2400)) ActionOverride(Player5,DestroyGold(2400)) ActionOverride(Player6,DestroyGold(2400)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(20000) !PartyGoldLT(10000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(15000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(40000) !PartyGoldLT(20000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(50000) !PartyGoldLT(25000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(30000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(5000)) ActionOverride(Player3,TakePartyGold(5000)) ActionOverride(Player4,TakePartyGold(5000)) ActionOverride(Player5,TakePartyGold(5000)) ActionOverride(Player6,TakePartyGold(5000)) ActionOverride(Player2,DestroyGold(4900)) ActionOverride(Player3,DestroyGold(4900)) ActionOverride(Player4,DestroyGold(4900)) ActionOverride(Player5,DestroyGold(4900)) ActionOverride(Player6,DestroyGold(4900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(30000) !PartyGoldLT(20000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(45000) !PartyGoldLT(30000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(40000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(75000) !PartyGoldLT(50000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(90000) !PartyGoldLT(60000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(10000)) ActionOverride(Player3,TakePartyGold(10000)) ActionOverride(Player4,TakePartyGold(10000)) ActionOverride(Player5,TakePartyGold(10000)) ActionOverride(Player6,TakePartyGold(10000)) ActionOverride(Player2,DestroyGold(9900)) ActionOverride(Player3,DestroyGold(9900)) ActionOverride(Player4,DestroyGold(9900)) ActionOverride(Player5,DestroyGold(9900)) ActionOverride(Player6,DestroyGold(9900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(40000) !PartyGoldLT(30000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(60000) !PartyGoldLT(45000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(80000) !PartyGoldLT(60000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(100000) !PartyGoldLT(75000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(120000) !PartyGoldLT(90000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(15000)) ActionOverride(Player3,TakePartyGold(15000)) ActionOverride(Player4,TakePartyGold(15000)) ActionOverride(Player5,TakePartyGold(15000)) ActionOverride(Player6,TakePartyGold(15000)) ActionOverride(Player2,DestroyGold(14900)) ActionOverride(Player3,DestroyGold(14900)) ActionOverride(Player4,DestroyGold(14900)) ActionOverride(Player5,DestroyGold(14900)) ActionOverride(Player6,DestroyGold(14900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(50000) !PartyGoldLT(40000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(75000) !PartyGoldLT(60000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(100000) !PartyGoldLT(80000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(125000) !PartyGoldLT(100000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~PartyGoldLT(150000) !PartyGoldLT(120000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(20000)) ActionOverride(Player3,TakePartyGold(20000)) ActionOverride(Player4,TakePartyGold(20000)) ActionOverride(Player5,TakePartyGold(20000)) ActionOverride(Player6,TakePartyGold(20000)) ActionOverride(Player2,DestroyGold(19900)) ActionOverride(Player3,DestroyGold(19900)) ActionOverride(Player4,DestroyGold(19900)) ActionOverride(Player5,DestroyGold(19900)) ActionOverride(Player6,DestroyGold(19900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(50000) NumInParty(2)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(75000) NumInParty(3)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(100000) NumInParty(4)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(125000) NumInParty(5)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+         + ~!PartyGoldLT(150000) NumInParty(6)~ +@2378 DO ~ActionOverride(Player2,TakePartyGold(25000)) ActionOverride(Player3,TakePartyGold(25000)) ActionOverride(Player4,TakePartyGold(25000)) ActionOverride(Player5,TakePartyGold(25000)) ActionOverride(Player6,TakePartyGold(25000)) ActionOverride(Player2,DestroyGold(24900)) ActionOverride(Player3,DestroyGold(24900)) ActionOverride(Player4,DestroyGold(24900)) ActionOverride(Player5,DestroyGold(24900)) ActionOverride(Player6,DestroyGold(24900)) SetGlobalTimer("#L_NPCSoD","GLOBAL",ONE_MINUTE)~ EXIT
+
+      CHAIN
+         IF WEIGHT #-997 ~Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_NPCSoD","GLOBAL",0) GlobalTimerExpired("#L_NPCSoD","GLOBAL") Global("#L_NPCSoDLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
+            %exit_leave%
+            %exit_l0%
+            %exit_l1%
+            %exit_l2%
+            %exit_l3%
+            %exit_l4%
+            %exit_l5%
+            %exit_l6%
+            %exit_l7%
+            %exit_l8%
+            %exit_l9%
+            %exit_l10%
+            %exit_l11%
+            %exit_l12%
+            %exit_l13%
+            %exit_l14%
+         END
+         IF ~~ THEN DO ~SetGlobal("#L_NPCSoDLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+
+      %pre_bg2%
+
+      %pk_post_file%
+
+   >>>>>>>>
+   COMPILE EVALUATE_BUFFER ~.../npc_add.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+END
