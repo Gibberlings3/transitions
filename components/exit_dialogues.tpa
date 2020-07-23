@@ -1,14 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD and BG2   //
-// NOTE: Jaheira, Khalid, Minsc, and Dynaheir don't get BG2 exit dialogues, they'll stick with the PC //
 // Imoen is dealt with separately                                                                     //
 // Called via main_common.tpa                                                                         //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Making this a macro since there are so many variables
+// Making this a function since there are so many variables
 DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
-// Keep the order - depending upon certain NPCs being in certain places in the list
+// Keep the order - I'm depending upon certain NPCs being in certain places in the list
 // I could fix that but I'm ok with not rearranging the order
 ACTION_DEFINE_ARRAY npc_list BEGIN
    Ajantis
@@ -41,7 +40,7 @@ ACTION_DEFINE_ARRAY npc_list BEGIN
    Yeslick
 END
 
-OUTER_SET max_num = 15
+// OUTER_SET max_num = 15
 
 ////////////////////////////
 // PREP THE INTERJECTIONS //
@@ -56,8 +55,8 @@ OUTER_SET max_num = 15
 // However it'll help ensure each is done properly
 // Each line of dialogue gets put into a variable
 /////////////////////////////////////////////////////
-//OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
-OUTER_FOR ( npc_num = 0; npc_num < max_num; ++npc_num ) BEGIN
+//OUTER_FOR ( npc_num = 0; npc_num < max_num; ++npc_num ) BEGIN
+OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
    OUTER_SPRINT npc_name $npc_list("%npc_num%")
    OUTER_SPRINT upper_name "%npc_name%"
    ACTION_TO_UPPER upper_name
@@ -250,69 +249,95 @@ OUTER_FOR ( npc_num = 0; npc_num < max_num; ++npc_num ) BEGIN
          OUTER_SPRINT exit_l14 ~%npc_ok% @2400 %exit_do%~
       END
       15 BEGIN     // MONTARON
-         // Initial pre-SoD/BG2
-         
-         // Leaving pre-SoD/BG2
+         // Initial pre-SoD/BG2: Aye, I've suffered yur company as long as I'm going to!
+         OUTER_SPRINT exit_i15 ~%npc_ok% @2402~
+
+         // Leaving pre-SoD/BG2: Watch yur back!
+         OUTER_SPRINT exit_l15 ~%npc_ok% @2403 %exit_do%~
       END
       16 BEGIN     // XZAR
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Aye, I'll not tolerate this group any longer. 
+         OUTER_SPRINT exit_i16 ~%npc_ok% @2405~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Fare ye well!
+         OUTER_SPRINT exit_l16 ~%npc_ok% @2406 %exit_do%~
       END
       17 BEGIN     // FALDORN
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: It's time to return to the forest.
+         OUTER_SPRINT exit_i17 ~%npc_ok% @2408~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Oakfather watch over you.
+         OUTER_SPRINT exit_l17 ~%npc_ok% @2409 %exit_do%~
       END
       18 BEGIN     // KAGAIN
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: It's time to go our separate ways.
+         OUTER_SPRINT exit_i18 ~%npc_ok% @2411~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Yeah bye.
+         OUTER_SPRINT exit_l18 ~%npc_ok% @2412 %exit_do%~
       END
       19 BEGIN     // KIVAN
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: It is time to part ways.
+         OUTER_SPRINT exit_i19 ~%npc_ok% @2414~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Farewell, mellonamin.
+         OUTER_SPRINT exit_l19 ~%npc_ok% @2415 %exit_do%~
       END
       20 BEGIN     // QUAYLE
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: My family business awaits!
+         OUTER_SPRINT exit_i20 ~%npc_ok% @2417~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Try to use your brain now that I won't be here to help you.
+         OUTER_SPRINT exit_l20 ~%npc_ok% @2418 %exit_do%~
       END
       21 BEGIN     // RASAAD
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: I too shall be leaving your company.
+         OUTER_SPRINT exit_i21 ~%npc_ok% @2420~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Farewell, my friend.  May Selûne's light guide you on your path.
+         OUTER_SPRINT exit_l21 ~%npc_ok% @2421 %exit_do%~
       END
       22 BEGIN     // SAFANA
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Yes, enough is enough.
+         OUTER_SPRINT exit_i22 ~%npc_ok% @2423~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Goodbye.  It's been...interesting.
+         OUTER_SPRINT exit_l22 ~%npc_ok% @2424 %exit_do%~
       END
       23 BEGIN     // SHARTEEL
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Yes, it is time I struck out on my own.
+         OUTER_SPRINT exit_i23 ~%npc_ok% @2426~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Farewell and stay strong!
+         OUTER_SPRINT exit_l23 ~%npc_ok% @2427 %exit_do%~
       END
       24 BEGIN     // SKIE
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Yeah, I'm done with this, too.
+         OUTER_SPRINT exit_i24 ~%npc_ok% @2429~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: See ya!  I'm outta here!
+         OUTER_SPRINT exit_l24 ~%npc_ok% @2430 %exit_do%~
       END
       25 BEGIN     // TIAX
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Tiax must begin the next phase of his plan.
+         OUTER_SPRINT exit_i25 ~%npc_ok% @2432~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Tiax may...or may not...look well upon you when he rules all.
+         OUTER_SPRINT exit_l25 ~%npc_ok% @2433 %exit_do%~
       END
       26 BEGIN     // VICONIA
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Yes, I must leave now as well.
+         OUTER_SPRINT exit_i26 ~%npc_ok% @2435~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.
+         OUTER_SPRINT exit_l26 ~%npc_ok% @2436 %exit_do%~
       END
       27 BEGIN     // YESLICK
-         // Initial pre-SoD/BG2
+         // Initial pre-SoD/BG2: Aye, tis time for me to leave your fine company.
+         OUTER_SPRINT exit_i27 ~%npc_ok% @2438~
          
-         // Leaving pre-SoD/BG2
+         // Leaving pre-SoD/BG2: You take care of yourself, ya hear <PRO_BOYGIRL>?!
+         OUTER_SPRINT exit_l27 ~%npc_ok% @2439 %exit_do%~
       END
       DEFAULT
          // Nothing
@@ -322,8 +347,8 @@ END
 /////////////////////////////////////////////////
 // 2nd and final loop
 /////////////////////////////////////////////////
-//OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
-OUTER_FOR (npc_num = 0; npc_num < max_num; ++npc_num) BEGIN 
+//OUTER_FOR (npc_num = 0; npc_num < max_num; ++npc_num) BEGIN 
+OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
 
    OUTER_SPRINT npc_name $npc_list("%npc_num%")
    OUTER_SPRINT upper_name "%npc_name%"
@@ -375,9 +400,9 @@ END
 
    // Jaheira, Khalid, Minsc, and Dynaheir don't have pre-BG2 exit dialogues
    ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) THEN BEGIN
-      OUTER_SPRINT bg ~~
+      OUTER_SPRINT bg2 ~~
    END ELSE BEGIN
-      OUTER_SPRINT bg ~// Pre-BG2
+      OUTER_SPRINT bg2 ~// Pre-BG2
 IF
    Global("#L_StartBG2","GLOBAL",1)
    Global("#L_%npc_name%Modded","GLOBAL",0)
@@ -396,10 +421,10 @@ END
    END
 
    <<<<<<<< .../npc_add.baf
-   // Post-Korlasz
+   // Post-Korlasz - only the first 7 on the list want to leave after Korlasz
    %pk%
 
-   // Pre-SoD
+   // Pre-SoD - everyone leaves
    IF
       GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
       Global("EndOfBG1","GLOBAL",1)
@@ -419,10 +444,10 @@ END
          Dialogue(Player1)
    END
 
-   // Pre-BG2
-   %bg%
+   // Pre-BG2 - those that are captured don't have this section
+   %bg2%
 
-   // Post BG1
+   // Post BG1 - everyone poofs
    IF
       GlobalGT("EndOfBG1","GLOBAL",0)
       Global("#L_%npc_name%OkInBG1Areas","GLOBAL",0)
@@ -545,68 +570,68 @@ END
       END
       15 BEGIN
          // Montaron
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2401~ // I've suffered yur company as long as I'm going to!  I'm leaving and that's that!
+         OUTER_SPRINT exit_leave ~@2403~ // Watch yur back!
       END
       16 BEGIN
          // Xzar
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2404~ // I'll not tolerate this group any longer.  I'm leaving and that's that!
+         OUTER_SPRINT exit_leave ~@2406~ // Fare ye well!
       END
       17 BEGIN
          // Faldorn
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2407~ // I will no longer waste my life with this endeavor.  I am leaving for the forest.
+         OUTER_SPRINT exit_leave ~@2409~ // Oakfather watch over you.
       END
       18 BEGIN
          // Kagain
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2410~ //You was a good leader.  I've no complaints over the profits but it's time to go our separate ways.
+         OUTER_SPRINT exit_leave ~@2412~ // Yeah bye.
       END
       19 BEGIN
          // Kivan
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2413~ // This is where we part ways.  I shall return home in a few moments.
+         OUTER_SPRINT exit_leave ~@2415~ // Farewell, mellonamin.
       END
       20 BEGIN
          // Quayle
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2416~ // I'll not put off starting my own venture any longer.  My family business awaits!
+         OUTER_SPRINT exit_leave ~@2418~ // Try to use your brain now that I won't be here to help you.
       END
       21 BEGIN
          // Rasaad
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2419~ // Alas, it is time for me to leave your company.
+         OUTER_SPRINT exit_leave ~@2421~ // Farewell, my friend.  May Selûne's light guide you on your path.
       END
       22 BEGIN
          // Safana
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2422~ // Enough is enough.  I am going to seek out the pleasures of warms baths and silk sheets...and...other things.
+         OUTER_SPRINT exit_leave ~@2424~ // Goodbye.  It's been...interesting.
       END
       23 BEGIN
          // Sharteel
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2425~ // You were a good enough leader.  But it is time I struck out on my own.
+         OUTER_SPRINT exit_leave ~@2427~ // Farewell and stay strong!
       END
       24 BEGIN
          // Skie
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2428~ // I'm tired of the grime and the gook and the fighting and ... I'm just tired.  I'm done.
+         OUTER_SPRINT exit_leave ~@2430~ // See ya!  I'm outta here!
       END
       25 BEGIN
          // Tiax
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2431~ // Tiax must begin the next phase of his plan.  Tiax can no longer aid you in your tasks.
+         OUTER_SPRINT exit_leave ~@2433~ // Tiax may...or may not...look well upon you when he rules all.
       END
       26 BEGIN
          // Viconia
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2434~ // I will remember your kindness to me always, but now I must leave ... while I am yet free to do so.
+         OUTER_SPRINT exit_leave ~@2436~ // Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.
       END
       27 BEGIN
          // Yeslick
-         OUTER_SPRINT exit_init ~@2398~ // This is all just too tedius!  I'm leaving!
-         OUTER_SPRINT exit_leave ~@2400~ // Ta ta!
+         OUTER_SPRINT exit_init ~@2437~ // We've done what we set out to do, and more to boot!  Tis time for me to leave your fine company.
+         OUTER_SPRINT exit_leave ~@2439~ // You take care of yourself, ya hear <PRO_BOYGIRL>?!
       END
       DEFAULT
          // Do nothing
@@ -689,7 +714,8 @@ END
    // Get rid of the duplicate pre-SoD/BG2 exit interjections
    OUTER_SPRINT group_exit_i ~~
    OUTER_SPRINT group_exit_l ~~
-   OUTER_FOR ( x = 0; x < max_num; ++x ) BEGIN
+//   OUTER_FOR ( x = 0; x < max_num; ++x ) BEGIN
+   OUTER_FOR ( x = 0; VARIABLE_IS_SET $npc_list(~%x%~); ++x ) BEGIN
       ACTION_IF (x != npc_num ) BEGIN
          OUTER_SPRINT group_exit_i ~~~~~%group_exit_i%
          %exit_i%x%%~~~~~

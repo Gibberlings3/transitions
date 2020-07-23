@@ -542,3 +542,68 @@
 @2398	= ~This is all just too tedius!  I'm leaving!~
 @2399	= ~It's about time we all came to our senses!  I'll be leaving too.~
 @2400	= ~Ta ta!~
+
+// Montaron's pre-SoD/BG2 exit dialogue
+@2401	= ~I've suffered yur company as long as I'm going to!  I'm leaving and that's that!~
+@2402	= ~Aye, I've suffered yur company as long as I'm going to!~
+@2403	= ~Watch yur back!~
+
+// Xzar's pre-SoD/BG2 exit dialogue
+@2404	= ~I'll not tolerate this group any longer.  I'm leaving and that's that!~
+@2405	= ~Aye, I'll not tolerate this group any longer.~
+@2406	= ~Fare ye well!~
+
+// Faldorn's pre-SoD/BG2 exit dialogue
+@2407	= ~I will no longer waste my life with this endeavor.  I am leaving for the forest.~
+@2408	= ~It's time to return to the forest.~
+@2409	= ~Oakfather watch over you.~
+
+// Kagain's pre-SoD/BG2 exit dialogue
+@2410	= ~You was a good leader.  I've no complaints over the profits but it's time to go our separate ways.~
+@2411	= ~It's time to go our separate ways.~
+@2412	= ~Yeah bye.~
+
+// Kivan's pre-SoD/BG2 exit dialogue
+@2413	= ~This is where we part ways.  I shall return home in a few moments.~
+@2414	= ~It is time to part ways.~
+@2415	= ~Farewell, mellonamin.~
+
+// Quayle's pre-SoD/BG2 exit dialogue
+@2416	= ~I'll not put off starting my own venture any longer.  My family business awaits!~
+@2417	= ~My family business awaits!~
+@2418	= ~Try to use your brain now that I won't be here to help you.~
+
+// Rasaad's pre-SoD/BG2 exit dialogue
+@2419	= ~Alas, it is time for me to leave your company.~
+@2420	= ~I too shall be leaving your company.~
+@2421	= ~Farewell, my friend.  May Selûne's light guide you on your path.~
+
+// Safana's pre-SoD/BG2 exit dialogue
+@2422	= ~Enough is enough.  I am going to seek out the pleasures of warms baths and silk sheets...and...other things.~
+@2423	= ~Yes, enough is enough.~
+@2424	= ~Goodbye.  It's been...interesting.~ 
+
+// Sharteel's pre-SoD/BG2 exit dialogue
+@2425	= ~You were a good enough leader.  But it is time I struck out on my own.~
+@2426	= ~Yes, it is time I struck out on my own.~
+@2427	= ~Farewell and stay strong!~
+
+// Skie's pre-SoD/BG2 exit dialogue
+@2428	= ~I'm tired of the grime and the gook and the fighting and ... I'm just tired.  I'm done.~
+@2429	= ~Yeah, I'm done with this, too.~
+@2430	= ~See ya!  I'm outta here!~
+
+// Tiax's pre-SoD/BG2 exit dialogue
+@2431	= ~Tiax must begin the next phase of his plan.  Tiax can no longer aid you in your tasks.~
+@2432	= ~Tiax must begin the next phase of his plan.~
+@2433	= ~Tiax may...or may not...look well upon you when he rules all.~
+
+// Viconia's pre-SoD/BG2 exit dialogue
+@2434	= ~I will remember your kindness to me always, but now I must leave ... while I am yet free to do so.~
+@2435	= ~Yes, I must leave now as well.~
+@2436	= ~Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.~
+
+// Yeslick's pre-SoD/BG2 exit dialogue
+@2437	= ~We've done what we set out to do, and more to boot!  Tis time for me to leave your fine company.~
+@2438	= ~Aye, tis time for me to leave your fine company.~
+@2439	= ~You take care of yourself, ya hear <PRO_BOYGIRL>?!~
