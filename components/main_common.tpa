@@ -320,6 +320,7 @@ BUT_ONLY_IF_IT_CHANGES
 
 // Put the exit dialogue stuff into its own file because it was pretty huge
 INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
+LAF exit_dialogues END
 
 // The 'magic' item given by Duke Belt that will allow for game advancement
 //   and getting to the SoD version of the palace
