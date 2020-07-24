@@ -13,7 +13,7 @@ BEGIN ~#LAdvGm1~
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1)~ + @2307	/* ~I'd like to visit Imoen.~ */ DO ~ClearAllActions() SetGlobal("#L_StartCaelarAttack","GLOBAL",2) StartCutSceneMode() StartCutSceneEx("#L_Cut08",TRUE)~ EXIT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2305 /* ~I'd like to go home.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","GLOBAL",3) SetGlobal("EndOfBG1","GLOBAL",1)~ EXIT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2306 /* ~I'd like to go to the Elfsong Tavern.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartCaelarAttack","GLOBAL",4) SetGlobal("EndOfBG1","GLOBAL",1)~ EXIT
-		++ @2309 /* ~I like to gather a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100)  SetGlobal("EndOfBG1","GLOBAL",2) SetGlobal("#L_StartBG2","GLOBAL",1)~ EXIT
+		++ @2309 /* ~I like to gather a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~ClearAllActions() SetGlobal("#L_StartBG2","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut08",TRUE)~ EXIT
 	END
 
 	IF ~~ THEN ITEM_FUN

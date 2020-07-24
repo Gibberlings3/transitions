@@ -16,3 +16,17 @@ THEN
 		SetCutSceneLite(TRUE)
 		StartCutSceneEx("#L_Cut07",TRUE)
 END
+
+IF
+	Clicked([ANYONE])
+	Range([PC],15)
+	Global("#L_SarvQuests","GLOBAL",100)
+	Global("EndOfBG1","GLOBAL",2)
+	Global("#L_StartBG2","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ClearAllActions()
+		FadeToColor([30.0],0)
+		Wait(3)
+		CreateCreatureObject("K#TELBGT",Player1,0,0,0)
+END

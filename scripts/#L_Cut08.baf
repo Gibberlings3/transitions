@@ -34,22 +34,18 @@ THEN
 END
 
 IF
-	False()
+	Global("#L_StartBG2","GLOBAL",1)
 THEN
 	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride("#LffEsc1",ForceSpell(Player1,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
-		ActionOverride("#LffEsc1",ForceSpell(Player2,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
-		ActionOverride("#LffEsc1",ForceSpell(Player3,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
-		ActionOverride("#LffEsc1",ForceSpell(Player4,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
-		ActionOverride("#LffEsc1",ForceSpell(Player5,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
-		ActionOverride("#LffEsc1",ForceSpell(Player6,DRYAD_TELEPORT))  // SPWI995.SPL (Dimension Door)
+		CreateVisualEffectObject("SPDIMNDR",Player1)
+		CreateVisualEffectObject("SPDIMNDR",Player2)
+		CreateVisualEffectObject("SPDIMNDR",Player3)
+		CreateVisualEffectObject("SPDIMNDR",Player4)
+		CreateVisualEffectObject("SPDIMNDR",Player5)
+		CreateVisualEffectObject("SPDIMNDR",Player6)
 		Wait(3)
 		FadeToColor([30.0],0)
 		Wait(1)
-		ActionOverride("#LffEsc1",DestroySelf())
-		ActionOverride("#LffEsc2",DestroySelf())
-		ActionOverride("#LffEsc3",DestroySelf())
 		// Poof to Palace
 		LeaveAreaLUA("BG0108","",[674.393],NE)  
 		ActionOverride(Player2,LeaveAreaLUA("BG0108","",[632.404],NE))  
@@ -60,8 +56,8 @@ THEN
 		Wait(1)
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
-		SetGlobal("#L_SarvQuests","GLOBAL",100)
-		SetGlobal("EndOfBG1","GLOBAL",1)
+ 		SetGlobal("#L_SarvQuests","GLOBAL",100)
+ 		SetGlobal("EndOfBG1","GLOBAL",2)
 		EndCutSceneMode()
 END
 
