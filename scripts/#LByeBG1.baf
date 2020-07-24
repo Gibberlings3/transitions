@@ -12,6 +12,7 @@ IF
 THEN
 	RESPONSE #100
 		ClearAllActions() 
+		SetWorldmap("BGMap")
 		SetCutSceneLite(TRUE)
 		StartCutSceneEx("#L_Cut07",TRUE)
 END
