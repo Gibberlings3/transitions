@@ -337,6 +337,9 @@ COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
    WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
    WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
 
+// Script used by the item from within its dialogue to send the group to the palace
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~
+
 // The dialogue for the item
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
