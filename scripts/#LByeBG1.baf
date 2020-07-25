@@ -26,7 +26,6 @@ IF
 THEN
 	RESPONSE #100
 		ClearAllActions()
-		FadeToColor([30.0],0)
-		Wait(3)
-		CreateCreatureObject("K#TELBGT",Player1,0,0,0)
+		StartCutSceneMode()
+		StartCutSceneEx("#L_Cut09",TRUE)
 END

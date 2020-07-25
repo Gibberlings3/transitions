@@ -349,6 +349,9 @@ APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 // Script to attach to palace exits to start SoD or BG2 when attempting to leave
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
 
+// Cut scene called by door script when transitioning to BG2
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
+
 // Modify palace exits to have a script that will kick off SoD when used
 COPY_EXISTING ~BG0108.ARE~ ~override~
    LPF ALTER_AREA_REGION
@@ -389,5 +392,21 @@ END
 COPY_EXISTING ~BD0103.bcs~ ~override~
    DECOMPILE_AND_PATCH BEGIN
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BD_PARTY_ITEMS","BD0103",0)~ ~Global("BD_PARTY_ITEMS","BD0103",0) !Global("#L_SkipFirstHalfCA","GLOBAL",1)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Modified version of BG2 Capture Intro
+LAF INSERT_SCRIPT_BLOCK
+   INT_VAR 
+      insert_above = 1
+      only_once = 1
+   STR_VAR 
+      script = BD6100
+      match = ~Switch("bd_finale","bd6100")~
+      insert = ~%mod_root%/scripts/bd6100.baf~
+END
+COPY_EXISTING ~BD6100.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Switch("bd_finale","bd6100")~ ~Global("#L_StartBG2","GLOBAL",0) Switch("bd_finale","bd6100")~
    END
 BUT_ONLY_IF_IT_CHANGES

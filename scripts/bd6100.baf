@@ -1,0 +1,32 @@
+
+IF
+	Global("#L_StartBG2","GLOBAL",1)
+	Switch("#L_bd_finale","bd6100")
+THEN
+	RESPONSE #0
+		IncrementGlobal("#L_bd_finale","bd6100",1)
+		// No sleeping...
+		SetGlobal("FOG_TYPE","GLOBAL",4)
+		CreateCreatureEffect("bdcutid","",[500.400],S)  // No such index
+		Wait(5)
+	RESPONSE #1
+		IncrementGlobal("#L_bd_finale","bd6100",1)
+		SetGlobal("bd_plot","global",690)
+		Weather(FOG)
+		PlaySound("EFF_M87")
+		Wait(5)
+	RESPONSE #2
+		IncrementGlobal("#L_bd_finale","bd6100",1)
+		ActionOverride("IMOEN2",DisplayStringHead(Myself,239786))  // Hey, do you feel a little... off?
+		Wait(5)
+	RESPONSE #3
+		IncrementGlobal("#L_bd_finale","bd6100",1)
+		ActionOverride("DYNAHEIR",DisplayStringHead("dynaheir",239791))  // The mist—it is more than mist. It dulls the senses...
+		Wait(5)
+	RESPONSE #4
+		SetGlobal("#L_StartBG2","GLOBAL",2)
+		FadeToColor([40.0],0)
+		Wait(2)
+		StartMovie("sodcin05")
+		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
+END
