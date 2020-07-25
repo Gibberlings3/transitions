@@ -11,14 +11,6 @@ THEN
 		FadeToColor([30.0],0)
 		Wait(1)
 
-		// Don't put the folks to sleep for this little show
-		SetGlobal("bd_player1_sleep","bd6100",99)
-		SetGlobal("bd_player2_sleep","bd6100",99)
-		SetGlobal("bd_player3_sleep","bd6100",99)
-		SetGlobal("bd_player4_sleep","bd6100",99)
-		SetGlobal("bd_player5_sleep","bd6100",99)
-		SetGlobal("bd_player6_sleep","bd6100",99)
-
 		// Poof to outside of Baldur's gate as in end of SoD
 		LeaveAreaLUA("BD6100","",[674.393],NE)
 		ActionOverride(Player2,LeaveAreaLUA("BD6100","",[632.404],NE))  
@@ -30,11 +22,21 @@ THEN
 
 		SetGlobal("bd_player_exiled","GLOBAL",2) // To indicate that we had nothing to do with it
 		SetGlobal("chapter","global",13)
+		SetGlobal("FOG_TYPE","GLOBAL",4)
+		Weather(FOG)
+		PlaySound("EFF_M87")
+
+		MoveGlobal("BD6100","Imoen2",[575.405])  // Imoen
+		ReallyForceSpellDeadRES("bdrejuve","Imoen2")  // No such index
+		ActionOverride("Imoen2",ChangeAIScript("BDIMOEN",OVERRIDE))
+		ActionOverride("Imoen2",ChangeAIScript("",CLASS))
+		ActionOverride("Imoen2",ChangeAIScript("",RACE))
+		ActionOverride("Imoen2",ChangeAIScript("",GENERAL))
+		ActionOverride("Imoen2",ChangeAIScript("",DEFAULT))
+		ActionOverride("Imoen2",SetDialogue("BDIMOEN"))
 
 		MoveGlobal("bd6100","MINSC",[660.420])  // Minsc
 		ReallyForceSpellDeadRES("bdrejuve","minsc")  // No such index
-		ChangeEnemyAlly("minsc",NEUTRAL)  // Minsc
-		ChangeSpecifics("minsc",ALLIES)  // Minsc
 		ActionOverride("minsc",ChangeAIScript("bdminsc",OVERRIDE))
 		ActionOverride("minsc",ChangeAIScript("",CLASS))
 		ActionOverride("minsc",ChangeAIScript("SHOUT",RACE))
@@ -44,95 +46,41 @@ THEN
 
 		MoveGlobal("bd6100","DYNAHEIR",[655.495])  // Dynaheir
 		ReallyForceSpellRES("bdrejuve","dynaheir")  // No such index
-		ChangeEnemyAlly("dynaheir",NEUTRAL)  // Dynaheir
-		ChangeSpecifics("dynaheir",ALLIES)  // Dynaheir
 		ActionOverride("dynaheir",ChangeAIScript("bddynahe",OVERRIDE))
 		ActionOverride("dynaheir",ChangeAIScript("",CLASS))
 		ActionOverride("dynaheir",ChangeAIScript("SHOUT",RACE))
 		ActionOverride("dynaheir",ChangeAIScript("BDMAGE01",GENERAL))
 		ActionOverride("dynaheir",ChangeAIScript("",DEFAULT))
 		ActionOverride("dynaheir",SetDialogue("bddynahe"))
-		ActionOverride("dynaheir",JoinParty())
 
 		MoveGlobal("bd6100","KHALID",[545.430])  // Khalid
 		ReallyForceSpellDeadRES("bdrejuve","khalid")  // No such index
-		ChangeEnemyAlly("khalid",NEUTRAL)  // Khalid
-		ChangeSpecifics("khalid",ALLIES)  // Khalid
 		ActionOverride("khalid",ChangeAIScript("bdkhalid",OVERRIDE))
 		ActionOverride("khalid",ChangeAIScript("",CLASS))
 		ActionOverride("khalid",ChangeAIScript("SHOUT",RACE))
 		ActionOverride("khalid",ChangeAIScript("BDFIGH01",GENERAL))
 		ActionOverride("khalid",ChangeAIScript("",DEFAULT))
 		ActionOverride("khalid",SetDialogue("bdkhalid"))
-		ActionOverride("khalid",JoinParty())
 
 		MoveGlobal("bd6100","JAHEIRA",[470.405])  // Jaheira
 		ReallyForceSpellDeadRES("bdrejuve","jaheira")  // No such index
-		ChangeEnemyAlly("jaheira",NEUTRAL)  // Jaheira
-		ChangeSpecifics("jaheira",ALLIES)  // Jaheira
 		ActionOverride("jaheira",ChangeAIScript("bdjaheir",OVERRIDE))
 		ActionOverride("jaheira",ChangeAIScript("",CLASS))
 		ActionOverride("jaheira",ChangeAIScript("SHOUT",RACE))
 		ActionOverride("jaheira",ChangeAIScript("bddrui01",GENERAL))
 		ActionOverride("jaheira",ChangeAIScript("",DEFAULT))
 		ActionOverride("jaheira",SetDialogue("bdjaheir"))
-		ActionOverride("jaheira",JoinParty())
 
-		MoveGlobal("BD6100","Imoen2",[575.405])  // Imoen
-		ApplySpellRES("bdresurr","Imoen2")  // No such index
-		SmallWait(1)
-		ApplySpellRES("bdrejuve","Imoen2")  // No such index
-		ChangeEnemyAlly("Imoen2",NEUTRAL)  // Imoen
-		ChangeSpecifics("Imoen2",ALLIES)  // Imoen
-		ActionOverride("Imoen2",ChangeAIScript("BDIMOEN",OVERRIDE))
-		ActionOverride("Imoen2",ChangeAIScript("",CLASS))
-		ActionOverride("Imoen2",ChangeAIScript("",RACE))
-		ActionOverride("Imoen2",ChangeAIScript("",GENERAL))
-		ActionOverride("Imoen2",ChangeAIScript("",DEFAULT))
-		ActionOverride("Imoen2",SetDialogue("BDIMOEN"))
-
-		FadeFromColor([30.0],0)
-		Explore()
-		Wait(1)
-		MultiPlayerSync()
-		EndCutSceneMode()
-		Wait(1)
 		Continue()
 END
 
 IF
-	!InPartyAllowDead("MINSC")  // Minsc
-	!NumInParty(6)
+	!InPartyAllowDead("IMOEN2")
 THEN
 	RESPONSE #100
-		ActionOverride("MINSC",JoinParty())
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("DYNAHEIR")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		ActionOverride("DYNAHEIR",JoinParty())
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("JAHEIRA")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		ActionOverride("JAHEIRA",JoinParty())
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("KHALID")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		ActionOverride("KHALID",JoinParty())
+		CutSceneId(Player1)
+		ChangeEnemyAlly("IMOEN2",NEUTRAL)  // Imoen
+		ChangeSpecifics("IMOEN2",ALLIES)  // Imoen
 		Continue()
 END
 
@@ -141,7 +89,127 @@ IF
 	!NumInParty(6)
 THEN
 	RESPONSE #100
+		CutSceneId(Player1)
 		ActionOverride("IMOEN2",JoinParty())
 		Continue()
 END
 
+IF
+	!InPartyAllowDead("MINSC")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ChangeEnemyAlly("MINSC",NEUTRAL)  // Imoen
+		ChangeSpecifics("MINSC",ALLIES)  // Imoen
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("MINSC")
+	!NumInParty(6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("MINSC",JoinParty())
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("JAHEIRA")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ChangeEnemyAlly("JAHEIRA",NEUTRAL)  // Imoen
+		ChangeSpecifics("JAHEIRA",ALLIES)  // Imoen
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("JAHEIRA")
+	!NumInParty(6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("JAHEIRA",JoinParty())
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("DYNAHEIR")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)  // Imoen
+		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("DYNAHEIR")
+	!NumInParty(6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("DYNAHEIR",JoinParty())
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("KHALID")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ChangeEnemyAlly("KHALID",NEUTRAL)  // Imoen
+		ChangeSpecifics("KHALID",ALLIES)  // Imoen
+		Continue()
+END
+
+IF
+	!InPartyAllowDead("KHALID")
+	!NumInParty(6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("KHALID",JoinParty())
+		Continue()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+
+		FadeFromColor([30.0],0)
+		Explore()
+
+		Wait(5)
+
+		MoveViewPoint([890.815],BD_WALK)
+
+		ActionOverride(Player2,MoveToPoint([835.835]))
+		ActionOverride(Player3,MoveToPoint([895.770]))
+		ActionOverride(Player4,MoveToPoint([805.795]))
+		ActionOverride(Player5,MoveToPoint([840.740]))
+		ActionOverride(Player6,MoveToPoint([780.765]))
+		MoveToPoint([940.805])
+
+		Wait(2)
+
+		DisplayStringWait("IMOEN2",239786)  // Hey, do you feel a little... off?
+
+		Wait(1)
+
+		DisplayStringWait("DYNAHEIR",239791)  // The mist—it is more than mist. It dulls the senses...
+
+		Wait(1)
+
+		FadeToColor([40.0],0)
+		Wait(1)
+		StartMovie("sodcin05")
+
+		MultiPlayerSync()
+		EndCutSceneMode()
+
+		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
+END
