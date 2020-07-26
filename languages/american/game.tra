@@ -143,3 +143,29 @@ Refugees are arriving in Baldur's Gate, telling about some brutal movement far u
 @1031	= ~Duke Belt's Gift to <CHARNAME>~
 @1032	= ~This item is able to grant you a limited number of specific wishes.~
 @1033	= ~Use the item~
+
+// Potion found in Chateau Irenicus so Imoen can refresh her magic missile before exiting
+@1034	= ~Potion of Revitalization~
+@1035	= ~This inviting potion removes fatigue of the body and the mind.
+
+STATISTICS:
+
+Special: Remove fatigue
+Special: Regain cast spells~
+
+// Imoen's custom wand of magic missiles
+@1036	= ~Imoen's Wand of Magic Missiles~
+@1037	= ~This wand looks like an ordinary wand of Magic Missiles, but there's something just a little different about it.  When activated, the wand will eject up to three missiles of magical energy that dart forth and unerringly strike their target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the spell ineffective. Each missile will inflict 1d4+1 points of damage.
+
+STATISTICS:
+
+Charge abilities:
+– Up to 3 magic missiles will strike the target
+  Damage: 1d4+1
+  Range: 100 ft.
+  Area of Effect: 1 creature
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~

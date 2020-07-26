@@ -1,0 +1,43 @@
+///////////////////////////////////////////////////////
+// First floor of Chateau Irenicus                   //
+// Puts some revitalization potions in the wall safe //
+// For Imoen to use before confronting Irenicus      //
+// Saves the PC's house key as well                  //
+// Compiled via main_common.tpa                      //
+///////////////////////////////////////////////////////
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+	PartyHasItem("#LKey01")
+THEN
+	RESPONSE #100
+		ActionOverride("Picture1",TakePartyItem("#LKey01"))
+		Continue()
+END
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+	PartyHasItem("#LKey02")
+THEN
+	RESPONSE #100
+		ActionOverride("Picture1",TakePartyItem("#LKey02"))
+		Continue()
+END
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+	PartyHasItem("#LKey03")
+THEN
+	RESPONSE #100
+		ActionOverride("Picture1",TakePartyItem("#LKey03"))
+		Continue()
+END
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ItemsStashed","GLOBAL",1)
+		ActionOverride("Picture1",CreateItem("#LPot01",10,0,0))
+		Continue()
+END

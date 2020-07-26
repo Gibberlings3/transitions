@@ -208,7 +208,6 @@ THEN
 		Wait(1)
 		StartMovie("sodcin05")
 
-		MultiPlayerSync()
 		EndCutSceneMode()
 
 		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
