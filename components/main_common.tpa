@@ -433,6 +433,8 @@ COPY_EXISTING ~AR0602.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Put Imoen's potion and PC's house key in the locked picture
+// Save some custom Transitions items in Chateau Irenicus
+// Must run EET_End to test this
+EXTEND_TOP ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT.baf~
 EXTEND_TOP ~AR0602.bcs~ ~%mod_root%/scripts/ar0602.baf~
 

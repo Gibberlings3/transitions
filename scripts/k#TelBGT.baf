@@ -1,0 +1,37 @@
+///////////////////////////////////////////////////////////////////////////
+// Changes to EET's import of items to include Transition's custom items //
+// Compiled via main_common.tpa                                          //
+///////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("K#FrameDelay","LOCALS",0)
+	PartyHasItem("#LKey01")
+THEN
+	RESPONSE #100
+		TakePartyItem("#LKey01")
+		DestroyItem("#LKey01")
+		AddStoreItem("K#IMPORT","#LKey01",1,1)
+		Continue()
+END
+
+IF
+	Global("K#FrameDelay","LOCALS",0)
+	PartyHasItem("#LKey02")
+THEN
+	RESPONSE #100
+		TakePartyItem("#LKey02")
+		DestroyItem("#LKey02")
+		AddStoreItem("K#IMPORT","#LKey02",1,1)
+		Continue()
+END
+
+IF
+	Global("K#FrameDelay","LOCALS",0)
+	PartyHasItem("#LKey03")
+THEN
+	RESPONSE #100
+		TakePartyItem("#LKey03")
+		DestroyItem("#LKey03")
+		AddStoreItem("K#IMPORT","#LKey03",1,1)
+		Continue()
+END
