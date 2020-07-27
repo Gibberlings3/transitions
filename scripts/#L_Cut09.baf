@@ -188,9 +188,9 @@ THEN
 		MoveViewPoint([890.815],BD_WALK)
 
 		ActionOverride(Player2,MoveToPoint([835.835]))
-		ActionOverride(Player3,MoveToPoint([895.770]))
+		ActionOverride(Player3,MoveToPoint([840.740]))
 		ActionOverride(Player4,MoveToPoint([805.795]))
-		ActionOverride(Player5,MoveToPoint([840.740]))
+		ActionOverride(Player5,MoveToPoint([895.770]))
 		ActionOverride(Player6,MoveToPoint([780.765]))
 		MoveToPoint([940.805])
 
@@ -208,7 +208,15 @@ THEN
 		Wait(1)
 		StartMovie("sodcin05")
 
-		EndCutSceneMode()
+		// Put everyone to sleep so no random remarks
+		ApplySpellRES("bdsleep",Player1)
+		ApplySpellRES("bdsleep",Player2)
+		ApplySpellRES("bdsleep",Player3)
+		ApplySpellRES("bdsleep",Player4)
+		ApplySpellRES("bdsleep",Player5)
+		ApplySpellRES("bdsleep",Player6)
 
 		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
+
+		EndCutSceneMode()
 END
