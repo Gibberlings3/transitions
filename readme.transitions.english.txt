@@ -104,6 +104,8 @@ This component prepares the 2nd house to the left of the Ducal Palace as one of 
 ------------------------------------------------------------------------
 See note in component #7
 
+This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.
+
 ------------------------------------------------------------------------
 9 Duke Eltan's reward - House in Beregost (Optional)
 ------------------------------------------------------------------------
@@ -114,7 +116,7 @@ This component adds the large grey house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Allow Imoen's magic training to be delayed (Optional)
 ------------------------------------------------------------------------
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when you advance the game to either SoD or BG2.  Without this component, Imoen will leave the group immediately upon the offer being given.
+This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when you advance the game to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
 
 A special case has been put in for Imoen when the unfinished SoD component of I4E is installed and she's not in training.  Until that component is finished, she will be allowed to stay with the group if she doesn't get poisoned in the attack by Caelar elites.  She won't have any specific SoD dialogue, but you can keep her.  To avoid her being poisoned at the start of SoD, select to rest somewhere other than in the palace.  If she is in training or gets poisoned, it will be up to I4E or BG2 to allow her to rejoin your group.  This special case will no longer be available once the completed version of I4E SoD is installed.
 
@@ -172,7 +174,7 @@ There are no known compatability issues at this time
 ------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------
-It may be necessary to install transitions before?/after? NPC mods.
+It may be necessary to install transitions before NPC mods.
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
