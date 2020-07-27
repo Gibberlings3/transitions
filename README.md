@@ -209,6 +209,7 @@ Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mo
 You can all thank subtledoctor for timers having the option to skip sailing times
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 Bubb and CamDawg for helping me get through a cut-scene/override fiasco - LOVE YOU FOREVER!!!
+Igi: for the potion from iiItemsMod I modified to use for Imoen after Chateau Irenicus
 The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
