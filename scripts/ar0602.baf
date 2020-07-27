@@ -3,8 +3,21 @@
 // Puts some revitalization potions in the wall safe //
 // For Imoen to use before confronting Irenicus      //
 // Saves the PC's house key as well                  //
+// And gives Imoen 2 magic missile innate abilities  //
 // Compiled via main_common.tpa                      //
 ///////////////////////////////////////////////////////
+
+IF
+	Exists("IMOEN2")
+	Global("#L_ImoenIMM","GLOBAL",0)
+THEN
+	RESPONSE #100
+		FadeToColor([40.0],0)
+		SetGlobal("#L_ImoenIMM","GLOBAL",1)
+	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
+	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
+	    Continue()
+END
 
 IF
 	Global("#L_ItemsStashed","GLOBAL",0)
