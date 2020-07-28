@@ -431,9 +431,9 @@ COPY ~%mod_root%/objects/#LPot01.itm~ ~override~
 COPY ~%mod_root%/objects/#LSPIN01.spl~ ~override~
 
 // A wanted poster if the PC wasn't allowed to leave Baldur's Gate by the Dukes
-// A few of them will evntually be dispersed around Athkatla
+// A few of them will eventually be dispersed around Athkatla
 // First will be for PC to find in Chateau Irenicus
-// Future version: Will give some to folks in BG1 as well if the PC shows up there
+// Future version: Will give some to folks in BG1 areas as well if the PC shows up there
 COPY ~%mod_root%/objects/#LScr01.itm~ ~override~
     SAY NAME2 @1038 // ~Warrant for <CHARNAME>'s Arrest~
     SAY DESC  @1039
