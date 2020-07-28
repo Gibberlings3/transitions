@@ -175,3 +175,7 @@ Weight: 1~
 @1039	= ~<CHARNAME> of Candlekeep is wanted by the Dukes of Baldur's Gate in reference to the murder of Skie Silvershield.  <PROPER_HESHE> is to be considered extremely dangerous.  Approach with caution.
 
 <PROPER_HESHE> must be brought to Baldur's Gate alive.~
+
+// Broken gift from Duke Belt
+@1040	= ~Broken Gift from Duke Belt~
+@1041	= ~This is what is left of the gift given to you by Duke Belt for your service to Baldur's Gate.  It is beyond repair.~

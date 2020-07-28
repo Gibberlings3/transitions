@@ -35,3 +35,14 @@ THEN
 		AddStoreItem("K#IMPORT","#LKey03",1,1)
 		Continue()
 END
+
+IF
+	Global("K#FrameDelay","LOCALS",0)
+	PartyHasItem("#LADVGM1")
+THEN
+	RESPONSE #100
+		TakePartyItem("#LADVGM1")
+		DestroyItem("#LADVGM1")
+		AddStoreItem("K#IMPORT","#LMSC01",1,1)
+		Continue()
+END

@@ -438,6 +438,11 @@ COPY ~%mod_root%/objects/#LScr01.itm~ ~override~
     SAY NAME2 @1038 // ~Warrant for <CHARNAME>'s Arrest~
     SAY DESC  @1039
 
+// Broken gift from Duke Belt
+COPY ~%mod_root%/objects/#LMsc01.itm~ ~override~
+    SAY NAME2 @1040 // ~Broken Gift from Duke Belt~
+    SAY DESC  @1041
+
 // Remove BG2's attempt to destroy items from SoD
 // Not necessary in this game
 // And these are things I want to put into stores
