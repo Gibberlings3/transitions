@@ -111,7 +111,7 @@ This component adds the cabin in High Hedge as one of the reward options from Du
 ------------------------------------------------------------------------
 See note in component #7
 
-This component adds the large grey house in the upper west side of Beregost as one of the reward options from Duke Eltan.
+This component adds the large gray house in the upper west side of Beregost as one of the reward options from Duke Eltan.
 
 ------------------------------------------------------------------------
 10 Allow Imoen's magic training to be delayed (Optional)
