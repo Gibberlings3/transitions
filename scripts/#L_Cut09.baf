@@ -187,11 +187,11 @@ THEN
 
 		MoveViewPoint([890.815],BD_WALK)
 
-		ActionOverride(Player2,MoveToPoint([835.835]))
+		ActionOverride(Player2,MoveToPoint([780.765]))
 		ActionOverride(Player3,MoveToPoint([840.740]))
 		ActionOverride(Player4,MoveToPoint([805.795]))
 		ActionOverride(Player5,MoveToPoint([895.770]))
-		ActionOverride(Player6,MoveToPoint([780.765]))
+		ActionOverride(Player6,MoveToPoint([835.835]))
 		MoveToPoint([940.805])
 
 		Wait(2)
@@ -207,6 +207,8 @@ THEN
 		FadeToColor([40.0],0)
 		Wait(1)
 		StartMovie("sodcin05")
+
+		HideGUI()
 
 		// Put everyone to sleep so no random remarks
 		ApplySpellRES("bdsleep",Player1)

@@ -12,7 +12,9 @@ IF
 	Global("#L_ImoenIMM","GLOBAL",0)
 THEN
 	RESPONSE #100
-		FadeToColor([40.0],0)
+		// Trying to get it so the player can't get at the bag of holding
+		HideGUI()
+		StartCutSceneMode()
 		SetGlobal("#L_ImoenIMM","GLOBAL",1)
 	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
 	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
@@ -43,6 +45,15 @@ IF
 THEN
 	RESPONSE #100
 		ActionOverride("Picture1",TakePartyItem("#LKey03"))
+		Continue()
+END
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+	!Global("BD_PLAYER_EXILED","GLOBAL",1)  // Escaped or bypassed trial
+THEN
+	RESPONSE #100
+		ActionOverride("JailkeepTable",CreateItem("#LScr01",1,0,0))
 		Continue()
 END
 

@@ -16,7 +16,7 @@ THEN
 		ActionOverride(Player1,ChangeAIScript("bdplayer",OVERRIDE))
 		SetGlobal("bd_001_plot","bd0103",1)
 		AdvanceTime(FOURTEEN_DAYS)
-		ActionOverride(Player1,Rest()
+		ActionOverride(Player1,Rest())
 		ActionOverride(Player2,Rest())
 		ActionOverride(Player3,Rest())
 		ActionOverride(Player4,Rest())
