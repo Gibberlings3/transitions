@@ -13,8 +13,8 @@ IF
 THEN
 	RESPONSE #100
 		// Trying to get it so the player can't get at the bag of holding
-		HideGUI()
 		StartCutSceneMode()
+		CutSceneID(Player1)
 		SetGlobal("#L_ImoenIMM","GLOBAL",1)
 	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
 	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
@@ -26,6 +26,7 @@ IF
 	PartyHasItem("#LKey01")
 THEN
 	RESPONSE #100
+		CutSceneID(Player1)
 		ActionOverride("Picture1",TakePartyItem("#LKey01"))
 		Continue()
 END
@@ -35,6 +36,7 @@ IF
 	PartyHasItem("#LKey02")
 THEN
 	RESPONSE #100
+		CutSceneID(Player1)
 		ActionOverride("Picture1",TakePartyItem("#LKey02"))
 		Continue()
 END
@@ -44,6 +46,7 @@ IF
 	PartyHasItem("#LKey03")
 THEN
 	RESPONSE #100
+		CutSceneID(Player1)
 		ActionOverride("Picture1",TakePartyItem("#LKey03"))
 		Continue()
 END
@@ -53,6 +56,7 @@ IF
 	PartyHasItem("#LMSC01")
 THEN
 	RESPONSE #100
+		CutSceneID(Player1)
 		ActionOverride("Table2",TakePartyItem("#LMSC01"))
 		Continue()
 END
@@ -62,6 +66,7 @@ IF
 	!Global("BD_PLAYER_EXILED","GLOBAL",1)  // Escaped or bypassed trial
 THEN
 	RESPONSE #100
+		CutSceneID(Player1)
 		ActionOverride("JailkeepTable",CreateItem("#LScr01",1,0,0))
 		Continue()
 END
@@ -71,6 +76,8 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ItemsStashed","GLOBAL",1)
+		CutSceneID(Player1)
 		ActionOverride("Picture1",CreateItem("#LPot01",10,0,0))
+		EndCutSceneMode()
 		Continue()
 END
