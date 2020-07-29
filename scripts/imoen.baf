@@ -10,10 +10,7 @@ IF
 	IsValidForPartyDialogue("IMOEN2")
 	!AreaType(DUNGEON)
 	CombatCounter(0)
-	OR(3)
-		GlobalLT("#L_StartCaelarAttack","GLOBAL",3)
-		!Global("C#IM_ImoenComesBackSoD","GLOBAL",0)
-		!Global("C#IM_ImoenInSoD","GLOBAL",1)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",4)
 THEN
 	RESPONSE #100
 		Dialogue(Player1)

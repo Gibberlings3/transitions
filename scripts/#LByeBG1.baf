@@ -7,7 +7,7 @@ IF
 	Range([PC],15)
 	Global("#L_SarvQuests","GLOBAL",100)
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
-	GlobalLT("#L_StartCaelarAttack","GLOBAL",5)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
 	Global("EndOfBG1","GLOBAL",1)
 THEN
 	RESPONSE #100
@@ -21,11 +21,12 @@ IF
 	Clicked([ANYONE])
 	Range([PC],15)
 	Global("#L_SarvQuests","GLOBAL",100)
-	Global("EndOfBG1","GLOBAL",2)
 	Global("#L_StartBG2","GLOBAL",1)
+	Global("EndOfBG1","GLOBAL",2)
 THEN
 	RESPONSE #100
 		ClearAllActions()
+		SetGlobal("#L_StartBG2","GLOBAL",2)
 		StartCutSceneMode()
 		StartCutSceneEx("#L_Cut09",TRUE)
 END

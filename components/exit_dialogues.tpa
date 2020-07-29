@@ -436,7 +436,7 @@ END
       !AreaType(DUNGEON)
       CombatCounter(0)
       OR(2)
-         GlobalGT("#L_StartCaelarAttack","GLOBAL",2)     // Imoen staying in the group
+         GlobalGT("#L_StartCaelarAttack","GLOBAL",3)     // Imoen staying in the group
          !InPartyAllowDead("IMOEN2")
    THEN
       RESPONSE #100

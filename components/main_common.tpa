@@ -352,7 +352,7 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
 // Cut scene called by door script when transitioning to BG2
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
 
-// Modify palace exits to have a script that will kick off SoD when used
+// Modify palace exits to have a script that will kick off SoD/BG2 when used
 COPY_EXISTING ~BG0108.ARE~ ~override~
    LPF ALTER_AREA_REGION
       STR_VAR

@@ -225,6 +225,7 @@
 @2121	= ~I can hardly wait to get started!  See ya!~
 @2124	= ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~
 @2126	= ~See ya, kid.  Try not to burn down the place.~
+@2440	= ~I'll visit in a couple weeks to see how you're doing, Imoen.~
 
 // imoen_training.d Imoen in her room before SoD
 @2127	= ~Oh, hello <CHARNAME>!  I can't talk right now.  I have to memorize this list of spells!~
@@ -511,7 +512,7 @@
 @2386	= ~He said to make sure to pick up some fresh pumpkin seeds.~
 
 // PC responses to pre-SoD/BG2 exit dialogues when there is and isn't gold to share
-@2378	= ~Here!  Take you're share of the gold before you leave.  You've earned it.~
+@2378	= ~That reminds me, here!  Everyone, take you're share of the gold.  You've all earned it.~
 @2379	= ~Thank you for your help.  I can finally relax a little~
 
 // Dynaheir's pre-SoD exit dialogue
@@ -607,3 +608,5 @@
 @2437	= ~We've done what we set out to do, and more to boot!  Tis time for me to leave your fine company.~
 @2438	= ~Aye, tis time for me to leave your fine company.~
 @2439	= ~You take care of yourself, ya hear <PRO_BOYGIRL>?!~
+
+// @2440 up with Imoen training

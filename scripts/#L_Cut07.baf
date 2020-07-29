@@ -42,7 +42,9 @@ THEN
 END
 
 IF
-	Global("#L_StartCaelarAttack","GLOBAL",2)
+	OR(2)
+		Global("#L_StartCaelarAttack","GLOBAL",2)
+		Global("#L_StartCaelarAttack","GLOBAL",3)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -67,24 +69,68 @@ THEN
 END
 
 IF
-	Global("#L_StartCaelarAttack","GLOBAL",3)
+	Global("#L_StartCaelarAttack","GLOBAL",4)	// Hanging out at home with Imoen during the attack
+	PartyHasItem("#LKey01")						// Home is in front of the palace
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC home and have them be notified of the attack
+		// Send the PC & Imoen home and have them be notified of the attack
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
 END
 
 IF
-	Global("#L_StartCaelarAttack","GLOBAL",4)
+	Global("#L_StartCaelarAttack","GLOBAL",4)	// Hanging out at home with Imoen during the attack
+	PartyHasItem("#LKey02")						// Home is in High Hedge
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC to a room that is supposedly in the Elfsong Tavern
+		// Send the PC & Imoen home and have them be notified of the attack
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",4)	// Hanging out at home with Imoen during the attack
+	PartyHasItem("#LKey03")						// Home is in Beregost
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		// Send the PC & Imoen home and have them be notified of the attack
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",4)	// Hanging out at home with Imoen during the attack
+	!PartyHasItem("#LKey01")					// Ditched the key - hang out in Elfsong instead
+	!PartyHasItem("#LKey02")
+	!PartyHasItem("#LKey03")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		// Send the PC & Imoen to a room that is supposedly in the Elfsong Tavern
+		// and have them be notified of the attack
+		FadeFromColor([30.0],0)
+		MultiPlayerSync()
+		EndCutSceneMode()
+END
+
+
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",5)	// Hanging out at Elfsong Tavern with Imoen during the attack
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+		// Send the PC & Imoen to a room that is supposedly in the Elfsong Tavern
 		// and have them be notified of the attack
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
