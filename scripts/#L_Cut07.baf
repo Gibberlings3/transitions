@@ -74,11 +74,31 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC & Imoen home and have them be notified of the attack
+
+		// Heal everyone up
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+
+		// Send the PC & Imoen home to rest
+		ActionOverride(Player2,LeaveAreaLUA("#LBG0006","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("#LBG0006","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("#LBG0006","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("#LBG0006","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("#LBG0006","",[239.581],N))
+		LeaveAreaLUA("#LBG0006","",[534.263],SW)
+
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
+
+		// Let the room script deal with the messenger
+		// There's a servant in the house and if he's not talked to the PC yet
+		// His conversation has to happen first or it'll mess stuff up
 END
 
 IF
@@ -87,11 +107,31 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC & Imoen home and have them be notified of the attack
+
+		// Heal everyone up
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+
+		// Send the PC & Imoen home to rest
+		ActionOverride(Player2,LeaveAreaLUA("#LBG0006","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("#LBG0006","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("#LBG0006","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("#LBG0006","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("#LBG0006","",[239.581],N))
+		LeaveAreaLUA("#LBG0006","",[534.263],SW)
+
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
+
+		// Let the room script deal with the messenger
+		// There's a servant in the house and if he's not talked to the PC yet
+		// His conversation has to happen first or it'll mess stuff up
 END
 
 IF
@@ -100,40 +140,105 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC & Imoen home and have them be notified of the attack
+
+		// Heal everyone up
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+
+		// Send the PC & Imoen home to rest
+		ActionOverride(Player2,LeaveAreaLUA("#LBG0006","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("#LBG0006","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("#LBG0006","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("#LBG0006","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("#LBG0006","",[239.581],N))
+		LeaveAreaLUA("#LBG0006","",[534.263],SW)
+
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
+
+		// Let the room script deal with the messenger
+		// There's a servant in the house and if he's not talked to the PC yet
+		// His conversation has to happen first or it'll mess stuff up
 END
 
 IF
 	Global("#L_StartCaelarAttack","GLOBAL",4)	// Hanging out at home with Imoen during the attack
-	!PartyHasItem("#LKey01")					// Ditched the key - hang out in Elfsong instead
+	!PartyHasItem("#LKey01")					// Ditched the key - hang out in Helm & Cloak instead
 	!PartyHasItem("#LKey02")
 	!PartyHasItem("#LKey03")
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC & Imoen to a room that is supposedly in the Elfsong Tavern
-		// and have them be notified of the attack
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",5)
+
+		// Heal everyone up
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+
+		// Send the PC & Imoen to a pub to rest
+		ActionOverride(Player2,LeaveAreaLUA("BG0118","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("BG0118","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("BG0118","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("BG0118","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("BG0118","",[239.581],N))
+		LeaveAreaLUA("BG0118","",[534.263],SW)
+
+		// Lock them in Muahahaha
+		TriggerActivation("Door0116",FALSE)
+
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
+
+		// Send in the messenger to notify them of the attack
+		StartCutSceneMode() 
+		StartCutScene("#L_Cut10")
 END
 
 
 IF
-	Global("#L_StartCaelarAttack","GLOBAL",5)	// Hanging out at Elfsong Tavern with Imoen during the attack
+	Global("#L_StartCaelarAttack","GLOBAL",5)	// Hanging out at Helm & Cloak Tavern with Imoen during the attack
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-		// Send the PC & Imoen to a room that is supposedly in the Elfsong Tavern
-		// and have them be notified of the attack
+
+		// Heal everyone up
+		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
+		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
+		SmallWait(5)
+
+		// Send the PC & Imoen to a pub to rest
+		ActionOverride(Player2,LeaveAreaLUA("BG0118","",[131.485],E))
+		ActionOverride(Player3,LeaveAreaLUA("BG0118","",[152.510],NE))
+		ActionOverride(Player4,LeaveAreaLUA("BG0118","",[179.544],NE))
+		ActionOverride(Player5,LeaveAreaLUA("BG0118","",[202.567],NE))
+		ActionOverride(Player6,LeaveAreaLUA("BG0118","",[239.581],N))
+		LeaveAreaLUA("BG0118","",[534.263],SW)
+
+		// Lock tham in Muahahaha
+		TriggerActivation("Door0116",FALSE)
+
 		FadeFromColor([30.0],0)
 		MultiPlayerSync()
 		EndCutSceneMode()
+
+		// Send in the messenger to notify them of the attack
+		StartCutSceneMode() 
+		StartCutScene("#L_Cut10")
 END
 

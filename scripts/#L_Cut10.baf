@@ -1,0 +1,23 @@
+////////////////////////////////////////////////////////
+// Send FF Escorts to inform PC of Caelar attack      //
+// Parsed via main_common.tpa called via #L_Cut07.bcs //
+////////////////////////////////////////////////////////
+
+IF
+	TRUE()
+THEN
+	RESPONSE #100
+		// Fade to black in all cases
+		CutSceneId(Player1)
+		DisplayStringHead(Player1,~Flaming Fist Escorts will be arriving shortly~)
+
+		MultiPlayerSync()
+		EndCutSceneMode()
+
+		Wait(5)
+
+		// Send in the messenger to notify them of the attack
+		StartCutSceneMode() 
+
+END
+

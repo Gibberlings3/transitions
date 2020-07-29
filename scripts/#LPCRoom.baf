@@ -69,3 +69,27 @@ THEN
 		Continue()
 END
 
+// If sent to their house to wait out the Caelar attack
+// Make sure the servant says his spiel then send in the FF Escort
+IF
+	Global("#L_StartCaelarAttack","GLOBAL",4)
+	Global("#L_ServantSpawned","MYAREA",2)
+	OR(3)
+		AreaCheck("#LBG0006")	// House in front of the palace
+		AreaCheck("#LBG3201")	// Cabin in High Hedge
+		AreaCheck("#LBG3347")	// House in Beregost
+THEN
+	RESPONSE #100
+		// Send in the Flaming Fist Escort
+		SetGlobal("#L_StartCaelarAttack","GLOBAL",10)
+		CreateCreatureObjectOffset("#LffEsc1",Player1,[-100.0])
+		CreateCreatureObjectOffset("#LffEsc2",Player1,[100.0])
+		CreateCreatureObjectOffset("#LffEsc3",Player1,[0.-100])
+		ActionOverride("#LffEsc1",FaceObject(Player1))
+		ActionOverride("#LffEsc2",FaceObject(Player1))
+		ActionOverride("#LffEsc3",FaceObject(Player1))
+		ActionOverride("#LffEsc1",Dialogue(Player1))
+		Continue()
+END
+
+

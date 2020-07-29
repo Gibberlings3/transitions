@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////
 
 BEGIN ~#LFFEsc1~
-IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
+	IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 		SAY @2294 /* ~<PROPER_SIRMAAM>, the Dukes have sent me to request your aid in rounding up the remaining supporters of Sarevok.~ */
 		++ @2295 /* ~Ok, let's go.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) ClearAllActions() StartCutSceneMode() StartCutSceneEx("#L_Cut06",TRUE)~ EXIT
 		++ @2296 /* ~I'll be there shortly.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2)~ + QUEST_HURRY
@@ -57,6 +57,17 @@ IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
 		= @2317 /* ~You can visit her there whenever you'd like.  Her suite is on the third floor.~ */
 		++ @2114 /* ~Thank you.  I'll do that.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680]) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
 		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680]) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
+	END
+
+	IF ~Global("#L_StartCaelarAttack","GLOBAL",10) OR(3) AreaCheck("#LBG0006") AreaCheck("#LBG3201") AreaCheck("#LBG3347")~ THEN BEGIN SOD_START_1a
+		SAY @2441 /* ~<PROPER_SIRMAAM>, the Dukes have sent us to inform you of an attack on the palace.~ */
+		++ @2442 /* ~What's that got to do with me?~ */ + SOD_START_1b
+	END
+
+	IF ~~ THEN SOD_START_1b
+		SAY @2443 /* ~It appears you were the intended target, <PRO_SIRMAAM>.~ */
+		= @2444 /* ~The Duke's request your presence to discuss the matter.~ */
+		++ @2445 /* ~Ok, let's go.~ */ DO ~ClearAllActions() SetGlobal("#L_StartCaelarAttack","GLOBAL",99) StartCutSceneMode() StartCutScene("#L_Cut11")~ EXIT
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR") AreaCheck("BG1100")~ THEN BEGIN ESCORT_1

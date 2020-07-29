@@ -162,7 +162,7 @@
 @2072	= ~I'd prefer the one in Beregost.~
 @2073	= ~I'd prefer the cabin in High Hedge.~
 @2074	= ~I'd prefer the one in front of the Ducal Palace.~
-@2075	= ~That's the large grey house on the upper west side.~
+@2075	= ~That's the large gray house on the upper west side.~
 @2076	= ~Ahh, a place in the woods.  Be careful not to bother the grumpy mage that will be your neighbor.~
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
 @2078	= ~Here's your key.~
@@ -356,9 +356,9 @@
 @2264	= ~So, <CHARNAME>, what are your plans now?~
 @2265	= ~I think I'll go up stairs and sleep for a couple weeks.~
 @2266	= ~I'm going to settle into my new house and sleep for a couple weeks.~
-@2267	= ~I think I'll go to Elfsong and celebrate for a couple weeks.~
+@2267	= ~I think I'll go to Helm & Cloak and celebrate for a couple weeks.~
 @2268	= ~I'm going to settle into my new home, but I'll be back in a couple weeks to visit Imoen.~
-@2269	= ~I'm going to the Elfsong and celebrate, but I'll be back in a couple weeks to visit Imoen.~
+@2269	= ~I'm going to the Helm & Cloak and celebrate, but I'll be back in a couple weeks to visit Imoen.~
 @2270	= ~I have places to go, things to do, people to see.~
 @2271	= ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~
 @2272	= ~I've had a special gift made for you.  It will allow for a limited number of wishes.~
@@ -408,7 +408,7 @@
 @2303	= ~So, <CHARNAME>, what would you like to do?~
 @2304	= ~I'd like to go to my room in the palace.~
 @2305	= ~I'd like to go home.~
-@2306	= ~I'd like to go to the Elfsong Tavern.~
+@2306	= ~I'd like to go to the Helm & Cloak Tavern.~
 @2307	= ~I'd like to visit Imoen.~
 @2308	= ~Nothing at this time.~
 @2309	= ~I like to gather a group and explore a bit, maybe see what's south of Nashkel.~
@@ -610,3 +610,10 @@
 @2439	= ~You take care of yourself, ya hear <PRO_BOYGIRL>?!~
 
 // @2440 up with Imoen training
+
+// Flaming Fist Escort announcing the Caelar Elite attack at the palace
+@2441	= ~<PROPER_SIRMAAM>, the Dukes have sent us to inform you of an attack on the palace.~
+@2442	= ~What's that got to do with me?~
+@2443	= ~It appears you were the intended target, <PRO_SIRMAAM>.~
+@2444	= ~The Duke's request your presence to discuss the matter.~
+@2445	= ~Ok, let's go.~
