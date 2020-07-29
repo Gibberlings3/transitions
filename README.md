@@ -210,8 +210,8 @@ Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, gui
 Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
 You can all thank subtledoctor for timers having the option to skip sailing times
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
-Bubb and CamDawg for helping me get through a cut-scene/override fiasco - LOVE YOU FOREVER!!!
-Igi: for the potion from iiItemsMod I modified to use for Imoen after Chateau Irenicus
+Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
+Iggi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
 The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
