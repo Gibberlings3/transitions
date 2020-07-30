@@ -25,12 +25,13 @@
 @25		= ~8 - Duke Eltan's reward option: Cabin in High Hedge~
 @26		= ~9 - Duke Eltan's reward option: Gray house in NW Beregost~
 @11		= ~10 - Allow Imoen's magic training to be delayed~
-@29		= ~11 - Add World Event Timers~
-@30		= ~Don't include sailing time to and from Balduran's Isle in the world timers~
-@31		= ~Sailing time (47 days) counts against world timers~
+@21		= ~11 - Give Imoen the ability to cast Magic Missile~
+@29		= ~12 - Add World Event Timers~		// Always renumber to be the last one installed
+@30		= ~Sailing time (47 days) counts against world timers~
+@31		= ~Don't include sailing time to and from Balduran's Isle in the world timers~
 
-@21 	= ~NOT USED 7 - Add Duke Eltan's reward and romance~
-@22		= ~NOT USED Hint at future romance~
-@23		= ~NOT USED Mature version~
-@24		= ~NOT USED Steamy verison~
-@27		= ~NOT USED Requires Duke Eltan's reward and romance to be installed~
+// Future enhancements
+@22 	= ~12 - Put group's BG1/SoD equipment into Athkatla stores~
+@23		= ~NOT USED~
+@24		= ~NOT USED~
+@27		= ~NOT USED~

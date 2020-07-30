@@ -1,0 +1,31 @@
+///////////////////////////////////////////////////////
+// First floor of Chateau Irenicus                   //
+// Puts some revitalization potions in the wall safe //
+// For Imoen to use before confronting Irenicus      //
+// And gives Imoen 2 magic missile innate abilities  //
+// Compiled via main_common.tpa                      //
+///////////////////////////////////////////////////////
+
+IF
+	Exists("IMOEN2")
+	Global("#L_ImoenIMM","GLOBAL",0)
+THEN
+	RESPONSE #100
+		// Trying to get it so the player can't get at the bag of holding
+		StartCutSceneMode()
+		CutSceneID(Player1)
+		SetGlobal("#L_ImoenIMM","GLOBAL",1)
+	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
+	    ActionOverride("IMOEN2",AddSpecialAbility("#LSPIN01"))  // Magic Missile
+	    Continue()
+END
+
+IF
+	Global("#L_ItemsStashed","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneID(Player1)
+		ActionOverride("Picture1",CreateItem("#LPot01",10,0,0))
+		EndCutSceneMode()
+		Continue()
+END

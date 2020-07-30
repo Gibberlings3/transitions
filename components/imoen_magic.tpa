@@ -1,0 +1,43 @@
+///////////////////////////////////////////////////////////////////////////
+// Optional component that gives Imoen her ability to cast magic missile //
+// Wand in SoD and Innate in BG2                                         //
+///////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION imoen_magic BEGIN
+	// A special wand of magic missiles that Imoen supposedly uses at the beginning of SoD
+	COPY ~%mod_root%/objects/#LWnd01.itm~ ~override~
+	    SAY NAME2 @1036 // ~Imoen's Wand of Magic Missiles~
+	    SAY DESC  @1037
+
+	// Put the cutspy where Imoen will fall so it can drop a wand
+	// For some reason it won't jump to her which is what I tried first
+	COPY_EXISTING ~BDCut02.bcs~ ~override~
+	   DECOMPILE_AND_PATCH BEGIN
+	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~CreateCreature("cutspy",[628.528],S)~ ~CreateCreature("cutspy",[757.588],S) GiveItemCreate("#LWnd01","CUTSPY",10,0,0)~
+	   END
+	BUT_ONLY_IF_IT_CHANGES
+
+	COPY_EXISTING ~BD0103.bcs~ ~override~
+	   	DECOMPILE_AND_PATCH BEGIN
+	      // Using the cutspy to drop Imoen's wand - its demise is dealt with later
+	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~ActionOverride("cutspy",DestroySelf())~ ~~
+	   END
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Put in the modified demise of cutspy so it'll drop Imoen's wand
+	EXTEND_TOP ~BD0103.bcs~ ~%mod_root%/scripts/BD0103_drop_wand.baf~
+
+	// An innate spell for Imoen so she'll have something to cast at Irenicus
+	COPY ~%mod_root%/objects/#LSPIN01.spl~ ~override~
+
+	// A potion for Imoen so she'll be refreshed after Chateau Irenicus
+	// Modified version of igi's Potion of Refreshment (iiItemMod)
+	COPY ~%mod_root%/objects/#LPot01.bam~ ~override~
+	COPY ~%mod_root%/objects/#LPot01.itm~ ~override~
+    	SAY NAME2 @1034 // ~Potion of Revitalization~
+    	SAY DESC  @1035
+
+	// Give Imoen her innate ability and a refresh spells potion
+	EXTEND_TOP ~AR0602.bcs~ ~%mod_root%/scripts/ar0602_imoen_magic.baf~
+
+END

@@ -9,7 +9,7 @@ GENERAL
 ------------------------------------------------------------------------
 This mod requires EET.  It is not compatible with other games at this time.
 
-The Transitions mod will provide a mechanism to remain in the BGI "world" after Sarevok is defeated.  It is aware of, compatible with, and plays off of jastey's Endless BG1 and Imoen Forever mods, though they are not required.
+The Transitions mod will provide a mechanism to remain in the BGI "world" after Sarevok is defeated.
 
 The mods main purpose is to provide seamless transitions between campaigns and to give the player the power to skip or participate in all or sections of SoD content as it fits their character and personal preferences.  It should be noted that there might be mods that expect specific SoD events to have happened prior to reaching BGII.  For example the PC may or may not have opened the portal in Dragonspear, may or may not have been physically present when a certain young girl is murdered. Globals will be set to indicate each major event in which the PC participated.
 
@@ -33,7 +33,6 @@ Allows access to Duke Belt in the Ducal Palace for game advancement
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate
 Allows for skipping or participating in all or just parts of SoD as fits your character
-To remain consistent with SoD and BG2, Imoen is offered magic training and given a suitable magic missile skill at the beginning of BG2 if she doesn't currently have one.
 
 Option 1: The "Sarevok died" movie is used as a dream sequence and a new bhaal-spawn power is awarded at the first rest
 Option 2: The "Sarevok died" movie is shown as usual after the fight and the new bhaal-spawn power is skipped
@@ -118,10 +117,13 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when you advance the game to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
 
-A special case has been put in for Imoen when the unfinished SoD component of I4E is installed and she's not in training.  Until that component is finished, she will be allowed to stay with the group if she doesn't get poisoned in the attack by Caelar elites.  She won't have any specific SoD dialogue, but you can keep her.  To avoid her being poisoned at the start of SoD, select to rest somewhere other than in the palace.  If she is in training or gets poisoned, it will be up to I4E or BG2 to allow her to rejoin your group.  This special case will no longer be available once the completed version of I4E SoD is installed.
+------------------------------------------------------------------------
+11 Give Imoen the ability to cast Magic Missile (Optional) 
+------------------------------------------------------------------------
+To remain consistent with SoD and BG2, Imoen is given the ability to cast magic missile at the beginning of SoD and BG2.  For SoD, she is given a special wand that will cast multiple magic missiles.  For BG2, she will have an innate ability to cast the spell twice and a potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.
 
 ------------------------------------------------------------------------
-11 Add World Event Timers (Optional)
+12 Add World Event Timers (Optional)
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  For now, refugees are limited to 3 waves, though more may be introduced in the future, if needed.
 
@@ -132,7 +134,6 @@ Twenty-five game-days after the death of Sarevok or fifteen days after the Korla
 If the PC joins the coalition, only recruitable SoD NPCs that aren't required to be in northern SoD areas prior to joining will remain in the group.  This includes:
 	- Minsc and Dynaheir
 	- Viconia
-	- Imoen under certain circumstances:  A special case has been put in for Imoen when the unfinished SoD portion of I4E is installed and she's not in training.  She will be allowed to stay with the group if she doesn't get poisoned in the attack by Caelar elites.  She won't have any specific SoD dialogue until I4E is finished, but you can keep her.  To avoid her being poisoned at the start of SoD, select to rest somewhere other than in the palace.  If she does get poisoneed, it will be up to I4E or BG2 to allow her to rejoin your group.
 NOTE: As a default, custom NPCs will leave the party unless they're specifically coded by their respective mods to stay.
 
 Twenty-five game-days after the first Caelar elite attack if the PC isn't working with the coalition, the PC will be arrested and the trial will begin whether the PC was anywhere near Dragonspear or not.  Again, ToSC areas are safe zones until the demon has been dispatched.
@@ -211,7 +212,7 @@ Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mo
 You can all thank subtledoctor for timers having the option to skip sailing times
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
-Iggi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
+igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
 The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
@@ -242,4 +243,5 @@ The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under
 
 Endless BG1 components are used with the permission of the mod's author, jastey.
 
+The Refreshment Potion BAM file from the iiItem mod is used for the Revitalization Potion with the permission of the mod's author, igi. 
 
