@@ -23,9 +23,10 @@ THEN
 		ActionOverride(Player5,Rest())
 		ActionOverride(Player6,Rest())
 		DayNight(23)
+		DisplayStringHead(Player1,@1042)
 		EndCutSceneMode()
-		Wait(1)
 		ActionOverride("IMOEN2",DestroySelf())
+		Wait(3)
 		FadeFromColor([20.0],0)
 END
 

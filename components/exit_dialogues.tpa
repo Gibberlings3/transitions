@@ -462,8 +462,8 @@ END
    >>>>>>>>
    EXTEND_TOP ~%bcs_file%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
 
-   // This is the normal DO after the "leaving" dialogues
-   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
+   // This is the normal DO after the "leaving" dialogues NOT USED 
+//   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
 
    // Normal exit line in addition to their unique lines (preSoD/BG2)
    // If I am carrying anything you'd prefer to keep, let's exchange equipment now.
@@ -806,7 +806,7 @@ END
             %exit_leave%
             %group_bg2_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea()) SetGlobal("#L_StartBG2","GLOBAL",2) StartCutSceneMode() StartCutSceneEx("#L_Cut09",TRUE)~ EXIT~~~~~
    END
 
    // Put it all together
@@ -827,7 +827,7 @@ END
             %exit_leave%
             %group_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea()) SetWorldmap("BGMap") SetCutSceneLite(TRUE) StartCutSceneEx("#L_Cut07",TRUE)~ EXIT
 
       %pre_bg2%
 

@@ -387,6 +387,7 @@ COPY_EXISTING ~BD0103.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~ActionOverride("cutspy",DestroySelf())~ ~~
    END
 BUT_ONLY_IF_IT_CHANGES
+
 // Put in the modified attack scene and the new demise of cutspy so it'll drop Imoen's wand
 LAF INSERT_SCRIPT_BLOCK
    INT_VAR 
