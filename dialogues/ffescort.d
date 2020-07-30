@@ -59,17 +59,6 @@ BEGIN ~#LFFEsc1~
 		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680]) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
 	END
 
-	IF ~Global("#L_StartCaelarAttack","GLOBAL",10) OR(3) AreaCheck("#LBG0006") AreaCheck("#LBG3201") AreaCheck("#LBG3347")~ THEN BEGIN SOD_START_1a
-		SAY @2441 /* ~<PROPER_SIRMAAM>, the Dukes have sent us to inform you of an attack on the palace.~ */
-		++ @2442 /* ~What's that got to do with me?~ */ + SOD_START_1b
-	END
-
-	IF ~~ THEN SOD_START_1b
-		SAY @2443 /* ~It appears you were the intended target, <PRO_SIRMAAM>.~ */
-		= @2444 /* ~The Duke's request your presence to discuss the matter.~ */
-		++ @2445 /* ~Ok, let's go.~ */ DO ~ClearAllActions() SetGlobal("#L_StartCaelarAttack","GLOBAL",99) StartCutSceneMode() StartCutScene("#L_Cut11")~ EXIT
-	END
-
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR") AreaCheck("BG1100")~ THEN BEGIN ESCORT_1
 		SAY @2194 /* ~No survivors?~ */
 		++ @2195 /* ~I'm afraid not.~ */ + ESCORT_LEAVESa

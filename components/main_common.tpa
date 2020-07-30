@@ -379,6 +379,10 @@ BUT_ONLY_IF_IT_CHANGES
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
 
+// Updated chapter text
+COPY ~%mod_root%/objects/#LCHPT08.2DA~ ~override~
+   REPLACE "REPLACEME" @1042
+
 // Allow for only 2nd half to be run
 COPY_EXISTING ~BD0103.bcs~ ~override~
    DECOMPILE_AND_PATCH BEGIN

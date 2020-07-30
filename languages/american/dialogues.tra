@@ -611,13 +611,3 @@
 
 // @2440 up with Imoen training
 
-// Flaming Fist Escort announcing the Caelar Elite attack at the palace
-// Not used
-@2441	= ~<PROPER_SIRMAAM>, the Dukes have sent us to inform you of an attack on the palace.~
-@2442	= ~What's that got to do with me?~
-@2443	= ~It appears you were the intended target, <PRO_SIRMAAM>.~
-@2444	= ~The Duke's request your presence to discuss the matter.~
-@2445	= ~Ok, let's go.~
-
-// Some snark...
-@2446	= ~How the hells should I know?~

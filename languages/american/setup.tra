@@ -27,11 +27,11 @@
 @11		= ~10 - Allow Imoen's magic training to be delayed~
 @21		= ~11 - Give Imoen the ability to cast Magic Missile~
 @22 	= ~12 - Add a little snark to SoD dialogues~
-@29		= ~13 - Add World Event Timers~		// Always renumber to be the last one installed
-@30		= ~Sailing time (47 days) counts against world timers~
-@31		= ~Don't include sailing time to and from Balduran's Isle in the world timers~
+@29		= ~13 - Add Waves of Refugees~		// Always renumber to be the last one installed
 
 // Future enhancements
 @23		= ~NOT USED~
 @24		= ~NOT USED~
 @27		= ~NOT USED~
+@30		= ~Sailing time (47 days) counts against world timers~
+@31		= ~Don't include sailing time to and from Balduran's Isle in the world timers~

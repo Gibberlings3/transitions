@@ -49,3 +49,14 @@ APPEND LIIA
 	END
 END
 
+//////////////////
+// SOD Dialogue //
+//////////////////
+// Allow the line to Entar about him being dead if SoD reached via Transitions
+ALTER_TRANS BDLIIA 
+	BEGIN 9 END 
+	BEGIN 2 END 
+	BEGIN
+  		"TRIGGER" ~!Global("SOD_fromimport","global",0)~
+	END
+

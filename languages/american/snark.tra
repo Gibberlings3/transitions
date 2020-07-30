@@ -1,0 +1,23 @@
+/////////////////////////////////////////////////////
+// Dialogue lines for the optional snark component //
+// Used for snark.d                                //
+/////////////////////////////////////////////////////
+
+// Some snark...
+// Response to Corwin's stupid question...
+@3000	= ~How the hells should I know?~
+
+// Response to Liia's request for PC to join the coalition
+@3001	= ~You want me to join the army?~
+
+// Eltan's response and dialogue with PC
+@3002	= ~Accompany is more to the point.~
+@3003	= ~What would you have me do?  Entertain your troops?  I'm just a bard!~
+@3004	= ~What could I possibly do that your trained army couldn't accomplish?  Well...besides...~
+@3005	= ~A bard whose talents far exceed that of song.  A bard that solved the iron crisis, exposed Sarevok, and saved my life.~
+@3006	= ~You mean besides solving the iron crisis?  Exposing Sarevok?  Saving my life?~
+@3007	= ~Besides your obvious talent for tactics and getting to the root of the problem, you are a symbol of hope for the entire region.~
+@3008	= ~I know it is a heavy burden to lay upon one so young, but we don't always get to choose our destiny.~
+@3009	= ~I can't promise anything, and I'm not joining any army ... just so we're clear.  But I'll go along and help where I'm able.~
+@3010	= ~So the reward for a dangerous job well done is more dangerous work. I have laid my own path, I will follow it.~
+@3011	= ~On the contrary, my coin is on the edge.  I choose my own destiny, and I choose to see this through.~
