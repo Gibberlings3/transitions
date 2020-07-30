@@ -96,6 +96,23 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 			bcs_name = BG4000							// GULLYKIN
 	END
 
+	////////////////
+	// ToSC Areas //
+	////////////////
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_tosc_areas						// like my_new_BG0146
+			bcs_name = BG1000							// ULGOTH'S BEARD
+	END
+
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = timers_tosc_areas						// like my_new_BG0146
+			bcs_name = BG0500							// DURLAG'S TOWER
+	END
+
 	// Refugee CREs (taken directly from jastey's EBG1 except for naming)
 	COPY_EXISTING ~FTOBE2.cre~ ~override/#LRfgF01.cre~ // Female #1
 	    SAY NAME1 @1029 /* Refugee */
