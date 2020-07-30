@@ -144,7 +144,23 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	// Set up BG north to spawn the refugees
 	EXTEND_BOTTOM ~BG0200.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
 
-	// Travel to Palace cut-scene used by messengers
+	// Travel to BG1 Palace cut-scene used by quest messengers
 	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut06.baf~	
+
+	// Travel to SoD Palace cut-scenes used by messengers after auto-start of SoD
+	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut10.baf~
+	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut11.baf~
+	COPY_EXISTING ~BD0102.bcs~ ~override~
+	   DECOMPILE_AND_PATCH BEGIN
+	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~NearLocation(Player1,324,281,10)~ ~OR(2) NearLocation(Player1,324,281,10) NearLocation(Player1,674,393,10)~
+	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BD_HELPED_KILL_ASSASSINS","GLOBAL",1)~ ~!Global("BD_HELPED_KILL_ASSASSINS","GLOBAL",0)~
+	   END
+	BUT_ONLY_IF_IT_CHANGES
+	COPY_EXISTING ~BG0100.bcs~ ~override~
+	   DECOMPILE_AND_PATCH BEGIN
+	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Assassin2",See([PC]))~ ~TriggerOverride("Assassin2",See([PC])) GlobalLT("BD_plot","global",52)~
+	   END
+	BUT_ONLY_IF_IT_CHANGES
+
 END
 

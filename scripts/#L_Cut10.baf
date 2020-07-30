@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////
 // Send FF Escorts to inform PC of Caelar attack      //
-// Parsed via main_common.tpa called via #L_Cut07.bcs //
+// Parsed via timers_common.tpa                       //
 ////////////////////////////////////////////////////////
 
 IF

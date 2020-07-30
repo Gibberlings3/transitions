@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////
 // Travel to Palace script used by messengers //
-// Parsed via main_common.tpa                 //
+// Parsed via timers_common.tpa               //
 ////////////////////////////////////////////////
 IF
 	True()
