@@ -3,6 +3,8 @@
 /////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION timers_common BEGIN
+
+/*
 	// Area script to set up timers
 	EXTEND_BOTTOM ~BG0125.BCS~ ~%mod_root%/scripts/BG0125_timers.baf~
 
@@ -112,6 +114,7 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 			baf_name = timers_tosc_areas						// like my_new_BG0146
 			bcs_name = BG0500							// DURLAG'S TOWER
 	END
+*/
 
 	// Refugee CREs (taken directly from jastey's EBG1 except for naming)
 	COPY_EXISTING ~FTOBE2.cre~ ~override/#LRfgF01.cre~ // Female #1
@@ -161,6 +164,7 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	// Set up BG north to spawn the refugees
 	EXTEND_BOTTOM ~BG0200.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
 
+/*
 	// Travel to BG1 Palace cut-scene used by quest messengers
 	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut06.baf~	
 
@@ -178,6 +182,6 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Assassin2",See([PC]))~ ~TriggerOverride("Assassin2",See([PC])) GlobalLT("BD_plot","global",52)~
 	   END
 	BUT_ONLY_IF_IT_CHANGES
-
+*/
 END
 

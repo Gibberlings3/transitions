@@ -283,25 +283,9 @@ LAF imoen_magic END
 // Only because it's read-me description is so long //
 // This component has 2 different options           //
 //////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////
-// This option counts the sailing time to and from Balduran's Isle
-BEGIN @30   // MOD 500
+BEGIN @29   // MOD 500
 DESIGNATED 500
-SUBCOMPONENT @29
 LABEL TIMERS_NO_SKIP_SAILING
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
-
-////////////////////////////////////////////////////////////////////////////////////////
-// This option will skip the sailing time to and from Balduran's Isle
-BEGIN @31   // MOD 501
-SUBCOMPONENT @29
-LABEL TIMERS_SKIP_SAILING
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
-INCLUDE ~transitions/components/timers_common.tpa~
-LAF timers_common END
-INCLUDE ~transitions/components/timers_skip_sail.tpa~
-LAF timers_skip_sail END
-

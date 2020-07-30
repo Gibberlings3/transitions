@@ -13,11 +13,13 @@ The Transitions mod will provide a mechanism to remain in the BGI "world" after 
 
 The mods main purpose is to provide seamless transitions between campaigns and to give the player the power to skip or participate in all or sections of SoD content as it fits their character and personal preferences.  It should be noted that there might be mods that expect specific SoD events to have happened prior to reaching BGII.  For example the PC may or may not have opened the portal in Dragonspear, may or may not have been physically present when a certain young girl is murdered. Globals will be set to indicate each major event in which the PC participated.
 
-Progressing through to SoD or BGII areas of the game can be done quickly by talking to Duke Belt inside the Palace and/or by using a custom item he provides after the clean-up quests are finished.  The game can also automatically progress more slowly via a series of optional world event timers even if you never speak with Duke Belt or do anything involving SoD.  
+Progressing through to SoD or BGII areas of the game can be done quickly by talking to Duke Belt inside the Palace and/or by using a custom item he provides after the clean-up quests are finished.
 
-The protagonist can take up residence at the Ducal Palace, also thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events, but there may be a time limit if the optional world event timers are installed.
+The protagonist can take up residence at the Ducal Palace, also thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
+
+The possible plot hole dealing with Imoen's ability to cast magic missile can also be dealt with.
 
 There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  Good and neutral aligned protagonists will receive Cure Serious Wounds and evil aligned protagonists will receive Cause Serious Wounds.  They weren't my first choice.  I wanted Greenstone Amulet's Mind Shield and Algernon's Cloak Charm Creature, but that's a bit more complicated than I can take on at the moment.  It is my desire to put those in at a future time.
 
@@ -115,7 +117,7 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Allow Imoen's magic training to be delayed (Optional)
 ------------------------------------------------------------------------
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when you advance the game to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
+This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
 
 ------------------------------------------------------------------------
 11 Give Imoen the ability to cast Magic Missile (Optional) 
@@ -127,25 +129,10 @@ To remain consistent with SoD and BG2, Imoen is given the ability to cast magic 
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  For now, refugees are limited to 3 waves, though more may be introduced in the future, if needed.
 
-Ten game-days after the death of Sarevok, the cleanup quests including Korlasz, will become unavailable.  They can be done any time previous.  A messenger will attempt to illicit the aid of the PC after 8 game-days, with the caveat that each stage of the clean up allows for 2 days to reach the next stage before the messenger is sent or the ten-day timer is allowed to expire.  The completion or refusal of the Korlasz dungeon quest or the ten day timer expiring will trigger exit dialogues of some party members.  Whether or not unmodded NPCs actually leave or not is left up to the roleplaying preferences of the player.
-
-Twenty-five game-days after the death of Sarevok or fifteen days after the Korlasz dungeon is completed (which ever is later), Caelar elites will attack and the town of Baldur's Gate will be limited to the SoD version of the city.  They will continue to attack at random intervals with growing forces for another twenty-one game-days or until the PC joins the coalition or until the PC is overwhelmed by them (after which he/she will wake up in Dragonspear castle).  Note: ToSC areas are safe zones until the demon has been dispatched.
-
-If the PC joins the coalition, only recruitable SoD NPCs that aren't required to be in northern SoD areas prior to joining will remain in the group.  This includes:
-	- Minsc and Dynaheir
-	- Viconia
-NOTE: As a default, custom NPCs will leave the party unless they're specifically coded by their respective mods to stay.
-
-Twenty-five game-days after the first Caelar elite attack if the PC isn't working with the coalition, the PC will be arrested and the trial will begin whether the PC was anywhere near Dragonspear or not.  Again, ToSC areas are safe zones until the demon has been dispatched.
-
-There are 2 options for the timer portion:
-
-Option 1: Don't include sailing time to and from Balduran's Isle in the world timers
-Option 2: Sailing time (47 days) counts against world timers
-
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
+Expanded world event timers
 jastey's palace treasurer
 Add better Korlasz loot to stores if quest is skipped
 Close any open quests that will be impossible to continue after Sarevok is dead
@@ -209,7 +196,6 @@ DavidW: for the lovely macros included in alter_script.tpa as well as guidance o
 Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
 Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
 Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
-You can all thank subtledoctor for timers having the option to skip sailing times
 jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
