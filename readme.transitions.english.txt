@@ -125,7 +125,12 @@ This component allows you to control when Imoen leaves your group to train in ma
 To remain consistent with SoD and BG2, Imoen is given the ability to cast magic missile at the beginning of SoD and BG2.  For SoD, she is given a special wand that will cast multiple magic missiles.  For BG2, she will have an innate ability to cast the spell twice and a potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.
 
 ------------------------------------------------------------------------
-12 Add World Event Timers (Optional)
+12 Add a little snark to SoD (Optional) 
+------------------------------------------------------------------------
+Just adds some fun snarky comments to the otherwise stuffy dialogue of SoD
+
+------------------------------------------------------------------------
+13 Add World Event Timers (Optional)
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  For now, refugees are limited to 3 waves, though more may be introduced in the future, if needed.
 

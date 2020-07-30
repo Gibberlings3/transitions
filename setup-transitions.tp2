@@ -277,6 +277,17 @@ INCLUDE ~transitions/components/imoen_magic.tpa~
 LAF imoen_magic END
 
 
+///////////////////////////////////////////
+// ADD SOME SNARK TO STUFFY SOD DIALOGUE //
+///////////////////////////////////////////
+BEGIN @22   // MOD 90
+DESIGNATED 90
+LABEL SOD_SNARK
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/add_snark.tpa~
+LAF add_snark END
+
+
 //////////////////////////////////////////////////////
 // WORLD EVENT TIMERS                               //
 // I always want this to be last                    //
