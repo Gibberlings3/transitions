@@ -138,6 +138,7 @@ Refugees will start arriving in front of the palace in waves, seven game-days ap
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
 Expanded world event timers
+Narration added to modified Chapter 8 scrolling text
 jastey's palace treasurer
 Add better Korlasz loot to stores if quest is skipped
 Close any open quests that will be impossible to continue after Sarevok is dead
@@ -146,7 +147,7 @@ Check/Update all remaining BG1 NPCs
 	- Update Inn rumors
 	- Polish how the NPCs flee the Iron Throne HQ
 Updated bhaal-spawn powers (mind shield and charm creature)
-Scrolling text to cut scene before dream movie starts or after it ends
+Scrolling text to cut scene before dream movie starts or after it ends with narration
 Group reactions to new dream
 Access to a palace physician/cleric
 Conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
