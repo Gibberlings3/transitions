@@ -117,7 +117,7 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Allow Imoen's magic training to be delayed (Optional)
 ------------------------------------------------------------------------
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed or by the messenger sent when the 8-day timer expires if timers are installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
+This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
 
 ------------------------------------------------------------------------
 11 Give Imoen the ability to cast Magic Missile (Optional) 
