@@ -20,6 +20,13 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+
+		// Set globals that the game normally sets in Korlasz dungeon
+		SetGlobal("sprite_is_deadsafana","GLOBAL",0)
+		SetGlobal("sprite_is_deaddynaheir","GLOBAL",0)
+		SetGlobal("sprite_is_deadminsc","GLOBAL",0)
+		SetGlobal("sprite_is_deadrasaad","GLOBAL",0)
+
 		// Start the full attack scene
 		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
@@ -49,6 +56,13 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
+
+ 		// Set globals that the game normally sets in Korlasz dungeon
+		SetGlobal("sprite_is_deadsafana","GLOBAL",0)
+		SetGlobal("sprite_is_deaddynaheir","GLOBAL",0)
+		SetGlobal("sprite_is_deadminsc","GLOBAL",0)
+		SetGlobal("sprite_is_deadrasaad","GLOBAL",0)
+
 		// Start with the 2nd half of the attack scene
 		SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)
 		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
