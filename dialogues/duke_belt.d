@@ -561,11 +561,11 @@ ALTER_TRANS BDSCHAEL
 	BEGIN 20 21 23 END 
 	BEGIN 0 END 
 	BEGIN
-		"TRIGGER" ~Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_Snark","GLOBAL",0)~ 
+		"TRIGGER" ~Global("#L_AcceptedRoom","GLOBAL",1)~ 
+		"EPILOGUE" ~EXTERN BDBELT BELT_HAVE_ROOM~
 	END
 
 EXTEND_BOTTOM BDSCHAEL 20 21 23
-	IF ~Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_Snark","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_HAVE_ROOM 
 	IF ~Global("#L_AcceptedRoom","GLOBAL",0)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM
 END
 
@@ -580,21 +580,10 @@ APPEND BDBELT
 		++ @2443 /* ~Imoen and Fenster are up there, I'd not want to disturb them.~ */ EXTERN ~BDLIIA~ LIIA_IMOEN_ROOM_OK
 	END
 
-	IF ~~ THEN BELT_HAVE_ROOM_SNARK
+	IF ~~ THEN BELT_INSIST
 		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
 		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
-		+ ~Global("#L_BG1KorlaszDone","GLOBAL",1)~ + @2447 /* ~Like how you managed to keep Imoen safe?  Or that sword of Sarevok's?~ */ + BELT_SNARK
-	END
-
-	IF ~~ THEN BELT_GET_ROOM_NO_SNARK
-		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
-		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
-	END
-
-	IF ~~ THEN BELT_GET_ROOM_SNARK
-		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
-		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
-		+ ~Global("#L_BG1KorlaszDone","GLOBAL",1)~ + @2447 /* ~Like how you managed to keep Imoen safe?  Or that sword of Sarevok's?~ */ + BELT_SNARK
+		+ ~Global("#L_BG1KorlaszDone","GLOBAL",1) Global("#L_Snark","GLOBAL",1)~ + @2447 /* ~Like how you managed to keep Imoen safe?  Or that sword of Sarevok's?~ */ + BELT_SNARK
 	END
 
 	IF ~~ THEN BELT_SNARK
@@ -617,9 +606,7 @@ END
 APPEND BDLIIA
 	IF ~~ THEN LIIA_IMOEN_ROOM_OK
 		SAY @2444 /* ~Imoen will be moved to her quarters shortly.  You will not disturb her.~ */
-		IF ~Global("#L_AcceptedRoom","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_HAVE_ROOM_SNARK 
-		IF ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_Snark","GLOBAL",0)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM_NO_SNARK
-		IF ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_Snark","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM_SNARK
+		IF ~~ THEN EXTERN ~BDBELT~ BELT_INSIST
 	END
 END
 
