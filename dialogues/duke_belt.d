@@ -555,3 +555,71 @@ CHAIN
 	END
 	++ @2260 /* ~That's incredibly generous of you.  Glad to be of service!~ */ DO ~TakePartyItem("BDSHBHR") DestroyItem("BDSHBHR") GiveGoldForce(6000)~ + BELT_QUESTS_ALL_DONE
 
+
+// SOD
+ALTER_TRANS BDSCHAEL 
+	BEGIN 20 21 23 END 
+	BEGIN 0 END 
+	BEGIN
+		"TRIGGER" ~Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_Snark","GLOBAL",0)~ 
+	END
+
+EXTEND_BOTTOM BDSCHAEL 20 21 23
+	IF ~Global("#L_AcceptedRoom","GLOBAL",1) Global("#L_Snark","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_HAVE_ROOM 
+	IF ~Global("#L_AcceptedRoom","GLOBAL",0)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM
+END
+
+APPEND BDBELT
+	IF ~~ THEN BELT_GET_ROOM
+		SAY @2441 /* ~You can rest on the third floor when you're finished with your preparations.~ */
+		++ @2443 /* ~Imoen and Fenster are up there, I'd not want to disturb them.~ */ EXTERN ~BDLIIA~ LIIA_IMOEN_ROOM_OK
+	END
+
+	IF ~~ THEN BELT_HAVE_ROOM
+		SAY @2442 /* ~I want to make sure you rest here tonight, <CHARNAME>, when you're finished with your preparations.~ */
+		++ @2443 /* ~Imoen and Fenster are up there, I'd not want to disturb them.~ */ EXTERN ~BDLIIA~ LIIA_IMOEN_ROOM_OK
+	END
+
+	IF ~~ THEN BELT_HAVE_ROOM_SNARK
+		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
+		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
+		+ ~Global("#L_BG1KorlaszDone","GLOBAL",1)~ + @2447 /* ~Like how you managed to keep Imoen safe?  Or that sword of Sarevok's?~ */ + BELT_SNARK
+	END
+
+	IF ~~ THEN BELT_GET_ROOM_NO_SNARK
+		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
+		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
+	END
+
+	IF ~~ THEN BELT_GET_ROOM_SNARK
+		SAY @2445 /* ~I rather insist upon this, <CHARNAME>.  It's for your safety.~ */
+		++ @2446 /* ~My safety?  That's a bit ironic.~ */ + BELT_NO_SNARK
+		+ ~Global("#L_BG1KorlaszDone","GLOBAL",1)~ + @2447 /* ~Like how you managed to keep Imoen safe?  Or that sword of Sarevok's?~ */ + BELT_SNARK
+	END
+
+	IF ~~ THEN BELT_SNARK
+		SAY @2448 /* ~err...I was going to mention that it went missing...~ */
+		++ @2449 /* ~Do you know where it is?  I do.  It was stolen from you and sent to Athkatla at the request of some mysterious 'hooded man'.~ */ + BELT_SNARK_2
+	END
+
+	IF ~~ THEN BELT_SNARK_2
+		SAY @2450 /* ~That I didn't know.~ */
+		++ @2451 /* ~You should probably have someone look into that.  It could end up being important.~ */ + BELT_NO_SNARK
+	END
+
+	IF ~~ THEN BELT_NO_SNARK
+		SAY @2452 /* ~Be that as it may, if tonight's attack would have happened when you were staying outside the palace, you'd not have had the Flaming Fist to help you fend them off.~ */
+		= @2453 /* ~You would not have been able to defend yourself from them all.~ */
+		++ @2454 /* ~Well, that's true enough.~ */ DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ + 41
+	END
+END
+
+APPEND BDLIIA
+	IF ~~ THEN LIIA_IMOEN_ROOM_OK
+		SAY @2444 /* ~Imoen will be moved to her quarters shortly.  You will not disturb her.~ */
+		IF ~Global("#L_AcceptedRoom","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_HAVE_ROOM_SNARK 
+		IF ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_Snark","GLOBAL",0)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM_NO_SNARK
+		IF ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_Snark","GLOBAL",1)~ THEN EXTERN ~BDBELT~ BELT_GET_ROOM_SNARK
+	END
+END
+

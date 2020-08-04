@@ -65,6 +65,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",1)
+		MoveContainerContents("BD0103*PlayerChest00","#LBD0103*PlayerChest00") // #5 SoD Room in Palace
 		SmallWait(1)
 		Continue()
 END

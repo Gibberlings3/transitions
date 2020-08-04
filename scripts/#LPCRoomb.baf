@@ -10,7 +10,8 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",3)
-		MoveContainerContents("#LBD0103*PlayerChest00","#LBG3201*PlayerChest00")
+		MoveContainerContents("#LBD0103*PlayerChest00","#LBG3201*PlayerChest00") // #1 BG1 Room in Palace
+		MoveContainerContents("BD0103*PlayerChest00","#LBG3201*PlayerChest00") // #5 SoD Room in Palace
 		SmallWait(1)
 		Continue()
 END

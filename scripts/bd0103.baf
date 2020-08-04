@@ -12,6 +12,10 @@ THEN
 		MultiPlayerSync()
 		StartCutSceneMode()
 		ActionOverride("IMOEN2",DestroySelf())
+		RemoveMapNote([440.420],267509)
+		RemoveMapNote([105.473],270641)
+		SetGlobal("#L_AddMapNotes","BD0103",1)
+		SetGlobal("#L_SpawnServant","BD0103",1)
 		SetGlobal("bd_npc_camp_chapter","global",1)
 		SetGlobal("BD_PLOT","GLOBAL",51)
 		ActionOverride(Player1,ChangeAIScript("bdplayer",OVERRIDE))
@@ -25,8 +29,45 @@ THEN
 		ActionOverride(Player6,Rest())
 		DayNight(23)
 		EndCutSceneMode()
-		Wait(3)
+		Wait(1)
 		IncrementChapter("#LCHPT08")
 		FadeFromColor([20.0],0)
 END
 
+IF
+	Global("#L_AcceptedRoom","GLOBAL",1)
+	Global("#L_AddMapNotes","BD0103", 1)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AddMapNotes","BD0103",0)
+		AddMapNote([440.420],267509)
+		AddMapNote([105.473],270641)
+		Continue()
+END
+
+IF
+	Global("#L_AcceptedRoom","GLOBAL",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",5)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",5)
+		MoveContainerContents("#LBD0103*PlayerChest00","BD0103*PlayerChest00") // #1 BG1 Room in Palace
+		MoveContainerContents("#LBG0006*PlayerChest00","BD0103*PlayerChest00") // #2 House in front of Palace
+		MoveContainerContents("#LBG3201*PlayerChest00","BD0103*PlayerChest00") // #3 High Hedge
+		MoveContainerContents("#LBG3347*PlayerChest00","BD0103*PlayerChest00") // #4 Beregost
+		SmallWait(1)
+		Continue()
+END
+
+// Spawn the servant the first time the PC enters their room in palace
+// OR their residence whereever it may be
+IF
+	Global("#L_SpawnServant","BD0103",1)
+	Global("#L_AcceptedRoom","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ContainerEnable("PlayerChest00",TRUE)
+		SetGlobal("#L_SpawnServant","BD0103",0)
+    	CreateCreature("#LDPSrv1",[491.308],6)
+		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
+END

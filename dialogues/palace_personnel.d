@@ -77,7 +77,7 @@ END
 
 // Servant in PC's places of residence
 BEGIN ~#LDPSrv1~
-	IF ~AreaCheck("#LBD0103")~ THEN pc_room_servant
+	IF ~OR(2) AreaCheck("#LBD0103") AreaCheck("BD0103")~ THEN pc_room_servant
 		SAY @2060 /* ~Welcome, <PRO_SIRMAAM>.~ */
 		= @2061 /* ~These rooms can serve as your residence whenever you are in the city.~ */
 		= @2062 /* ~The chest on the far left of the room is for your personal use.  It is quite secure.~ */
