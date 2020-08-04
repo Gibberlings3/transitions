@@ -169,7 +169,7 @@ There are no known compatability issues at this time
 ------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------
-It may be necessary to install transitions before NPC mods.
+It may be necessary to install Transitions before NPC mods.
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
