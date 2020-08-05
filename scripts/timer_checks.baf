@@ -16,6 +16,7 @@ THEN
 		Continue()
 END
 
+/*
 // Clean up quests time limit
 // 8 days to the messenger - 2 more days after that
 IF
@@ -70,3 +71,39 @@ THEN
 		// To Do...Send the messenger
 		Continue()
 END
+*/
+
+// Timer to see if group needs to transfer to SoD/BG2 but it won't happen via the dialogue as normal
+IF
+	Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogue never fired
+	Global("#L_SoloExitLeft","GLOBAL",0)
+	!Global("#L_SoloExitTimer","GLOBAL",0)
+	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
+	Global("#L_SarvQuests","GLOBAL",100)
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
+	Global("EndOfBG1","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ClearAllActions() 
+		SetGlobal("#L_SoloExitLeft","GLOBAL",1) 
+		SetWorldmap("BGMap")
+		SetCutSceneLite(TRUE)
+		StartCutSceneEx("#L_Cut07",TRUE)
+END
+
+IF
+	Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogue never fired
+	!Global("#L_SoloExitTimer","GLOBAL",0)
+	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
+	Global("#L_SarvQuests","GLOBAL",100)
+	Global("#L_StartBG2","GLOBAL",1)
+	Global("EndOfBG1","GLOBAL",2)
+THEN
+	RESPONSE #100
+		ClearAllActions()
+		SetGlobal("#L_StartBG2","GLOBAL",2)
+		StartCutSceneMode()
+		StartCutSceneEx("#L_Cut09",TRUE)
+END
+

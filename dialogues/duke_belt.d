@@ -41,21 +41,19 @@ APPEND BELT
 	IF ~~ THEN BEGIN ROOM_GOOD
 		SAY @2051 /* ~Your suite is on the third floor.  A servant will be there to show you around.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
-		IF ~Global("#L_EltanInstalled","GLOBAL",1)~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 	END
 
 	IF ~~ THEN BEGIN NO_ROOM
 		SAY @2052 /* ~I'm sorry to hear that.  Please let me know if you change your mind.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3)~ EXIT
-		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
 	IF ~~ THEN BEGIN ROOM_BAD
 		SAY @2053 /* ~I'm sorry you feel that way.  Please let me know if you change your mind.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3)~ EXIT
-		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("BDELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuestsInProg","GLOBAL",2) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
@@ -188,12 +186,12 @@ APPEND BELT
 	IF ~~ THEN BELT_NOW_WHAT
 		SAY @2264 /* ~So, <CHARNAME>, what are your plans now?~ */
 		++ @2270 /* ~I have places to go, things to do, people to see.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_FUN
-		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",1)~ EXIT
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2268 /* ~I'm going to settle into my new home, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)~ EXIT
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2269 /* ~I'm going to the Elfsong and celebrate, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)~ EXIT
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2266 /* ~I'm going to settle into my new house and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",3)~ EXIT
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2267 /* ~I think I'll go to Elfsong and celebrate for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",3)~ EXIT
-		++ @2271 /* ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",2) SetGlobal("#L_StartBG2","GLOBAL",1)~ EXIT
+		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2268 /* ~I'm going to settle into my new home, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2269 /* ~I'm going to the Elfsong and celebrate, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2266 /* ~I'm going to settle into my new house and sleep for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",3) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2267 /* ~I think I'll go to Elfsong and celebrate for a week.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobal("#L_StartCaelarAttack","GLOBAL",3) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
+		++ @2271 /* ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",2) SetGlobal("#L_StartBG2","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",FIVE_ROUNDS)~ EXIT
 	END
 
 	IF ~~ THEN BELT_FUN
