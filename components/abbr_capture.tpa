@@ -1,0 +1,8 @@
+////////////////////////////////////////////////////////
+// Optional component that skips the fight scene that //
+// leads to the capture of the group prior to BG2     //
+////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION abbr_capture BEGIN
+	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/bg0125_abbr_cap.baf~
+END

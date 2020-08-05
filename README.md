@@ -130,7 +130,12 @@ To remain consistent with SoD and BG2, Imoen is given the ability to cast magic 
 Just adds some fun snarky comments to the otherwise stuffy dialogue of SoD
 
 ------------------------------------------------------------------------
-13 Add World Event Timers (Optional)
+13 Use abbreviated capture scene leading to BG2 (Optional) 
+------------------------------------------------------------------------
+Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.
+
+------------------------------------------------------------------------
+14 Add World Event Timers (Optional)
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  For now, refugees are limited to 3 waves, though more may be introduced in the future, if needed.
 

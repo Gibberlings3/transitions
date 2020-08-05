@@ -287,6 +287,15 @@ REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (M
 INCLUDE ~transitions/components/add_snark.tpa~
 LAF add_snark END
 
+//////////////////////////////////////////////////
+// USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //
+//////////////////////////////////////////////////
+BEGIN @23   // MOD 100
+DESIGNATED 100
+LABEL ABBR_CAPTURE
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/abbr_capture.tpa~
+LAF abbr_capture END
 
 //////////////////////////////////////////////////////
 // WORLD EVENT TIMERS                               //

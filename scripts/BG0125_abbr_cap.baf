@@ -1,0 +1,12 @@
+//////////////////////////////////////////////////////////////
+// Sets up a global to use abbreviated capture prior to BG2 //
+// Patched via abbr_capture.tpa                             //
+//////////////////////////////////////////////////////////////
+IF
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AbbrCapture","GLOBAL",1)
+  		Continue()
+END
+
