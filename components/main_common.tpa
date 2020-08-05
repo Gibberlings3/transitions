@@ -338,7 +338,8 @@ COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
    WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
 
 // Script used by the item from within its dialogue to send the group to the palace
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~
+// NO LONGER USED 
+// COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~
 
 // The dialogue for the item
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
@@ -346,12 +347,15 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/di
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
+// No longer using this method
 // Script to attach to palace exits to start SoD or BG2 when attempting to leave
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
+// COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
 
-// Cut scene called by door script when transitioning to BG2
+// Cut scene called by exit dialogues when transitioning to BG2
+// Also called by door scripts in case player is solo - not any more
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
 
+/* No longer using this method
 // Modify palace exits to have a script that will kick off SoD/BG2 when used
 COPY_EXISTING ~BG0108.ARE~ ~override~
    LPF ALTER_AREA_REGION
@@ -375,6 +379,7 @@ COPY_EXISTING ~BG0108.ARE~ ~override~
          region_script = ~#LByeBG1.BCS~
    END
 BUT_ONLY_IF_IT_CHANGES
+*/
 
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
