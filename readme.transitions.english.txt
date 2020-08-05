@@ -142,29 +142,33 @@ Refugees will start arriving in front of the palace in waves, seven game-days ap
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-Add bounty hunter attacks until name cleared in Baldur's Gate
-Expanded world event timers
-Narration added to modified Chapter 8 scrolling text
-Put in jastey's palace treasurer
-Add better Korlasz loot to stores if quest is skipped
-Close any open quests that will be impossible to continue after Sarevok is dead
-Clean-up quests should use the quest journal
-Check/Update all remaining BG1 NPCs
-	- Update Inn rumors
-	- Polish how the NPCs flee the Iron Throne HQ
-Updated bhaal-spawn powers (mind shield and charm creature)
-Use scrolling text box mechanism before dream movie starts or after it ends with narration
-Add group reactions to new dream
-Allow access to a palace physician/cleric (Fenster?)
-Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
-Add a romance with Duke Eltan
-Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
-Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
-Distribute group's possessions from the end of SoD to stores in Athkatla 
-Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
-Clean up unique items that might be duplicated due to playing areas out of normal sequence
-Make sure there are consequenses to returning to BG before name is cleared
-Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
+* Add bounty hunter attacks until name cleared in Baldur's Gate
+* Expanded world event timers
+* Narration added to modified Chapter 8 scrolling text
+* Put in jastey's palace treasurer
+* Add better Korlasz loot to stores if quest is skipped
+* Close any open quests that will be impossible to continue after Sarevok is dead
+* Clean-up quests should use the quest journal
+* Check/Update all remaining BG1 NPCs
+	* - Update Inn rumors
+	* - Polish how the NPCs flee the Iron Throne HQ
+* Updated bhaal-spawn powers (mind shield and charm creature)
+* Use scrolling text box mechanism before dream movie starts or after it ends with narration
+* Add group reactions to new dream
+* Allow access to a palace physician/cleric (Fenster?)
+* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
+* Add a romance with Duke Eltan
+* Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
+* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
+* Distribute group's possessions from the end of SoD to stores in Athkatla 
+* Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
+* Clean up unique items that might be duplicated due to playing areas out of normal sequence
+* Make sure there are consequenses to returning to city of BG before name is cleared
+* Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
+* Open up Suldanessellar after Irenicus is defeated for quests
+* Add a romance with Queen Ellesime
+* Allow all quests to be completed after Irenicus is defeated
+* Add a "continue the adventure" ending with Bhaalspawn powers intact
 
 ------------------------------------------------------------------------
 COMPATABIITY NOTES
@@ -202,24 +206,24 @@ If you have installation problems or encounter any bugs, please post your bug re
 ------------------------------------------------------------------------
 CREDITS
 ------------------------------------------------------------------------
-BeamDog / Overhaul Games: for the Infinity Engine and inspiring this mod
-K4thos: for giving us the awesome playground (EET) in which to mod
-DavidW: for the lovely macros included in alter_script.tpa as well as guidance on encapsulation and immutability
-Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
-Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
-Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
-jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
-Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
-igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
-The folks at The Gibberlings Three forums: for never failing to answer my many many questions
+* BeamDog / Overhaul Games: for the Infinity Engine and inspiring this mod
+* K4thos: for giving us the awesome playground (EET) in which to mod
+* DavidW: for the lovely macros included in alter_script.tpa as well as guidance on encapsulation and immutability
+* Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
+* Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
+* Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
+* jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
+* Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
+* igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
+* The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
 USED TOOLS AND RESSOURCES
 ------------------------------------------------------------------------
 The Transitions Mod was created using the resources provided by the IESDP (https://gibberlings3.github.io/iesdp/index.htm) and with the following software:
 
-Near Infinity			https://github.com/Argent77/NearInfinity/releases/latest
-WeiDU					http://www.weidu.org
+* Near Infinity			https://github.com/Argent77/NearInfinity/releases/latest
+* WeiDU					http://www.weidu.org
 
 Modding communities, tutorials and technical assistance:
 

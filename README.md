@@ -163,8 +163,12 @@ PLANNED FUTURE ENHANCEMENTS
 * Distribute group's possessions from the end of SoD to stores in Athkatla 
 * Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
-* Make sure there are consequenses to returning to BG before name is cleared
+* Make sure there are consequenses to returning to city of BG before name is cleared
 * Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
+* Open up Suldanessellar after Irenicus is defeated for quests
+* Add a romance with Queen Ellesime
+* Allow all quests to be completed after Irenicus is defeated
+* Add a "continue the adventure" ending with Bhaalspawn powers intact
 
 ------------------------------------------------------------------------
 COMPATABIITY NOTES
