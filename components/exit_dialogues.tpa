@@ -815,7 +815,7 @@ END
 
       // Everyone leaves the group prior to SoD
       CHAIN
-         IF WEIGHT #-998 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_ExitTimer","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) GlobalGT("#L_StartCaelarAttack","GLOBAL",0)~ THEN %join_file% PRE_exit_WARNING
+         IF WEIGHT #-998 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_ExitTimer","GLOBAL",0) Global("EndOfBG1","GLOBAL",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_exit_WARNING
             %exit_init%
             %take_my_stuff%
             %group_exit_init%
@@ -823,7 +823,7 @@ END
          %take_your_split%
 
       CHAIN
-         IF WEIGHT #-997 ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
+         IF WEIGHT #-997 ~OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
             %exit_leave%
             %group_exit_leave%
          END
