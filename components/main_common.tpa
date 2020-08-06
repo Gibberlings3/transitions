@@ -433,3 +433,6 @@ COPY_EXISTING ~K#TELBGT.bcs~ ~override~
 BUT_ONLY_IF_IT_CHANGES
 EXTEND_BOTTOM ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT_end.baf~
 
+// For now, just get rid of Ophyllis if PC didn't lose their gold
+EXTEND_TOP ~BD0116.BCS~ ~%mod_root%/scripts/BD0116_skip_treasurer.baf~
+

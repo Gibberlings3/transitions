@@ -1,0 +1,13 @@
+/////////////////////////////////////////////////
+// Destroys treasurer from palace basement     //
+// Compiled via main_common.tpa                //
+/////////////////////////////////////////////////
+
+IF
+	Global("#L_SkipFirstHalfCA","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ActionOverride("BDOPHYLL",DestroySelf())
+		Continue()
+END
+
