@@ -626,4 +626,20 @@
 @2451	= ~You should probably have someone look into that.  It could end up being important.~
 @2452	= ~Be that as it may, if tonight's attack would have happened when you were staying outside the palace, you'd not have had the Flaming Fist to help you fend them off.~
 @2453	= ~You would not have been able to defend yourself from them all.~
-@2454	= ~Well, that's true enough.~
+@2454	= ~Well, that is true.  You're right, I am safer here.~
+
+// PC learns it's a weak poison that was used
+@2455	= ~They used a weak poison?  That makes no...they weren't trying to kill me.  They were trying to capture me.~
+@2456	= ~Hmm, you may be right.~
+
+// Final conversation with the Dukes before leaving the palace for Dragonspear
+@2457	= ~Before I leave, I need to point out that Caelar's minions weren't here to kill me.~
+@2458	= ~Yes, the poison they used was far too weak to accomplish that.~
+@2459	= ~Their purpose was to capture me.  I have no idea why.~
+@2460	= ~That is disturbing news.~
+@2461	= ~Even more disturbing was the visitor I had.  It seems a mysterious hooded man is stalking me.~
+@2462	= ~Before I leave, I have some disturbing news.  I received a visitor here in the palace. It seems a mysterious hooded man is stalking me.~
+@2463	= ~Could it be the same that commissioned the theft of Sarevok's sword?~
+@2464	= ~Well, he certainly fit the description.  Mysterious...creepy is closer to the truth.  And ominous.~
+@2465	= ~I must apologize, <CHARNAME>.  It seems our palace security never ceases to fail you.~
+

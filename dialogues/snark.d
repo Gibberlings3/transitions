@@ -40,3 +40,14 @@ APPEND BDELTAN
 	END
 END
 
+ALTER_TRANS BDENTAR
+	BEGIN 18 END
+	BEGIN 0 END
+	BEGIN
+		"TRIGGER" ~Global("#L_Snark","GLOBAL",0)~
+	END
+EXTEND_BOTTOM BDENTAR 18
+	IF ~!Global("#L_Snark","GLOBAL",0)~ THEN REPLY @3012 /* ~With all due respect sir, I'm not a babysitter.  Neither is the Fist.  But if you insist upon this folly, her fate is upon your head, not mine.~ */ DO ~AddJournalEntry(256390,QUEST)~ GOTO 44
+END
+
+

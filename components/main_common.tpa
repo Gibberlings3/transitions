@@ -407,6 +407,12 @@ LAF INSERT_SCRIPT_BLOCK
       insert = ~%mod_root%/scripts/bd0103.baf~
 END
 
+// SoD Palace dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/sod_palace.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// For now, just get rid of Ophyllis if PC didn't lose their gold
+EXTEND_TOP ~BD0116.BCS~ ~%mod_root%/scripts/BD0116_skip_treasurer.baf~
+
 // A wanted poster if the PC wasn't allowed to leave Baldur's Gate by the Dukes
 // A few of them will eventually be dispersed around Athkatla
 // First will be for PC to find in Chateau Irenicus
@@ -432,7 +438,4 @@ COPY_EXISTING ~K#TELBGT.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 EXTEND_BOTTOM ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT_end.baf~
-
-// For now, just get rid of Ophyllis if PC didn't lose their gold
-EXTEND_TOP ~BD0116.BCS~ ~%mod_root%/scripts/BD0116_skip_treasurer.baf~
 
