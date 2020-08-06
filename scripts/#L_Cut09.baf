@@ -1,7 +1,9 @@
-///////////////////////////////////////////////////////////////////////////////
-// Travel to area outside of Baldur's Gate for pre-BG2 capture scene         //
-// Parsed via main_common.tpa call via #LByeBG1.baf attached to palace exits //
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// Travel to area outside of Baldur's Gate for pre-BG2 capture scene              //
+// Parsed via main_common.tpa                                                     //
+// NO LONGER USED - Call via #LByeBG1.baf attached to palace exits                //
+// Called via exit dialogues and solo exit timer in Baldur.bcs (timer_checks.baf) //
+////////////////////////////////////////////////////////////////////////////////////
 
 IF
 	True()
@@ -175,7 +177,15 @@ THEN
 END
 
 IF
-	True()
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		EndCutSceneMode()
+END
+
+IF
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
