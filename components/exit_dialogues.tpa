@@ -426,7 +426,11 @@ END
 
    // Pre-SoD - everyone leaves
    IF
-      GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+      !InPartyAllowDead("IMOEN2")
+      OR(3)
+         Global("#L_StartCaelarAttack","GLOBAL",1)
+         Global("#L_StartCaelarAttack","GLOBAL",2)
+         Global("#L_StartCaelarAttack","GLOBAL",3)
       Global("EndOfBG1","GLOBAL",1)
       Global("#L_%npc_name%Modded","GLOBAL",0)      // NPC isn't modded
       IsValidForPartyDialogue(MYSELF)
@@ -435,9 +439,6 @@ END
          GlobalTimerExpired("#L_ExitTimer","GLOBAL")
       !AreaType(DUNGEON)
       CombatCounter(0)
-      OR(2)
-         GlobalGT("#L_StartCaelarAttack","GLOBAL",3)     // Imoen staying in the group
-         !InPartyAllowDead("IMOEN2")
    THEN
       RESPONSE #100
          ClearAllActions()
