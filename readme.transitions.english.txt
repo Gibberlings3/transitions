@@ -142,25 +142,30 @@ Refugees will start arriving in front of the palace in waves, seven game-days ap
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-* Add bounty hunter attacks until name cleared in Baldur's Gate
-* Expanded world event timers
-* Narration added to modified Chapter 8 scrolling text
-* Put in jastey's palace treasurer
-* Add better Korlasz loot to stores if quest is skipped
 * Close any open quests that will be impossible to continue after Sarevok is dead
-* Clean-up quests should use the quest journal
-* Check/Update all remaining BG1 NPCs
-	* - Update Inn rumors
-	* - Polish how the NPCs flee the Iron Throne HQ
 * Updated bhaal-spawn powers (mind shield and charm creature)
 * Use scrolling text box mechanism before dream movie starts or after it ends with narration
 * Add group reactions to new dream
+* Put in jastey's palace treasurer
 * Allow access to a palace physician/cleric (Fenster?)
-* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
+* Check/Update all remaining BG1 NPCs
+	* - Update Inn rumors
+	* - Polish how the NPCs flee the Iron Throne HQ
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
-* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
+* Clean-up quests should use the quest journal
+* Add better Korlasz loot to stores if quest is skipped
+* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
+* Narration added to modified start of SoD scrolling text
+* Add 'Scout the Coastway Bridge' quest
+* Add reactions and possible options when the annotated book 'A Historical Treatise of Dragonspear Castle' is found
 * Distribute group's possessions from the end of SoD to stores in Athkatla 
+* Add soul dagger to Chateau Irenicus if Cost of One Girl's Soul isn't loaded
+* Add bounty hunter attacks until name cleared in Baldur's Gate
+* Add quick Fed Ex quest to hand in soul dagger and stop attacks from bounty hunters
+* Add comments about wanted posters to heads of temples, order of radiant heart and shadow thieves as well as some SoD NPCs such as Dorn
+* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
+* Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Make sure there are consequenses to returning to city of BG before name is cleared
@@ -168,7 +173,9 @@ PLANNED FUTURE ENHANCEMENTS
 * Open up Suldanessellar after Irenicus is defeated for quests
 * Add a romance with Queen Ellesime
 * Allow all quests to be completed after Irenicus is defeated
+* Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
 * Add a "continue the adventure" ending with Bhaalspawn powers intact
+* Expanded world event timers
 
 ------------------------------------------------------------------------
 COMPATABIITY NOTES
