@@ -383,8 +383,8 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
 // Cut scene that starts BG2
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
 
-// Updated chapter text
-COPY ~%mod_root%/objects/#LCHPT08.2DA~ ~override~
+// Updated Start SoD scrolling text
+COPY ~%mod_root%/objects/#LSoD01.2DA~ ~override~
    REPLACE "REPLACEME" @1042
 
 // Allow for only 2nd half to be run

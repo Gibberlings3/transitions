@@ -30,7 +30,8 @@ THEN
 		DayNight(23)
 		EndCutSceneMode()
 		Wait(1)
-		IncrementChapter("#LCHPT08")
+
+		TextScreen("#LSoD01")
 		FadeFromColor([20.0],0)
 END
 
