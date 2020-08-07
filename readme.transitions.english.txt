@@ -161,14 +161,14 @@ PLANNED FUTURE ENHANCEMENTS
 * Add reactions and possible options when the annotated book 'A Historical Treatise of Dragonspear Castle' is found
 * Distribute group's possessions from the end of SoD to stores in Athkatla 
 * Add soul dagger to Chateau Irenicus if Cost of One Girl's Soul isn't loaded
+* Make sure there are consequences to returning to city of BG before name is cleared
 * Add bounty hunter attacks until name cleared in Baldur's Gate
-* Add quick Fed Ex quest to hand in soul dagger and stop attacks from bounty hunters
+* Add quick Fed Ex quest to hand in soul dagger and stop attacks from bounty hunters and clear name
 * Add comments about wanted posters to heads of temples, order of radiant heart and shadow thieves as well as some SoD NPCs such as Dorn
 * Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
-* Make sure there are consequenses to returning to city of BG before name is cleared
 * Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
 * Open up Suldanessellar after Irenicus is defeated for quests
 * Add a romance with Queen Ellesime
