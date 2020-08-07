@@ -411,8 +411,9 @@
 @2306	= ~I'd like to go to the Helm & Cloak Tavern.~
 @2307	= ~I'd like to visit Imoen.~
 @2308	= ~Nothing at this time.~
-@2309	= ~I like to gather a group and explore a bit, maybe see what's south of Nashkel.~
+@2309	= ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel.~
 @2310	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  It could prove quite interesting.~
+@2466	= ~I want to gather a group and head as far away from here as possible.~
 
 // Quest Messenger relaying Liia's offer to train Imoen in magic
 // Only if they haven't already spoken to the dukes
@@ -643,3 +644,4 @@
 @2464	= ~Well, he certainly fit the description.  Mysterious...creepy is closer to the truth.  And ominous.~
 @2465	= ~I must apologize, <CHARNAME>.  It seems our palace security never ceases to fail you.~
 
+// @2466 Up with game advance item dialogue
