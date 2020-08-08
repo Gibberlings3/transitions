@@ -16,63 +16,6 @@ THEN
 		Continue()
 END
 
-/*
-// Clean up quests time limit
-// 8 days to the messenger - 2 more days after that
-IF
-	Global("#L_QuestMsgSent","GLOBAL",0)
-	GlobalLT("#L_SarvQuests","GLOBAL",99)
-	GlobalGT("#L_SendQuestMsgr","GLOBAL",0)
-	GlobalTimerExpired("#L_SendQuestMsgr","GLOBAL") // 8 days
-	OR(2)
-		Global("#L_QuestTimer","GLOBAL",0)
-		GlobalTimerExpired("#L_QuestTimer","GLOBAL") // 2 days since last quest update
-	Global("#L_MsgOK","MYAREA",1)
-THEN
-	RESPONSE #100
-		SetGlobal("#L_QuestMsgSent","GLOBAL",1)
-		SetGlobalTimer("#L_QuestTimer","GLOBAL",TWO_DAYS) // They have 2 days to complete quests
-		CreateCreatureObjectOffset("#LffEsc1",Player1,[-100.0])
-		CreateCreatureObjectOffset("#LffEsc2",Player1,[100.0])
-		CreateCreatureObjectOffset("#LffEsc3",Player1,[0.-100])
-		ActionOverride("#LffEsc1",FaceObject(Player1))
-		ActionOverride("#LffEsc2",FaceObject(Player1))
-		ActionOverride("#LffEsc3",FaceObject(Player1))
-		ActionOverride("#LffEsc1",Dialogue(Player1))
-		Continue()
-END
-
-// End of Korlasz exit dialogues
-IF
-	GlobalGT("#L_QuestMsgSent","GLOBAL",0)
-	GlobalLT("#L_SarvQuests","GLOBAL",99)
-	GlobalTimerExpired("#L_QuestTimer","GLOBAL")
-THEN
-	RESPONSE #100
-		SetGlobal("#L_SarvQuests","GLOBAL",99) // This kicks off post-Korlasz dialogues if there are any
-		SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)
-		Continue()
-END
-
-// Messenger to notify PC of attack in the palace (start of SoD)
-IF
-	Global("#L_SoDMsgSent","GLOBAL",0)
-	Global("EndOfBG1","GLOBAL",0)
-	GlobalGT("#L_StartSoD","GLOBAL",0)
-	GlobalTimerExpired("#L_StartSoD","GLOBAL") // there's at least 25 days after Sarevok is killed
-	GlobalGT("#L_SoDNotBefore","GLOBAL",0) 
-	GlobalTimerExpired("#L_SoDNotBefore","GLOBAL") // there's at least 15 days after quests finished
-	Global("#L_MsgOK","MYAREA",1)
-THEN
-	RESPONSE #100
-		SetGlobal("#L_SoDMsgSent","GLOBAL",1)
-		SetGlobal("EndOfBG1","GLOBAL",2)
-		// To Do...Set timers for major SoD world events
-		// To Do...Send the messenger
-		Continue()
-END
-*/
-
 // Timer to see if group needs to transfer to SoD/BG2 but it won't happen via the dialogue as normal
 IF
 	Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogue never fired

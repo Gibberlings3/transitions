@@ -9,8 +9,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_TimersSet","MYAREA",1)
 		SetGlobalTimer("#L_NextWaveTimer","GLOBAL",SEVEN_DAYS)	// 1st wave of refugees
-		SetGlobalTimer("#L_SendQuestMsgr","GLOBAL",EIGHT_DAYS)	// Prompt user to do clean up quest
-		SetGlobalTimer("#L_StartSoD","GLOBAL",TWENTYFIVE_DAYS)	// Earliest we can switch to SoD
   		Continue()
 END	
 
