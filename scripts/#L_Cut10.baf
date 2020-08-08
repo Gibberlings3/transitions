@@ -1,23 +1,31 @@
-////////////////////////////////////////////////////////
-// Send FF Escorts to inform PC of Caelar attack      //
-// Parsed via timers_common.tpa     NOT USED          //
-////////////////////////////////////////////////////////
+////////////////////////////////////////////
+// Starts ToB                             //
+// Compiled via main_common.tpa           //
+// Called via #LAMUL27.dlg (elf_palace.d) //
+////////////////////////////////////////////
 
 IF
-	TRUE()
+	True()
 THEN
 	RESPONSE #100
-		// Fade to black in all cases
 		CutSceneId(Player1)
-		DisplayStringHead(Player1,~Flaming Fist Escorts will be arriving shortly~)
+
+		// I have no idea who will have the sucker but the modified amulet needs to go
+		DestroyItem("#LAMUL27")
+		ActionOverride(Player2,DestroyItem("#LAMUL27"))
+		ActionOverride(Player3,DestroyItem("#LAMUL27"))
+		ActionOverride(Player4,DestroyItem("#LAMUL27"))
+		ActionOverride(Player5,DestroyItem("#LAMUL27"))
+		ActionOverride(Player6,DestroyItem("#LAMUL27"))
+
+		LeaveAreaLUA("AR4000","",[1300.1840],W)
+		ActionOverride(Player2,LeaveAreaLUA("AR4000","",[1300.1840],W))
+		ActionOverride(Player3,LeaveAreaLUA("AR4000","",[1300.1840],W))
+		ActionOverride(Player4,LeaveAreaLUA("AR4000","",[1300.1840],SW))
+		ActionOverride(Player5,LeaveAreaLUA("AR4000","",[1300.1840],S))
+		ActionOverride(Player6,LeaveAreaLUA("AR4000","",[1300.1840],S))
+		SetGlobal("FORCETOBPARTYMOVE4000","GLOBAL",1)
 
 		MultiPlayerSync()
 		EndCutSceneMode()
-
-		Wait(5)
-
-		// Send in the messenger to notify them of the attack
-		StartCutSceneMode() 
-
 END
-

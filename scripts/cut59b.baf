@@ -1,0 +1,90 @@
+//////////////////////////////////////
+// Puts in dream and returns powers //
+// Compiled via power_up.tpa        //
+//////////////////////////////////////
+
+IF
+	Global("#L_Dream1","GLOBAL",0)
+	OR(2)
+		Alignment(Player1,MASK_GOOD)
+		Alignment(Player1,MASK_GENEUTRAL)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		Wait(2)
+		FadeToColor([20.0],0)
+		Wait(2)
+		StartMovie("end15fps")
+		AddSpecialAbility("SPIN101")
+		AddSpecialAbility("SPIN101")
+		AddSpecialAbility("SPIN102")
+		AddSpecialAbility("SPIN102")
+		AddSpecialAbility("SPIN103")
+		AddSpecialAbility("SPIN103")
+		RestParty()
+		Continue()
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",0)
+	Alignment(Player1,MASK_EVIL)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		Wait(2)
+		FadeToColor([20.0],0)
+		Wait(2)
+		StartMovie("end15fps")
+		AddSpecialAbility("SPIN104")
+		AddSpecialAbility("SPIN104")
+		AddSpecialAbility("SPIN105")
+		AddSpecialAbility("SPIN105")
+		AddSpecialAbility("SPIN106")
+		AddSpecialAbility("SPIN106")
+		RestParty()
+		Continue()
+END
+
+IF
+	!Global("#L_Dream1","GLOBAL",0)
+	OR(2)
+		Alignment(Player1,MASK_GOOD)
+		Alignment(Player1,MASK_GENEUTRAL)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		Wait(2)
+		FadeToColor([20.0],0)
+		Wait(2)
+		StartMovie("end15fps")
+		AddSpecialAbility("SPIN101")
+		AddSpecialAbility("SPIN101")
+		AddSpecialAbility("SPIN102")
+		AddSpecialAbility("SPIN102")
+		AddSpecialAbility("SPIN103")
+		AddSpecialAbility("SPIN103")
+	    AddSpecialAbility("SPIN200")  // Cure Serious Wounds
+		RestParty()
+		Continue()
+END
+
+IF
+	!Global("#L_Dream1","GLOBAL",0)
+	Alignment(Player1,MASK_EVIL)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		Wait(2)
+		FadeToColor([20.0],0)
+		Wait(2)
+		StartMovie("end15fps")
+		AddSpecialAbility("SPIN104")
+		AddSpecialAbility("SPIN104")
+		AddSpecialAbility("SPIN105")
+		AddSpecialAbility("SPIN105")
+		AddSpecialAbility("SPIN106")
+		AddSpecialAbility("SPIN106")
+		AddSpecialAbility("SPIN202")  // Cause Serious Wounds
+		RestParty()
+		Continue()
+END

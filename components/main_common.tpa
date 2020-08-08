@@ -439,3 +439,14 @@ COPY_EXISTING ~K#TELBGT.bcs~ ~override~
 BUT_ONLY_IF_IT_CHANGES
 EXTEND_BOTTOM ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT_end.baf~
 
+// Suldanessellar Palace dialogue to allow for continuation of BG2
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elf_palace.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Item that Queen Essemine gives to PC that will advance the game to ToB
+// This is just a slightly modified version of her normal award
+// This version get destroyed upon use and the normal award given at the start of ToB
+COPY_EXISTING ~AMUL27.ITM~ ~override/#LAMUL27.itm~
+   WRITE_LONG (0x0018) 2157 // Critical Item, Dropable, Displayable, Not Copyable, Magical, Conversable
+
+APPEND itemdial.2da ~#LAMUL27 %UseMe% #LAMUL27~ UNLESS ~#LAMUL27~
+

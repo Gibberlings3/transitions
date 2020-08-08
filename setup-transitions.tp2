@@ -255,11 +255,22 @@ INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
 
+//////////////
+// REFUGEES //
+//////////////
+BEGIN @29   // MOD 70
+DESIGNATED 70
+LABEL REFUGEES
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+INCLUDE ~transitions/components/timers_common.tpa~
+LAF timers_common END
+
+
 /////////////////////////////////////////////////////
 // LIIA ALLOWS IMOEN TO POSTPONE TRAINING IN MAGIC //
 /////////////////////////////////////////////////////
-BEGIN @11   // MOD 70
-DESIGNATED 70
+BEGIN @11   // MOD 80
+DESIGNATED 80
 LABEL LIIA
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/liia.tpa~
@@ -269,8 +280,8 @@ LAF liia END
 ///////////////////////////////////////
 // IMOEN GIVEN MAGIC MISSILE ABILITY //
 ///////////////////////////////////////
-BEGIN @21   // MOD 80
-DESIGNATED 80
+BEGIN @21   // MOD 90
+DESIGNATED 90
 LABEL IMOEN_MAGIC
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/imoen_magic.tpa~
@@ -280,9 +291,9 @@ LAF imoen_magic END
 ///////////////////////////////////////////
 // ADD SOME SNARK TO STUFFY SOD DIALOGUE //
 ///////////////////////////////////////////
-BEGIN @22   // MOD 90
-DESIGNATED 90
-LABEL SOD_SNARK
+BEGIN @22   // MOD 100
+DESIGNATED 100
+LABEL SNARK
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/add_snark.tpa~
 LAF add_snark END
@@ -290,22 +301,20 @@ LAF add_snark END
 //////////////////////////////////////////////////
 // USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //
 //////////////////////////////////////////////////
-BEGIN @23   // MOD 100
-DESIGNATED 100
+BEGIN @23   // MOD 110
+DESIGNATED 110
 LABEL ABBR_CAPTURE
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/abbr_capture.tpa~
 LAF abbr_capture END
 
-//////////////////////////////////////////////////////
-// WORLD EVENT TIMERS                               //
-// I always want this to be last                    //
-// Only because it's read-me description is so long //
-// This component has 2 different options           //
-//////////////////////////////////////////////////////
-BEGIN @29   // MOD 500
-DESIGNATED 500
-LABEL TIMERS_NO_SKIP_SAILING
+//////////////////////////////////////////////////////////
+// RETORE BHAAL-SPAWN POWERS AFTER IRENICUS IS DEFEATED //
+//////////////////////////////////////////////////////////
+BEGIN @24   // MOD 120
+DESIGNATED 120
+LABEL RESTORE_POWER
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
-INCLUDE ~transitions/components/timers_common.tpa~
-LAF timers_common END
+INCLUDE ~transitions/components/power_up.tpa~
+LAF power_up END
+

@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Travel to area outside of Baldur's Gate for pre-BG2 capture scene              //
 // Parsed via main_common.tpa                                                     //
-// NO LONGER USED - Call via #LByeBG1.baf attached to palace exits                //
 // Called via exit dialogues and solo exit timer in Baldur.bcs (timer_checks.baf) //
 ////////////////////////////////////////////////////////////////////////////////////
 

@@ -70,7 +70,7 @@
 @2046	= ~That's very generous of you.  Thank you!~
 @2047	= ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~
 @2048	= ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~
-@2049	= ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~
+@2049	= ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generosity is underwhelming to say the least.  Keep your accommodations.~
 @2050	= ~I'm sorry we can't be more generous at this time.~
 @2051 	= ~Your suite is on the third floor.  A servant will be there to show you around.~
 @2052	= ~I'm sorry to hear that.  Please let me know if you change your mind.~
@@ -99,7 +99,7 @@
 @2144	= ~What did you have in mind?~
 @2145	= ~As you wish.~ [BD69824]
 @2146	= ~Hello again, <GABBER>.  Is <CHARNAME> ready to help us clear up the rest of Sarevok's supporters?~
-@2147	= ~Hello again, <CHARNAME>.  Are you ready to help us clear up the rest of Savevok's supporters?~
+@2147	= ~Hello again, <CHARNAME>.  Are you ready to help us clear up the rest of Sarevok's supporters?~
 @2148	= ~I'd prefer to skip this one.~
 @2149	= ~Hello again!  Have you dealt with Angelo yet?~
 @2150	= ~No, I'll be back when he's taken care of.~
@@ -339,7 +339,7 @@
 
 // Bhaal documentation in Korlasz dungeon quest
 // Used in duke_belt.d and duke_liia.d
-@2253	= ~<CHARNAME>, one moment.  The Korlasz family are known to have worshipped The Dead Three over the years.~
+@2253	= ~<CHARNAME>, one moment.  The Korlasz family are known to have worshiped The Dead Three over the years.~
 @2254	= ~If you find any documents or research on them, Bhaal especially, please bring them to me.~
 @2255	= ~I will, of course, reimburse you for them.~
 @2256	= ~Oh by the way, <CHARNAME>, Duke Jannath is looking for research on The Dead Three.~
@@ -381,7 +381,7 @@
 
 // Refugee dialogues
 // refugees.d
-@2285	= ~We travelled all the way here from High Moor because they burnt down our farms.  We don't know who they were, only that they are still out there and their number is growing.  Will Baldur's Gate help us, we don't feel safe outside the city walls?~
+@2285	= ~We traveled all the way here from High Moor because they burnt down our farms.  We don't know who they were, only that they are still out there and their number is growing.  Will Baldur's Gate help us, we don't feel safe outside the city walls?~
 @2286	= ~They burned everything down - after taking all our livestock. Why would anyone do that?~
 @2287	= ~So many angry men, and they destroy everything in their wake. I really hope we're safe here in the south.~
 @2288 	= ~They asked us to join them, and then they started rampaging and killing... We fled with what few belongings we could carry.~
@@ -541,9 +541,9 @@
 @2397	= ~Farewell my friend.~
 
 // Eldoth's pre-SoD/BG2 exit dialogue
-@2398	= ~This is all just too tedius!  I'm leaving!~
+@2398	= ~This is all just too tedious!  I'm leaving!~
 @2399	= ~It's about time we all came to our senses!  I'll be leaving too.~
-@2400	= ~Ta ta!~
+@2400	= ~Ta-ta!~
 
 // Montaron's pre-SoD/BG2 exit dialogue
 @2401	= ~I've suffered yur company as long as I'm going to!  I'm leaving and that's that!~
@@ -645,3 +645,13 @@
 @2465	= ~I must apologize, <CHARNAME>.  It seems our palace security never ceases to fail you.~
 
 // @2466 Up with game advance item dialogue
+
+// Queen Ellesime gives game advancement item to PC
+@2467	= ~The amulet will also allow you access to our sacred grove, when you are ready to seek its wisdom.~
+@2468	= ~Thank you.~
+@2469	= ~You are most welcome in Suldanessellar.  The entrance will always remain open to you.  Feel free to come and go as you please.~
+@2470	= ~Like I've not heard that before.~
+@2471	= ~You hear a voice, remarkably similar to Queen Ellesime's, echo strangely in your mind~ [ELLESD15]
+@2472	= ~<CHARNAME>, are you ready to enter our sacred grove?~
+@2473	= ~Yes, I am ready.~
+@2474	= ~Not at this time.~

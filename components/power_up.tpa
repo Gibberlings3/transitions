@@ -1,0 +1,7 @@
+//////////////////////////////////////////////////////
+// Shows Irenicus in hell movie and restores powers //
+//////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION power_up BEGIN
+	EXTEND_TOP ~CUT59B.BCS~ ~%mod_root%/scripts/cut59b.baf~
+END

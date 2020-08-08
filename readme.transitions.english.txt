@@ -9,13 +9,11 @@ GENERAL
 ------------------------------------------------------------------------
 This mod requires EET.  It is not compatible with other games at this time.
 
-The Transitions mod will provide a mechanism to remain in the BGI "world" after Sarevok is defeated.
+The Transitions mod's main purpose is to provide seemless transitions between campaigns.  It will provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  It also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
 
-The mods main purpose is to provide seamless transitions between campaigns and to give the player the power to skip or participate in all or sections of SoD content as it fits their character and personal preferences.  It should be noted that there might be mods that expect specific SoD events to have happened prior to reaching BGII.  For example the PC may or may not have opened the portal in Dragonspear, may or may not have been physically present when a certain young girl is murdered. Globals will be set to indicate each major event in which the PC participated.
+Progressing through to SoD or BGII areas of the game is accomplished by talking to Duke Belt inside the Palace and/or by using a custom item he provides after the clean-up quests are finished.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
-Progressing through to SoD or BGII areas of the game can be done quickly by talking to Duke Belt inside the Palace and/or by using a custom item he provides after the clean-up quests are finished.
-
-The protagonist can take up residence at the Ducal Palace, also thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
+After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
@@ -31,10 +29,11 @@ DESCRIPTION
 1 Main Component (Required)
 ------------------------------------------------------------------------
 Prevents the end of game transition to SoD after Sarevok's death
+Prevents the end of game transition to ToB after Irenicus's death
 Allows access to Duke Belt in the Ducal Palace for game advancement
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate
-Allows for skipping or participating in all or just parts of SoD as fits your character
+Allows for skipping SoD
 
 Option 1: The "Sarevok died" movie is used as a dream sequence and a new bhaal-spawn power is awarded at the first rest
 Option 2: The "Sarevok died" movie is shown as usual after the fight and the new bhaal-spawn power is skipped
@@ -115,48 +114,53 @@ See note in component #7
 This component adds the large gray house in the upper west side of Beregost as one of the reward options from Duke Eltan.
 
 ------------------------------------------------------------------------
-10 Allow Imoen's magic training to be delayed (Optional)
+10 Add waves of refugees to Baldur's Gate (Optional)
+------------------------------------------------------------------------
+Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.
+
+------------------------------------------------------------------------
+11 Allow Imoen's magic training to be delayed (Optional)
 ------------------------------------------------------------------------
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.
 
 ------------------------------------------------------------------------
-11 Give Imoen the ability to cast Magic Missile (Optional) 
+12 Give Imoen the ability to cast Magic Missile (Optional) 
 ------------------------------------------------------------------------
 To remain consistent with SoD and BG2, Imoen is given the ability to cast magic missile at the beginning of SoD and BG2.  For SoD, she is given a special wand that will cast multiple magic missiles.  For BG2, she will have an innate ability to cast the spell twice and a potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.
 
 ------------------------------------------------------------------------
-12 Add a little snark to SoD (Optional) 
+13 Add a little snark (Optional) 
 ------------------------------------------------------------------------
-Just adds some fun snarky comments to the otherwise stuffy dialogue of SoD
+Just adds some fun snarky comments to the otherwise stuffy or inane dialogue
 
 ------------------------------------------------------------------------
-13 Use abbreviated capture scene leading to BG2 (Optional) 
+14 Use abbreviated capture scene leading to BG2 (Optional) 
 ------------------------------------------------------------------------
 Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.
 
 ------------------------------------------------------------------------
-14 Add World Event Timers (Optional)
+15 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
 ------------------------------------------------------------------------
-Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  For now, refugees are limited to 3 waves, though more may be introduced in the future, if needed.
+While recuperating in Suldanessellar, the Irenicus in hell move will be shown as a dream and all Bhaal-spawn powers will be restored.
 
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
 * Close any open quests that will be impossible to continue after Sarevok is dead
+* Clean-up quests should use the quest journal
 * Updated bhaal-spawn powers (mind shield and charm creature)
 * Use scrolling text box mechanism before dream movie starts or after it ends with narration
+* Narration added to modified start of SoD scrolling text
 * Add group reactions to new dream
 * Put in jastey's palace treasurer
 * Allow access to a palace physician/cleric (Fenster?)
 * Check/Update all remaining BG1 NPCs
 	* - Update Inn rumors
 	* - Polish how the NPCs flee the Iron Throne HQ
+* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
+* Add better Korlasz loot to stores if quest is skipped
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
-* Clean-up quests should use the quest journal
-* Add better Korlasz loot to stores if quest is skipped
-* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
-* Narration added to modified start of SoD scrolling text
 * Add 'Scout the Coastway Bridge' quest
 * Add reactions and possible options when the annotated book 'A Historical Treatise of Dragonspear Castle' is found
 * Distribute group's possessions from the end of SoD to stores in Athkatla 
@@ -167,15 +171,11 @@ PLANNED FUTURE ENHANCEMENTS
 * Add comments about wanted posters to heads of temples, order of radiant heart and shadow thieves as well as some SoD NPCs such as Dorn
 * Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
-* Make sure new bhaal-spawn powers are removed during BG2 and all are added back in at the end
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
-* Open up Suldanessellar after Irenicus is defeated for quests
 * Add a romance with Queen Ellesime
-* Allow all quests to be completed after Irenicus is defeated
 * Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
 * Add a "continue the adventure" ending with Bhaalspawn powers intact
-* Expanded world event timers
 
 ------------------------------------------------------------------------
 COMPATABIITY NOTES
