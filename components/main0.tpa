@@ -36,6 +36,11 @@ DEFINE_ACTION_FUNCTION main0 BEGIN
             insert = ~%mod_root%/scripts/BG0125a.baf~
       END
    END
+   COPY_EXISTING ~CUT41I.BCS~ ~override~
+      DECOMPILE_AND_PATCH BEGIN
+         REPLACE_TEXTUALLY ~ReallyForceSpell(Player1,LOSE_ALL)~ ~~~~~ReallyForceSpell(Player1,LOSE_ALL) RemoveSpell(~SPIN200~) RemoveSpell(~SPIN202~)~~~~~
+      END
+   BUT_ONLY_IF_IT_CHANGES
 
    // Do actions that are needed no matter which ending was chosen
    INCLUDE ~%mod_root%/components/main_common.tpa~
