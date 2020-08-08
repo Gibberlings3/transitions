@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Optional component that puts group equipment from BG1/SoD into BG2 stores //
 // after capture by Irenicus                                                 //
+// Will be used in a future version                                          //
 ///////////////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION store_items BEGIN
