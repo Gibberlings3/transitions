@@ -1,0 +1,21 @@
+//////////////////////////////////////////////
+// Optional component that cleans up quests //
+//////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION rumors BEGIN
+	// Close out never-ending BG1 quests started by rumors
+	COPY_EXISTING ~BG0108.BCS~ ~override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231470)~ ~EraseJournalEntry(231470) EraseJournalEntry(214701) EraseJournalEntry(227387) EraseJournalEntry(227388) EraseJournalEntry(227390) EraseJournalEntry(227391) EraseJournalEntry(227392) EraseJournalEntry(227394) EraseJournalEntry(227398) EraseJournalEntry(227399) EraseJournalEntry(227408) EraseJournalEntry(227409) EraseJournalEntry(227092) EraseJournalEntry(226925) EraseJournalEntry(226960)~
+		END
+	BUT_ONLY_IF_IT_CHANGES
+
+	COPY_EXISTING ~BG0125.BCS~ ~override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231474)~ ~EraseJournalEntry(231474) EraseJournalEntry(220597) EraseJournalEntry(226872) EraseJournalEntry(227505) EraseJournalEntry(227513) EraseJournalEntry(210004) EraseJournalEntry(226812) EraseJournalEntry(226871) EraseJournalEntry(226892) EraseJournalEntry(226962) EraseJournalEntry(226967) EraseJournalEntry(227091) EraseJournalEntry(227093) EraseJournalEntry(227094) EraseJournalEntry(227095) EraseJournalEntry(227096) EraseJournalEntry(227132) EraseJournalEntry(227190) EraseJournalEntry(227192) EraseJournalEntry(227201) EraseJournalEntry(227283) EraseJournalEntry(227284) EraseJournalEntry(227285) EraseJournalEntry(227286) EraseJournalEntry(227287) EraseJournalEntry(227327) EraseJournalEntry(227329) EraseJournalEntry(227330) EraseJournalEntry(227331) EraseJournalEntry(227332) EraseJournalEntry(227333) EraseJournalEntry(227339) EraseJournalEntry(227340) EraseJournalEntry(227351) EraseJournalEntry(227352) EraseJournalEntry(227387) EraseJournalEntry(227399) EraseJournalEntry(227488) EraseJournalEntry(227514) EraseJournalEntry(227387)~
+		END
+	BUT_ONLY_IF_IT_CHANGES
+
+	// Make sure the rumors don't reopen closed quests - no new dialogue so no tra file
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/rumors.d~
+END
