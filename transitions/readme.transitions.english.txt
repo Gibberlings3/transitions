@@ -94,7 +94,8 @@ This overwrites how EBG1 brings in Elminster if that was installed first.
 ------------------------------------------------------------------------
 7 Duke Eltan's reward - House in front of Palace (Optional)
 ------------------------------------------------------------------------
-NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a home the protagonist can call their own.  Duke Eltan will also allow for the finalization of the Scar's Return quest (BG1RE) if you were able to recover his body.  This is a slightly modified version of how jastey handles it in EBG1.  
+NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a (one - no matter how many are installed as options) home the protagonist can call their own.  
+
 Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2 for you to find if you didn't sell it previously.  
 
 This component prepares the 2nd house to the left of the Ducal Palace as one of the reward options.  
@@ -104,7 +105,7 @@ This component prepares the 2nd house to the left of the Ducal Palace as one of 
 ------------------------------------------------------------------------
 See note in component #7  
 
-This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  
+This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed.  I haven't tested if installing this as an option will affect those mods.
 
 ------------------------------------------------------------------------
 9 Duke Eltan's reward - House in Beregost (Optional)

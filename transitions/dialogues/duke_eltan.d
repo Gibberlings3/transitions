@@ -12,14 +12,6 @@ REPLACE_ACTION_TEXT BDELTAN ~SetGlobal("bd_plot_003","bd0102",1)~ ~SetGlobal("bd
 
 // Add Palace dialogue
 APPEND BDELTAN
-	IF ~Global("#L_TalkedToDukes","GLOBAL",1) 
-		GlobalGT("C#RE1_ScarRetrieval","GLOBAL",10)
-		GlobalLT("C#RE1_ScarRetrieval","GLOBAL",14)~
-	THEN BEGIN SCAR_1
-		SAY @2096 /* ~There is someone here who would like to talk you, <CHARNAME>.~ */
-		IF ~~ THEN DO ~SetGlobal("C#RE1_ScarRetrieval","GLOBAL",13) ClearAllActions() StartCutSceneMode() CutSceneId(Player1) CreateCreature("c#re1sr6",[600.200],E) ActionOverride("c#re1sr6",DestroyItem("sw1h02")) ActionOverride("c#re1sr6",DestroyItem("shld04")) ActionOverride(Player1,Face(NNW)) EndCutSceneMode()~ EXIT
-	END
-
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("C#RE1_ScarRetrieval","GLOBAL",15)~ THEN BEGIN SHOO
 		SAY @2098 /* ~I have nothing more to say to you.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_EltanLoveMatch","GLOBAL",0) EscapeArea()~ EXIT
