@@ -39,14 +39,6 @@ COPY_EXISTING ~BANDITC.CRE~ ~override/#LBandit.cre~
 	WRITE_ASCII 0x280 ~#LBandit~ #32 // set DV
 BUT_ONLY_IF_IT_CHANGES
 
-// Attach new Angelo dialogue file to his CRE
-COPY_EXISTING ~GALDOR.CRE~ ~override~
-    WRITE_ASCII 0x2cc ~GALDOR~ #8   // dialogue
-
-// Attach new Semaj dialogue file to his CRE
-COPY_EXISTING ~SEMAJ.CRE~ ~override~
-    WRITE_ASCII 0x2cc ~SEMAJ~ #8   // dialogue
-
 // Toned down Winski
 COPY_EXISTING ~WINSKI.CRE~ ~override/#LWINSKI.CRE~
 	WRITE_SHORT 0x0024 85 // Current HP
@@ -67,18 +59,30 @@ BUT_ONLY_IF_IT_CHANGES
 // New Angelo (GALDOR) dialogue file
 ACTION_IF !FILE_EXISTS_IN_GAME ~GALDOR.DLG~ THEN BEGIN
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_begin.d~	// Just builds an empty dialogue file
+	// Attach new Angelo dialogue file to his CRE
+	COPY_EXISTING ~GALDOR.CRE~ ~override~
+    	WRITE_ASCII 0x2cc ~GALDOR~ #8   // dialogue
+	BUT_ONLY_IF_IT_CHANGES
 END
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 // Updated Tazok (TAZOK2) dialogue file
 ACTION_IF !FILE_EXISTS_IN_GAME ~TAZOK2.DLG~ THEN BEGIN
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tazok_begin.d~	// Just builds an empty dialogue file
+	// Attach new dialogue file to his CRE
+	COPY_EXISTING ~TAZOK2.CRE~ ~override~
+    	WRITE_ASCII 0x2cc ~TAZOK2~ #8   // dialogue
+    BUT_ONLY_IF_IT_CHANGES
 END
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tazok_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 // New Semaj dialogue file
 ACTION_IF !FILE_EXISTS_IN_GAME ~SEMAJ.DLG~ THEN BEGIN
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_begin.d~	// Just builds an empty dialogue file
+	// Attach new Semaj dialogue file to his CRE
+	COPY_EXISTING ~SEMAJ.CRE~ ~override~
+    	WRITE_ASCII 0x2cc ~SEMAJ~ #8   // dialogue
+	BUT_ONLY_IF_IT_CHANGES
 END
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_common.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
