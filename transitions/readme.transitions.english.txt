@@ -33,7 +33,7 @@ Prevents the end of game transition to ToB after Irenicus's death
 Allows access to Duke Belt in the Ducal Palace for game advancement  
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate  
-Allows for skipping SoD
+Allows for skipping SoD  
 
 Option 1: The "Sarevok died" movie is used as a dream sequence and a new bhaal-spawn power is awarded at the first rest  
 Option 2: The "Sarevok died" movie is shown as usual after the fight and the new bhaal-spawn power is skipped  
@@ -56,7 +56,7 @@ Option 3: When installed, use how Endless BG1 handles Sarevok's equipement
 Add quests to bring in Sarevok's remaining supporters depending upon who hasn't already been dispatched  
 The Korlasz dungeon quest will be offered whether or not this component is installed.  
 Any and all clean-up quests, including Korlasz's Dungeon crawl, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
-NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.    
+NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.  
 
 Option 1: Have survivors of the final battle with Sarevok immediately flee the area when Sarevok dies (to give more clean-up quests)  
 Option 2: Behavior of the Sarevok's supporters in the final BGI battle is unchanged  
@@ -66,14 +66,13 @@ Option 4: Option 2 and gentler version of Tamoko's quest
 ------------------------------------------------------------------------
 4 Clean up townsfolk chatter with reference to Sarevok (Optional)
 ------------------------------------------------------------------------
-An import from Endless BG1 of changes to various townsfolk.
+An import from Endless BG1 of changes to various townsfolk.  
 Skipped if it's already installed via EBG1  
 
 ------------------------------------------------------------------------
 5 Clean up the wounded from the thieves maze (Optional)
 ------------------------------------------------------------------------
 Remove Winski and Voleta from the thieves' maze and have Denkod inform the group of their whereabouts  
-Thank you jastey for the idea of using Denkod! :)  
 If someone in the group wears Sarevok's armor or helm, Denkod will provide some comedic relief  
 NOTE: If you installed the 3rd component, Winski will disappear from the thieves' maze even if you don't install this component  
 This will overwrite EBG1 changes to Denkod if they are installed  
@@ -82,7 +81,6 @@ This will overwrite EBG1 changes to Denkod if they are installed
 6 Have Elminster make an appearance outside the Ducal Palace (Optional)
 ------------------------------------------------------------------------
 Adds back unused original dialogue from BG1  
-Thank you k4thos for finding this and jastey for letting me know about it :)  
 Skipped if it's already installed via EBG1  
 
 ------------------------------------------------------------------------
