@@ -12,8 +12,6 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("SPRITE_IS_DEADBDELTAN","GLOBAL",0)
-		CreateCreature("BDELTAN",[789.386],S)  // Duke Eltan
-		SmallWait(1)
 		Continue()
 END
 
@@ -25,7 +23,7 @@ IF
 THEN
 	RESPONSE #100
 		CreateCreature("BDELTAN",[789.386],S)  // Duke Eltan
-		SmallWait(1)
+		SmallWait(2)
 		Continue()
 END
 

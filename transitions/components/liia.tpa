@@ -5,5 +5,13 @@
 ///////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION liia BEGIN
+	// Remove jastey's code to prep the dukes in the palace - we do it differently
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 0
+		STR_VAR
+			script = BG0108
+			match = ~C#st_SpawnLiia~
+	END
 	EXTEND_TOP ~BG0125.BCS~ ~%mod_root%/scripts/bg0125_liia.baf~
 END

@@ -20,6 +20,21 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
          script = BG0108
          match = ~C#st_RearrangeDukes~
    END
+   // Remove jastey's guards and opening of the palace
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 0
+      STR_VAR
+         script = BG0200
+         match = ~C#st_SarevokDeadGuards~
+   END
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 0
+      STR_VAR
+         script = BG0200
+         match = ~C#st_SarevokDeadOpenGate~
+   END
 END
 
 // 3 Flaming Fist escort ... used in various places
