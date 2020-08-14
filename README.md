@@ -187,8 +187,8 @@ There are no known compatability issues at this time
 INSTALLATION
 ------------------------------------------------------------------------
 Install before BG1RE in order to complete Scar Returns quest after Sarevok is defeated.  
-Transitions should be installed before NPC mods.
-If installing EBG1, do so before Transitions.
+Transitions should be installed before NPC mods.  
+If installing EBG1, do so before Transitions.  
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
