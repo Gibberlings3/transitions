@@ -2,6 +2,7 @@
 // Duke Belt in the Ducal Palace after Sarevok is defeated //
 // Patched in via main_common.tpa                          //
 /////////////////////////////////////////////////////////////
+REPLACE_TRIGGER_TEXT BELT ~Global("C#st_DukesAskedSword","GLOBAL",0)~ ~Global("C#st_DukesAskedSword","GLOBAL",0) PartyHasItem("c#stsrvs")~
 APPEND BELT
 	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1
 		SAY @2034 /* ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~ */
