@@ -41,11 +41,11 @@ COPY_EXISTING ~FLAM11.cre~ ~override/#LffHlr2.cre~
 // See if jastey's custom items for Sarevok are installed
 COPY_EXISTING ~BG0125.BCS~ ~override~
   DECOMPILE_AND_PATCH BEGIN 
-    COUNT_REGEXP_INSTANCES ~Global("C#st_SarevoksItems","MYAREA",0)~ sarevokItemsInstalled
+    COUNT_REGEXP_INSTANCES ~Global("C#st_FFHealerSpawn","GLOBAL",0)~ endlessHealersInstalled
   END
 BUT_ONLY_IF_IT_CHANGES
 
-ACTION_IF (sarevokItemsInstalled > 0) BEGIN
+ACTION_IF (endlessHealersInstalled > 0) BEGIN
    // Replace the block where jastey spawns her flaming fist healers
    // with modified version where they confiscate the sword
    LAF REPLACE_SCRIPT_BLOCK

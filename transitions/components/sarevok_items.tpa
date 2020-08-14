@@ -35,4 +35,12 @@ ACTION_IF (sarevokItemsInstalled > 0) BEGIN
          script = BG0125
          match = ~Global("C#st_SarevoksItems","MYAREA",0)~
    END
+   // Remove block where jastey manually drops the items after Sarevok's death
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 1
+      STR_VAR 
+         script = BG0125
+         match = ~Global("C#st_SarevoksPlaceSword","MYAREA",0)~
+   END
 END
