@@ -37,31 +37,24 @@ Allows for skipping SoD
 
 Option 1: The "Sarevok died" movie is used as a dream sequence and a new bhaal-spawn power is awarded at the first rest  
 Option 2: The "Sarevok died" movie is shown as usual after the fight and the new bhaal-spawn power is skipped  
-Option 3: Just use whatever Endless BG1 has already installed for the end of the fight (of course, only if that mod is already installed).  
+Option 3: When installed, use how Endless BG1 handles the end of the fight    
 
 ------------------------------------------------------------------------
 2 Sarevok's Equipment (Optional)
 ------------------------------------------------------------------------
 Give Sarevok his sword so we can better explain its movement between games  
+Add Sarevok's custom armor and helm from Tantalus
 NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be stolen from the Ducal Palace as per SoD, however the PC will be compensated for the loss by Duke Belt  
-Add custom armor and helm from Tantalus - Thank you Tantalus for making these available!  
-The custom BAMs for armor and helmet were created by Tantalus for his Mod "Sarevok Recovery Mod" ( http://www.baldursgate-refugium.de/mods/sarevok-wiederherstellung/ ), licensed under "Creative Commons" von Nicolas Peters. License: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )  
-Shout out to jastey for letting me know about these and for the example on how to add them to the game and for letting me hijack her flaming fist healers from her Endless BG1 mod  
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
-Option 3: Just use whatever Endless BG1 has already installed (of course, only if that mod is actually already installed)  
+Option 3: When installed, use how Endless BG1 handles Sarevok's equipement
 
 ------------------------------------------------------------------------
 3 Add Clean Up Quests (Optional)
 ------------------------------------------------------------------------
 Add quests to bring in Sarevok's remaining supporters depending upon who hasn't already been dispatched  
-This was originally to satisfy the forewarning from Hafiz the gnome from east of Nashkel Mines who says we will battle the 6 that serve Sarevok.  There are various supporters who could have made the list to fulfill that vision.  For example:  
-	Angelo, Tazok, Semaj, Winski Peroate, Cythandria, Tamoko, Zhalimar Cloudwulfe, and Korlasz  
-Note: Thanks Guest Glimpse for the Winski idea :)  
-Note: Shin mentioned that Zhalimar Cloudwulfe and his gang probably is what Hafiz was referring to and I agree.  So these quests are more than to just satisfy Hafiz's vision.  They are to clean up any lingering support for the movement.  It's also possible to sneak by that fight so, in case you have, you now have the opportunity to do what has been foreseen.  
-Angelo, Tazok, and Semaj are probably already dead from the fight in the Undercity Temple.  But for those that just kill Sarevok and run, they will be able to still get experience for them, as well as some gold.
-Winski and Angelo will have some rogue Flaming Fist cronies with them, Tazok some bandits, Zhalimar will have a couple of dopplegangers as well as the surviving members of his crew (Aasim, Alai, Diyab, Gardush and Naaman), Semaj, Cythandria and Tamoko will be alone, and Korlasz has her usual dungeon crawl quest from SoD.  The Korlasz dungeon quest will be offered whether or not this component is installed.  
+The Korlasz dungeon quest will be offered whether or not this component is installed.  
 Any and all clean-up quests, including Korlasz's Dungeon crawl, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
 NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.    
 
@@ -73,7 +66,8 @@ Option 4: Option 2 and gentler version of Tamoko's quest
 ------------------------------------------------------------------------
 4 Clean up townsfolk chatter with reference to Sarevok (Optional)
 ------------------------------------------------------------------------
-An import from Endless BG1 of changes to various townsfolk (only if that mod hasn't been installed already)  
+An import from Endless BG1 of changes to various townsfolk.
+Skipped if it's already installed via EBG1  
 
 ------------------------------------------------------------------------
 5 Clean up the wounded from the thieves maze (Optional)
@@ -105,7 +99,7 @@ This component prepares the 2nd house to the left of the Ducal Palace as one of 
 ------------------------------------------------------------------------
 See note in component #7  
 
-This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed.  I haven't tested if installing this as an option will affect those mods.
+This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed.
 
 ------------------------------------------------------------------------
 9 Duke Eltan's reward - House in Beregost (Optional)
@@ -117,7 +111,8 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Add waves of refugees to Baldur's Gate (Optional)
 ------------------------------------------------------------------------
-Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is skipped if it's already installed via EBG1.  
+Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  
+Skipped if it's already installed via EBG1.  
 
 ------------------------------------------------------------------------
 11 Allow Imoen's magic training to be delayed (Optional)
@@ -186,9 +181,9 @@ There are no known compatability issues at this time
 ------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------
-Install before BG1RE in order to complete Scar Returns quest after Sarevok is defeated.  
+Install before BG1RE (https://www.gibberlings3.net/forums/forum/131-romantic-encounters-bg2/) in order to complete Scar Returns quest after Sarevok is defeated.  
 Transitions should be installed before NPC mods.  
-If installing EBG1, do so before Transitions.  
+If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-bg1/), do so before Transitions.  
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
@@ -211,7 +206,7 @@ Linux
 Extract the contents of the mod to the folder of the game you wish to modify. Download the latest version of WeiDU for Linux from https://github.com/WeiDUorg/weidu/releases and copy WeiDU and WeInstall to /usr/bin. Following that, open a terminal and cd to your EET installation directory, run 'tolower' and answer Y to both queries. You can avoid running the second option (linux.ini) if you've already run it once in the same directory. If you're unsure, running tolower and choosing both options is the safest bet.
 Run WeInstall transitions in your game folder to install the mod. Then run wine BGMain.exe and start playing. 
 
-If you have installation problems or encounter any bugs, please post your bug report in one of the forum threads.
+If you have installation problems or encounter any bugs, please post your bug report in the forum thread: https://www.gibberlings3.net/forums/topic/31868-transitions-mod-for-eet/.
 
 ------------------------------------------------------------------------
 CREDITS
@@ -229,6 +224,16 @@ CREDITS
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
+NOTES ON THE CLEAN-UP QUESTS
+------------------------------------------------------------------------
+These were originally to satisfy the forewarning from Hafiz the gnome from east of Nashkel Mines who says we will battle the 6 that serve Sarevok.  There are various supporters who could have made the list to fulfill that vision.  For example:  
+	Angelo, Tazok, Semaj, Winski Peroate, Cythandria, Tamoko, Zhalimar Cloudwulfe, and Korlasz  
+Note: Thanks Guest Glimpse for the Winski idea :)  
+Note: Shin mentioned that Zhalimar Cloudwulfe and his gang probably is what Hafiz was referring to and I agree.  So these quests are more than to just satisfy Hafiz's vision.  They are to clean up any lingering support for the movement.  It's also possible to sneak by that fight so, in case you have, you now have the opportunity to do what has been foreseen.  
+Angelo, Tazok, and Semaj are probably already dead from the fight in the Undercity Temple.  But for those that just kill Sarevok and run, they will be able to still get experience for them, as well as some gold.
+Winski and Angelo will have some rogue Flaming Fist cronies with them, Tazok some bandits, Zhalimar will have a couple of dopplegangers as well as the surviving members of his crew (Aasim, Alai, Diyab, Gardush and Naaman), Semaj, Cythandria and Tamoko will be alone, and Korlasz has her usual dungeon crawl quest from SoD.
+
+------------------------------------------------------------------------
 USED TOOLS AND RESSOURCES
 ------------------------------------------------------------------------
 The Transitions Mod was created using the resources provided by the IESDP (https://gibberlings3.github.io/iesdp/index.htm) and with the following software:
@@ -243,8 +248,7 @@ The Gibberlings Three		http://gibberlings3.net
 ------------------------------------------------------------------------
 HISTORY
 ------------------------------------------------------------------------
-Version 1
--first public release
+still in beta
 
 ------------------------------------------------------------------------
 LEGAL INFORMATION
