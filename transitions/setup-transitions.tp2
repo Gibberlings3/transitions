@@ -263,6 +263,7 @@ BEGIN @29   // MOD 70
 DESIGNATED 70
 LABEL REFUGEES
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 

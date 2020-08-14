@@ -117,7 +117,7 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Add waves of refugees to Baldur's Gate (Optional)
 ------------------------------------------------------------------------
-Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import of jastey's component in Endless BG1.  
+Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is skipped if it's already installed via EBG1.  
 
 ------------------------------------------------------------------------
 11 Allow Imoen's magic training to be delayed (Optional)
