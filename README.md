@@ -224,6 +224,7 @@ CREDITS
 * jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 * igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
+* Thank you beta testers!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
