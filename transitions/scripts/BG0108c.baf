@@ -23,7 +23,7 @@ IF
 THEN
 	RESPONSE #100
 		CreateCreature("BDELTAN",[789.386],S)  // Duke Eltan
-		SmallWait(2)
+		SetGlobal("#L_EltanInstalled","GLOBAL",1)
 		Continue()
 END
 
