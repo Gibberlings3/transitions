@@ -1,5 +1,5 @@
 BACKUP ~weidu_external/backup/transitions~
-SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net which doesn't exist yet because I'm a newb, but hopefully it'll be there before this gets distributed to anyone.  #RunOnSentencesRUs~
+SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net ~
 VERSION ~v0.2.01~
 
 README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
