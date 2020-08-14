@@ -215,9 +215,10 @@ LAF cleanup_maze END
 // since I have no idea which module it is, I'm going to redo it //
 ///////////////////////////////////////////////////////////////////
 BEGIN @20      // MOD 50
-DESIGNATED 50
+DESIGNATED 50 
 LABEL ELMINSTER
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
 
