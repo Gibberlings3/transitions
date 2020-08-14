@@ -89,7 +89,7 @@ This will overwrite EBG1 changes to Denkod if they are installed
 ------------------------------------------------------------------------
 Adds back unused original dialogue from BG1  
 Thank you k4thos for finding this and jastey for letting me know about it :)  
-This overwrites how EBG1 brings in Elminster if that was installed first.  
+Skipped if it's already installed via EBG1  
 
 ------------------------------------------------------------------------
 7 Duke Eltan's reward - House in front of Palace (Optional)
