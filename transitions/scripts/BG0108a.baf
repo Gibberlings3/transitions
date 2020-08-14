@@ -12,8 +12,6 @@ THEN
 	RESPONSE #100
 		ActionOverride("LIIA",DestroySelf())
 		SetGlobal("SPRITE_IS_DEADLIIA","GLOBAL",0)
-		CreateCreature("LIIA",[680.356],S)
-		SmallWait(1)
 		Continue()
 END
 
@@ -24,7 +22,7 @@ IF
 THEN
 	RESPONSE #100
 		CreateCreature("LIIA",[680.356],S)
-		SmallWait(1)
+		SmallWait(2)
 		Continue()
 END
 
@@ -49,8 +47,6 @@ THEN
 	RESPONSE #100
 		ActionOverride("BELT",DestroySelf())
 		SetGlobal("SPRITE_IS_DEADBELT","GLOBAL",0)
-		CreateCreature("BELT",[735.371],S)  // Belt
-		SmallWait(1)
 		Continue()
 END
 
@@ -61,7 +57,7 @@ IF
 THEN
 	RESPONSE #100
 		CreateCreature("BELT",[735.371],S)  // Belt
-		SmallWait(1)
+		SmallWait(2)
 		Continue()
 END
 
