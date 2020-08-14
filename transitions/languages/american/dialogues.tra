@@ -167,7 +167,7 @@
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
 @2078	= ~Here's your key.~
 @2079	= ~While looking intently into your eyes he says, "With your permission, I'll stop by later to see how you're settling in."~
-@2080	= ~Uhm..sure, if you'd like.~
+@2080	= ~Uhm...sure, if you'd like.~
 @2081	= ~Oh that's very kind of you but hardly necessary.~  // Clueless answer - thinks she said 'no thank you' while he heard 'yes'
 @2082	= ~Actually, I'd prefer if you didn't.  I'd not like the attention it would draw.~
 @2083	= ~I would like.  I would like very much.~  // (OMG THAT IS SO CREEPY!)
@@ -286,7 +286,7 @@
 
 // cythan.d
 @2220	= ~You?  What do you want?!~
-@2221	= ~The Dukes sent me to bring you in dead or alive.~
+@2221	= ~The Dukes sent me to bring you in alive...if possible.~
 @2222	= ~There are Flaming Fist waiting for you outside.~
 @2210	= ~So my choice is the noose or death by a bhaal-spawn?~
 @2217	= ~How ironic.~
@@ -527,7 +527,7 @@
 
 // Alora's pre-Sod/BG2 exit dialogues
 @2389	= ~You sure have kept me busy!  It's been fun but I think I'll find less dangerous fun somewhere ... not here.~
-@2390	= ~Yeah, think I'll check out...mmm somewhere..not here.~
+@2390	= ~Yeah, think I'll check out...mmm somewhere...not here.~
 @2391	= ~See ya 'round!~
 
 // Branwen's pre-SoD/BG2 exit dialogue
