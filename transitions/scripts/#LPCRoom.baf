@@ -48,10 +48,10 @@ END
 // Have the servant welcome the PC
 IF
 	Exists("#LDPSrv1")
+	TriggerOverride("#LDPSrv1",Range(Player1,15))
 THEN
 	RESPONSE #100
 		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
-		Continue()
 END
 
 // Move everything from the PC's chest whereever it is at the moment
@@ -69,6 +69,4 @@ THEN
 		SmallWait(1)
 		Continue()
 END
-
-
 
