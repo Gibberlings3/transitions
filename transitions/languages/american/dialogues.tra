@@ -59,12 +59,15 @@
 @2035	= ~You are truly the Hero of Baldur's Gate.~
 @2036	= ~News of your victory has already reached us, as has Sarevok's sword.~
 @2037	= ~Thank you for agreeing to let us keep it safe.~
+@2475	= ~Now to business.~
+@2476	= ~Thank you for agreeing to let us keep Sarevok's sword safe here in the palace.~
 @2038	= ~You're quite welcome.  I'm happy to oblige.~
 @2039	= ~I really didn't have much choice in the matter.~
 @2040	= ~Be that as it may, we would like to reimburse you for the sword and reward you for saving this city.~
 @2041	= ~I believe 3000 gold should cover the value of the sword.~
 @2042	= ~That should more than cover it, thank you.~
 @2043	= ~I guess that's a fair price.~
+@2477	= ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~
 @2044	= ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~
 @2045	= ~Please feel free to come and go as you wish.~
 @2046	= ~That's very generous of you.  Thank you!~
@@ -167,7 +170,7 @@
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
 @2078	= ~Here's your key.~
 @2079	= ~While looking intently into your eyes he says, "With your permission, I'll stop by later to see how you're settling in."~
-@2080	= ~Uhm..sure, if you'd like.~
+@2080	= ~Uhm...sure, if you'd like.~
 @2081	= ~Oh that's very kind of you but hardly necessary.~  // Clueless answer - thinks she said 'no thank you' while he heard 'yes'
 @2082	= ~Actually, I'd prefer if you didn't.  I'd not like the attention it would draw.~
 @2083	= ~I would like.  I would like very much.~  // (OMG THAT IS SO CREEPY!)
@@ -286,7 +289,7 @@
 
 // cythan.d
 @2220	= ~You?  What do you want?!~
-@2221	= ~The Dukes sent me to bring you in dead or alive.~
+@2221	= ~The Dukes sent me to bring you in alive...if possible.~
 @2222	= ~There are Flaming Fist waiting for you outside.~
 @2210	= ~So my choice is the noose or death by a bhaal-spawn?~
 @2217	= ~How ironic.~
@@ -527,7 +530,7 @@
 
 // Alora's pre-Sod/BG2 exit dialogues
 @2389	= ~You sure have kept me busy!  It's been fun but I think I'll find less dangerous fun somewhere ... not here.~
-@2390	= ~Yeah, think I'll check out...mmm somewhere..not here.~
+@2390	= ~Yeah, think I'll check out...mmm somewhere...not here.~
 @2391	= ~See ya 'round!~
 
 // Branwen's pre-SoD/BG2 exit dialogue
@@ -655,3 +658,5 @@
 @2472	= ~<CHARNAME>, are you ready to enter our sacred grove?~
 @2473	= ~Yes, I am ready.~
 @2474	= ~Not at this time.~
+
+// 2475-77 up with Belt's initial dialogue in order to accommodate EBG1
