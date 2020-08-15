@@ -52,6 +52,15 @@ APPEND BELT
 		++ @2049 /* ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~ */ + ROOM_BAD
 	END
 
+	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_NOT_MENTIONED_YET
+		SAY @2044 /* ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
+		= @2045 /* ~Please feel free to come and go as you wish.~ */
+		++ @2046 /* ~That's very generous of you.  Thank you!~ */ + ROOM_GOOD
+		++ @2047 /* ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~ */ + ROOM_SOSO
+		++ @2048 /* ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~ */ + NO_ROOM
+		++ @2049 /* ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~ */ + ROOM_BAD
+	END
+
  	IF ~~ THEN BEGIN REWARD
 		SAY @2044 /* ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		= @2045 /* ~Please feel free to come and go as you wish.~ */
