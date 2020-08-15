@@ -135,7 +135,7 @@ Cut out the long fight scene leading to capture prior to BG2 and just show a bri
 ------------------------------------------------------------------------
 15 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
 ------------------------------------------------------------------------
-While recuperating in Suldanessellar, the Irenicus in hell move will be shown as a dream and all Bhaal-spawn powers will be restored.  
+While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
 
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
