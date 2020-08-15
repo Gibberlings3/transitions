@@ -4,11 +4,18 @@
 /////////////////////////////////////////////////////////////
 REPLACE_TRIGGER_TEXT BELT ~Global("C#st_DukesAskedSword","GLOBAL",0)~ ~Global("C#st_DukesAskedSword","GLOBAL",0) PartyHasItem("c#stsrvs")~
 APPEND BELT
-	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1
+	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) !Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1
 		SAY @2034 /* ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~ */
 		= @2035	/* ~You are truly the Hero of Baldur's Gate.~ */
 		IF ~~ + REWARD
 		IF ~Global("#L_SwordTaken","GLOBAL",1)~ + SWORD_TAKEN1
+	END
+
+	IF ~Global("C#st_HeroOfBG","GLOBAL",1) !Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1
+		SAY @2475 /* ~Now to business.~ */
+		= @2476 /* ~Thank you for agreeing to let us keep Sarevok's sword safe here in the palace.~ */
+		++ @2038 /* ~You're quite welcome.  I'm happy to oblige.~ */ + SWORD_TAKEN2
+		++ @2039 /* ~I really didn't have much choice in the matter.~ */ + SWORD_TAKEN2
 	END
 
 	IF ~~ THEN BEGIN SWORD_TAKEN1
@@ -21,11 +28,31 @@ APPEND BELT
 	IF ~~ THEN BEGIN SWORD_TAKEN2
 		SAY @2040 /* ~Be that as it may, we would like to reimburse you for the sword and reward you for saving this city.~ */
 		= @2041 /* ~I believe 3000 gold should cover the value of the sword.~ */
-		++ @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD
-		++ @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD
+		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD_MENTIONED
+		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD_MENTIONED
+		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD
+		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + REWARD
 	END
 
-	IF ~~ THEN BEGIN REWARD
+	IF ~Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN MOSTLY_DONE_ALREADY
+		SAY @2477 /* ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
+		= @2045 /* ~Please feel free to come and go as you wish.~ */
+		++ @2046 /* ~That's very generous of you.  Thank you!~ */ + ROOM_GOOD
+		++ @2047 /* ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~ */ + ROOM_SOSO
+		++ @2048 /* ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~ */ + NO_ROOM
+		++ @2049 /* ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~ */ + ROOM_BAD
+	END
+	
+	IF ~~ THEN BEGIN REWARD_MENTIONED
+		SAY @2477 /* ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
+		= @2045 /* ~Please feel free to come and go as you wish.~ */
+		++ @2046 /* ~That's very generous of you.  Thank you!~ */ + ROOM_GOOD
+		++ @2047 /* ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~ */ + ROOM_SOSO
+		++ @2048 /* ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~ */ + NO_ROOM
+		++ @2049 /* ~Seriously?  You were going to make Sarevok a duke for simply *promising* to stop the trouble he himself started.  The very same trouble that I *actually* stopped...and I get a room with a view?  Your generousity is underwhelming to say the least.  Keep your accommodations.~ */ + ROOM_BAD
+	END
+
+ 	IF ~~ THEN BEGIN REWARD
 		SAY @2044 /* ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		= @2045 /* ~Please feel free to come and go as you wish.~ */
 		++ @2046 /* ~That's very generous of you.  Thank you!~ */ + ROOM_GOOD
