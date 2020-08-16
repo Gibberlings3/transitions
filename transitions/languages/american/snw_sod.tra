@@ -1,9 +1,8 @@
 /////////////////////////////////////////////////////
 // Dialogue lines for the optional snark component //
-// Used for snark.d                                //
+// Used for snw_sod.d                              //
 /////////////////////////////////////////////////////
 
-// Some snark...
 // Response to Corwin's stupid question...
 @3000	= ~How the hells should I know?~
 
@@ -25,5 +24,3 @@
 // Entar/Skie
 @3012	= ~With all due respect sir, I'm not a babysitter.  Neither is the Fist.  But if you insist upon this folly, her fate is upon your head, not mine.~
 
-// Ellesime
-@3013	= ~Only partially?~

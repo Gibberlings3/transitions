@@ -2,11 +2,6 @@
 // INSTALLATION SETUP STRINGS //
 ////////////////////////////////
 @0 		= ~Transitions~
-@1		= ~This mod is only compatible with EET~
-@8		= ~Requires main component of this or Endless BG1 mods to be installed~
-@9		= ~Just use what EndlessBG1 has already installed~
-@10		= ~Requires Endless BG1 mod to be installed~
-@19		= ~Already installed with Endless BG1 mod~
 @2		= ~1 - MAIN COMPONENT: Allow continued play after Sarevok is defeated~
 @3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
 @4		= ~Play BGI ending movie after Sarevok is defeated and skip new bhaal-spawn power~
@@ -31,9 +26,12 @@
 @23		= ~14 - Use abbreviated capture scene leading to BG2~
 @24		= ~15 - Use Irenicus in hell movie to restore Bhaal-spawn powers after he is defeated~
 
-// Future enhancements
-/*
-@27		= ~NOT USED~
-@30		= ~Sailing time (47 days) counts against world timers~
-@31		= ~Don't include sailing time to and from Balduran's Isle in the world timers~
-*/
+// Error codes specific to this mod
+@100	= ~This mod is only compatible with EET~
+@8		= ~Requires main component of this or Endless BG1 mods to be installed~
+@9		= ~Just use what EndlessBG1 has already installed~
+@10		= ~Requires Endless BG1 mod to be installed~
+@19		= ~Already installed with Endless BG1 mod~
+
+// Standard error codes
+@1000	= ~blah blah~

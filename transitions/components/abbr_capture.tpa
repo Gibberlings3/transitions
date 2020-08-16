@@ -4,7 +4,8 @@
 ////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION abbr_capture BEGIN
-	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/bg0125_abbr_cap.baf~
+	// Patch this baf to the first area of your game
+	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
 
 	// Stop the actual pre-BG2 capture scene from happening
 	COPY_EXISTING ~BD6100.bcs~ ~override~

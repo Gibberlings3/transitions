@@ -1,0 +1,12 @@
+////////////////////////////////////////////////////////////
+// Optional component that adds a little more snark       //
+// Also makes more intelligent observations in some spots //
+////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION snark_n_wit BEGIN
+	// Patch this baf to the first area of your game
+	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/snark_n_wit.baf~
+
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/snw_sod.d~ USING ~%tra_loc%/%s/snw_sod.tra~
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/snw_bg2.d~ USING ~%tra_loc%/%s/snw_bg2.tra~
+END

@@ -1,7 +1,8 @@
-////////////////////////////////////////////////////////////////
-// Travel to where the player wants to be at the start of SoD //
-// Parsed via main_common.tpa called via BG0108.bcs           //
-////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// Start either full or half attack scene to start SoD                            //
+// Parsed via main_common.tpa                                                     //
+// Called via exit dialogues and solo exit timer in Baldur.bcs (timer_checks.baf) //
+////////////////////////////////////////////////////////////////////////////////////
 
 IF
 	TRUE()
@@ -10,12 +11,39 @@ THEN
 		// Fade to black in all cases
 		CutSceneId(Player1)
 		FadeToColor([30.0],0)
-		Wait(3)
 		Continue()
 END
 
 IF
 	Global("#L_StartCaelarAttack","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+
+		// Start the full attack scene
+		TakeObjectGoldGlobal("BD_TAKEN_GOLD","GLOBAL",Player1)
+		SetGlobal("BD_EXTRA_GOLD","GLOBAL",17)
+		SmallWait(5)
+
+		Continue()
+END
+
+IF
+	OR(2)
+		Global("#L_StartCaelarAttack","GLOBAL",2)
+		Global("#L_StartCaelarAttack","GLOBAL",3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+
+		// Start with the 2nd half of the attack scene
+		SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)
+
+		Continue()
+END
+
+IF
+	TRUE()
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -27,51 +55,17 @@ THEN
 		SetGlobal("sprite_is_deadminsc","GLOBAL",0)
 		SetGlobal("sprite_is_deadrasaad","GLOBAL",0)
 
-		// Start the full attack scene
+		Wait(3)
+
 		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
-		SmallWait(5)
-		TakeObjectGoldGlobal("BD_TAKEN_GOLD","GLOBAL",Player1)
-		SetGlobal("BD_EXTRA_GOLD","GLOBAL",17)
-		SmallWait(5)
-		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
-		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
-		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
-		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
-		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
-		LeaveAreaLUA("bd0103","",[215.396],SE)
-		MultiPlayerSync()
-		// Keep changes to the group done in BD0103.BCS invisible 
-END
 
-IF
-	OR(2)
-		Global("#L_StartCaelarAttack","GLOBAL",2)
-		Global("#L_StartCaelarAttack","GLOBAL",3)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		SetGlobal("#L_StartCaelarAttack","GLOBAL",99)
-
- 		// Set globals that the game normally sets in Korlasz dungeon
-		SetGlobal("sprite_is_deadsafana","GLOBAL",0)
-		SetGlobal("sprite_is_deaddynaheir","GLOBAL",0)
-		SetGlobal("sprite_is_deadminsc","GLOBAL",0)
-		SetGlobal("sprite_is_deadrasaad","GLOBAL",0)
-
-		// Start with the 2nd half of the attack scene
-		SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1)
-		ReallyForceSpellRES("bdrejuve",Myself)  // No such index
-		ReallyForceSpellRES("bdrejuve",Player2)  // No such index
-		ReallyForceSpellRES("bdrejuve",Player3)  // No such index
-		ReallyForceSpellRES("bdrejuve",Player4)  // No such index
-		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
-		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
 		SmallWait(5)
+
 		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
 		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
 		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
@@ -81,4 +75,3 @@ THEN
 		MultiPlayerSync()
 		// Keep changes to the group done in BD0103.BCS invisible
 END
-

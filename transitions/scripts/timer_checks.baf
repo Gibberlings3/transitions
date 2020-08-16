@@ -32,7 +32,7 @@ THEN
 		SetGlobal("#L_SoloExitLeft","GLOBAL",1) 
 		SetWorldmap("BGMap")
 		SetCutSceneLite(TRUE)
-		StartCutSceneEx("#L_Cut07",TRUE)
+		StartCutSceneEx("#L_GoSoD",TRUE)
 END
 
 IF
@@ -47,6 +47,6 @@ THEN
 		ClearAllActions()
 		SetGlobal("#L_StartBG2","GLOBAL",2)
 		StartCutSceneMode()
-		StartCutSceneEx("#L_Cut09",TRUE)
+		StartCutSceneEx("#L_GoBG2",TRUE)
 END
 
