@@ -1,0 +1,9 @@
+/////////////////////////////////////////////////////////////
+// Optional component that adds a little more snark to SoD //
+/////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION add_snark BEGIN
+	// Some snarky little comments
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/snark.d~ USING ~%tra_loc%/%s/snark.tra~
+	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/bg0125_snark.baf~
+END

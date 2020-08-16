@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////
 // Sets up a global to indicate snark is desired   //
-// Patched via snark_n_wit.tpa                     //
+// Patched via add_snark.tpa                       //
 /////////////////////////////////////////////////////
 IF
 	Global("#L_Snark","GLOBAL",0)

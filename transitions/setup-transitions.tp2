@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/transitions~
 SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net ~
-VERSION ~v0.2.03~
+VERSION ~v0.2.02~
 
 README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
 
@@ -49,7 +49,7 @@ ALWAYS
    END
 
    ACTION_IF NOT GAME_IS ~eet~ BEGIN
-      FAIL @100
+      FAIL @1
    END
 
    ACTION_IF !VARIABLE_IS_SET deja_vu BEGIN
@@ -297,8 +297,8 @@ BEGIN @22   // MOD 100
 DESIGNATED 100
 LABEL SNARK
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
-INCLUDE ~transitions/components/snark_n_wit.tpa~
-LAF snark_n_wit END
+INCLUDE ~transitions/components/add_snark.tpa~
+LAF add_snark END
 
 //////////////////////////////////////////////////
 // USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //

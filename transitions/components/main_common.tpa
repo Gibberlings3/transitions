@@ -366,11 +366,37 @@ APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 // Script to attach to palace exits to start SoD or BG2 when attempting to leave
 // COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
 
+/* No longer using this method
+// Modify palace exits to have a script that will kick off SoD/BG2 when used
+COPY_EXISTING ~BG0108.ARE~ ~override~
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0109a~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0109b~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0111~
+         region_script = ~#LByeBG1.BCS~
+   END
+   LPF ALTER_AREA_REGION
+      STR_VAR
+         region_name = ~Door0200~
+         region_script = ~#LByeBG1.BCS~
+   END
+BUT_ONLY_IF_IT_CHANGES
+*/
+
 // Cut scene that starts SoD
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_GoSoD.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
 
 // Cut scene that starts BG2
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_GoBG2.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
 
 // Updated Start SoD scrolling text
 COPY ~%mod_root%/objects/#LSoD01.2DA~ ~override~
