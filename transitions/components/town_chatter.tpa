@@ -52,11 +52,7 @@ DEFINE_ACTION_FUNCTION town_chatter BEGIN
 	END
 
 	// Set global that will switch on post-Sarevok chatter
-	COPY_EXISTING ~BG0153.BCS~ ~override~
-		DECOMPILE_AND_PATCH BEGIN 
-			APPEND_FILE TEXT ~%mod_root%/scripts/BG0153b.baf~
-		END
-	BUT_ONLY_IF_IT_CHANGES
+	EXTEND_BOTTOM ~BG0108.BCS~ ~%mod_root%/scripts/hero_bg.baf~
 
 	// There's also a merchant in the iron throne that needs to be taken out
 	ACTION_IF !( (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 20) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 21) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 22) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 23) ) THEN BEGIN

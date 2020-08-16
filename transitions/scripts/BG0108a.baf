@@ -82,7 +82,6 @@ IF
 THEN
 	RESPONSE #100
 		ActionOverride("LIIA",StartDialogueNoSet("IMOEN2"))
-		Continue()
 END
 
 IF
@@ -93,7 +92,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_LiiaTalkedToPC","MYAREA",1)
 		ActionOverride("LIIA",StartDialogueNoSet(Player1))
-		Continue()
 END
 
 IF
@@ -104,7 +102,6 @@ THEN
 		SetGlobal("#L_BeltInitiatedQuests","MYAREA",1)
 		SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)
 		ActionOverride("BELT",StartDialogueNoSet(Player1))
-		Continue()
 END
 
 IF

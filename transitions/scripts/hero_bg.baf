@@ -5,6 +5,7 @@
 IF
 	Dead("Sarevok")
 	Global("C#st_HeroOfBG","GLOBAL",0)
+	GlobalGT("#L_TalkedToDukes","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("C#st_HeroOfBG","GLOBAL",1)
