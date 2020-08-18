@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/transitions~
 SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net ~
-VERSION ~v0.2.02~
+VERSION ~v0.2.04~
 
 README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
 
@@ -137,7 +137,7 @@ LAF sarevok1 END
 BEGIN @9       // MOD 12
 SUBCOMPONENT @5
 LABEL EQUIPMENT_USE_ENDLESS
-REQUIRE_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 2 @10
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
 
 
