@@ -541,8 +541,6 @@ IF
    Global("#L_%npc_name%PK","GLOBAL",0)   // Indicates they've already given their full spiel if = 1
    Global("#L_NPCPK","GLOBAL",0)
    IsValidForPartyDialogue(MYSELF)
-   !AreaType(DUNGEON)
-   CombatCounter(0)
 THEN
    RESPONSE #100
       ClearAllActions()
@@ -558,7 +556,6 @@ IF
    Global("#L_PKExitModded","LOCALS",0)
    !InPartyAllowDead(MYSELF)
    See(Player1)
-   CombatCounter(0)
 THEN
    RESPONSE #100
       Dialogue(Player1)
@@ -600,8 +597,6 @@ IF
    OR(2)
       Global("#L_ExitTimer","GLOBAL",0)
       GlobalTimerExpired("#L_ExitTimer","GLOBAL")
-   !AreaType(DUNGEON)
-   CombatCounter(0)
 THEN
    RESPONSE #100
       ClearAllActions()
@@ -647,8 +642,6 @@ END
       OR(2)
          Global("#L_ExitTimer","GLOBAL",0)
          GlobalTimerExpired("#L_ExitTimer","GLOBAL")
-      !AreaType(DUNGEON)
-      CombatCounter(0)
    THEN
       RESPONSE #100
          ClearAllActions()
@@ -870,7 +863,7 @@ END
       // Only the first seven in our list would prefer to leave after Korlasz
       OUTER_SPRINT post_korlasz ~~~~~
       CHAIN
-         IF WEIGHT #-999 ~Global("#L_PKExitModded","LOCALS",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN %join_file% POST_KORLASZ_ASK
+         IF WEIGHT #-999 ~Global("#L_PKExitModded","LOCALS",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2)~ THEN %join_file% POST_KORLASZ_ASK
             %pk_init%
             %pk_group_init%
          END
