@@ -1,0 +1,80 @@
+/////////////////////////////////////////////////////////////////
+// Timer to see if solo character needs to transfer to SoD/BG2 //
+// since it won't happen via NPC dialogue as normal            //
+// Compiled via main_common.tpa                                //
+/////////////////////////////////////////////////////////////////
+
+IF
+  !InPartyAllowDead("IMOEN2")
+	Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogues never fired
+	Global("#L_SoloExitLeft","GLOBAL",0)
+	!Global("#L_SoloExitTimer","GLOBAL",0)
+	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
+	Global("#L_SarvQuests","GLOBAL",100)
+	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
+	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
+	Global("EndOfBG1","GLOBAL",1)
+  OR(3)
+    !InPartyAllowDead(Player2)
+    !TriggerOverride(Player2,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player3)
+    !TriggerOverride(Player3,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player4)
+    !TriggerOverride(Player4,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player5)
+    !TriggerOverride(Player5,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player6)
+    !TriggerOverride(Player6,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+THEN
+	RESPONSE #100
+		ClearAllActions() 
+		SetGlobal("#L_SoloExitLeft","GLOBAL",1) 
+		SetWorldmap("BGMap")
+		SetCutSceneLite(TRUE)
+		StartCutSceneEx("#L_Cut07",TRUE)
+END
+
+IF
+  Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogue never fired
+  !Global("#L_SoloExitTimer","GLOBAL",0)
+  GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
+  Global("#L_SarvQuests","GLOBAL",100)
+  Global("#L_StartBG2","GLOBAL",1)
+  Global("EndOfBG1","GLOBAL",2)
+  OR(3)
+    !InPartyAllowDead(Player2)
+    !TriggerOverride(Player2,Global("#L_BG2ExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player3)
+    !TriggerOverride(Player3,Global("#L_BG2ExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player4)
+    !TriggerOverride(Player4,Global("#L_BG2ExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player5)
+    !TriggerOverride(Player5,Global("#L_BG2ExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+  OR(3)
+    !InPartyAllowDead(Player6)
+    !TriggerOverride(Player6,Global("#L_BG2ExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+THEN
+  RESPONSE #100
+    ClearAllActions()
+    SetGlobal("#L_StartBG2","GLOBAL",2)
+    StartCutSceneMode()
+    StartCutSceneEx("#L_Cut09",TRUE)
+END
+
