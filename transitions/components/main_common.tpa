@@ -352,45 +352,14 @@ COPY_EXISTING ~COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
    WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
    WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
 
-// Script used by the item from within its dialogue to send the group to the palace
-// NO LONGER USED 
-// COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~
-
 // The dialogue for the item
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
-// No longer using this method
-// Script to attach to palace exits to start SoD or BG2 when attempting to leave
-// COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LByeBG1.baf~
-
-/* No longer using this method
-// Modify palace exits to have a script that will kick off SoD/BG2 when used
-COPY_EXISTING ~BG0108.ARE~ ~override~
-   LPF ALTER_AREA_REGION
-      STR_VAR
-         region_name = ~Door0109a~
-         region_script = ~#LByeBG1.BCS~
-   END
-   LPF ALTER_AREA_REGION
-      STR_VAR
-         region_name = ~Door0109b~
-         region_script = ~#LByeBG1.BCS~
-   END
-   LPF ALTER_AREA_REGION
-      STR_VAR
-         region_name = ~Door0111~
-         region_script = ~#LByeBG1.BCS~
-   END
-   LPF ALTER_AREA_REGION
-      STR_VAR
-         region_name = ~Door0200~
-         region_script = ~#LByeBG1.BCS~
-   END
-BUT_ONLY_IF_IT_CHANGES
-*/
+// Timer put on the PC so it'll transition to SoD or BG2 when solo
+EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/solo_check.baf~
 
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
