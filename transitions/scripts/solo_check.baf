@@ -30,6 +30,7 @@ IF
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
 	Global("EndOfBG1","GLOBAL",1)
+  Global("#L_WaitForMe","GLOBAL",0)
 THEN
 	RESPONSE #100
 		ClearAllActions() 
@@ -45,6 +46,7 @@ IF
   Global("#L_SarvQuests","GLOBAL",100)
   Global("#L_StartBG2","GLOBAL",1)
   Global("EndOfBG1","GLOBAL",2)
+  Global("#L_WaitForMe","GLOBAL",0)
 THEN
   RESPONSE #100
     ClearAllActions()
