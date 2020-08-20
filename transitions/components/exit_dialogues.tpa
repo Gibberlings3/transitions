@@ -371,6 +371,26 @@ IF
    Global("#L_%npc_name%PK","GLOBAL",0)
    Global("#L_NPCPK","GLOBAL",0)
    IsValidForPartyDialogue(MYSELF)
+   OR(3)
+      !InPartyAllowDead(Player2)
+      !TriggerOverride(Player2,Global("#L_PKExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player3)
+      !TriggerOverride(Player3,Global("#L_PKExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player4)
+      !TriggerOverride(Player4,Global("#L_PKExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player5)
+      !TriggerOverride(Player5,Global("#L_PKExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player6)
+      !TriggerOverride(Player6,Global("#L_PKExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
 THEN
    RESPONSE #100
       ClearAllActions()
@@ -407,6 +427,26 @@ IF
    OR(2)
       Global("#L_ExitTimer","GLOBAL",0)
       GlobalTimerExpired("#L_ExitTimer","GLOBAL")
+   OR(3)
+      !InPartyAllowDead(Player2)
+      !TriggerOverride(Player2,Global("#L_BG2ExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player3)
+      !TriggerOverride(Player3,Global("#L_BG2ExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player4)
+      !TriggerOverride(Player4,Global("#L_BG2ExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player5)
+      !TriggerOverride(Player5,Global("#L_BG2ExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
+   OR(3)
+      !InPartyAllowDead(Player6)
+      !TriggerOverride(Player6,Global("#L_BG2ExitModded","LOCALS",1))
+      TriggerOverride(Player1,False())
 THEN
    RESPONSE #100
       ClearAllActions()
@@ -432,6 +472,26 @@ END
       OR(2)
          Global("#L_ExitTimer","GLOBAL",0)
          GlobalTimerExpired("#L_ExitTimer","GLOBAL")
+      OR(3)
+         !InPartyAllowDead(Player2)
+         !TriggerOverride(Player2,Global("#L_SoDExitModded","LOCALS",1))
+         TriggerOverride(Player1,False())
+      OR(3)
+         !InPartyAllowDead(Player3)
+         !TriggerOverride(Player3,Global("#L_SoDExitModded","LOCALS",1))
+         TriggerOverride(Player1,False())
+      OR(3)
+         !InPartyAllowDead(Player4)
+         !TriggerOverride(Player4,Global("#L_SoDExitModded","LOCALS",1))
+         TriggerOverride(Player1,False())
+      OR(3)
+         !InPartyAllowDead(Player5)
+         !TriggerOverride(Player5,Global("#L_SoDExitModded","LOCALS",1))
+         TriggerOverride(Player1,False())
+      OR(3)
+         !InPartyAllowDead(Player6)
+         !TriggerOverride(Player6,Global("#L_SoDExitModded","LOCALS",1))
+         TriggerOverride(Player1,False())
    THEN
       RESPONSE #100
          ClearAllActions()
@@ -657,13 +717,7 @@ END
       // Only the first seven in our list would prefer to leave after Korlasz
       OUTER_SPRINT post_korlasz ~~~~~
       CHAIN
-<<<<<<< HEAD
-         IF WEIGHT #-999 ~Global("#L_PKExitModded","LOCALS",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2)~ THEN %join_file% POST_KORLASZ_ASK
-||||||| e3e0c7c... Modified exit dialogues to check for party member locals indicating the NPC is modded
-         IF WEIGHT #-999 ~Global("#L_PKExitModded","LOCALS",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN %join_file% POST_KORLASZ_ASK
-=======
-         IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2) !AreaType(DUNGEON) CombatCounter(0)~ THEN %join_file% POST_KORLASZ_ASK
->>>>>>> parent of e3e0c7c... Modified exit dialogues to check for party member locals indicating the NPC is modded
+         IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2)~ THEN %join_file% POST_KORLASZ_ASK
             %pk_init%
             %pk_group_init%
          END
@@ -793,6 +847,13 @@ END
       OUTER_SPRINT pre_bg2 ~~
    END ELSE BEGIN
       OUTER_SPRINT pre_bg2 ~~~~~
+      APPEND_EARLY %join_file%
+         IF WEIGHT #-995 ~NumInParty(2) Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN BEGIN PRE_BG2_GOODBYE_JUST_ME
+            SAY %exit_leave%
+            IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobal("#L_StartBG2","GLOBAL",2) StartCutSceneMode() StartCutSceneEx("#L_Cut09",TRUE) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+         END
+      END
+
       CHAIN
          IF WEIGHT #-996 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_ExitTimer","GLOBAL",0) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% PRE_BG2_WARNING
             %exit_init%
@@ -802,7 +863,7 @@ END
          %take_your_split%
 
       CHAIN
-         IF WEIGHT #-995 ~Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_BG2_GOODBYE
+         IF WEIGHT #-995 ~NumInPartyGT(2) Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_BG2_GOODBYE
             %exit_leave%
             %group_bg2_exit_leave%
          END
@@ -812,6 +873,13 @@ END
    // Put it all together
    <<<<<<<< .../npc_add.d
       %post_korlasz%
+
+      APPEND_EARLY %join_file%
+         IF WEIGHT #-997 ~NumInParty(2) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN BEGIN PRE_exit_LEAVE_JUST_ME
+            SAY %exit_leave%
+            IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetWorldmap("BGMap") SetCutSceneLite(TRUE) StartCutSceneEx("#L_Cut07",TRUE) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+         END
+      END
 
       // Everyone leaves the group prior to SoD
       CHAIN
@@ -823,7 +891,7 @@ END
          %take_your_split%
 
       CHAIN
-         IF WEIGHT #-997 ~OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
+         IF WEIGHT #-997 ~NumInPartyGT(2) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
             %exit_leave%
             %group_exit_leave%
          END
