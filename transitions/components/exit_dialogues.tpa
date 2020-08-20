@@ -450,6 +450,7 @@ IF
 THEN
    RESPONSE #100
       ClearAllActions()
+      SetGlobal("#L_SoloExitTimer","GLOBAL",0)  // turn off the solo-exit timer until after we're done
       Dialogue(Player1)
 END
 ~
@@ -495,6 +496,7 @@ END
    THEN
       RESPONSE #100
          ClearAllActions()
+         SetGlobal("#L_SoloExitTimer","GLOBAL",0)  // turn off the solo-exit timer until after we're done
          Dialogue(Player1)
    END
 
@@ -847,13 +849,6 @@ END
       OUTER_SPRINT pre_bg2 ~~
    END ELSE BEGIN
       OUTER_SPRINT pre_bg2 ~~~~~
-      APPEND_EARLY %join_file%
-         IF WEIGHT #-995 ~NumInParty(2) Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN BEGIN PRE_BG2_GOODBYE_JUST_ME
-            SAY %exit_leave%
-            IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobal("#L_StartBG2","GLOBAL",2) StartCutSceneMode() StartCutSceneEx("#L_Cut09",TRUE) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
-         END
-      END
-
       CHAIN
          IF WEIGHT #-996 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("#L_ExitTimer","GLOBAL",0) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% PRE_BG2_WARNING
             %exit_init%
@@ -863,23 +858,16 @@ END
          %take_your_split%
 
       CHAIN
-         IF WEIGHT #-995 ~NumInPartyGT(2) Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_BG2_GOODBYE
+         IF WEIGHT #-995 ~Global("#L_StartBG2","GLOBAL",1) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_BG2_GOODBYE
             %exit_leave%
             %group_bg2_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea()) SetGlobal("#L_StartBG2","GLOBAL",2) StartCutSceneMode() StartCutSceneEx("#L_Cut09",TRUE)~ EXIT~~~~~
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
    END
 
    // Put it all together
    <<<<<<<< .../npc_add.d
       %post_korlasz%
-
-      APPEND_EARLY %join_file%
-         IF WEIGHT #-997 ~NumInParty(2) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN BEGIN PRE_exit_LEAVE_JUST_ME
-            SAY %exit_leave%
-            IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetWorldmap("BGMap") SetCutSceneLite(TRUE) StartCutSceneEx("#L_Cut07",TRUE) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
-         END
-      END
 
       // Everyone leaves the group prior to SoD
       CHAIN
@@ -891,11 +879,11 @@ END
          %take_your_split%
 
       CHAIN
-         IF WEIGHT #-997 ~NumInPartyGT(2) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
+         IF WEIGHT #-997 ~OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3) Global("#L_%npc_name%Modded","GLOBAL",0) GlobalGT("#L_ExitTimer","GLOBAL",0) GlobalTimerExpired("#L_ExitTimer","GLOBAL") Global("#L_ExitTimerLeft","GLOBAL",0)~ THEN %join_file% PRE_exit_LEAVE
             %exit_leave%
             %group_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea()) SetWorldmap("BGMap") SetCutSceneLite(TRUE) StartCutSceneEx("#L_Cut07",TRUE)~ EXIT
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
 
       %pre_bg2%
 

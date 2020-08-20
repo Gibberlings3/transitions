@@ -1,12 +1,28 @@
-/////////////////////////////////////////////////////////////////
-// Timer to see if solo character needs to transfer to SoD/BG2 //
-// since it won't happen via NPC dialogue as normal            //
-// Compiled via main_common.tpa                                //
-/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+// Timer to see if it's time to transfer to SoD/BG2 //
+// Compiled via main_common.tpa                     //
+//////////////////////////////////////////////////////
+
 
 IF
-  !InPartyAllowDead("IMOEN2")
-	Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogues never fired
+  OR(4)
+    Global("#L_StartBG2","GLOBAL",1)            // We're starting either SoD or BG2
+    Global("#L_StartCaelarAttack","GLOBAL",1)
+    Global("#L_StartCaelarAttack","GLOBAL",2)
+    Global("#L_StartCaelarAttack","GLOBAL",3)
+  OR(6)
+    TriggerOverride(Player2,Global("#L_SoDExitModded","LOCALS",1))  // Someone in the group needs us to wait
+    TriggerOverride(Player3,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player4,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player5,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player6,Global("#L_SoDExitModded","LOCALS",1))
+    TriggerOverride(Player1,False())
+THEN
+  RESPONSE #100
+    SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)         // Bump the timer
+END
+
+IF
 	Global("#L_SoloExitLeft","GLOBAL",0)
 	!Global("#L_SoloExitTimer","GLOBAL",0)
 	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
@@ -14,26 +30,6 @@ IF
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
 	Global("EndOfBG1","GLOBAL",1)
-  OR(3)
-    !InPartyAllowDead(Player2)
-    !TriggerOverride(Player2,Global("#L_SoDExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player3)
-    !TriggerOverride(Player3,Global("#L_SoDExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player4)
-    !TriggerOverride(Player4,Global("#L_SoDExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player5)
-    !TriggerOverride(Player5,Global("#L_SoDExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player6)
-    !TriggerOverride(Player6,Global("#L_SoDExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
 THEN
 	RESPONSE #100
 		ClearAllActions() 
@@ -44,32 +40,11 @@ THEN
 END
 
 IF
-  Global("#L_ExitTimer","GLOBAL",0)		// the exit dialogue never fired
   !Global("#L_SoloExitTimer","GLOBAL",0)
   GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
   Global("#L_SarvQuests","GLOBAL",100)
   Global("#L_StartBG2","GLOBAL",1)
   Global("EndOfBG1","GLOBAL",2)
-  OR(3)
-    !InPartyAllowDead(Player2)
-    !TriggerOverride(Player2,Global("#L_BG2ExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player3)
-    !TriggerOverride(Player3,Global("#L_BG2ExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player4)
-    !TriggerOverride(Player4,Global("#L_BG2ExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player5)
-    !TriggerOverride(Player5,Global("#L_BG2ExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
-  OR(3)
-    !InPartyAllowDead(Player6)
-    !TriggerOverride(Player6,Global("#L_BG2ExitModded","LOCALS",1))
-    TriggerOverride(Player1,False())
 THEN
   RESPONSE #100
     ClearAllActions()
