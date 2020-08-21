@@ -14,6 +14,32 @@ THEN
 		SetGlobal("BD_Korlasz_Fight","BD0130",2)
 END
 
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",2)
+	Global("BDSH_Imoen_Room","BD0130",1)
+	!TriggerOverride("Bhaal_Mural",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	!TriggerOverride("Bhaal_Mural",Detect([EVILCUTOFF]))
+	!TriggerOverride("Bhaal_corner",Detect([PC]))
+	!TriggerOverride("Entrance_corner",Detect([PC]))
+	!TriggerOverride("Bhaal_corner2",Detect([PC]))
+	Delay(6)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0130",2)
+		ActionOverride("bdff1000",JumpToPoint([2150.1170]))
+		ActionOverride("bdff1000",Face(SE))
+		ActionOverride("bdff1001",JumpToPoint([2155.1265]))
+		ActionOverride("bdff1001",Face(SE))
+		ActionOverride("bdff1002",JumpToPoint([2265.1180]))
+		ActionOverride("bdff1002",Face(S))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
 IF 
 	Global("#L_SarvQuests","GLOBAL",8)
 	TriggerOverride("BDFF1000",Range(Player1,15))
@@ -27,3 +53,93 @@ THEN
 		ActionOverride("BDFF1001",EscapeAreaObject("Tranbd0120rope"))
 		ActionOverride("BDFF1002",EscapeAreaObject("Tranbd0120rope"))
 END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",2)
+	Global("BDSH_Imoen_Room","BD0130",2)
+	!TriggerOverride("Dead_Three_Center",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	!TriggerOverride("Dead_Three_Center",Detect([EVILCUTOFF]))
+	!TriggerOverride("Lava02",Detect([PC]))
+	Delay(6)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0130",3)
+		ActionOverride("bdff1000",JumpToPoint([2645.1975]))
+		ActionOverride("bdff1000",Face(SW))
+		ActionOverride("bdff1001",JumpToPoint([2535.2020]))
+		ActionOverride("bdff1001",Face(SW))
+		ActionOverride("bdff1002",JumpToPoint([2615.2080]))
+		ActionOverride("bdff1002",Face(SW))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",2)
+	Global("BDSH_Imoen_Room","BD0130",3)
+	!TriggerOverride("Bane_mural",Detect([PC]))
+	!TriggerOverride("Bane_mural",Detect([EVILCUTOFF]))
+	!TriggerOverride("Jelly_globe01",Detect([PC]))
+	!TriggerOverride("Corridor_alcoves",Detect([PC]))
+	!TriggerOverride("Dead_Three_Center",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	Delay(6)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0130",4)
+		ActionOverride("bdff1000",JumpToPoint([1800.2260]))
+		ActionOverride("bdff1000",Face(NW))
+		ActionOverride("bdff1001",JumpToPoint([1690.2225]))
+		ActionOverride("bdff1001",Face(NW))
+		ActionOverride("bdff1002",JumpToPoint([1800.2165]))
+		ActionOverride("bdff1002",Face(N))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",2)
+	Global("BDSH_Imoen_Room","BD0130",4)
+	!TriggerOverride("Myrkul_mural",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	!TriggerOverride("Myrkul_mural",Detect([EVILCUTOFF]))
+	!TriggerOverride("Lava01",Detect([PC]))
+	Delay(6)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0130",5)
+		ActionOverride("bdff1000",JumpToPoint([810.1565]))
+		ActionOverride("bdff1000",Face(E))
+		ActionOverride("bdff1001",JumpToPoint([905.1400]))
+		ActionOverride("bdff1001",Face(N))
+		ActionOverride("bdff1002",JumpToPoint([1030.1410]))
+		ActionOverride("bdff1002",Face(N))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",2)
+	!Global("BDSH_Imoen_Room","BD0130",6)
+	Global("#L_SarvQuests","GLOBAL",8)
+	OR(2)
+		Dead("bdkorlas")  // Korlasz
+		Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0130",6)
+		SetGlobal("bd_plot","GLOBAL",29)
+		SetInterrupt(TRUE)
+END
+

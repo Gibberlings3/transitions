@@ -14,3 +14,57 @@ THEN
 		StartCutSceneMode()
 		StartCutSceneEx("#L_Cut05",TRUE)
 END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",1)
+	Global("BDSH_Imoen_Room","BD0120",0)
+	TriggerOverride("Imoen_Room1b",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	!TriggerOverride("Card_Table",Detect([PC]))
+	!TriggerOverride("Card_Table",Detect([EVILCUTOFF]))
+	!Dead("bdkorlas")  // Korlasz
+	!Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0120",1) 
+		ActionOverride("bdff1000",JumpToPoint([1645.1520]))
+		ActionOverride("bdff1000",Face(NE))
+		ActionOverride("bdff1001",JumpToPoint([1785.1375]))
+		ActionOverride("bdff1001",Face(NE))
+		ActionOverride("bdff1002",JumpToPoint([1722.1341]))
+		ActionOverride("bdff1002",Face(NE))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDSH_Imoen_Floor","GLOBAL",1)
+	Global("BDSH_Imoen_Room","BD0120",1)
+	!TriggerOverride("Imoen_room2",Detect([PC]))
+	!TriggerOverride("Imoen_room2",Detect([EVILCUTOFF]))
+	!TriggerOverride("Imoen_room1a",Detect([PC]))
+	Global("#L_SarvQuests","GLOBAL",8)
+	!TriggerOverride("Card_Table",Detect([PC]))
+	!TriggerOverride("Imoen_room2a",Detect([PC]))
+	!TriggerOverride("Imoen_room2b",Detect([PC]))
+	!Dead("bdkorlas")  // Korlasz
+	!Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDSH_Imoen_Room","BD0120",2)
+		ActionOverride("bdff1000",JumpToPoint([1610.640]))
+		ActionOverride("bdff1000",Face(NE))
+		ActionOverride("bdff1001",JumpToPoint([1560.570]))
+		ActionOverride("bdff1001",Face(E))
+		ActionOverride("bdff1002",JumpToPoint([1720.650]))
+		ActionOverride("bdff1002",Face(NW))
+		ActionOverride("bdff1000",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1001",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		ActionOverride("bdff1002",SaveObjectLocation("LOCALS","DEFAULT",Myself))
+		SetInterrupt(TRUE)
+END
+
