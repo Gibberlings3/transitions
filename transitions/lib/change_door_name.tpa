@@ -15,8 +15,8 @@ DEFINE_PATCH_FUNCTION CHANGE_DOOR_NAME
 	STR_VAR	
 		old_name = ""		// required
 		new_name = ""		// required
-RET
-	found_door
+	RET
+		found_door
 BEGIN
 	PATCH_IF STRING_LENGTH ~%old_name%~ == 0 || STRING_LENGTH ~%new_name%~ == 0 BEGIN
     	PATCH_FAIL ~fun CHANGE_DOOR_NAME called with arguments old_name:"%old_name%" and new_name:"%new_name%"~
@@ -25,11 +25,10 @@ BEGIN
 	PHP_EACH array_off_doors AS idx_door => offset_door BEGIN
     	PATCH_IF found_door == 0 BEGIN
     		READ_ASCII offset_door name_door (32) NULL
-      			PATCH_IF ~%name_door%~ STR_EQ ~%old_name%~ BEGIN
-        			SET found_door = offset_door
-			        WRITE_ASCIIE offset_door ~%new_name%~ (32)
-      			END
-    		END
+      		PATCH_IF ~%name_door%~ STR_EQ ~%old_name%~ BEGIN
+        		SET found_door = offset_door
+			    WRITE_ASCIIE offset_door ~%new_name%~ (32)
+      		END
     	END
 	END
 END
