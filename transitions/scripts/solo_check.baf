@@ -23,7 +23,7 @@ THEN
 END
 
 IF
-	Global("#L_SoloExitLeft","GLOBAL",0)
+	Global("#L_SoDStarted","GLOBAL",0)
 	!Global("#L_SoloExitTimer","GLOBAL",0)
 	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
 	Global("#L_SarvQuests","GLOBAL",100)
@@ -34,7 +34,7 @@ IF
 THEN
 	RESPONSE #100
 		ClearAllActions() 
-		SetGlobal("#L_SoloExitLeft","GLOBAL",1) 
+		SetGlobal("#L_SoDStarted","GLOBAL",1) 
 		SetWorldmap("BGMap")
 		SetCutSceneLite(TRUE)
 		StartCutSceneEx("#L_Cut07",TRUE)
