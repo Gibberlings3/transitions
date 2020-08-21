@@ -32,6 +32,8 @@ Prevents the end of game transition to SoD after Sarevok's death
 Prevents the end of game transition to ToB after Irenicus's death  
 Allows access to Duke Belt in the Ducal Palace for game advancement  
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
+Also to remain consistent with SoD, Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
+The Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate  
 Allows for skipping SoD  
 
@@ -152,6 +154,7 @@ PLANNED FUTURE ENHANCEMENTS
 	* - Update Inn rumors
 	* - Polish how the NPCs flee the Iron Throne HQ
 * Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
+* Put in a regular travel region entrance to the Korlasz crypt to be accessable only during the quest
 * Add better Korlasz loot to stores if quest is skipped
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
@@ -179,9 +182,9 @@ There are no known compatability issues at this time
 ------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------
+If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-bg1/), do so before Transitions.  
 Install before BG1RE (https://www.gibberlings3.net/forums/forum/131-romantic-encounters-bg2/) in order to complete Scar Returns quest after Sarevok is defeated.  
 Transitions should be installed before NPC mods.  
-If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-bg1/), do so before Transitions.  
 
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
@@ -213,10 +216,12 @@ CREDITS
 * K4thos: for giving us the awesome playground (EET) in which to mod
 * DavidW: for the lovely macros included in alter_script.tpa as well as guidance on encapsulation and immutability
 * Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
+* G3 guest Gob Oafenplug: for the new code for change_door_name.tpa 
 * Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
 * Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
 * jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
+* Bubb again for showing me how to fix TriggerOverride. Thank you thank you thank you!!!
 * igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
 * Thank you beta testers!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
