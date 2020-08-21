@@ -37,6 +37,15 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
    END
 END
 
+// New line in campaign.2da so we can use the right post-dialogue files
+APPEND ~CAMPAIGN.2DA~ ~#LSOD1         BDBALDUR       -1             1              BDBANTER       *              MASTAREA       152            -1             *              BDPARTY        BDDIALOG       save           #LSTRTA1       STRTGOLD       *              SODWEAP        BDSTWEAP       *              *              BGMAP          BDBALDUR       1              0xFFFFFFFF     1              *              PARTY          SODINTER       SODYEARS       REPUTATI       SODCLTXT       SODRACE~
+
+APPEND ~CAMPAIGN.2DA~ ~#LSOD2         BDBALDUR       -1             1              BDBANTER       *              MASTAREA       152            -1             *              BDPARTY        BDDIALOG       save           #LSTRTA2       STRTGOLD       *              SODWEAP        BDSTWEAP       *              *              BGMAP          BDBALDUR       1              0xFFFFFFFF     1              *              PARTY          SODINTER       SODYEARS       REPUTATI       SODCLTXT       SODRACE~
+
+// New starting areas
+COPY ~%mod_root%/objects/#LSTRTA1.2DA~ ~override~
+COPY ~%mod_root%/objects/#LSTRTA2.2DA~ ~override~
+
 // 3 Flaming Fist escort ... used in various places
 COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc1.cre~
    SAY NAME1 @1007 /* ~Flaming Fist Escort~ */

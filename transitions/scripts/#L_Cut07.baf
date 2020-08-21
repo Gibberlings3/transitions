@@ -38,12 +38,16 @@ THEN
 		TakeObjectGoldGlobal("BD_TAKEN_GOLD","GLOBAL",Player1)
 		SetGlobal("BD_EXTRA_GOLD","GLOBAL",17)
 		SmallWait(5)
-		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
-		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
-		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
-		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
-		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
-		LeaveAreaLUA("bd0103","",[215.396],SE)
+
+		MoveToCampaign("#LSOD1")
+
+//		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
+//		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
+//		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
+//		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
+//		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
+//		LeaveAreaLUA("bd0103","",[215.396],SE)
+
 		MultiPlayerSync()
 		// Keep changes to the group done in BD0103.BCS invisible 
 END
@@ -72,12 +76,16 @@ THEN
 		ReallyForceSpellRES("bdrejuve",Player5)  // No such index
 		ReallyForceSpellRES("bdrejuve",Player6)  // No such index
 		SmallWait(5)
-		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
-		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
-		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
-		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
-		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
-		LeaveAreaLUA("bd0103","",[534.263],SW)
+
+		MoveToCampaign("#LSOD2")
+
+//		ActionOverride(Player2,LeaveAreaLUA("bd0103","",[131.485],E))
+//		ActionOverride(Player3,LeaveAreaLUA("bd0103","",[152.510],NE))
+//		ActionOverride(Player4,LeaveAreaLUA("bd0103","",[179.544],NE))
+//		ActionOverride(Player5,LeaveAreaLUA("bd0103","",[202.567],NE))
+//		ActionOverride(Player6,LeaveAreaLUA("bd0103","",[239.581],N))
+//		LeaveAreaLUA("bd0103","",[534.263],SW)
+
 		MultiPlayerSync()
 		// Keep changes to the group done in BD0103.BCS invisible
 END
