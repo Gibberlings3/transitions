@@ -517,7 +517,7 @@
 
 // PC responses to pre-SoD/BG2 exit dialogues when there is and isn't gold to share
 @2378	= ~That reminds me, here!  Everyone, take you're share of the gold.  You've all earned it.~
-@2379	= ~Thank you for your help.  I can finally relax a little~
+@2379	= ~Thank you for your help.  I can finally relax a little.~
 
 // Dynaheir's pre-SoD exit dialogue
 @2380	= ~I am in dire need of a short rest.  I shall not go afar off, but I must go for awhile.~
