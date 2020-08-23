@@ -107,7 +107,7 @@ APPEND BELT
 	IF ~~ THEN BEGIN ROOM_TAKEN
 		SAY @2051 /* ~Your suite is on the third floor.  A servant will be there to show you around.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
-		IF ~Global("#L_SarvQuests","GLOBAL",99) Global("#L_GroupSplit","GLOBAL",0)~ + BELT_QUESTS_ALL_DONE
+		IF ~SetGlobal("#L_AcceptedRoom","GLOBAL",1) Global("#L_SarvQuests","GLOBAL",99) Global("#L_GroupSplit","GLOBAL",0)~ + BELT_QUESTS_ALL_DONE
 	END
 
 	IF ~~ THEN BEGIN ROOM_TAKEN_THATS_ALL
