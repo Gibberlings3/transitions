@@ -96,7 +96,7 @@ APPEND BELT
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuestsInProg","GLOBAL",2) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
 		SAY @2054 /* ~Hello again, <CHARNAME>.  Have you changed your mind?~ */
 		++ @2055 /* ~No, I haven't.  Goodbye.~ */ + NO_CHANGE
-		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2056 /* ~Yes, I'll take the room.~ */ + ROOM_TAKEN
+		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2056 /* ~Yes, I'll take the room.~ */ + ROOM_TAKEN_THATS_ALL
 	END
 
 	IF ~~ THEN BEGIN NO_CHANGE
@@ -108,6 +108,11 @@ APPEND BELT
 		SAY @2051 /* ~Your suite is on the third floor.  A servant will be there to show you around.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 		IF ~Global("#L_SarvQuests","GLOBAL",99) Global("#L_GroupSplit","GLOBAL",0)~ + BELT_QUESTS_ALL_DONE
+	END
+
+	IF ~~ THEN BEGIN ROOM_TAKEN_THATS_ALL
+		SAY @2051 /* ~Your suite is on the third floor.  A servant will be there to show you around.~ */
+		IF ~~ THEN DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 	END
 
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("#L_SarvQuestsInProg","GLOBAL",2) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
