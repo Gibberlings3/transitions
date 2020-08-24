@@ -12,13 +12,16 @@ THEN
 		FadeToColor([30.0],0)
 		Wait(1)
 
-		// Poof to outside of Baldur's gate as in end of SoD
+		// Clear the party
+		ActionOverride(Player6,LeaveParty())
+		ActionOverride(Player5,LeaveParty())
+		ActionOverride(Player4,LeaveParty())
+		ActionOverride(Player3,LeaveParty())
+		ActionOverride(Player2,LeaveParty())
+		Wait(1)
+
+		// Poof the PC to outside of Baldur's gate as in end of SoD
 		LeaveAreaLUA("BD6100","",[674.393],NE)
-		ActionOverride(Player2,LeaveAreaLUA("BD6100","",[632.404],NE))  
-		ActionOverride(Player3,LeaveAreaLUA("BD6100","",[674.423],NE))  
-		ActionOverride(Player4,LeaveAreaLUA("BD6100","",[639.439],NE))  
-		ActionOverride(Player5,LeaveAreaLUA("BD6100","",[590.422],NE))  
-		ActionOverride(Player6,LeaveAreaLUA("BD6100","",[669.464],NE))  
 		Wait(1)
 
 		SetGlobal("bd_player_exiled","GLOBAL",2) // To indicate that we had nothing to do with it
@@ -26,13 +29,6 @@ THEN
 		SetGlobal("FOG_TYPE","GLOBAL",4)
 		Weather(FOG)
 		PlaySound("EFF_M87")
-
-		// Clear the party
-		ActionOverride(Player6,LeaveParty())
-		ActionOverride(Player5,LeaveParty())
-		ActionOverride(Player4,LeaveParty())
-		ActionOverride(Player3,LeaveParty())
-		ActionOverride(Player2,LeaveParty())
 
 		MoveGlobal("BD6100","Imoen2",[575.405])  // Imoen
 		ReallyForceSpellDeadRES("bdrejuve","Imoen2")  // No such index
