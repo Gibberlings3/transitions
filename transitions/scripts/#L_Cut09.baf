@@ -27,6 +27,13 @@ THEN
 		Weather(FOG)
 		PlaySound("EFF_M87")
 
+		// Clear the party
+		ActionOverride(Player6,LeaveParty())
+		ActionOverride(Player5,LeaveParty())
+		ActionOverride(Player4,LeaveParty())
+		ActionOverride(Player3,LeaveParty())
+		ActionOverride(Player2,LeaveParty())
+
 		MoveGlobal("BD6100","Imoen2",[575.405])  // Imoen
 		ReallyForceSpellDeadRES("bdrejuve","Imoen2")  // No such index
 		ActionOverride("Imoen2",ChangeAIScript("BDIMOEN",OVERRIDE))
@@ -72,177 +79,26 @@ THEN
 		ActionOverride("jaheira",ChangeAIScript("",DEFAULT))
 		ActionOverride("jaheira",SetDialogue("bdjaheir"))
 
-		Continue()
-END
-
-// Make room for canon group
-IF
-	InPartyAllowDead(Player6)
-	!InPartySlot("IMOEN2",5)
-	!InPartySlot("JAHEIRA",5)
-	!InPartySlot("KHALID",5)
-	!InPartySlot("MINSC",5)
-	!InPartySlot("DYNAHEIR",5)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player6,LeaveParty())
-		Continue()
-END
-
-IF
-	InPartyAllowDead(Player5)
-	!InPartySlot("IMOEN2",4)
-	!InPartySlot("JAHEIRA",4)
-	!InPartySlot("KHALID",4)
-	!InPartySlot("MINSC",4)
-	!InPartySlot("DYNAHEIR",4)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player5,LeaveParty())
-		Continue()
-END
-
-IF
-	InPartyAllowDead(Player4)
-	!InPartySlot("IMOEN2",3)
-	!InPartySlot("JAHEIRA",3)
-	!InPartySlot("KHALID",3)
-	!InPartySlot("MINSC",3)
-	!InPartySlot("DYNAHEIR",3)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player4,LeaveParty())
-		Continue()
-END
-
-IF
-	InPartyAllowDead(Player3)
-	!InPartySlot("IMOEN2",2)
-	!InPartySlot("JAHEIRA",2)
-	!InPartySlot("KHALID",2)
-	!InPartySlot("MINSC",2)
-	!InPartySlot("DYNAHEIR",2)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player3,LeaveParty())
-		Continue()
-END
-
-IF
-	InPartyAllowDead(Player2)
-	!InPartySlot("IMOEN2",1)
-	!InPartySlot("JAHEIRA",1)
-	!InPartySlot("KHALID",1)
-	!InPartySlot("MINSC",1)
-	!InPartySlot("DYNAHEIR",1)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player2,LeaveParty())
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("IMOEN2")
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ChangeEnemyAlly("IMOEN2",NEUTRAL)  // Imoen
 		ChangeSpecifics("IMOEN2",ALLIES)  // Imoen
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("IMOEN2")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ActionOverride("IMOEN2",JoinParty())
-		Continue()
-END
 
-IF
-	!InPartyAllowDead("MINSC")
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ChangeEnemyAlly("MINSC",NEUTRAL)  // Imoen
 		ChangeSpecifics("MINSC",ALLIES)  // Imoen
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("MINSC")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ActionOverride("MINSC",JoinParty())
-		Continue()
-END
 
-IF
-	!InPartyAllowDead("JAHEIRA")
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ChangeEnemyAlly("JAHEIRA",NEUTRAL)  // Imoen
 		ChangeSpecifics("JAHEIRA",ALLIES)  // Imoen
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("JAHEIRA")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ActionOverride("JAHEIRA",JoinParty())
-		Continue()
-END
 
-IF
-	!InPartyAllowDead("DYNAHEIR")
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)  // Imoen
 		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("DYNAHEIR")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ActionOverride("DYNAHEIR",JoinParty())
-		Continue()
-END
 
-IF
-	!InPartyAllowDead("KHALID")
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ChangeEnemyAlly("KHALID",NEUTRAL)  // Imoen
 		ChangeSpecifics("KHALID",ALLIES)  // Imoen
-		Continue()
-END
-
-IF
-	!InPartyAllowDead("KHALID")
-	!NumInParty(6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
 		ActionOverride("KHALID",JoinParty())
+
 		Continue()
 END
 
