@@ -11,7 +11,7 @@ This mod requires EET.  It is not compatible with other games at this time.
 
 The Transitions mod's main purpose is to provide seemless transitions between campaigns.  It will provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  It also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
 
-Progressing through to SoD or BGII areas of the game is accomplished by talking to Duke Belt inside the Palace and/or by using a custom item he provides after the clean-up quests are finished.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
+Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
 After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
@@ -50,7 +50,7 @@ NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be sto
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
-Option 3: When installed, use how Endless BG1 handles Sarevok's equipement
+Option 3: When installed, use how Endless BG1 handles Sarevok's equipment
 
 ------------------------------------------------------------------------
 3 Add Clean Up Quests (Optional)
@@ -99,7 +99,7 @@ This component prepares the 2nd house to the left of the Ducal Palace as one of 
 ------------------------------------------------------------------------
 See note in component #7  
 
-This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed.
+This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed and still using it.  Installing it, however, shouldn't affect those mods.
 
 ------------------------------------------------------------------------
 9 Duke Eltan's reward - House in Beregost (Optional)
@@ -111,7 +111,7 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 10 Add waves of refugees to Baldur's Gate (Optional)
 ------------------------------------------------------------------------
-Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  
+Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import from EBG1.
 Skipped if it's already installed via EBG1.  
 
 ------------------------------------------------------------------------
@@ -127,7 +127,7 @@ To remain consistent with SoD and BG2, Imoen is given the ability to cast magic 
 ------------------------------------------------------------------------
 13 Add a little snark (Optional) 
 ------------------------------------------------------------------------
-Just adds some fun snarky comments to the otherwise stuffy or inane dialogue  
+Just adds some fun snarky comments to otherwise stuffy or inane dialogue  
 
 ------------------------------------------------------------------------
 14 Use abbreviated capture scene leading to BG2 (Optional) 
@@ -215,16 +215,24 @@ CREDITS
 ------------------------------------------------------------------------
 * BeamDog / Overhaul Games: for the Infinity Engine and inspiring this mod
 * K4thos: for giving us the awesome playground (EET) in which to mod
-* DavidW: for the lovely macros included in alter_script.tpa as well as guidance on encapsulation and immutability
+* DavidW: for the lovely macros included in alter_script.tpa as well as for guidance on encapsulation and immutability
 * Gwendolyne: for the very handy clone regions tool in GW_Cartes.tpa
 * G3 guest Gob Oafenplug: for the new code for change_door_name.tpa 
 * Grammarsalad, subtledoctor, grodrigues, Mike1072, and jastey: for the ideas, guidance and help on the tool that provides proper and upper case player1 pronouns (cases.tpa)
 * Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
-* jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code
+* jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code:
+	- modified version of Sarevok's custom items from Tantalus
+	- modified versions	Flaming Fist Healers after the Sarevok fight
+	- modified version of Denkod
+	- import of town chatter component
+	- modified version of Elminster's appearance at Ducal palace
+	- modified version of servant who welcomes PC to their room
+	- modified version of guards in front of the palace
+	- modified version of refugees 
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 * Bubb again for showing me how to fix TriggerOverride. Thank you thank you thank you!!!
 * igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
-* Thank you beta testers!: jastey and igi :)
+* Thank you beta testers and proofreaders!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
 ------------------------------------------------------------------------
