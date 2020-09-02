@@ -71,12 +71,13 @@ LANGUAGE ~American English~ ~american~
    ~transitions/languages/american/cases.tra~
    ~weidu_external/workspace/transitions/languages/american/cases.tra~
 
-/////////////////////////////////////////////////////////////////////////
-// MAIN COMPONENT: ALLOW CONTINUED PLAY AFTER SAREVOK IS DEFEATED      //
-// OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR GAME CONTINUATION //
-// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC       //
-// This component has three options from which to select               //
-/////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// MAIN COMPONENT: ALLOW CONTINUED PLAY AFTER SAREVOK IS DEFEATED        //
+// OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR GAME CONTINUATION   //
+// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC         //
+// AS WELL AS MAKING KORLASZ A NORMAL DUNGEON CRAWL WITH NO HAND HOLDING //
+// This component has three options from which to select                 //
+///////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option removes the movie from the end of the fight
