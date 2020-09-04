@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/transitions~
 SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at forums.gibberlings3.net ~
-VERSION ~v0.3.04~
+VERSION ~v0.4.00~
 
 README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
 
@@ -84,7 +84,7 @@ LANGUAGE ~American English~ ~american~
 // so it can be used in a dream sequence later on
 BEGIN @3    // MOD 0
 SUBCOMPONENT @2
-LABEL MAIN_DREAM
+LABEL "#L-TRANSITIONS-MAIN_DREAM"
 INCLUDE ~transitions/components/main0.tpa~
 LAF main0 END
 
@@ -93,7 +93,7 @@ LAF main0 END
 // but makes the necessary changes so the the player can keep playing
 BEGIN @4       // MOD 1
 SUBCOMPONENT @2
-LABEL MAIN_NO_DREAM
+LABEL "#L-TRANSITIONS-MAIN_NO_DREAM"
 INCLUDE ~transitions/components/main1.tpa~
 LAF main1 END
 
@@ -102,8 +102,8 @@ LAF main1 END
 // adds one of my global variables that I'll need later
 BEGIN @9       // MOD 2
 SUBCOMPONENT @2
-LABEL MAIN_USE_ENDLESS
-REQUIRE_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @10
+LABEL "#L-TRANSITIONS-MAIN_USE_ENDLESS"
+REQUIRE_COMPONENT ~c#endlessbg1.tp2~ 0 @10
 INCLUDE ~transitions/components/main2.tpa~
 LAF main2 END
 
@@ -119,8 +119,8 @@ LAF main2 END
 BEGIN @6       // MOD 10
 DESIGNATED  10
 SUBCOMPONENT @5
-LABEL EQUIPMENT_EQUIPPED
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-EQUIPMENT_EQUIPPED"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/sarevok0.tpa~
 LAF sarevok0 END
 
@@ -128,8 +128,8 @@ LAF sarevok0 END
 // This option places Sarevok's equipment into his inventory
 BEGIN @7       // MOD 11
 SUBCOMPONENT @5
-LABEL EQUIPMENT_IN_INVENTORY
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-EQUIPMENT_IN_INVENTORY"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
 LAF sarevok1 END
 
@@ -137,9 +137,9 @@ LAF sarevok1 END
 // This option just leaves EndlessBG1 handling of Sarevok's items
 BEGIN @9       // MOD 12
 SUBCOMPONENT @5
-LABEL EQUIPMENT_USE_ENDLESS
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-EQUIPMENT_USE_ENDLESS"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
 
 
 /////////////////////////////////////
@@ -152,8 +152,8 @@ REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (M
 BEGIN @13       // MOD 20
 DESIGNATED 20
 SUBCOMPONENT @12
-LABEL QUESTS_FLEE_HARSH
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-QUESTS_FLEE_HARSH"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/quests0.tpa~
 LAF quests0 END
 
@@ -161,8 +161,8 @@ LAF quests0 END
 // This option doesn't alter the behavior of the Sarevok's supporters in the final BGI battle
 BEGIN @14       // MOD 21
 SUBCOMPONENT @12
-LABEL QUESTS_NO_FLEE_HARSH
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/quests1.tpa~
 LAF quests1 END
 
@@ -170,8 +170,8 @@ LAF quests1 END
 // This is option 1 with a gentler Tamoko quest
 BEGIN @15       // MOD 22
 SUBCOMPONENT @12
-LABEL QUESTS_FLEE_GENTLE
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-QUESTS_FLEE_GENTLE"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/quests2.tpa~
 LAF quests2 END
 
@@ -179,8 +179,8 @@ LAF quests2 END
 // This is option 2 with a gentler Tamoko quest
 BEGIN @16       // MOD 23
 SUBCOMPONENT @12
-LABEL QUESTS_NO_FLEE_GENTLE
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/quests3.tpa~
 LAF quests3 END
 
@@ -192,8 +192,8 @@ LAF quests3 END
 /////////////////////////////////////////////////////////
 BEGIN @18      // MOD 30
 DESIGNATED 30
-LABEL CHATTER
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "C#-TRANSITIONS-CHATTER"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
 LAF town_chatter END
@@ -204,8 +204,8 @@ LAF town_chatter END
 /////////////////////////////////////////////
 BEGIN @17       // MOD 40
 DESIGNATED 40
-LABEL MAZE
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-MAZE"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/cleanup_maze.tpa~
 LAF cleanup_maze END
 
@@ -217,9 +217,9 @@ LAF cleanup_maze END
 ///////////////////////////////////////////////////////////////////
 BEGIN @20      // MOD 50
 DESIGNATED 50 
-LABEL ELMINSTER
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
-REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
+LABEL "#L-TRANSITIONS-ELMINSTER"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
 
@@ -230,8 +230,8 @@ LAF elminster END
 ///////////////////////////////////
 BEGIN @28   // MOD 60
 DESIGNATED 60
-LABEL ELTAN_HOUSE_BG_N
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BG_N"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/eltan_house0.tpa~
 LAF eltan_house0 END
 
@@ -240,8 +240,8 @@ LAF eltan_house0 END
 // CABIN IN HIGH HEDGE //
 /////////////////////////
 BEGIN @25   // MOD 61
-LABEL ELTAN_HOUSE_HEDGE
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/eltan_house1.tpa~
 LAF eltan_house1 END
 
@@ -251,8 +251,8 @@ LAF eltan_house1 END
 // HOUSE IN NW BEREGOST //
 //////////////////////////
 BEGIN @26   // MOD 62
-LABEL ELTAN_HOUSE_BEREGOST_NW
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BEREGOST_NW"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
@@ -262,9 +262,9 @@ LAF eltan_house2 END
 //////////////
 BEGIN @29   // MOD 70
 DESIGNATED 70
-LABEL REFUGEES
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
-REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1/c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
+LABEL "#L-TRANSITIONS-REFUGEES"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 
@@ -274,8 +274,8 @@ LAF timers_common END
 /////////////////////////////////////////////////////
 BEGIN @11   // MOD 80
 DESIGNATED 80
-LABEL LIIA
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-LIIA"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/liia.tpa~
 LAF liia END
 
@@ -285,8 +285,8 @@ LAF liia END
 ///////////////////////////////////////
 BEGIN @21   // MOD 90
 DESIGNATED 90
-LABEL IMOEN_MAGIC
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-IMOEN_MAGIC"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/imoen_magic.tpa~
 LAF imoen_magic END
 
@@ -296,8 +296,8 @@ LAF imoen_magic END
 ///////////////////////////////////////////
 BEGIN @22   // MOD 100
 DESIGNATED 100
-LABEL SNARK
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-SNARK"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/add_snark.tpa~
 LAF add_snark END
 
@@ -306,18 +306,18 @@ LAF add_snark END
 //////////////////////////////////////////////////
 BEGIN @23   // MOD 110
 DESIGNATED 110
-LABEL ABBR_CAPTURE
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-ABBR_CAPTURE"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/abbr_capture.tpa~
 LAF abbr_capture END
 
-//////////////////////////////////////////////////////////
-// RETORE BHAAL-SPAWN POWERS AFTER IRENICUS IS DEFEATED //
-//////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+// RESTORE BHAAL-SPAWN POWERS AFTER IRENICUS IS DEFEATED //
+///////////////////////////////////////////////////////////
 BEGIN @24   // MOD 120
 DESIGNATED 120
-LABEL RESTORE_POWER
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 2) @8
+LABEL "#L-TRANSITIONS-RESTORE_POWER"
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/power_up.tpa~
 LAF power_up END
 
