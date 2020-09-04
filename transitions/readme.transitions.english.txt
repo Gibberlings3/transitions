@@ -160,6 +160,7 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
 * Remove references to PC being a bhaalspawn from NPCs that shouldn't know about it
+* Add option to ditch tour-guide Corwin
 * Add 'Scout the Coastway Bridge' quest
 * Add reactions and possible options when the annotated book 'A Historical Treatise of Dragonspear Castle' is found
 * Distribute group's possessions from the end of SoD to stores in Athkatla 
