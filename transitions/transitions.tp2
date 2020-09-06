@@ -119,7 +119,7 @@ LAF main2 END
 BEGIN @6       // MOD 10
 DESIGNATED  10
 SUBCOMPONENT @5
-LABEL "#L-TRANSITIONS-EQUIPMENT_EQUIPPED"
+LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_EQUIPPED"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/sarevok0.tpa~
 LAF sarevok0 END
@@ -128,7 +128,7 @@ LAF sarevok0 END
 // This option places Sarevok's equipment into his inventory
 BEGIN @7       // MOD 11
 SUBCOMPONENT @5
-LABEL "#L-TRANSITIONS-EQUIPMENT_IN_INVENTORY"
+LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_IN_INVENTORY"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
 LAF sarevok1 END
@@ -137,7 +137,7 @@ LAF sarevok1 END
 // This option just leaves EndlessBG1 handling of Sarevok's items
 BEGIN @9       // MOD 12
 SUBCOMPONENT @5
-LABEL "#L-TRANSITIONS-EQUIPMENT_USE_ENDLESS"
+LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_USE_ENDLESS"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
 
@@ -192,7 +192,7 @@ LAF quests3 END
 /////////////////////////////////////////////////////////
 BEGIN @18      // MOD 30
 DESIGNATED 30
-LABEL "C#-TRANSITIONS-CHATTER"
+LABEL "C#-EBG1-BG_CHATTER"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
 FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
