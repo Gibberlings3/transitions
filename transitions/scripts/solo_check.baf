@@ -65,6 +65,8 @@ THEN
     ClearAllActions()
     SetGlobal("#L_StartBG2","GLOBAL",2)
     StartCutSceneMode()
+    FadeToColor([30.0],0)
+    Wait(1)
     StartCutSceneEx("#L_Cut09",TRUE)
 END
 

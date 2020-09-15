@@ -6,16 +6,6 @@
 
 IF
 	Global("#L_CanonGroupMoved","GLOBAL",0)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		FadeToColor([30.0],0)
-		Wait(1)
-		Continue()
-END
-
-IF
-	Global("#L_CanonGroupMoved","GLOBAL",0)
 	InPartyAllowDead(Player6)
 	!Name("None",Player6)
 THEN
