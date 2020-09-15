@@ -13,7 +13,7 @@ DEFINE_ACTION_FUNCTION main0 BEGIN
    BUT_ONLY_IF_IT_CHANGES
 
    // See if jastey's Endless BG1 mod has been installed
-   ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
+   ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       // Replace jastey's play end-movie block with block that 
       // just opens the door and sets global variables
       LAF REPLACE_SCRIPT_BLOCK

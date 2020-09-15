@@ -47,7 +47,7 @@ DEFINE_ACTION_FUNCTION town_chatter BEGIN
 	INCLUDE ~%mod_root%/components/sarevok_cleanup_more.tpa~
 
 	// Fix folks if cleanup_maze is loaded
-	ACTION_IF (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 40) THEN BEGIN
+	ACTION_IF (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-MAZE")) THEN BEGIN
 		INCLUDE ~%mod_root%/components/fix_maze.tpa~
 	END
 
@@ -55,7 +55,7 @@ DEFINE_ACTION_FUNCTION town_chatter BEGIN
 	EXTEND_BOTTOM ~BG0108.BCS~ ~%mod_root%/scripts/hero_bg.baf~
 
 	// There's also a merchant in the iron throne that needs to be taken out
-	ACTION_IF !( (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 20) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 21) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 22) OR (MOD_IS_INSTALLED~%mod_root%/setup-%mod_root%.tp2~ 23) ) THEN BEGIN
+	ACTION_IF !((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_FLEE_GENTLE")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"))) THEN BEGIN
 		EXTEND_BOTTOM ~BG0616.BCS~ ~%mod_root%/scripts/BG0616.baf~
 	END
 END

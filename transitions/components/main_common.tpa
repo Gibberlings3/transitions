@@ -3,7 +3,7 @@
 // Included via main0-2.tpa but only once              //
 /////////////////////////////////////////////////////////
 
-ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
+ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
    // Remove remnant of block left behind by jastey
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
