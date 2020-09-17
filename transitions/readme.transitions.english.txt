@@ -7,11 +7,11 @@
 ------------------------------------------------------------------------
 GENERAL
 ------------------------------------------------------------------------
-This mod requires EET.  It is not compatible with other games at this time.
+This mod requires EET, BG1EE, SoD, or BG2EE.
 
-The Transitions mod's main purpose is to provide seemless transitions between campaigns.  It will provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  It also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
+The Transitions mod's main purpose is to provide seemless transitions between campaigns in EET.  It will  provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  For EET, it also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
 
-Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
+Progressing through to SoD or BGII areas of the game (BG1EE) is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB (BG2EE) is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
 After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
@@ -26,7 +26,7 @@ DESCRIPTION
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
-1 Main Component (Required)
+1 Main Component
 ------------------------------------------------------------------------
 Prevents the end of game transition to SoD after Sarevok's death  
 Prevents the end of game transition to ToB after Irenicus's death  

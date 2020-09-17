@@ -13,18 +13,18 @@ THEN
 		FadeToColor([30.0],0)
 		Wait(1)
 		ApplySpellRES("clearcld",Myself)
-		ApplySpellRES("bdresurr",Player2)  // No such index
-		ApplySpellRES("bdresurr",Player3)  // No such index
-		ApplySpellRES("bdresurr",Player4)  // No such index
-		ApplySpellRES("bdresurr",Player5)  // No such index
-		ApplySpellRES("bdresurr",Player6)  // No such index
+		ApplySpellRES("sppr712",Player2)  // No such index
+		ApplySpellRES("sppr712",Player3)  // No such index
+		ApplySpellRES("sppr712",Player4)  // No such index
+		ApplySpellRES("sppr712",Player5)  // No such index
+		ApplySpellRES("sppr712",Player6)  // No such index
 		SmallWait(10)
-		ApplySpellRES("bddispel",Player1)  // No such index
-		ApplySpellRES("bddispel",Player2)  // No such index
-		ApplySpellRES("bddispel",Player3)  // No such index
-		ApplySpellRES("bddispel",Player4)  // No such index
-		ApplySpellRES("bddispel",Player5)  // No such index
-		ApplySpellRES("bddispel",Player6)  // No such index
+		ApplySpellRES("bpdispel",Player1)  // No such index
+		ApplySpellRES("bpdispel",Player2)  // No such index
+		ApplySpellRES("bpdispel",Player3)  // No such index
+		ApplySpellRES("bpdispel",Player4)  // No such index
+		ApplySpellRES("bpdispel",Player5)  // No such index
+		ApplySpellRES("bpdispel",Player6)  // No such index
 		SmallWait(10)
 		ApplySpellRES("sppr713",Player1)  // No such index
 		ApplySpellRES("sppr713",Player2)  // No such index

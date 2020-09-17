@@ -1,3 +1,42 @@
+//////////////////////////////////////////////////////////////////////////////
+// Component that allows uses the BG1 end movie as part of a dream sequence //
+// that gives the protagonist an additional bhaal-spawn power               //
+//////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION bg1_dream BEGIN
+   // New dream and bhaal-spawn power
+   EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
+
+   // See if jastey's Endless BG1 mod has been installed
+   ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
+      // Replace jastey's play end-movie block with block that 
+      // just opens the door and sets global variables
+      LAF REPLACE_SCRIPT_BLOCK
+         INT_VAR
+            only_once = 1
+         STR_VAR 
+            script = EVAL %Undercity_TempleofBhaal%
+            match = ~Global("C#st_BG1End","GLOBAL",0)~
+            insert = ~%mod_root%/scripts/BG0125a.baf~
+      END
+   END ELSE BEGIN
+      // Replace original block that transitions to SoD with block that 
+      // just opens the door and sets global variables
+      LAF REPLACE_SCRIPT_BLOCK
+         INT_VAR
+            only_once = 1
+         STR_VAR 
+            script = EVAL %Undercity_TempleofBhaal%
+            match = ~StartCutSceneEx("BDSODTRN",TRUE)~
+            insert = ~%mod_root%/scripts/BG0125a.baf~
+      END
+   END
+
+   // Do actions that are needed no matter which ending was chosen
+   INCLUDE ~%mod_root%/components/main_bg1.tpa~
+END
+
+
 /////////////////////////////////////////////////////////////////////////
 // Main component that allows continued play after Sarevok is defeated //
 // This options uses the BG1 end movie as part of a dream sequence     //
@@ -13,7 +52,7 @@ DEFINE_ACTION_FUNCTION main0 BEGIN
    BUT_ONLY_IF_IT_CHANGES
 
    // See if jastey's Endless BG1 mod has been installed
-   ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) BEGIN
+   ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       // Replace jastey's play end-movie block with block that 
       // just opens the door and sets global variables
       LAF REPLACE_SCRIPT_BLOCK

@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////
 // Makes sure Dukes Belt and Liia are alive and in position //
 // and sets up their dialogue cues                          //
-// Patched via main_common.tpa                              //
+// Patched via main_bg1.tpa                                 //
 //////////////////////////////////////////////////////////////
 
 IF

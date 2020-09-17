@@ -1,0 +1,31 @@
+/////////////////////////////////////////////////////
+// Globals needed when SoD is not available        //
+// Patched via main_bg1.tpa                        //
+/////////////////////////////////////////////////////
+
+// Determine if there are any clean-up quests to be done initially
+// We don't want to start the conversation about clean-up quests when there are none to do to begin with
+IF 
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_QuestsChecked","MYAREA",0)
+	Global("#L_OnlyDoKorlaszQuest","MYAREA",0)
+	OR(12)
+	 	!Dead("GALDOR")
+		!Dead("Tazok") 
+		!Dead("SEMAJ")
+		!Dead("winski2")
+	 	!Dead("Cythan")
+ 		!Dead("Tamoko")
+ 		!Dead("ZHALIMAR")
+ 		!Dead("GARDUSH")
+ 		!Dead("NAAMAN")
+ 		!Dead("DIYAB")
+ 		!Dead("AASIM")
+ 		!Dead("ALAI")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_QuestsChecked","MYAREA",1)
+		SetGlobal("#L_QuestsAvailable","MYAREA",1)
+		Continue()
+END
+

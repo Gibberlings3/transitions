@@ -1,0 +1,216 @@
+/////////////////////////////////////
+// Additions when SoD is available //
+// Included via main_common.tpa    //
+/////////////////////////////////////
+
+ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
+   // Remove remnant of block left behind by jastey
+   LAF DELETE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 0
+      STR_VAR
+         script = BG0125
+         match = ~StartCutSceneEx("BDSODTRN",TRUE)~
+   END
+END
+
+// New line in campaign.2da so we can use the right post-dialogue files
+APPEND ~CAMPAIGN.2DA~ ~#LSOD1         BDBALDUR       -1             1              BDBANTER       *              MASTAREA       152            -1             *              BDPARTY        BDDIALOG       save           #LSTRTA1       STRTGOLD       *              SODWEAP        BDSTWEAP       *              *              BGMAP          BDBALDUR       1              0xFFFFFFFF     1              *              PARTY          SODINTER       SODYEARS       REPUTATI       SODCLTXT       SODRACE~
+
+APPEND ~CAMPAIGN.2DA~ ~#LSOD2         BDBALDUR       -1             1              BDBANTER       *              MASTAREA       152            -1             *              BDPARTY        BDDIALOG       save           #LSTRTA2       STRTGOLD       *              SODWEAP        BDSTWEAP       *              *              BGMAP          BDBALDUR       1              0xFFFFFFFF     1              *              PARTY          SODINTER       SODYEARS       REPUTATI       SODCLTXT       SODRACE~
+
+// New starting areas for transitions from BG1
+COPY ~%mod_root%/objects/#LSTRTA1.2DA~ ~override~
+COPY ~%mod_root%/objects/#LSTRTA2.2DA~ ~override~
+
+// Sets up globals
+EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_sod.baf~
+
+// Add a couple key rings
+COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR03.ITM~ 
+   SAY NAME1 @1016 /* ~Brass Key Ring~ */
+   SAY NAME2 @1016 /* ~Brass Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1022
+   SAY IDENTIFIED_DESC @1022
+BUT_ONLY_IF_IT_CHANGES
+COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR03.STO~ 
+   SAY 0x0c @1016
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDKAZZRE.STO~ ~override~  // Kazzrem inside BD Sorcerer's Sundries
+   ADD_STORE_ITEM ~#LKEYR03~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR04.ITM~ 
+   SAY NAME1 @1017 /* ~Steel Key Ring~ */
+   SAY NAME2 @1017 /* ~Steel Key Ring~ */
+   // Current description already says steel
+BUT_ONLY_IF_IT_CHANGES
+COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR04.STO~ 
+   SAY 0x0c @1017
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~BDBELEG4.sto~ ~override~   // Quartermaster Belegarm
+   ADD_STORE_ITEM ~#LKEYR04~ AFTER ~BAG31~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+// Modified dialogues for Flaming Fist escorts in Korlasz Dungeon
+// Removes calls to Imoen's dialogue if doing quest
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/bdff100x.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Modified version of Korlasz's Journal with no mention of refugees
+COPY_EXISTING ~BDSHKORJ.ITM~ ~override~
+	SAY UNIDENTIFIED_DESC @1027
+	SAY IDENTIFIED_DESC @1027
+	BUT_ONLY_IF_IT_CHANGES
+
+// Add an info area where the group exits from Korlasz's family crypt
+// Can't say I'm completely happy with this, but it's better than nothing
+COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
+	LPF ADD_AREA_REGION_TRIGGER
+		INT_VAR
+			ab_RT_Type = 1
+			ab_RT_BbLX = 1356
+			ab_RT_BbLY = 532
+			ab_RT_BbHX = 1558
+			ab_RT_BbHY = 619
+			ab_RT_VxPr = 4
+			ab_RT_Vx_X_0 = 1356
+			ab_RT_Vx_Y_0 = 532
+			ab_RT_Vx_X_1 = 1368
+			ab_RT_Vx_Y_1 = 618
+			ab_RT_Vx_X_2 = 1558
+			ab_RT_Vx_Y_2 = 619
+			ab_RT_Vx_X_3 = 1540
+			ab_RT_Vx_Y_3 = 545
+			ab_RT_Itxt = RESOLVE_STR_REF (@1028) /* ~Sealed exit from the Korlasz family crypt~ */
+		STR_VAR
+			ab_RT_Name = "#L_KorlaszExit"
+	END
+
+// New cut scene called from Duke Belt's dialogue for Korlasz quest
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut04.baf~
+
+// Update BDRope.bcs so that when someone clicks on it, it'll take the party to the surface
+// instead of starting the ending dialogue
+COPY_EXISTING ~BDRope.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Clicked([ANYONE])~ ~Clicked([ANYONE]) !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+EXTEND_TOP ~BDRope.bcs~ ~%mod_root%/scripts/BDRope.baf~
+
+// Update 1st Korlasz Safehouse area script so no group or equipment swaps
+COPY_EXISTING ~BD0120.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("K#NewGame","BD0120",0)~ ~Global("K#NewGame","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("K#StoryMode","BD0120",0)~ ~Global("K#StoryMode","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~GlobalLT("bd_plot","global",2)~ ~GlobalLT("bd_plot","global",2) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!InMyArea("IMOEN2")~ ~!InMyArea("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_Room1b",Detect([PC]))~ ~TriggerOverride("Imoen_Room1b",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_room1a",Detect([PC]))~ ~TriggerOverride("Imoen_room1a",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Use a modified intro scene and other modified blocks that moved Imoen about
+LAF INSERT_SCRIPT_BLOCK
+   INT_VAR 
+      insert_above = 0
+      only_once = 1
+   STR_VAR 
+      script = BD0120
+      match = ~GlobalLT("bd_plot","global",2)~
+      match1 = ~StartCutSceneEx("bdintro",TRUE)~
+      insert = ~%mod_root%/scripts/bd0120.baf~
+END
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut05.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Skip.baf~
+
+// Updates to 2nd Korlasz Safehouse area script to sidestep ending quest hand-holding
+COPY_EXISTING ~BD0130.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!Global("BD_Korlasz_Fight","BD0130",2)~ ~!Global("BD_Korlasz_Fight","BD0130",2) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!TriggerOverride("Bhaal_Mural",Detect([PC]))~ ~!TriggerOverride("Bhaal_Mural",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!TriggerOverride("Dead_Three_Center",Detect([PC]))~ ~!TriggerOverride("Dead_Three_Center",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!TriggerOverride("Myrkul_mural",Detect([PC]))~ ~!TriggerOverride("Myrkul_mural",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!Global("BDSH_Imoen_Room","BD0130",6)~ ~!Global("BDSH_Imoen_Room","BD0130",6) !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+// Replacement blocks for the ones side-stepped above
+LAF INSERT_SCRIPT_BLOCK
+   INT_VAR 
+      insert_above = 0
+      only_once = 1
+   STR_VAR 
+      script = BD0130
+      match = ~!Global("BD_Korlasz_Fight","BD0130",2)~
+      insert = ~%mod_root%/scripts/bd0130.baf~
+END
+
+// Update to cut scene when entering BD0130 for the first time that spawns the FF escort
+// Make sure Imoen isn't also spawned
+COPY_EXISTING ~BDSHCUT0.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BDSH_Spawn_Imoen","GLOBAL",0)~ ~Global("BDSH_Spawn_Imoen","GLOBAL",0) !Global("#L_SarvQuests","GLOBAL",8)~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Put the exit dialogue stuff into its own file because it was pretty huge
+INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
+LAF exit_dialogues END
+
+// The 'magic' item given by Duke Belt that will allow for game advancement
+//   and getting to the SoD version of the palace
+// PC will find unusable broken remnants of it in Chateau Irenicus
+//   if it's in their inventory at the time of capture
+// PC will find a 'drained' unusable version of it in their personal chest
+//   if it is transfered to their stronghold in BG2
+COPY ~%mod_root%/objects/COMPON02.ITM~ ~override/#LAdvGm1.itm~ // I like the pretty icon
+   SAY NAME1 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY NAME2 @1031 /* ~Duke Belt's Gift to <CHARNAME>~ */
+   SAY UNIDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   SAY IDENTIFIED_DESC @1032 /* ~This item is able to grant you a limited number of specific wishes.~ */
+   WRITE_LONG (0x0018) 2093 // Critical Item, Dropable, Displayable, Not Copyable, Conversable
+   WRITE_LONG (0x0034) 0 // Price-Discourage it's sale though Critical Item should stop it from being sold
+   WRITE_SHORT (0x0042) 0 // Doesn't need a bard to identify
+
+// The dialogue for the item
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
+APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
+
+// Timer put on the PC so it'll transition to SoD or BG2 when solo
+EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/solo_check.baf~
+
+// Cut scene that starts SoD
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
+
+// Updated Start SoD scrolling text
+COPY ~%mod_root%/objects/#LSoD01.2DA~ ~override~
+   REPLACE "REPLACEME" @1042
+
+// Allow for only 2nd half to be run
+COPY_EXISTING ~BD0103.bcs~ ~override~
+   DECOMPILE_AND_PATCH BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BD_PARTY_ITEMS","BD0103",0)~ ~Global("BD_PARTY_ITEMS","BD0103",0) !Global("#L_SkipFirstHalfCA","GLOBAL",1)~
+      // Using the cutspy to drop Imoen's wand - its demise is dealt with later
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~ActionOverride("cutspy",DestroySelf())~ ~~
+   END
+BUT_ONLY_IF_IT_CHANGES
+
+// Put in the modified Caelar Elite attack scene and the new demise of cutspy so it'll drop Imoen's wand
+LAF INSERT_SCRIPT_BLOCK
+   INT_VAR 
+      insert_above = 1
+      only_once = 1
+   STR_VAR 
+      script = BD0103
+      match = ~TextScreen("DPALACE")~
+      insert = ~%mod_root%/scripts/bd0103.baf~
+END
+
+// SoD Palace dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/sod_palace.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// For now, just get rid of Ophyllis if PC didn't lose their gold
+EXTEND_TOP ~BD0116.BCS~ ~%mod_root%/scripts/BD0116_skip_treasurer.baf~
+

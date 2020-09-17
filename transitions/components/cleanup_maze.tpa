@@ -5,12 +5,12 @@
 
 DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 	// Fix folks if Endless BG1 'sarevok_cleanup...' components are loaded
-	ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1/c#endlessbg1.tp2~ 0) OR (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 30) THEN BEGIN
+	ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL "%mod_root%.tp2" "C#-EBG1-BG_CHATTER")) THEN BEGIN
 		INCLUDE ~%mod_root%/components/fix_maze.tpa~
 	END
 
 	// First deal with Winski since we already have a component set up for doing just that
-	ACTION_IF NOT ((MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 20) OR (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 21) OR (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 22) OR (MOD_IS_INSTALLED ~%mod_root%/setup-%mod_root%.tp2~ 23)) THEN BEGIN
+	ACTION_IF NOT ((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL "%mod_root%.tp2" "#L-TRANSITIONS-QUESTS_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL "%mod_root%.tp2" "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL "%mod_root%.tp2" "#L-TRANSITIONS-QUESTS_FLEE_GENTLE")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL "%mod_root%.tp2" "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"))) THEN BEGIN
 		// Add in code that sets up Winski to escape
 		INCLUDE ~%mod_root%/components/winski_escapes.tpa~
 	END

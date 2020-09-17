@@ -5,7 +5,7 @@
 //////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION eltan_house1 BEGIN
-	ACTION_IF !(MOD_IS_INSTALLED ~transitions/setup-transitions.tp2~ 60) BEGIN
+	ACTION_IF !(MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_BG_N")) BEGIN
 		INCLUDE ~%mod_root%/components/eltan_common.tpa~
 	END
 

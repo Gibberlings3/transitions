@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////
 // Modifications to the Flaming Fist escorts in Korlasz Dungeon //
-// Compiled via main_common.tpa                                 //
+// Compiled via main_sod.tpa                                    //
 //////////////////////////////////////////////////////////////////
 
 REPLACE_TRIGGER_TEXT BDFF1000 ~Dead("IMOEN2")~ ~Dead("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~

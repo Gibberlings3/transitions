@@ -1,0 +1,11 @@
+/////////////////////////////////////
+// Additions when EET is available //
+// Included via main_common.tpa    //
+/////////////////////////////////////
+
+// Sets up globals
+EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_eet.baf~
+
+// Cut scene that starts BG2 when EET is installed
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
+

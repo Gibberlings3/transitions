@@ -8,10 +8,10 @@ IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("BroughtEltan","GLOBAL",1)
 	Global("#L_BG1PositionDukes","MYAREA",0)
-	Dead("BDELTAN")  // Duke Eltan
+	Dead("DELTAN")  // Duke Eltan
 THEN
 	RESPONSE #100
-		SetGlobal("SPRITE_IS_DEADBDELTAN","GLOBAL",0)
+		SetGlobal("SPRITE_IS_DEADDELTAN","GLOBAL",0)
 		Continue()
 END
 
@@ -19,10 +19,10 @@ IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("BroughtEltan","GLOBAL",1)
 	Global("#L_BG1PositionDukes","MYAREA",0)
-	!Exists("BDELTAN")
+	!Exists("DELTAN")
 THEN
 	RESPONSE #100
-		CreateCreature("BDELTAN",[789.386],S)  // Duke Eltan
+		CreateCreature("DELTAN",[789.386],S)  // Duke Eltan
 		SetGlobal("#L_EltanInstalled","GLOBAL",1)
 		Continue()
 END
@@ -31,13 +31,13 @@ IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("BroughtEltan","GLOBAL",1)
 	Global("#L_BG1PositionDukes","MYAREA",0)
-	Exists("BDELTAN")
+	Exists("DELTAN")
 THEN
 	RESPONSE #100
-		ApplySpellRES("bddispel","BDELTAN")  // No such index
+		ApplySpellRES("bpdispel","DELTAN")  // No such index
 		SmallWait(1)
-		ActionOverride("BDELTAN",JumpToPoint([789.386]))
-		ActionOverride("BDELTAN",Face(S))
+		ActionOverride("DELTAN",JumpToPoint([789.386]))
+		ActionOverride("DELTAN",Face(S))
 		SetGlobal("#L_EltanInstalled","GLOBAL",1)
 		Continue()
 END
@@ -48,7 +48,7 @@ IF
 	Global("#L_EltanInstalled","GLOBAL",1)
 THEN
 	RESPONSE #100
-		ActionOverride("BDELTAN",StartDialogueNoSet(Player1))
+		ActionOverride("DELTAN",StartDialogueNoSet(Player1))
 		Continue()
 END
 
