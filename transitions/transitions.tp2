@@ -145,6 +145,7 @@ DESIGNATED 30
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_HARSH"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/quests0.tpa~
 LAF quests0 END
 
@@ -154,6 +155,7 @@ BEGIN @14       // MOD 31
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/quests1.tpa~
 LAF quests1 END
 
@@ -163,6 +165,7 @@ BEGIN @15       // MOD 32
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_GENTLE"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/quests2.tpa~
 LAF quests2 END
 
@@ -172,6 +175,7 @@ BEGIN @16       // MOD 33
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/quests3.tpa~
 LAF quests3 END
 
@@ -184,7 +188,8 @@ LAF quests3 END
 BEGIN @18      // MOD 40
 DESIGNATED 40
 LABEL "C#-EBG1-BG_CHATTER"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
 LAF town_chatter END
@@ -196,7 +201,8 @@ LAF town_chatter END
 BEGIN @17       // MOD 50
 DESIGNATED 50
 LABEL "#L-TRANSITIONS-MAZE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/cleanup_maze.tpa~
 LAF cleanup_maze END
 
@@ -209,7 +215,8 @@ LAF cleanup_maze END
 BEGIN @20      // MOD 60
 DESIGNATED 60 
 LABEL "#L-TRANSITIONS-ELMINSTER"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
@@ -222,7 +229,8 @@ LAF elminster END
 BEGIN @28   // MOD 70
 DESIGNATED 70
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BG_N"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/eltan_house0.tpa~
 LAF eltan_house0 END
 
@@ -232,7 +240,8 @@ LAF eltan_house0 END
 /////////////////////////
 BEGIN @25   // MOD 71
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/eltan_house1.tpa~
 LAF eltan_house1 END
 
@@ -242,7 +251,8 @@ LAF eltan_house1 END
 //////////////////////////
 BEGIN @26   // MOD 72
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BEREGOST_NW"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
@@ -253,7 +263,8 @@ LAF eltan_house2 END
 BEGIN @29   // MOD 80
 DESIGNATED 80
 LABEL "#L-TRANSITIONS-REFUGEES"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
@@ -265,7 +276,8 @@ LAF timers_common END
 BEGIN @11   // MOD 90
 DESIGNATED 90
 LABEL "#L-TRANSITIONS-LIIA"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 INCLUDE ~transitions/components/liia.tpa~
 LAF liia END
 
@@ -276,7 +288,7 @@ LAF liia END
 BEGIN @21   // MOD 100
 DESIGNATED 100
 LABEL "#L-TRANSITIONS-IMOEN_MAGIC"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @27
 INCLUDE ~transitions/components/imoen_magic.tpa~
 LAF imoen_magic END
 

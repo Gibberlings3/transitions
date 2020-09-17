@@ -12,5 +12,5 @@ LAF UPDATE_BCS
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~
 		baf_name = ~BG0146~
-		bcs_name = ~BG0146~
+		bcs_name = EVAL ~%ThievesMaze_BCS%~
 END
