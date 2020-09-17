@@ -23,6 +23,7 @@
 @27		= ~Requires BG1EE or EET~
 @31		= ~Requires BG2EE or EET~
 @32		= ~Requires SoD or EET~
+@8		= ~Requires main component to be installed~
 @18		= ~Clean up the town folk chatter with regard to Sarevok~
 @17		= ~Clean up the wounded from the thieves' maze~
 @20		= ~Elminster makes an appearance outside of the Ducal Palace~
@@ -39,5 +40,4 @@
 // Can  reuse in the future
 // @4		= ~Play BGI ending movie after Sarevok is defeated and skip new bhaal-spawn power~
 // @30		= ~Allow continued play after Irenicus is defeated~
-// @8		= ~Requires main component of this or Endless BG1 mods to be installed~
 
