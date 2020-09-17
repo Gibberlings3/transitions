@@ -283,22 +283,33 @@ INCLUDE ~transitions/components/liia.tpa~
 LAF liia END
 
 
+///////////////////////////////////////////////
+// IMOEN GIVEN SPECIAL WAND OF MAGIC MISSILE //
+///////////////////////////////////////////////
+BEGIN @30   // MOD 100
+DESIGNATED 100
+LABEL "#L-TRANSITIONS-IMOEN_SOD_WAND"
+REQUIRE_PREDICATE (GAME_INCLUDES ~sod~) @32
+INCLUDE ~transitions/components/imoen_sod_wand.tpa~
+LAF imoen_sod_wand END
+
+
 ///////////////////////////////////////
 // IMOEN GIVEN MAGIC MISSILE ABILITY //
 ///////////////////////////////////////
 BEGIN @21   // MOD 100
-DESIGNATED 100
-LABEL "#L-TRANSITIONS-IMOEN_MAGIC"
-REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @27
-INCLUDE ~transitions/components/imoen_magic.tpa~
-LAF imoen_magic END
+DESIGNATED 110
+LABEL "#L-TRANSITIONS-IMOEN_BG2_MM"
+REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @31
+INCLUDE ~transitions/components/imoen_bg2_mm.tpa~
+LAF imoen_bg2_mm END
 
 
 ///////////////////////////////////////////
 // ADD SOME SNARK TO STUFFY SOD DIALOGUE //
 ///////////////////////////////////////////
-BEGIN @22   // MOD 110
-DESIGNATED 110
+BEGIN @22   // MOD 120
+DESIGNATED 120
 LABEL "#L-TRANSITIONS-SNARK"
 REQUIRE_PREDICATE (GAME_INCLUDES ~sod~) @32
 INCLUDE ~transitions/components/add_snark.tpa~
@@ -308,8 +319,8 @@ LAF add_snark END
 //////////////////////////////////////////////////
 // USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //
 //////////////////////////////////////////////////
-BEGIN @23   // MOD 120
-DESIGNATED 120
+BEGIN @23   // MOD 130
+DESIGNATED 130
 LABEL "#L-TRANSITIONS-ABBR_CAPTURE"
 REQUIRE_PREDICATE (GAME_IS ~eet~) @4
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
@@ -320,8 +331,8 @@ LAF abbr_capture END
 ///////////////////////////////////////////////////////////
 // RESTORE BHAAL-SPAWN POWERS AFTER IRENICUS IS DEFEATED //
 ///////////////////////////////////////////////////////////
-BEGIN @24   // MOD 130
-DESIGNATED 130
+BEGIN @24   // MOD 140
+DESIGNATED 140
 LABEL "#L-TRANSITIONS-RESTORE_POWER"
 REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @31
 INCLUDE ~transitions/components/power_up.tpa~

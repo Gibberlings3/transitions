@@ -1,0 +1,21 @@
+///////////////////////////////////////////////////////////////////////////
+// Optional component that gives Imoen her ability to cast magic missile //
+// Wand in SoD and Innate in BG2                                         //
+///////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION imoen_bg2_mm BEGIN
+	
+	// An innate spell for Imoen so she'll have something to cast at Irenicus
+	COPY ~%mod_root%/objects/#LSPIN01.spl~ ~override~
+
+	// A potion for Imoen so she'll be refreshed after Chateau Irenicus
+	// Modified version of igi's Potion of Refreshment (iiItemMod)
+	COPY ~%mod_root%/objects/#LPot01.bam~ ~override~
+	COPY ~%mod_root%/objects/#LPot01.itm~ ~override~
+    	SAY NAME2 @1034 // ~Potion of Revitalization~
+    	SAY DESC  @1035
+
+	// Give Imoen her innate ability and a refresh spells potion
+	EXTEND_TOP ~AR0602.bcs~ ~%mod_root%/scripts/ar0602_imoen_magic.baf~
+
+END
