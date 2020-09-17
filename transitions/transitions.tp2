@@ -92,8 +92,8 @@ LAF main_common END
 BEGIN @3    // MOD 10
 LABEL "#L-TRANSITIONS-BG1_DREAM"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
-INCLUDE ~transitions/components/main_option0.tpa~
-LAF main_option0 END
+INCLUDE ~transitions/components/bg1_dream.tpa~
+LAF bg1_dream END
 
 
 //////////////////////////////////////////////

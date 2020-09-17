@@ -7,6 +7,11 @@ DEFINE_ACTION_FUNCTION bg1_dream BEGIN
    // New dream and bhaal-spawn power
    EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
 
+   COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
+      DECOMPILE_AND_PATCH BEGIN
+         REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~StartMovie("ENDMOVIE")~ ~~ 
+      END
+
    // See if jastey's Endless BG1 mod has been installed
    ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       // Replace jastey's play end-movie block with block that 

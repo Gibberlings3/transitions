@@ -13,6 +13,7 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
          script = EVAL %NBaldursGate_DucalPalace_L1%
          match = ~C#st_RearrangeDukes~
    END
+
    // Remove jastey's guards and opening of the palace
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
@@ -28,6 +29,25 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
          script = EVAL %NBaldursGate%
          match = ~C#st_SarevokDeadOpenGate~
    END
+END
+
+// Replace the block that transfers to SoD or plays the movie so play can continue
+ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
+   LAF REPLACE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 1
+      STR_VAR 
+         script = EVAL %Undercity_TempleofBhaal%
+         match = ~StartCutSceneEx("BDSODTRN",TRUE)~
+         insert = ~%mod_root%/scripts/BG0125_main.baf~
+END ELSE BEGIN
+   LAF REPLACE_SCRIPT_BLOCK
+      INT_VAR
+         only_once = 1
+      STR_VAR 
+         script = EVAL %Undercity_TempleofBhaal%
+         match = ~StartMovie("ENDMOVIE")~
+         insert = ~%mod_root%/scripts/BG0125_main.baf~
 END
 
 // 3 Flaming Fist escort ... used in various places
