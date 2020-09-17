@@ -9,7 +9,7 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       INT_VAR
          only_once = 0
       STR_VAR
-         script = BG0125
+         script = EVAL %Undercity_TempleofBhaal%
          match = ~StartCutSceneEx("BDSODTRN",TRUE)~
    END
 END
