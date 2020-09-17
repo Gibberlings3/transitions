@@ -16,6 +16,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_QuestsChecked","MYAREA",1)
 		SetGlobal("#L_QuestsAvailable","MYAREA",1) // Always have Korlasz available when SoD installed
+		SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)  // The default unless they install quests
 		Continue()
 END
 

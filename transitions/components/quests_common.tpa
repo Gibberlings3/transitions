@@ -6,7 +6,7 @@
 INCLUDE ~%mod_root%/components/winski_escapes.tpa~
 
 // Change the room variable that limits quests to only Korlasz
-COPY_EXISTING ~BG0108.BCS~ ~override~
+COPY_EXISTING ~%NBaldursGate_DucalPalace_L1%.BCS~ ~override~
 	DECOMPILE_AND_PATCH BEGIN
 		REPLACE_TEXTUALLY ~SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)~ ~SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",0)~
 	END
@@ -106,13 +106,13 @@ LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG1100~			// like my_new_BG0146
-		bcs_name = ~BG1100~			// like BG0146
+		bcs_name = EVAL ~%SWBaldursGate%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0224~			// like my_new_BG0146
-		bcs_name = ~BG0224~			// like BG0146
+		bcs_name = EVAL ~%WSewers_BCS%~			// like BG0146
 END
 
 // Tazok and Cythandria Quests (for the flaming fist portion)
@@ -123,19 +123,19 @@ LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0800~			// like my_new_BG0146
-		bcs_name = ~BG0800~			// like BG0146
+		bcs_name = EVAL ~%EBaldursGate%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0226~			// like my_new_BG0146
-		bcs_name = ~BG0226~			// like BG0146
+		bcs_name = EVAL ~%ESewers%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0706~			// like my_new_BG0146
-		bcs_name = ~BG0706~			// like BG0146
+		bcs_name = EVAL ~%EBaldursGate_ElfsongTavern_L2%~			// like BG0146
 END
 
 // Semaj Quest
@@ -145,13 +145,13 @@ LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0300~			// like my_new_BG0146
-		bcs_name = ~BG0300~			// like BG0146
+		bcs_name = EVAL ~%NEBaldursGate%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0112~			// like my_new_BG0146
-		bcs_name = ~BG0112~			// like BG0146
+		bcs_name = EVAL ~%BaldursGate_Undercellars%~			// like BG0146
 END
 
 // Tamoko and Cloudwulfe Quests
@@ -162,27 +162,27 @@ LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG1200~			// like my_new_BG0146
-		bcs_name = ~BG1200~			// like BG0146
+		bcs_name = EVAL ~%BaldursGateDocks%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0615~			// like my_new_BG0146
-		bcs_name = ~BG0615~			// like BG0146
+		bcs_name = EVAL ~%BaldursGateDocks_IronThrone_L5%~			// like BG0146
 END
 LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0225~			// like my_new_BG0146
-		bcs_name = ~BG0225~			// like BG0146
+		bcs_name = EVAL ~%CentralSewers%~			// like BG0146
 END
 // Update script that makes these guys poof in chapter 7 (in which these quests take place)
 COPY_EXISTING ~LeaveCh7.bcs~ ~override~
 	DECOMPILE_AND_PATCH BEGIN
-		REPLACE_TEXTUALLY ~Global("Chapter","GLOBAL",7)~ ~Global("Chapter","GLOBAL",7) !AreaCheck("BG0225")~
+		REPLACE_TEXTUALLY ~Global("Chapter","GLOBAL",7)~ ~Global("Chapter","GLOBAL",7) !AreaCheck("%CentralSewers%")~
 	END
 BUT_ONLY_IF_IT_CHANGES
 
 // Get rid of merchant in the iron throne
-EXTEND_BOTTOM ~BG0616.BCS~ ~%mod_root%/scripts/BG0616.baf~
+EXTEND_BOTTOM ~%BaldursGateDocks_IronThrone_L1%.BCS~ ~%mod_root%/scripts/BG0616.baf~
 

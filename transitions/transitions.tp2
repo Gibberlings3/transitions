@@ -108,6 +108,7 @@ BEGIN @6       // MOD 20
 DESIGNATED  20
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_EQUIPPED"
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok0.tpa~
 LAF sarevok0 END
@@ -117,7 +118,8 @@ LAF sarevok0 END
 BEGIN @7       // MOD 21
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_IN_INVENTORY"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
 LAF sarevok1 END
 
@@ -126,7 +128,8 @@ LAF sarevok1 END
 BEGIN @9       // MOD 22
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_USE_ENDLESS"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
 
 
@@ -141,7 +144,7 @@ BEGIN @13       // MOD 30
 DESIGNATED 30
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_HARSH"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests0.tpa~
 LAF quests0 END
 
@@ -150,7 +153,7 @@ LAF quests0 END
 BEGIN @14       // MOD 31
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests1.tpa~
 LAF quests1 END
 
@@ -159,7 +162,7 @@ LAF quests1 END
 BEGIN @15       // MOD 32
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_GENTLE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests2.tpa~
 LAF quests2 END
 
@@ -168,7 +171,7 @@ LAF quests2 END
 BEGIN @16       // MOD 33
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests3.tpa~
 LAF quests3 END
 
