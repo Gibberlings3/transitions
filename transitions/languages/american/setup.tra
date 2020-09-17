@@ -18,6 +18,7 @@
 @1		= ~This mod is only compatible with BG1EE, SoD, BG2EE and EET~
 @2		= ~Main component: Allow continued play after Sarevok and/or Irenicus is defeated~
 @3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
+@4		= ~Requires EET~
 @5		= ~Give Sarevok his armor, helm, and sword~
 @12		= ~Clean-up Quests~
 @27		= ~Requires BG1EE or EET~
@@ -38,6 +39,5 @@
 @24		= ~Use Irenicus in hell movie to restore Bhaal-spawn powers after he is defeated~
 
 // Can  reuse in the future
-// @4		= ~Play BGI ending movie after Sarevok is defeated and skip new bhaal-spawn power~
 // @30		= ~Allow continued play after Irenicus is defeated~
 
