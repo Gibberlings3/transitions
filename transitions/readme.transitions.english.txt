@@ -158,6 +158,7 @@ Requires Main Component and EET
 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
 ------------------------------------------------------------------------
 While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
+Requires BG2EE or EET
 
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
