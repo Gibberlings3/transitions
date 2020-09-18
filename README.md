@@ -210,6 +210,8 @@ If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-bg1/),
 Install before BG1RE (https://www.gibberlings3.net/forums/forum/131-romantic-encounters-bg2/) in order to complete Scar Returns quest after Sarevok is defeated.  
 Transitions should be installed before NPC mods.  
 
+Installation using Project Infinity (https://forums.beamdog.com/discussion/comment/1145416/#Comment_1145416) will ensure this and other mods are installed in the correct order.
+
 NOTE: If you've previously installed the mod, remove it before extracting a new version. To do this, uninstall all previously installed components and delete the mod folder and executables. 
 
 When installing or uninstalling, do not close the DOS window by clicking on the X button! Instead, press the Enter key when instructed to do so.
