@@ -4,7 +4,7 @@
 // that gives the protagonist an additional bhaal-spawn power          //
 /////////////////////////////////////////////////////////////////////////
 
-DEFINE_ACTION_FUNCTION main1 BEGIN
+DEFINE_ACTION_FUNCTION main_option1 BEGIN
    // See if jastey's Endless BG1 mod has been installed
    ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       // Replace the block where she runs the movie so both our globals are updated
