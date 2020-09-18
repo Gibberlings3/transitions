@@ -10,18 +10,42 @@
 
 DEFINE_ACTION_FUNCTION town_chatter BEGIN
 	// Might be needed for imported Endless BG1 components
-	/* custom definitions: eet */
-	OUTER_SPRINT ~bgee_only~ ~False()~
-	OUTER_SPRINT ~sod~ ~~
-	OUTER_SPRINT ~eet_only~ ~~
-	OUTER_SPRINT ~start_bg1end_sod_cutscene~ ~ClearAllActions() StartCutSceneMode() StartCutScene("c#st2sod")~
-	OUTER_SPRINT ~move_to_bg2~ ~ClearAllActions() CreateCreatureObject("K#TELBGT",Player1,0,0,0)~
-	OUTER_SPRINT ~bdresurr~ ~bdresurr~
-	OUTER_SPRINT ~bddispel~ ~bddispel~
-	OUTER_SPRINT ~clearcld~ ~clearcld~
-	OUTER_SPRINT ~BELT~ ~BELT~
-	OUTER_SET BGTIMOENPState0 = 0 
-	OUTER_SET BGTIMOENPState4 = 4
+
+	ACTION_IF (GAME_IS ~bgee~ AND NOT FILE_EXISTS_IN_GAME ~bd0103.are~) THEN BEGIN
+		OUTER_SPRINT ~bgee_only~ ~~
+		OUTER_SPRINT ~sod~ ~False()~
+		OUTER_SPRINT ~eet_only~ ~False()~
+		OUTER_SPRINT ~bdresurr~ ~sppr712~ //resurrection
+		OUTER_SPRINT ~bddispel~ ~bpdispel~
+		OUTER_SPRINT ~clearcld~ ~sppr318~
+		OUTER_SPRINT ~BELT~ ~BELT~
+		OUTER_SET BGTIMOENPState0 = 0 
+		OUTER_SET BGTIMOENPState4 = 4
+	END
+
+	ACTION_IF (GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~bd0103.are~) THEN BEGIN
+		OUTER_SPRINT ~bgee_only~ ~False()~
+		OUTER_SPRINT ~sod~ ~~
+		OUTER_SPRINT ~eet_only~ ~False()~
+		OUTER_SPRINT ~bdresurr~ ~bdresurr~
+		OUTER_SPRINT ~bddispel~ ~bddispel~
+		OUTER_SPRINT ~clearcld~ ~clearcld~
+		OUTER_SPRINT ~BELT~ ~BELT~
+		OUTER_SET BGTIMOENPState0 = 0 
+		OUTER_SET BGTIMOENPState4 = 4
+	END
+
+	ACTION_IF (GAME_IS ~eet~) THEN BEGIN
+		OUTER_SPRINT ~bgee_only~ ~False()~
+		OUTER_SPRINT ~sod~ ~~
+		OUTER_SPRINT ~eet_only~ ~~
+		OUTER_SPRINT ~bdresurr~ ~bdresurr~
+		OUTER_SPRINT ~bddispel~ ~bddispel~
+		OUTER_SPRINT ~clearcld~ ~clearcld~
+		OUTER_SPRINT ~BELT~ ~BELT~
+		OUTER_SET BGTIMOENPState0 = 0 
+		OUTER_SET BGTIMOENPState4 = 4
+	END
 
 	// From her general.tpa - it's used all over
 	// We'll have to undo this for certain NPCs (like Denkod)
@@ -52,10 +76,6 @@ DEFINE_ACTION_FUNCTION town_chatter BEGIN
 	END
 
 	// Set global that will switch on post-Sarevok chatter
-	EXTEND_BOTTOM ~BG0108.BCS~ ~%mod_root%/scripts/hero_bg.baf~
+	EXTEND_BOTTOM ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/hero_bg.baf~
 
-	// There's also a merchant in the iron throne that needs to be taken out
-	ACTION_IF !((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_FLEE_GENTLE")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"))) THEN BEGIN
-		EXTEND_BOTTOM ~BG0616.BCS~ ~%mod_root%/scripts/BG0616.baf~
-	END
 END
