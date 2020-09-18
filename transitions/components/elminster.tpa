@@ -19,14 +19,10 @@ DEFINE_ACTION_FUNCTION elminster BEGIN
 		INT_VAR
 			only_once = 1
 		STR_VAR 
-			script = EVAL %NBaldursGate%
+			script = EVAL ~%NBaldursGate%~
 			match = ~SetGlobal("C#st_SarevokElminster","MYAREA",1)~
 	END
 
 	// Spawn the new Elminster outside the Ducal Palace after Sarevok is dead
-	COPY_EXISTING ~%NBaldursGate%.BCS~ ~override~
-	   DECOMPILE_AND_PATCH BEGIN 
-	      APPEND_FILE TEXT ~%mod_root%/scripts/BG0200b.baf~
-	   END
-	BUT_ONLY_IF_IT_CHANGES
+	EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200b.baf~
 END

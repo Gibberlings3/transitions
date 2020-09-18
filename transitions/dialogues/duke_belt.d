@@ -45,7 +45,7 @@ APPEND BELT
 	END
 
 	IF ~~ THEN BEGIN BELT_OFFER_ROOM
-		= @2045 /* ~Please feel free to come and go as you wish.~ */
+		SAY @2045 /* ~Please feel free to come and go as you wish.~ */
 		++ @2046 /* ~That's very generous of you.  Thank you!~ */ + ROOM_GOOD
 		++ @2047 /* ~That's it?  Sarevok was going to be a Duke and I get a room with a view?  ::sigh:: Fine.  I'll take it.~ */ + ROOM_SOSO
 		++ @2048 /* ~Thank you, but no thank you.  I'm not planning on staying in Baldur's Gate.~ */ + NO_ROOM
@@ -285,7 +285,7 @@ APPEND BELT
 	IF ~Global("#L_SarvQuests","GLOBAL",3) Dead("SEMAJ")~ THEN BEGIN BELT_QUEST_3_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
-		IF ~OR(10) Global("#L_Sod","GLOBAL",1) !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~~ + BELT_QUESTS_PAUSE
+		IF ~OR(10) Global("#L_Sod","GLOBAL",1) !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -316,7 +316,7 @@ APPEND BELT
 	IF ~Global("#L_SarvQuests","GLOBAL",4) Dead("winski2")~ THEN BEGIN BELT_QUEST_4_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
-		IF ~OR(9) Global("#L_Sod","GLOBAL",1) !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~~ + BELT_QUESTS_PAUSE
+		IF ~OR(9) Global("#L_Sod","GLOBAL",1) !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -347,7 +347,7 @@ APPEND BELT
 	IF ~Global("#L_SarvQuests","GLOBAL",5) OR(2) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
-		IF ~OR(8) Global("#L_Sod","GLOBAL",1) !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~~ + BELT_QUESTS_PAUSE
+		IF ~OR(8) Global("#L_Sod","GLOBAL",1) !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -387,7 +387,7 @@ APPEND BELT
 	IF ~Global("#L_SarvQuests","GLOBAL",6) OR(2) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_6_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
-		IF ~OR(7) Global("#L_Sod","GLOBAL",1) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~~ + BELT_QUESTS_PAUSE
+		IF ~OR(7) Global("#L_Sod","GLOBAL",1) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
@@ -397,7 +397,7 @@ APPEND BELT
 	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BEGIN BELT_QUEST_7_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
 		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_ALL_DONE
-		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~~ + BELT_QUESTS_PAUSE
+		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////

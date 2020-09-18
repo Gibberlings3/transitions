@@ -10,7 +10,7 @@ DEFINE_ACTION_FUNCTION liia BEGIN
 		INT_VAR
 			only_once = 0
 		STR_VAR
-			script = EVAL %NBaldursGate_DucalPalace_L1%
+			script = EVAL ~%NBaldursGate_DucalPalace_L1%~
 			match = ~C#st_SpawnLiia~
 	END
 	EXTEND_TOP ~%Undercity_TempleofBhaal%.BCS~ ~%mod_root%/scripts/bg0125_liia.baf~

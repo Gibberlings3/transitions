@@ -10,7 +10,7 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       INT_VAR
          only_once = 0
       STR_VAR
-         script = EVAL %NBaldursGate_DucalPalace_L1%
+         script = EVAL ~%NBaldursGate_DucalPalace_L1%~
          match = ~C#st_RearrangeDukes~
    END
 
@@ -19,14 +19,14 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       INT_VAR
          only_once = 0
       STR_VAR
-         script = EVAL %NBaldursGate%
+         script = EVAL ~%NBaldursGate%~
          match = ~C#st_SarevokDeadGuards~
    END
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
          only_once = 0
       STR_VAR
-         script = EVAL %NBaldursGate%
+         script = EVAL ~%NBaldursGate%~
          match = ~C#st_SarevokDeadOpenGate~
    END
 END
@@ -37,17 +37,19 @@ ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = EVAL %Undercity_TempleofBhaal%
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~StartCutSceneEx("BDSODTRN",TRUE)~
          insert = ~%mod_root%/scripts/BG0125_main.baf~
+   END 
 END ELSE BEGIN
    LAF REPLACE_SCRIPT_BLOCK
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = EVAL %Undercity_TempleofBhaal%
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~StartMovie("ENDMOVIE")~
          insert = ~%mod_root%/scripts/BG0125_main.baf~
+   END
 END
 
 // 3 Flaming Fist escort ... used in various places
@@ -160,54 +162,10 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/d
 // Update Duke Liia's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_liia.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
-// Update Imoen's dialogue file and script to initiate pre-sod exit dialogue
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~IMOEN_.BCS~ ~%mod_root%/scripts/imoen.baf~
-
 // Update Duke Belt's override script so he'll initiate conversation when PC first arrives in palace
 EXTEND_TOP ~BELT.BCS~ ~%mod_root%/scripts/Belt_Add.baf~
 
 // Make sure Duke Belt and Liia are alive and in position inside the Ducal Palace
 // Also sets up dialogue cues
 EXTEND_BOTTOM ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/BG0108a.baf~
-
-// Add key rings to Black Lily, Silence, and Sorcery Sundries
-COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR01.ITM~ 
-   SAY NAME1 @1014 /* ~Black Key Ring~ */
-   SAY NAME2 @1014 /* ~Black Key Ring~ */
-   SAY UNIDENTIFIED_DESC @1020
-   SAY IDENTIFIED_DESC @1020
-BUT_ONLY_IF_IT_CHANGES
-COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR01.STO~ 
-   SAY 0x0c @1014
-BUT_ONLY_IF_IT_CHANGES
-COPY_EXISTING ~STOBLACK.sto~ ~override~   // Black Lily
-   ADD_STORE_ITEM ~#LKEYR01~ AFTER ~SLNG11~ #0 #0 #0 ~IDENTIFIED~ #1
-BUT_ONLY_IF_IT_CHANGES
-
-COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR02.ITM~ 
-   SAY NAME1 @1015 /* ~Silver Key Ring~ */
-   SAY NAME2 @1015 /* ~Silver Key Ring~ */
-   SAY UNIDENTIFIED_DESC @1021
-   SAY IDENTIFIED_DESC @1021
-BUT_ONLY_IF_IT_CHANGES
-COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR02.STO~ 
-   SAY 0x0c @1015
-BUT_ONLY_IF_IT_CHANGES
-COPY_EXISTING ~STO0703.STO~ ~override~  // BG Sorcerer's Sundries
-   ADD_STORE_ITEM ~#LKEYR02~ LAST #0 #0 #0 ~IDENTIFIED~ #1
-BUT_ONLY_IF_IT_CHANGES
-
-COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR05.ITM~ 
-   SAY NAME1 @1018 /* ~Iron Key Ring~ */
-   SAY NAME2 @1018 /* ~Iron Key Ring~ */
-   SAY UNIDENTIFIED_DESC @1023
-   SAY IDENTIFIED_DESC @1023
-BUT_ONLY_IF_IT_CHANGES
-COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR05.STO~ 
-   SAY 0x0c @1018
-BUT_ONLY_IF_IT_CHANGES
-COPY_EXISTING ~%mod_root%/objects/STOSILEN.sto~ ~override~   // Silence
-   ADD_STORE_ITEM ~#LKEYR05~ LAST #0 #0 #0 ~IDENTIFIED~ #1
-BUT_ONLY_IF_IT_CHANGES
 

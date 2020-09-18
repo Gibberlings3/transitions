@@ -9,7 +9,7 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
       INT_VAR
          only_once = 0
       STR_VAR
-         script = EVAL %Undercity_TempleofBhaal%
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~StartCutSceneEx("BDSODTRN",TRUE)~
    END
 END
@@ -27,6 +27,46 @@ COPY ~%mod_root%/objects/#LSTRTA2.2DA~ ~override~
 EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_sod.baf~
 
 // Add a couple key rings
+// Add key rings to Black Lily, Silence, and Sorcery Sundries
+COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR01.ITM~ 
+   SAY NAME1 @1014 /* ~Black Key Ring~ */
+   SAY NAME2 @1014 /* ~Black Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1020
+   SAY IDENTIFIED_DESC @1020
+BUT_ONLY_IF_IT_CHANGES
+COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR01.STO~ 
+   SAY 0x0c @1014
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STOBLACK.sto~ ~override~   // Black Lily
+   ADD_STORE_ITEM ~#LKEYR01~ AFTER ~SLNG11~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR02.ITM~ 
+   SAY NAME1 @1015 /* ~Silver Key Ring~ */
+   SAY NAME2 @1015 /* ~Silver Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1021
+   SAY IDENTIFIED_DESC @1021
+BUT_ONLY_IF_IT_CHANGES
+COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR02.STO~ 
+   SAY 0x0c @1015
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STO0703.STO~ ~override~  // BG Sorcerer's Sundries
+   ADD_STORE_ITEM ~#LKEYR02~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR05.ITM~ 
+   SAY NAME1 @1018 /* ~Iron Key Ring~ */
+   SAY NAME2 @1018 /* ~Iron Key Ring~ */
+   SAY UNIDENTIFIED_DESC @1023
+   SAY IDENTIFIED_DESC @1023
+BUT_ONLY_IF_IT_CHANGES
+COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR05.STO~ 
+   SAY 0x0c @1018
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~STOSILEN.sto~ ~override~   // Silence
+   ADD_STORE_ITEM ~#LKEYR05~ LAST #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
 COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR03.ITM~ 
    SAY NAME1 @1016 /* ~Brass Key Ring~ */
    SAY NAME2 @1016 /* ~Brass Key Ring~ */
@@ -109,6 +149,10 @@ COPY_EXISTING ~BD0120.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_room1a",Detect([PC]))~ ~TriggerOverride("Imoen_room1a",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
    END
 BUT_ONLY_IF_IT_CHANGES
+
+// Update Imoen's dialogue file and script to initiate pre-sod exit dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
+EXTEND_TOP ~IMOEN_.BCS~ ~%mod_root%/scripts/imoen.baf~
 
 // Use a modified intro scene and other modified blocks that moved Imoen about
 LAF INSERT_SCRIPT_BLOCK

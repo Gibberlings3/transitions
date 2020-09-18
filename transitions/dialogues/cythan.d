@@ -6,7 +6,7 @@ REPLACE_TRIGGER_TEXT CYTHAN ~NumTimesTalkedTo(0)~ ~NumTimesTalkedTo(0) Global("#
 REPLACE_TRIGGER_TEXT CYTHAN ~HPPercentLT(Myself,50)~ ~HPPercentLT(Myself,50) Global("#L_BG1SarevokDead","GLOBAL",0)~
 
 APPEND CYTHAN
-	IF ~AreaCheck("BG0706")~ THEN BEGIN Cythan_Quest1
+	IF ~AreaCheck("%EBaldursGate_ElfsongTavern_L2%")~ THEN BEGIN Cythan_Quest1
 		SAY @2220 /* ~You?  What do you want?!~ */
 		++ @2221 /* ~The Dukes sent me to bring you in dead or alive.~ */ + Cythan_Quest2
 	END
@@ -35,7 +35,7 @@ APPEND CYTHAN
 		IF ~~ THEN DO ~ActionOverride("Cythan",Enemy())~  EXIT
 	END
 	
-	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) !AreaCheck("BG0706")~ THEN BEGIN Cythan_Default
+	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) !AreaCheck("%EBaldursGate_ElfsongTavern_L2%")~ THEN BEGIN Cythan_Default
 		SAY @2187 // ~Get away from me.  I have nothing to say to you.~
 		IF ~~ THEN EXIT
 	END

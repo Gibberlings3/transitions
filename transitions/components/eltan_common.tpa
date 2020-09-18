@@ -9,7 +9,7 @@ LAF DELETE_SCRIPT_BLOCK
 	INT_VAR
 		only_once = 0
 	STR_VAR
-		script = EVAL %NBaldursGate_DucalPalace_L1%
+		script = EVAL ~%NBaldursGate_DucalPalace_L1%~
 		match = ~C#st_SpawnEltan~
 END
 

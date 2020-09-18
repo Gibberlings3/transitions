@@ -9,3 +9,5 @@ EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_eet.ba
 // Cut scene that starts BG2 when EET is installed
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~
 
+// Update Imoen's script to self destruct if in non-BG1 areas if she's not supposed to be there
+EXTEND_TOP ~IMOEN_.BCS~ ~%mod_root%/scripts/imoen_eet.baf~

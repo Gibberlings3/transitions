@@ -20,8 +20,10 @@ ALWAYS
       LAF DO_RUN_ONCE END
 
       // Variables used to point to files
-      INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
-      INCLUDE ~%mod_root%/lib/g3_bgee_cpmvars.tap~
+      ACTION_IF (GAME_IS ~eet~) BEGIN
+         INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
+      END
+      INCLUDE ~%mod_root%/lib/g3_bgee_cpmvars.tpa~
       INCLUDE ~%mod_root%/lib/#l_eet_cmpvars.tpa~
 
       // Library functions used throughout
@@ -311,7 +313,7 @@ LAF imoen_bg2_mm END
 BEGIN @22   // MOD 120
 DESIGNATED 120
 LABEL "#L-TRANSITIONS-SNARK"
-REQUIRE_PREDICATE ((GAME_INCLUDES ~sod~) OR (GAME_IS ~bg2ee eet~) @33
+REQUIRE_PREDICATE ((GAME_INCLUDES ~sod~) OR (GAME_IS ~bg2ee eet~)) @33
 INCLUDE ~transitions/components/add_snark.tpa~
 LAF add_snark END
 

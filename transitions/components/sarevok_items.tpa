@@ -26,14 +26,14 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = EVAL %Undercity_TempleofBhaal%
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~Global("C#st_SarevoksItems","MYAREA",0)~
    END
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = EVAL %Undercity_TempleofBhaal%
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~Global("C#st_SarevoksPlaceSword","MYAREA",0)~
    END
 END

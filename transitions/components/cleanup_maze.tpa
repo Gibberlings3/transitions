@@ -29,7 +29,7 @@ DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 		INT_VAR
 			only_once = 1
 		STR_VAR
-			script = EVAL %EBaldursGate_ThievesGuild%
+			script = EVAL ~%EBaldursGate_ThievesGuild%~
 			match = ~Global("DukeThanks","GLOBAL",1)~
 			match1 = ~!Exists("DENKOD")~
 			match2 = ~!Dead("DENKOD")~

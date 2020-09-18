@@ -1,0 +1,17 @@
+////////////////////////////////
+// Post-BG1 self-destruct     //
+// Parsed via main_eet.tpa    //
+////////////////////////////////
+
+IF
+	GlobalGT("EndOfBG1","GLOBAL",0)
+	Global("#L_ImoenOkInBG1Areas","GLOBAL",0)
+	Global("#L_ImoenModded","GLOBAL",0)
+	!InPartyAllowDead("IMOEN2")
+	AreaType(BG1AREA)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ImoenOkInBG1Areas","GLOBAL",1)
+		DestroySelf()
+END
+
