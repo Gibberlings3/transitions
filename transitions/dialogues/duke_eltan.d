@@ -10,8 +10,16 @@
 //REPLACE_TRIGGER_TEXT BDELTAN ~Global("k9Sharteel_Talk_ELTAN","GLOBAL",0)~ ~Global("k9Sharteel_Talk_ELTAN","GLOBAL",0) GlobalGT("BD_plot","GLOBAL",40)~
 //REPLACE_ACTION_TEXT BDELTAN ~SetGlobal("bd_plot_003","bd0102",1)~ ~SetGlobal("bd_plot_003","bd0102",1) SetGlobal("#L_EltanTalkedToCorwin","MYAREA",1)~
 
+// Make sure stock dialogue doesn't fire while in the palace
+ADD_STATE_TRIGGER DELTAN 0 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+ADD_STATE_TRIGGER DELTAN 7 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+ADD_STATE_TRIGGER DELTAN 12 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+ADD_STATE_TRIGGER DELTAN 13 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+ADD_STATE_TRIGGER DELTAN 14 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+ADD_STATE_TRIGGER DELTAN 15 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
+
 // Add Palace dialogue
-APPEND BDELTAN
+APPEND DELTAN
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("C#RE1_ScarRetrieval","GLOBAL",15)~ THEN BEGIN SHOO
 		SAY @2098 /* ~I have nothing more to say to you.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_EltanLoveMatch","GLOBAL",0) EscapeArea()~ EXIT

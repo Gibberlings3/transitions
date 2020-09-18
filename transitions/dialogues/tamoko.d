@@ -6,7 +6,7 @@ REPLACE_TRIGGER_TEXT TAMOKO ~!InParty("skie")~ ~!InParty("skie") Global("#L_BG1S
 REPLACE_TRIGGER_TEXT TAMOKO ~HPPercentLT(Myself,50)~ ~InParty("skie") Global("#L_BG1SarevokDead","GLOBAL",0)~
 
 APPEND TAMOKO
-	IF ~AreaCheck("BG0615")~ THEN BEGIN Tamoko_Quest1
+	IF ~AreaCheck("%BaldursGateDocks_IronThrone_L5%")~ THEN BEGIN Tamoko_Quest1
 		SAY @2223 /* ~Hello again, <CHARNAME>.  What is it you seek here?~ */
 		++ @2221 /* ~The Dukes sent me to bring you in dead or alive.~ */ + Tamoko_Quest2
 	END
@@ -39,7 +39,7 @@ APPEND TAMOKO
 		++ @2222 /* ~There are Flaming Fist waiting for you outside.~ */ DO ~ActionOverride("Tamoko",EscapeArea()) AddexperienceParty(5000) SetGlobal("#L_TamokoSurrend","GLOBAL",1) ~  EXIT
 	END
 	
-	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) !AreaCheck("BG0615") !AreaCheck("BG1200")~ THEN BEGIN Tamoko_Default
+	IF ~Global("#L_BG1SarevokDead","GLOBAL",1) !AreaCheck("%BaldursGateDocks_IronThrone_L5%") !AreaCheck("%BaldursGateDocks%")~ THEN BEGIN Tamoko_Default
 		SAY @2234 /* ~Please leave me be.  I have much to think about.~ */
 		IF ~~ THEN EXIT
 	END

@@ -20,11 +20,7 @@ DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 	    WRITE_ASCII 0x280 ~VOLETA~ #32 // set DV
 
 	// Add Voleta's block to maze script so she poofs as well
-	COPY_EXISTING ~BG0146.BCS~ ~override~
-		DECOMPILE_AND_PATCH BEGIN 
-			APPEND_FILE TEXT ~%mod_root%/scripts/BG0146b.baf~
-		END
-	BUT_ONLY_IF_IT_CHANGES
+	EXTEND_BOTTOM ~%ThievesMaze%.BCS~ ~%mod_root%/scripts/BG0146b.baf~
 
 	// Append to the trigger that spawns Denkod so he doesn't spawn right after we have him leave
 	// This might already be done via jastey's Endless BG1 main component
@@ -33,7 +29,7 @@ DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 		INT_VAR
 			only_once = 1
 		STR_VAR
-			script = BG0153
+			script = EVAL ~%EBaldursGate_ThievesGuild%~
 			match = ~Global("DukeThanks","GLOBAL",1)~
 			match1 = ~!Exists("DENKOD")~
 			match2 = ~!Dead("DENKOD")~
@@ -44,7 +40,7 @@ DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 
 	// Set up the thieves' guild area script to start dialogue for Denkod
 	// so he can explain what happened to the wounded that were in the thieves' maze
-	EXTEND_TOP ~BG0153.BCS~ ~%mod_root%/scripts/BG0153a.baf~
+	EXTEND_TOP ~%EBaldursGate_ThievesGuild%.BCS~ ~%mod_root%/scripts/BG0153a.baf~
 
 	// Add to Denkod's dialogue file
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/denkod.d~ USING ~%tra_loc%/%s/dialogues.tra~

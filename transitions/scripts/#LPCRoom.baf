@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////
 // Spawn servant in the protagonist's quarters (whereever they may be) //
 // Updates the contents of PC's chest                                  //
-// Patched via main_common.tpa, main_2                                 //
+// Patched via main_bg1.tpa                                            //
 // Linked into all custom areas used as the PC's personal quarters     //
 /////////////////////////////////////////////////////////////////////////
 
@@ -56,9 +56,10 @@ END
 
 // Move everything from the PC's chest whereever it is at the moment
 // to their chest whereever they are located now
-// Will need to update to this for every possible house award
+// Will need to update this for every possible house award
 // OMG!  SAPIENT PEARWOOD!
 // Or busy servants ... who knows.
+// BD0103 won't exist if not EET, but I don't think it'll affect anything
 IF
 	AreaCheck("#LBD0103")	// Room in the palace
 	!Global("#L_PlayerChestLocation","GLOBAL",1)

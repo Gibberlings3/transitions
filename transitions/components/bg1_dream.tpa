@@ -1,0 +1,15 @@
+//////////////////////////////////////////////////////////////////////////////
+// Component that allows uses the BG1 end movie as part of a dream sequence //
+// that gives the protagonist an additional bhaal-spawn power               //
+//////////////////////////////////////////////////////////////////////////////
+
+DEFINE_ACTION_FUNCTION bg1_dream BEGIN
+   // New dream and bhaal-spawn power
+   EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
+
+   COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
+      DECOMPILE_AND_PATCH BEGIN
+         REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~StartMovie("ENDMOVIE")~ ~~ 
+      END
+END
+

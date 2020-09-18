@@ -10,7 +10,7 @@ LAF DELETE_SCRIPT_BLOCK
 	INT_VAR
 		only_once = 1
 	STR_VAR
-		script = BG0153
+		script = EVAL ~%EBaldursGate_ThievesGuild%~
 		match = ~!Global("C#st_DenkodTalk","MYAREA",1)~
 		match1 = ~Dead("Sarevok")~
 		match2 = ~ActionOverride("DENKOD",DestroySelf())~
@@ -25,7 +25,7 @@ LAF DELETE_SCRIPT_BLOCK
 	INT_VAR
 		only_once = 1
 	STR_VAR
-		script = BG0146
+		script = EVAL ~%ThievesMaze_BCS%~
 		match = ~ActionOverride("WINSKI2",DestroySelf())~
 		match1 = ~InMyArea("WINSKI2")~
 END

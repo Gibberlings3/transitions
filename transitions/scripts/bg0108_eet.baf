@@ -1,0 +1,12 @@
+/////////////////////////////////////
+// Additions when EET is available //
+// Included via main_eet.tpa       //
+/////////////////////////////////////
+
+IF
+	Global("#L_EET","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_EET","GLOBAL",1)
+  		Continue()
+END

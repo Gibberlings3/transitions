@@ -16,7 +16,7 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 		SAY UNIDENTIFIED_DESC @1012
 		SAY IDENTIFIED_DESC @1012
 
-	COPY_EXISTING ~BG3300.ARE~ ~override~
+	COPY_EXISTING ~%Beregost%.ARE~ ~override~
 		// Change the name of the door leading into BG3347
 		// or else we can't control it because it has the same name 
 		// as the travel trigger region
@@ -73,12 +73,12 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 		STR_VAR 
 			baf_location = EVAL ~%mod_root%/scripts/~
 			baf_name = ~BG3300~
-			bcs_name = ~BG3300~
+			bcs_name = EVAL ~%Beregost%~
 	END
 
 	// Update the dialogue of the servant who welcomes them
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/house2_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 	// Set the global to indicate that the cabin in Beregost is available as a reward
-	EXTEND_TOP ~BG0108.BCS~ ~%mod_root%/scripts/BG0108e.baf~
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1_BCS%.BCS~ ~%mod_root%/scripts/BG0108e.baf~
 END

@@ -9,7 +9,7 @@ BEGIN ~#LffHlr1~
 		SAY @2000 // ~<CHARNAME>! The Dukes sent us to see to your well-being. We will take care of the bodies of Sarevok and his minions.~
 		= @2001	// ~We've also come to collect Sarevok's sword.  The dukes don't want it to become a rallying symbol for his minions.~
 		IF ~~ THEN + do_disarm
-		IF ~AreaCheck("BG0123")~ THEN + skip_disarm 
+		IF ~AreaCheck("%Undercity%")~ THEN + skip_disarm 
 	END
 
 	IF ~~ THEN BEGIN do_disarm

@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 // New class script file for new flaming fist healer #1
-// It just initiates the dialogue with the protagonist
+// It just initiates the dialogue with the protagonist 
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffHlr1.baf~ 
 
 // New Cut Scene scripts for healing the party, disarming the traps, and destroying bodies
@@ -39,7 +39,7 @@ COPY_EXISTING ~FLAM11.cre~ ~override/#LffHlr2.cre~
 	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8	// general script - don't wander
 
 // See if jastey's custom items for Sarevok are installed
-COPY_EXISTING ~BG0125.BCS~ ~override~
+COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
   DECOMPILE_AND_PATCH BEGIN 
     COUNT_REGEXP_INSTANCES ~Global("C#st_FFHealerSpawn","GLOBAL",0)~ endlessHealersInstalled
   END
@@ -52,25 +52,16 @@ ACTION_IF (endlessHealersInstalled > 0) BEGIN
       INT_VAR
          only_once = 1
       STR_VAR
-         script = BG0125
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~C#st_FFHealerSpawn~
          insert = ~%mod_root%/scripts/BG0125c.baf~
    END
 END ELSE BEGIN
-   // Add block where flaming fist healers are spawned
-   COPY_EXISTING ~BG0125.BCS~ ~override~
-      DECOMPILE_AND_PATCH BEGIN 
-         APPEND_FILE TEXT ~%mod_root%/scripts/BG0125c.baf~
-      END
-   BUT_ONLY_IF_IT_CHANGES
+  EXTEND_BOTTOM ~%Undercity_TempleofBhaal%.BCS~ ~%mod_root%/scripts/BG0125c.baf~
 END
 
 // Spawn flaming fist healers when they exit the temple
 // if they still have the sword
 // Can happen ... 
-COPY_EXISTING ~BG0123.BCS~ ~override~
-   DECOMPILE_AND_PATCH BEGIN 
-      APPEND_FILE TEXT ~%mod_root%/scripts/BG0123.baf~
-   END
-BUT_ONLY_IF_IT_CHANGES
+EXTEND_BOTTOM ~%Undercity%.BCS~ ~%mod_root%/scripts/BG0123.baf~
 

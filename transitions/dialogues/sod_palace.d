@@ -112,6 +112,14 @@ APPEND BDLIIA
 	END
 END
 
+// Allow the line to Entar about him being dead if SoD reached via Transitions
+ALTER_TRANS BDLIIA 
+	BEGIN 9 END 
+	BEGIN 2 END 
+	BEGIN
+  		"TRIGGER" ~!Global("SOD_fromimport","global",0)~
+	END
+
 // Have the PC realize the poison was too weak to act as a means of assassination
 ALTER_TRANS BDLIIA
 	BEGIN 14 END

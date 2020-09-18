@@ -20,7 +20,10 @@ ALWAYS
       LAF DO_RUN_ONCE END
 
       // Variables used to point to files
-      INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
+      ACTION_IF (GAME_IS ~eet~) BEGIN
+         INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
+      END
+      INCLUDE ~%mod_root%/lib/g3_bgee_cpmvars.tpa~
       INCLUDE ~%mod_root%/lib/#l_eet_cmpvars.tpa~
 
       // Library functions used throughout
@@ -48,7 +51,7 @@ ALWAYS
          reload_array = thismod_reload
    END
 
-   ACTION_IF NOT GAME_IS ~eet~ BEGIN
+   ACTION_IF NOT ((GAME_IS ~bgee bg2ee eet~) OR (GAME_INCLUDES ~sod~)) BEGIN
       FAIL @1
    END
 
@@ -71,41 +74,29 @@ LANGUAGE ~American English~ ~american~
    ~transitions/languages/american/cases.tra~
    ~weidu_external/workspace/transitions/languages/american/cases.tra~
 
-///////////////////////////////////////////////////////////////////////////
-// MAIN COMPONENT: ALLOW CONTINUED PLAY AFTER SAREVOK IS DEFEATED        //
-// OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR GAME CONTINUATION   //
-// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC         //
-// AS WELL AS MAKING KORLASZ A NORMAL DUNGEON CRAWL WITH NO HAND HOLDING //
-// This component has three options from which to select                 //
-///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// MAIN COMPONENT FOR ALL GAMES: ALLOW CONTINUED PLAY AFTER DEFEAT OF BOSS ENEMY  //
+// OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR BG1 CONTINUATION             //
+// OPEN SULDANESSELLAR AND MODIFY QUEEN ESSEMINE TO ALLOW FOR BG2 CONTINUATION    //
+// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC IN BG1           //
+////////////////////////////////////////////////////////////////////////////////////
+BEGIN @2    // MOD 0
+LABEL "#L-TRANSITIONS-MAIN"
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @1
+INCLUDE ~transitions/components/main_common.tpa~
+LAF main_common END
 
-////////////////////////////////////////////////////////////////////////////////////////
-// This option removes the movie from the end of the fight
-// so it can be used in a dream sequence later on
-BEGIN @3    // MOD 0
-SUBCOMPONENT @2
-LABEL "#L-TRANSITIONS-MAIN_DREAM"
-INCLUDE ~transitions/components/main0.tpa~
-LAF main0 END
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// This option leaves the movie at the end of the fight and skips the new bhaal-spawn powers
-// but makes the necessary changes so the the player can keep playing
-BEGIN @4       // MOD 1
-SUBCOMPONENT @2
-LABEL "#L-TRANSITIONS-MAIN_NO_DREAM"
-INCLUDE ~transitions/components/main1.tpa~
-LAF main1 END
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-// This option just leaves EndlessBG1 main component as is except
-// adds one of my global variables that I'll need later
-BEGIN @9       // MOD 2
-SUBCOMPONENT @2
-LABEL "#L-TRANSITIONS-MAIN_USE_ENDLESS"
-REQUIRE_COMPONENT ~c#endlessbg1.tp2~ 0 @10
-INCLUDE ~transitions/components/main2.tpa~
-LAF main2 END
+/////////////////////////////////////////////////////////////
+// REMOVE THE MOVIE FROM THE END OF THE FIGHT WITH SAREVOK //
+// SO IT CAN BE USED IN A DREAM SEQUENCE LATER ON          //
+/////////////////////////////////////////////////////////////
+BEGIN @3    // MOD 10
+LABEL "#L-TRANSITIONS-BG1_DREAM"
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+INCLUDE ~transitions/components/bg1_dream.tpa~
+LAF bg1_dream END
 
 
 //////////////////////////////////////////////
@@ -116,29 +107,32 @@ LAF main2 END
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option has Sarevok equip his equipment
 // Will make the fight slightly more difficult
-BEGIN @6       // MOD 10
-DESIGNATED  10
+BEGIN @6       // MOD 20
+DESIGNATED  20
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_EQUIPPED"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok0.tpa~
 LAF sarevok0 END
 
 //////////////////////////////////////////////////////////////////////////////////////
 // This option places Sarevok's equipment into his inventory
-BEGIN @7       // MOD 11
+BEGIN @7       // MOD 21
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_IN_INVENTORY"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
 LAF sarevok1 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option just leaves EndlessBG1 handling of Sarevok's items
-BEGIN @9       // MOD 12
+BEGIN @9       // MOD 22
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_USE_ENDLESS"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
 
 
@@ -149,38 +143,42 @@ REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option has Sarevok's survivors flee upon his death to give more quests
-BEGIN @13       // MOD 20
-DESIGNATED 20
+BEGIN @13       // MOD 30
+DESIGNATED 30
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_HARSH"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests0.tpa~
 LAF quests0 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option doesn't alter the behavior of the Sarevok's supporters in the final BGI battle
-BEGIN @14       // MOD 21
+BEGIN @14       // MOD 31
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_HARSH"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests1.tpa~
 LAF quests1 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This is option 1 with a gentler Tamoko quest
-BEGIN @15       // MOD 22
+BEGIN @15       // MOD 32
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_FLEE_GENTLE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests2.tpa~
 LAF quests2 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This is option 2 with a gentler Tamoko quest
-BEGIN @16       // MOD 23
+BEGIN @16       // MOD 33
 SUBCOMPONENT @12
 LABEL "#L-TRANSITIONS-QUESTS_NO_FLEE_GENTLE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/quests3.tpa~
 LAF quests3 END
 
@@ -190,10 +188,11 @@ LAF quests3 END
 // This is jastey's code taken directly from her       //
 // Endless BG1 mod                                     //
 /////////////////////////////////////////////////////////
-BEGIN @18      // MOD 30
-DESIGNATED 30
+BEGIN @18      // MOD 40
+DESIGNATED 40
 LABEL "C#-EBG1-BG_CHATTER"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
 LAF town_chatter END
@@ -202,10 +201,11 @@ LAF town_chatter END
 /////////////////////////////////////////////
 // CLEAN-UP WOUNDED FROM THE THIEVES' MAZE //
 /////////////////////////////////////////////
-BEGIN @17       // MOD 40
-DESIGNATED 40
+BEGIN @17       // MOD 50
+DESIGNATED 50
 LABEL "#L-TRANSITIONS-MAZE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/cleanup_maze.tpa~
 LAF cleanup_maze END
 
@@ -215,10 +215,11 @@ LAF cleanup_maze END
 // This is pretty much what jastey includes in Endless BG1 but   //
 // since I have no idea which module it is, I'm going to redo it //
 ///////////////////////////////////////////////////////////////////
-BEGIN @20      // MOD 50
-DESIGNATED 50 
+BEGIN @20      // MOD 60
+DESIGNATED 60 
 LABEL "#L-TRANSITIONS-ELMINSTER"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
@@ -228,10 +229,11 @@ LAF elminster END
 // DUKE ELTAN'S REWARD           //                   
 // The Baldur's Gate North house //
 ///////////////////////////////////
-BEGIN @28   // MOD 60
-DESIGNATED 60
+BEGIN @28   // MOD 70
+DESIGNATED 70
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BG_N"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house0.tpa~
 LAF eltan_house0 END
 
@@ -239,20 +241,21 @@ LAF eltan_house0 END
 // DUKE ELTAN'S REWARD //
 // CABIN IN HIGH HEDGE //
 /////////////////////////
-BEGIN @25   // MOD 61
+BEGIN @25   // MOD 71
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house1.tpa~
 LAF eltan_house1 END
-
 
 //////////////////////////
 // DUKE ELTAN'S REWARD  //
 // HOUSE IN NW BEREGOST //
 //////////////////////////
-BEGIN @26   // MOD 62
+BEGIN @26   // MOD 72
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BEREGOST_NW"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
@@ -260,10 +263,11 @@ LAF eltan_house2 END
 //////////////
 // REFUGEES //
 //////////////
-BEGIN @29   // MOD 70
-DESIGNATED 70
+BEGIN @29   // MOD 80
+DESIGNATED 80
 LABEL "#L-TRANSITIONS-REFUGEES"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
@@ -272,52 +276,67 @@ LAF timers_common END
 /////////////////////////////////////////////////////
 // LIIA ALLOWS IMOEN TO POSTPONE TRAINING IN MAGIC //
 /////////////////////////////////////////////////////
-BEGIN @11   // MOD 80
-DESIGNATED 80
+BEGIN @11   // MOD 90
+DESIGNATED 90
 LABEL "#L-TRANSITIONS-LIIA"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/liia.tpa~
 LAF liia END
+
+
+///////////////////////////////////////////////
+// IMOEN GIVEN SPECIAL WAND OF MAGIC MISSILE //
+///////////////////////////////////////////////
+BEGIN @30   // MOD 100
+DESIGNATED 100
+LABEL "#L-TRANSITIONS-IMOEN_SOD_WAND"
+REQUIRE_PREDICATE (GAME_INCLUDES ~sod~) @32
+INCLUDE ~transitions/components/imoen_sod_wand.tpa~
+LAF imoen_sod_wand END
 
 
 ///////////////////////////////////////
 // IMOEN GIVEN MAGIC MISSILE ABILITY //
 ///////////////////////////////////////
-BEGIN @21   // MOD 90
-DESIGNATED 90
-LABEL "#L-TRANSITIONS-IMOEN_MAGIC"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
-INCLUDE ~transitions/components/imoen_magic.tpa~
-LAF imoen_magic END
+BEGIN @21   // MOD 100
+DESIGNATED 110
+LABEL "#L-TRANSITIONS-IMOEN_BG2_MM"
+REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @31
+INCLUDE ~transitions/components/imoen_bg2_mm.tpa~
+LAF imoen_bg2_mm END
 
 
 ///////////////////////////////////////////
 // ADD SOME SNARK TO STUFFY SOD DIALOGUE //
 ///////////////////////////////////////////
-BEGIN @22   // MOD 100
-DESIGNATED 100
+BEGIN @22   // MOD 120
+DESIGNATED 120
 LABEL "#L-TRANSITIONS-SNARK"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE ((GAME_INCLUDES ~sod~) OR (GAME_IS ~bg2ee eet~)) @33
 INCLUDE ~transitions/components/add_snark.tpa~
 LAF add_snark END
+
 
 //////////////////////////////////////////////////
 // USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //
 //////////////////////////////////////////////////
-BEGIN @23   // MOD 110
-DESIGNATED 110
+BEGIN @23   // MOD 130
+DESIGNATED 130
 LABEL "#L-TRANSITIONS-ABBR_CAPTURE"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~eet~) @4
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/abbr_capture.tpa~
 LAF abbr_capture END
+
 
 ///////////////////////////////////////////////////////////
 // RESTORE BHAAL-SPAWN POWERS AFTER IRENICUS IS DEFEATED //
 ///////////////////////////////////////////////////////////
-BEGIN @24   // MOD 120
-DESIGNATED 120
+BEGIN @24   // MOD 140
+DESIGNATED 140
 LABEL "#L-TRANSITIONS-RESTORE_POWER"
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) OR (MOD_IS_INSTALLED ~transitions.tp2~ 1) OR (MOD_IS_INSTALLED ~transitions.tp2~ 2) @8
+REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @31
 INCLUDE ~transitions/components/power_up.tpa~
 LAF power_up END
 

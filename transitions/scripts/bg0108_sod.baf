@@ -1,0 +1,22 @@
+/////////////////////////////////////////////////////
+// Sets up a global to indicate SoD is available   //
+// Patched via main_sod.tpa                        //
+/////////////////////////////////////////////////////
+IF
+	Global("#L_SoD","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SoD","GLOBAL",1)
+  		Continue()
+END
+
+IF 
+	Global("#L_QuestsChecked","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_QuestsChecked","MYAREA",1)
+		SetGlobal("#L_QuestsAvailable","MYAREA",1) // Always have Korlasz available when SoD installed
+		SetGlobal("#L_OnlyDoKorlaszQuest","MYAREA",1)  // The default unless they install quests
+		Continue()
+END
+

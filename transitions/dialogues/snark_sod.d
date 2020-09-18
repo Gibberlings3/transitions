@@ -50,7 +50,3 @@ EXTEND_BOTTOM BDENTAR 18
 	IF ~!Global("#L_Snark","GLOBAL",0)~ THEN REPLY @3012 /* ~With all due respect sir, I'm not a babysitter.  Neither is the Fist.  But if you insist upon this folly, her fate is upon your head, not mine.~ */ DO ~AddJournalEntry(256390,QUEST)~ GOTO 44
 END
 
-EXTEND_BOTTOM SUELLE2 18
-	IF ~ReputationLT(Player1,10) !Global("#L_Snark","GLOBAL",0)~ THEN REPLY @3013 /* ~Only partially?~ */ + 19
-	IF ~ReputationGT(Player1,9) !Global("#L_Snark","GLOBAL",0)~ THEN REPLY @3013 /* ~Only partially?~ */ + 20
-END

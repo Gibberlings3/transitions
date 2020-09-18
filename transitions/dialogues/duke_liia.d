@@ -19,11 +19,6 @@ APPEND LIIA
 		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","IMOEN2",[960.680])~ EXIT
 	END
 
-//	IF ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("IMOEN2") Global("#L_LiiaInstalled","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_2
-//		SAY @2118 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~ */
-//		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",6)~ EXIT
-//	END
-
 	IF WEIGHT #-997 ~Global("#L_TalkedToDukes","GLOBAL",2) InPartyAllowDead("IMOEN2") !IsValidForPartyDialogue("IMOEN2") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_3
 		SAY @2117 /* ~One moment <CHARNAME>, I need to speak with Imoen.~ */
 		IF ~~ DO ~ApplySpellRES("IMOEN2","bdresurr") ApplySpellRES("IMOEN2","bddispel") ApplySpellRES("IMOEN2","sppr713")~ EXIT
@@ -48,15 +43,4 @@ APPEND LIIA
 		IF ~~ THEN EXIT
 	END
 END
-
-//////////////////
-// SOD Dialogue //
-//////////////////
-// Allow the line to Entar about him being dead if SoD reached via Transitions
-ALTER_TRANS BDLIIA 
-	BEGIN 9 END 
-	BEGIN 2 END 
-	BEGIN
-  		"TRIGGER" ~!Global("SOD_fromimport","global",0)~
-	END
 

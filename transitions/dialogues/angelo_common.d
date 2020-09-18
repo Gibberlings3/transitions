@@ -3,7 +3,7 @@
 // Compiled and attached via quests_common.tpa //
 /////////////////////////////////////////////////
 APPEND ~GALDOR~
-	IF ~AreaCheck("BG0224")~ THEN BEGIN Angelo_Quest1
+	IF ~AreaCheck("%WSewers%")~ THEN BEGIN Angelo_Quest1
 		SAY @2189 // ~You again!  Will you never just go away!~
 		++ @2190 /* ~Not in your lifetime!~ */ + Angelo_Quest2a 
 		++ @2191 /* ~Come along peacefully and you may live.~ */ + Angelo_Quest2b
@@ -19,7 +19,7 @@ APPEND ~GALDOR~
 		IF ~~ THEN DO ~ActionOverride("GALDOR",Enemy())~  EXIT
 	END
 	
-	IF ~!AreaCheck("BG0125") !AreaCheck("BG0224")~ THEN BEGIN Angelo_Default
+	IF ~!AreaCheck("BG0125") !AreaCheck("%WSewers%")~ THEN BEGIN Angelo_Default
 		SAY @2187 // ~Get away from me.  I have nothing to say to you.~
 		IF ~~ THEN EXIT
 	END

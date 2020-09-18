@@ -15,7 +15,7 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/angelo_flees.d~ USING ~%tra_loc%/%
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/semaj_flees.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 // Area script to trigger dialogues
-COPY_EXISTING ~BG0125.BCS~ ~override~
+COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
 	DECOMPILE_AND_PATCH BEGIN 
 		APPEND_FILE TEXT ~%mod_root%/scripts/BG0125d.baf~
 	END

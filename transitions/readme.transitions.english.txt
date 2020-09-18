@@ -1,15 +1,14 @@
 -------------------------------------------------
 ---               Transitions                 ---
----    		    for EET		      ---
 ---                by Lauriel                 ---
 -------------------------------------------------
 
 ------------------------------------------------------------------------
 GENERAL
 ------------------------------------------------------------------------
-This mod requires EET.  It is not compatible with other games at this time.
+This mod requires EET, BG1EE, SoD, or BG2EE.
 
-The Transitions mod's main purpose is to provide seemless transitions between campaigns.  It will provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  It also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
+The Transitions mod's main purpose is to provide seemless transitions between campaigns in EET.  It will  provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  For EET, it also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
 
 Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
@@ -26,39 +25,43 @@ DESCRIPTION
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
-1 Main Component (Required)
+Main Component - required for most, but not all, content
 ------------------------------------------------------------------------
 Prevents the end of game transition to SoD after Sarevok's death  
 Prevents the end of game transition to ToB after Irenicus's death  
 Allows access to Duke Belt in the Ducal Palace for game advancement  
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
 Also to remain consistent with SoD, Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
-The Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
-NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate  
-Allows for skipping SoD  
-
-Option 1: The "Sarevok died" movie is used as a dream sequence and a new bhaal-spawn power is awarded at the first rest  
-Option 2: The "Sarevok died" movie is shown as usual after the fight and the new bhaal-spawn power is skipped  
-Option 3: When installed, use how Endless BG1 handles the end of the fight    
+If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
+NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
+Allows for skipping SoD in EET
 
 ------------------------------------------------------------------------
-2 Sarevok's Equipment (Optional)
+New Bhaal-spawn power
+------------------------------------------------------------------------
+Use the "Sarevok died" movie as a dream sequence and award new bhaal-spawn power at the first rest
+Requires Main Component and BG1EE or EET
+
+------------------------------------------------------------------------
+Sarevok's Equipment
 ------------------------------------------------------------------------
 Give Sarevok his sword so we can better explain its movement between games  
 Add Sarevok's custom armor and helm from Tantalus
 NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be stolen from the Ducal Palace as per SoD, however the PC will be compensated for the loss by Duke Belt  
+Requires Main Component and BG1EE or EET
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
 Option 3: When installed, use how Endless BG1 handles Sarevok's equipment
 
 ------------------------------------------------------------------------
-3 Add Clean Up Quests (Optional)
+Add Clean Up Quests
 ------------------------------------------------------------------------
 Add quests to bring in Sarevok's remaining supporters depending upon who hasn't already been dispatched  
 The Korlasz dungeon quest will be offered whether or not this component is installed.  
-Any and all clean-up quests, including Korlasz's Dungeon crawl, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
+Any and all clean-up quests, including Korlasz's Dungeon crawl if SoD is installed, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
 NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.  
+Requires Main Component and BG1EE or EET
 
 Option 1: Have survivors of the final battle with Sarevok immediately flee the area when Sarevok dies (to give more clean-up quests)  
 Option 2: Behavior of the Sarevok's supporters in the final BGI battle is unchanged  
@@ -66,28 +69,32 @@ Option 3: Option 1 and gentler version of Tamoko's quest
 Option 4: Option 2 and gentler version of Tamoko's quest  
 
 ------------------------------------------------------------------------
-4 Clean up townsfolk chatter with reference to Sarevok (Optional)
+Clean up townsfolk chatter with reference to Sarevok
 ------------------------------------------------------------------------
 An import from Endless BG1 of changes to various townsfolk.  
 Skipped if it's already installed via EBG1  
+Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
-5 Clean up the wounded from the thieves maze (Optional)
+Clean up the wounded from the thieves maze
 ------------------------------------------------------------------------
 Remove Winski and Voleta from the thieves' maze and have Denkod inform the group of their whereabouts  
 If someone in the group wears Sarevok's armor or helm, Denkod will provide some comedic relief  
 NOTE: If you installed the 3rd component, Winski will disappear from the thieves' maze even if you don't install this component  
 This will overwrite EBG1 changes to Denkod if they are installed  
+Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
-6 Have Elminster make an appearance outside the Ducal Palace (Optional)
+Have Elminster make an appearance outside the Ducal Palace
 ------------------------------------------------------------------------
 Adds back unused original dialogue from BG1  
 Skipped if it's already installed via EBG1  
+Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
-7 Duke Eltan's reward - House in front of Palace (Optional)
+Duke Eltan's reward - House in front of Palace
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a (one - no matter how many are installed as options) home the protagonist can call their own.  
 
 Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2 for you to find if you didn't sell it previously.  
@@ -95,47 +102,60 @@ Once a house is selected in-game as the reward, it will be locked, the PC will b
 This component prepares the 2nd house to the left of the Ducal Palace as one of the reward options.  
 
 ------------------------------------------------------------------------
-8 Duke Eltan's reward - Cabin in High Hedge (Optional)
+Duke Eltan's reward - Cabin in High Hedge
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 See note in component #7  
 
 This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed and still using it.  Installing it, however, shouldn't affect those mods.
 
 ------------------------------------------------------------------------
-9 Duke Eltan's reward - House in Beregost (Optional)
+Duke Eltan's reward - House in Beregost
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 See note in component #7  
 
 This component adds the large gray house in the upper west side of Beregost as one of the reward options from Duke Eltan.  
 
 ------------------------------------------------------------------------
-10 Add waves of refugees to Baldur's Gate (Optional)
+Add waves of refugees to Baldur's Gate
 ------------------------------------------------------------------------
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import from EBG1.
 Skipped if it's already installed via EBG1.  
+Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
-11 Allow Imoen's magic training to be delayed (Optional)
+Allow Imoen's magic training to be delayed
 ------------------------------------------------------------------------
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
+Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
-12 Give Imoen the ability to cast Magic Missile (Optional) 
+Give Imoen a special wand of Magic Missiles
 ------------------------------------------------------------------------
-To remain consistent with SoD and BG2, Imoen is given the ability to cast magic missile at the beginning of SoD and BG2.  For SoD, she is given a special wand that will cast multiple magic missiles.  For BG2, she will have an innate ability to cast the spell twice and a potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.  
+In case Imoen hasn't been dualed to a mage, she is given a special wand of magic missiles for her to use in the fight against Caelar's elite forces at the beginning of SoD.  The wand will be able to cast multiple magic missiles.
+Requires SoD or EET
 
 ------------------------------------------------------------------------
-13 Add a little snark (Optional) 
+Give Imoen innate Magic Missile
 ------------------------------------------------------------------------
-Just adds some fun snarky comments to otherwise stuffy or inane dialogue  
+In case Imoen hasn't been dualged to a mage, she is given the innate ability to cast magic missile twice at the beginning of BG2.  A potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.  
+Requires BG2 or EET
 
 ------------------------------------------------------------------------
-14 Use abbreviated capture scene leading to BG2 (Optional) 
+Add a little snark
 ------------------------------------------------------------------------
-Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.  
+Just adds some fun snarky comments to otherwise stuffy or inane dialogue
+Requires SoD, BG2 or EET
 
 ------------------------------------------------------------------------
-15 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
+Use abbreviated capture scene leading to BG2
+------------------------------------------------------------------------
+Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
+Requires Main Component and EET
+
+------------------------------------------------------------------------
+Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
 ------------------------------------------------------------------------
 While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
 

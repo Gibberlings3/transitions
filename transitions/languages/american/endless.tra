@@ -1,5 +1,3 @@
-/* new for v2 */
-//#9774 changed
 @12 = ~That crummy Sarevok was an evil one, yes he was! He murdered Scar, and Entar and tried to kill lots of others! He deserved death, and thanks to <CHARNAME> it came to him quickly!~
 //#9778 changed
 @13 = ~It's so frightening! To think that Sarevok came so close to completing his murderous plans. I am glad <CHARNAME> tracked him down and brought him to justice. Let that be an example to other crazies so they don't try to do what he did.~ 
@@ -11,3 +9,4 @@
 @16 = ~Aren't you <CHARNAME>? It's pleasing to have a hero in the city! On behalf of everyone I know, I'd like to thank you for what you've done. If it weren't for your heroics... Well, I shudder to think how a war with Amn would have turned out. Thank you for catching that villainous Sarevok and putting an end to his trouble-making!~
 //#9855 changed
 @17 = ~It's spreading like wildfire! Everyone's talking about what happened at the palace. From what I've heard, that Sarevok fellow wasn't as noble as he'd like us all to believe. He tried to have the other Dukes killed, so that he could take over the city.~
+

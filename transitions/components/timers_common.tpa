@@ -5,7 +5,7 @@
 DEFINE_ACTION_FUNCTION timers_common BEGIN
 
 	// Area script to set up timers
-	EXTEND_BOTTOM ~BG0125.BCS~ ~%mod_root%/scripts/BG0125_timers.baf~
+	EXTEND_BOTTOM ~%Undercity_TempleofBhaal%.BCS~ ~%mod_root%/scripts/BG0125_timers.baf~
 
 	// Put timer checks in BALDUR.BCS
 	EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/timer_checks.baf~
@@ -56,7 +56,7 @@ DEFINE_ACTION_FUNCTION timers_common BEGIN
 	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/refugees.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 	// Set up BG north to spawn the refugees
-	EXTEND_BOTTOM ~BG0200.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
+	EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200_refugees.baf~
 
 END
 

@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////////////
 
 IF
-	Dead("Sarevok")  // Sarevok
+	Global("#L_BG1SarevokDead","GLOBAL",1)  // Sarevok
 	Global("BroughtEltan","GLOBAL",1)
 	Global("#L_BG1PositionDukes","MYAREA",0)
 	Gender(Player1,FEMALE)

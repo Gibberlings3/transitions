@@ -20,27 +20,20 @@ COPY ~%mod_root%/objects/sarevok/itm/#LSrvHlm.itm~ ~override~
 	SAY IDENTIFIED_DESC @1006
 
 // See if jastey's custom items for Sarevok are installed
-COPY_EXISTING ~BG0125.BCS~ ~override~
-  DECOMPILE_AND_PATCH BEGIN 
-    COUNT_REGEXP_INSTANCES ~Global("C#st_SarevoksItems","MYAREA",0)~ sarevokItemsInstalled
-  END
-BUT_ONLY_IF_IT_CHANGES
-
-ACTION_IF (sarevokItemsInstalled > 0) BEGIN
+ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) BEGIN
    // Remove block where jastey manually drops the items after Sarevok's death
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = BG0125
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~Global("C#st_SarevoksItems","MYAREA",0)~
    END
-   // Remove block where jastey manually drops the items after Sarevok's death
    LAF DELETE_SCRIPT_BLOCK
       INT_VAR
          only_once = 1
       STR_VAR 
-         script = BG0125
+         script = EVAL ~%Undercity_TempleofBhaal%~
          match = ~Global("C#st_SarevoksPlaceSword","MYAREA",0)~
    END
 END

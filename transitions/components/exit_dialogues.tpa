@@ -456,6 +456,12 @@ END
 ~
    END
 
+   ACTION_IF (GAME_IS ~eet~) BEGIN
+      OUTER_SPRINT areatype ~AreaType(BG1AREA)~
+   END ELSE BEGIN
+      OUTER_SPRINT areatype ~~
+   END
+
    <<<<<<<< .../npc_add.baf
    // Post-Korlasz - only the first 7 on the list want to leave after Korlasz
    %pk%
@@ -509,7 +515,7 @@ END
       Global("#L_%npc_name%OkInBG1Areas","GLOBAL",0)
       Global("#L_%npc_name%Modded","GLOBAL",0)
       !InPartyAllowDead(MYSELF)
-      AreaType(BG1AREA)
+      %areatype%
    THEN
       RESPONSE #100
          SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1)
