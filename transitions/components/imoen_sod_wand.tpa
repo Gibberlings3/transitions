@@ -26,5 +26,5 @@ DEFINE_ACTION_FUNCTION imoen_sod_wand BEGIN
 	BUT_ONLY_IF_IT_CHANGES
 
 	// Put in the modified demise of cutspy so it'll drop Imoen's wand
-	EXTEND_TOP ~BD0103.bcs~ ~%mod_root%/scripts/BD0103_drop_wand.baf~
+	EXTEND_TOP ~BD0103.bcs~ ~%mod_root%/scripts/BD0103_drop_wand.baf~ EVAL
 END

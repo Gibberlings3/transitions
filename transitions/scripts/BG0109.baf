@@ -17,17 +17,19 @@ END
 
 IF
 	Global("#L_PCRoomPrepped","MYAREA",0)
-	Global("#L_AcceptedRoom","GLOBAL",1)
+	OR(2)
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_ImoenInPalace","GLOBAL",1)
 THEN
 	RESPONSE #100
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container1","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container2","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container3","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container4","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container5","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container6","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container7","#LBD0103*PlayerChest00")
-    	MoveContainerContents("%NBaldursGate_DucalPalace_L2%*Container8","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container1","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container2","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container3","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container4","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container5","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container6","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container7","#LBD0103*PlayerChest00")
+    	MoveContainerContents("%NBaldursGate_DucalPalace_L3%*Container8","#LBD0103*PlayerChest00")
 		TriggerActivation("Door0110a",FALSE)
 		TriggerActivation("Door0110b",FALSE)
 		TriggerActivation("Door#lbd0103a",TRUE)

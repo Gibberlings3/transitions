@@ -14,7 +14,11 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
    END
 END
 // Modified copy of SoD's version of the third floor
-COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
+ACTION_IF GAME_IS ~eet~ BEGIN
+   COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
+END ELSE BEGIN
+   COPY ~%mod_root%/areas/#LBD0103_BG.ARE~ ~override\#LBD0103.ARE~ 
+END
 
 // Place the servant in the custom SoD version of the third floor
 // This is a common script used in all PC personal quarters
