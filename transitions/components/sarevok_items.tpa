@@ -19,6 +19,16 @@ COPY ~%mod_root%/objects/sarevok/itm/#LSrvHlm.itm~ ~override~
 	SAY UNIDENTIFIED_DESC @1005
 	SAY IDENTIFIED_DESC @1006
 
+ACTION_IF NOT (GAME_IS ~eet~) BEGIN
+   COPY ~%mod_root%/objects/CSW2H16.BAM~ ~override~
+   COPY ~%mod_root%/objects/cdunq260.bam~ ~override~
+   COPY ~%mod_root%/objects/SW2H16.ITM~ ~override~
+      SAY NAME1 @1043 /* ~Sword of Chaos +2~ */
+      SAY NAME2 @1043 /* ~Sword of Chaos +2~ */
+      SAY UNIDENTIFIED_DESC @1044
+      SAY IDENTIFIED_DESC @1044
+END
+
 // See if jastey's custom items for Sarevok are installed
 ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) BEGIN
    // Remove block where jastey manually drops the items after Sarevok's death

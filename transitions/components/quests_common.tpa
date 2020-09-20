@@ -112,7 +112,7 @@ LAF UPDATE_BCS	// default is extend top
 	STR_VAR
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0224~			// like my_new_BG0146
-		bcs_name = EVAL ~%WSewers_BCS%~			// like BG0146
+		bcs_name = EVAL ~%WSewers%~			// like BG0146
 END
 
 // Tazok and Cythandria Quests (for the flaming fist portion)

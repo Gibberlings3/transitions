@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////
 // Travel to where the player wants to be at the start of SoD //
-// Parsed via main_common.tpa called via BG0108.bcs           //
+// Parsed via main_sod.tpa called via BG0108.bcs              //
 ////////////////////////////////////////////////////////////////
 
 IF
@@ -21,15 +21,15 @@ THEN
 		LeaveAreaLUA("#LBD0103","",[215.396],SE)
 
 		// Make sure Imoen is here as well
-		MoveGlobal("#LBD0103","IMOEN2",[960.680])
+		MoveGlobal("#LBD0103","%IMOEN_DV%",[960.680])
 		SmallWait(2)
 
 		// Move all her equipment to her chest
-		ActionOverride("Imoen_equipment",TakeCreatureItems("IMOEN2",ALL))
+		ActionOverride("Imoen_equipment",TakeCreatureItems("%IMOEN_DV%",ALL))
 		SmallWait(2)
 
 		// We can get rid of Imoen now and move her stuff to its final destination
-		ActionOverride("IMOEN2",DestroySelf())
+		ActionOverride("%IMOEN_DV%",DestroySelf())
 		MoveContainerContents("#LBD0103*Imoen_equipment","BD0103*Imoen_equipment")
 
 		Continue()

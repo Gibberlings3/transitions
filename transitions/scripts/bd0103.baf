@@ -11,7 +11,7 @@ THEN
 		FadeToColor([1.0],0) 
 		MultiPlayerSync()
 		StartCutSceneMode()
-		ActionOverride("IMOEN2",DestroySelf())
+		ActionOverride("%IMOEN_DV%",DestroySelf())
 		RemoveMapNote([440.420],267509)
 		RemoveMapNote([105.473],270641)
 		SetGlobal("#L_AddMapNotes","BD0103",1)

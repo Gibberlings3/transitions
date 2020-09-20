@@ -6,7 +6,7 @@
 // Drops a wand of missiles near Imoen when she goes down 
 // to explain how she manage to cast it
 IF
-	StateCheck("IMOEN2",STATE_SLEEPING)
+	StateCheck("%IMOEN_DV%",STATE_SLEEPING)
 	Exists("CUTSPY")
 THEN
 	RESPONSE #100

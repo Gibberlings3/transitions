@@ -13,7 +13,7 @@ APPEND ~SEMAJ~
 		IF ~~ THEN DO ~ActionOverride("Semaj",Enemy())~  EXIT
 	END
 
-	IF ~!AreaCheck("BG0125") !AreaCheck("%BaldursGate_Undercellars%")~ THEN BEGIN Semaj_Default
+	IF ~!AreaCheck("%Undercity_TempleofBhaal%") !AreaCheck("%BaldursGate_Undercellars%")~ THEN BEGIN Semaj_Default
 		SAY @2187 // ~Get away from me.  I have nothing to say to you.~
 		IF ~~ THEN DO ~ActionOverride("Semaj",Enemy())~  EXIT
 	END

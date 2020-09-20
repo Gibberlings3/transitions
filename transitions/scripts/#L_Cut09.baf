@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 // Travel to area outside of Baldur's Gate for pre-BG2 capture scene //
-// Parsed via main_common.tpa                                        //
+// Parsed via main_eet.tpa                                           //
 // Called via solo exit timer in solo_check.baf                      //
 ///////////////////////////////////////////////////////////////////////
 
@@ -69,17 +69,17 @@ THEN
 
 		SmallWait(10)
 
-		MoveGlobal("BD6100","Imoen2",[575.405])  // Imoen
-		ReallyForceSpellDeadRES("bdrejuve","Imoen2")  // No such index
-		ActionOverride("Imoen2",ChangeAIScript("BDIMOEN",OVERRIDE))
-		ActionOverride("Imoen2",ChangeAIScript("",CLASS))
-		ActionOverride("Imoen2",ChangeAIScript("",RACE))
-		ActionOverride("Imoen2",ChangeAIScript("",GENERAL))
-		ActionOverride("Imoen2",ChangeAIScript("",DEFAULT))
-		ActionOverride("Imoen2",SetDialogue("BDIMOEN"))
+		MoveGlobal("BD6100","%IMOEN_DV%",[575.405])  // Imoen
+		ReallyForceSpellDeadRES("bdrejuve","%IMOEN_DV%")  // No such index
+		ActionOverride("%IMOEN_DV%",ChangeAIScript("BDIMOEN",OVERRIDE))
+		ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS))
+		ActionOverride("%IMOEN_DV%",ChangeAIScript("",RACE))
+		ActionOverride("%IMOEN_DV%",ChangeAIScript("",GENERAL))
+		ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT))
+		ActionOverride("%IMOEN_DV%",SetDialogue("BDIMOEN"))
 
-		ChangeEnemyAlly("IMOEN2",NEUTRAL)  // Imoen
-		ChangeSpecifics("IMOEN2",ALLIES)  // Imoen
+		ChangeEnemyAlly("%IMOEN_DV%",NEUTRAL)  // Imoen
+		ChangeSpecifics("%IMOEN_DV%",ALLIES)  // Imoen
 
 		MoveGlobal("bd6100","MINSC",[660.420])  // Minsc
 		ReallyForceSpellDeadRES("bdrejuve","minsc")  // No such index
@@ -136,11 +136,11 @@ END
 
 IF
 	NumInPartyLT(6)
-	!InPartyAllowDead("IMOEN2")
+	!InPartyAllowDead("%IMOEN_DV%")
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ActionOverride("IMOEN2",JoinParty())
+		ActionOverride("%IMOEN_DV%",JoinParty())
 		SmallWait(10)
 		StartCutSceneEx("#L_Cut09",TRUE)
 END
@@ -334,7 +334,7 @@ THEN
 
 		ActionOverride("JAHEIRA",MoveToPoint([825.750]))
 		ActionOverride("KHALID",MoveToPoint([775.750]))
-		ActionOverride("IMOEN2",MoveToPoint([850.700]))
+		ActionOverride("%IMOEN_DV%",MoveToPoint([850.700]))
 		ActionOverride("DYNAHEIR",MoveToPoint([800.700]))
 		ActionOverride("MINSC",MoveToPoint([750.700]))
 		MoveToPoint([800.800])
@@ -342,7 +342,7 @@ THEN
 		MultiPlayerSync()		
 
 		Wait(2)
-		DisplayStringWait("IMOEN2",239786)  // Hey, do you feel a little... off?
+		DisplayStringWait("%IMOEN_DV%",239786)  // Hey, do you feel a little... off?
 
 		Wait(1)
 		DisplayStringWait("DYNAHEIR",239791)  // The mist—it is more than mist. It dulls the senses...

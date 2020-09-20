@@ -7,7 +7,9 @@ APPEND BELT
 	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) !Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1_NO_CEREMONY
 		SAY @2034 /* ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~ */
 		= @2035	/* ~You are truly the Hero of Baldur's Gate.~ */
-		IF ~~ + ROOM_NOT_MENTIONED_YET
+		IF ~Global("#L_SoD","GLOBAL",1)~ + ROOM_NOT_MENTIONED_YET
+		IF ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		IF ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 		IF ~Global("#L_SwordTaken","GLOBAL",1)~ + SWORD_TAKEN1
 	END
 
@@ -28,18 +30,22 @@ APPEND BELT
 	IF ~~ THEN BEGIN SWORD_TAKEN2
 		SAY @2040 /* ~Be that as it may, we would like to reimburse you for the sword and reward you for saving this city.~ */
 		= @2041 /* ~I believe 3000 gold should cover the value of the sword.~ */
-		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
-		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
-		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
-		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
+		+ ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
+		+ ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
+		+ ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
+		+ ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
+		+ ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		+ ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		+ ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		+ ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
-	IF ~Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
+	IF ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
 		SAY @2477 /* ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		IF ~~ THEN GOTO BELT_OFFER_ROOM
 	END
 	
-	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_NOT_MENTIONED_YET
+	IF ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_NOT_MENTIONED_YET
 		SAY @2044 /* ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		IF ~~ THEN GOTO BELT_OFFER_ROOM
 	END
@@ -60,22 +66,22 @@ APPEND BELT
 	IF ~~ THEN BEGIN ROOM_GOOD
 		SAY @2051 /* ~Your suite is on the third floor.  A servant will be there to show you around.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
-		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("DELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1) SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 	END
 
 	IF ~~ THEN BEGIN NO_ROOM
 		SAY @2052 /* ~I'm sorry to hear that.  Please let me know if you change your mind.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("DELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
 	IF ~~ THEN BEGIN ROOM_BAD
 		SAY @2053 /* ~I'm sorry you feel that way.  Please let me know if you change your mind.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("DELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
+	IF ~Global("#L_SoD","GLOBAL",1) GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
 		SAY @2054 /* ~Hello again, <CHARNAME>.  Have you changed your mind?~ */
 		++ @2055 /* ~No, I haven't.  Goodbye.~ */ + NO_CHANGE
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2056 /* ~Yes, I'll take the room.~ */ + ROOM_TAKEN
@@ -91,7 +97,7 @@ APPEND BELT
 		IF ~~ THEN DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 	END
 
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) OR(2) Global("#L_SoD","GLOBAL",0) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
 		IF ~~ THEN EXIT
 	END
@@ -112,7 +118,7 @@ APPEND BELT
 		++ @2138 /* ~I'm not a bounty hunter.  I'm afraid you'll have to hire someone else.  I'll be on my way now.~ */ + BELT_QUESTS_SKIP_ALL
 	END
 
-	IF ~Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_QUESTS_ALL_DONE
+	IF ~Global("L_SoD","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_QUESTS_ALL_DONE
 		SAY @2272 /* ~I've had a special gift made for you.  It will allow for a limited number of wishes.~ */
 		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
 		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("#LAdvGm1",Player1,1,0,0)~ + BELT_NOW_WHAT
@@ -125,7 +131,8 @@ APPEND BELT
 
 	IF ~~ THEN BEGIN BELT_QUESTS_SKIP_ALL
 		SAY @2145 /* ~As you wish.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
+		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
+		IF ~Global("#L_Sod","GLOBAL",0)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_NOW_WHAT
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",50) !IsGabber(Player1)~ THEN BEGIN BELT_QUEST_50a
@@ -192,7 +199,7 @@ APPEND BELT
 		+ ~GlobalLT("#L_SarvQuests","GLOBAL",8) OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ")  OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1) OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ZHALIMAR") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("GARDUSH") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("NAAMAN") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("DIYAB") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("AASIM") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ALAI")~ + @2200 /* ~I'm ready to go now.  What's the job?~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",8)~ + BELT_QUEST_8a
 	END
 
-	IF ~~ THEN BEGIN BELT_NOW_WHAT
+	IF ~Global("L_SoD","GLOBAL",0) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_NOW_WHAT
 		SAY @2264 /* ~So, <CHARNAME>, what are your plans now?~ */
 		++ @2270 /* ~I have places to go, things to do, people to see.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_FUN
 //		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",1) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
@@ -229,7 +236,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR")~ THEN BEGIN BELT_QUEST_1_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(12) Global("#L_Sod","GLOBAL",1) !Dead("Tazok") !Dead("SEMAJ") !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -253,7 +260,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",2) Dead("Tazok")~ THEN BEGIN BELT_QUEST_2_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(11) Global("#L_Sod","GLOBAL",1) !Dead("SEMAJ") !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -284,7 +291,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",3) Dead("SEMAJ")~ THEN BEGIN BELT_QUEST_3_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(10) Global("#L_Sod","GLOBAL",1) !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -315,7 +322,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",4) Dead("winski2")~ THEN BEGIN BELT_QUEST_4_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(9) Global("#L_Sod","GLOBAL",1) !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -346,7 +353,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",5) OR(2) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(8) Global("#L_Sod","GLOBAL",1) !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -386,7 +393,7 @@ APPEND BELT
 
 	IF ~Global("#L_SarvQuests","GLOBAL",6) OR(2) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_6_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
 		IF ~OR(7) Global("#L_Sod","GLOBAL",1) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -396,7 +403,7 @@ APPEND BELT
 	//////////////////////////////////////////////////////////////////////////
 	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BEGIN BELT_QUEST_7_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_ALL_DONE
+		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_NOW_WHAT
 		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -435,8 +442,8 @@ END
 CHAIN
 	IF ~~ THEN BELT BELT_QUESTS_FF_NO_BANTER_MALE
 		@2201 /* ~Excellent!~ */
-		= IF ~!InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		= IF ~!InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
 	END
 	++ @2141 /* ~I doubt that will be necessary.~ */ + BELT_QUESTS_WARNING
 	++ @2140 /* ~Thank you.~ */ EXIT
@@ -444,8 +451,8 @@ CHAIN
 CHAIN
 	IF ~~ THEN BELT BELT_QUESTS_FF_NO_BANTER_FEMALE
 		@2201 /* ~Excellent!~ */
-		= IF ~!InMyArea("DELTAN")~ @2179 /* ~I will make sure there are Flaming Fist to escort her to a cell if she surfaces from the sewers.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2179 /* ~I will make sure there are Flaming Fist to escort her to a cell if she surfaces from the sewers.~ */
+		= IF ~!InMyArea("ELTAN")~ @2179 /* ~I will make sure there are Flaming Fist to escort her to a cell if she surfaces from the sewers.~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2179 /* ~I will make sure there are Flaming Fist to escort her to a cell if she surfaces from the sewers.~ */
 	END
 	++ @2141 /* ~I doubt that will be necessary.~ */ + BELT_QUESTS_WARNING
 	++ @2140 /* ~Thank you.~ */ EXIT
@@ -453,8 +460,8 @@ CHAIN
 CHAIN
 	IF ~~ THEN BELT BELT_QUESTS_FF_NO_BANTER_GROUP
 		@2201 /* ~Excellent!~ */
-		= IF ~!InMyArea("DELTAN")~ @2180 /* ~I will make sure there are Flaming Fist to escort them to a cell if they surface from the sewers.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2180 /* ~I will make sure there are Flaming Fist to escort them to a cell if they surface from the sewers.~ */
+		= IF ~!InMyArea("ELTAN")~ @2180 /* ~I will make sure there are Flaming Fist to escort them to a cell if they surface from the sewers.~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2180 /* ~I will make sure there are Flaming Fist to escort them to a cell if they surface from the sewers.~ */
 	END
 	++ @2141 /* ~I doubt that will be necessary.~ */ + BELT_QUESTS_WARNING
 	++ @2140 /* ~Thank you.~ */ EXIT
@@ -466,10 +473,10 @@ CHAIN
 	IF ~~ THEN BELT BELT_QUEST_1a
 		@2131 /* ~Angelo was spotted heading down into the sewers behind the Flaming Fist Headquarters.~ */
 		= @2132 /* ~We would like to hire you to being him to justice, dead or alive.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2133 /* ~I'd prefer dead.~ */
-		== %SHARTEEL_JOINED% IF ~!InMyArea("DELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2133 /* ~I'd prefer dead.~ */
-		== %SHARTEEL_JOINED% IF ~InMyArea("DELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2193 /* ~Me too!~ */
-		== BELT IF ~OR(2) InMyArea("DELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2134 /* ~Dead or alive!~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2133 /* ~I'd prefer dead.~ */
+		== %SHARTEEL_JOINED% IF ~!InMyArea("ELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2133 /* ~I'd prefer dead.~ */
+		== %SHARTEEL_JOINED% IF ~InMyArea("ELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2193 /* ~Me too!~ */
+		== BELT IF ~OR(2) InMyArea("ELTAN") IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2134 /* ~Dead or alive!~ */
 	END
 	++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ + BELT_QUEST_1b
 	++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUEST_1b
@@ -478,8 +485,8 @@ CHAIN
  CHAIN
 	IF ~~ THEN BELT BELT_QUEST_1b
 		@2201 /* ~Excellent!~ */
-		= IF ~!InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		= IF ~!InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
 		== %SHARTEEL_JOINED% IF ~IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2141 /* ~I doubt that will be necessary.~ */
 		== BELT IF ~IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2142 /* ~Dead or ALIVE!~ */
 	END
@@ -503,8 +510,8 @@ CHAIN
 CHAIN
 	IF ~~ THEN BELT BELT_QUEST_2b
 		@2201 /* ~Excellent!~ */
-		= IF ~!InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
-		== DELTAN IF ~InMyArea("DELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		= IF ~!InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
+		== DELTAN IF ~InMyArea("ELTAN")~ @2139 /* ~I will make sure there are Flaming Fist to escort him to a cell if he surfaces from the sewers.~ */
 		== %KIVAN_JOINED% IF ~IsValidForPartyDialogue("KIVAN")~ THEN @2141 /* ~I doubt that will be necessary.~ */
 		== BELT IF ~IsValidForPartyDialogue("KIVAN")~ THEN @2142 /* ~Dead or ALIVE!~ */
 	END
@@ -555,8 +562,8 @@ CHAIN
 	    = IF ~InMyArea("LIIA")~ @2254 /* ~If you find any documents or research on them, Bhaal especially, please bring them to me.~ */
 		= IF ~InMyArea("LIIA")~ @2255	/* ~I will, of course, reimburse you for them.~ */
 		== BELT @2261 /* ~Ok now.  Hold still.~ */
-		= IF ~!InMyArea("DELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
-		== DELTAN IF ~InMyArea("DELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
+		= IF ~!InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
+		== DELTAN IF ~InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 	END
 	IF ~~ DO ~ClearAllActions() SetGlobal("#L_SentToKorlasz","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ EXIT
 

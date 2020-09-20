@@ -15,7 +15,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ImoenFixed","MYAREA",1)
-		ActionOverride("IMOEN2",SetGlobal("KickedOut","LOCALS",2))
+		ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2))
 		Continue()
 END
 

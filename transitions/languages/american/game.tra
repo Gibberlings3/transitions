@@ -187,3 +187,45 @@ Though you are feted by the rulers of Baldur's Gate, a sense of unease plagues y
 Every day, more refugees driven from their homes by the servants of Caelar Argent arrive at the city gates. Many have stories of the Shining Lady's grace; all have tales of her followers' wrath.
 
 A tenday after you've settled into what would seem a normal life, you enter the Ducal Palace to check up on your friend Imoen, your thoughts troubled. You wonder what effect Caelar's crusade will have on her, you, and Baldur's Gate, little knowing how close at hand the answer is...~
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// NEW FOR VERSION 0.4
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////
+// STRINGS NEEDED TO IMPORT BG2 ITEMS INTO BG1/SOD //
+/////////////////////////////////////////////////////
+@1043	= ~Sword of Chaos +2~
+@1044	= ~Sarevok's Sword of Chaos
+The blade of Sarevok, brother of <CHARNAME>, used in the battle they fought in faraway Baldur's Gate. <CHARNAME> prevailed, destroying Sarevok's plans and rescuing the Sword Coast from the brink of war. The sword itself defies identification, likely forged specifically for Sarevok to best focus the infernal energy he hoped to control. Much of its power died with him.
+
+STATISTICS:
+
+Combat abilities:
+– Each hit drains 1 Hit Point from the target and transfers it to the wielder. This will not heal beyond the wielder's maximum.
+
+THAC0: +2
+Damage: 1d10+2 (slashing)
+Speed Factor: 8
+Proficiency Type: Large Sword
+Type: Two-handed
+Requires:
+ 14 Strength
+
+Weight: 10~
+
+@1045	= ~Cure Serious Wounds~
+@1046	= ~Cure Serious Wounds
+(Necromancy)
+
+Level: 4
+Sphere: Healing 
+Range: Touch 
+Duration: Permanent 
+Casting Time: 7 
+Area of Effect: 1 creature 
+Saving Throw: None 
+
+This spell is a more potent version of the Cure Light Wounds spell. The priest lays <PRO_HISHER> hand upon a creature and heals 17 points of wound or other injury damage to the creature's body. This healing cannot affect noncorporeal, nonliving, or extraplanar creatures.~

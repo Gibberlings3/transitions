@@ -7,7 +7,7 @@ IF
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	Global("EndofBG1","GLOBAL",1)
 	Global("#L_ImoenModded","GLOBAL",0)
-	IsValidForPartyDialogue("IMOEN2")
+	IsValidForPartyDialogue(MYSELF)
 	GlobalLT("#L_StartCaelarAttack","GLOBAL",4)
 	OR(3)
     	!InPartyAllowDead(Player2)

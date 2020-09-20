@@ -13,6 +13,58 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
          match = ~StartCutSceneEx("BDSODTRN",TRUE)~
    END
 END
+// Modified copy of SoD's version of the third floor
+COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
+
+// Place the servant in the custom SoD version of the third floor
+// This is a common script used in all PC personal quarters
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LPCRoom.baf~ EVAL
+
+// New general script file for new palace servant
+// Stops it from wandering around when first spawned
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSrvGen.baf~
+
+// Palace servant on the 3rd floor
+COPY_EXISTING ~servan.cre~ ~override/#LDPSrv1.cre~
+   WRITE_ASCII 0x280 ~#LDPSrv1~ #32 // set DV
+   WRITE_ASCII 0x2cc ~#LDPSrv1~ #8 // set dialogue file
+   WRITE_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+
+// Open the way to the PCs rooms
+LAF UPDATE_BCS
+   STR_VAR
+      baf_location = EVAL ~%mod_root%/scripts/~
+      baf_name = ~bg0109~
+      bcs_name = ~%NBaldursGate_DucalPalace_L2%~
+END
+
+// Add 2 new inactive exit travel triggers leading from the 2nd floor to the new 3rd floor
+// Activate the new ones and deactive the original ones when/if the PC and/or Imoen take up residence
+COPY_EXISTING ~%NBaldursGate_DucalPalace_L2%.ARE~ ~override~
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110a~
+         GW_Name_new = ~Door#lbd0103a~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109a~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110b~
+         GW_Name_new = ~Door#lbd0103b~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109b~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+BUT_ONLY_IF_IT_CHANGES
 
 // New line in campaign.2da so we can use the right post-dialogue files
 APPEND ~CAMPAIGN.2DA~ ~#LSOD1         BDBALDUR       -1             1              BDBANTER       *              MASTAREA       152            -1             *              BDPARTY        BDDIALOG       save           #LSTRTA1       STRTGOLD       *              SODWEAP        BDSTWEAP       *              *              BGMAP          BDBALDUR       1              0xFFFFFFFF     1              *              PARTY          SODINTER       SODYEARS       REPUTATI       SODCLTXT       SODRACE~
@@ -144,7 +196,7 @@ COPY_EXISTING ~BD0120.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("K#NewGame","BD0120",0)~ ~Global("K#NewGame","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("K#StoryMode","BD0120",0)~ ~Global("K#StoryMode","BD0120",0) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~GlobalLT("bd_plot","global",2)~ ~GlobalLT("bd_plot","global",2) !Global("#L_SarvQuests","GLOBAL",8)~
-      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!InMyArea("IMOEN2")~ ~!InMyArea("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!InMyArea("%IMOEN_DV%")~ ~!InMyArea("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_Room1b",Detect([PC]))~ ~TriggerOverride("Imoen_Room1b",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_room1a",Detect([PC]))~ ~TriggerOverride("Imoen_room1a",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
    END
@@ -152,7 +204,7 @@ BUT_ONLY_IF_IT_CHANGES
 
 // Update Imoen's dialogue file and script to initiate pre-sod exit dialogue
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
-EXTEND_TOP ~IMOEN_.BCS~ ~%mod_root%/scripts/imoen.baf~
+EXTEND_TOP ~%IMOEN_BCS%.BCS~ ~%mod_root%/scripts/imoen.baf~
 
 // Use a modified intro scene and other modified blocks that moved Imoen about
 LAF INSERT_SCRIPT_BLOCK
@@ -165,7 +217,7 @@ LAF INSERT_SCRIPT_BLOCK
       match1 = ~StartCutSceneEx("bdintro",TRUE)~
       insert = ~%mod_root%/scripts/bd0120.baf~
 END
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut05.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut05.baf~ EVAL
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Skip.baf~
 
 // Updates to 2nd Korlasz Safehouse area script to sidestep ending quest hand-holding
@@ -226,7 +278,7 @@ APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/solo_check.baf~
 
 // Cut scene that starts SoD
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~ EVAL
 
 // Updated Start SoD scrolling text
 COPY ~%mod_root%/objects/#LSoD01.2DA~ ~override~

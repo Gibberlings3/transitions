@@ -90,10 +90,6 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LffGen.baf~
 // Palace personnel dialogues
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/palace_personnel.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
-// New general script file for new palace servant
-// Stops it from wandering around when first spawned
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSrvGen.baf~
-
 // Palace gate guards
 COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd1.cre~
    WRITE_ASCII 0x280 ~#LDPGrd1~ #32 // set DV
@@ -103,58 +99,9 @@ COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd2.cre~
    WRITE_ASCII 0x280 ~#LDPGrd2~ #32 // set DV
    WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
 
-// Palace servant on the 3rd floor
-COPY_EXISTING ~servan.cre~ ~override/#LDPSrv1.cre~
-   WRITE_ASCII 0x280 ~#LDPSrv1~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LDPSrv1~ #8 // set dialogue file
-   WRITE_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
-
 // Open the palace gates
 // And place friendly guards
 EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200a.baf~
-
-// Place the servant in the custom SoD version of the third floor
-// This is a common script used in all PC personal quarters
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LPCRoom.baf~
-
-// Modified copy of SoD's version of the third floor
-COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
-
-// Open the way to the PCs rooms
-LAF UPDATE_BCS
-   STR_VAR
-      baf_location = EVAL ~%mod_root%/scripts/~
-      baf_name = ~bg0109~
-      bcs_name = ~%NBaldursGate_DucalPalace_L2%~
-END
-
-// Add 2 new inactive exit travel triggers leading from the 2nd floor to the new 3rd floor
-// Activate the new ones and deactive the original ones when/if the PC and/or Imoen take up residence
-COPY_EXISTING ~%NBaldursGate_DucalPalace_L2%.ARE~ ~override~
-   LPF GW_CLONE_TRAVEL_TRIGGER
-      INT_VAR
-         GW_Flags_new = 256 // Deactivated
-      STR_VAR
-         GW_Name_old = ~Door0110a~
-         GW_Name_new = ~Door#lbd0103a~
-         GW_Dest_new = ~#LBD0103~
-         GW_Entre_new = ~ExitBG0109a~
-         GW_Key_new = ~~      // Clear out the key if one exists
-         GW_Script_new = ~~   // Clear out the script if one exists
-   END
-
-   LPF GW_CLONE_TRAVEL_TRIGGER
-      INT_VAR
-         GW_Flags_new = 256 // Deactivated
-      STR_VAR
-         GW_Name_old = ~Door0110b~
-         GW_Name_new = ~Door#lbd0103b~
-         GW_Dest_new = ~#LBD0103~
-         GW_Entre_new = ~ExitBG0109b~
-         GW_Key_new = ~~      // Clear out the key if one exists
-         GW_Script_new = ~~   // Clear out the script if one exists
-   END
-BUT_ONLY_IF_IT_CHANGES
 
 // Update Duke Belt's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/dialogues.tra~

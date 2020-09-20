@@ -19,7 +19,7 @@ APPEND ~GALDOR~
 		IF ~~ THEN DO ~ActionOverride("GALDOR",Enemy())~  EXIT
 	END
 	
-	IF ~!AreaCheck("BG0125") !AreaCheck("%WSewers%")~ THEN BEGIN Angelo_Default
+	IF ~!AreaCheck("%Undercity_TempleofBhaal%") !AreaCheck("%WSewers%")~ THEN BEGIN Angelo_Default
 		SAY @2187 // ~Get away from me.  I have nothing to say to you.~
 		IF ~~ THEN EXIT
 	END

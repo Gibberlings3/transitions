@@ -468,7 +468,7 @@ END
 
    // Pre-SoD - everyone leaves
    IF
-      !InPartyAllowDead("IMOEN2")
+      !InPartyAllowDead("%IMOEN_DV%")
       OR(3)
          Global("#L_StartCaelarAttack","GLOBAL",1)
          Global("#L_StartCaelarAttack","GLOBAL",2)

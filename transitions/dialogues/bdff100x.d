@@ -3,7 +3,7 @@
 // Compiled via main_sod.tpa                                    //
 //////////////////////////////////////////////////////////////////
 
-REPLACE_TRIGGER_TEXT BDFF1000 ~Dead("IMOEN2")~ ~Dead("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+REPLACE_TRIGGER_TEXT BDFF1000 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
 REPLACE_TRIGGER_TEXT BDFF1000 ~True()~ ~OR(3) !Global("#L_SarvQuests","GLOBAL",8) !AreaCheck("BD0130") !Global("BD_Korlasz_Fight","BD0130",2)~
 ALTER_TRANS BDFF1000 
 	BEGIN 0 END 
@@ -33,7 +33,7 @@ APPEND BDFF1000
 	END
 END
 
-REPLACE_TRIGGER_TEXT BDFF1001 ~Dead("IMOEN2")~ ~Dead("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+REPLACE_TRIGGER_TEXT BDFF1001 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
 ALTER_TRANS BDFF1001 
 	BEGIN 0 END 
 	BEGIN 0 END 
@@ -62,7 +62,7 @@ APPEND BDFF1001
 	END
 END
 
-REPLACE_TRIGGER_TEXT BDFF1002 ~Dead("IMOEN2")~ ~Dead("IMOEN2") !Global("#L_SarvQuests","GLOBAL",8)~
+REPLACE_TRIGGER_TEXT BDFF1002 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
 ALTER_TRANS BDFF1002 
 	BEGIN 0 END 
 	BEGIN 0 END 

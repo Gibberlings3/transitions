@@ -31,7 +31,7 @@ IF
 	Exists("LIIA")
 THEN
 	RESPONSE #100
-		ApplySpellRES("bddispel","LIIA")  // No such index
+		ApplySpellRES("bpdispel","LIIA")  // No such index
 		SmallWait(1)
 		ActionOverride("LIIA",JumpToPoint([680.356]))
 		ActionOverride("LIIA",Face(S))
@@ -77,17 +77,28 @@ END
 
 IF
 	Global("#L_TalkedToDukes","GLOBAL",2)
-	IsValidForPartyDialogue("IMOEN2")
-	Global("#L_ImTrainRsp","MYAREA",0)
+	!Global("#L_SoD","GLOBAL",1)
 THEN
 	RESPONSE #100
-		ActionOverride("LIIA",StartDialogueNoSet("IMOEN2"))
+		SetGlobal("#L_TalkedToDukes","GLOBAL",3)
+		Continue()
 END
 
 IF
 	Global("#L_TalkedToDukes","GLOBAL",2)
-	!IsValidForPartyDialogue("IMOEN2")
+	IsValidForPartyDialogue("%IMOEN_DV%")
+	Global("#L_ImTrainRsp","MYAREA",0)
+	Global("#L_SoD","GLOBAL",1)
+THEN
+	RESPONSE #100
+		ActionOverride("LIIA",StartDialogueNoSet("%IMOEN_DV%"))
+END
+
+IF
+	Global("#L_TalkedToDukes","GLOBAL",2)
+	!IsValidForPartyDialogue("%IMOEN_DV%")
 	Global("#L_LiiaTalkedToPC","MYAREA",0)
+	Global("#L_SoD","GLOBAL",1)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_LiiaTalkedToPC","MYAREA",1)

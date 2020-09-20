@@ -2,7 +2,7 @@
 // Moves everything from original 3rd floor to PC's chest on new 3rd floor //
 // Opens the way to the PC's suite - modified version of BD0103            //
 // Moves Imoen into her room if she's in training                          //
-// Parsed via main_common.tpa                                              //
+// Parsed via main_sod.tpa                                                 //
 /////////////////////////////////////////////////////////////////////////////
 
 IF
@@ -11,7 +11,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ImoenInRoom","MYAREA",1)
-		MoveGlobal("#LBD0103","IMOEN2",[960.680])
+		MoveGlobal("#LBD0103","%IMOEN_DV%",[960.680])
 		Continue()
 END
 

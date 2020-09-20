@@ -12,7 +12,7 @@ The Transitions mod's main purpose is to provide seemless transitions between ca
 
 Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
-After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
+After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace (requires SoD), thanks to Duke Belt.  If the protagonist rescued Duke Eltan and EET is loaded, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
@@ -30,8 +30,8 @@ Main Component - required for most, but not all, content
 Prevents the end of game transition to SoD after Sarevok's death  
 Prevents the end of game transition to ToB after Irenicus's death  
 Allows access to Duke Belt in the Ducal Palace for game advancement  
-To remain consistent with SoD, the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
-Also to remain consistent with SoD, Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
+To remain consistent with SoD, when SoD is present the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
+Also to remain consistent with SoD, when SoD is present Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
 If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
 Allows for skipping SoD in EET
@@ -94,7 +94,7 @@ Requires Main Component and BG1EE or EET
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in front of Palace
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and EET
 NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a (one - no matter how many are installed as options) home the protagonist can call their own.  
 
 Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2 for you to find if you didn't sell it previously.  
@@ -104,7 +104,7 @@ This component prepares the 2nd house to the left of the Ducal Palace as one of 
 ------------------------------------------------------------------------
 Duke Eltan's reward - Cabin in High Hedge
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and EET
 See note in component #7  
 
 This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed and still using it.  Installing it, however, shouldn't affect those mods.
@@ -112,7 +112,7 @@ This component adds the cabin in High Hedge as one of the reward options from Du
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in Beregost
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and EET
 See note in component #7  
 
 This component adds the large gray house in the upper west side of Beregost as one of the reward options from Duke Eltan.  
@@ -128,7 +128,7 @@ Requires Main Component and BG1EE or EET
 Allow Imoen's magic training to be delayed
 ------------------------------------------------------------------------
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
-Requires Main Component and BG1EE or EET
+Requires Main Component and EET
 
 ------------------------------------------------------------------------
 Give Imoen a special wand of Magic Missiles

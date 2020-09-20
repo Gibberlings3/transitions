@@ -4,6 +4,13 @@
 //////////////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION bg1_dream BEGIN
+	ACTION_IF NOT GAME_IS ~eet~ BEGIN
+		COPY ~%mod_root%/objects/SPPR401C.BAM~ ~override~
+		COPY ~%mod_root%/objects/SPIN200.SPL~ ~override~
+		COPY ~%mod_root%/objects/SPPR414C.BAM~ ~override~
+		COPY ~%mod_root%/objects/SPIN202.SPL~ ~override~
+	END
+
    // New dream and bhaal-spawn power
    EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
 
