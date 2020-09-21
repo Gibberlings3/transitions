@@ -58,7 +58,6 @@ IF
   GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
   Global("#L_SarvQuests","GLOBAL",100)
   Global("#L_StartBG2","GLOBAL",1)
-  Global("EndOfBG1","GLOBAL",2)
   Global("#L_WaitForMe","GLOBAL",0)
 THEN
   RESPONSE #100

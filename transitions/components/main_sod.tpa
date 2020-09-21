@@ -278,8 +278,8 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/di
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
-// Timer put on the PC so it'll transition to SoD or BG2 when solo
-EXTEND_TOP ~DPLAYER3.BCS~ ~%mod_root%/scripts/solo_check.baf~
+// Timer put in BALDUR so it'll transition to SoD or BG2 when solo no matter if AI is on or not
+EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/solo_check.baf~
 
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~ EVAL
