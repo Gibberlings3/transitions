@@ -21,7 +21,7 @@ APPEND LIIA
 
 	IF WEIGHT #-997 ~Global("#L_SoD","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",2) InPartyAllowDead("%IMOEN_DV%") !IsValidForPartyDialogue("%IMOEN_DV%") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_3
 		SAY @2117 /* ~One moment <CHARNAME>, I need to speak with Imoen.~ */
-		IF ~~ DO ~ApplySpellRES("%IMOEN_DV%","bdresurr") ApplySpellRES("%IMOEN_DV%","bddispel") ApplySpellRES("%IMOEN_DV%","sppr713")~ EXIT
+		IF ~~ DO ~ApplySpellRES("%IMOEN_DV%","%SPL_RESURRECT%") ApplySpellRES("%IMOEN_DV%","%SPL_DISPEL%") ApplySpellRES("%IMOEN_DV%","%SPL_CLEANAIR%")~ EXIT
 	END
 
 	IF WEIGHT #-996 ~Global("#L_SoD","GLOBAL",1) !Global("#L_ImoenInPalace","GLOBAL",1) IsGabber("%IMOEN_DV%")~ THEN BEGIN LIIA_99a

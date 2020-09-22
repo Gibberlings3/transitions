@@ -36,7 +36,7 @@ BEGIN ~#LFFEsc1~
 
 	IF ~~ THEN HEAL_IMOEN
 		SAY @2117 /* ~One moment <CHARNAME>, I need to speak with Imoen.~ */
-		IF ~~ DO ~ApplySpellRES("%IMOEN_DV%","bdresurr") ApplySpellRES("%IMOEN_DV%","bddispel") ApplySpellRES("%IMOEN_DV%","sppr713")~ + IMOEN_OFFER_TRAINING
+		IF ~~ DO ~ApplySpellRES("%IMOEN_DV%","%SPL_RESURRECT%") ApplySpellRES("%IMOEN_DV%","%SPL_DISPEL%") ApplySpellRES("%IMOEN_DV%","%SPL_CLEANAIR%")~ + IMOEN_OFFER_TRAINING
 	END
 
 	IF ~~ THEN IMOEN_OFFER_TRAINING

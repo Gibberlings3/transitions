@@ -24,7 +24,7 @@ ALWAYS
          INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
       END
       INCLUDE ~%mod_root%/lib/g3_bgee_cpmvars.tpa~
-      INCLUDE ~%mod_root%/lib/#l_eet_cmpvars.tpa~
+      INCLUDE ~%mod_root%/lib/#l_cmpvars.tpa~
 
       // Library functions used throughout
       INCLUDE ~%mod_root%/lib/alter_script.tpa~
