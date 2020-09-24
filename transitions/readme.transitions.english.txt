@@ -34,7 +34,7 @@ To remain consistent with SoD, when SoD is present the protagonist is offered th
 Also to remain consistent with SoD, when SoD is present Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
 If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
-Allows for skipping SoD in EET
+Allows for skipping all or the remainder of SoD in EET
 
 ------------------------------------------------------------------------
 New Bhaal-spawn power
@@ -128,7 +128,7 @@ Requires Main Component and BG1EE or EET
 Allow Imoen's magic training to be delayed
 ------------------------------------------------------------------------
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
-Requires Main Component and EET
+Requires Main Component an BG1EE or EET
 
 ------------------------------------------------------------------------
 Give Imoen a special wand of Magic Missiles
@@ -199,7 +199,7 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a "continue the adventure" ending with Bhaalspawn powers intact
 
 ------------------------------------------------------------------------
-COMPATABIITY NOTES
+COMPATIBILITY NOTES
 ------------------------------------------------------------------------
 There are no known compatability issues at this time
 
