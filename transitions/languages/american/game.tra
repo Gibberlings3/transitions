@@ -130,20 +130,29 @@ The Flaming Fist is making it impossible to leave the city. There are guards at 
 
 With the help of my allies, we've stolen Sarevok's sword from the Ducal Palace. I wish I could keep it myself, but its sale will fund the safe escape of me and the others. Must be careful in how we store the blade for its trip to Waukeen's Promenade in Athkatla. Apparently, it's no good if the blood's wiped off.~
 
-// Info region near where group exits from Korlasz family crypt
+//////////////////////////////////////////////////////////////////
+// INFO REGION NEAR WHERE GROUP EXITS FROM KORLASZ FAMILY CRYPT //
+//////////////////////////////////////////////////////////////////
 @1028	= ~Sealed exit from the Korlasz family crypt~
 
-// Refugees
+//////////////
+// REFUGEES //
+//////////////
 @1029	= ~Refugee~
 @1030	= ~Refugees from the Far North
 
 Refugees are arriving in Baldur's Gate, telling about some brutal movement far up north in High Moor, burning down farms and villages.~
 
-// Item that is given by belt (3 versions - usable, broken, drained)
+/////////////////////////////////////
+// GAME ADVANCE ITEM GIVEN BY BELT //
+/////////////////////////////////////
 @1031	= ~Duke Belt's Gift to <CHARNAME>~
 @1032	= ~This item is able to grant you a limited number of specific wishes.~
 @1033	= ~Use the item~
 
+/////////////////////////////////
+// POTION MOVED TO ANOTHER MOD //
+/////////////////////////////////
 // Potion found in Chateau Irenicus so Imoen can refresh her magic missile before exiting
 @1034	= ~Potion of Revitalization~
 @1035	= ~This inviting potion removes fatigue of the body and the mind.
