@@ -273,13 +273,18 @@ INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 
 
-/////////////////////////////////////////////////////
-// LIIA ALLOWS IMOEN TO POSTPONE TRAINING IN MAGIC //
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// LIIA ALLOWS IMOEN TO POSTPONE TRAINING IN MAGIC   //
+// In order to put this with BG1 where it belongs    //
+// There will need to be a BG1 compatible version    //
+// of the custom room on the 3rd floor of the palace //
+// to send Imoen to when in training                 //
+// I'll do this for another version                  //
+///////////////////////////////////////////////////////
 BEGIN @11   // MOD 90
 DESIGNATED 90
 LABEL "#L-TRANSITIONS-LIIA"
-REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE ((GAME_IS ~eet~) OR (GAME_INCLUDES ~sod~)) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/liia.tpa~
 LAF liia END

@@ -127,8 +127,8 @@ Requires Main Component and BG1EE or EET
 ------------------------------------------------------------------------
 Allow Imoen's magic training to be delayed
 ------------------------------------------------------------------------
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
-Requires Main Component an BG1EE or EET
+This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed when SoD is installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
+Requires Main Component and SoD or EET
 
 ------------------------------------------------------------------------
 Give Imoen a special wand of Magic Missiles
