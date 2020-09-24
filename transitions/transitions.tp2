@@ -19,11 +19,7 @@ ALWAYS
       INCLUDE ~%mod_root%/lib/run_once.tpa~
       LAF DO_RUN_ONCE END
 
-      // Variables used to point to files
-      ACTION_IF (GAME_IS ~eet~) BEGIN
-         INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
-      END
-      INCLUDE ~%mod_root%/lib/g3_bgee_cpmvars.tpa~
+      // Variables used throughout
       INCLUDE ~%mod_root%/lib/#l_cmpvars.tpa~
 
       // Library functions used throughout
@@ -289,28 +285,7 @@ REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/liia.tpa~
 LAF liia END
 
-
-///////////////////////////////////////////////
-// IMOEN GIVEN SPECIAL WAND OF MAGIC MISSILE //
-///////////////////////////////////////////////
-BEGIN @30   // MOD 100
-DESIGNATED 100
-LABEL "#L-TRANSITIONS-IMOEN_SOD_WAND"
-REQUIRE_PREDICATE (GAME_INCLUDES ~sod~) @32
-INCLUDE ~transitions/components/imoen_sod_wand.tpa~
-LAF imoen_sod_wand END
-
-
-///////////////////////////////////////
-// IMOEN GIVEN MAGIC MISSILE ABILITY //
-///////////////////////////////////////
-BEGIN @21   // MOD 100
-DESIGNATED 110
-LABEL "#L-TRANSITIONS-IMOEN_BG2_MM"
-REQUIRE_PREDICATE (GAME_IS ~bg2ee eet~) @31
-INCLUDE ~transitions/components/imoen_bg2_mm.tpa~
-LAF imoen_bg2_mm END
-
+// MOVED IMOEN'S MAGIC FOR SOD AND BG2EE TO ANOTHER MOD
 
 ///////////////////////////////////////////
 // ADD SOME SNARK TO STUFFY SOD DIALOGUE //
