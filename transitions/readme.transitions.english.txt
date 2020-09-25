@@ -39,16 +39,16 @@ Allows for skipping all or the remainder of SoD in EET
 ------------------------------------------------------------------------
 New Bhaal-spawn power
 ------------------------------------------------------------------------
-Use the "Sarevok died" movie as a dream sequence and award new bhaal-spawn power at the first rest
 Requires Main Component and BG1EE or EET
+Use the "Sarevok died" movie as a dream sequence and award new bhaal-spawn power at the first rest
 
 ------------------------------------------------------------------------
 Sarevok's Equipment
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 Give Sarevok his sword so we can better explain its movement between games  
 Add Sarevok's custom armor and helm from Tantalus
 NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be stolen from the Ducal Palace as per SoD, however the PC will be compensated for the loss by Duke Belt  
-Requires Main Component and BG1EE or EET
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
@@ -57,11 +57,11 @@ Option 3: When installed, use how Endless BG1 handles Sarevok's equipment
 ------------------------------------------------------------------------
 Add Clean Up Quests
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 Add quests to bring in Sarevok's remaining supporters depending upon who hasn't already been dispatched  
 The Korlasz dungeon quest will be offered whether or not this component is installed.  
 Any and all clean-up quests, including Korlasz's Dungeon crawl if SoD is installed, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
 NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.  
-Requires Main Component and BG1EE or EET
 
 Option 1: Have survivors of the final battle with Sarevok immediately flee the area when Sarevok dies (to give more clean-up quests)  
 Option 2: Behavior of the Sarevok's supporters in the final BGI battle is unchanged  
@@ -71,25 +71,25 @@ Option 4: Option 2 and gentler version of Tamoko's quest
 ------------------------------------------------------------------------
 Clean up townsfolk chatter with reference to Sarevok
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 An import from Endless BG1 of changes to various townsfolk.  
 Skipped if it's already installed via EBG1  
-Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
 Clean up the wounded from the thieves maze
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 Remove Winski and Voleta from the thieves' maze and have Denkod inform the group of their whereabouts  
 If someone in the group wears Sarevok's armor or helm, Denkod will provide some comedic relief  
 NOTE: If you installed the 3rd component, Winski will disappear from the thieves' maze even if you don't install this component  
 This will overwrite EBG1 changes to Denkod if they are installed  
-Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
 Have Elminster make an appearance outside the Ducal Palace
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 Adds back unused original dialogue from BG1  
 Skipped if it's already installed via EBG1  
-Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in front of Palace
@@ -120,37 +120,38 @@ This component adds the large gray house in the upper west side of Beregost as o
 ------------------------------------------------------------------------
 Add waves of refugees to Baldur's Gate
 ------------------------------------------------------------------------
+Requires Main Component and BG1EE or EET
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import from EBG1.
 Skipped if it's already installed via EBG1.  
-Requires Main Component and BG1EE or EET
 
 ------------------------------------------------------------------------
 Allow Imoen's magic training to be delayed
 ------------------------------------------------------------------------
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed when SoD is installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
 Requires Main Component and SoD or EET
+This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed when SoD is installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
 
 ------------------------------------------------------------------------
 Add a little snark
 ------------------------------------------------------------------------
-Just adds some fun snarky comments to otherwise stuffy or inane dialogue
 Requires SoD, BG2 or EET
+Just adds some fun snarky comments to otherwise stuffy or inane dialogue
 
 ------------------------------------------------------------------------
 Use abbreviated capture scene leading to BG2
 ------------------------------------------------------------------------
-Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
 Requires Main Component and EET
+Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
 
 ------------------------------------------------------------------------
 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
 ------------------------------------------------------------------------
-While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
 Requires BG2EE or EET
+While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
 
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
+* Add a custom 3rd floor area that is compatibile with BG1 so the Liia component can be added there 
 * Conversation with genie in Chateau Irenicus about the end of SoD to get the PC up on current events
 * Close any open quests that will be impossible to continue after Sarevok is dead
 * Clean-up quests should use the quest journal
