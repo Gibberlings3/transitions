@@ -131,18 +131,6 @@ This component allows you to control when Imoen leaves your group to train in ma
 Requires Main Component and SoD or EET
 
 ------------------------------------------------------------------------
-Give Imoen a special wand of Magic Missiles
-------------------------------------------------------------------------
-In case Imoen hasn't been dualed to a mage, she is given a special wand of magic missiles for her to use in the fight against Caelar's elite forces at the beginning of SoD.  The wand will be able to cast multiple magic missiles.
-Requires SoD or EET
-
-------------------------------------------------------------------------
-Give Imoen innate Magic Missile
-------------------------------------------------------------------------
-In case Imoen hasn't been dualged to a mage, she is given the innate ability to cast magic missile twice at the beginning of BG2.  A potion will be provided in Chateau Irenicus for her to use to make sure she is capable of casting it when they arrive at the promenade.  
-Requires BG2 or EET
-
-------------------------------------------------------------------------
 Add a little snark
 ------------------------------------------------------------------------
 Just adds some fun snarky comments to otherwise stuffy or inane dialogue
@@ -163,6 +151,7 @@ Requires BG2EE or EET
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
+* Conversation with genie in Chateau Irenicus about the end of SoD to get the PC up on current events
 * Close any open quests that will be impossible to continue after Sarevok is dead
 * Clean-up quests should use the quest journal
 * Updated bhaal-spawn powers (mind shield and charm creature)
@@ -180,20 +169,10 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Remove references to PC being a bhaalspawn from NPCs that shouldn't know about it
-* Add option to ditch tour-guide Corwin
-* Add 'Scout the Coastway Bridge' quest
-* Add reactions and possible options when the annotated book 'A Historical Treatise of Dragonspear Castle' is found
-* Distribute group's possessions from the end of SoD to stores in Athkatla 
-* Add soul dagger to Chateau Irenicus if Cost of One Girl's Soul isn't loaded
-* Make sure there are consequences to returning to city of BG before name is cleared
-* Add bounty hunter attacks until name cleared in Baldur's Gate
-* Add quick Fed Ex quest to hand in soul dagger and stop attacks from bounty hunters and clear name
-* Add comments about wanted posters to heads of temples, order of radiant heart and shadow thieves as well as some SoD NPCs such as Dorn
+* Distribute group's possessions from the end of SoD to stores in Athkatla (different mod?)
 * Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
-* Allow for actual transition to dual-class mage from single classed Imoen during her training with Duke Liia
 * Add a romance with Queen Ellesime
 * Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
 * Add a "continue the adventure" ending with Bhaalspawn powers intact
@@ -256,7 +235,6 @@ CREDITS
 	- modified version of refugees 
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 * Bubb again for showing me how to fix TriggerOverride. Thank you thank you thank you!!!
-* igi: for persmission to modify his Refreshment potion from iiItemMod for Imoen to use after Chateau Irenicus
 * Thank you beta testers and proofreaders!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
@@ -297,5 +275,4 @@ The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under
 
 Endless BG1 components are used with the permission of the mod's author, jastey.
 
-The Refreshment Potion BAM file from the iiItem mod is used for the Revitalization Potion with the permission of the mod's author, igi. 
 
