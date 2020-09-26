@@ -5,42 +5,41 @@
 ///////////////////////////////////////////////
 
 IF
-	Global("#L_ItemsStashed","GLOBAL",0)
+	Global("#L_KeyStashed","MYAREA",0)
 	PartyHasItem("#LKey01")
 THEN
 	RESPONSE #100
-		CutSceneID(Player1)
-		StartCutSceneMode()
+		SetGlobal("#L_KeyStashed","MYAREA",1)
 		ActionOverride("Picture1",TakePartyItem("#LKey01"))
 		Continue()
 END
 
 IF
-	Global("#L_ItemsStashed","GLOBAL",0)
+	Global("#L_KeyStashed","MYAREA",0)
 	PartyHasItem("#LKey02")
 THEN
 	RESPONSE #100
-		CutSceneID(Player1)
+		SetGlobal("#L_KeyStashed","MYAREA",1)
 		ActionOverride("Picture1",TakePartyItem("#LKey02"))
 		Continue()
 END
 
 IF
-	Global("#L_ItemsStashed","GLOBAL",0)
+	Global("#L_KeyStashed","MYAREA",0)
 	PartyHasItem("#LKey03")
 THEN
 	RESPONSE #100
-		CutSceneID(Player1)
+		SetGlobal("#L_KeyStashed","MYAREA",1)
 		ActionOverride("Picture1",TakePartyItem("#LKey03"))
 		Continue()
 END
 
 IF
-	Global("#L_ItemsStashed","GLOBAL",0)
+	Global("#L_BeltGiftStashed","MYAREA",0)
 	PartyHasItem("#LMSC01")	
 THEN
 	RESPONSE #100
-		CutSceneID(Player1)
+		SetGlobal("#L_BeltGiftStashed","MYAREA",1)
 		ActionOverride("Table2",TakePartyItem("#LMSC01"))
 		Continue()
 END
