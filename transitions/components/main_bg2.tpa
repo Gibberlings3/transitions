@@ -37,14 +37,6 @@ COPY_EXISTING ~RIBALD.sto~ ~override~   // Ribald's Adventurer Mart
    ADD_STORE_ITEM ~#LKEYR06~ AFTER ~BAG02~ #0 #0 #0 ~IDENTIFIED~ #1
 BUT_ONLY_IF_IT_CHANGES
 
-// A wanted poster if the PC wasn't allowed to leave Baldur's Gate by the Dukes
-// A few of them will eventually be dispersed around Athkatla
-// First will be for PC to find in Chateau Irenicus
-// Future version: Will give some to folks in BG1 areas as well if the PC shows up there
-COPY ~%mod_root%/objects/#LScr01.itm~ ~override~
-    SAY NAME2 @1038 // ~Warrant for <CHARNAME>'s Arrest~
-    SAY DESC  @1039
-
 // Broken gift from Duke Belt
 COPY ~%mod_root%/objects/#LMsc01.itm~ ~override~
     SAY NAME2 @1040 // ~Broken Gift from Duke Belt~
