@@ -3,7 +3,6 @@
 // Compiled via main_common.tpa                     //
 //////////////////////////////////////////////////////
 
-
 IF
   OR(3)
     Global("#L_StartCaelarAttack","GLOBAL",1)

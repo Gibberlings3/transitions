@@ -69,7 +69,7 @@ THEN
 
 		SmallWait(10)
 
-		MoveGlobal("BD6100","%IMOEN_DV%",[575.405])  // Imoen
+		MoveGlobal("BD6100","%IMOEN_DV%",[515.320])  // Imoen
 		ReallyForceSpellDeadRES("bdrejuve","%IMOEN_DV%")  // No such index
 		ActionOverride("%IMOEN_DV%",ChangeAIScript("BDIMOEN",OVERRIDE))
 		ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS))
@@ -81,7 +81,7 @@ THEN
 		ChangeEnemyAlly("%IMOEN_DV%",NEUTRAL)  // Imoen
 		ChangeSpecifics("%IMOEN_DV%",ALLIES)  // Imoen
 
-		MoveGlobal("bd6100","MINSC",[660.420])  // Minsc
+		MoveGlobal("bd6100","MINSC",[545.260])  // Minsc
 		ReallyForceSpellDeadRES("bdrejuve","minsc")  // No such index
 		ActionOverride("minsc",ChangeAIScript("bdminsc",OVERRIDE))
 		ActionOverride("minsc",ChangeAIScript("",CLASS))
@@ -93,7 +93,7 @@ THEN
 		ChangeEnemyAlly("MINSC",NEUTRAL)  // Imoen
 		ChangeSpecifics("MINSC",ALLIES)  // Imoen
 
-		MoveGlobal("bd6100","DYNAHEIR",[655.495])  // Dynaheir
+		MoveGlobal("bd6100","DYNAHEIR",[485.280])  // Dynaheir
 		ReallyForceSpellRES("bdrejuve","dynaheir")  // No such index
 		ActionOverride("dynaheir",ChangeAIScript("bddynahe",OVERRIDE))
 		ActionOverride("dynaheir",ChangeAIScript("",CLASS))
@@ -105,7 +105,7 @@ THEN
 		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)  // Imoen
 		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
 
-		MoveGlobal("bd6100","KHALID",[545.430])  // Khalid
+		MoveGlobal("bd6100","KHALID",[515.210])  // Khalid
 		ReallyForceSpellDeadRES("bdrejuve","khalid")  // No such index
 		ActionOverride("khalid",ChangeAIScript("bdkhalid",OVERRIDE))
 		ActionOverride("khalid",ChangeAIScript("",CLASS))
@@ -117,7 +117,7 @@ THEN
 		ChangeEnemyAlly("KHALID",NEUTRAL)  // Imoen
 		ChangeSpecifics("KHALID",ALLIES)  // Imoen
 
-		MoveGlobal("bd6100","JAHEIRA",[470.405])  // Jaheira
+		MoveGlobal("bd6100","JAHEIRA",[450.250])  // Jaheira
 		ReallyForceSpellDeadRES("bdrejuve","jaheira")  // No such index
 		ActionOverride("jaheira",ChangeAIScript("bdjaheir",OVERRIDE))
 		ActionOverride("jaheira",ChangeAIScript("",CLASS))
@@ -241,7 +241,7 @@ THEN
 		CutSceneId(Player1)
 
 		// Poof the group to outside of Baldur's gate as in end of SoD
-		LeaveAreaLUA("BD6100","",[674.393],SE)
+		LeaveAreaLUA("BD6100","",[600.330],SE)
 		MultiPlayerSync()		
 		Wait(1)
 
@@ -272,7 +272,7 @@ THEN
 
 		Wait(2)
 
-		MoveViewPoint([800.800],BD_WALK)
+		MoveViewPoint([890.815],BD_WALK)
 		Continue()
 END
 
@@ -282,7 +282,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ActionOverride(Player2,MoveToPoint([850.800])
+		ActionOverride(Player2,MoveToPoint([890.805])
 		Continue()
 END
 
@@ -292,7 +292,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ActionOverride(Player3,MoveToPoint([750.800])
+		ActionOverride(Player3,MoveToPoint([990.805])
 		Continue()
 END
 
@@ -302,7 +302,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ActionOverride(Player4,MoveToPoint([900.800])
+		ActionOverride(Player4,MoveToPoint([840.805])
 		Continue()
 END
 
@@ -312,7 +312,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ActionOverride(Player5,MoveToPoint([700.800])
+		ActionOverride(Player5,MoveToPoint([940.805])
 		Continue()
 END
 
@@ -332,12 +332,15 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 
-		ActionOverride("JAHEIRA",MoveToPoint([825.750]))
-		ActionOverride("KHALID",MoveToPoint([775.750]))
-		ActionOverride("%IMOEN_DV%",MoveToPoint([850.700]))
-		ActionOverride("DYNAHEIR",MoveToPoint([800.700]))
-		ActionOverride("MINSC",MoveToPoint([750.700]))
-		MoveToPoint([800.800])
+		ActionOverride("%IMOEN_DV%",MoveToPoint([835.835]))
+		ActionOverride("JAHEIRA",MoveToPoint([895.770]))
+		ActionOverride("KHALID",MoveToPoint([805.795]))
+//		ActionOverride("DYNAHEIR",MoveToPoint([840.740]))
+		ActionOverride("DYNAHEIR",MoveToPoint([940.805]))
+		ActionOverride("MINSC",MoveToPoint([780.765]))
+		FadeFromColor([30.0],0)
+//		MoveToPoint([940.805])
+		MoveToPoint([840.740])
 
 		MultiPlayerSync()		
 
@@ -363,7 +366,34 @@ THEN
 		ApplySpellRES("bdsleep",Player5)
 		ApplySpellRES("bdsleep",Player6)
 
-		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
+		SetSequence(SEQ_SLEEP)
+		ActionOverride(Player2,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player3,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player4,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player5,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player6,SetSequence(SEQ_SLEEP))
+		ApplySpellRES("K#REST",Player1)  // No such index
+		ApplySpellRES("K#REST",Player2)  // No such index
+		ApplySpellRES("K#REST",Player3)  // No such index
+		ApplySpellRES("K#REST",Player4)  // No such index
+		ApplySpellRES("K#REST",Player5)  // No such index
+		ApplySpellRES("K#REST",Player6)  // No such index
+		Wait(1)
 
+		SmallWait(40)
+		SoundActivate("AMB_Main",FALSE)
+		SoundActivate("Amb_day1",FALSE)
+		SoundActivate("Amb_day2",FALSE)
+		SoundActivate("Amb_night1",FALSE)
+		SoundActivate("Amb_night2",FALSE)
+		SetMusic(NIGHT,G3Blank)
+		SetMusic(COMBAT_WIN,G3Blank)
+		SetMusic(COMBAT_NORMAL,G3Blank)
+		SetMusic(COMBAT_LOSE,G3Blank)
+		SetMusic(MISC0,G3Blank)
+		SmallWait(25)
+		SoundActivate("Amb_dungeon",TRUE)
+		Wait(2)
 		EndCutSceneMode()
+		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
 END

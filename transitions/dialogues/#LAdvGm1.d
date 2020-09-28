@@ -16,7 +16,7 @@ BEGIN ~#LAdvGm1~
 		+ ~Global("#L_EET","GLOBAL",1)~ + @2309 /* ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("#L_StartBG2","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
 	END
 
-	IF ~Global("#L_StartCaelarAttack","GLOBAL",99) Global("#L_StartBG2","GLOBAL",0)~ THEN BEGIN ITEM_O1
+	IF ~Global("#L_StartCaelarAttack","GLOBAL",99) Global("#L_StartBG2","GLOBAL",0)~ THEN BEGIN ITEM_O2
 		SAY	@2302 /* ~You hear a voice, remarkably similar to Duke Belt's, echo strangely in your mind~ [BD69824] */
 		= @2303 /* ~So, <CHARNAME>, what would you like to do?~ */
 		+ ~!Global("#L_LetsHaveFun","GLOBAL",1) !Dead("DEATHK")~ + @2308 /* ~Nothing at this time.~ */ + ITEM_FUN
