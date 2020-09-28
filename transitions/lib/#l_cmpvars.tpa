@@ -1,8 +1,8 @@
-//////////////////////////
-// Additional Variables //
-//////////////////////////
+//////////////////////////////////////
+// Common Variables Used Throughout //
+//////////////////////////////////////
 
-// Missing BG1 NPC
+// BG1 NPC missing from eet_cmpvars
 OUTER_SPRINT "BAELOTH_BCS" "BAELOTH"
 OUTER_SPRINT "BAELOTH_JOINED" "BAELOTHJ"
 OUTER_SPRINT "BAELOTH_POST" "BAELOTHP" 
@@ -21,7 +21,7 @@ END ELSE ACTION_IF GAME_IS ~bgee~ BEGIN
 	OUTER_SPRINT ~SPL_RESURRECT~ ~sppr712~
 	OUTER_SPRINT ~SPL_DISPEL~ ~bpdispel~
 	OUTER_SPRINT ~SPL_CLEANAIR~ ~sppr318~
-END ELSE BEGIN // BG2EE
+END ELSE ACTION_IF GAME_IS ~bg2ee~ BEGIN
 	OUTER_SPRINT "IMOEN_JOINED" "IMOENJ"
 	OUTER_SPRINT ~SPL_RESURRECT~ ~bdresurr~
 	OUTER_SPRINT ~SPL_DISPEL~ ~bddispel~
