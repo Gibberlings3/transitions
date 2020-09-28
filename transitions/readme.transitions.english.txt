@@ -16,8 +16,6 @@ After Sarevok has been defeated, the protagonist can take up residence at the Du
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
-The possible plot hole dealing with Imoen's ability to cast magic missile can also be dealt with.
-
 There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  Good and neutral aligned protagonists will receive Cure Serious Wounds and evil aligned protagonists will receive Cause Serious Wounds.  They weren't my first choice.  I wanted Greenstone Amulet's Mind Shield and Algernon's Cloak Charm Creature, but that's a bit more complicated than I can take on at the moment.  It is my desire to put those in at a future time.
 
 ------------------------------------------------------------------------
@@ -131,12 +129,6 @@ Requires Main Component and SoD or EET
 This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed when SoD is installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
 
 ------------------------------------------------------------------------
-Add a little snark
-------------------------------------------------------------------------
-Requires SoD, BG2 or EET
-Just adds some fun snarky comments to otherwise stuffy or inane dialogue
-
-------------------------------------------------------------------------
 Use abbreviated capture scene leading to BG2
 ------------------------------------------------------------------------
 Requires Main Component and EET
@@ -169,9 +161,10 @@ PLANNED FUTURE ENHANCEMENTS
 * Add better Korlasz loot to stores if quest is skipped
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
+* Allow access to house in front of the palace during SoD prologue if chosen as Eltan's reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Distribute group's possessions from the end of SoD to stores in Athkatla (different mod?)
-* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (Ajantis)
+* Distribute group's possessions from the end of SoD to stores in Athkatla
+* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (like Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Add a romance with Queen Ellesime
