@@ -287,16 +287,7 @@ LAF liia END
 
 // MOVED IMOEN'S MAGIC FOR SOD AND BG2EE TO ANOTHER MOD
 
-///////////////////////////////////////////
-// ADD SOME SNARK TO STUFFY SOD DIALOGUE //
-///////////////////////////////////////////
-BEGIN @22   // MOD 120
-DESIGNATED 120
-LABEL "#L-TRANSITIONS-SNARK"
-REQUIRE_PREDICATE ((GAME_INCLUDES ~sod~) OR (GAME_IS ~bg2ee eet~)) @33
-INCLUDE ~transitions/components/add_snark.tpa~
-LAF add_snark END
-
+// MOVED SNARK DIALOGUE COMPONENT TO ANOTHER MOD
 
 //////////////////////////////////////////////////
 // USE ABBREVIATED CAPTURE SCENE LEADING TO BG2 //
