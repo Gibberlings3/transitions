@@ -88,6 +88,7 @@ LAF main_common END
 // SO IT CAN BE USED IN A DREAM SEQUENCE LATER ON          //
 /////////////////////////////////////////////////////////////
 BEGIN @3    // MOD 10
+DESIGNATED 10
 LABEL "#L-TRANSITIONS-BG1_DREAM"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
@@ -104,7 +105,7 @@ LAF bg1_dream END
 // This option has Sarevok equip his equipment
 // Will make the fight slightly more difficult
 BEGIN @6       // MOD 20
-DESIGNATED  20
+DESIGNATED 20
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_EQUIPPED"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
