@@ -295,7 +295,7 @@ COPY_EXISTING ~BD0103.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Put in the modified Caelar Elite attack scene and the new demise of cutspy so it'll drop Imoen's wand
+// Put in the modified Caelar Elite attack scene
 LAF INSERT_SCRIPT_BLOCK
    INT_VAR 
       insert_above = 1
