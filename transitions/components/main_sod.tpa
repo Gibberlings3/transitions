@@ -292,8 +292,6 @@ COPY ~%mod_root%/objects/#LSoD01.2DA~ ~override~
 COPY_EXISTING ~BD0103.bcs~ ~override~
    DECOMPILE_AND_PATCH BEGIN
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Global("BD_PARTY_ITEMS","BD0103",0)~ ~Global("BD_PARTY_ITEMS","BD0103",0) !Global("#L_SkipFirstHalfCA","GLOBAL",1)~
-      // Using the cutspy to drop Imoen's wand - its demise is dealt with later
-      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~ActionOverride("cutspy",DestroySelf())~ ~~
    END
 BUT_ONLY_IF_IT_CHANGES
 
