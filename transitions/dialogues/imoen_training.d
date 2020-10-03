@@ -7,7 +7,7 @@ REPLACE_TRIGGER_TEXT %IMOEN_JOINED% ~Global("EndofBG1","GLOBAL",0)~ ~Global("End
 REPLACE_ACTION_TEXT %IMOEN_POST% ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("%IMOEN_DV%",JoinParty())~
 EXTEND_TOP %IMOEN_POST% 2 #2 
 	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0)~ THEN 
-		REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + SEE_YA
+		REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + IMOEN_TRAIN_1
 	END
 
 APPEND %IMOEN_POST%
@@ -138,11 +138,6 @@ APPEND %IMOEN_POST%
 		SAY @2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
 		++ @2109 /* ~Good bye, Imoen.  Good luck.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~ EXIT
 		++ @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~ EXIT
-	END
-
-	IF ~~ THEN SEE_YA
-		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
-		IF ~~ THEN DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~ EXIT
 	END
 END
 
