@@ -66,7 +66,7 @@ OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN
    OUTER_SPRINT npc_ok ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0)~ ~~~~~
 
    // This is the normal DO after the group's "leaving" dialogues 
-   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
+   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
 
    // NOTE: Only the first 7 do the post_Korlasz (PK) dialogues 
    ACTION_MATCH %npc_num% WITH
@@ -218,7 +218,7 @@ OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN
       == DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2384 /* ~I just said that.~ */
       == %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2385 /* ~Oh, sorry, I didn't hear you.  I was talking to Boo.~ */
       == %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2386 /* ~He said to make sure to pick up some fresh pumpkin seeds.~ */ %exit_do%
-      == DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2387 DO ~SetGlobal("#L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",EscapeArea())~ /* ~sigh~ */~~~~~
+      == DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) IsValidForPartyDialogue("DYNAHEIR") Global("#L_DynaheirModded","GLOBAL",0)~ @2387 DO ~SetGlobal("#L_DynaheirOkInBG1Areas","GLOBAL",1) ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("Dynaheir",EscapeArea())~ /* ~sigh~ */~~~~~
       END
       11 BEGIN     // ALORA
          // Initial pre-SoD/BG2: Yeah, think I'll check out...mmm somewhere..not here.
@@ -525,7 +525,7 @@ END
    EXTEND_TOP ~%bcs_file%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
 
    // This is the normal DO after the "leaving" dialogues NOT USED 
-//   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
+//   OUTER_SPRINT exit_do ~~~~~DO ~SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
 
    // Normal exit line in addition to their unique lines (preSoD/BG2)
    // If I am carrying anything you'd prefer to keep, let's exchange equipment now.
@@ -746,7 +746,7 @@ END
             %pk_leave%
             %pk_group_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+         IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
       ~~~~~
 
       OUTER_SPRINT pk_post_file ~~~~~APPEND_EARLY %post_file%
@@ -868,7 +868,7 @@ END
             %exit_leave%
             %group_bg2_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
    END
 
    // Put it all together
@@ -889,7 +889,7 @@ END
             %exit_leave%
             %group_exit_leave%
          END
-         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+         IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
 
       %pre_bg2%
 
