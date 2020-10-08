@@ -144,7 +144,6 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
 * Add a custom 3rd floor area that is compatibile with BG1 so the Liia component can be added there 
-* Conversation with genie in Chateau Irenicus about the end of SoD to get the PC up on current events
 * Close any open quests that will be impossible to continue after Sarevok is dead
 * Clean-up quests should use the quest journal
 * Updated bhaal-spawn powers (mind shield and charm creature)
