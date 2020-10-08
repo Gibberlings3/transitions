@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////
 // Actions common to all options of the main component //
 // For BG1 and EET                                     //
-// Included via main_option0-2.tpa but only once       //
+// Included via main_common.tpa                        //
 /////////////////////////////////////////////////////////
 
 ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
