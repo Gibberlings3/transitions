@@ -2,56 +2,63 @@
 // Main component that allows continued play after Irenicus is defeated //
 //////////////////////////////////////////////////////////////////////////
 
-// Make sure custom innates are removed as well
-ACTION_IF (MOD_IS_INSTALLED ~transitions.tp2~ (ID_OF_LABEL ~transitions.tp2~ ~#L-TRANSITIONS-BG1_DREAM~)) BEGIN
-	COPY_EXISTING ~CUT41I.BCS~ ~override~
-		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY ~ReallyForceSpell(Player1,LOSE_ALL)~ ~~~~~ReallyForceSpell(Player1,LOSE_ALL) RemoveSpell(~SPIN200~) RemoveSpell(~SPIN202~)~~~~~
-		END
-	BUT_ONLY_IF_IT_CHANGES
+DEFINE_ACTION_FUNCTION main_bg2 BEGIN
+  // Make sure custom innates are removed as well
+  ACTION_IF (MOD_IS_INSTALLED ~transitions.tp2~ (ID_OF_LABEL ~transitions.tp2~ ~#L-TRANSITIONS-BG1_DREAM~)) BEGIN
+  	COPY_EXISTING ~CUT41I.BCS~ ~override~
+  		DECOMPILE_AND_PATCH BEGIN
+  			REPLACE_TEXTUALLY ~ReallyForceSpell(Player1,LOSE_ALL)~ ~~~~~ReallyForceSpell(Player1,LOSE_ALL) RemoveSpell(~SPIN200~) RemoveSpell(~SPIN202~)~~~~~
+  		END
+  	BUT_ONLY_IF_IT_CHANGES
+  END
+
+  // Suldanessellar Palace dialogue to allow for continuation of BG2
+  COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elf_palace.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+  // Item that Queen Essemine gives to PC that will advance the game to ToB
+  // This is just a slightly modified version of her normal award
+  // This version gets destroyed upon use and the normal award given at the start of ToB
+  COPY_EXISTING ~AMUL27.ITM~ ~override/#LAMUL27.itm~
+  	WRITE_LONG (0x0018) 2157 // Critical Item, Dropable, Displayable, Not Copyable, Magical, Conversable
+
+  OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
+  APPEND itemdial.2da ~#LAMUL27 %UseMe% #LAMUL27~ UNLESS ~#LAMUL27~
+
+  // Add key ring to Adventure Mart
+  COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR06.ITM~ 
+     SAY NAME1 @1019 /* ~Copper Key Ring~ */
+     SAY NAME2 @1019 /* ~Copper Key Ring~ */
+     SAY UNIDENTIFIED_DESC @1024
+     SAY IDENTIFIED_DESC @1024
+  BUT_ONLY_IF_IT_CHANGES
+  COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR06.STO~ 
+     SAY 0x0c @1019
+  BUT_ONLY_IF_IT_CHANGES
+  COPY_EXISTING ~RIBALD.sto~ ~override~   // Ribald's Adventurer Mart
+     ADD_STORE_ITEM ~#LKEYR06~ AFTER ~BAG02~ #0 #0 #0 ~IDENTIFIED~ #1
+  BUT_ONLY_IF_IT_CHANGES
+
+  // Broken gift from Duke Belt
+  COPY ~%mod_root%/objects/#LMsc01.itm~ ~override~
+      SAY NAME2 @1040 // ~Broken Gift from Duke Belt~
+      SAY DESC  @1041
+
+  // Save some custom Transitions items in Chateau Irenicus
+  EXTEND_TOP ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT.baf~
+  EXTEND_TOP ~AR0602.bcs~ ~%mod_root%/scripts/ar0602.baf~
+
+  // Skip the intro movie if using my transition
+  // We've just lived it, we don't need a recap
+  COPY_EXISTING ~K#TELBGT.bcs~ ~override~
+     DECOMPILE_AND_PATCH BEGIN
+        REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~True()~ ~Global("#L_StartBG2","GLOBAL",0)~
+     END
+  BUT_ONLY_IF_IT_CHANGES
+  EXTEND_BOTTOM ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT_end.baf~
+
+  // Compile dialogue about the end of SoD
+  ACTION_IF GAME_IS ~eet~ BEGIN
+    OUTER_SPRINT ~IMOEN_JOINED~ ~IMOEN2J~
+  END
+  COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/framed_info.d~ USING ~%tra_loc%/%s/framed_info.tra~
 END
-
-// Suldanessellar Palace dialogue to allow for continuation of BG2
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elf_palace.d~ USING ~%tra_loc%/%s/dialogues.tra~
-
-// Item that Queen Essemine gives to PC that will advance the game to ToB
-// This is just a slightly modified version of her normal award
-// This version gets destroyed upon use and the normal award given at the start of ToB
-COPY_EXISTING ~AMUL27.ITM~ ~override/#LAMUL27.itm~
-	WRITE_LONG (0x0018) 2157 // Critical Item, Dropable, Displayable, Not Copyable, Magical, Conversable
-
-OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
-APPEND itemdial.2da ~#LAMUL27 %UseMe% #LAMUL27~ UNLESS ~#LAMUL27~
-
-// Add key ring to Adventure Mart
-COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR06.ITM~ 
-   SAY NAME1 @1019 /* ~Copper Key Ring~ */
-   SAY NAME2 @1019 /* ~Copper Key Ring~ */
-   SAY UNIDENTIFIED_DESC @1024
-   SAY IDENTIFIED_DESC @1024
-BUT_ONLY_IF_IT_CHANGES
-COPY ~%mod_root%/objects/BDKEYR.STO~ ~override/#LKEYR06.STO~ 
-   SAY 0x0c @1019
-BUT_ONLY_IF_IT_CHANGES
-COPY_EXISTING ~RIBALD.sto~ ~override~   // Ribald's Adventurer Mart
-   ADD_STORE_ITEM ~#LKEYR06~ AFTER ~BAG02~ #0 #0 #0 ~IDENTIFIED~ #1
-BUT_ONLY_IF_IT_CHANGES
-
-// Broken gift from Duke Belt
-COPY ~%mod_root%/objects/#LMsc01.itm~ ~override~
-    SAY NAME2 @1040 // ~Broken Gift from Duke Belt~
-    SAY DESC  @1041
-
-// Save some custom Transitions items in Chateau Irenicus
-EXTEND_TOP ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT.baf~
-EXTEND_TOP ~AR0602.bcs~ ~%mod_root%/scripts/ar0602.baf~
-
-// Skip the intro movie if using my transition
-// We've just lived it, we don't need a recap
-COPY_EXISTING ~K#TELBGT.bcs~ ~override~
-   DECOMPILE_AND_PATCH BEGIN
-      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~True()~ ~Global("#L_StartBG2","GLOBAL",0)~
-   END
-BUT_ONLY_IF_IT_CHANGES
-EXTEND_BOTTOM ~K#TELBGT.bcs~ ~%mod_root%/scripts/k#TelBGT_end.baf~
-

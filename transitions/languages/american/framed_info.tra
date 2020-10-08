@@ -1,0 +1,17 @@
+/////////////////////////////////////////////////////////////////////////
+// Dialogue inside Chateau Irenicus about the events at the end of SoD //
+// Kept separate so it can be imported into Transitions                //
+// This is the only bit that might be used for Transitions             //
+/////////////////////////////////////////////////////////////////////////
+
+@2000	= ~It is unfortunate that I no longer am the keeper of the dagger the master used to frame you, or I would be able to offer it to you to sweeten the deal.~
+@2001	= ~Frame me?  For what?~
+@2002	= ~For the murder of Skie Silvershield.  He killed her and trapped her soul inside a soultaker dagger.~
+@2003	= ~Oh how awful!~
+@2004	= ~But what makes them think I did it.~
+@2005	= ~How he managed to cause others to believe you were the one who killed her, I do not know.~
+@2006	= ~But unfortunately, I suspect the dagger has been destroyed since he no longer had any use for it.~
+
+// To enable The Cost Of One Girl's Soul quest - if installed
+@2007	= ~To sweeten the deal, I will give you the dagger the master used to frame you.  I will have no use for it.~
+@2008	= ~I am protecting the dagger for the master.  If you free me, I will you give it and your weapon.~

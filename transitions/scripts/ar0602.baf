@@ -43,3 +43,16 @@ THEN
 		ActionOverride("Table2",TakePartyItem("#LMSC01"))
 		Continue()
 END
+
+///////////////////////////////////////////////////////
+// Give the PC time to become aware of the situation //
+///////////////////////////////////////////////////////
+IF
+	Contains("l#2sda1","Picture1")
+	Global("#L_DestroyedDagger","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_DestroyedDagger","GLOBAL",1)
+		ActionOverride("Picture1",DestroyItem("l#2sda1"))
+		Continue()
+END
