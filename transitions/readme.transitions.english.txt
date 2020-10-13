@@ -155,21 +155,18 @@ PLANNED FUTURE ENHANCEMENTS
 * Check/Update all remaining BG1 NPCs
 	* - Update Inn rumors
 	* - Polish how the NPCs flee the Iron Throne HQ
-* Have a conversation between Caelar and PC prior to first attack where she asks for his/her help with her cause to have Caelar's surprise at the PC's reluctance to help her seem a bit more reasonable.
 * Put in a regular travel region entrance to the Korlasz crypt to be accessable only during the quest
 * Add better Korlasz loot to stores if quest is skipped
 * Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
 * Allow access to house in front of the palace during SoD prologue if chosen as Eltan's reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Distribute group's possessions from the end of SoD to stores in Athkatla
 * Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (like Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Add a romance with Queen Ellesime
 * Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
-* Add a "continue the adventure" ending with Bhaalspawn powers intact
-
+* Remove restoration of powers in BG2, move it to Themed Tweaks mod when it's published
 ------------------------------------------------------------------------
 COMPATIBILITY NOTES
 ------------------------------------------------------------------------
