@@ -166,7 +166,7 @@ PLANNED FUTURE ENHANCEMENTS
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Add a romance with Queen Ellesime
 * Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
-* Remove restoration of powers in BG2, move it to Themed Tweaks mod when it's published
+
 ------------------------------------------------------------------------
 COMPATIBILITY NOTES
 ------------------------------------------------------------------------
