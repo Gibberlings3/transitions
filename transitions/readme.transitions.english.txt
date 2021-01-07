@@ -216,7 +216,7 @@ CREDITS
 * Tantalus: BAMs of Sarevok unique items. The BAMs where taken out of Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
 * jastey: Thank you for all the incredible help and the permission to use your Endless BGI mod code:
 	- modified version of Sarevok's custom items from Tantalus
-	- modified versions	Flaming Fist Healers after the Sarevok fight
+	- modified version of Flaming Fist Healers after the Sarevok fight
 	- modified version of Denkod
 	- import of town chatter component
 	- modified version of Elminster's appearance at Ducal palace
