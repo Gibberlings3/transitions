@@ -225,6 +225,7 @@ CREDITS
 	- modified version of refugees 
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 * Bubb again for showing me how to fix TriggerOverride. Thank you thank you thank you!!!
+* Mike1072 for help with the legal stuff
 * Thank you beta testers and proofreaders!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
@@ -258,20 +259,22 @@ still in beta
 ------------------------------------------------------------------------
 LEGAL INFORMATION
 ------------------------------------------------------------------------
-Copyright
-    This mod is copyright (c) 2019 Lauriel.
-    You are allowed to submit maintenance updates for this mod. This mod is additionally licensed under "Creative Commons" von Nicolas Peters: CC BY-NC-SA 3.0.
+This mod is copyright (c) 2019 Lauriel.
 
- The material of the mods can be used, changed and shared under the following conditions:
-        Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+This mod accepts bug fixes, compatibility fixes, and translation updates from the community.
 
-        NonCommercial — You may not use the material for commercial purposes.
+This mod is additionally licensed under CC BY-NC-SA 3.0.
 
-        ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+https://creativecommons.org/licenses/by-nc-sa/3.0/
 
-Transitions is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
+The mod uses BAM files from Sarevok Wiederherstellung (the Sarevok Recovery Mod) by Nicolas Peters, licensed under CC BY-NC-SA 3.0.
+
+http://www.baldursgate-refugium.de/mods/sarevok-wiederherstellung/
+
+Endless BG1 components are licensed under CC BY-NC-SA 3.0 and used with the permission of the mod's author, jastey.
+
+https://www.gibberlings3.net/mods/other/endlessbg1/
+
+Transitions is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. (c) Wizards of the Coast LLC.
+
 This mod is also not developed, supported, or endorsed by BioWare, Black Isle Studios, Interplay Entertainment Corp., Overhaul Games or Beamdog. All other trademarks and copyrights are property of their respective owners.
-
-The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ ). The Sarevok Unique Items from the Endless BGI Mod and Transitions are therefore licensed under "Creative Commons" von Nicolas Peters.
-
-Endless BG1 components are used with the permission of the mod's author, jastey.
