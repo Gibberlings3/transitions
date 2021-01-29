@@ -258,11 +258,20 @@ still in beta
 ------------------------------------------------------------------------
 LEGAL INFORMATION
 ------------------------------------------------------------------------
+Copyright
+    This mod is copyright (c) 2019 Lauriel.
+    You are allowed to submit maintenance updates for this mod. This mod is additionally licensed under "Creative Commons" von Nicolas Peters: CC BY-NC-SA 3.0.
+
+ The material of the mods can be used, changed and shared under the following conditions:
+        Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+        NonCommercial — You may not use the material for commercial purposes.
+
+        ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
 Transitions is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
 This mod is also not developed, supported, or endorsed by BioWare, Black Isle Studios, Interplay Entertainment Corp., Overhaul Games or Beamdog. All other trademarks and copyrights are property of their respective owners.
 
 The mod uses BAM files from Tantalus' Mod "Sarevok Recovery Mod", licensed under "Creative Commons" von Nicolas Peters. Lizenz: CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ ). The Sarevok Unique Items from the Endless BGI Mod and Transitions are therefore licensed under "Creative Commons" von Nicolas Peters.
 
 Endless BG1 components are used with the permission of the mod's author, jastey.
-
-
