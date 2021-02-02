@@ -259,7 +259,7 @@ still in beta
 ------------------------------------------------------------------------
 LEGAL INFORMATION
 ------------------------------------------------------------------------
-This mod is copyright (c) 2019 Lauriel.
+This mod is copyright (c) Lauriel.
 
 This mod accepts bug fixes, compatibility fixes, and translation updates from the community.
 
