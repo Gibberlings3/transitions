@@ -6,27 +6,29 @@
 /////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION elminster BEGIN
-	// Build a new dialogue file for Elminster using the original strrefs
-	ACTION_IF GAME_IS ~eet~ BEGIN
-		COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster.d~
-	END ELSE BEGIN
-		COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster_bg1.d~
-	END	
+	ACTION_IF !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) BEGIN
+		// Build a new dialogue file for Elminster using the original strrefs
+		ACTION_IF GAME_IS ~eet~ BEGIN
+			COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster.d~
+		END ELSE BEGIN
+			COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster_bg1.d~
+		END	
 
-	// Build a new Elminster with the dialogue file plugged in
-	COPY_EXISTING ~ELMIN5.cre~ ~override/#LELMN01.cre~
-		WRITE_ASCII 0x280 ~#LELMN01~ #32 // set DV
-		WRITE_EVALUATED_ASCII 0x2cc ~#LELMN01~ #8   // dialogue
+		// Build a new Elminster with the dialogue file plugged in
+		COPY_EXISTING ~ELMIN5.cre~ ~override/#LELMN01.cre~
+			WRITE_ASCII 0x280 ~#LELMN01~ #32 // set DV
+			WRITE_EVALUATED_ASCII 0x2cc ~#LELMN01~ #8   // dialogue
 
-	// Delete jastey's Elminster spawning code, if it's there
-	LAF DELETE_SCRIPT_BLOCK
-		INT_VAR
-			only_once = 1
-		STR_VAR 
-			script = EVAL ~%NBaldursGate%~
-			match = ~SetGlobal("C#st_SarevokElminster","MYAREA",1)~
+		// Delete jastey's Elminster spawning code, if it's there
+		LAF DELETE_SCRIPT_BLOCK
+			INT_VAR
+				only_once = 1
+			STR_VAR 
+				script = EVAL ~%NBaldursGate%~
+				match = ~SetGlobal("C#st_SarevokElminster","MYAREA",1)~
+		END
+
+		// Spawn the new Elminster outside the Ducal Palace after Sarevok is dead
+		EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200b.baf~
 	END
-
-	// Spawn the new Elminster outside the Ducal Palace after Sarevok is dead
-	EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200b.baf~
 END

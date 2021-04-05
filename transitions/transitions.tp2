@@ -185,13 +185,13 @@ LAF quests3 END
 // CLEAN UP TOWNFOLK CHATTER WITH REFERENCE TO SAREVOK //
 // This is jastey's code taken directly from her       //
 // Endless BG1 mod                                     //
+// Will give precedence to EBG1 if installed           //
 /////////////////////////////////////////////////////////
 BEGIN @18      // MOD 40
 DESIGNATED 40
 LABEL "C#-EBG1-BG_CHATTER"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-//FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
 LAF town_chatter END
 
@@ -210,15 +210,13 @@ LAF cleanup_maze END
 
 ///////////////////////////////////////////////////////////////////
 // HAVE ELMINSTER MAKE AN APPEARANCE OUTSIDE OF THE DUCAL PALACE //
-// This is pretty much what jastey includes in Endless BG1 but   //
-// since I have no idea which module it is, I'm going to redo it //
+// Will give precedence to EBG1 if installed                     //
 ///////////////////////////////////////////////////////////////////
 BEGIN @20      // MOD 60
 DESIGNATED 60 
 LABEL "#L-TRANSITIONS-ELMINSTER"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-//REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
 
@@ -258,15 +256,15 @@ INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
 
-//////////////
-// REFUGEES //
-//////////////
+/////////////////////////////////////////////// 
+// REFUGEES                                  //
+// Will give precedence to EBG1 if installed //
+///////////////////////////////////////////////
 BEGIN @29   // MOD 80
 DESIGNATED 80
 LABEL "#L-TRANSITIONS-REFUGEES"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-//REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 
