@@ -78,9 +78,12 @@ LANGUAGE ~American English~ ~american~
 ////////////////////////////////////////////////////////////////////////////////////
 BEGIN @2    // MOD 0
 LABEL "#L-TRANSITIONS-MAIN"
+LABEL "#L-TRANSITIONS-LIIA"
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @1
 INCLUDE ~transitions/components/main_common.tpa~
 LAF main_common END
+INCLUDE ~transitions/components/liia.tpa~
+LAF liia END
 
 
 /////////////////////////////////////////////////////////////
@@ -269,22 +272,7 @@ REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessb
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 
-
-///////////////////////////////////////////////////////
-// LIIA ALLOWS IMOEN TO POSTPONE TRAINING IN MAGIC   //
-// In order to put this with BG1 where it belongs    //
-// There will need to be a BG1 compatible version    //
-// of the custom room on the 3rd floor of the palace //
-// to send Imoen to when in training                 //
-// I'll do this for another version                  //
-///////////////////////////////////////////////////////
-BEGIN @11   // MOD 90
-DESIGNATED 90
-LABEL "#L-TRANSITIONS-LIIA"
-REQUIRE_PREDICATE ((GAME_IS ~eet~) OR (GAME_INCLUDES ~sod~)) @27
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-INCLUDE ~transitions/components/liia.tpa~
-LAF liia END
+// MOVED LIIA'S COMPONENT UP TO MAIN
 
 // MOVED IMOEN'S MAGIC FOR SOD AND BG2EE TO ANOTHER MOD
 
