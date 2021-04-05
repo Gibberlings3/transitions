@@ -12,7 +12,7 @@ THEN
 	RESPONSE #100
 		ActionOverride("LIIA",DestroySelf())
 		SetGlobal("SPRITE_IS_DEADLIIA","GLOBAL",0)
-		Continue()
+		SmallWait(1)
 END
 
 IF
@@ -22,7 +22,7 @@ IF
 THEN
 	RESPONSE #100
 		CreateCreature("LIIA",[680.356],S)
-		Continue()
+		SmallWait(1)
 END
 
 IF

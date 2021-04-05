@@ -18,7 +18,7 @@
 // NEW FOR VERSION 0.4
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-@1		= ~This mod is only compatible with BG1EE, SoD, BG2EE and EET~
+@1		= ~This mod is requires BG1EE, BG2EE or EET~
 @2		= ~Main component: Allow continued play after Sarevok and/or Irenicus is defeated~
 @3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
 @4		= ~Requires EET~

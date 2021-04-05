@@ -6,13 +6,13 @@
 ------------------------------------------------------------------------
 GENERAL
 ------------------------------------------------------------------------
-This mod requires EET, BG1EE, SoD, or BG2EE.
+This mod requires EET, BGEE, or BG2EE.
 
-The Transitions mod's main purpose is to provide seemless transitions between campaigns in EET.  It will  provide a mechanism to remain in the BGI "world" after Sarevok is defeated and BG2 "world" after Irenicus is defeated.  For EET, it also allows for skipping ahead to BG2, skipping all or the remainder of SoD, as suits the player.
+The Transitions mod's main purpose is to provide seemless transitions between campaigns in EET.  It will  provide a mechanism to remain in the BGEE "world" after Sarevok is defeated and BG2EE "world" after Irenicus is defeated.  For EET, it also allows for skipping ahead to BG2EE, skipping all or the remainder of SoD, as suits the player.
 
 Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
-After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace (requires SoD), thanks to Duke Belt.  If the protagonist rescued Duke Eltan and EET is loaded, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGI and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
+After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan and EET is loaded, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGEE and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
@@ -29,10 +29,10 @@ Prevents the end of game transition to SoD after Sarevok's death
 Prevents the end of game transition to ToB after Irenicus's death  
 Allows access to Duke Belt in the Ducal Palace for game advancement  
 To remain consistent with SoD, when SoD is present the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
-Also to remain consistent with SoD, when SoD is present Liia recruits Imoen for magic training but with an optional component you'll be able to affect the timing  
-If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please (via Duke Belt at the moment)
+Also to remain consistent with SoD, after Sarevok is defeated Liia offers to recruit Imoen for magic training, the timing of which is up to the player  
+If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
-Allows for skipping all or the remainder of SoD in EET
+In EET, Duke Belt's item allows for skipping all or the remainder of SoD at almost any time during the campaign (there is a point of no escape toward the end)
 
 ------------------------------------------------------------------------
 New Bhaal-spawn power
@@ -50,7 +50,7 @@ NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be sto
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
-Option 3: When installed, use how Endless BG1 handles Sarevok's equipment
+Option 3: When Endless BG1 is installed, use how that mod handles Sarevok's equipment, otherwise use option 2
 
 ------------------------------------------------------------------------
 Add Clean Up Quests
@@ -62,7 +62,7 @@ Any and all clean-up quests, including Korlasz's Dungeon crawl if SoD is install
 NOTE: Tamoko's quest involves suicide-by-Flaming-Fist.  It may be triggering for some players.  
 
 Option 1: Have survivors of the final battle with Sarevok immediately flee the area when Sarevok dies (to give more clean-up quests)  
-Option 2: Behavior of the Sarevok's supporters in the final BGI battle is unchanged  
+Option 2: Behavior of the Sarevok's supporters in the final BGEE battle is unchanged  
 Option 3: Option 1 and gentler version of Tamoko's quest  
 Option 4: Option 2 and gentler version of Tamoko's quest  
 
@@ -95,7 +95,7 @@ Duke Eltan's reward - House in front of Palace
 Requires Main Component and EET
 NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a (one - no matter how many are installed as options) home the protagonist can call their own.  
 
-Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2 for you to find if you didn't sell it previously.  
+Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2EE for you to find if you didn't sell it previously.  
 
 This component prepares the 2nd house to the left of the Ducal Palace as one of the reward options.  
 
@@ -123,16 +123,10 @@ Refugees will start arriving in front of the palace in waves, seven game-days ap
 Skipped if it's already installed via EBG1.  
 
 ------------------------------------------------------------------------
-Allow Imoen's magic training to be delayed
-------------------------------------------------------------------------
-Requires Main Component and SoD or EET
-This component allows you to control when Imoen leaves your group to train in magic with Duke Liia.  Liia will make the offer when you first go to speak with the Dukes after Sarevok is killed when SoD is installed.  With this component, you'll be able to postpone that training.  You may come back at any time to accept.  It will also be one of the options if you remove her from the group.  She will have to leave your group when the game advances to SoD.  Without this component, Imoen will leave the group immediately upon the offer being given.  
-
-------------------------------------------------------------------------
-Use abbreviated capture scene leading to BG2
+Use abbreviated capture scene leading to BG2EE
 ------------------------------------------------------------------------
 Requires Main Component and EET
-Cut out the long fight scene leading to capture prior to BG2 and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
+Cut out the long fight scene leading to capture prior to BG2EE and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
 
 ------------------------------------------------------------------------
 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
@@ -161,7 +155,7 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
 * Allow access to house in front of the palace during SoD prologue if chosen as Eltan's reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (like Ajantis)
+* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2EE, even as a cameo (like Ajantis)
 * Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Add a romance with Queen Ellesime

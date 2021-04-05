@@ -47,7 +47,7 @@ ALWAYS
          reload_array = thismod_reload
    END
 
-   ACTION_IF NOT ((GAME_IS ~bgee bg2ee eet~) OR (GAME_INCLUDES ~sod~)) BEGIN
+   ACTION_IF NOT ((GAME_IS ~bgee bg2ee eet~) BEGIN
       FAIL @1
    END
 
@@ -74,16 +74,13 @@ LANGUAGE ~American English~ ~american~
 // MAIN COMPONENT FOR ALL GAMES: ALLOW CONTINUED PLAY AFTER DEFEAT OF BOSS ENEMY  //
 // OPEN THE PALACE AND MODIFY DUKE BELT TO ALLOW FOR BG1 CONTINUATION             //
 // OPEN SULDANESSELLAR AND MODIFY QUEEN ESSEMINE TO ALLOW FOR BG2 CONTINUATION    //
-// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC IN EET           //
+// HANDLES PC'S ROOM IN THE PALACE AND IMOEN'S TRAINING IN MAGIC                  //
 ////////////////////////////////////////////////////////////////////////////////////
 BEGIN @2    // MOD 0
 LABEL "#L-TRANSITIONS-MAIN"
-LABEL "#L-TRANSITIONS-LIIA"
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @1
+LABEL "#L-TRANSITIONS-LIIA"	// Used to be a separate component
 INCLUDE ~transitions/components/main_common.tpa~
 LAF main_common END
-INCLUDE ~transitions/components/liia.tpa~
-LAF liia END
 
 
 /////////////////////////////////////////////////////////////
@@ -124,7 +121,7 @@ LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_IN_INVENTORY"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
-LAF sarevok1 END
+LAF sarevok1 INT use_ebg1 = 0 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // This option just leaves EndlessBG1 handling of Sarevok's items
@@ -133,7 +130,8 @@ SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_USE_ENDLESS"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokSword")) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_SarevokItems")) @10
+INCLUDE ~transitions/components/sarevok1.tpa~
+LAF sarevok1 INT use_ebg1 = 1 END
 
 
 /////////////////////////////////////

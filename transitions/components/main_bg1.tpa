@@ -5,79 +5,140 @@
 /////////////////////////////////////////////////////////
 
 ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
-   // Remove jastey's code to prep the dukes in the palace - we do it differently
-   LAF DELETE_SCRIPT_BLOCK
-      INT_VAR
-         only_once = 0
-      STR_VAR
-         script = EVAL ~%NBaldursGate_DucalPalace_L1%~
-         match = ~C#st_RearrangeDukes~
-   END
+	// Remove jastey's code to prep the dukes in the palace - we do it differently
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 0
+		STR_VAR
+			script = EVAL ~%NBaldursGate_DucalPalace_L1%~
+			match = ~C#st_RearrangeDukes~
+	END
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 0
+		STR_VAR
+			script = EVAL ~%NBaldursGate_DucalPalace_L1%~
+			match = ~C#st_SpawnLiia~
+	END
+	EXTEND_TOP ~%Undercity_TempleofBhaal%.BCS~ ~%mod_root%/scripts/bg0125_liia.baf~
 
-   // Remove jastey's guards and opening of the palace
-   LAF DELETE_SCRIPT_BLOCK
-      INT_VAR
-         only_once = 0
-      STR_VAR
-         script = EVAL ~%NBaldursGate%~
-         match = ~C#st_SarevokDeadGuards~
-   END
-   LAF DELETE_SCRIPT_BLOCK
-      INT_VAR
-         only_once = 0
-      STR_VAR
-         script = EVAL ~%NBaldursGate%~
-         match = ~C#st_SarevokDeadOpenGate~
-   END
+	// Remove jastey's guards and opening of the palace
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 0
+		STR_VAR
+			script = EVAL ~%NBaldursGate%~
+			match = ~C#st_SarevokDeadGuards~
+	END
+	LAF DELETE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 0
+		STR_VAR
+			script = EVAL ~%NBaldursGate%~
+			match = ~C#st_SarevokDeadOpenGate~
+	END
 END
 
 // Replace the block that transfers to SoD or plays the movie so play can continue
 ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
-   LAF REPLACE_SCRIPT_BLOCK
-      INT_VAR
-         only_once = 1
-      STR_VAR 
-         script = EVAL ~%Undercity_TempleofBhaal%~
-         match = ~StartCutSceneEx("BDSODTRN",TRUE)~
-         insert = ~%mod_root%/scripts/BG0125_main.baf~
-   END 
+	LAF REPLACE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 1
+		STR_VAR 
+			script = EVAL ~%Undercity_TempleofBhaal%~
+			match = ~StartCutSceneEx("BDSODTRN",TRUE)~
+			insert = ~%mod_root%/scripts/BG0125_main.baf~
+	END 
 END ELSE BEGIN
-   LAF REPLACE_SCRIPT_BLOCK
-      INT_VAR
-         only_once = 1
-      STR_VAR 
-         script = EVAL ~%Undercity_TempleofBhaal%~
-         match = ~StartMovie("ENDMOVIE")~
-         insert = ~%mod_root%/scripts/BG0125_main.baf~
-   END
+	LAF REPLACE_SCRIPT_BLOCK
+		INT_VAR
+			only_once = 1
+		STR_VAR 
+			script = EVAL ~%Undercity_TempleofBhaal%~
+			match = ~StartMovie("ENDMOVIE")~
+			insert = ~%mod_root%/scripts/BG0125_main.baf~
+	END
 END
+
+////////////////////////////////////////////////////
+// Now allowing this to happen in BG1 without SoD //
+////////////////////////////////////////////////////
+// Place the servant in the custom SoD version of the third floor
+// This is a common script used in all PC personal quarters
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LPCRoom.baf~ EVAL
+
+// New general script file for new palace servant
+// Stops it from wandering around when first spawned
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSrvGen.baf~
+
+// Palace servant on the 3rd floor
+COPY_EXISTING ~servan.cre~ ~override/#LDPSrv1.cre~
+   WRITE_ASCII 0x280 ~#LDPSrv1~ #32 // set DV
+   WRITE_ASCII 0x2cc ~#LDPSrv1~ #8 // set dialogue file
+   WRITE_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+
+// Open the way to the PCs rooms
+LAF UPDATE_BCS
+   STR_VAR
+      baf_location = EVAL ~%mod_root%/scripts/~
+      baf_name = ~bg0109~
+      bcs_name = ~%NBaldursGate_DucalPalace_L2%~
+END
+
+// Add 2 new inactive exit travel triggers leading from the 2nd floor to the new 3rd floor
+// Activate the new ones and deactive the original ones when/if the PC and/or Imoen take up residence
+COPY_EXISTING ~%NBaldursGate_DucalPalace_L2%.ARE~ ~override~
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110a~
+         GW_Name_new = ~Door#lbd0103a~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109a~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+
+   LPF GW_CLONE_TRAVEL_TRIGGER
+      INT_VAR
+         GW_Flags_new = 256 // Deactivated
+      STR_VAR
+         GW_Name_old = ~Door0110b~
+         GW_Name_new = ~Door#lbd0103b~
+         GW_Dest_new = ~#LBD0103~
+         GW_Entre_new = ~ExitBG0109b~
+         GW_Key_new = ~~      // Clear out the key if one exists
+         GW_Script_new = ~~   // Clear out the script if one exists
+   END
+BUT_ONLY_IF_IT_CHANGES
 
 // 3 Flaming Fist escort ... used in various places
 COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc1.cre~
-   SAY NAME1 @1007 /* ~Flaming Fist Escort~ */
-   SAY NAME2 @1007 /* ~Flaming Fist Escort~ */
-   WRITE_ASCII 0x280 ~#LffEsc1~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
-   WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
-   WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+	SAY NAME1 @1007 /* ~Flaming Fist Escort~ */
+	SAY NAME2 @1007 /* ~Flaming Fist Escort~ */
+	WRITE_ASCII 0x280 ~#LffEsc1~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
 BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc2.cre~
-   SAY NAME1 @1008 // ~Flaming Fist Escort~
-   SAY NAME2 @1008 // ~Flaming Fist Escort~
-   WRITE_ASCII 0x280 ~#LffEsc2~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
-   WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
-   WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc2~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
 BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc3.cre~
-   SAY NAME1 @1008 // ~Flaming Fist Escort~
-   SAY NAME2 @1008 // ~Flaming Fist Escort~
-   WRITE_ASCII 0x280 ~#LffEsc3~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
-   WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
-   WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
+	SAY NAME1 @1008 // ~Flaming Fist Escort~
+	SAY NAME2 @1008 // ~Flaming Fist Escort~
+	WRITE_ASCII 0x280 ~#LffEsc3~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LffEsc1~ #8   // dialogue
+	WRITE_EVALUATED_ASCII 0x250 ~~ #8   // class script - nada
+	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
 BUT_ONLY_IF_IT_CHANGES
 
 // Dialogues for the Flaming Fist escort that are used for various components
@@ -92,12 +153,12 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/palace_personnel.d~ USING ~%tra_lo
 
 // Palace gate guards
 COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd1.cre~
-   WRITE_ASCII 0x280 ~#LDPGrd1~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
+	WRITE_ASCII 0x280 ~#LDPGrd1~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
 
 COPY_EXISTING ~flambrid.cre~ ~override/#LDPGrd2.cre~
-   WRITE_ASCII 0x280 ~#LDPGrd2~ #32 // set DV
-   WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
+	WRITE_ASCII 0x280 ~#LDPGrd2~ #32 // set DV
+	WRITE_ASCII 0x2cc ~#LDPGrd1~ #8 // set dialogue file
 
 // Open the palace gates
 // And place friendly guards
