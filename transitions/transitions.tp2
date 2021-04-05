@@ -47,7 +47,7 @@ ALWAYS
          reload_array = thismod_reload
    END
 
-   ACTION_IF NOT ((GAME_IS ~bgee bg2ee eet~) BEGIN
+   ACTION_IF NOT (GAME_IS ~bgee bg2ee eet~) BEGIN
       FAIL @1
    END
 
@@ -121,17 +121,17 @@ LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_IN_INVENTORY"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
-LAF sarevok1 INT use_ebg1 = 0 END
+LAF sarevok1 INT_VAR use_ebg1 = 0 END
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// This option just leaves EndlessBG1 handling of Sarevok's items
+// This option gives precedence to EndlessBG1's handling of Sarevok's items
 BEGIN @9       // MOD 22
 SUBCOMPONENT @5
 LABEL "#L-TRANSITIONS-SAREVOK_EQUIPMENT_USE_ENDLESS"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/sarevok1.tpa~
-LAF sarevok1 INT use_ebg1 = 1 END
+LAF sarevok1 INT_VAR use_ebg1 = 1 END
 
 
 /////////////////////////////////////
@@ -191,7 +191,7 @@ DESIGNATED 40
 LABEL "C#-EBG1-BG_CHATTER"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
+//FORBID_COMPONENT ~c#endlessbg1/c#endlessbg1.tp2~ 0 @19
 INCLUDE ~transitions/components/town_chatter.tpa~
 LAF town_chatter END
 
@@ -218,7 +218,7 @@ DESIGNATED 60
 LABEL "#L-TRANSITIONS-ELMINSTER"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
+//REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) @19
 INCLUDE ~transitions/components/elminster.tpa~
 LAF elminster END
 
@@ -266,7 +266,7 @@ DESIGNATED 80
 LABEL "#L-TRANSITIONS-REFUGEES"
 REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
-REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
+//REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_RefugeesInBGCity")) @19
 INCLUDE ~transitions/components/timers_common.tpa~
 LAF timers_common END
 

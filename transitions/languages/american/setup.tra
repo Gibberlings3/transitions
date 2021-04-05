@@ -2,32 +2,25 @@
 // INSTALLATION SETUP STRINGS //
 ////////////////////////////////
 @0 		= ~Transitions~
-@10		= ~Requires Endless BG1 mod to be installed~
-@19		= ~Already installed with Endless BG1 mod~
+@1		= ~This mod is requires BG1EE, BG2EE or EET~
+@27		= ~Requires BG1EE or EET~
+@31		= ~Requires BG2EE or EET~
+@32		= ~Requires SoD or EET~
+@33		= ~Requires SoD, BG2 or EET~
+@4		= ~Requires EET~
+@8		= ~Requires main component to be installed~
+
+@2		= ~Main component: Allow continued play after Sarevok and/or Irenicus is defeated~
+@3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
 @5		= ~Give Sarevok his armor, helm, and sword~
 @6		= ~Equipped~
 @7		= ~In inventory only~
+@9		= ~Use EndlessBG1's handling of Sarevok's equipment, if available, else use Option 2~
+@12		= ~Clean-up Quests~
 @13		= ~Those supporters that are still alive when Sarevok dies immediately flee the area (to give more clean-up quests)~
 @14		= ~Behavior of the Sarevok's supporters in the final BGI battle is unchanged~
 @15		= ~Option 1 and use gentler Tamoko quest~
 @16		= ~Option 2 and use gentler Tamoko quest~
-@9		= ~Just use what EndlessBG1 has already installed~
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// NEW FOR VERSION 0.4
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-@1		= ~This mod is requires BG1EE, BG2EE or EET~
-@2		= ~Main component: Allow continued play after Sarevok and/or Irenicus is defeated~
-@3		= ~Use BGI ending movie as a dream and give new bhaal-spawn power at first rest~
-@4		= ~Requires EET~
-@5		= ~Give Sarevok his armor, helm, and sword~
-@12		= ~Clean-up Quests~
-@27		= ~Requires BG1EE or EET~
-@31		= ~Requires BG2EE or EET~
-@32		= ~Requires SoD or EET~
-@8		= ~Requires main component to be installed~
 @18		= ~Clean up the town folk chatter with regard to Sarevok~
 @17		= ~Clean up the wounded from the thieves' maze~
 @20		= ~Elminster makes an appearance outside of the Ducal Palace~
@@ -36,11 +29,10 @@
 @26		= ~Duke Eltan's reward option: Gray house in NW Beregost~
 @29		= ~Add Waves of Refugees to Baldur's Gate~
 @11		= ~Allow Imoen's magic training to be delayed~
-@30		= ~Give Imoen a wand that will cast multiple Magic Missiles for attack scene in SoD~
-@21		= ~Give Imoen the innnate ability to cast Magic Missile for attack scene in the Promenade~
-@22 	= ~Add a little snark to dialogues~
+//@30		= ~Give Imoen a wand that will cast multiple Magic Missiles for attack scene in SoD~
+//@21		= ~Give Imoen the innnate ability to cast Magic Missile for attack scene in the Promenade~
+//@22 	= ~Add a little snark to dialogues~
 @23		= ~Use abbreviated capture scene leading to BG2~
 @24		= ~Use Irenicus in hell movie to restore Bhaal-spawn powers after he is defeated~
-@33		= ~Requires SoD, BG2 or EET~
 
 

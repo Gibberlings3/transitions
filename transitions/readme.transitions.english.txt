@@ -71,7 +71,7 @@ Clean up townsfolk chatter with reference to Sarevok
 ------------------------------------------------------------------------
 Requires Main Component and BG1EE or EET
 An import from Endless BG1 of changes to various townsfolk.  
-Skipped if it's already installed via EBG1  
+Will use EBG1's version if available
 
 ------------------------------------------------------------------------
 Clean up the wounded from the thieves maze
