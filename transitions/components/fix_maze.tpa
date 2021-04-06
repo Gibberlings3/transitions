@@ -25,7 +25,7 @@ LAF DELETE_SCRIPT_BLOCK
 	INT_VAR
 		only_once = 1
 	STR_VAR
-		script = EVAL ~%ThievesMaze_BCS%~
+		script = EVAL ~%ThievesMaze%~
 		match = ~ActionOverride("WINSKI2",DestroySelf())~
 		match1 = ~InMyArea("WINSKI2")~
 END

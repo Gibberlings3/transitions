@@ -77,18 +77,8 @@ END
 
 IF
 	Global("#L_TalkedToDukes","GLOBAL",2)
-	!Global("#L_SoD","GLOBAL",1)
-THEN
-	RESPONSE #100
-		SetGlobal("#L_TalkedToDukes","GLOBAL",3)
-		Continue()
-END
-
-IF
-	Global("#L_TalkedToDukes","GLOBAL",2)
 	IsValidForPartyDialogue("%IMOEN_DV%")
 	Global("#L_ImTrainRsp","MYAREA",0)
-	Global("#L_SoD","GLOBAL",1)
 THEN
 	RESPONSE #100
 		ActionOverride("LIIA",StartDialogueNoSet("%IMOEN_DV%"))
@@ -98,7 +88,6 @@ IF
 	Global("#L_TalkedToDukes","GLOBAL",2)
 	!IsValidForPartyDialogue("%IMOEN_DV%")
 	Global("#L_LiiaTalkedToPC","MYAREA",0)
-	Global("#L_SoD","GLOBAL",1)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_LiiaTalkedToPC","MYAREA",1)

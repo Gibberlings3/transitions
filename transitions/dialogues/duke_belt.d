@@ -34,12 +34,12 @@ APPEND BELT
 		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
 	END
 
-	IF ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
+	IF ~Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
 		SAY @2477 /* ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		IF ~~ THEN GOTO BELT_OFFER_ROOM
 	END
 	
-	IF ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_NOT_MENTIONED_YET
+	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_NOT_MENTIONED_YET
 		SAY @2044 /* ~As your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		IF ~~ THEN GOTO BELT_OFFER_ROOM
 	END
