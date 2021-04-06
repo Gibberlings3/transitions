@@ -7,9 +7,7 @@ APPEND BELT
 	IF ~!Global("C#st_HeroOfBG","GLOBAL",1) !Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1_NO_CEREMONY
 		SAY @2034 /* ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~ */
 		= @2035	/* ~You are truly the Hero of Baldur's Gate.~ */
-		IF ~Global("#L_SoD","GLOBAL",1)~ + ROOM_NOT_MENTIONED_YET
-		IF ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		IF ~~ + ROOM_NOT_MENTIONED_YET
 		IF ~Global("#L_SwordTaken","GLOBAL",1)~ + SWORD_TAKEN1
 	END
 
@@ -30,14 +28,10 @@ APPEND BELT
 	IF ~~ THEN BEGIN SWORD_TAKEN2
 		SAY @2040 /* ~Be that as it may, we would like to reimburse you for the sword and reward you for saving this city.~ */
 		= @2041 /* ~I believe 3000 gold should cover the value of the sword.~ */
-		+ ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
-		+ ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
-		+ ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
-		+ ~Global("#L_SoD","GLOBAL",1) !Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
-		+ ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		+ ~Global("#L_SoD","GLOBAL",0) OR(2) !Global("#L_EltanInstalled","GLOBAL",1) !InMyArea("ELTAN")~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		+ ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
-		+ ~Global("#L_SoD","GLOBAL",0) Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
+		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
+		+ ~Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_MENTIONED
+		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2042 /* ~That should more than cover it, thank you.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
+		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
 	END
 
 	IF ~Global("#L_SoD","GLOBAL",1) Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
@@ -81,7 +75,7 @@ APPEND BELT
 		IF ~Global("#L_EltanInstalled","GLOBAL",1) InMyArea("ELTAN")~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",1)~ EXIT
 	END
 
-	IF ~Global("#L_SoD","GLOBAL",1) GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",0)~ THEN BEGIN BELT_2_1
 		SAY @2054 /* ~Hello again, <CHARNAME>.  Have you changed your mind?~ */
 		++ @2055 /* ~No, I haven't.  Goodbye.~ */ + NO_CHANGE
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2056 /* ~Yes, I'll take the room.~ */ + ROOM_TAKEN
@@ -97,7 +91,7 @@ APPEND BELT
 		IF ~~ THEN DO ~SetGlobal("#L_AcceptedRoom","GLOBAL",1)~ EXIT
 	END
 
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) OR(2) Global("#L_SoD","GLOBAL",0) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) GlobalGT("#L_SarvQuests","GLOBAL",90) Global("#L_AcceptedRoom","GLOBAL",1)~ THEN BEGIN BELT_HELLO
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
 		IF ~~ THEN EXIT
 	END
