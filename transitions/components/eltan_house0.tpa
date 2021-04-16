@@ -8,11 +8,15 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 	INCLUDE ~%mod_root%/components/eltan_common.tpa~
 
 	// Add the key he gives to the protagonist for their new house in front of the Ducal Palace
-	COPY ~%mod_root%/objects/#LKey.itm~ ~override/#LKey01.itm~
+	COPY_EXISTING ~TTKey01.itm~ ~override/#LKey01.itm~
 		SAY NAME1 @1009 /* ~<CHARNAME>'s House Key~ */
 		SAY NAME2 @1009 /* ~<CHARNAME>'s House Key~ */
 		SAY UNIDENTIFIED_DESC @1010
 		SAY IDENTIFIED_DESC @1010
+		WRITE_SHORT (0x0018) 44 // Flags
+		WRITE_SHORT (0x0034) 10000 // Price
+		WRITE_ASCII (0x003a) ~IMISC93~
+		WRITE_ASCII (0x0058) ~GMISC93~
 
 	COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
 		// Change the name of the region leading into BG0006

@@ -228,7 +228,7 @@ LAF elminster END
 BEGIN @28   // MOD 70
 DESIGNATED 70
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BG_N"
-REQUIRE_PREDICATE (GAME_IS ~eet~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house0.tpa~
 LAF eltan_house0 END
@@ -239,7 +239,7 @@ LAF eltan_house0 END
 /////////////////////////
 BEGIN @25   // MOD 71
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE"
-REQUIRE_PREDICATE (GAME_IS ~eet~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house1.tpa~
 LAF eltan_house1 END
@@ -250,7 +250,7 @@ LAF eltan_house1 END
 //////////////////////////
 BEGIN @26   // MOD 72
 LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BEREGOST_NW"
-REQUIRE_PREDICATE (GAME_IS ~eet~) @4
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END

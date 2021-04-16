@@ -25,7 +25,7 @@ DEFINE_ACTION_FUNCTION main_common BEGIN
 		// Modified copy of SoD's version of the third floor
 		COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
 	END ELSE ACTION_IF (GAME_IS ~bgee~) BEGIN
-		COPY ~%mod_root%/areas/#LBD0103_BG.ARE~ ~override\#LBD0103.ARE~ 
+		COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override\#LBD0103.ARE~ 
 		COPY ~%mod_root%/areas/BD0103.wed~ ~override~ 
 		COPY ~%mod_root%/areas/BD0103.tis~ ~override~ 
 	END

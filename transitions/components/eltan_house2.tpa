@@ -10,11 +10,15 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 	END
 
 	// Add the key he gives to the protagonist for their new house in Beregost
-	COPY ~%mod_root%/objects/#LKey.itm~ ~override/#LKey03.itm~
+	COPY_EXISTING ~TTKey01.itm~ ~override/#LKey03.itm~
 		SAY NAME1 @1009 /* ~<CHARNAME>'s House Key~ */
 		SAY NAME2 @1009 /* ~<CHARNAME>'s House Key~ */
 		SAY UNIDENTIFIED_DESC @1012
 		SAY IDENTIFIED_DESC @1012
+		WRITE_SHORT (0x0018) 44 // Flags
+		WRITE_SHORT (0x0034) 10000 // Price
+		WRITE_ASCII (0x003a) ~IMISC93~
+		WRITE_ASCII (0x0058) ~GMISC93~
 
 	COPY_EXISTING ~%Beregost%.ARE~ ~override~
 		// Change the name of the door leading into BG3347
