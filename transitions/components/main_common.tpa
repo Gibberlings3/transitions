@@ -3,13 +3,16 @@
 ////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION main_common BEGIN
-	// Additions if this is also SoD
 	ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
 		INCLUDE ~%mod_root%/components/main_sod.tpa~
 	END ELSE ACTION_IF (GAME_IS ~bgee~) BEGIN
 		// Need a way to determine if Duke Belt has any quests to offer
 		// Won't have Korlasz as a default
 		EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_no_sod.baf~
+	END
+
+	ACTION_IF GAME_IS ~eet~ BEGIN
+		INCLUDE ~%mod_root%/components/main_eet.tpa~
 	END
 
 	ACTION_IF (GAME_IS ~bgee eet~) BEGIN
@@ -20,14 +23,23 @@ DEFINE_ACTION_FUNCTION main_common BEGIN
 		INCLUDE ~%mod_root%/components/main_bg2.tpa~
 	END
 
-	ACTION_IF (GAME_IS ~eet~) BEGIN
-		INCLUDE ~%mod_root%/components/main_eet.tpa~
-		// Modified copy of SoD's version of the third floor
-		COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override~ 
-	END ELSE ACTION_IF (GAME_IS ~bgee~) BEGIN
-		COPY ~%mod_root%/areas/#LBD0103.ARE~ ~override\#LBD0103.ARE~ 
-		COPY ~%mod_root%/areas/BD0103.wed~ ~override~ 
-		COPY ~%mod_root%/areas/BD0103.tis~ ~override~ 
+	ACTION_IF FILE_EXISTS_IN_GAME ~BD0103.ARE~ BEGIN
+		COPY_EXISTING ~BD0103.are~ ~override\#LBD0103.are~
+			LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+			LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
+	END ELSE BEGIN
+		COPY_EXISTING ~%NBaldursGate_DucalPalace_L3%.are~ ~override\#LBD0103.are~
+			WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
+			WRITE_LONG (0x0048) 128 // Allow sleeping
+			LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
+			LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
+			LPF UNLOCK_ALL_CONTAINERS END
+			LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
+			LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+			LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 4~ new_name = ~Imoen_equipment~ END
+			LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
+			LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109a~ new_name = ~TranBG0109a~ END
+			LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109b~ new_name = ~TranBG0109b~ END
 	END
 END
 

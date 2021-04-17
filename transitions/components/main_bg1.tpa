@@ -65,6 +65,10 @@ END
 ////////////////////////////////////////////////////
 // Place the servant in the custom SoD version of the third floor
 // This is a common script used in all PC personal quarters
+OUTER_SPRINT SOD_CHEST_TRANS ~~
+ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+	OUTER_SPRINT SOD_CHEST_TRANS ~MoveContainerContents("BD0103*PlayerChest00","#LBD0103*PlayerChest00")~
+END
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LPCRoom.baf~ EVAL
 
 // New general script file for new palace servant

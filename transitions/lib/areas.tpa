@@ -172,6 +172,18 @@ BEGIN
 	END
 END
 
+//////////////////////////////////////
+// Unlock all containers in an area //
+//////////////////////////////////////
+DEFINE_PATCH_FUNCTION UNLOCK_ALL_CONTAINERS
+BEGIN
+  	GET_OFFSET_ARRAY array_off_containers ARE_V10_CONTAINERS
+	PHP_EACH array_off_containers AS idx_container => offset_container BEGIN
+   		READ_ASCII offset_container container_name (32) NULL
+		LPF ALTER_AREA_CONTAINER INT_VAR trapped = 0 flag_locked = 0 STR_VAR container_name = EVAL ~%container_name%~ END
+	END
+END
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Changes the name of a door object v2                                                 //
 // This version was provided by G3 guest Gob Oafenplug - Thanks!                        //

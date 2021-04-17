@@ -11,7 +11,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",4)
 		MoveContainerContents("#LBD0103*PlayerChest00","#LBG3347*PlayerChest00") // #1 BG1 Room in Palace
-		MoveContainerContents("BD0103*PlayerChest00","#LBG3347*PlayerChest00") // #5 SoD Room in Palace
+		%SOD_CHEST_TRANS%
 		SmallWait(1)
 		Continue()
 END

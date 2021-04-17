@@ -78,13 +78,17 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door#LBG0006~ destination_area = ~#LBG0006~ entrance_name = ~Exit0007~ END
 
 	// Update the script used on all PC residences to include the one in front of the ducal palace
+	OUTER_SPRINT SOD_CHEST_TRANS ~~
+	ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+		OUTER_SPRINT SOD_CHEST_TRANS ~MoveContainerContents("BD0103*PlayerChest00","#LBG0006*PlayerChest00")~
+	END
 	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
 	   DECOMPILE_AND_PATCH BEGIN 
 			// Move the contents from this house's chest to the ducal palace chest when they go there
 			REPLACE_TEXTUALLY ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1)~ ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1) MoveContainerContents("#LBG0006*PlayerChest00","#LBD0103*PlayerChest00")~
 
 			// Add the block where the ducal palace chest contents get move to the house
-			APPEND_FILE TEXT ~%mod_root%/scripts/#LPCRooma.baf~
+			APPEND_FILE TEXT ~%mod_root%/scripts/#LPCRooma.baf~ EVAL
 		END
 	BUT_ONLY_IF_IT_CHANGES
 
