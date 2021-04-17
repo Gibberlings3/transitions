@@ -25,8 +25,18 @@ DEFINE_ACTION_FUNCTION main_common BEGIN
 
 	ACTION_IF FILE_EXISTS_IN_GAME ~BD0103.ARE~ BEGIN
 		COPY_EXISTING ~BD0103.are~ ~override\#LBD0103.are~
-			LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+			WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
+			WRITE_LONG (0x0048) 128 // Allow sleeping
+			LPF REMOVE_ACTOR STR_VAR actor_name = ~IMOEN2~ END
+			LPF UNLOCK_ALL_CONTAINERS END
 			LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
+			LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+			LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 1 STR_VAR region_name = ~Window_info_1~ END
+			LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 1 STR_VAR region_name = ~Window_info_2~ END
+			LPF GW_CLONE_TRAVEL_TRIGGER STR_VAR GW_Name_old = ~TranBD0100a~ GW_Dest_new = EVAL ~%NBaldursGate_DucalPalace_L2%~ GW_Name_new = ~TranBG0109a~ GW_Entre_new = ~Exit0110a~ END
+			LPF GW_CLONE_TRAVEL_TRIGGER STR_VAR GW_Name_old = ~TranBD0100b~ GW_Dest_new = EVAL ~%NBaldursGate_DucalPalace_L2%~ GW_Name_new = ~TranBG0109b~ GW_Entre_new = ~Exit0110b~ END
+			LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109a~ END
+			LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109b~ END
 	END ELSE BEGIN
 		COPY_EXISTING ~%NBaldursGate_DucalPalace_L3%.are~ ~override\#LBD0103.are~
 			WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
@@ -34,10 +44,10 @@ DEFINE_ACTION_FUNCTION main_common BEGIN
 			LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
 			LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
 			LPF UNLOCK_ALL_CONTAINERS END
+			LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
 			LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
 			LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
 			LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 4~ new_name = ~Imoen_equipment~ END
-			LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
 			LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109a~ new_name = ~TranBG0109a~ END
 			LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109b~ new_name = ~TranBG0109b~ END
 	END

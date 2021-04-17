@@ -264,7 +264,7 @@ BEGIN
 		<<<<<<<< temp_file
 			%GW_input%
 		>>>>>>>>
-		COPY - temp_file ~temp_file2~ EVALUATE_BUFFER
+		COPY temp_file ~temp_file2~ EVALUATE_BUFFER
 	END
 
 	PATCH_REINCLUDE ~temp_file2~
@@ -280,8 +280,8 @@ DEFINE_PATCH_FUNCTION ~GW_CLONE_TRAVEL_TRIGGER~
 	INT_VAR 
 		GW_Flags_new = 9999	// Optional Added by Lauriel - default is to use whatever is in the original
 	STR_VAR 
-		GW_Dest_old = ""	// Optional Carte de destination à trouver - Made optional by Lauriel - default is to use the one that matches the passed name (GW_Name_old) - either destination or name must be provided
-		GW_Name_old = ""	// Optional Added by Lauriel - default is to use the first one found for the given destination - either destination or name must be provided
+		GW_Dest_old = ""	// Optional Carte de destination à trouver - Made optional by Lauriel - default is to use the one that matches the passed name (GW_Name_old)
+ 		GW_Name_old = ""	// Optional Added by Lauriel - default is to use the first one found for the given destination - either destination or name must be provided
 		GW_Dest_new = ""	// Required Carte de destination du trigger cloné.
 		GW_Name_new = ""	// Required Nom du trigger cloné.
         GW_Entre_new = ""  	// Optional - Entrance name - default is to use whatever is in the original (pardon the lame play on words - I can't help myself)
@@ -372,7 +372,7 @@ BEGIN
 				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Fbit = %flags%"
 			END
 
-			SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Itxt = %info_text% ab_RT_TDtD = %trap_det% ab_RT_TRmD = %trap_rem% ab_RT_TSet = %trap_set% ab_RT_TDet = %trap_detected% ab_RT_LPoX = %launch_X% ab_RT_LPoY = %launch_Y% ab_RT_ALPX = %alt_X% ab_RT_ALPY = %alt_Y%"
+			SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Itxt = ~%info_text%~ ab_RT_TDtD = %trap_det% ab_RT_TRmD = %trap_rem% ab_RT_TSet = %trap_set% ab_RT_TDet = %trap_detected% ab_RT_LPoX = %launch_X% ab_RT_LPoY = %launch_Y% ab_RT_ALPX = %alt_X% ab_RT_ALPY = %alt_Y%"
 
 			SPRINT GW_add_trigger EVAL "%GW_add_trigger% %GW_ab_RT_Vx% STR_VAR ab_RT_Name = ~%GW_Name_new%~ ab_RT_Dest = ~%GW_Dest_new%~"
 
@@ -404,6 +404,7 @@ BEGIN
 			END
 
 			SPRINT GW_add_trigger EVAL "%GW_add_trigger% END"
+//			PATCH_PRINT ~%GW_add_trigger%~
 
 			// Lauriel added call to reinclude
 			// To make it easier to use
