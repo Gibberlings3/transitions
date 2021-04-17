@@ -60,6 +60,26 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 	// if/when it is chosen as a reward
 	COPY ~%mod_root%/areas/#LBG3347.ARE~ ~override~
 	COPY ~%mod_root%/areas/#LBG3348.ARE~ ~override~
+	COPY_EXISTING ~%NWBaldursGate_House3_L1%.are~ ~override/#LBG3347.are~
+//		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~		// Add this back in when servant and other rooms fixed for BG1
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Male Townsfolk~ END
+		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_locked = 0 STR_VAR container_name = ~PlayerChest00~ END 
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0100~ new_name = ~Door3300~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0156~ new_name = ~Door3348~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0100~ new_name = ~Exit3300~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0156~ new_name = ~Exit3348~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door3348~ destination_area = ~#LBG3348~ entrance_name = ~Exit3347~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door3300~ destination_area = EVAL ~%Beregost%~ entrance_name = ~Exit3347~ END
+	COPY_EXISTING ~%NWBaldursGate_House2_L2%.are~ ~override/#LBG3348.are~
+		WRITE_ASCII (AREA_SCRIPT) ~~
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Sleeping Man~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_locked = 0 STR_VAR container_name = ~Container 1~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0163~ new_name = ~Door#LBG3347~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0163~ new_name = ~Exit3347~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door#LBG3347~ destination_area = ~#LBG3347~ entrance_name = ~Exit3348~ END
 
 	// Update the script used on all PC residences to include the one in front of the ducal palace
 	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
