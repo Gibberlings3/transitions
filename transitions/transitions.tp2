@@ -24,8 +24,7 @@ ALWAYS
 
       // Library functions used throughout
       INCLUDE ~%mod_root%/lib/alter_script.tpa~
-      INCLUDE ~%mod_root%/lib/gw_cartes.tpa~
-      INCLUDE ~%mod_root%/lib/change_door_name.tpa~
+      INCLUDE ~%mod_root%/lib/areas.tpa~
       INCLUDE ~%mod_root%/lib/update_bcs.tpa~
    END
 

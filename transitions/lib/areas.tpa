@@ -1,3 +1,237 @@
+////////////////////////////////
+// FUNCTIONS THAT ALTER AREAS //
+////////////////////////////////
+
+///////////////////////////////////
+// Removes an actor from an area //
+///////////////////////////////////
+DEFINE_PATCH_FUNCTION REMOVE_ACTOR
+	INT_VAR
+		found_actor = 0
+	STR_VAR
+		actor_name = ""	// required
+	RET
+		found_actor
+BEGIN
+	PATCH_IF STRING_LENGTH ~%actor_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun REMOVE_ACTOR called with argument actor_name:"%actor_name%"~
+  	END
+	GET_OFFSET_ARRAY array_off_actors ARE_V10_ACTORS
+	PHP_EACH array_off_actors AS idx_actor => offset_actor BEGIN
+		PATCH_IF found_actor == 0 BEGIN
+			READ_ASCII offset_actor iName (32) NULL
+			PATCH_IF ~%iName%~ STR_EQ ~%actor_name%~ BEGIN
+				SET found_door = 1
+				LPF fj_are_structure
+					INT_VAR fj_delete_mode = %idx_actor%
+					STR_VAR fj_structure_type = actor
+				END
+/*				
+				DELETE_BYTES offset_actor (0x110)
+				
+				// Update the header
+				READ_SHORT (0x0058) num_actors
+				WRITE_SHORT (0x0058) (num_actors - 1)
+				
+				READ_LONG (0x005c) offset_regions
+				WRITE_LONG (0x005c) (offset_regions - (0x110))
+				
+				READ_LONG (0x0060) offset_spawnpoints
+				WRITE_LONG (0x0060) (offset_spawnpoints - (0x110))
+				
+				READ_LONG (0x0068) offset_entrances
+				WRITE_LONG (0x0068) (offset_entrances - (0x110))
+				
+				READ_LONG (0x0070) offset_containers
+				WRITE_LONG (0x0070) (offset_containers - (0x110))
+				
+				READ_LONG (0x0078) offset_items
+				WRITE_LONG (0x0078) (offset_items - (0x110))
+				
+				READ_LONG (0x007c) offset_vertices
+				WRITE_LONG (0x007c) (offset_vertices - (0x110))
+				
+				READ_LONG (0x0084) offset_ambients
+				WRITE_LONG (0x0084) (offset_ambients  - (0x110))
+				
+				READ_LONG (0x0088) offset_variables
+				WRITE_LONG (0x0088) (offset_variables - (0x110))
+				
+				READ_LONG (0x0090) offset_tile_flags
+				WRITE_LONG (0x0090) (offset_tile_flags - (0x110))
+				
+				READ_LONG (0x00a0) offset_bitmask
+				WRITE_LONG (0x00a0) (offset_bitmask - (0x110))
+				
+				READ_LONG (0x00a8) offset_doors
+				WRITE_LONG (0x00a8) (offset_doors - (0x110))
+				
+				READ_LONG (0x00b0) offset_animation
+				WRITE_LONG (0x00b0) (offset_animation - (0x110))
+				
+				READ_LONG (0x00b8) offset_tiles
+				WRITE_LONG (0x00b8) (offset_tiles - (0x110))
+				
+				READ_LONG (0x00bc) offset_songs
+				WRITE_LONG (0x00bc) (offset_songs - (0x110))
+				
+				READ_LONG (0x00c0) offset_rests
+				WRITE_LONG (0x00c0) (offset_rests - (0x110))
+				
+				READ_LONG (0x00c4) offset_maps
+				WRITE_LONG (0x00c4) (offset_maps - (0x110))
+				
+				READ_LONG (0x00cc) offset_projtrap
+				WRITE_LONG (0x00cc) (offset_projtrap - (0x110))
+*/				
+			END
+		END
+	END
+
+	// Update offsets of structures from actors on down
+END	
+
+////////////////////////////////////
+// Change the name of a entrance //
+////////////////////////////////////
+DEFINE_PATCH_FUNCTION CHANGE_ENTRANCE_NAME
+	INT_VAR
+		found_entrance = 0
+	STR_VAR	
+		old_name = ""		// required
+		new_name = ""		// required
+	RET
+		found_entrance
+BEGIN
+	PATCH_IF STRING_LENGTH ~%old_name%~ == 0 || STRING_LENGTH ~%new_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun CHANGE_ENTRANCE_NAME called with arguments old_name:"%old_name%" and new_name:"%new_name%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_entrances ARE_V10_ENTRANCES
+	PHP_EACH array_off_entrances AS idx_entrance => offset_entrance BEGIN
+    	PATCH_IF found_entrance == 0 BEGIN
+    		READ_ASCII offset_entrance entrance_name (32) NULL
+      		PATCH_IF ~%entrance_name%~ STR_EQ ~%old_name%~ BEGIN
+        		SET found_entrance = offset_entrance
+			    WRITE_ASCIIE offset_entrance ~%new_name%~ (32)
+      		END
+    	END
+	END
+END
+
+/////////////////////////////////
+// Change the name of a region //
+/////////////////////////////////
+DEFINE_PATCH_FUNCTION CHANGE_REGION_NAME
+	INT_VAR
+		found_region = 0
+	STR_VAR	
+		old_name = ""		// required
+		new_name = ""		// required
+	RET
+		found_region
+BEGIN
+	PATCH_IF STRING_LENGTH ~%old_name%~ == 0 || STRING_LENGTH ~%new_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun CHANGE_REGION_NAME called with arguments old_name:"%old_name%" and new_name:"%new_name%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_regions ARE_V10_REGIONS
+	PHP_EACH array_off_regions AS idx_region => offset_region BEGIN
+    	PATCH_IF found_region == 0 BEGIN
+    		READ_ASCII offset_region region_name (32) NULL
+      		PATCH_IF ~%region_name%~ STR_EQ ~%old_name%~ BEGIN
+        		SET found_region = offset_region
+			    WRITE_ASCIIE offset_region ~%new_name%~ (32)
+      		END
+    	END
+	END
+END
+
+////////////////////////////////////
+// Change the name of a container //
+////////////////////////////////////
+DEFINE_PATCH_FUNCTION CHANGE_CONTAINER_NAME
+	INT_VAR
+		found_container = 0
+	STR_VAR	
+		old_name = ""		// required
+		new_name = ""		// required
+	RET
+		found_container
+BEGIN
+	PATCH_IF STRING_LENGTH ~%old_name%~ == 0 || STRING_LENGTH ~%new_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun CHANGE_CONTAINER_NAME called with arguments old_name:"%old_name%" and new_name:"%new_name%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_containers ARE_V10_CONTAINERS
+	PHP_EACH array_off_containers AS idx_container => offset_container BEGIN
+    	PATCH_IF found_container == 0 BEGIN
+    		READ_ASCII offset_container container_name (32) NULL
+      		PATCH_IF ~%container_name%~ STR_EQ ~%old_name%~ BEGIN
+        		SET found_container = offset_container
+			    WRITE_ASCIIE offset_container ~%new_name%~ (32)
+      		END
+    	END
+	END
+END
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Changes the name of a door object v2                                                 //
+// This version was provided by G3 guest Gob Oafenplug - Thanks!                        //
+//                                                                                      //
+// Needed when they're named the same as the travel trigger region associated with them //
+// or else you can't close or lock the door via script                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION CHANGE_DOOR_NAME
+	INT_VAR
+		found_door = 0
+	STR_VAR	
+		old_name = ""		// required
+		new_name = ""		// required
+	RET
+		found_door
+BEGIN
+	PATCH_IF STRING_LENGTH ~%old_name%~ == 0 || STRING_LENGTH ~%new_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun CHANGE_DOOR_NAME called with arguments old_name:"%old_name%" and new_name:"%new_name%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_doors ARE_V10_DOORS
+	PHP_EACH array_off_doors AS idx_door => offset_door BEGIN
+    	PATCH_IF found_door == 0 BEGIN
+    		READ_ASCII offset_door name_door (32) NULL
+      		PATCH_IF ~%name_door%~ STR_EQ ~%old_name%~ BEGIN
+        		SET found_door = offset_door
+			    WRITE_ASCIIE offset_door ~%new_name%~ (32)
+      		END
+    	END
+	END
+END
+
+/////////////////
+// UNLOCK DOOR //
+/////////////////
+DEFINE_PATCH_FUNCTION UNLOCK_DOOR
+	INT_VAR
+		found_door = 0
+	STR_VAR	
+		door_name = ""		// required
+	RET
+		found_door
+BEGIN
+	PATCH_IF STRING_LENGTH ~%door_name%~ == 0 BEGIN
+    	PATCH_FAIL ~fun UNLOCK_DOOR called with arguments door_name:"%door_name%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_doors ARE_V10_DOORS
+	PHP_EACH array_off_doors AS idx_door => offset_door BEGIN
+    	PATCH_IF found_door == 0 BEGIN
+    		READ_ASCII offset_door name_door (32) NULL
+      		PATCH_IF ~%name_door%~ STR_EQ ~%door_name%~ BEGIN
+        		SET found_door = offset_door
+				READ_BYTE (offset_door + 0x0028) door_flags1 // 1 of 4
+				PATCH_IF ((door_flags1 BAND 0b00000010) = 0b00000010) BEGIN // door is locked
+					WRITE_BYTE (offset_door + 0x0028) (door_flags1 BAND 0b11111101)
+				END
+      		END
+    	END
+	END
+END
+
 ///////////////////////////////////////////////////////////////////////////////////
 //                                                                               //
 // F O N C T I O N S   A P P E L É E S   P A R   L A   P R O C É D U R E   T P 2 //
@@ -168,4 +402,5 @@ BEGIN
 		END				// of PATCH_IF (GW_clone_trigger = 1)
 	END 			// of PATCH_IF required parameters provided
 END				// of DEFINE_PATCH_FUNCTION
+
 

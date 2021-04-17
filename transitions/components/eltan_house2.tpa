@@ -50,7 +50,7 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 				lock_difficulty = 100
 			STR_VAR
 				door_name = ~Port3347~
-				door_open_sound = ~AMB_D22B~
+				door_open_sound = ~AMB_D21D~
 				door_key = ~#LKey03~
 		END
 

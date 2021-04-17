@@ -5,7 +5,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
-	INCLUDE ~%mod_root%/components/eltan_common.tpa~
+	ACTION_IF !((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_BEREGOST_NW"))) BEGIN
+		INCLUDE ~%mod_root%/components/eltan_common.tpa~
+	END
 
 	// Add the key he gives to the protagonist for their new house in front of the Ducal Palace
 	COPY_EXISTING ~TTKey01.itm~ ~override/#LKey01.itm~
@@ -47,15 +49,33 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				lock_difficulty = 100
 			STR_VAR
 				door_name = ~Port0006~
-				door_open_sound = ~AMB_D22B~
+				door_open_sound = ~AMB_D21D~
 				door_key = ~#LKey01~
 		END
 	BUT_ONLY_IF_IT_CHANGES
 
 	// Also need to add a new area that can be attached to the door
 	// if/when it is chosen as a reward
-	COPY ~%mod_root%/areas/#LBG0006.ARE~ ~override~
-	COPY ~%mod_root%/areas/#LBG0007.ARE~ ~override~
+	COPY_EXISTING ~%NWBaldursGate_House3_L1%.are~ ~override/#LBG0006.are~
+//		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~		// Add this back in when servant and other rooms fixed for BG1
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Male Townsfolk~ END
+		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_locked = 0 STR_VAR container_name = ~PlayerChest00~ END 
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0100~ new_name = ~Door0200~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0156~ new_name = ~Door0007~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0100~ new_name = ~Exit0200~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0156~ new_name = ~Exit0007~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door0007~ destination_area = ~#LBG0007~ entrance_name = ~Exit0006~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door0200~ destination_area = EVAL ~%NBaldursGate%~ entrance_name = ~Exit0006~ END
+	COPY_EXISTING ~%NWBaldursGate_House2_L2%.are~ ~override/#LBG0007.are~
+		WRITE_ASCII (AREA_SCRIPT) ~~
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Sleeping Man~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_locked = 0 STR_VAR container_name = ~Container 1~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0163~ new_name = ~Door#LBG0006~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0163~ new_name = ~Exit0006~ END
+		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door#LBG0006~ destination_area = ~#LBG0006~ entrance_name = ~Exit0007~ END
 
 	// Update the script used on all PC residences to include the one in front of the ducal palace
 	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
