@@ -12,7 +12,7 @@ The Transitions mod's main purpose is to provide seemless transitions between ca
 
 Progressing through to SoD or BGII areas of the game is accomplished by using a custom item provided by Duke Belt after the clean-up quests are finished or skipped.  Progressing through to ToB is accomplished by using the Amulet of Selderine provided by Queen Ellesmine.
 
-After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan and EET is loaded, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGEE and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
+After Sarevok has been defeated, the protagonist can take up residence at the Ducal Palace, thanks to Duke Belt.  If the protagonist rescued Duke Eltan, he will show his appreciation by awarding the keys to a home.  There is also the possibility for a number of new clean-up quests, depending upon which of Sarevok's followers have been previously eliminated.  BGEE and TotSC quests can be finished after Sarevok's death, giving the player control over the order of events.
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
@@ -28,9 +28,9 @@ Main Component - required for most, but not all, content
 Prevents the end of game transition to SoD after Sarevok's death  
 Prevents the end of game transition to ToB after Irenicus's death  
 Allows access to Duke Belt in the Ducal Palace for game advancement  
-To remain consistent with SoD, when SoD is present the protagonist is offered the room on the 3rd floor as well as the Korlasz Dungeon quest, both of which may be turned down  
-Also to remain consistent with SoD, after Sarevok is defeated Liia offers to recruit Imoen for magic training, the timing of which is up to the player  
-If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please
+To remain consistent with SoD, the protagonist is offered the room on the 3rd floor, which may be turned down
+Also to remain consistent with SoD, after Sarevok is defeated Liia offers to recruit Imoen for magic training, the timing of which is up to the player
+If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest (which can also be skipped), with no tour-guide Imoen, and allowing you to come and go as you please
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
 In EET, Duke Belt's item allows for skipping all or the remainder of SoD at almost any time during the campaign (there is a point of no escape toward the end)
 
@@ -79,7 +79,7 @@ Clean up the wounded from the thieves maze
 Requires Main Component and BG1EE or EET
 Remove Winski and Voleta from the thieves' maze and have Denkod inform the group of their whereabouts  
 If someone in the group wears Sarevok's armor or helm, Denkod will provide some comedic relief  
-NOTE: If you installed the 3rd component, Winski will disappear from the thieves' maze even if you don't install this component  
+NOTE: If you installed the clean-up quests component, Winski will disappear from the thieves' maze even if you don't install this component  
 This will overwrite EBG1 changes to Denkod if they are installed  
 
 ------------------------------------------------------------------------
@@ -87,7 +87,7 @@ Have Elminster make an appearance outside the Ducal Palace
 ------------------------------------------------------------------------
 Requires Main Component and BG1EE or EET
 Adds back unused original dialogue from BG1  
-Skipped if it's already installed via EBG1  
+Will use EBG1's version if available
 
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in front of Palace
@@ -120,7 +120,7 @@ Add waves of refugees to Baldur's Gate
 ------------------------------------------------------------------------
 Requires Main Component and BG1EE or EET
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import from EBG1.
-Skipped if it's already installed via EBG1.  
+Will use EBG1's version if available
 
 ------------------------------------------------------------------------
 Use abbreviated capture scene leading to BG2EE

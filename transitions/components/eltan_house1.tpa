@@ -68,11 +68,12 @@ DEFINE_ACTION_FUNCTION eltan_house1 BEGIN
 	// Also need to add a new area that can be attached to the door
 	// if/when it is chosen as a reward
 	COPY_EXISTING ~%FriendlyArmInn_JoiasHouse%.are~ ~override/#LBG3201.are~
-//		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~		// Add this back in when servant and other rooms fixed for BG1
+		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
 		WRITE_LONG (0x0048) 128 // Allow sleeping
 		LPF REMOVE_ACTOR STR_VAR actor_name = ~Joia~ END
+		LPF UNLOCK_ALL_CONTAINERS END
+		LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
 		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
-		LPF ALTER_AREA_CONTAINER INT_VAR flag_locked = 0 STR_VAR container_name = ~PlayerChest00~ END 
 		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door2300~ new_name = ~Door3200~ END
 		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit2300~ new_name = ~Exit3200~ END
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door3200~ destination_area = EVAL ~%HighHedge%~ entrance_name = ~Exit3201~ END
