@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
-	ACTION_IF !((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_BG_N")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE"))) BEGIN
+	ACTION_IF !((MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_BG_N")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_HEDGE")) OR (MOD_IS_INSTALLED ~%mod_root%.tp2~ (ID_OF_LABEL ~%mod_root%.tp2~ "#L-TRANSITIONS-ELTAN_HOUSE_BG_SW"))) BEGIN
 		INCLUDE ~%mod_root%/components/eltan_common.tpa~
 	END
 
@@ -53,7 +53,6 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 				door_open_sound = ~AMB_D21D~
 				door_key = ~#LKey03~
 		END
-
 	BUT_ONLY_IF_IT_CHANGES
 
 	// Also need to add a new area that can be attached to the door

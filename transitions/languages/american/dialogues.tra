@@ -660,3 +660,6 @@
 @2474	= ~Not at this time.~
 
 // 2475-77 up with Belt's initial dialogue in order to accommodate EBG1
+
+// String to display to notify the player they need the key for the new house with no door
+@2500	= ~The door is locked. You'll need a key to enter.~

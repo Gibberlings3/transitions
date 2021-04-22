@@ -9,9 +9,9 @@ IF
 THEN
 	RESPONSE #100
 		AddMapNote([1217.2715],@1013)
-		MoveContainerContents("BG0006*Container1","#LBG0006*PlayerChest00")
-		MoveContainerContents("BG0006*Container2","#LBG0006*Container2")
-		MoveContainerContents("BG0006*Container3","#LBG0006*Container3")
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container1","#LBG0006*PlayerChest00")
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container2","#LBG0006*Container2")
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container3","#LBG0006*Container3")
 		CloseDoor("Port0006")
 		SmallWait(1)
 		Lock("Port0006")
@@ -20,7 +20,7 @@ THEN
 		SmallWait(1)
 		SetGlobal("#L_HousePrepped","MYAREA",1)
 		// Try to move Rinnie
-		MoveGlobal("BG0008","Rinnie",[303.257])
+		MoveGlobal("%NBaldursGate_RinniesHouse_L1%","Rinnie",[303.257])
 		Continue()
 END
 

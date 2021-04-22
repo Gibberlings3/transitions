@@ -38,6 +38,7 @@ IF
 	OR(2)
 		AreaCheck("#LBG0006")
 		AreaCheck("#LBG3347")
+		AreaCheck("#LBG1107")
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ServantSpawned","MYAREA",1)
@@ -69,7 +70,6 @@ END
 // Will need to update this for every possible house award
 // OMG!  SAPIENT PEARWOOD!
 // Or busy servants ... who knows.
-// BD0103 won't exist if not SoD/EET, but I don't think it'll affect anything
 IF
 	AreaCheck("#LBD0103")	// Room in the palace
 	!Global("#L_PlayerChestLocation","GLOBAL",1)

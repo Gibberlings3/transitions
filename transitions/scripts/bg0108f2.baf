@@ -1,0 +1,13 @@
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Sets a global indicating that the house in Baldur's Gate SW (just in front of the FF HQ) //
+// is available for a reward                                                                //
+// Patched via eltan_house3.tpa                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("#L_HouseBGate1","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_HouseBGate1","GLOBAL",1)
+		Continue()
+END

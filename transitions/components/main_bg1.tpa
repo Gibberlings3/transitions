@@ -63,7 +63,7 @@ END
 ////////////////////////////////////////////////////
 // Now allowing this to happen in BG1 without SoD //
 ////////////////////////////////////////////////////
-// Place the servant in the custom SoD version of the third floor
+// Place the servant in the custom version of the third floor
 // This is a common script used in all PC personal quarters
 OUTER_SPRINT SOD_CHEST_TRANS ~~
 ACTION_IF GAME_INCLUDES ~sod~ BEGIN

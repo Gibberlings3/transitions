@@ -1,0 +1,17 @@
+//////////////////////////////////////////////
+// Updates needed for the house in Beregost //
+// To be put at the end of the file         //
+// Patched via eltan_house2.tpa             //
+//////////////////////////////////////////////
+
+IF
+	AreaCheck("#LBG1107")	// House in Beregost
+	!Global("#L_PlayerChestLocation","GLOBAL",5)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",5)
+		MoveContainerContents("#LBD0103*PlayerChest00","#LBG1107*0PlayerChest00") // #1 BG1 Room in Palace
+		%SOD_CHEST_TRANS%
+		SmallWait(1)
+		Continue()
+END

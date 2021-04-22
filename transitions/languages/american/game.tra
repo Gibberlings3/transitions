@@ -51,9 +51,10 @@ Weight: 2~
 // STRINGS NEEDED FOR CUSTOM KEYS FROM DUKE ELTAN //
 ////////////////////////////////////////////////////
 @1009	= ~<CHARNAME>'s House Key~
-@1010	= ~This is the key to <CHARNAME>'s house in Baldur's Gate.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
+@1010	= ~This is the key to <CHARNAME>'s house in North Baldur's Gate.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
 @1011	= ~This is the key to <CHARNAME>'s cabin in High Hedge.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
 @1012	= ~This is the key to <CHARNAME>'s house in Beregost.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
+@1047	= ~This is the key to <CHARNAME>'s house in SW Baldur's Gate.  It was given to <PRO_HIMHER> by Duke Eltan in appreciation for saving his life.~
 
 //////////////////////////////////////////
 // STRING NEEDED FOR PCs HOUSE MAP NOTE //
@@ -238,3 +239,5 @@ Area of Effect: 1 creature
 Saving Throw: None 
 
 This spell is a more potent version of the Cure Light Wounds spell. The priest lays <PRO_HISHER> hand upon a creature and heals 17 points of wound or other injury damage to the creature's body. This healing cannot affect noncorporeal, nonliving, or extraplanar creatures.~
+
+//@1047 UP WITH KEYS

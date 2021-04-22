@@ -37,25 +37,25 @@ In EET, Duke Belt's item allows for skipping all or the remainder of SoD at almo
 ------------------------------------------------------------------------
 New Bhaal-spawn power
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and BGEE or EET
 Use the "Sarevok died" movie as a dream sequence and award new bhaal-spawn power at the first rest
 
 ------------------------------------------------------------------------
 Sarevok's Equipment
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and BGEE or EET
 Give Sarevok his sword so we can better explain its movement between games  
 Add Sarevok's custom armor and helm from Tantalus
 NOTE: the sword will be confiscated by the Flaming Fist so it can in turn be stolen from the Ducal Palace as per SoD, however the PC will be compensated for the loss by Duke Belt  
 
 Option 1: Sarevok's equipment is equipped - this may make the final fight slightly more difficult  
 Option 2: Sarevok's equipment is just in his inventory - final fight will not be affected  
-Option 3: When Endless BG1 is installed, use how that mod handles Sarevok's equipment, otherwise use option 2
+Option 3: When Endless BGEE is installed, use how that mod handles Sarevok's equipment, otherwise use option 2
 
 ------------------------------------------------------------------------
 Add Clean Up Quests
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and BGEE or EET
 Add quests to bring in Sarevok's remaining supporters depending upon who hasn't already been dispatched  
 The Korlasz dungeon quest will be offered whether or not this component is installed.  
 Any and all clean-up quests, including Korlasz's Dungeon crawl if SoD is installed, can be skipped.  To skip all of them without being asked about the next and the next, ad nauseum, just reply that you're not a bounty hunter and that Belt will need to hire someone else.  
@@ -69,14 +69,14 @@ Option 4: Option 2 and gentler version of Tamoko's quest
 ------------------------------------------------------------------------
 Clean up townsfolk chatter with reference to Sarevok
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
-An import from Endless BG1 of changes to various townsfolk.  
+Requires Main Component and BGEE or EET
+An import from Endless BGEE of changes to various townsfolk.  
 Will use EBG1's version if available
 
 ------------------------------------------------------------------------
 Clean up the wounded from the thieves maze
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and BGEE or EET
 Remove Winski and Voleta from the thieves' maze and have Denkod inform the group of their whereabouts  
 If someone in the group wears Sarevok's armor or helm, Denkod will provide some comedic relief  
 NOTE: If you installed the clean-up quests component, Winski will disappear from the thieves' maze even if you don't install this component  
@@ -85,40 +85,48 @@ This will overwrite EBG1 changes to Denkod if they are installed
 ------------------------------------------------------------------------
 Have Elminster make an appearance outside the Ducal Palace
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
-Adds back unused original dialogue from BG1  
+Requires Main Component and BGEE or EET
+Adds back unused original dialogue from BGEE  
 Will use EBG1's version if available
 
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in front of Palace
 ------------------------------------------------------------------------
-Requires Main Component and EET
+Requires Main Component and BGEE or EET
 NOTE: Duke Eltan will only show up if he was safely delivered to the Harbor Master.  The reward for saving his life is a (one - no matter how many are installed as options) home the protagonist can call their own.  
 
-Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house.  The key will be among your possessions that are placed in Chateau Irenicus in BG2EE for you to find if you didn't sell it previously.  
+Once a house is selected in-game as the reward, it will be locked, the PC will be given a key, and any actors inside the house will be moved to another location.  The house's contents will remain the same.  If you sell the key, you in essence sell the house and all possessions inside.  If EET is installed, the key will be among your possessions that are placed in Chateau Irenicus in BG2EE for you to find if you didn't sell it previously.  
 
 This component prepares the 2nd house to the left of the Ducal Palace as one of the reward options.  
 
 ------------------------------------------------------------------------
 Duke Eltan's reward - Cabin in High Hedge
 ------------------------------------------------------------------------
-Requires Main Component and EET
-See note in component #7  
+Requires Main Component and BGEE or EET
+See note in component "House in front of Palace"
 
 This component adds the cabin in High Hedge as one of the reward options from Duke Eltan.  This house is used in various other mods (Ascalon's Questpack and Glam's NPC Pack), so you may want to not select it in-game as your reward if those mods are installed and still using it.  Installing it, however, shouldn't affect those mods.
 
 ------------------------------------------------------------------------
 Duke Eltan's reward - House in Beregost
 ------------------------------------------------------------------------
-Requires Main Component and EET
-See note in component #7  
+Requires Main Component and BGEE or EET
+See note in component "House in front of Palace"
 
 This component adds the large gray house in the upper west side of Beregost as one of the reward options from Duke Eltan.  
 
 ------------------------------------------------------------------------
+Duke Eltan's reward - House in front of Flaming Fist headquarters
+------------------------------------------------------------------------
+Requires Main Component and BGEE or EET
+See note in component "House in front of Palace"
+
+This component adds the house across from the Flaming Fist compound as one of the reward options from Duke Eltan.
+
+------------------------------------------------------------------------
 Add waves of refugees to Baldur's Gate
 ------------------------------------------------------------------------
-Requires Main Component and BG1EE or EET
+Requires Main Component and BGEE or EET
 Refugees will start arriving in front of the palace in waves, seven game-days apart starting a week after the death of Sarevok.  Each wave will increase the number of refugees, but all are in front of the palace so overall, this is more of a cosmetic thing and will by no means swamp the city with refugees as it is in SoD.  This is a slightly modified import from EBG1.
 Will use EBG1's version if available
 
@@ -137,7 +145,7 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-* Add a custom 3rd floor area that is compatibile with BG1 so the Liia component can be added there 
+* Add a custom 3rd floor area that is compatibile with BGEE so the Liia component can be added there 
 * Close any open quests that will be impossible to continue after Sarevok is dead
 * Clean-up quests should use the quest journal
 * Updated bhaal-spawn powers (mind shield and charm creature)
@@ -146,7 +154,7 @@ PLANNED FUTURE ENHANCEMENTS
 * Add group reactions to new dream
 * Put in jastey's palace treasurer
 * Allow access to a palace physician/cleric (Fenster?)
-* Check/Update all remaining BG1 NPCs
+* Check/Update all remaining BGEE NPCs
 	* - Update Inn rumors
 	* - Polish how the NPCs flee the Iron Throne HQ
 * Put in a regular travel region entrance to the Korlasz crypt to be accessable only during the quest
@@ -155,11 +163,11 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
 * Allow access to house in front of the palace during SoD prologue if chosen as Eltan's reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2EE, even as a cameo (like Ajantis)
-* Move BG1 personal chest contents to a stronghold chest with compliments of dukes when name is cleared
+* Make sure all NPCs that joined the PC during BGEE still have their equipment if they show up in Sod or BG2EE, even as a cameo (like Ajantis)
+* Move BGEE personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
 * Add a romance with Queen Ellesime
-* Move BG1/SoD personal chest contents to a pocket plane chest with comments by the imp
+* Move BGEE/SoD personal chest contents to a pocket plane chest with comments by the imp
 
 ------------------------------------------------------------------------
 COMPATIBILITY NOTES
@@ -169,7 +177,7 @@ There are no known compatability issues at this time
 ------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------
-If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-bg1/), do so before Transitions.  
+If installing EBG1 (https://www.gibberlings3.net/forums/forum/217-endless-BGEE/), do so before Transitions.  
 Install before BG1RE (https://www.gibberlings3.net/forums/forum/131-romantic-encounters-bg2/) in order to complete Scar Returns quest after Sarevok is defeated.  
 Transitions should be installed before NPC mods.  
 
@@ -266,7 +274,7 @@ The mod uses BAM files from Sarevok Wiederherstellung (the Sarevok Recovery Mod)
 
 http://www.baldursgate-refugium.de/mods/sarevok-wiederherstellung/
 
-Endless BG1 components are licensed under CC BY-NC-SA 3.0 and used with the permission of the mod's author, jastey.
+Endless BGEE components are licensed under CC BY-NC-SA 3.0 and used with the permission of the mod's author, jastey.
 
 https://www.gibberlings3.net/mods/other/endlessbg1/
 

@@ -254,6 +254,17 @@ REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/eltan_house2.tpa~
 LAF eltan_house2 END
 
+///////////////////////////////
+// DUKE ELTAN'S REWARD       //
+// HOUSE IN SW BALDUR'S GATE //
+///////////////////////////////
+BEGIN @30   // MOD 73
+LABEL "#L-TRANSITIONS-ELTAN_HOUSE_BG_SW"
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+INCLUDE ~transitions/components/eltan_house3.tpa~
+LAF eltan_house3 END
+
 
 /////////////////////////////////////////////// 
 // REFUGEES                                  //

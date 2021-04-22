@@ -15,25 +15,52 @@ DEFINE_ACTION_FUNCTION UPDATE_BCS
 		baf_location = ""		// like ~mymod/bafs/~
 		baf_name = ""			// like my_new_BG0146
 		bcs_name = ""			// like BG0146
+		using_tra = ""			// like ~%tra_loc%/%s/dialogues.tra~
 BEGIN
 	ACTION_IF FILE_EXISTS_IN_GAME ~%bcs_name%.BCS~ THEN BEGIN
 		ACTION_MATCH %action_taken% WITH 
-			1 BEGIN EXTEND_TOP ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ END
-			2 BEGIN	EXTEND_BOTTOM ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ END
+			1 BEGIN 
+				ACTION_IF STRING_LENGTH ~%using_tra%~ == 0 BEGIN
+					EXTEND_TOP ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ EVAL
+				END ELSE BEGIN
+					EXTEND_TOP ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ EVAL USING ~%using_tra%~
+				END
+			END
+
+			2 BEGIN	
+				ACTION_IF STRING_LENGTH ~%using_tra%~ == 0 BEGIN
+					EXTEND_BOTTOM ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ EVAL
+				END ELSE BEGIN
+					EXTEND_BOTTOM ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ EVAL USING ~%using_tra%~
+				END
+			END
+
 			0 BEGIN
-				COPY_EXISTING ~%bcs_name%.BCS~ ~override~
-					DECOMPILE_AND_PATCH BEGIN
-						APPEND_FILE TEXT ~%baf_location%%baf_name%.BAF~
-					END
-				BUT_ONLY_IF_IT_CHANGES
+				ACTION_IF STRING_LENGTH ~%using_tra%~ == 0 BEGIN
+					COPY_EXISTING ~%bcs_name%.BCS~ ~override~
+						DECOMPILE_AND_PATCH BEGIN
+							APPEND_FILE TEXT ~%baf_location%%baf_name%.BAF~
+						END
+					BUT_ONLY_IF_IT_CHANGES
+				END ELSE BEGIN
+					EXTEND_BOTTOM ~%bcs_name%.BCS~ ~%baf_location%%baf_name%.BAF~ EVAL USING ~%using_tra%~
+				END
 			END
 			DEFAULT // do nothing
 		END
 	END ELSE BEGIN
-		COMPILE EVALUATE_BUFFER ~%baf_location%%baf_name%.BAF~
-		ACTION_IF ~%baf_name%~ STR_EQ ~%bcs_name%~ = 0 THEN BEGIN
-			COPY ~override/%baf_name%.BCS~ ~override/%bcs_name%.BCS~
-			DELETE ~override/%baf_name%.BCS~
+		ACTION_IF STRING_LENGTH ~%using_tra%~ == 0 BEGIN
+			COMPILE EVALUATE_BUFFER ~%baf_location%%baf_name%.BAF~
+			ACTION_IF ~%baf_name%~ STR_EQ ~%bcs_name%~ = 0 THEN BEGIN
+				COPY ~override/%baf_name%.BCS~ ~override/%bcs_name%.BCS~
+				DELETE ~override/%baf_name%.BCS~
+			END
+		END ELSE BEGIN
+			COMPILE EVALUATE_BUFFER ~%baf_location%%baf_name%.BAF~ USING ~%using_tra%~
+			ACTION_IF ~%baf_name%~ STR_EQ ~%bcs_name%~ = 0 THEN BEGIN
+				COPY ~override/%baf_name%.BCS~ ~override/%bcs_name%.BCS~
+				DELETE ~override/%baf_name%.BCS~
+			END
 		END
 	END
 END

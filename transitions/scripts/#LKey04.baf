@@ -1,0 +1,14 @@
+///////////////////////////////////////////////////////////////////////////
+// Don't allow entrance into house with no door if the key isn't present //
+// This is to emulate having a door object                               //
+// Patched via eltan_house3.tpa                                          //
+///////////////////////////////////////////////////////////////////////////
+
+IF
+	Clicked([ANYONE])
+	!PartyHasItem("#LKey04")
+THEN
+	RESPONSE #100
+		DisplayStringNoName("Locked#LBG1107",@2500)  // The door is locked. You'll need a key to enter.
+END
+
