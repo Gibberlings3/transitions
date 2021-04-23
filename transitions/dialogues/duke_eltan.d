@@ -51,6 +51,7 @@ APPEND DELTAN
 		+ ~Global("#L_HouseBGate1","GLOBAL",1)~ + @2074	/* ~I'd prefer the one in front of the Ducal Palace.~ */ + BGATE1
 		+ ~Global("#L_HouseBeregost","GLOBAL",1)~ + @2072 /* ~I'd prefer the one in Beregost.~ */ + BEREGOST
 		+ ~Global("#L_HouseHHedge","GLOBAL",1)~ + @2073 /* ~I'd prefer the cabin in High Hedge.~ */ + HHEDGE
+		+ ~Global("#L_HouseBGate2","GLOBAL",1)~ + @2501 /* ~I'd prefer the one across from the Flaming Fist compound.~ */ + BGATE2
 	END
 
 	IF ~~ THEN BEGIN BEREGOST
@@ -75,6 +76,13 @@ APPEND DELTAN
 		= @2078 /* ~Here's your key.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_HouseBGate1","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
 		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate1","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0)~ + MATCH
+	END
+
+	IF ~~ THEN BEGIN BGATE2
+		SAY @2502 // ~I'm glad you selected that one.~
+		= @2078 /* ~Here's your key.~ */
+		IF ~~ THEN DO ~SetGlobal("#L_HouseBGate2","GLOBAL",2) GiveItemCreate("#LKey04",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
+		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate2","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0)~ + MATCH
 	END
 
 	IF ~~ THEN BEGIN MATCH

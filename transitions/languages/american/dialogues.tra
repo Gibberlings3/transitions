@@ -165,6 +165,8 @@
 @2072	= ~I'd prefer the one in Beregost.~
 @2073	= ~I'd prefer the cabin in High Hedge.~
 @2074	= ~I'd prefer the one in front of the Ducal Palace.~
+@2501 	= ~I'd prefer the one across from the Flaming Fist compound.~
+@2502	= ~I'm glad you selected that one.~
 @2075	= ~That's the large gray house on the upper west side.~
 @2076	= ~Ahh, a place in the woods.  Be careful not to bother the grumpy mage that will be your neighbor.~
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
@@ -663,3 +665,4 @@
 
 // String to display to notify the player they need the key for the new house with no door
 @2500	= ~The door is locked. You'll need a key to enter.~
+// @2501-2 up with Eltan's dialogue about houses
