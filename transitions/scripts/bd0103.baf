@@ -48,14 +48,15 @@ END
 
 IF
 	Global("#L_AcceptedRoom","GLOBAL",1)
-	!Global("#L_PlayerChestLocation","GLOBAL",5)
+	!Global("#L_PlayerChestLocation","GLOBAL",10)
 THEN
 	RESPONSE #100
-		SetGlobal("#L_PlayerChestLocation","GLOBAL",5)
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",10)
 		MoveContainerContents("#LBD0103*PlayerChest00","BD0103*PlayerChest00") // #1 BG1 Room in Palace
 		MoveContainerContents("#LBG0006*PlayerChest00","BD0103*PlayerChest00") // #2 House in front of Palace
 		MoveContainerContents("#LBG3201*PlayerChest00","BD0103*PlayerChest00") // #3 High Hedge
 		MoveContainerContents("#LBG3347*PlayerChest00","BD0103*PlayerChest00") // #4 Beregost
+		MoveContainerContents("#LBG1107*PlayerChest00","BD0103*PlayerChest00") // #5 House in front of FF HQ
 		SmallWait(1)
 		Continue()
 END

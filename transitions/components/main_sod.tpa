@@ -111,7 +111,8 @@ COPY_EXISTING ~BDSHKORJ.ITM~ ~override~
 COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
 	LPF ADD_AREA_REGION_TRIGGER
 		INT_VAR
-			ab_RT_Type = 1
+			ab_RT_Type = 2
+			ab_RT_Fbit = 256 
 			ab_RT_BbLX = 1356
 			ab_RT_BbLY = 532
 			ab_RT_BbHX = 1558
@@ -125,10 +126,47 @@ COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
 			ab_RT_Vx_Y_2 = 619
 			ab_RT_Vx_X_3 = 1540
 			ab_RT_Vx_Y_3 = 545
+			ab_RT_CuId = 30
 			ab_RT_Itxt = RESOLVE_STR_REF (@1028) /* ~Sealed exit from the Korlasz family crypt~ */
 		STR_VAR
-			ab_RT_Name = "#L_KorlaszExit"
+			ab_RT_Name = "#L_KorlaszSealed"
 	END
+	LPF ADD_AREA_REGION_TRIGGER
+		INT_VAR
+			ab_RT_Type = 2
+			ab_RT_Fbit = 256 
+			ab_RT_BbLX = 1356
+			ab_RT_BbLY = 532
+			ab_RT_BbHX = 1558
+			ab_RT_BbHY = 619
+			ab_RT_VxPr = 4
+			ab_RT_Vx_X_0 = 1356
+			ab_RT_Vx_Y_0 = 532
+			ab_RT_Vx_X_1 = 1368
+			ab_RT_Vx_Y_1 = 618
+			ab_RT_Vx_X_2 = 1558
+			ab_RT_Vx_Y_2 = 619
+			ab_RT_Vx_X_3 = 1540
+			ab_RT_Vx_Y_3 = 545
+			ab_RT_CuId = 30
+		STR_VAR
+			ab_RT_Name = "#L_KorlaszExit"
+			ab_RT_Dest = "BD0120"
+			ab_RT_EntN = "#Lfrom_BG0200"
+	END
+COPY_EXISTING ~BD0120.ARE~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+			fj_loc_x = 940
+			fj_loc_y = 1590
+			fj_orientation = 6
+		STR_VAR
+			fj_structure_type = "entrance"
+			fj_name = "#Lfrom_BG0200"
+	END
+	
+// Turn on the regions when doing the Korlasz quest
+EXTEND_TOP ~%NBaldursGate%.bcs~ ~%mod_root%/scripts/BG0200_SoD.baf~
 
 // New cut scene called from Duke Belt's dialogue for Korlasz quest
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut04.baf~

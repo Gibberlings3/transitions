@@ -1,8 +1,8 @@
-//////////////////////////////////////////////
-// Updates needed for the house in Beregost //
-// To be put at the end of the file         //
-// Patched via eltan_house2.tpa             //
-//////////////////////////////////////////////
+///////////////////////////////////////////
+// Updates needed for the house in SW BG //
+// To be put at the end of the file      //
+// Patched via eltan_house3.tpa          //
+///////////////////////////////////////////
 
 IF
 	AreaCheck("#LBG1107")	// House in Beregost

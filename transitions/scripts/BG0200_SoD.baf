@@ -1,0 +1,32 @@
+///////////////////////////////////////////////
+// Sets up the entrance into Korlasz dungeon //
+// Patched via main_sod.tpa                  //
+///////////////////////////////////////////////
+
+IF
+	Global("#L_SarvQuests","GLOBAL",8)
+	!Dead("bdkorlas")
+	!Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+	Global("#L_KorlaszOpen","MYAREA",0)
+THEN
+	RESPONSE #100
+		TriggerActivation("#L_KorlaszExit",TRUE)
+		TriggerActivation("#L_KorlaszSealed",FALSE)
+		SetGlobal("#L_KorlaszOpen","MYAREA",1)
+		Continue()
+END
+
+IF
+	OR(3)
+		GlobalGT("#L_SarvQuests","GLOBAL",8)
+		Dead("bdkorlas")
+		Global("BD_KORLASZ_SURRENDER","GLOBAL",1)
+	Global("#L_KorlaszClosed","MYAREA",0)
+THEN
+	RESPONSE #100
+		TriggerActivation("#L_KorlaszExit",FALSE)
+		TriggerActivation("#L_KorlaszSealed",TRUE)
+		SetGlobal("#L_KorlaszClosed","MYAREA",1)
+		Continue()
+END
+
