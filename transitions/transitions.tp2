@@ -180,6 +180,19 @@ INCLUDE ~transitions/components/quests3.tpa~
 LAF quests3 END
 
 
+//////////////////////////////////////////////////
+// CLOSE QUESTS THAT CAN NO LONGER BE COMPLETED //
+// Also makes sure that pub rumors don't start  //
+// ones that can't be closed out                //
+//////////////////////////////////////////////////
+BEGIN @21      // MOD 200
+DESIGNATED 200
+LABEL "#L-TRANSITIONS-CLOSE_QUESTS"
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @27
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
+INCLUDE ~transitions/components/close_quests.tpa~
+LAF close_quests END
+
 /////////////////////////////////////////////////////////
 // CLEAN UP TOWNFOLK CHATTER WITH REFERENCE TO SAREVOK //
 // This is jastey's code taken directly from her       //

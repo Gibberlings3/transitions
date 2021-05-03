@@ -78,8 +78,8 @@ THEN
 		ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT))
 		ActionOverride("%IMOEN_DV%",SetDialogue("BDIMOEN"))
 
-		ChangeEnemyAlly("%IMOEN_DV%",ALLY)  // Imoen
-//		ChangeSpecifics("%IMOEN_DV%",ALLIES)  // Imoen
+		ChangeEnemyAlly("%IMOEN_DV%",NEUTRAL)  // Imoen
+		ChangeSpecifics("%IMOEN_DV%",ALLIES)  // Imoen
 
 		MoveGlobal("bd6100","MINSC",[545.260])  // Minsc
 		ReallyForceSpellDeadRES("bdrejuve","minsc")  // No such index
@@ -90,8 +90,8 @@ THEN
 		ActionOverride("minsc",ChangeAIScript("",DEFAULT))
 		ActionOverride("minsc",SetDialogue("bdminsc"))
 
-		ChangeEnemyAlly("MINSC",ALLY)  // Imoen
-//		ChangeSpecifics("MINSC",ALLIES)  // Imoen
+		ChangeEnemyAlly("MINSC",NEUTRAL)  // Imoen
+		ChangeSpecifics("MINSC",ALLIES)  // Imoen
 
 		MoveGlobal("bd6100","DYNAHEIR",[485.280])  // Dynaheir
 		ReallyForceSpellRES("bdrejuve","dynaheir")  // No such index
@@ -102,8 +102,8 @@ THEN
 		ActionOverride("dynaheir",ChangeAIScript("",DEFAULT))
 		ActionOverride("dynaheir",SetDialogue("bddynahe"))
 
-		ChangeEnemyAlly("DYNAHEIR",ALLY)  // Imoen
-//		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
+		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)  // Imoen
+		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
 
 		MoveGlobal("bd6100","KHALID",[515.210])  // Khalid
 		ReallyForceSpellDeadRES("bdrejuve","khalid")  // No such index
@@ -114,8 +114,8 @@ THEN
 		ActionOverride("khalid",ChangeAIScript("",DEFAULT))
 		ActionOverride("khalid",SetDialogue("bdkhalid"))
 
-		ChangeEnemyAlly("KHALID",ALLY)  // Imoen
-//		ChangeSpecifics("KHALID",ALLIES)  // Imoen
+		ChangeEnemyAlly("KHALID",NEUTRAL)  // Imoen
+		ChangeSpecifics("KHALID",ALLIES)  // Imoen
 
 		MoveGlobal("bd6100","JAHEIRA",[450.250])  // Jaheira
 		ReallyForceSpellDeadRES("bdrejuve","jaheira")  // No such index
@@ -126,8 +126,8 @@ THEN
 		ActionOverride("jaheira",ChangeAIScript("",DEFAULT))
 		ActionOverride("jaheira",SetDialogue("bdjaheir"))
 
-		ChangeEnemyAlly("JAHEIRA",ALLY)  // Imoen
-//		ChangeSpecifics("JAHEIRA",ALLIES)  // Imoen
+		ChangeEnemyAlly("JAHEIRA",NEUTRAL)  // Imoen
+		ChangeSpecifics("JAHEIRA",ALLIES)  // Imoen
 
 		SmallWait(10)
 

@@ -666,3 +666,11 @@
 // String to display to notify the player they need the key for the new house with no door
 @2500	= ~The door is locked. You'll need a key to enter.~
 // @2501-2 up with Eltan's dialogue about houses
+
+/////////////////////
+// JOURNAL ENTRIES //
+/////////////////////
+@3000	= ~Tandem in Extremis
+I successfully confronted Sarevok in an old temple of Bhaal in the Undercity. His plans to ascend to godhood died with him.~
+@3001	= ~Afoul of the Law
+I cleared my name by exposing Sarevok as the true murderer of the Iron Throne leaders.  The Iron Fist should no longer be hounding my steps.~

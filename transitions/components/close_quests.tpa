@@ -2,20 +2,69 @@
 // Optional component that cleans up quests //
 //////////////////////////////////////////////
 
-DEFINE_ACTION_FUNCTION rumors BEGIN
+DEFINE_ACTION_FUNCTION close_quests BEGIN
+	// New journal entries to close out quests that were never designed to close
+	ACTION_IF GAME_IS ~eet~ BEGIN
+		ADD_JOURNAL EXISTING TITLE (#231400) @3000 USING ~%tra_loc%/%s/dialogues.tra~ // Tandem in Extremis
+		ADD_JOURNAL EXISTING TITLE (#231288) @3001 USING ~%tra_loc%/%s/dialogues.tra~ // Afoul of the law
+		ADD_JOURNAL EXISTING TITLE (#231396) #231470 // Slythe and Krystin
+	END ELSE BEGIN
+		ADD_JOURNAL EXISTING TITLE (#31400) @3000 USING ~%tra_loc%/%s/dialogues.tra~ // Tandem in Extremis
+		ADD_JOURNAL EXISTING TITLE (#31288) @3001 USING ~%tra_loc%/%s/dialogues.tra~ // Afoul of the law
+		ADD_JOURNAL EXISTING TITLE (#31396) #31470 // Slythe and Krystin
+	END
+	
 	// Close out never-ending BG1 quests started by rumors
-	COPY_EXISTING ~BG0108.BCS~ ~override~
+	// Used 31470 to close out the Slythe and Krystin quest so not erasing it at the palace
+	WITH_TRA ~%tra_loc%/%s/dialogues.tra~ BEGIN
+		COPY_EXISTING ~%NBaldursGate_DucalPalace_L1%.BCS~ ~override~
+			DECOMPILE_AND_PATCH BEGIN
+				PATCH_IF GAME_IS ~eet~ BEGIN
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231470)~ ~EraseJournalEntry(214701) EraseJournalEntry(227387) EraseJournalEntry(227388) EraseJournalEntry(227390) EraseJournalEntry(227391) EraseJournalEntry(227392) EraseJournalEntry(227394) EraseJournalEntry(227398) EraseJournalEntry(227399) EraseJournalEntry(227408) EraseJournalEntry(227409) EraseJournalEntry(227092) EraseJournalEntry(226925)~
+				END ELSE BEGIN
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(31470)~ ~EraseJournalEntry(14701) EraseJournalEntry(27387) EraseJournalEntry(27388) EraseJournalEntry(27390) EraseJournalEntry(27391) EraseJournalEntry(27392) EraseJournalEntry(27394) EraseJournalEntry(27398) EraseJournalEntry(27399) EraseJournalEntry(27408) EraseJournalEntry(27409) EraseJournalEntry(27092) EraseJournalEntry(26925)~
+				END
+			END
+		BUT_ONLY_IF_IT_CHANGES
+
+// Closing Tandem instead of deleting them
+// EraseJournalEntry(220597) EraseJournalEntry(226872) EraseJournalEntry(227505) EraseJournalEntry(227513)
+// EraseJournalEntry(20597) EraseJournalEntry(26872) EraseJournalEntry(27505) EraseJournalEntry(27513)
+		COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
+			DECOMPILE_AND_PATCH BEGIN
+				PATCH_IF GAME_IS ~eet~ BEGIN
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("#L_BG1SarevokDead","GLOBAL",1)~ ~SetGlobal("#L_BG1SarevokDead","GLOBAL",1) EraseJournalEntry(#231475) AddJournalEntry(@3000,QUEST_DONE)~
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231474)~ ~EraseJournalEntry(231474)  EraseJournalEntry(210004) EraseJournalEntry(226812) EraseJournalEntry(226871) EraseJournalEntry(226892) EraseJournalEntry(226962) EraseJournalEntry(226967) EraseJournalEntry(227091) EraseJournalEntry(227093) EraseJournalEntry(227094) EraseJournalEntry(227095) EraseJournalEntry(227096) EraseJournalEntry(227132) EraseJournalEntry(227190) EraseJournalEntry(227192) EraseJournalEntry(227201) EraseJournalEntry(227283) EraseJournalEntry(227284) EraseJournalEntry(227285) EraseJournalEntry(227286) EraseJournalEntry(227287) EraseJournalEntry(227327) EraseJournalEntry(227329) EraseJournalEntry(227330) EraseJournalEntry(227331) EraseJournalEntry(227332) EraseJournalEntry(227333) EraseJournalEntry(227339) EraseJournalEntry(227340) EraseJournalEntry(227351) EraseJournalEntry(227352) EraseJournalEntry(227387) EraseJournalEntry(227399) EraseJournalEntry(227488) EraseJournalEntry(227514) EraseJournalEntry(227387)~
+				END ELSE BEGIN
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("#L_BG1SarevokDead","GLOBAL",1)~ ~SetGlobal("#L_BG1SarevokDead","GLOBAL",1) EraseJournalEntry(#31475) AddJournalEntry(@3000,QUEST_DONE)~
+					REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(31474)~ ~EraseJournalEntry(31474) EraseJournalEntry(10004) EraseJournalEntry(26812) EraseJournalEntry(26871) EraseJournalEntry(26892) EraseJournalEntry(26962) EraseJournalEntry(26967) EraseJournalEntry(27091) EraseJournalEntry(27093) EraseJournalEntry(27094) EraseJournalEntry(27095) EraseJournalEntry(27096) EraseJournalEntry(27132) EraseJournalEntry(27190) EraseJournalEntry(27192) EraseJournalEntry(27201) EraseJournalEntry(27283) EraseJournalEntry(27284) EraseJournalEntry(27285) EraseJournalEntry(27286) EraseJournalEntry(27287) EraseJournalEntry(27327) EraseJournalEntry(27329) EraseJournalEntry(27330) EraseJournalEntry(27331) EraseJournalEntry(27332) EraseJournalEntry(27333) EraseJournalEntry(27339) EraseJournalEntry(27340) EraseJournalEntry(27351) EraseJournalEntry(27352) EraseJournalEntry(27387) EraseJournalEntry(27399) EraseJournalEntry(27488) EraseJournalEntry(27514) EraseJournalEntry(27387)~
+				END
+			END 
+		BUT_ONLY_IF_IT_CHANGES
+	END
+	
+	// Closing Slythe and Krystin right away since the party might not be working with Husam
+	COPY_EXISTING ~%BaldursGate_Undercellars%.BCS~ ~override~
 		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231470)~ ~EraseJournalEntry(231470) EraseJournalEntry(214701) EraseJournalEntry(227387) EraseJournalEntry(227388) EraseJournalEntry(227390) EraseJournalEntry(227391) EraseJournalEntry(227392) EraseJournalEntry(227394) EraseJournalEntry(227398) EraseJournalEntry(227399) EraseJournalEntry(227408) EraseJournalEntry(227409) EraseJournalEntry(227092) EraseJournalEntry(226925) EraseJournalEntry(226960)~
+			PATCH_IF GAME_IS ~eet~ BEGIN
+				REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~AddJournalEntry(231470,QUEST)~ ~AddJournalEntry(231470,QUEST_DONE)~
+			END ELSE BEGIN
+				REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~AddJournalEntry(31470,QUEST)~ ~AddJournalEntry(31470,QUEST_DONE)~
+			END
 		END
 	BUT_ONLY_IF_IT_CHANGES
-
-	COPY_EXISTING ~BG0125.BCS~ ~override~
-		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~EraseJournalEntry(231474)~ ~EraseJournalEntry(231474) EraseJournalEntry(220597) EraseJournalEntry(226872) EraseJournalEntry(227505) EraseJournalEntry(227513) EraseJournalEntry(210004) EraseJournalEntry(226812) EraseJournalEntry(226871) EraseJournalEntry(226892) EraseJournalEntry(226962) EraseJournalEntry(226967) EraseJournalEntry(227091) EraseJournalEntry(227093) EraseJournalEntry(227094) EraseJournalEntry(227095) EraseJournalEntry(227096) EraseJournalEntry(227132) EraseJournalEntry(227190) EraseJournalEntry(227192) EraseJournalEntry(227201) EraseJournalEntry(227283) EraseJournalEntry(227284) EraseJournalEntry(227285) EraseJournalEntry(227286) EraseJournalEntry(227287) EraseJournalEntry(227327) EraseJournalEntry(227329) EraseJournalEntry(227330) EraseJournalEntry(227331) EraseJournalEntry(227332) EraseJournalEntry(227333) EraseJournalEntry(227339) EraseJournalEntry(227340) EraseJournalEntry(227351) EraseJournalEntry(227352) EraseJournalEntry(227387) EraseJournalEntry(227399) EraseJournalEntry(227488) EraseJournalEntry(227514) EraseJournalEntry(227387)~
-		END
-	BUT_ONLY_IF_IT_CHANGES
-
-	// Make sure the rumors don't reopen closed quests - no new dialogue so no tra file
-	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/rumors.d~
+	
+	
+	
+	// Some quests might never close
+	ACTION_IF GAME_IS ~eet~ BEGIN
+		OUTER_SPRINT CLOSE_DORN_QUEST ~~~~~REPLACE_ACTION_TEXT %DORN_JOINED% ~AddJournalEntry(228458,QUEST)~ ~AddJournalEntry(228458,QUEST_DONE)~ ~~~~~
+//		OUTER_SET JOURNAL_CLOSING_AFOUL = 226843
+	END ELSE BEGIN
+		OUTER_SPRINT CLOSE_DORN_QUEST ~~~~~REPLACE_ACTION_TEXT %DORN_JOINED% ~AddJournalEntry(28458,QUEST)~ ~AddJournalEntry(28458,QUEST_DONE)~ ~~~~~
+//		OUTER_SET JOURNAL_CLOSING_AFOUL = 26843
+	END
+	
+	// Make sure the rumors don't reopen closed quests
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/rumors.d~ USING ~%tra_loc%/%s/dialogues.tra~
 END

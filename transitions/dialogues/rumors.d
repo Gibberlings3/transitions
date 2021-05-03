@@ -65,7 +65,7 @@ ALTER_TRANS FTOWBA
 	BEGIN "ACTION" ~~ END
 
 // This isn't a rumor - but it will never close so putting it in as completed
-ALTER_TRANS DORNJ
-	BEGIN 1117 1118 END
-	BEGIN 0 END
-	BEGIN "ACTION" ~AddJournalEntry(228458,QUEST_DONE)~ END
+%CLOSE_DORN_QUEST%
+
+// This also isn't a rumor but will only close if the group is captured
+ADD_TRANS_ACTION BELT BEGIN 7 END BEGIN 0 END ~AddJournalEntry(@3001,QUEST_DONE)~
