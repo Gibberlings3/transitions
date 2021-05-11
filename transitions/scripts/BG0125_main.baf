@@ -13,6 +13,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_BG1SarevokDead","GLOBAL",1)
 		SetGlobal("C#st_BG1End","GLOBAL",1)
+		SetGlobal("SarevokBehavior","GLOBAL",5)
 		TriggerActivation("Door0123",TRUE)
 		StartMovie("ENDMOVIE")
 		Continue()
