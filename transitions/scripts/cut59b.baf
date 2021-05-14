@@ -63,7 +63,7 @@ THEN
 		AddSpecialAbility("SPIN102")
 		AddSpecialAbility("SPIN103")
 		AddSpecialAbility("SPIN103")
-	    AddSpecialAbility("SPIN200")  // Cure Serious Wounds
+	    AddSpecialAbility("#LPWR01")  // Mind Shield
 		RestParty()
 		Continue()
 END
@@ -84,7 +84,7 @@ THEN
 		AddSpecialAbility("SPIN105")
 		AddSpecialAbility("SPIN106")
 		AddSpecialAbility("SPIN106")
-		AddSpecialAbility("SPIN202")  // Cause Serious Wounds
+		AddSpecialAbility("#LPWR02")  // Charm Creature
 		RestParty()
 		Continue()
 END

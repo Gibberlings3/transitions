@@ -7,7 +7,7 @@ DEFINE_ACTION_FUNCTION main_bg2 BEGIN
   ACTION_IF (MOD_IS_INSTALLED ~transitions.tp2~ (ID_OF_LABEL ~transitions.tp2~ ~#L-TRANSITIONS-BG1_DREAM~)) BEGIN
   	COPY_EXISTING ~CUT41I.BCS~ ~override~
   		DECOMPILE_AND_PATCH BEGIN
-  			REPLACE_TEXTUALLY ~ReallyForceSpell(Player1,LOSE_ALL)~ ~~~~~ReallyForceSpell(Player1,LOSE_ALL) RemoveSpell(~SPIN200~) RemoveSpell(~SPIN202~)~~~~~
+  			REPLACE_TEXTUALLY ~ReallyForceSpell(Player1,LOSE_ALL)~ ~~~~~ReallyForceSpell(Player1,LOSE_ALL) RemoveSpell(~#LPWR01~) RemoveSpell(~#LPWR02~)~~~~~
   		END
   	BUT_ONLY_IF_IT_CHANGES
   END

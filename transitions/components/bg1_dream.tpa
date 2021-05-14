@@ -5,10 +5,20 @@
 
 DEFINE_ACTION_FUNCTION bg1_dream BEGIN
 	// Build a new spell for the good guys (and neutrals)
-	COPY ~%mod_root%/objects/#LPWR01B.BAM~ ~override~
-	COPY ~%mod_root%/objects/#LPWR01C.BAM~ ~override~
-	COPY ~%mod_root%/objects/#LPWR01.SPL~ ~override~
+	COPY ~%mod_root%/objects/#LPWR01B.BAM~ ~override~	// Blue version of spwi506B
+	COPY ~%mod_root%/objects/#LPWR01C.BAM~ ~override~	// Blue version of spwi506c
+
+	COPY ~%mod_root%/objects/BLANK_INNATE.SPL~ ~override\#LPWR01.SPL~
+		WRITE_LONG 0x0008 23748	// Mind Shield strref in all campaigns
 		SAY 0x0050 @1050	// Mind shield description (modified version of Greenstone Amulet description)
+		WRITE_ASCII 0x003a ~#LPWR01C~
+		LPF ALTER_SPELL_HEADER
+			INT_VAR
+				header = 1
+				target = 5 // Caster
+			STR_VAR
+				icon = ~#LPWR01B~
+		END
 		
 	COPY_EXISTING ~AMUL17.ITM~ ~override~
 		LPF ITEM_EFFECT_TO_SPELL
@@ -20,30 +30,31 @@ DEFINE_ACTION_FUNCTION bg1_dream BEGIN
 				new_itm_spl = ~#LPWR01.SPL~
 		END
 	BUT_ONLY_IF_IT_CHANGES
-
-//    ADD_SPELL ~#LPwr01~ type level idsName patch list [ IF_EXISTING patch list END ] [ ON_DISABLE patch list END ] 
 	
-	/*
-	greenstone amulet icon = CAMUL17.bam, IAMUL17.BAM
-	this bam isn't used in BGEE = SPCL904b.bam
-	SPIN153.BAM LOOKS LIKE A HELMET MAYBE
-spin649.bam is pretty close to head with circle around it but only in gold - might be what's used in portrait
-sppr405a-c.bam is close but not a full circle - same as spwi506a-c
-	it's the red icon for mental domination - would be good if it were blue
-sppr730a-c.bam is also close but not quite and is also red	=========================================
-	ITEM_EFFECT_TO_SPELL: copies all extended effects from the current item to the first extended header of a spell. This is a PATCH macro and function.
-
-    SET type to the header type to copy the effect from (use 99 to specify ’all types’).
-    SET header to number of extended header the effect should be copied from (use 99 to specify ’every header’).
-    SET insert_point to the index into the spell file at which the effects should be inserted. A value of 0 will have the effects inserted as the first effects of the spell. Effects are inserted as the last effects by default.
-    SPRINT new_itm_spl to a spell you want to copy effects to. 
-	*/
-	ACTION_IF NOT GAME_IS ~eet~ BEGIN
-		COPY ~%mod_root%/objects/SPPR401C.BAM~ ~override~
-		COPY ~%mod_root%/objects/SPIN200.SPL~ ~override~
-		COPY ~%mod_root%/objects/SPPR414C.BAM~ ~override~
-		COPY ~%mod_root%/objects/SPIN202.SPL~ ~override~
-	END
+	// Build a new spell for the not-so good guys
+	COPY ~%mod_root%/objects/BLANK_INNATE.SPL~ ~override\#LPWR02.SPL~
+		SAY 0x0008 @1051	// Charm Creatue
+		SAY 0x0050 @1052	// Charm Creature description (modified version of Algernon's Cloak description)
+		WRITE_ASCII 0x003a ~SPWI104C~
+		LPF ALTER_SPELL_HEADER
+			INT_VAR
+				header = 1
+				target = 1 // Living Target
+				range = 60
+			STR_VAR
+				icon = ~SPWI104B~
+		END
+		
+	COPY_EXISTING ~CLCK08.ITM~ ~override~
+		LPF ITEM_EFFECT_TO_SPELL
+			INT_VAR
+				type = 99
+				header = 99
+				insert_point = 0
+			STR_VAR
+				new_itm_spl = ~#LPWR02.SPL~
+		END
+	BUT_ONLY_IF_IT_CHANGES
 
    // New dream and bhaal-spawn power
    EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~

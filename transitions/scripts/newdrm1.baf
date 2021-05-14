@@ -13,7 +13,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
 		StartMovie("ENDMOVIE")
-	    AddSpecialAbility("SPIN200")  // Cure Serious Wounds
+	    AddSpecialAbility("#LPWR01")  // Mind Shield
 		RestParty()
 		Continue()
 END
@@ -26,7 +26,7 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
 		StartMovie("ENDMOVIE")
-		AddSpecialAbility("SPIN202")  // Cause Serious Wounds
+		AddSpecialAbility("#LPWR02")  // Charm Creature
 		RestParty()
 		Continue()
 END

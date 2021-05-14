@@ -148,7 +148,6 @@ PLANNED FUTURE ENHANCEMENTS
 * Add a custom 3rd floor area that is compatibile with BGEE so the Liia component can be added there 
 * Close any open quests that will be impossible to continue after Sarevok is dead
 * Clean-up quests should use the quest journal
-* Updated bhaal-spawn powers (mind shield and charm creature)
 * Use scrolling text box mechanism before dream movie starts or after it ends with narration
 * Narration added to modified start of SoD scrolling text
 * Add group reactions to new dream

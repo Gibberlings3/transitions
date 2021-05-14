@@ -253,3 +253,11 @@ Area of Effect: The caster
 Saving Throw: None
 
 Confers the caster protection against charm, confusion, fear, domination, ESP, Detect Alignment, hold, stun, psionics, sleep, and feeblemind, much like the 8th-level wizard spell Mind Blank. However, the protection effect will only last for 1 turn.~
+
+@1051	= ~Charm Creature~
+@1052	= ~Charm Creature
+
+Range: 40 ft.
+Duration: 12 hours
+Area of Effect: 1 creature
+Saving Throw: Breath at -1 negates~
