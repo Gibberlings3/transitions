@@ -227,6 +227,7 @@ CREDITS
 	- modified version of refugees 
 * Bubb and CamDawg for helping me get through a cut-scene/override fiasco, arrays syntax, and showing me that EVAL EVAL is an actual thing (who'd a thunk!) - LOVE YOU FOREVER!!!
 * Bubb again for showing me how to fix TriggerOverride. Thank you thank you thank you!!!
+* Gwendolyne, Bartimaeus and kjeron for the help on my first custom innate spell
 * Mike1072 for help with the legal stuff
 * Thank you beta testers and proofreaders!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions

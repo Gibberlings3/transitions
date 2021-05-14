@@ -198,12 +198,6 @@ Every day, more refugees driven from their homes by the servants of Caelar Argen
 
 A tenday after you've settled into what would seem a normal life, you enter the Ducal Palace to check up on your friend Imoen, your thoughts troubled. You wonder what effect Caelar's crusade will have on her, you, and Baldur's Gate, little knowing how close at hand the answer is...~
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// NEW FOR VERSION 0.4
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /////////////////////////////////////////////////////
 // STRINGS NEEDED TO IMPORT BG2 ITEMS INTO BG1/SOD //
 /////////////////////////////////////////////////////
@@ -226,6 +220,9 @@ Requires:
 
 Weight: 10~
 
+///////////////////////////
+// OLD BHAALSPAWN POWERS //
+///////////////////////////
 @1045	= ~Cure Serious Wounds~
 @1046	= ~Cure Serious Wounds
 (Necromancy)
@@ -240,4 +237,19 @@ Saving Throw: None
 
 This spell is a more potent version of the Cure Light Wounds spell. The priest lays <PRO_HISHER> hand upon a creature and heals 17 points of wound or other injury damage to the creature's body. This healing cannot affect noncorporeal, nonliving, or extraplanar creatures.~
 
-//@1047 UP WITH KEYS
+////////////////////////
+// @1047 UP WITH KEYS //
+////////////////////////
+
+///////////////////////////
+// NEW BHAALSPAWN POWERS //
+///////////////////////////
+@1050	= ~Mind Shield
+
+Sphere: Protection 
+Range: 0 
+Duration: 1 turn
+Area of Effect: The caster
+Saving Throw: None
+
+Confers the caster protection against charm, confusion, fear, domination, ESP, Detect Alignment, hold, stun, psionics, sleep, and feeblemind, much like the 8th-level wizard spell Mind Blank. However, the protection effect will only last for 1 turn.~
