@@ -67,6 +67,7 @@ COPY ~%mod_root%/objects/#LDRM4.2da~ ~override~
 COPY ~%mod_root%/objects/#LDRM5.2da~ ~override~
 COPY ~%mod_root%/objects/#LDRM6.2da~ ~override~
 COPY ~%mod_root%/objects/#LDRM7.2da~ ~override~
+EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/setnextdream.baf~
 EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/forcedrms.baf~
 
 ////////////////////////////////////////////////////

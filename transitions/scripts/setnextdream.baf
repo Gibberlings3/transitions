@@ -1,0 +1,65 @@
+////////////////////////////////////////////////////////////////
+// Force chapter dreams to happen before the end of the game  //
+// The easiest way to do that is to interrupt the first rest  //
+// Patched via main_bg1.tpa                                   //
+////////////////////////////////////////////////////////////////
+IF
+	GlobalLT("Dream","GLOBAL",2)
+	Global("Chapter","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",2)
+		SetGlobal("Dream","GLOBAL",2)
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",3)
+	Global("Chapter","GLOBAL",3)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",3)
+		SetGlobal("Dream","GLOBAL",3)
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",4)
+	Global("Chapter","GLOBAL",4)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",4)
+		SetGlobal("Dream","GLOBAL",4)
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",5)
+	Global("Chapter","GLOBAL",5)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",5)
+		SetGlobal("Dream","GLOBAL",5)
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",6)
+	Global("Chapter","GLOBAL",6)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",6)
+		SetGlobal("Dream","GLOBAL",6)
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",7)
+	Global("Chapter","GLOBAL",7)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ForceDream","GLOBAL",7)
+		SetGlobal("Dream","GLOBAL",7)
+		Continue()
+END
+
