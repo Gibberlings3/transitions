@@ -9,7 +9,7 @@ IF
 THEN
 	RESPONSE #100
 		StartMovie("ENDMOVIE")
-		SmallWait(2)
+		SmallWait(2)			// Without this, the Textscreen in the next block won't show up for some reason
 		Continue()
 END
 
