@@ -1,14 +1,12 @@
 ////////////////////////////////////////////////////////////////
 // Interrupt the group's first rest after Sarevok is defeated //
 // Play ENDMOVIE and grant PC new bhaal-spawn power           //
-// Patched via main0.tpa                                      //
+// Patched via bg1_dream.tpa                                  //
 ////////////////////////////////////////////////////////////////
 IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_Dream1","GLOBAL",0)
-	OR(2)
-		Alignment(Player1,MASK_GOOD)
-		Alignment(Player1,MASK_GENEUTRAL)
+	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
@@ -21,7 +19,7 @@ END
 IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_Dream1","GLOBAL",0)
-	Alignment(Player1,MASK_EVIL)
+	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
