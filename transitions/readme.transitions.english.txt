@@ -145,28 +145,27 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-* Add a custom 3rd floor area that is compatibile with BGEE so the Liia component can be added there 
-* Close any open quests that will be impossible to continue after Sarevok is dead
-* Clean-up quests should use the quest journal
-* Use scrolling text box mechanism before dream movie starts or after it ends with narration
-* Narration added to modified start of SoD scrolling text
+* Add narration to new dream scrolling text box
 * Add group reactions to new dream
+* Change dialogue around Imoen's traning for jastey
+* Clean-up quests should use the quest journal
+* Narration added to modified start of SoD scrolling text
 * Put in jastey's palace treasurer
 * Allow access to a palace physician/cleric (Fenster?)
 * Check/Update all remaining BGEE NPCs
 	* - Update Inn rumors
 	* - Polish how the NPCs flee the Iron Throne HQ
-* Put in a regular travel region entrance to the Korlasz crypt to be accessable only during the quest
 * Add better Korlasz loot to stores if quest is skipped
-* Add a romance with Duke Eltan
 * Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
-* Allow access to house in front of the palace during SoD prologue if chosen as Eltan's reward
+* Allow access to houses in town of Baldur's Gate during SoD prologue if chosen as Eltan's reward
 * Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
+* Make sure chest moves to/from house and camps properly
 * Make sure all NPCs that joined the PC during BGEE still have their equipment if they show up in Sod or BG2EE, even as a cameo (like Ajantis)
 * Move BGEE personal chest contents to a stronghold chest with compliments of dukes when name is cleared
 * Clean up unique items that might be duplicated due to playing areas out of normal sequence
-* Add a romance with Queen Ellesime
 * Move BGEE/SoD personal chest contents to a pocket plane chest with comments by the imp
+* (EET) Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (like Ajantis)  - this might be a tweak instead
+* Add a "continue the adventure" ending with Bhaalspawn powers intact, continue play after 'ending'
 
 ------------------------------------------------------------------------
 COMPATIBILITY NOTES
