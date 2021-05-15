@@ -568,7 +568,7 @@ CHAIN
 		== LIIA IF ~InMyArea("LIIA")~ @2257 /* ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~ */
 	END
 	+ ~PartyHasItem("BDSHBHR")~ + @2258 /* ~Yes, I found some on Bhaal~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BHAAL_BOOKS_REWARD
-	+ ~!PartyHasItem("BDSHBHR")~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
+	+ ~~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
 
 CHAIN 
 	IF ~~ THEN BELT BHAAL_BOOKS_REWARD
