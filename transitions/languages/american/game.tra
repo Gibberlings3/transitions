@@ -190,6 +190,9 @@ Weight: 1~
 @1040	= ~Broken Gift from Duke Belt~
 @1041	= ~This is what is left of the gift given to you by Duke Belt for your service to Baldur's Gate.  It is beyond repair.~
 
+/////////////////////////
+// ALTERNATE SOD INTRO //
+/////////////////////////
 @1042	= ~Korlasz is defeated, and the last of Sarevok's influence died with her. Your foster father, Gorion, has been avenged. All those who helped you thwart your half-brother's schemes drift away from you, returning to their lives. Even Imoen is busy, for the most part, with her magical studies with Grand Duke Liia Jannath.  For the first time since you left Candlekeep, you have the opportunity to reflect on the astonishing turns your life has taken.
 
 Though you are feted by the rulers of Baldur's Gate, a sense of unease plagues you. You can't help but hear the rumors, the whispers that you share the same dark blood as Sarevok. Some hint you killed your half-brother not for the good of the city, but so you could usurp his place and his power. For the moment, however, your persecutors' voices are drowned out by an ever-growing number of others with more immediate concerns.
@@ -261,3 +264,8 @@ Range: 40 ft.
 Duration: 12 hours
 Area of Effect: 1 creature
 Saving Throw: Breath at -1 negates~
+
+//////////////////////////////
+// NEW DREAM SCROLLING TEXT //
+//////////////////////////////
+@1053 = ~As you try to take a well deserved rest after defeating Sarevok and his plans for the Sword Coast, your sleep is troubled with visions of his descent to oblivion. Alanzo's prophecies echo in your troubled mind. Just how many children did Bhaal spawn in his bid for ressurection? How many more of your siblings will you need to face?~

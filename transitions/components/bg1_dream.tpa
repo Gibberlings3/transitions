@@ -56,12 +56,16 @@ DEFINE_ACTION_FUNCTION bg1_dream BEGIN
 		END
 	BUT_ONLY_IF_IT_CHANGES
 
-   // New dream and bhaal-spawn power
-   EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
+	// New dream and bhaal-spawn power
+	OUTER_SET STRREF_DRMTXT = RESOLVE_STR_REF(@1053)
+	COPY ~%mod_root%/objects/#LDRM1.2DA~ ~override~
+		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~DREAM_TEXT~ ~%STRREF_DRMTXT%~
+	COPY ~%mod_root%/objects/#LDRM1.MOS~ ~override~
+	EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
 
-   COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
-      DECOMPILE_AND_PATCH BEGIN
-         REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~StartMovie("ENDMOVIE")~ ~~ 
-      END
+    COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~StartMovie("ENDMOVIE")~ ~~ 
+		END
 END
 

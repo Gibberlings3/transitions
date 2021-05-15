@@ -6,11 +6,21 @@
 IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_Dream1","GLOBAL",0)
+THEN
+	RESPONSE #100
+		StartMovie("ENDMOVIE")
+		SmallWait(2)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_Dream1","GLOBAL",0)
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
-		StartMovie("ENDMOVIE")
+		TextScreen("#LDRM1")
 	    AddSpecialAbility("#LPWR01")  // Mind Shield
 		RestParty()
 		Continue()
@@ -23,7 +33,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_Dream1","GLOBAL",1)
-		StartMovie("ENDMOVIE")
+		TextScreen("#LDRM1")
 		AddSpecialAbility("#LPWR02")  // Charm Creature
 		RestParty()
 		Continue()
