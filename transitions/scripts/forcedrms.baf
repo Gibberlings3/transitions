@@ -1,0 +1,160 @@
+////////////////////////////////////////////////////////////////
+// Force chapter dreams to happen before the end of the game  //
+// The easiest way to do that is to interrupt the first rest  //
+// Patched via main_bg1.tpa                                   //
+////////////////////////////////////////////////////////////////
+IF
+	GlobalLT("Dream","GLOBAL",2)
+	GlobalGT("Chapter","GLOBAL",1)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM2")
+		SetGlobal("Dream","GLOBAL",2)
+		AddSpecialAbility("SPIN101")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",2)
+	GlobalGT("Chapter","GLOBAL",1)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM2")
+		SetGlobal("Dream","GLOBAL",2)
+		AddSpecialAbility("SPIN104")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",3)
+	GlobalGT("Chapter","GLOBAL",2)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM3")
+		SetGlobal("Dream","GLOBAL",3)
+		AddSpecialAbility("SPIN101")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",3)
+	GlobalGT("Chapter","GLOBAL",2)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM3")
+		SetGlobal("Dream","GLOBAL",3)
+		AddSpecialAbility("SPIN104")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",4)
+	GlobalGT("Chapter","GLOBAL",3)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM4")
+		SetGlobal("Dream","GLOBAL",4)
+		AddSpecialAbility("SPIN102")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",4)
+	GlobalGT("Chapter","GLOBAL",3)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM4")
+		SetGlobal("Dream","GLOBAL",4)
+		AddSpecialAbility("SPIN105")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",5)
+	GlobalGT("Chapter","GLOBAL",4)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM5")
+		SetGlobal("Dream","GLOBAL",5)
+		AddSpecialAbility("SPIN102")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",5)
+	GlobalGT("Chapter","GLOBAL",4)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM5")
+		SetGlobal("Dream","GLOBAL",5)
+		AddSpecialAbility("SPIN105")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",6)
+	GlobalGT("Chapter","GLOBAL",5)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM6")
+		SetGlobal("Dream","GLOBAL",6)
+		AddSpecialAbility("SPIN103")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",6)
+	GlobalGT("Chapter","GLOBAL",5)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM6")
+		SetGlobal("Dream","GLOBAL",6)
+		AddSpecialAbility("SPIN106")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",7)
+	GlobalGT("Chapter","GLOBAL",6)
+	ReputationGT(Player1,9)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM7")
+		SetGlobal("Dream","GLOBAL",7)
+		AddSpecialAbility("SPIN103")
+		RestParty()
+		Continue()
+END
+
+IF
+	GlobalLT("Dream","GLOBAL",7)
+	GlobalGT("Chapter","GLOBAL",6)
+	ReputationLT(Player1,10)
+THEN
+	RESPONSE #100
+		TextScreen("#LDRM7")
+		SetGlobal("Dream","GLOBAL",7)
+		AddSpecialAbility("SPIN106")
+		RestParty()
+		Continue()
+END

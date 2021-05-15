@@ -60,6 +60,15 @@ END ELSE BEGIN
 	END
 END
 
+// Force chapter dreams at first rest so we're not ending BG1 and getting Chapter 6's dream
+COPY ~%mod_root%/objects/#LDRM2.2da~ ~override~
+COPY ~%mod_root%/objects/#LDRM3.2da~ ~override~
+COPY ~%mod_root%/objects/#LDRM4.2da~ ~override~
+COPY ~%mod_root%/objects/#LDRM5.2da~ ~override~
+COPY ~%mod_root%/objects/#LDRM6.2da~ ~override~
+COPY ~%mod_root%/objects/#LDRM7.2da~ ~override~
+EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/forcedrms.baf~
+
 ////////////////////////////////////////////////////
 // Now allowing this to happen in BG1 without SoD //
 ////////////////////////////////////////////////////
