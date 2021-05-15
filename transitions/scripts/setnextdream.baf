@@ -5,17 +5,18 @@
 ////////////////////////////////////////////////////////////////
 IF
 	GlobalLT("Dream","GLOBAL",2)
-	Global("Chapter","GLOBAL",2)
+	GlobalGT("Chapter","GLOBAL",1)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",2)
 		SetGlobal("Dream","GLOBAL",2)
-		Continue()
 END
 
 IF
 	GlobalLT("Dream","GLOBAL",3)
-	Global("Chapter","GLOBAL",3)
+	GlobalGT("Chapter","GLOBAL",2)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",3)
@@ -25,7 +26,8 @@ END
 
 IF
 	GlobalLT("Dream","GLOBAL",4)
-	Global("Chapter","GLOBAL",4)
+	GlobalGT("Chapter","GLOBAL",3)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",4)
@@ -35,7 +37,8 @@ END
 
 IF
 	GlobalLT("Dream","GLOBAL",5)
-	Global("Chapter","GLOBAL",5)
+	GlobalGT("Chapter","GLOBAL",4)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",5)
@@ -45,7 +48,8 @@ END
 
 IF
 	GlobalLT("Dream","GLOBAL",6)
-	Global("Chapter","GLOBAL",6)
+	GlobalGT("Chapter","GLOBAL",5)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",6)
@@ -55,7 +59,8 @@ END
 
 IF
 	GlobalLT("Dream","GLOBAL",7)
-	Global("Chapter","GLOBAL",7)
+	GlobalGT("Chapter","GLOBAL",6)
+	Global("#L_ForceDream","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",7)
