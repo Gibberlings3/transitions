@@ -21,7 +21,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",3)
 		SetGlobal("Dream","GLOBAL",3)
-		Continue()
 END
 
 IF
@@ -32,7 +31,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",4)
 		SetGlobal("Dream","GLOBAL",4)
-		Continue()
 END
 
 IF
@@ -43,7 +41,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",5)
 		SetGlobal("Dream","GLOBAL",5)
-		Continue()
 END
 
 IF
@@ -54,7 +51,6 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",6)
 		SetGlobal("Dream","GLOBAL",6)
-		Continue()
 END
 
 IF
@@ -65,6 +61,5 @@ THEN
 	RESPONSE #100
 		SetGlobal("#L_ForceDream","GLOBAL",7)
 		SetGlobal("Dream","GLOBAL",7)
-		Continue()
 END
 
