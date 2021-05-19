@@ -4,6 +4,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION bg1_dream BEGIN
+	// Copy dream narration wav file to override\#LPWR01
+	COPY ~%mod_root%/objects/#LPWR01.WAV~ ~override~
+
 	// Build a new spell for the good guys (and neutrals)
 	COPY ~%mod_root%/objects/#LPWR01B.BAM~ ~override~	// Blue version of spwi506B
 	COPY ~%mod_root%/objects/#LPWR01C.BAM~ ~override~	// Blue version of spwi506c
