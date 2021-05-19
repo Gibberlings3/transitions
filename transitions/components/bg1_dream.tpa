@@ -4,9 +4,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION bg1_dream BEGIN
-	// Copy dream narration wav file to override\#LPWR01
-	COPY ~%mod_root%/objects/#LPWR01.WAV~ ~override~
-
 	// Build a new spell for the good guys (and neutrals)
 	COPY ~%mod_root%/objects/#LPWR01B.BAM~ ~override~	// Blue version of spwi506B
 	COPY ~%mod_root%/objects/#LPWR01C.BAM~ ~override~	// Blue version of spwi506c
@@ -61,6 +58,7 @@ DEFINE_ACTION_FUNCTION bg1_dream BEGIN
 
 	// New dream and bhaal-spawn power
 	OUTER_SET STRREF_DRMTXT = RESOLVE_STR_REF(@1053)
+	COPY ~%mod_root%/objects/#LDRM1.WAV~ ~override~
 	COPY ~%mod_root%/objects/#LDRM1.2DA~ ~override~
 		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~DREAM_TEXT~ ~%STRREF_DRMTXT%~
 	COPY ~%mod_root%/objects/#LDRM1.MOS~ ~override~
