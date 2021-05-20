@@ -5,9 +5,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 IF
-	Global("#L_HouseBGate1","GLOBAL",0)
+	Global("#L_HouseBGate2","GLOBAL",0)
 THEN
 	RESPONSE #100
-		SetGlobal("#L_HouseBGate1","GLOBAL",1)
+		SetGlobal("#L_HouseBGate2","GLOBAL",1)
 		Continue()
 END

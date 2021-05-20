@@ -1,6 +1,6 @@
 //////////////////////////////////////////////
 // Opens the way to the PC's house in SW BG //
-// Parsed via eltan.tpa                     //
+// Parsed via eltan_house3.tpa              //
 //////////////////////////////////////////////
 
 IF
@@ -11,7 +11,8 @@ THEN
 		AddMapNote([1885.1530],@1013)
 		MoveContainerContents("%SWBaldursGate_House2_L1%*Container1","#LBG1107*PlayerChest00")
 		MoveContainerContents("%SWBaldursGate_House2_L2%*Container1","#LBG1107*PlayerChest00")
-		MoveContainerContents("%SWBaldursGate_House2_L2%*Container2","#LBG1107*PlayerChest00")		MoveContainerContents("%SWBaldursGate_House2_L2%*Container3","#LBG1107*PlayerChest00")
+		MoveContainerContents("%SWBaldursGate_House2_L2%*Container2","#LBG1107*PlayerChest00")
+		MoveContainerContents("%SWBaldursGate_House2_L2%*Container3","#LBG1107*PlayerChest00")
 		SmallWait(1)
 		TriggerActivation("Door1107",FALSE)
 		TriggerActivation("Locked#LBG1107",TRUE)
@@ -43,7 +44,7 @@ THEN
 	RESPONSE #100
 		TriggerActivation("Open#LBG1107",FALSE)
 		TriggerActivation("Locked#LBG1107",TRUE)
-		SetGlobal("#L_HouseLocked","MYAREA",0)
+		SetGlobal("#L_HouseLocked","MYAREA",1)
 		Continue()
 END
 
