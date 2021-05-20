@@ -373,6 +373,7 @@ IF
 	Dead("Sarevok")
 THEN
 	RESPONSE #100
+		SetGlobal("TamokoMove","GLOBAL",99)
 		ActionOverride("TAMOKO",DestroySelf())
 END
 >>>>>>>>
