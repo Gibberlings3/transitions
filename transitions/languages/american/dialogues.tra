@@ -667,6 +667,13 @@
 @2500	= ~The door is locked. You'll need a key to enter.~
 // @2501-2 up with Eltan's dialogue about houses
 
+// Dialogue with group after new dream
+@2510	= ~*You notice your companion's concern and realize your own is written all over your face.*~
+@2511	= ~*You smile as nonchallantly as you can muster, easing their tension and avoiding a discussion.*~
+@2512	= ~*You smile, but it is grim instead of reassuring.*~
+@2513	= ~Sarevok is dead. Why are you still troubled, <CHARNAME>?~
+@2514	= ~Alonzo's prophesies...how many more of Bhaal's spawn will need to be dealt with before this is truly over?~
+
 /////////////////////
 // JOURNAL ENTRIES //
 /////////////////////

@@ -1,0 +1,109 @@
+//////////////////////////////////////////////////
+// Starts a dialogue after the new dream occurs //
+// Patched via bg1_dream.tpa                    //
+//////////////////////////////////////////////////
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",0)
+	NumInParty(1)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Dream1Talk","GLOBAL",2)
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",0)
+	Global("#L_Dream1TalkTimer","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Dream1Talk","GLOBAL",1)
+		SetGlobalTimer("#L_Dream1TalkTimer","GLOBAL",2)
+		Continue()
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	IsValidForPartyDialogue("%IMOEN_DV%")
+THEN
+	RESPONSE #100
+		ActionOverride("%IMOEN_DV%",StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	!IsValidForPartyDialogue("%IMOEN_DV%")
+	General(Player2,HUMANOID)
+	IsValidForPartyDialogue(Player2)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		ActionOverride(Player2,StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	!IsValidForPartyDialogue("%IMOEN_DV%")
+	General(Player3,HUMANOID)
+	IsValidForPartyDialogue(Player3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		ActionOverride(Player3,StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	!IsValidForPartyDialogue("%IMOEN_DV%")
+	General(Player4,HUMANOID)
+	IsValidForPartyDialogue(Player4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		ActionOverride(Player4,StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	!IsValidForPartyDialogue("%IMOEN_DV%")
+	General(Player5,HUMANOID)
+	IsValidForPartyDialogue(Player5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		ActionOverride(Player5,StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+	!IsValidForPartyDialogue("%IMOEN_DV%")
+	General(Player6,HUMANOID)
+	IsValidForPartyDialogue(Player6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		ActionOverride(Player6,StartDialogOverride("#LGroup",Player1))
+END
+
+IF
+	Global("#L_Dream1","GLOBAL",1)
+	Global("#L_Dream1Talk","GLOBAL",1)
+	GlobalTimerExpired("#L_Dream1TalkTimer","GLOBAL")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_Dream1Talk","GLOBAL",2)
+END
+

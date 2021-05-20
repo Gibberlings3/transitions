@@ -67,6 +67,12 @@ Option 3: Option 1 and gentler version of Tamoko's quest
 Option 4: Option 2 and gentler version of Tamoko's quest  
 
 ------------------------------------------------------------------------
+Close quests that cannot be continued
+------------------------------------------------------------------------
+Requires Main Component and BGEE or EET
+Closes quests that may remain open after Sarevok is defeated and makes sure pub rumors don't reopen old quests.
+
+------------------------------------------------------------------------
 Clean up townsfolk chatter with reference to Sarevok
 ------------------------------------------------------------------------
 Requires Main Component and BGEE or EET
@@ -145,7 +151,6 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-* Add narration to new dream scrolling text box
 * Add group reactions to new dream
 * Change dialogue around Imoen's traning for jastey
 * Clean-up quests should use the quest journal

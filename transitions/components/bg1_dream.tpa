@@ -63,7 +63,12 @@ DEFINE_ACTION_FUNCTION bg1_dream BEGIN
 		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~DREAM_TEXT~ ~%STRREF_DRMTXT%~
 	COPY ~%mod_root%/objects/#LDRM1.MOS~ ~override~
 	EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/newdrm1.baf~
+	
+	// Group discussion on the dream
+	EXTEND_BOTTOM ~BALDUR.BCS~ ~%mod_root%/scripts/newdrm1_talk.baf~
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LGroup.d~ USING ~%tra_loc%/%s/dialogues.tra~		
 
+	// Stop the end-movie from happening when Sarevok is defeated
     COPY_EXISTING ~%Undercity_TempleofBhaal%.BCS~ ~override~
 		DECOMPILE_AND_PATCH BEGIN
 			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~StartMovie("ENDMOVIE")~ ~~ 
