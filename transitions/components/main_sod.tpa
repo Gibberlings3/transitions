@@ -106,8 +106,7 @@ COPY_EXISTING ~BDSHKORJ.ITM~ ~override~
 	SAY IDENTIFIED_DESC @1027
 	BUT_ONLY_IF_IT_CHANGES
 
-// Add an info area where the group exits from Korlasz's family crypt
-// Can't say I'm completely happy with this, but it's better than nothing
+// Add a travel info area where the group can enter Korlasz's family crypt
 COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
 	LPF ADD_AREA_REGION_TRIGGER
 		INT_VAR
