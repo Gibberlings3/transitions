@@ -151,7 +151,6 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 ------------------------------------------------------------------------
 PLANNED FUTURE ENHANCEMENTS
 ------------------------------------------------------------------------
-* Add group reactions to new dream
 * Change dialogue around Imoen's traning for jastey
 * Clean-up quests should use the quest journal
 * Narration added to modified start of SoD scrolling text
