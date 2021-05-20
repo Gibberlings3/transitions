@@ -191,8 +191,8 @@ COPY_EXISTING ~BD0120.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Update Imoen's dialogue file and script to initiate pre-sod exit dialogue
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
+// Update Imoen's script to initiate pre-sod exit dialogue
+// The dialogue file is updated via main_bg1
 EXTEND_TOP ~%IMOEN_BCS%.BCS~ ~%mod_root%/scripts/imoen.baf~
 
 // Use a modified intro scene and other modified blocks that moved Imoen about

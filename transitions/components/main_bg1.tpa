@@ -70,9 +70,39 @@ COPY ~%mod_root%/objects/#LDRM7.2da~ ~override~
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/setnextdream.baf~
 EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/forcedrms.baf~
 
-////////////////////////////////////////////////////
-// Now allowing this to happen in BG1 without SoD //
-////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+// Now allowing this to happen in BG1 with or without SoD //
+////////////////////////////////////////////////////////////
+// Add PC's room in the palace
+ACTION_IF FILE_EXISTS_IN_GAME ~BD0103.ARE~ BEGIN
+	COPY_EXISTING ~BD0103.are~ ~override\#LBD0103.are~
+		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~IMOEN2~ END
+		LPF UNLOCK_ALL_CONTAINERS END
+		LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 1 STR_VAR region_name = ~Window_info_1~ END
+		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 1 STR_VAR region_name = ~Window_info_2~ END
+		LPF GW_CLONE_TRAVEL_TRIGGER STR_VAR GW_Name_old = ~TranBD0100a~ GW_Dest_new = EVAL ~%NBaldursGate_DucalPalace_L2%~ GW_Name_new = ~TranBG0109a~ GW_Entre_new = ~Exit0110a~ END
+		LPF GW_CLONE_TRAVEL_TRIGGER STR_VAR GW_Name_old = ~TranBD0100b~ GW_Dest_new = EVAL ~%NBaldursGate_DucalPalace_L2%~ GW_Name_new = ~TranBG0109b~ GW_Entre_new = ~Exit0110b~ END
+		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109a~ END
+		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109b~ END
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~%NBaldursGate_DucalPalace_L3%.are~ BEGIN
+	COPY_EXISTING ~%NBaldursGate_DucalPalace_L3%.are~ ~override\#LBD0103.are~
+		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
+		WRITE_LONG (0x0048) 128 // Allow sleeping
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
+		LPF REMOVE_ACTOR STR_VAR actor_name = ~Flaming Fist Mercena~ END
+		LPF UNLOCK_ALL_CONTAINERS END
+		LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
+		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
+		LPF ALTER_AREA_CONTAINER INT_VAR flag_disabled = 1 STR_VAR container_name = ~PlayerChest00~ END 
+		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 4~ new_name = ~Imoen_equipment~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109a~ new_name = ~TranBG0109a~ END
+		LPF CHANGE_REGION_NAME STR_VAR old_name = ~Door0109b~ new_name = ~TranBG0109b~ END
+END
+
 // Place the servant in the custom version of the third floor
 // This is a common script used in all PC personal quarters
 OUTER_SPRINT SOD_CHEST_TRANS ~~
@@ -109,7 +139,7 @@ COPY_EXISTING ~%NBaldursGate_DucalPalace_L2%.ARE~ ~override~
          GW_Name_old = ~Door0110a~
          GW_Name_new = ~Door#lbd0103a~
          GW_Dest_new = ~#LBD0103~
-         GW_Entre_new = ~ExitBG0109a~
+         GW_Entre_new = ~Exit0109a~
          GW_Key_new = ~~      // Clear out the key if one exists
          GW_Script_new = ~~   // Clear out the script if one exists
    END
@@ -121,7 +151,7 @@ COPY_EXISTING ~%NBaldursGate_DucalPalace_L2%.ARE~ ~override~
          GW_Name_old = ~Door0110b~
          GW_Name_new = ~Door#lbd0103b~
          GW_Dest_new = ~#LBD0103~
-         GW_Entre_new = ~ExitBG0109b~
+         GW_Entre_new = ~Exit0109b~
          GW_Key_new = ~~      // Clear out the key if one exists
          GW_Script_new = ~~   // Clear out the script if one exists
    END
@@ -183,6 +213,9 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/d
 
 // Update Duke Liia's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_liia.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Update Imoen's dialogue file
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/imoen_training.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 // Update Duke Belt's override script so he'll initiate conversation when PC first arrives in palace
 EXTEND_TOP ~BELT.BCS~ ~%mod_root%/scripts/Belt_Add.baf~

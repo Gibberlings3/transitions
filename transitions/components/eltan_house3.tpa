@@ -78,7 +78,7 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
 	   DECOMPILE_AND_PATCH BEGIN 
 			// Move the contents from this house's chest to the ducal palace chest when they go there
-			REPLACE_TEXTUALLY ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1)~ ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1) MoveContainerContents("#LBG3347*PlayerChest00","#LBD0103*PlayerChest00")~
+			REPLACE_TEXTUALLY ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1)~ ~SetGlobal("#L_PlayerChestLocation","GLOBAL",1) MoveContainerContents("#LBG1107*PlayerChest00","#LBD0103*PlayerChest00")~
 
 			// Add the block where the SoD ducal palace chest contents get move to the house
 			APPEND_FILE TEXT ~%mod_root%/scripts/#LPCRoomd.baf~ EVAL
@@ -97,7 +97,7 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LKey04.baf~ USING ~%tra_loc%/%s/dialogues.tra~
 
 	// Update the dialogue of the servant who welcomes them
-	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/house2_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
+	COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/house3_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
 	// Set the global to indicate that the house is available as a reward
 	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/BG0108f2.baf~

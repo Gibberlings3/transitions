@@ -35,7 +35,7 @@ END
 
 IF
 	Global("#L_ServantSpawned","MYAREA",0)
-	OR(2)
+	OR(3)
 		AreaCheck("#LBG0006")
 		AreaCheck("#LBG3347")
 		AreaCheck("#LBG1107")
@@ -51,7 +51,7 @@ IF
 	AreaCheck("#LBG3201")
 THEN
 	RESPONSE #100
-		SetGlobal("#L_ServantSpawned","MYAREA",1)
+		SetGlobal("#L_ServantSpawned","MYAREA",1) 
     	CreateCreature("#LDPSrv1",[350.240],SW)
     	Continue()
 END

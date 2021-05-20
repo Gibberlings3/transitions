@@ -149,29 +149,6 @@ Requires BG2EE or EET
 While recuperating in Suldanessellar, the Irenicus in hell movie will be shown as a dream and all Bhaal-spawn powers will be restored.  
 
 ------------------------------------------------------------------------
-PLANNED FUTURE ENHANCEMENTS
-------------------------------------------------------------------------
-* Change dialogue around Imoen's traning for jastey
-* Clean-up quests should use the quest journal
-* Narration added to modified start of SoD scrolling text
-* Put in jastey's palace treasurer
-* Allow access to a palace physician/cleric (Fenster?)
-* Check/Update all remaining BGEE NPCs
-	* - Update Inn rumors
-	* - Polish how the NPCs flee the Iron Throne HQ
-* Add better Korlasz loot to stores if quest is skipped
-* Add a house across from the Flaming Fist HQ for Eltan to offer as a reward
-* Allow access to houses in town of Baldur's Gate during SoD prologue if chosen as Eltan's reward
-* Change mechanism on how gold is shared with group so it always happens, even without standard NPCs
-* Make sure chest moves to/from house and camps properly
-* Make sure all NPCs that joined the PC during BGEE still have their equipment if they show up in Sod or BG2EE, even as a cameo (like Ajantis)
-* Move BGEE personal chest contents to a stronghold chest with compliments of dukes when name is cleared
-* Clean up unique items that might be duplicated due to playing areas out of normal sequence
-* Move BGEE/SoD personal chest contents to a pocket plane chest with comments by the imp
-* (EET) Make sure all NPCs that joined the PC during BG1 still have their equipment if they show up in Sod or BG2, even as a cameo (like Ajantis)  - this might be a tweak instead
-* Add a "continue the adventure" ending with Bhaalspawn powers intact, continue play after 'ending'
-
-------------------------------------------------------------------------
 COMPATIBILITY NOTES
 ------------------------------------------------------------------------
 There are no known compatability issues at this time
@@ -251,6 +228,8 @@ The Transitions Mod was created using the resources provided by the IESDP (https
 
 * Near Infinity			https://github.com/Argent77/NearInfinity/releases/latest
 * WeiDU					http://www.weidu.org
+* Audacity					https://www.audacityteam.org
+* Real-Time-Voice-Cloning	https://github.com/CorentinJ/Real-Time-Voice-Cloning
 
 Modding communities, tutorials and technical assistance:
 
@@ -261,6 +240,7 @@ HISTORY
 ------------------------------------------------------------------------
 v1.0 - initial production release
 v1.1 - added compat library for SoD
+v2.0 - various fixes and all planned enhancements completed
 
 ------------------------------------------------------------------------
 LEGAL INFORMATION

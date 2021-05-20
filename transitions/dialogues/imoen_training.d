@@ -148,13 +148,6 @@ APPEND %IMOEN_JOINED%
 		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("%IMOEN_DV%",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
 	END
 
-	IF WEIGHT #-998 ~OR(2) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_LiiaInstalled","GLOBAL",0)~ THEN BEGIN IMOEN_MUST_TRAIN
-		SAY @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
-		= @2103 /* ~You will come visit, <CHARNAME>!  Promise!~ */
-		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("%IMOEN_DV%",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
-	END
-
 	IF WEIGHT #-997 ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("EndofBG1","GLOBAL",1) GlobalLT("#L_StartCaelarAttack","GLOBAL",4)~ THEN BEGIN PRE_SOD_TRAIN
 		SAY @2325 /* ~I've decided to take Duke Jannath up on her offer to train me in magic.~ */
 		= @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
@@ -231,13 +224,13 @@ APPEND %IMOEN_JOINED%
 END
 
 CHAIN	
-	IF WEIGHT #-996 ~InMyArea("LIIA") Global("#L_ImTrainRsp","GLOBAL",2) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN %IMOEN_JOINED% IMOEN_LIIA_TRAIN_RSP_2
+	IF WEIGHT #-996 ~InMyArea("LIIA") Global("#L_ImTrainRsp","GLOBAL",2)~ THEN %IMOEN_JOINED% IMOEN_LIIA_TRAIN_RSP_2
 		@2110 /* ~I appreciate the offer, Grand Duke Jannath, but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~ */
 		DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImTrainRsp","GLOBAL",99)~
 		== LIIA @2111 /* ~As you wish, child.  Come see me if you change your mind.~ */ EXIT
 
 CHAIN
-	IF WEIGHT #-995 ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",3) Global("#L_LiiaInstalled","GLOBAL",1)~ THEN %IMOEN_JOINED% IMOEN_LIIA_3
+	IF WEIGHT #-995 ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_ImTrainRsp","GLOBAL",3)~ THEN %IMOEN_JOINED% IMOEN_LIIA_3
 		@2124 /* ~I'm sorry, Grand Duke Jannath.  I really appreciate the offer, but <CHARNAME> needs me for a little while longer.~ */
 		DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImTrainRsp","GLOBAL",99)~
 		== LIIA @2125 /* ~As you will, Imoen. Come see me when you're ready.~ */ EXIT
