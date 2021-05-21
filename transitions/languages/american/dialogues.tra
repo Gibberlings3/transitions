@@ -201,7 +201,7 @@
 
 // duke_liia.d Duke Liia offers magic training to Imoen
 @2117	= ~One moment <CHARNAME>, I need to speak with Imoen.~
-@2099	= ~Imoen, I sense a real talent for magic within you, child.  Are you interested in learning how to hone this skill?~
+@2099	= ~Imoen, I sense a real talent for magic within you, child.  If you are interested in learning how to hone this skill, come see me later.~
 @2100	= ~It would require you stay here in the palace with me.  There would be a lot of study.~
 @2101	= ~Go ahead, Imoen.  You've always wanted this.~
 @2102	= ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~
