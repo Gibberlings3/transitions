@@ -16,7 +16,7 @@ After Sarevok has been defeated, the protagonist can take up residence at the Du
 
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
-There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  Good and neutral aligned protagonists will receive Cure Serious Wounds and evil aligned protagonists will receive Cause Serious Wounds.  They weren't my first choice.  I wanted Greenstone Amulet's Mind Shield and Algernon's Cloak Charm Creature, but that's a bit more complicated than I can take on at the moment.  It is my desire to put those in at a future time.
+There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  The protagonist will receive either Mind Shield or Charm Creature, depending upon their reaction bonus.
 
 ------------------------------------------------------------------------
 DESCRIPTION
@@ -222,12 +222,12 @@ Angelo, Tazok, and Semaj are probably already dead from the fight in the Underci
 Winski and Angelo will have some rogue Flaming Fist cronies with them, Tazok some bandits, Zhalimar will have a couple of dopplegangers as well as the surviving members of his crew (Aasim, Alai, Diyab, Gardush and Naaman), Semaj, Cythandria and Tamoko will be alone, and Korlasz has her usual dungeon crawl quest from SoD.
 
 ------------------------------------------------------------------------
-USED TOOLS AND RESSOURCES
+USED TOOLS AND RESOURCES
 ------------------------------------------------------------------------
 The Transitions Mod was created using the resources provided by the IESDP (https://gibberlings3.github.io/iesdp/index.htm) and with the following software:
 
-* Near Infinity			https://github.com/Argent77/NearInfinity/releases/latest
-* WeiDU					http://www.weidu.org
+* Near Infinity				https://github.com/Argent77/NearInfinity/releases/latest
+* WeiDU						http://www.weidu.org
 * Audacity					https://www.audacityteam.org
 * Real-Time-Voice-Cloning	https://github.com/CorentinJ/Real-Time-Voice-Cloning
 
