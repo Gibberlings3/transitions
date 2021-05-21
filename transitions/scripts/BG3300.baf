@@ -9,9 +9,9 @@ IF
 THEN
 	RESPONSE #100
 		AddMapNote([980.1030],@1013)
-		MoveContainerContents("BG3347*Container1","#LBG3347*PlayerChest00")
-		MoveContainerContents("BG3348*Container1","#LBG3347*PlayerChest00")
-		MoveContainerContents("BG3348*Container2","#LBG3347*PlayerChest00")
+		MoveContainerContents("%Beregost_House05_L1%*Container1","#LBG3347*PlayerChest00")
+		MoveContainerContents("%Beregost_House05_L2%*Container1","#LBG3347*PlayerChest00")
+		MoveContainerContents("%Beregost_House05_L2%*Container2","#LBG3347*PlayerChest00")
 		CloseDoor("Port3347")
 		SmallWait(1)
 		Lock("Port3347")

@@ -9,7 +9,7 @@ IF
 THEN
 	RESPONSE #100
 		AddMapNote([1760.1470],@1013)
-		MoveContainerContents("BG3201*Container1","#LBG3201*PlayerChest00")
+		MoveContainerContents("%HighHedge_House%*Container1","#LBG3201*PlayerChest00")
 		CloseDoor("Port3201")
 		SmallWait(1)
 		Lock("Port3201")
