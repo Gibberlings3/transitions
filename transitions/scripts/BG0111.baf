@@ -4,6 +4,7 @@
 // Parsed via main_bg1.tpa //
 /////////////////////////////
 IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_OphyllisSpawned","MYAREA",0)
 THEN
 	RESPONSE #100
@@ -13,4 +14,3 @@ THEN
 		ContainerEnable("Container1",FALSE) 
 		Continue()
 END
-
