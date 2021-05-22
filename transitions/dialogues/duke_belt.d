@@ -11,6 +11,7 @@ APPEND BELT
 		IF ~Global("#L_SwordTaken","GLOBAL",1)~ + SWORD_TAKEN1
 	END
 
+	// Cross-mod content with EndlessBG1
 	IF ~Global("C#st_HeroOfBG","GLOBAL",1) !Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_SwordTaken","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN BELT_1_AFTER_CEREMONY
 		SAY @2475 /* ~Now to business.~ */
 		= @2476 /* ~Thank you for agreeing to let us keep Sarevok's sword safe here in the palace.~ */
@@ -34,6 +35,7 @@ APPEND BELT
 		+ ~!Global("C#st_HeroOfBG","GLOBAL",1)~ + @2043 /* ~I guess that's a fair price.~ */ DO ~GiveGoldForce(3000) Wait(1)~ + ROOM_NOT_MENTIONED_YET
 	END
 
+	// Cross-mod content with EndlessBG1
 	IF ~Global("C#st_HeroOfBG","GLOBAL",1) Global("C#st_DukesAskedSword","GLOBAL",1) Global("#L_BG1SarevokDead","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",0)~ THEN BEGIN ROOM_MENTIONED
 		SAY @2477 /* ~As I mentioned in your award ceremony, as part of your reward for saving our city, we have made accommodations for you here within the Ducal Palace.~ */
 		IF ~~ THEN GOTO BELT_OFFER_ROOM
