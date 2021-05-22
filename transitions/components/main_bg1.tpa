@@ -196,7 +196,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDOPHYLL.CRE~ BEGIN
 		WRITE_ASCII 0x02cc ~#LOPHYLL~ #8	// Dialogue
 	EXTEND_TOP ~%NBaldursGate_DucalPalace_Cellar%.BCS~ ~%mod_root%/scripts/BG0111.baf~
 END ELSE ACTION_IF NOT FILE_EXISTS_IN_GAME ~c#stophl.cre~ BEGIN // Leave jastey's version in
-	COPY ~BDOPHYLL.CRE~ ~override/#LOPHYLL.CRE~
+	COPY_EXISTING ~BDOPHYLL.CRE~ ~override/#LOPHYLL.CRE~
 		WRITE_ASCII 0x0280 ~#LOPHYLL~ #32	// set DV
 		WRITE_ASCII 0x0248 ~~ #8			// Override Script
 		WRITE_ASCII 0x0268 ~#LffGen~ #8		// Default Script
@@ -211,7 +211,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDFENSTE.CRE~ BEGIN
 		SAY NAME2 ~Fenster~
 		WRITE_ASCII 0x02cc ~#LFENSTE~ #8	// Dialogue
 END ELSE BEGIN
-	COPY ~BDFENSTE.CRE~ ~override/#LFENSTE.CRE~
+	COPY_EXISTING ~BDFENSTE.CRE~ ~override/#LFENSTE.CRE~
 		WRITE_ASCII 0x0280 ~#LFENSTE~ #32	// set DV
 		WRITE_ASCII 0x0248 ~~ #8			// Override Script
 		WRITE_ASCII 0x0268 ~#LffGen~ #8		// Default Script
