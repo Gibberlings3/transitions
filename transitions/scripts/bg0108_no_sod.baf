@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////
 // Globals needed when SoD is not available        //
-// Patched via main_bg1.tpa                        //
+// Patched via quests_common.tpa                   //
 /////////////////////////////////////////////////////
 
 // Determine if there are any clean-up quests to be done initially
