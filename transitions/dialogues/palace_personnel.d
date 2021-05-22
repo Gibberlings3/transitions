@@ -86,3 +86,27 @@ BEGIN ~#LDPSrv1~
 		IF ~~ THEN DO ~EscapeArea()~ EXIT
 	END
 // END OF NEW DIALOGUE FILE
+
+// Palace treasurer (Ophyllis)
+BEGIN ~#LOPHYLL~
+	IF ~True()~ BEGIN Default_greeting
+		SAY @2520 // ~Greetings, <SIRMAAM>. I'm afraid I'm busy taking inventory and cannot be interrupted.  Good <DAYNIGHTALL> to you.~
+		IF ~~ THEN EXIT
+	END
+// END OF NEW DIALOGUE FILE
+	
+// Palace physician (Fenster)
+BEGIN ~#LFENSTE~
+	IF ~NumberOfTimesTalkedTo(0)~ BEGIN Initial_greeting
+		SAY @2521 // ~Greetings, <SIRMAAM>. I am Fenster, the palace physician.~
+		= @2525 // ~For residents of the palace, I offer my services at reduced rates.~
+		IF ~~ GOTO Default_greeting
+	END
+	
+	IF ~True()~ BEGIN Default_greeting
+		SAY @2522 // ~How may I be of service?~
+		IF ~Global("#L_AcceptedRoom","GLOBAL",0)~ THEN REPLY @2523 /* ~What services do you offer?~ */ DO ~StartStore("#LFenst1",LastTalkedToBy(Myself))~ EXIT
+		IF ~!Global("#L_AcceptedRoom","GLOBAL",0)~ THEN REPLY @2523 /* ~What services do you offer?~ */ DO ~StartStore("#LFenst2",LastTalkedToBy(Myself))~ EXIT
+		IF ~~ THEN REPLY @2524 /* ~I don't need anything at the moment.~ */ EXIT
+	END
+// END OF NEW DIALOGUE FILE

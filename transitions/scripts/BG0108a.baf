@@ -6,6 +6,16 @@
 
 IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
+	Global("#L_FensterSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_FensterSpawned","MYAREA",1)
+		CreateCreature("#LFenste",[900.840],SW)
+		Continue()
+END
+
+IF
+	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_BG1PositionDukes","MYAREA",0)
 	Dead("LIIA")
 THEN

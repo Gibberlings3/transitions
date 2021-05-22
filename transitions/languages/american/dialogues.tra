@@ -53,6 +53,14 @@
 @2062	= ~The chest on the far left of the room is for your personal use.  It is quite secure.~
 @2064	= ~Please help yourself to whatever is already inside.~
 @2063	= ~M'<PROPER_LORDLADY>, it has been an honor to serve the Hero of Baldur's Gate.~
+// Palace treasurer (Ophyllis)
+@2520	= ~Greetings, <SIRMAAM>. I'm afraid I am extrememly busy taking inventory and cannot be interrupted.  Good <DAYNIGHTALL> to you.~
+// Palace physician (Fenster)
+@2521	= ~Greetings, <SIRMAAM>. I am Fenster, the palace physician.~
+@2522	= ~How may I be of service?~
+@2523	= ~What services do you offer?~
+@2524	= ~I don't need anything at the moment.~
+@2525	= ~For residents of the palace, I offer my services at reduced rates.~
 
 // duke_belt.d
 @2034	= ~Here <PRO_HESHE> is!  The <PRO_MANWOMAN> of the hour!  Welcome, <CHARNAME>!~
@@ -673,6 +681,8 @@
 @2512	= ~*You smile, but it is grim instead of reassuring.*~
 @2513	= ~Sarevok is dead. Why are you still troubled, <CHARNAME>?~
 @2514	= ~Alonzo's prophesies...how many more of Bhaal's spawn will need to be dealt with before this is truly over?~
+
+// 2520-2525 up with palace_personnel
 
 /////////////////////
 // JOURNAL ENTRIES //

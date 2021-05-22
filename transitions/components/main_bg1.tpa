@@ -185,6 +185,40 @@ COPY_EXISTING ~FLAM11.cre~ ~override/#LffEsc3.cre~
 	WRITE_EVALUATED_ASCII 0x260 ~#LffGen~ #8  // general script - don't wander
 BUT_ONLY_IF_IT_CHANGES
 
+// Add an early version of the palace treasurer
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDOPHYLL.CRE~ BEGIN
+	COPY ~%mod_root%/objects/#LOPHYLL.CRE~ ~override~
+		SAY NAME1 ~Ophyllis~
+		SAY NAME2 ~Ophyllis~
+		WRITE_ASCII 0x02cc ~#LOPHYLL~ #8	// Dialogue
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_Cellar%.BCS~ ~%mod_root%/scripts/BG0111.baf~
+END ELSE ACTION_IF NOT FILE_EXISTS_IN_GAME ~c#stophl.cre~ BEGIN // Leave jastey's version in
+	COPY ~BDOPHYLL.CRE~ ~override/#LOPHYLL.CRE~
+		WRITE_ASCII 0x0280 ~#LOPHYLL~ #32	// set DV
+		WRITE_ASCII 0x0248 ~~ #8			// Override Script
+		WRITE_ASCII 0x0268 ~#LffGen~ #8		// Default Script
+		WRITE_ASCII 0x02cc ~#LOPHYLL~ #8	// Dialogue
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_Cellar%.BCS~ ~%mod_root%/scripts/BG0111.baf~
+END
+
+// Add an early version of the palace physician
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDFENSTE.CRE~ BEGIN
+	COPY ~%mod_root%/objects/#LFENSTE.CRE~ ~override~
+		SAY NAME1 ~Fenster~
+		SAY NAME2 ~Fenster~
+		WRITE_ASCII 0x02cc ~#LFENSTE~ #8	// Dialogue
+END ELSE BEGIN
+	COPY ~BDFENSTE.CRE~ ~override/#LFENSTE.CRE~
+		WRITE_ASCII 0x0280 ~#LFENSTE~ #32	// set DV
+		WRITE_ASCII 0x0248 ~~ #8			// Override Script
+		WRITE_ASCII 0x0268 ~#LffGen~ #8		// Default Script
+		WRITE_ASCII 0x02cc ~#LFENSTE~ #8	// Dialogue
+END
+COPY ~%mod_root%/objects/#LFenst1.STO~ ~override~
+	SAY 0x000c ~Fenster~
+COPY ~%mod_root%/objects/#LFenst2.STO~ ~override~
+	SAY 0x000c ~Fenster~
+
 // Dialogues for the Flaming Fist escort that are used for various components
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/ffescort.d~ USING ~%tra_loc%/%s/dialogues.tra~
 

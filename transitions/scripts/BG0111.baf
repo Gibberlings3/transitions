@@ -1,0 +1,16 @@
+/////////////////////////////
+// BG1 Palace Cellar       //
+// Put Ophyllis in place   //
+// Parsed via main_bg1.tpa //
+/////////////////////////////
+IF
+	Global("#L_OphyllisSpawned","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_OphyllisSpawned","MYAREA",1)
+		CreateCreature("#LOPHYLL",[437.976],SW)
+		OpenDoor("Door01")
+		ContainerEnable("Container1",FALSE) 
+		Continue()
+END
+
