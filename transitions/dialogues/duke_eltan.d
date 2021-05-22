@@ -20,11 +20,13 @@ ADD_STATE_TRIGGER DELTAN 15 ~Global("#L_BG1SarevokDead","GLOBAL",0)~
 
 // Add Palace dialogue
 APPEND DELTAN
+	// Cross-mod content with BG1RE
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("C#RE1_ScarRetrieval","GLOBAL",15)~ THEN BEGIN SHOO
 		SAY @2098 /* ~I have nothing more to say to you.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_EltanLoveMatch","GLOBAL",0) EscapeArea()~ EXIT
 	END
 
+	// Cross-mod content with BG1RE
 	IF ~Global("#L_TalkedToDukes","GLOBAL",1) Global("C#RE1_ScarRetrieval","GLOBAL",14)~ THEN BEGIN ELTAN_SCAR
 		SAY @2097 /* ~<CHARNAME>, I need to personally thank you for saving my life and the life of my friend.~ */
 		= @2066 /* ~I have a number properties here in the city as well in and around Beregost.  I'd be honored if you'd accept one as a thank you.~ */
@@ -54,82 +56,49 @@ APPEND DELTAN
 		+ ~Global("#L_HouseBGate2","GLOBAL",1)~ + @2501 /* ~I'd prefer the one across from the Flaming Fist compound.~ */ + BGATE2
 	END
 
+	// Includes cross-mod content with the Eltan romance mod
 	IF ~~ THEN BEGIN BEREGOST
 		SAY @2075 /* ~That's the grey house on the upper west side.~ */
 		= @2087 /* ~I've recently done some renovations to the place.  I hope you like them.~ */
 		= @2078 /* ~Here's your key.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_HouseBeregost","GLOBAL",2) GiveItemCreate("#LKey03",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBeregost","GLOBAL",2) GiveItemCreate("#LKey03",Player1,1,0,0)~ + MATCH
+		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBeregost","GLOBAL",2) GiveItemCreate("#LKey03",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ + MATCH
 	END
 
+	// Includes cross-mod content with the Eltan romance mod
 	IF ~~ THEN BEGIN HHEDGE
 		SAY @2076 /* ~Ahh, a place in the woods.  Be careful not to bother the grumpy mage that will be your neighbor.~ */
 		= @2087 /* ~I've recently done some renovations to the place.  I hope you like them.~ */
 		= @2078 /* ~Here's your key.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_HouseHHedge","GLOBAL",2) GiveItemCreate("#LKey02",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseHHedge","GLOBAL",2) GiveItemCreate("#LKey02",Player1,1,0,0)~ + MATCH
+		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseHHedge","GLOBAL",2) GiveItemCreate("#LKey02",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ + MATCH
 	END
 
+	// Includes cross-mod content with the Eltan romance mod
 	IF ~~ THEN BEGIN BGATE1
 		SAY @2077 /* ~That house is the 2nd door to your left as you're facing the entrance to the palace.~ */
 		= @2087 /* ~I've recently done some renovations to the place.  I hope you like them.~ */
 		= @2078 /* ~Here's your key.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_HouseBGate1","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate1","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0)~ + MATCH
+		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate1","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ + MATCH
 	END
 
+	// Includes cross-mod content with the Eltan romance mod
 	IF ~~ THEN BEGIN BGATE2
 		SAY @2502 // ~I'm glad you selected that one.~
 		= @2078 /* ~Here's your key.~ */
 		IF ~~ THEN DO ~SetGlobal("#L_HouseBGate2","GLOBAL",2) GiveItemCreate("#LKey04",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate2","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0)~ + MATCH
+		IF ~Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN DO ~SetGlobal("#L_HouseBGate2","GLOBAL",2) GiveItemCreate("#LKey01",Player1,1,0,0) SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ + MATCH
 	END
 
+	// Cross-mod content with the Eltan romance mod
+	// The Eltan mod will hook in here
 	IF ~~ THEN BEGIN MATCH
 		SAY @2088 /* ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~ */
-		= @2079 /* ~While looking intently into your eyes he says, "With your permission, I'll stop by later to see how you're settling in."~ */
-		++ @2089 /* ~Yes, I'd like that.~ */ DO ~SetGlobal("#L_EltanVisit","GLOBAL",1)~ + VISIT_0
-		++ @2080 /* ~Uhm..sure, if you'd like.~ */ DO ~SetGlobal("#L_EltanVisit","GLOBAL",1)~ + VISIT_1
-		++ @2081 /* ~Oh that's very kind of you but hardly necessary.~ */ DO ~SetGlobal("#L_EltanVisit","GLOBAL",1)~ + VISIT_2
-		++ @2082 /* ~Actually, I'd prefer if you didn't.  I'd not like the attention it would draw.~ */ + SORRY
-	END
-	
-	IF ~~ THEN BEGIN VISIT_0
-		SAY @2090 /* ~I look forward to it.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-	END
-
-	IF ~~ THEN BEGIN VISIT_1
-		SAY @2083 /* ~I would like.  I would like very much.~  // (OMG THAT IS SO CREEPY!) */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-	END
-
-	IF ~~ THEN BEGIN VISIT_2
-		SAY @2084 /* ~It will be a pleasure, I assure you.~ // (STILL CREEPY!) */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-	END
-
-	IF ~~ THEN BEGIN SORRY
-		SAY @2085 /* ~As you will.  But feel free to visit me here or at the Flaming Fist headquarters if you should change your mind.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2)~ EXIT
-	END
-
-	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) Global("#L_EltanVisit","GLOBAL",0) Global("#L_EltanLoveMatch","GLOBAL",1)~ THEN BEGIN ELTAN_2_1
-		SAY @2054 /* ~Hello again, <CHARNAME>.  Have you changed your mind?~ */
-		++ @2055 /* ~No, I haven't.  Goodbye.~ */ + NO_CHANGE
-		++ @2086 /* ~Yes I have.  I'd be honored to have you stop by.~ */ + VISIT_3
-	END
-
-	IF ~~ THEN BEGIN NO_CHANGE
-		SAY @2085 /* ~As you will.  But feel free to visit me here or at the Flaming Fist headquarters if you should change your mind.~ */
 		IF ~~ THEN EXIT
 	END
 
-	IF ~~ THEN BEGIN VISIT_3
-		SAY @2084 /* ~It will be a pleasure, I assure you.~ // (STILL CREEPY!) */
-		IF ~~ THEN DO ~SetGlobal("#L_EltanVisit","GLOBAL",1)~ EXIT
-	END
-
+	// Includes cross-mod consideration with BG1RE and the Eltan romand mod
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",1) !Global("C#RE1_ScarRetrieval","GLOBAL",15) OR(2) GlobalGT("#L_EltanVisit","GLOBAL",0) Global("#L_EltanLoveMatch","GLOBAL",0) ~ THEN BEGIN ELTAN_HELLO
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
 		IF ~~ THEN EXIT

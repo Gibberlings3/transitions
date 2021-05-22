@@ -179,18 +179,8 @@
 @2076	= ~Ahh, a place in the woods.  Be careful not to bother the grumpy mage that will be your neighbor.~
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
 @2078	= ~Here's your key.~
-@2079	= ~While looking intently into your eyes he says, "With your permission, I'll stop by later to see how you're settling in."~
-@2080	= ~Uhm...sure, if you'd like.~
-@2081	= ~Oh that's very kind of you but hardly necessary.~  // Clueless answer - thinks she said 'no thank you' while he heard 'yes'
-@2082	= ~Actually, I'd prefer if you didn't.  I'd not like the attention it would draw.~
-@2083	= ~I would like.  I would like very much.~  // (OMG THAT IS SO CREEPY!)
-@2084	= ~It will be a pleasure, I assure you.~
-@2085	= ~As you will.  But feel free to visit me here or at the Flaming Fist headquarters if you should change your mind.~
-@2086	= ~Yes I have.  I'd be honored to have you stop by.~
 @2087	= ~I've recently done some renovations to the place.  I hope you like them.~
 @2088	= ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~
-@2089	= ~Yes, I'd like that.~
-@2090	= ~I look forward to it.~
 
 // duke_eltan.d Duke Eltan's introduction of Scar
 @2096	= ~There is someone here who would like to talk to you, <CHARNAME>.~
