@@ -10,7 +10,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_TamokoMoved","GLOBAL",1)
-		MoveGlobal("BG1200","Tamoko",[412.748])
+		MoveGlobal("%BaldursGateDocks%","Tamoko",[412.748])
 		Wait(2)
 END
 
