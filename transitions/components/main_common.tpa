@@ -5,10 +5,6 @@
 DEFINE_ACTION_FUNCTION main_common BEGIN
 	ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
 		INCLUDE ~%mod_root%/components/main_sod.tpa~
-	END ELSE ACTION_IF (GAME_IS ~bgee~) BEGIN
-		// Need a way to determine if Duke Belt has any quests to offer
-		// Won't have Korlasz as a default
-		EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_no_sod.baf~
 	END
 
 	ACTION_IF GAME_IS ~eet~ BEGIN

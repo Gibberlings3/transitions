@@ -12,6 +12,12 @@ COPY_EXISTING ~%NBaldursGate_DucalPalace_L1%.BCS~ ~override~
 	END
 BUT_ONLY_IF_IT_CHANGES
 
+ACTION_IF (GAME_IS ~bgee~) AND (NOT GAME_INCLUDES ~sod~) BEGIN
+	// Need a way to determine if Duke Belt has any quests to offer
+	// Won't have Korlasz as a default
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_no_sod.baf~
+END
+
 // Rogue Flaming Fist Mercenary
 COPY_EXISTING ~FLAMANG.CRE~ ~override/#LffBad.cre~
 	SAY NAME1 @1025 // ~Rogue Flaming Fist Mercenary~ 
