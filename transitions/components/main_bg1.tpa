@@ -20,7 +20,6 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
 			script = EVAL ~%NBaldursGate_DucalPalace_L1%~
 			match = ~C#st_SpawnLiia~
 	END
-	EXTEND_TOP ~%Undercity_TempleofBhaal%.BCS~ ~%mod_root%/scripts/bg0125_liia.baf~
 
 	// Remove jastey's guards and opening of the palace
 	LAF DELETE_SCRIPT_BLOCK
