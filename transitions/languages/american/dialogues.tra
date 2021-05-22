@@ -180,6 +180,7 @@
 @2077	= ~That house is the 2nd door to your left as you're facing the entrance to the palace.~
 @2078	= ~Here's your key.~
 @2087	= ~I've recently done some renovations to the place.  I hope you like them.~
+// Crossmod content with Eltan romance mod to provide a hook into the dialogue
 @2088	= ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~
 
 // duke_eltan.d Duke Eltan's introduction of Scar
@@ -681,3 +682,29 @@
 I successfully confronted Sarevok in an old temple of Bhaal in the Undercity. His plans to ascend to godhood died with him.~
 @3001	= ~Afoul of the Law
 I cleared my name by exposing Sarevok as the true murderer of the Iron Throne leaders.  The Iron Fist should no longer be hounding my steps.~
+@3002	= ~Sarevok's Minions
+I am to confront Angelo, who was spotted heading down into the sewers behind the Flaming Fist Headquarters accompanied by some rogue Flaming Fist.~
+@3003	= ~Sarevok's Minions
+I have been hired to bring Tazok to justice. He was spotted heading down into the sewers in front of the Rogues Guild Hall with a troop of thugs.~
+@3004	= ~Sarevok's Minions
+A mage named Semaj was spotted going into the Blushing Mermaid. It's possible he was headed to the Undercellar. I'll need to be careful of bystanders while I attempt to bring him in.~
+@3005	= ~Sarevok's Minions
+It seems Sarevok's mentor, Winski Peroate, survived and was spotted heading down into the sewers across the street from the Flaming Fist Headquarters aided by some rogue Flaming Fist.~
+@3006	= ~Sarevok's Minions
+Sarevok's consort, Cythandria, was spotted heading into the Elfsong Tavern. I'll need to be careful of bystanders while I attempt to bring her to justice.~ 
+@3007	= ~Sarevok's Minions
+I'm to bring Tamoko in to face justice.  She was spotted returning to the Iron Throne Headquarters.~ 
+@3008	= ~Sarevok's Minions
+I've been hired to bring in Zhalimar Cloudwulfe and his crew. They were spotted heading into the sewers in front of the Iron Throne Headquarters. I doubt they'll come peaceably.~ 
+@3009	= ~Sarevok's Minions
+The last of Sarevok's supporters, Korlasz and her crew, are holed up in an old tomb. When I've dealt with them I'll be able to have a little respite.~
+@3010	= ~Sarevok's Minions
+All of Sarevok's supports are either dead or in prison. I can stop looking over my shoulder...at least for a while.~
+@3011	= ~Dead Three Documents
+I've been asked to keep an eye open for any books or documents on the Dead Three for Duke Jannath~
+@3012	= ~Dead Three Documents
+I was unable to find the documents that Duke Jannath had hoped I'd locate.~
+@3013	= ~Dead Three Documents
+I found research on the Dead Three, but decided to not hand it over to Duke Jannath. I'd prefer to read it myself when I have the time.~
+@3014	= ~Dead Three Documents
+The Dukes paid me well for the research I found on the Dead Three.~

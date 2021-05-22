@@ -114,7 +114,7 @@ APPEND BELT
 		++ @2138 /* ~I'm not a bounty hunter.  I'm afraid you'll have to hire someone else.  I'll be on my way now.~ */ + BELT_QUESTS_SKIP_ALL
 	END
 
-	IF ~Global("L_SoD","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_QUESTS_ALL_DONE
+	IF ~Global("#L_SoD","GLOBAL",1) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_QUESTS_ALL_DONE
 		SAY @2272 /* ~I've had a special gift made for you.  It will allow for a limited number of wishes.~ */
 		= @2273 /* ~It's a personal thank you for all you've done for the city.~ */
 		++ @2274 /* ~Thank you.  That's very kind of you.~ */ DO ~GiveItemCreate("#LAdvGm1",Player1,1,0,0)~ + BELT_NOW_WHAT
@@ -128,7 +128,7 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUESTS_SKIP_ALL
 		SAY @2145 /* ~As you wish.~ */
 		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
-		IF ~Global("#L_Sod","GLOBAL",0)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_NOW_WHAT
+		IF ~Global("#L_Sod","GLOBAL",0)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",50) !IsGabber(Player1)~ THEN BEGIN BELT_QUEST_50a
@@ -195,7 +195,7 @@ APPEND BELT
 		+ ~GlobalLT("#L_SarvQuests","GLOBAL",8) OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ")  OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1) OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ZHALIMAR") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("GARDUSH") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("NAAMAN") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("DIYAB") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("AASIM") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ALAI")~ + @2200 /* ~I'm ready to go now.  What's the job?~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",8)~ + BELT_QUEST_8a
 	END
 
-	IF ~Global("L_SoD","GLOBAL",0) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_NOW_WHAT
+	IF ~Global("#L_SoD","GLOBAL",0) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_NOW_WHAT
 		SAY @2264 /* ~So, <CHARNAME>, what are your plans now?~ */
 		++ @2270 /* ~I have places to go, things to do, people to see.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_FUN
 //		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",1) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
@@ -221,18 +221,18 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2150 /* ~No, I'll be back when he's taken care of.~ */ EXIT
 		++ @2151 /* ~Not yet.  Where was he again?~	*/ + BELT_QUEST_1_ECHO
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest1","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest1","MYAREA",1) EraseJournalEntry(@3002)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_1_ECHO
 		SAY @2131 /* ~Angelo was spotted ...~ */
 		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ EXIT
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest1","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest1","MYAREA",1) EraseJournalEntry(@3002)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR")~ THEN BEGIN BELT_QUEST_1_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL #3010 + BELT_NOW_WHAT
 		IF ~OR(12) Global("#L_Sod","GLOBAL",1) !Dead("Tazok") !Dead("SEMAJ") !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1AngeloDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -245,18 +245,18 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2150 /* ~No, I'll be back when he's taken care of.~ */ EXIT
 		++ @2151 /* ~Not yet.  Where was he again?~	*/ + BELT_QUEST_2_ECHO
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest2","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest2","MYAREA",1) EraseJournalEntry(@3003)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_2_ECHO
 		SAY @2154 /* ~Tazok was spotted ...~ */
 		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ EXIT
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest2","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest2","MYAREA",1) EraseJournalEntry(@3003)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",2) Dead("Tazok")~ THEN BEGIN BELT_QUEST_2_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~OR(11) Global("#L_Sod","GLOBAL",1) !Dead("SEMAJ") !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TazokDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -266,8 +266,8 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUEST_3a
 		SAY @2156 /* ~Semaj was spotted ...~ */
 		= @2132 /* ~We would like to hire you to being him to justice, dead or alive.~ */
-		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_MALE
-		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUESTS_FF_NO_BANTER_MALE
+		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ UNSOLVED_JOURNAL @3004 + BELT_QUESTS_FF_NO_BANTER_MALE
+		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3004 + BELT_QUESTS_FF_NO_BANTER_MALE
 		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest3","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 	END
 
@@ -276,18 +276,18 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2150 /* ~No, I'll be back when he's taken care of.~ */ EXIT
 		++ @2151 /* ~Not yet.  Where was he again?~	*/ + BELT_QUEST_3_ECHO
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest3","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest3","MYAREA",1) EraseJournalEntry(@3004)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_3_ECHO
 		SAY @2156 /* ~Semaj was spotted ...~ */
 		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ EXIT
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest3","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest3","MYAREA",1) EraseJournalEntry(@3004)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",3) Dead("SEMAJ")~ THEN BEGIN BELT_QUEST_3_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~OR(10) Global("#L_Sod","GLOBAL",1) !Dead("winski2") !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1SemajDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -297,8 +297,8 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUEST_4a
 		SAY @2159 /* ~Winski Peroate was spotted ...~ */
 		= @2132 /* ~We would like to hire you to being him to justice, dead or alive.~ */
-		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_MALE
-		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUESTS_FF_NO_BANTER_MALE
+		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ UNSOLVED_JOURNAL @3005 + BELT_QUESTS_FF_NO_BANTER_MALE
+		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3005 + BELT_QUESTS_FF_NO_BANTER_MALE
 		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest4","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 	END
 
@@ -307,18 +307,18 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2150 /* ~No, I'll be back when he's taken care of.~ */ EXIT
 		++ @2151 /* ~Not yet.  Where was he again?~	*/ + BELT_QUEST_4_ECHO
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest4","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest4","MYAREA",1) EraseJournalEntry(@3005)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_4_ECHO
 		SAY @2159 /* ~Winski Peroate was spotted ...~ */
 		++ @2135 /* ~Not a problem.  I'll be back as soon a he's taken care of.~ */ EXIT
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest4","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest4","MYAREA",1) EraseJournalEntry(@3005)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",4) Dead("winski2")~ THEN BEGIN BELT_QUEST_4_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~OR(9) Global("#L_Sod","GLOBAL",1) !Dead("Cythan") !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1WinskiDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -328,8 +328,8 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUEST_5a
 		SAY @2161 /* ~Cythandria was spotted ...~ */
 		= @2174 /* ~We would like to hire you to being her to justice, dead or alive.~ */
-		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_FEMALE
-		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUESTS_FF_NO_BANTER_FEMALE
+		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ UNSOLVED_JOURNAL @3006 + BELT_QUESTS_FF_NO_BANTER_FEMALE
+		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3006 + BELT_QUESTS_FF_NO_BANTER_FEMALE
 		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest5","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 	END
 
@@ -338,18 +338,18 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2171 /*~No, I'll be back when she's taken care of.~ */ EXIT
 		++ @2172 /* ~Not yet.  Where was she again?~ */ + BELT_QUEST_5_ECHO
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest5","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest5","MYAREA",1) EraseJournalEntry(@3006)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_5_ECHO
 		SAY @2161 /* ~Cythandria was spotted ...~ */
 		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ EXIT
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest5","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest5","MYAREA",1) EraseJournalEntry(@3006)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",5) OR(2) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_5_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~OR(8) Global("#L_Sod","GLOBAL",1) !Dead("Tamoko") !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1CythanDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -359,8 +359,8 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUEST_6a
 		SAY @2163 /* ~Tamoko was spotted ...~ */
 		= @2174 /* ~We would like to hire you to being her to justice, dead or alive.~ */
-		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_FEMALE
-		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUESTS_FF_NO_BANTER_FEMALE
+		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ UNSOLVED_JOURNAL @3007 + BELT_QUESTS_FF_NO_BANTER_FEMALE
+		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3007 + BELT_QUESTS_FF_NO_BANTER_FEMALE
 		++ @2175 /* ~I've spoken with her and let her go.  She is not a danger to anyone.~ */ + BELT_QUEST_6b
 		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 	END
@@ -368,7 +368,7 @@ APPEND BELT
 	IF ~~ THEN BEGIN BELT_QUEST_6b
 		SAY @2176 /* ~Her freedom is not yours to give, <CHARNAME>.  The courts will decide her fate.~ */
 		++ @2177 /* ~Her freedom may not be up to me, but her capture will not involve me.  I pass.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
-		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_FEMALE
+		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ UNSOLVED_JOURNAL @3007 + BELT_QUESTS_FF_NO_BANTER_FEMALE
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",6) !Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",0)~ THEN BEGIN BELT_QUEST_6_NOT_DONE_YET
@@ -376,30 +376,28 @@ APPEND BELT
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 		++ @2171 /*~No, I'll be back when she's taken care of.~ */ EXIT
 		++ @2172 /* ~Not yet.  Where was she again?~ */ + BELT_QUEST_6_ECHO
-		++ @2175 /* ~I've spoken with her and let her go.  She is not a danger to anyone.~ */ + BELT_QUEST_6b
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1) EraseJournalEntry(@3007)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~~ THEN BEGIN BELT_QUEST_6_ECHO
 		SAY @2163 /* ~Tamoko was spotted ...~ */
 		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ EXIT
-		++ @2175 /* ~I've spoken with her and let her go.  She is not a danger to anyone.~ */ + BELT_QUEST_6b
-		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1) EraseJournalEntry(@3007)~ + BELT_QUESTS_SKIP_THIS
 	END
 
 	IF ~Global("#L_SarvQuests","GLOBAL",6) OR(2) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1)~ THEN BEGIN BELT_QUEST_6_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~OR(7) Global("#L_Sod","GLOBAL",1) !Dead("ZHALIMAR") !Dead("GARDUSH") !Dead("NAAMAN") !Dead("DIYAB") !Dead("AASIM") !Dead("ALAI")~ THEN DO ~GiveGoldForce(2000) SetGlobal("#L_BG1TamokoDone","GLOBAL",1) AddexperienceParty(2000)~ + BELT_QUESTS_PAUSE
 	END
 
 	//////////////////////////////////////////////////////////////////////////
-	// Cloudwulfe et al speciic
+	// Cloudwulfe et al specific
 	// Most of it is in the CHAIN section below
 	//////////////////////////////////////////////////////////////////////////
 	IF ~Global("#L_SarvQuests","GLOBAL",7) Dead("ZHALIMAR") Dead("GARDUSH") Dead("NAAMAN") Dead("DIYAB") Dead("AASIM") Dead("ALAI")~ THEN BEGIN BELT_QUEST_7_DONE
 		SAY @2152 /* ~Well done <CHARNAME>!  Word has reached us on your success.~ */
-		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_NOW_WHAT
+		IF ~~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~GiveGoldForce(5000) SetGlobal("#L_BG1ZhalimarDone","GLOBAL",1) AddexperienceParty(5000)~ + BELT_QUESTS_PAUSE
 	END
 
@@ -486,8 +484,8 @@ CHAIN
 		== %SHARTEEL_JOINED% IF ~IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2141 /* ~I doubt that will be necessary.~ */
 		== BELT IF ~IsValidForPartyDialogue("SHAR-TEEL")~ THEN @2142 /* ~Dead or ALIVE!~ */
 	END
-	+ ~!IsValidForPartyDialogue("SHAR-TEEL")~ + @2141 /* ~I doubt that will be necessary.~ */ + BELT_QUESTS_WARNING
-	+ ~!IsValidForPartyDialogue("SHAR-TEEL")~ + @2140 /* ~Thank you.~ */ EXIT
+	+ ~!IsValidForPartyDialogue("SHAR-TEEL")~ + @2141 /* ~I doubt that will be necessary.~ */ UNSOLVED_JOURNAL @3002 + BELT_QUESTS_WARNING
+	+ ~!IsValidForPartyDialogue("SHAR-TEEL")~ + @2140 /* ~Thank you.~ */ UNSOLVED_JOURNAL @3002 EXIT
 
 //////////////////////////////////////////////////////////////////////////////
 // Tazok
@@ -511,11 +509,11 @@ CHAIN
 		== %KIVAN_JOINED% IF ~IsValidForPartyDialogue("KIVAN")~ THEN @2141 /* ~I doubt that will be necessary.~ */
 		== BELT IF ~IsValidForPartyDialogue("KIVAN")~ THEN @2142 /* ~Dead or ALIVE!~ */
 	END
-	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2141 /* ~I doubt that will be necessary.~ */ + BELT_QUESTS_WARNING
-	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2140 /* ~Thank you.~ */ EXIT
+	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2141 /* ~I doubt that will be necessary.~ */ UNSOLVED_JOURNAL @3003 + BELT_QUESTS_WARNING
+	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2140 /* ~Thank you.~ */ UNSOLVED_JOURNAL @3003 EXIT
 
 //////////////////////////////////////////////////////////////////////////////
-// Cloudwulfe et al speciic
+// Cloudwulfe et al specific
 //////////////////////////////////////////////////////////////////////////////
 CHAIN
 	IF ~~ THEN BELT BELT_QUEST_7a
@@ -523,8 +521,8 @@ CHAIN
 		= IF ~Dead("ZHALIMAR")~ @2167 /* ~The remainder of Zhalimar Cloudwulfe's crew were spotted ... */
 		= @2183 /* ~We would like to hire you to being them to justice, dead or alive.~ */
 	END
-	++ @2178 /* ~Not a problem.  I'll be back as soon as they're taken care of.~ */ + BELT_QUESTS_FF_NO_BANTER_GROUP
-	++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ + BELT_QUESTS_FF_NO_BANTER_GROUP
+	++ @2178 /* ~Not a problem.  I'll be back as soon as they're taken care of.~ */ UNSOLVED_JOURNAL @3008 + BELT_QUESTS_FF_NO_BANTER_GROUP
+	++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3008 + BELT_QUESTS_FF_NO_BANTER_GROUP
 	++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest7","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 
 CHAIN
@@ -535,7 +533,7 @@ CHAIN
 	+ ~Global("#L_AcceptedRoom","GLOBAL",0)~ + @2158 /* ~I'm here about the room, actually.  I'll take it.~ */ + ROOM_TAKEN
 	++ @2181 /* ~No, I'll be back when they're taken care of.~ */ EXIT
 	++ @2182 /* ~Not yet.  Where were they again?~ */ + BELT_QUEST_7_ECHO
-	++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest7","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+	++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest7","MYAREA",1) EraseJournalEntry(@3008)~ + BELT_QUESTS_SKIP_THIS
 
 CHAIN
 	IF ~~ THEN BELT BELT_QUEST_7_ECHO
@@ -543,10 +541,10 @@ CHAIN
 		= IF ~Dead("ZHALIMAR")~ @2167 /* ~The remainder of Zhalimar Cloudwulfe's crew were spotted ... */
 	END
 	++ @2178 /* ~Not a problem.  I'll be back as soon as they're taken care of.~ */ EXIT
-	++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest7","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
+	++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest7","MYAREA",1) EraseJournalEntry(@3008)~ + BELT_QUESTS_SKIP_THIS
 
 //////////////////////////////////////////////////////////////////////////////
-// Korlasz speciic
+// Korlasz specific
 //////////////////////////////////////////////////////////////////////////////
 CHAIN
 	IF ~~ THEN BELT START_KORLASZ
@@ -561,7 +559,7 @@ CHAIN
 		= IF ~!InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 		== DELTAN IF ~InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 	END
-	IF ~~ DO ~ClearAllActions() SetGlobal("#L_SentToKorlasz","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ EXIT
+	IF ~~ DO ~ClearAllActions() SetGlobal("#L_SentToKorlasz","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ UNSOLVED_JOURNAL @3009 UNSOLVED_JOURNAL @3011 EXIT
 
 CHAIN
 	IF ~Global("#L_SarvQuests","GLOBAL",8) OR(2) Dead("bdkorlas") Global("BD_KORLASZ_SURRENDER","GLOBAL",1)~ THEN BELT BELT_QUEST_8_DONE
@@ -569,8 +567,9 @@ CHAIN
 		= IF ~!InMyArea("LIIA")~ @2257 /* ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~ */ 
 		== LIIA IF ~InMyArea("LIIA")~ @2257 /* ~Were you able to find any documents or research on The Dead Three, <CHARNAME>?~ */
 	END
-	+ ~PartyHasItem("BDSHBHR")~ + @2258 /* ~Yes, I found some on Bhaal~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BHAAL_BOOKS_REWARD
-	+ ~~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ + BELT_QUESTS_ALL_DONE
+	+ ~PartyHasItem("BDSHBHR")~ + @2258 /* ~Yes, I found some on Bhaal~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~ SOLVED_JOURNAL @3010 + BHAAL_BOOKS_REWARD
+	+ ~PartyHasItem("BDSHBHR")~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~   SOLVED_JOURNAL @3010  SOLVED_JOURNAL @3013 + BELT_QUESTS_ALL_DONE
+	+ ~!PartyHasItem("BDSHBHR")~ + @2262 /* ~No, I'm sorry.  I wasn't able to find anything.~ */ DO ~SetGlobal("BD_SAFEHOUSE_DONE","GLOBAL",1) SetGlobal("#L_BG1KorlaszDone","GLOBAL",1) GiveGoldForce(6000) AddXPObject(Player1,5000) AddXPObject(Player2,5000) AddXPObject(Player3,5000) AddXPObject(Player4,5000) AddXPObject(Player5,5000) AddXPObject(Player6,5000)~   SOLVED_JOURNAL @3010 SOLVED_JOURNAL @3012 + BELT_QUESTS_ALL_DONE
 
 CHAIN 
 	IF ~~ THEN BELT BHAAL_BOOKS_REWARD
@@ -578,4 +577,4 @@ CHAIN
 		= IF ~!InMyArea("LIIA")~ @2263 /* ~I will give you 6000 gold for the lot.~ */
 		== LIIA IF ~InMyArea("LIIA")~ @2259 /* ~Most excellent!  I will give you 6000 gold for the lot.~ */
 	END
-	++ @2260 /* ~That's incredibly generous of you.  Glad to be of service!~ */ DO ~TakePartyItem("BDSHBHR") DestroyItem("BDSHBHR") GiveGoldForce(6000)~ + BELT_QUESTS_ALL_DONE
+	++ @2260 /* ~That's incredibly generous of you.  Glad to be of service!~ */ DO ~TakePartyItem("BDSHBHR") DestroyItem("BDSHBHR") GiveGoldForce(6000)~ SOLVED_JOURNAL @3014 + BELT_QUESTS_ALL_DONE

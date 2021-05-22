@@ -70,6 +70,10 @@ COPY ~%mod_root%/objects/#LDRM7.2da~ ~override~
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/setnextdream.baf~
 EXTEND_BOTTOM ~PLAYER1D.BCS~ ~%mod_root%/scripts/forcedrms.baf~
 
+// Put in all the quest journal entries here so they're all in as a group no matter which quests are available
+ADD_JOURNAL @3002 @3003 @3004 @3005 @3006 @3007 @3008 @3009 @3010 USING ~%tra_loc%/%s/dialogues.tra~	// Clean-up quests
+ADD_JOURNAL @3011 @3012 @3013 @3014 USING ~%tra_loc%/%s/dialogues.tra~									// Dead three research quest
+
 ////////////////////////////////////////////////////////////
 // Now allowing this to happen in BG1 with or without SoD //
 ////////////////////////////////////////////////////////////
