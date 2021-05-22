@@ -7,7 +7,7 @@
 EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/BG0108h.baf~
 
 // Have Tamoko initiate dialogue outside Iron Throne
-EXTEND_BOTTOM ~%BaldursGateDocks%.BCS~ ~%mod_root%/scripts/BG1200_tamoko.baf~
+EXTEND_BOTTOM ~%BaldursGateDocks%.BCS~ ~%mod_root%/scripts/BG1200_tamoko.baf~ EVAL
 
 // New dialogue for this scene
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/tamoko_die.d~ USING ~%tra_loc%/%s/dialogues.tra~
