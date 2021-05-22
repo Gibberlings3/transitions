@@ -92,7 +92,7 @@ APPEND DELTAN
 	END
 
 	// Cross-mod content with the Eltan romance mod
-	// The Eltan mod will hook in here
+	// The Eltan mod's introduction will hook in here
 	IF ~~ THEN BEGIN MATCH
 		SAY @2088 /* ~(He holds your hand in his a little longer than necessary as he encloses your fingers around the key)~ */
 		IF ~~ THEN EXIT
