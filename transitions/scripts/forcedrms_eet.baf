@@ -9,7 +9,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM2")
+		TextScreen("DRMTXT2")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",2)
 		AddSpecialAbility("SPIN101")
@@ -22,7 +22,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM2")
+		TextScreen("DRMTXT2")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",2)
 		AddSpecialAbility("SPIN101")
@@ -35,7 +35,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM2")
+		TextScreen("DRMTXT2")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",2)
 		AddSpecialAbility("SPIN104")
@@ -48,7 +48,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM3")
+		TextScreen("DRMTXT3")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",3)
 		AddSpecialAbility("SPIN101")
@@ -61,7 +61,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM3")
+		TextScreen("DRMTXT3")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",3)
 		AddSpecialAbility("SPIN104")
@@ -74,7 +74,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM4")
+		TextScreen("DRMTXT4")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",4)
 		AddSpecialAbility("SPIN102")
@@ -87,7 +87,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM4")
+		TextScreen("DRMTXT4")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",4)
 		AddSpecialAbility("SPIN105")
@@ -100,7 +100,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM5")
+		TextScreen("DRMTXT5")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",5)
 		AddSpecialAbility("SPIN102")
@@ -113,7 +113,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM5")
+		TextScreen("DRMTXT5")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",5)
 		AddSpecialAbility("SPIN105")
@@ -126,7 +126,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM6")
+		TextScreen("DRMTXT6")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",6)
 		AddSpecialAbility("SPIN103")
@@ -139,7 +139,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM6")
+		TextScreen("DRMTXT6")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",6)
 		AddSpecialAbility("SPIN106")
@@ -152,7 +152,7 @@ IF
 	ReputationGT(Player1,9)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM7")
+		TextScreen("DRMTXT7")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",7)
 		AddSpecialAbility("SPIN103")
@@ -165,7 +165,7 @@ IF
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
-		TextScreen("#LDRM7")
+		TextScreen("DRMTXT7")
 		SetGlobal("#L_ForceDream","GLOBAL",0)
 		SetGlobal("Dream","GLOBAL",7)
 		AddSpecialAbility("SPIN106")
