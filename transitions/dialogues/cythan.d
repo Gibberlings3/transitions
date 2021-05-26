@@ -4,7 +4,9 @@
 /////////////////////////////////////////////////////
 REPLACE_TRIGGER_TEXT CYTHAN ~NumTimesTalkedTo(0)~ ~NumTimesTalkedTo(0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_TRIGGER_TEXT CYTHAN ~HPPercentLT(Myself,50)~ ~HPPercentLT(Myself,50) Global("#L_BG1SarevokDead","GLOBAL",0)~
-
+REPLACE_ACTION_TEXT CYTHAN ~GiveItem("SCRL2L",LastTalkedToBy)~ ~~
+REPLACE_ACTION_TEXT CYTHAN ~GiveItem("SCRL2M",LastTalkedToBy)~ ~~
+REPLACE_ACTION_TEXT CYTHAN ~GiveItem("SCRL3F",LastTalkedToBy)~ ~DropInventory()~
 APPEND CYTHAN
 	IF ~AreaCheck("%EBaldursGate_ElfsongTavern_L2%")~ THEN BEGIN Cythan_Quest1
 		SAY @2220 /* ~You?  What do you want?!~ */
@@ -27,7 +29,7 @@ APPEND CYTHAN
 	
 	IF ~~ THEN BEGIN Cythan_Quest3b
 		SAY @2216 /* ~Fine!  I surrender!~ */
-		++ @2222 /* ~There are Flaming Fist waiting for you outside.~ */ DO ~SetGlobal("#L_CythanSurrend","GLOBAL",1) ActionOverride("Cythan",EscapeArea())~  EXIT
+		++ @2222 /* ~There are Flaming Fist waiting for you outside.~ */ DO ~SetGlobal("#L_CythanSurrend","GLOBAL",1) ActionOverride("Cythan",DropInventory()) ActionOverride("Cythan",EscapeArea())~  EXIT
 	END
 	
 	IF ~~ THEN BEGIN Cythan_Quest3c
