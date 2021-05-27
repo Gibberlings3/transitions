@@ -361,7 +361,7 @@ APPEND BELT
 		= @2174 /* ~We would like to hire you to being her to justice, dead or alive.~ */
 		++ @2173 /* ~Not a problem.  I'll be back as soon a she's taken care of.~ */ UNSOLVED_JOURNAL @3007 + BELT_QUESTS_FF_NO_BANTER_FEMALE
 		++ @2136 /* ~Oh, this will be a pleasure.  Consider it done.~ */ UNSOLVED_JOURNAL @3007 + BELT_QUESTS_FF_NO_BANTER_FEMALE
-		++ @2175 /* ~I've spoken with her and let her go.  She is not a danger to anyone.~ */ + BELT_QUEST_6b
+		+ ~GlobalGT("TamokoMove","GLOBAL",0)~ + @2175 /* ~I've spoken with her and let her go.  She is not a danger to anyone.~ */ + BELT_QUEST_6b
 		++ @2148 /* ~I'd prefer to skip this one.~ */ DO ~SetGlobal("#L_SkipQuest6","MYAREA",1)~ + BELT_QUESTS_SKIP_THIS
 	END
 
