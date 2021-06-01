@@ -127,7 +127,7 @@ APPEND BELT
 
 	IF ~~ THEN BEGIN BELT_QUESTS_SKIP_ALL
 		SAY @2145 /* ~As you wish.~ */
-		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_QUESTS_ALL_DONE
+		IF ~Global("#L_Sod","GLOBAL",1)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99) AddStoreItem("Sto0703","bdshld03",1,1) AddStoreItem("Sto0703","BDHELM10",1,1) AddStoreItem("Sto0703","BDSW2H03",1,1) AddStoreItem("Sto0703","SHLD17A",1,1) ~ + BELT_QUESTS_ALL_DONE
 		IF ~Global("#L_Sod","GLOBAL",0)~ THEN DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ SOLVED_JOURNAL @3010 + BELT_NOW_WHAT
 	END
 
