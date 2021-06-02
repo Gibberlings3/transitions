@@ -34,8 +34,8 @@ DEFINE_ACTION_FUNCTION cleanup_maze BEGIN
 			match1 = ~!Exists("DENKOD")~
 			match2 = ~!Dead("DENKOD")~
 			match3 = ~!Dead("blacklily")~
-			swap_out = ~!Dead("blacklily")~
-			swap_in = ~!Dead("blacklily") !Dead("Sarevok")~
+			swap_out = ~Global("SarevokBehavior","GLOBAL",0)~
+			swap_in = ~Global("SarevokBehavior","GLOBAL",1)~
 	END
 
 	// Set up the thieves' guild area script to start dialogue for Denkod
