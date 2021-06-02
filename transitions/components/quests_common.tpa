@@ -18,6 +18,9 @@ ACTION_IF (GAME_IS ~bgee~) AND (NOT GAME_INCLUDES ~sod~) BEGIN
 	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/bg0108_no_sod.baf~
 END
 
+// Needed to unhide mobs
+COPY ~%mod_root%/objects/#LUnhid.spl~ ~override~
+
 // Rogue Flaming Fist Mercenary
 COPY_EXISTING ~FLAMANG.CRE~ ~override/#LffBad.cre~
 	SAY NAME1 @1025 // ~Rogue Flaming Fist Mercenary~ 

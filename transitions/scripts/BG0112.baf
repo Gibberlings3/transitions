@@ -18,14 +18,27 @@ THEN
 	RESPONSE #100
 		// Semaj is alone
 		SetGlobal("#L_SemajSpawned","MYAREA",1)
-		CreateCreature("SEMAJ",[1400.1070],SE)
+		SetGlobal("SemajBehavior","GLOBAL",0)
+		CreateCreature("SEMAJ",[1400.1070],S)
 		Continue()
 END
+
+IF
+	OR(2)
+		StateCheck("Semaj",STATE_INVISIBLE)
+		StateCheck("Semaj",STATE_IMPROVEDINVISIBILITY)
+THEN
+	RESPONSE #100
+		ActionOverride("Semaj",DestroyItem("MAGE01"))
+		ActionOverride("Semaj",ForceSpellRES("#LUNHID","Semaj"))
+		Continue()
+END	
 
 IF
 	Global("#L_SarvQuests","GLOBAL",3)
 	Global("#L_SemajSpawned","MYAREA",1)
 	Global("#L_SemajBantered","MYAREA",0)
+	CombatCounter(0)
 	TriggerOverride("Semaj",See([PC]))
 THEN
 	RESPONSE #100
