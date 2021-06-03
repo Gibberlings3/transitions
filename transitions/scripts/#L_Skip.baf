@@ -28,6 +28,5 @@ THEN
 		OpenDoor("door07")
 		SmallWait(11)
 		FadeFromColor([10.0],0)
-		AddJournalEntry(256379,QUEST)
 		EndCutSceneMode()
 END

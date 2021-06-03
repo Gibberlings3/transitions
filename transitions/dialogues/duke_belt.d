@@ -559,7 +559,7 @@ CHAIN
 		= IF ~!InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 		== DELTAN IF ~InMyArea("ELTAN")~ @2186 /* ~I will make sure a contingent of Flaming Fist is there to back you up.~ */ 
 	END
-	IF ~~ DO ~ClearAllActions() SetGlobal("#L_SentToKorlasz","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ UNSOLVED_JOURNAL @3009 UNSOLVED_JOURNAL @3011 EXIT
+	IF ~~ DO ~ClearAllActions() AddJournalEntry(@3009,QUEST) AddJournalEntry(@3011,QUEST) SetGlobal("#L_SentToKorlasz","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#L_Cut04",TRUE)~ EXIT
 
 CHAIN
 	IF ~Global("#L_SarvQuests","GLOBAL",8) OR(2) Dead("bdkorlas") Global("BD_KORLASZ_SURRENDER","GLOBAL",1)~ THEN BELT BELT_QUEST_8_DONE

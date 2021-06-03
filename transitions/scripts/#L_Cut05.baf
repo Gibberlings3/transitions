@@ -61,7 +61,6 @@ THEN
 		SetGlobal("bd_plot","global",10)
 		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
 		ActionOverride("cutspy",DestroySelf())
-		AddJournalEntry(256379,QUEST)
 		SetAreaScript("",OVERRIDE)
 		EndCutSceneMode()
 END
@@ -125,7 +124,6 @@ THEN
 		SetGlobal("bd_plot","global",10)
 		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
 		ActionOverride("cutspy",DestroySelf())
-		AddJournalEntry(256379,QUEST)
 		SetAreaScript("",OVERRIDE)
 		EndCutSceneMode()
 END
@@ -189,7 +187,6 @@ THEN
 		SetGlobal("bd_plot","global",10)
 		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
 		ActionOverride("cutspy",DestroySelf())
-		AddJournalEntry(256379,QUEST)
 		SetAreaScript("",OVERRIDE)
 		EndCutSceneMode()
 END
@@ -252,7 +249,6 @@ THEN
 		SetGlobal("bd_plot","global",10)
 		SetGlobal("BDSH_Imoen_Floor","GLOBAL",1)
 		ActionOverride("cutspy",DestroySelf())
-		AddJournalEntry(256379,QUEST)
 		SetAreaScript("",OVERRIDE)
 		EndCutSceneMode()
 END
