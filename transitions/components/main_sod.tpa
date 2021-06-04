@@ -188,6 +188,7 @@ COPY_EXISTING ~BD0120.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!InMyArea("%IMOEN_DV%")~ ~!InMyArea("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_Room1b",Detect([PC]))~ ~TriggerOverride("Imoen_Room1b",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~TriggerOverride("Imoen_room1a",Detect([PC]))~ ~TriggerOverride("Imoen_room1a",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("bd_leaving_ot","GLOBAL",1)~ ~~	// Stop the "I'm leaving" chatter
    END
 BUT_ONLY_IF_IT_CHANGES
 
@@ -217,6 +218,7 @@ COPY_EXISTING ~BD0130.bcs~ ~override~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!TriggerOverride("Dead_Three_Center",Detect([PC]))~ ~!TriggerOverride("Dead_Three_Center",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!TriggerOverride("Myrkul_mural",Detect([PC]))~ ~!TriggerOverride("Myrkul_mural",Detect([PC])) !Global("#L_SarvQuests","GLOBAL",8)~
       REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!Global("BDSH_Imoen_Room","BD0130",6)~ ~!Global("BDSH_Imoen_Room","BD0130",6) !Global("#L_SarvQuests","GLOBAL",8)~
+	  REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("bd_leaving2_ot","GLOBAL",1)~ ~~  // Stop the "I'm leaving" chatter
    END
 BUT_ONLY_IF_IT_CHANGES
 // Replacement blocks for the ones side-stepped above
