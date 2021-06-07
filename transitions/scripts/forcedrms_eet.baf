@@ -19,19 +19,6 @@ END
 IF
 	Global("#L_ForceDream","GLOBAL",2)
 	GlobalLT("Dream","GLOBAL",2)
-	ReputationGT(Player1,9)
-THEN
-	RESPONSE #100
-		TextScreen("DRMTXT2")
-		SetGlobal("#L_ForceDream","GLOBAL",0)
-		SetGlobal("Dream","GLOBAL",2)
-		AddSpecialAbility("SPIN101")
-		RestParty()
-END
-
-IF
-	Global("#L_ForceDream","GLOBAL",2)
-	GlobalLT("Dream","GLOBAL",2)
 	ReputationLT(Player1,10)
 THEN
 	RESPONSE #100
