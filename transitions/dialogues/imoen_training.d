@@ -5,10 +5,10 @@
 
 REPLACE_TRIGGER_TEXT %IMOEN_JOINED% ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_ACTION_TEXT %IMOEN_POST% ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("%IMOEN_DV%",JoinParty())~
-EXTEND_TOP %IMOEN_POST% 2 #2 
-	IF ~GlobalGT("#L_ImTrainRsp","GLOBAL",0)~ THEN 
-		REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + IMOEN_TRAIN_1
-	END
+EXTEND_BOTTOM %IMOEN_POST% 2 #2 
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("#L_ImoenAskedToTrain","GLOBAL",1)~ THEN REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + IMOEN_TRAIN_1
+	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("#L_ImoenAskedToTrain","GLOBAL",0)~ THEN REPLY @2529 /* ~I wanted to let you know that Duke Jannath has offered to train you in magic over at the Ducal Palace.~ */ + IMOEN_TRAIN_LEARNED
+END
 
 APPEND %IMOEN_POST%
 	IF WEIGHT #-999 ~Global("#L_ImoenInPalace","GLOBAL",1) AreaCheck("#LBD0103") Global("KickedOut","LOCALS",2)~ THEN BEGIN IMOEN_IN_ROOM
@@ -17,7 +17,7 @@ APPEND %IMOEN_POST%
 		++ @2129 /* ~I'll leave you to it, then.~ */ EXIT
 	END
 
-	IF WEIGHT #-997 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_ImTrainRsp","GLOBAL",0) Global("KickedOut","LOCALS",0) HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ANGRY_TRAIN
+	IF WEIGHT #-997 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("KickedOut","LOCALS",0) HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ANGRY_TRAIN
 		SAY @2320 /* ~Fine!  Be that way!  I have a better place to be, anyway!~ */
 		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */
 		// @2126 /* ~See ya, kid.  Try not to burn down the place.~ */ 
@@ -68,12 +68,17 @@ APPEND %IMOEN_POST%
 		+ ~!PartyGoldLT(150000) NumInParty(6)~ +@2105 DO ~ActionOverride("%IMOEN_DV%",TakePartyGold(25000)) ActionOverride("%IMOEN_DV%",DestroyGold(12500))~ + IMOEN_TRAIN_2b
 	END
 
-	IF WEIGHT #-998 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_ImTrainRsp","GLOBAL",0) Global("KickedOut","LOCALS",0) !HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ASK_TRAIN
+	IF WEIGHT #-998 ~Global("EndOfBG1","GLOBAL",0) GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("KickedOut","LOCALS",0) !HappinessLT(Myself,UNHAPPY_ANGRY_BOUNDARY)~ THEN BEGIN IMOEN_ASK_TRAIN
 		SAY @2318 /* ~Ya know, <CHARNAME>, I'd really like to take Duke Liia up on her magic training offer.~ */
 		= @2319	/* ~If you don't need me any more, I'm going to go talk to her.~ */
 		++ @2101 /* ~Go ahead, Imoen.  You've always wanted this.~ */ + IMOEN_TRAIN_1
 		++ @2321 /* ~No, I'll be right back, don't go anywhere.~ */ DO ~ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",1))~ EXIT
 	END	
+
+	IF ~~ THEN BEGIN IMOEN_TRAIN_LEARNED
+		SAY @2530 // ~Really? Actual magic training?! I'll go check that out right away! Thanks for letting me know!~
+		IF ~~ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~ EXIT
+	END
 
 	IF ~~ THEN IMOEN_TRAIN_1
 		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */

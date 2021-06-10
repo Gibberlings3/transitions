@@ -4,9 +4,9 @@
 ///////////////////////////////////////////////////////////
 
 APPEND LIIA
-	IF WEIGHT #-999 ~Global("#L_TalkedToDukes","GLOBAL",2) IsValidForPartyDialogue("%IMOEN_DV%") Global("#L_ImTrainRsp","GLOBAL",0)~ THEN BEGIN LIIA_1
+	IF WEIGHT #-999 ~Global("#L_TalkedToDukes","GLOBAL",2) IsValidForPartyDialogue("%IMOEN_DV%")~ THEN BEGIN LIIA_1
 		SAY @2099 // ~Imoen, I sense a real talent for magic within you, child.  If you are interested in learning how to hone this skill, come see me later.~
-		IF ~~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3)~ EXIT
+		IF ~~ DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImoenAskedToTrain","GLOBAL",1)~ EXIT
 	END
 
 	IF WEIGHT #-998 ~Global("#L_TalkedToDukes","GLOBAL",2) !InPartyAllowDead("%IMOEN_DV%")~ THEN BEGIN LIIA_2
@@ -21,10 +21,10 @@ APPEND LIIA
 
 	IF WEIGHT #-996 ~!Global("#L_ImoenInPalace","GLOBAL",1) IsGabber("%IMOEN_DV%")~ THEN BEGIN LIIA_99a
 		SAY @2119 /* ~Greetings Imoen.  Have you come about magic training?~ */
-		IF ~~ GOTO LOTS_OF_STUDY
+		IF ~~ DO ~SetGlobal("#L_ImoenAskedToTrain","GLOBAL",1)~ GOTO LOTS_OF_STUDY
 	END
 
-	IF WEIGHT #-995 ~!Global("#L_ImoenInPalace","GLOBAL",1) !IsGabber("%IMOEN_DV%")~ THEN BEGIN LIIA_99b
+	IF WEIGHT #-995 ~!Global("#L_ImoenInPalace","GLOBAL",1) !IsGabber("%IMOEN_DV%") IsValidForPartyDialogue("%IMOEN_DV%")~ THEN BEGIN LIIA_99b
 		SAY @2120 /* ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~ */
 		IF ~~ GOTO LOTS_OF_STUDY
 	END
@@ -38,6 +38,11 @@ APPEND LIIA
 
 	IF WEIGHT #-994 ~Global("#L_ImoenInPalace","GLOBAL",1)~ THEN BEGIN LIIA_HELLO_AGAIN
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
+		IF ~~ THEN EXIT
+	END
+	
+	IF WEIGHT #-993 ~Global("#L_ImoenInPalace","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%")~ THEN BEGIN LIIA_ASK_ABOUT_IMOEN
+		SAY @2531 // ~Please do let Imoen know about the training opportunity I'm offering her.~
 		IF ~~ THEN EXIT
 	END
 END

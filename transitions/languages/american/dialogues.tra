@@ -214,7 +214,8 @@
 @2115	= ~Maybe...someday.~
 @2118	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with me, if she's interested.~
 @2119	= ~Greetings Imoen.  Have you come about magic training?~
-@2120	= ~Greetings, <GABBER>.  Is Imoen ready to train in magic with me?~
+@2120	= ~Greetings, <GABBER>. Is Imoen ready to train in magic with me?~
+@2531	= ~Please do let Imoen know about the training opportunity I'm offering her.~
 
 // imoen_training.d
 @2103	= ~You will come visit, <CHARNAME>!  Promise!~
@@ -242,6 +243,8 @@
 @2320	= ~Fine!  Be that way!  I have a better place to be, anyway!~
 @2321	= ~No, I'll be right back, don't go anywhere.~
 @2322	= ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training.~
+@2529	= ~I wanted to let you know that Duke Jannath has offered to train you in magic over at the Ducal Palace.~
+@2530	= ~Really? Actual magic training?! I'll go check that out right away! Thanks for letting me know!~
 
 // @2130-2186 up with duke_belt.d
 
@@ -617,7 +620,7 @@
 @2438	= ~Aye, tis time for me to leave your fine company.~
 @2439	= ~You take care of yourself, ya hear <PRO_BOYGIRL>?!~
 
-// @2440 up with Imoen training
+// @2440 up with imoen_training
 
 // Belt/Liia conversation about the accommodations on the third floor
 // Includes snarky lines
@@ -678,6 +681,8 @@
 
 // 2520-2525 up with palace_personnel
 // 2526-2528 up with Tamoko
+// 2529-2530 up with imoen_training
+// 2531 up with duke_liia
 
 /////////////////////
 // JOURNAL ENTRIES //
