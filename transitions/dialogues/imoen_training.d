@@ -304,7 +304,7 @@ CHAIN
 		@2106 /* ~I'm NOT a kid!  Oooo, that's a lot of gold.  I'm a rich kid!~ */
 		= @2107 /* ~Goodbye, <CHARNAME>.  Thanks for everything.~ */
 		== LIIA @2122 /* ~You'll be staying on the 3rd floor, Imoen.  <CHARNAME> can visit you there whenever <PRO_HESHE> wants.~ */	
-		DO  ~SetGlobal("#L_TalkedToDukes","GLOBAL",3) SetGlobal("#L_ImTrainRsp","GLOBAL",6) SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",LeaveParty()) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~
+		DO  ~SetGlobal("#L_LiiaInformedPC","MYAREA",1) SetGlobal("#L_ImTrainRsp","GLOBAL",6) SetGlobal("#L_ImoenInPalace","GLOBAL",1) ActionOverride("%IMOEN_DV%",LeaveParty()) ActionOverride("%IMOEN_DV%",SetGlobal("KickedOut","LOCALS",2)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",CLASS)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT)) ActionOverride("%IMOEN_DV%",ChangeAIScript("",OVERRIDE)) ActionOverride("%IMOEN_DV%",SetNumTimesTalkedTo(1)) ActionOverride("%IMOEN_DV%",EscapeAreaMove("#LBD0103",960,680,N))~
 	END
 	+ ~GlobalGT("#L_StartCaelarAttack","GLOBAL",1)~ + @2440 /* ~I'll visit in a couple weeks to see how you're doing, Imoen.~ */ DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
 	+ ~Global("#L_StartCaelarAttack","GLOBAL",0)~ + @2108 /* ~Good luck, Imoen.  I'll come visit!~ */ EXIT

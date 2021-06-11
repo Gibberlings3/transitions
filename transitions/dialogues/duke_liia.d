@@ -35,13 +35,20 @@ APPEND LIIA
 		++ @2102 /* ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",2) ActionOverride("%IMOEN_DV%",StartDialogueNoSet(Player1))~ EXIT
 		++ @2123 /* ~Can you wait a few days, Imoen?  I really need you right now.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",3) ActionOverride("%IMOEN_DV%",StartDialogueNoSet(Player1))~ EXIT
 	END
+	
+	IF WEIGHT #-994 ~Global("#L_ImoenInPalace","GLOBAL",1) Global("#L_LiiaInformedPC","MYAREA",0)~ THEN BEGIN LIIA_INFORM_PC
+		SAY @2112 // ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying with us to study magic.~
+		= @2113	// ~Feel free to visit her on the 3rd floor whenever you'd like.~
+		++ @2114 /* ~Thank you.  I'll do that.~ */ DO ~SetGlobal("#L_LiiaInformedPC","MYAREA",1)~ EXIT
+		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_LiiaInformedPC","MYAREA",1)~ EXIT
+	END
 
-	IF WEIGHT #-994 ~Global("#L_ImoenInPalace","GLOBAL",1)~ THEN BEGIN LIIA_HELLO_AGAIN
+	IF WEIGHT #-993 ~Global("#L_ImoenInPalace","GLOBAL",1) Global("#L_LiiaInformedPC","MYAREA",1)~ THEN BEGIN LIIA_HELLO_AGAIN
 		SAY @2057 /* ~Greetings, <GABBER>.  It's a pleasure to see you again.~ */
 		IF ~~ THEN EXIT
 	END
 	
-	IF WEIGHT #-993 ~Global("#L_ImoenInPalace","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%")~ THEN BEGIN LIIA_ASK_ABOUT_IMOEN
+	IF WEIGHT #-992 ~Global("#L_ImoenInPalace","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%")~ THEN BEGIN LIIA_ASK_ABOUT_IMOEN
 		SAY @2531 // ~Please do let Imoen know about the training opportunity I'm offering her.~
 		IF ~~ THEN EXIT
 	END
