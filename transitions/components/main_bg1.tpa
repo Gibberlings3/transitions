@@ -95,6 +95,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~BD0103.ARE~ BEGIN
 		LPF GW_CLONE_TRAVEL_TRIGGER STR_VAR GW_Name_old = ~TranBD0100b~ GW_Dest_new = EVAL ~%NBaldursGate_DucalPalace_L2%~ GW_Name_new = ~TranBG0109b~ GW_Entre_new = ~Exit0110b~ END
 		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109a~ END
 		LPF ALTER_AREA_REGION INT_VAR flag_deactivated = 0 STR_VAR region_name = ~TranBG0109b~ END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = "Exitbd0100a" new_name = "Exit0109a" END
+		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = "Exitbd0100b" new_name = "Exit0109b" END
 END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~%NBaldursGate_DucalPalace_L3%.are~ BEGIN
 	COPY_EXISTING ~%NBaldursGate_DucalPalace_L3%.are~ ~override\#LBD0103.are~
 		WRITE_ASCII (AREA_SCRIPT) ~#LPCRoom~
@@ -133,7 +135,7 @@ LAF UPDATE_BCS
    STR_VAR
       baf_location = EVAL ~%mod_root%/scripts/~
       baf_name = ~bg0109~
-      bcs_name = ~%NBaldursGate_DucalPalace_L2%~
+      bcs_name = EVAL ~%NBaldursGate_DucalPalace_L2%~
 END
 
 // Add 2 new inactive exit travel triggers leading from the 2nd floor to the new 3rd floor
