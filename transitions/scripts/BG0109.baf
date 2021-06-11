@@ -2,7 +2,7 @@
 // Moves everything from original 3rd floor to PC's chest on new 3rd floor //
 // Opens the way to the PC's suite - modified version of BD0103            //
 // Moves Imoen into her room if she's in training                          //
-// Parsed via main_sod.tpa                                                 //
+// Parsed via main_bg1.tpa                                                 //
 /////////////////////////////////////////////////////////////////////////////
 
 IF
