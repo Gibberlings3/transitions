@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Prep canned BG1 NPCs for leaving/staying after Korlasz quest and at the beginning of SoD and BG2   //
+// Prep stock BG1 NPCs for comments after Korlasz quest and leaving at the beginning of SoD and BG2   //
 // Imoen is dealt with separately                                                                     //
 // Called via main_common.tpa                                                                         //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,7 +370,8 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 	   Global("EndOfBG1","GLOBAL",0)
 	   Global("#L_%npc_name%PK","GLOBAL",0)
 	   Global("#L_NPCPK","GLOBAL",0)
-	   IsValidForPartyDialogue(MYSELF)
+	   IsValidForPartyDialogue(Myself)
+	   See(Player1)
 	   OR(3)
 		  !InPartyAllowDead(Player2)
 		  !TriggerOverride(Player2,Global("#L_PKExitModded","LOCALS",1))
@@ -396,7 +397,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		  ClearAllActions()
 		  SetGlobal("#L_%npc_name%PK","GLOBAL",1)
 		  SetGlobal("#L_NPCPK","GLOBAL",1)
-		  Dialogue(Player1)
+		  Dialogue(Myself)
 	END
 
 	// Post-Korlasz while not in party
@@ -425,7 +426,8 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 	IF
 	   Global("#L_StartBG2","GLOBAL",1)
 	   Global("#L_%npc_name%Modded","GLOBAL",0)
-	   IsValidForPartyDialogue(MYSELF)
+	   IsValidForPartyDialogue(Myself)
+	   See(Player1)
 	   OR(2)
 		  Global("#L_ExitTimer","GLOBAL",0)
 		  GlobalTimerExpired("#L_ExitTimer","GLOBAL")
@@ -453,7 +455,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 	   RESPONSE #100
 		  ClearAllActions()
 		  SetGlobal("#L_SoloExitTimer","GLOBAL",0)  // turn off the solo-exit timer until after we're done
-		  Dialogue(Player1)
+		  Dialogue(Myself)
 	END
 	~
 	   END
@@ -477,7 +479,8 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 			 Global("#L_StartCaelarAttack","GLOBAL",3)
 		  Global("EndOfBG1","GLOBAL",1)
 		  Global("#L_%npc_name%Modded","GLOBAL",0)      // NPC isn't modded
-		  IsValidForPartyDialogue(MYSELF)
+		  IsValidForPartyDialogue(Myself)
+		  See(Player1)
 		  OR(2)
 			 Global("#L_ExitTimer","GLOBAL",0)
 			 GlobalTimerExpired("#L_ExitTimer","GLOBAL")
@@ -505,7 +508,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		  RESPONSE #100
 			 ClearAllActions()
 			 SetGlobal("#L_SoloExitTimer","GLOBAL",0)  // turn off the solo-exit timer until after we're done
-			 Dialogue(Player1)
+			 Dialogue(Myself)
 	   END
 
 	   // Pre-BG2 - those that are captured don't have this section
@@ -665,7 +668,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		  21 BEGIN
 			 // Rasaad
 			 OUTER_SPRINT exit_init ~@2419~ // Alas, it is time for me to leave your company.
-			 OUTER_SPRINT exit_leave ~@2421~ // Farewell, my friend.  May Selûne's light guide you on your path.
+			 OUTER_SPRINT exit_leave ~@2421~ // Farewell, my friend.  May Selune's light guide you on your path.
 		  END
 		  22 BEGIN
 			 // Safana
@@ -712,15 +715,15 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 				%pk_i%x%%~~~~~
 				OUTER_SPRINT pk_group_s ~~~~~%pk_group_s%
 				%pk_s%x%%~~~~~
-				OUTER_SPRINT pk_group_l ~~~~~%pk_group_l%
-				%pk_l%x%%~~~~~
+//				OUTER_SPRINT pk_group_l ~~~~~%pk_group_l%
+//				%pk_l%x%%~~~~~
 			 END
 		  END
 	   END
 
 	   OUTER_SPRINT pk_group_init EVAL EVAL ~%pk_group_i%~
 	   OUTER_SPRINT pk_group_stay EVAL EVAL ~%pk_group_s%~
-	   OUTER_SPRINT pk_group_leave EVAL EVAL ~%pk_group_l%~
+//	   OUTER_SPRINT pk_group_leave EVAL EVAL ~%pk_group_l%~
 
 	   // Start building the optional sections of the dialogue file
 	   ACTION_IF npc_num < 7 THEN BEGIN
@@ -734,7 +737,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 			 + ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
 			 + ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
 			 ++ @2281 /* ~Of course you may leave, but not with that equipment.~ */  + POST_KORLASZ_STAY
-			 ++ @2282 /* ~I understand.  Now is as good a time as any to say our farewells.~ */ + POST_KORLASZ_LEAVE
+//			 ++ @2282 /* ~I understand.  Now is as good a time as any to say our farewells.~ */ + POST_KORLASZ_LEAVE
 
 		  CHAIN
 			 IF ~~ THEN %join_file% POST_KORLASZ_STAY
@@ -743,12 +746,12 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 			 END
 			 IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",2)~ EXIT
 
-		  CHAIN
-			 IF ~~ THEN %join_file% POST_KORLASZ_LEAVE
-				%pk_leave%
-				%pk_group_leave%
-			 END
-			 IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+//		  CHAIN
+//			 IF ~~ THEN %join_file% POST_KORLASZ_LEAVE
+//				%pk_leave%
+//				%pk_group_leave%
+//			 END
+//			 IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",3) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
 		  ~~~~~
 
 		  OUTER_SPRINT pk_post_file ~~~~~APPEND_EARLY %post_file%
@@ -873,6 +876,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 			 IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobal("#L_%npc_name%OkInBG1Areas","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
 	   END
 
+		PRINT "DEBUG POST_KORLASZ: %post_korlasz%"
 	   // Put it all together
 	   <<<<<<<< .../npc_add.d
 		  %post_korlasz%

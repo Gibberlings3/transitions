@@ -192,10 +192,6 @@ COPY_EXISTING ~BD0120.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Update Imoen's script to initiate pre-sod exit dialogue
-// The dialogue file is updated via main_bg1
-EXTEND_TOP ~%IMOEN_BCS%.BCS~ ~%mod_root%/scripts/imoen.baf~
-
 // Use a modified intro scene and other modified blocks that moved Imoen about
 LAF INSERT_SCRIPT_BLOCK
    INT_VAR 
@@ -240,10 +236,6 @@ COPY_EXISTING ~BDSHCUT0.bcs~ ~override~
    END
 BUT_ONLY_IF_IT_CHANGES
 
-// Put the exit dialogue stuff into its own file because it was pretty huge
-INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
-LAF exit_dialogues END
-
 // The 'magic' item given by Duke Belt that will allow for game advancement
 //   and getting to the SoD version of the palace
 // PC will find unusable broken remnants of it in Chateau Irenicus
@@ -264,6 +256,14 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/di
 
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
+
+// Update Imoen's script to initiate pre-sod exit dialogue
+// The dialogue file is updated via main_bg1
+EXTEND_TOP ~%IMOEN_BCS%.BCS~ ~%mod_root%/scripts/imoen.baf~
+
+// Other NPC exit dialogue stuff is in its own file because it was pretty huge
+INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
+LAF exit_dialogues END
 
 // Timer put in BALDUR so it'll transition to SoD or BG2 when solo no matter if AI is on or not
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/solo_check.baf~
