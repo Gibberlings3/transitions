@@ -1,7 +1,7 @@
-////////////////////////////////////////////////////////////////
-// Travel to where the player wants to be at the start of SoD //
-// Parsed via main_sod.tpa called via BG0108.bcs              //
-////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// Travel to where the player wants to be at the start of SoD           //
+// Parsed via main_sod.tpa called via #LAdvGm1.d, #LSayBye, and #LSplit //
+//////////////////////////////////////////////////////////////////////////
 
 IF
 	TRUE()
@@ -11,6 +11,10 @@ THEN
 		CutSceneId(Player1)
 		FadeToColor([30.0],0)
 		Wait(3)
+
+		// Set exit globals
+		SetGlobal("#L_SarvQuests","GLOBAL",100)
+		SetGlobal("EndOfBG1","GLOBAL",1)
 
 		// Move what's left of the party to #LBD0103 to transfer Imoen's items
 		ActionOverride(Player2,LeaveAreaLUA("#LBD0103","",[131.485],E))

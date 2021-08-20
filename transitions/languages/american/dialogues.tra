@@ -364,13 +364,7 @@
 // Post-Korlasz BG1 wrap-up dialogue with Belt
 // duke_belt.d
 @2264	= ~So, <CHARNAME>, what are your plans now?~
-@2265	= ~I think I'll go up stairs and sleep for a couple weeks.~
-@2266	= ~I'm going to settle into my new house and sleep for a couple weeks.~
-@2267	= ~I think I'll go to Helm & Cloak and celebrate for a couple weeks.~
-@2268	= ~I'm going to settle into my new home, but I'll be back in a couple weeks to visit Imoen.~
-@2269	= ~I'm going to the Helm & Cloak and celebrate, but I'll be back in a couple weeks to visit Imoen.~
 @2270	= ~I have places to go, things to do, people to see.~
-@2271	= ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~
 @2272	= ~I've had a special gift made for you.  It will allow for a limited number of wishes.~
 @2273	= ~It's a personal thank you for all you've done for the city.~
 @2274	= ~Thank you.  That's very kind of you.~
@@ -384,10 +378,8 @@
 @2279	= ~Please don't go yet.  I still need you, for just a few more days.~
 @2280	= ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~
 @2281	= ~Of course you may leave, just not with that equipment.~
-@2282	= ~I understand.  Now is as good a time as any to say our farewells.~
 @2283	= ~As you wish.  I owe you that at least.~ [AJANT20]
 @2284	= ~It has been an honor.  Farewell.~ [AJANT17]
-@2316	= ~I am eager to present our accomplishments before my superiors.  Thank you for all you've done.~ [AJANT21]
 
 // Refugee dialogues
 // refugees.d
@@ -401,223 +393,130 @@
 @2292	= ~I lost my puppy!~
 @2293	= ~I wanna go home.~
 
-// Quest Messenger
-// ffescort.d
-@2294	= ~<PROPER_SIRMAAM>, the Dukes have sent me to request your aid in rounding up the remaining supporters of Sarevok.~
-@2295	= ~Ok, let's go.~
-@2296	= ~I'll be there shortly.~
-@2297	= ~Tell the Dukes I'm not interested in being their bounty hunter.~
-@2298	= ~Please hurry, <PROPER_SIRMAAM>.  Time is of the essence.~
-@2299	= ~As you wish, <PRO_SIRMAAM>.~ 
-@2300	= ~Duke Belt wished for us to give you this token of his appreciation.~
-@2301	= ~Please give him my thanks. That was thoughtful.~
-
 // Game Advance Item
 // #LAdvGm1.d
 @2302	= ~You hear a voice, remarkably similar to Duke Belt's, echo strangely in your mind~ [BD69824]
 @2303	= ~So, <CHARNAME>, what would you like to do?~
-@2304	= ~I'd like to go to my room in the palace.~
-@2305	= ~I'd like to go home.~
-@2306	= ~I'd like to go to the Helm & Cloak Tavern.~
-@2307	= ~I'd like to visit Imoen.~
+@2304	= ~I'd like to go to my room in the palace. (Start SoD)~
+@2305	= ~I'd like to go home. (Start SoD)~
+@2306	= ~I'd like to go to the Helm & Cloak Tavern. (Start SoD)~
+@2307	= ~I'd like to visit Imoen. (Start SoD)~
 @2308	= ~Nothing at this time.~
-@2309	= ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel.~
+@2309	= ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel. (Start BG2)~
 @2310	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  It could prove quite interesting.~
-@2466	= ~I want to gather a group and head as far away from here as possible.~
-
-// Quest Messenger relaying Liia's offer to train Imoen in magic
-// Only if they haven't already spoken to the dukes
-// ffescort.d
-@2311	= ~Imoen, Grand Duke Jannath would like to extend an offer to train you in magic.~
-@2312	= ~You can accompany us back to the palace, if you'd like.~
-@2313	= ~Please give her my thanks but my place is here with <CHARNAME>.  Someone has to keep <PRO_HIMHER> out of trouble!~
-@2314	= ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying at the Ducal Palace to study magic with Grand Duke Jannath.~
-@2317	= ~You can visit her there whenever you'd like.  Her suite is on the third floor.~
-@2315	= ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~
-
-// @2316 Up with ajantis.d
-// @2317 is with ffescort.d quest msg relaying Liia's offer to train Imoen in magic
-// @2318-22 is up with imoen_training.d
-// @2323-25 is up with ajantis.d
-
-// ajantis.d exit dialogue just before SoD starts
-@2323	= ~I will be leaving in a minute to report to my superiors.~
-@2324	= ~If I am carrying anything you'd prefer to keep, let's exchange equipment now.~
+@2466	= ~I want to gather a group and head as far away from here as possible. (Start BG2)~
+@2378	= ~Before we go our separate ways, take your share of the gold. You've earned it.~
+@2379	= ~I guess it's time we go our separate ways. Thank you for your help. I can finally relax a little.~
+@2532	= ~As you wish.~ // without the sound since it's used at the beginning of the conversation
 
 // Imoen leaves to go into training at the beginning of SoD
 // imoen_training.d
-@2325	= ~I've decided to take Duke Jannath up on her offer to train me in magic.~
+@2325	= ~I've decided to take Duke Jannath up on her offer to train me in magic. Come see me when I've had a chance to settled in.~
 
 // Jaheira's post Korlasz and Pre-Sod exit dialogues and interjections
-@2326	= ~I too have other places to be.~
+@2326	= ~Khalid and I too have other places to be.~
 @2327	= ~So be it.~
 @2328	= ~Take care of yourself.~
-@2329	= ~I too will be leaving.~
-@2330	= ~<CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.~
-@2331	= ~No more arguments, I will be leaving in just a few moments.~
-@2369	= ~<CHARNAME>, you are safe now and I have places I should be.~
+@2330	= ~<CHARNAME>, you are safe now and Khalid and I have places we should be, but we will stay if you have need.~
 
 // Khalid's post Korlasz and Pre-Sod exit dialogues and interjections
-@2332	= ~I-I should be going as well.~
+@2332	= ~Jaheira and I should be going as well.~
 @2333	= ~If you insist.~
 @2334	= ~Goodbye.~
-@2335	= ~I must go as well~
-@2336	= ~<CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.~
-@2337	= ~Now <CHARNAME>, I really m-must insist.  I c-cannot stay any longer.~
-@2338	= ~Yes, *we* should go.~ 
-@2339	= ~Yes, *we* really must go.~
-@2370	= ~Now that you are s-safe, I m-must be on my way.~
+@2336	= ~<CHARNAME>, you are s-safe now and Jaheira and I have p-places we should be, but we will s-stay if you have need of either of us.~
 
 // Dorn's post Korlasz and Pre-Sod exit dialogues and interjections
-@2340	= ~Me as well.~
+@2340	= ~Me as well.~	 // Used by Ajantis as well since they probably aren't both in the group together
 @2341	= ~I can stay for a little while.~
-@2342	= ~I feel we will meet again.~
-@2343	= ~Time to go!~
 @2344	= ~<CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.~
-@2345	= ~I have no choice in the matter, <CHARNAME>.  It's time for me to go.~
 @2346	= ~Until we meet again.~
 
 // Edwin's post Korlasz and Pre-Sod exit dialogues and interjections
 @2347	= ~(gives you an exaggerated yawn)~
 @2348	= ~Fine. (sigh)~
-@2349	= ~Finally!~
-@2350	= ~I'm so done.~
 @2351	= ~I've just about had all I can take of this.  Are we done yet?~
-@2352	= ~I think I speak for everyone here when I say, I've had it.  I'm done!~
 @2353	= ~I'm outta here!~
-@2371	= ~I've just about had all I can take of this.~
 
 // Neera's post Korlasz and Pre-Sod exit dialogues and interjections
 @2354	= ~I do have plans, yes.~
 @2355	= ~Ok, for a little while.~
 @2356	= ~See ya!  Good luck and all.~
-@2357	= ~Yes, I really do have to go.~
 @2358	= ~You're in the clear now, right?  Can I go?~
-@2359	= ~You're great and all, but I really have to get outta here.~
 
 // Baeloth's post Korlasz and Pre-Sod exit dialogues and interjections
 @2360	= ~You hog all the limelight.~
 @2361	= ~Have it your way, as always!~
 @2362	= ~Look for my name in lights, I'm bowing out of this dump!~
-@2363	= ~I couldn't agree more.~
 @2364	= ~This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!~
-@2365	= ~The spot lights can wait no longer, <CHARNAME>. Stardom!  A spectacular stage!  No!  No arguments!  That is where I'm headed now.~ 
 
 // Garrick's pre-SoD exit dialogue and interjections 
-@2366	= ~<CHARNAME>, I can wait no longer to begin my epic ballad.  I must insist that it is time to part ways.~
-@2367	= ~I can't wait any longer, either.~
 @2368	= ~Farewell, <CHARNAME>.  I shall immortalize your name in song!~
 
 // 2369 - 71 up with their respective exit dialogues 
 
 // Xan's pre-SoD/BG2 exit dialogue and interjections
-@2372	= ~I'm amazed we've made it thus far, <CHARNAME>.  I need to report back before our luck inevitably runs out.~
-@2373	= ~I need to report back to Evereska.~
 @2374	= ~Farewell though I certainly shall not.~
 
 // Minsc's pre-SoD exit dialogue and interjections
-@2375	= ~Boo is tired and needs a break from all the butt-kicking.  Just a short one.  We'll be near by if you need us.~
-@2376	= ~Boo is weary and must rest!~
 @2377	= ~If you need us, look for us at the Three Old Kegs.~
 @2385	= ~Oh, sorry, I didn't hear you.  I was talking to Boo.~
 @2386	= ~He said to make sure to pick up some fresh pumpkin seeds.~
 
-// PC responses to pre-SoD/BG2 exit dialogues when there is and isn't gold to share
-@2378	= ~That reminds me, here!  Everyone, take you're share of the gold.  You've all earned it.~
-@2379	= ~Thank you for your help.  I can finally relax a little.~
-
 // Dynaheir's pre-SoD exit dialogue
-@2380	= ~I am in dire need of a short rest.  I shall not go afar off, but I must go for awhile.~
-@2381	= ~Aye, a rest will do us all good.~
-@2382	= ~If thou hast need of me, I shall be lodging at the Three Old Kegs.~
-@2383	= ~If I am carrying aught thou would'st prefer to keep, let us exchange equipment now.~
+@2382	= ~If thou hast need of Minsc or myself, we shall be lodging at the Three Old Kegs.~
 @2384	= ~I just said that.~
 @2387	= ~sigh~
 @2388	= ~Farewell until we meet again.~
 
 // Alora's pre-Sod/BG2 exit dialogues
-@2389	= ~You sure have kept me busy!  It's been fun but I think I'll find less dangerous fun somewhere ... not here.~
-@2390	= ~Yeah, think I'll check out...mmm somewhere...not here.~
 @2391	= ~See ya 'round!~
 
 // Branwen's pre-SoD/BG2 exit dialogue
-@2392	= ~You are a fine warrior, <CHARNAME>, but I will now go my own way.~
-@2393	= ~Aye, our time together is at an end.~
 @2394	= ~Tempus watch over you!~
 
 // Coran's pre-SoD/BG2 exit dialogue
-@2395	= ~This has been fun, <CHARNAME>, but it is time for me to leave.~
-@2396	= ~Yes, it is time we part ways.~
 @2397	= ~Farewell my friend.~
 
 // Eldoth's pre-SoD/BG2 exit dialogue
-@2398	= ~This is all just too tedious!  I'm leaving!~
-@2399	= ~It's about time we all came to our senses!  I'll be leaving too.~
 @2400	= ~Ta-ta!~
 
 // Montaron's pre-SoD/BG2 exit dialogue
-@2401	= ~I've suffered yur company as long as I'm going to!  I'm leaving and that's that!~
-@2402	= ~Aye, I've suffered yur company as long as I'm going to!~
 @2403	= ~Watch yur back!~
 
 // Xzar's pre-SoD/BG2 exit dialogue
-@2404	= ~I'll not tolerate this group any longer.  I'm leaving and that's that!~
-@2405	= ~Aye, I'll not tolerate this group any longer.~
 @2406	= ~Fare ye well!~
 
 // Faldorn's pre-SoD/BG2 exit dialogue
-@2407	= ~I will no longer waste my life with this endeavor.  I am leaving for the forest.~
-@2408	= ~It's time to return to the forest.~
 @2409	= ~Oakfather watch over you.~
 
 // Kagain's pre-SoD/BG2 exit dialogue
-@2410	= ~You was a good leader.  I've no complaints over the profits but it's time to go our separate ways.~
-@2411	= ~It's time to go our separate ways.~
 @2412	= ~Yeah bye.~
 
 // Kivan's pre-SoD/BG2 exit dialogue
-@2413	= ~This is where we part ways.  I shall return home in a few moments.~
-@2414	= ~It is time to part ways.~
 @2415	= ~Farewell, mellonamin.~
 
 // Quayle's pre-SoD/BG2 exit dialogue
-@2416	= ~I'll not put off starting my own venture any longer.  My family business awaits!~
-@2417	= ~My family business awaits!~
 @2418	= ~Try to use your brain now that I won't be here to help you.~
 
 // Rasaad's pre-SoD/BG2 exit dialogue
-@2419	= ~Alas, it is time for me to leave your company.~
-@2420	= ~I too shall be leaving your company.~
 @2421	= ~Farewell, my friend.  May Selûne's light guide you on your path.~
 
 // Safana's pre-SoD/BG2 exit dialogue
-@2422	= ~Enough is enough.  I am going to seek out the pleasures of warm baths and silk sheets...and...other things.~
-@2423	= ~Yes, enough is enough.~
 @2424	= ~Goodbye.  It's been...interesting.~ 
 
 // Sharteel's pre-SoD/BG2 exit dialogue
-@2425	= ~You were a good enough leader.  But it is time I struck out on my own.~
-@2426	= ~Yes, it is time I struck out on my own.~
 @2427	= ~Farewell and stay strong!~
 
 // Skie's pre-SoD/BG2 exit dialogue
-@2428	= ~I'm tired of the grime and the gook and the fighting and ... I'm just tired.  I'm done.~
-@2429	= ~Yeah, I'm done with this, too.~
 @2430	= ~See ya!  I'm outta here!~
 
 // Tiax's pre-SoD/BG2 exit dialogue
-@2431	= ~Tiax must begin the next phase of his plan.  Tiax can no longer aid you in your tasks.~
-@2432	= ~Tiax must begin the next phase of his plan.~
 @2433	= ~Tiax may...or may not...look well upon you when he rules all.~
 
 // Viconia's pre-SoD/BG2 exit dialogue
-@2434	= ~I will remember your kindness to me always, but now I must leave ... while I am yet free to do so.~
-@2435	= ~Yes, I must leave now as well.~
 @2436	= ~Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.~
 
 // Yeslick's pre-SoD/BG2 exit dialogue
-@2437	= ~We've done what we set out to do, and more to boot!  Tis time for me to leave your fine company.~
-@2438	= ~Aye, tis time for me to leave your fine company.~
 @2439	= ~You take care of yourself, ya hear <PRO_BOYGIRL>?!~
 
 // @2440 up with imoen_training
@@ -640,19 +539,19 @@
 @2454	= ~Well, that is true.  You're right, I am safer here.~
 
 // PC learns it's a weak poison that was used
-@2455	= ~They used a weak poison?  That makes no...they weren't trying to kill me.  They were trying to capture me.~
-@2456	= ~Hmm, you may be right.~
+//@2455	= ~They used a weak poison?  That makes no...they weren't trying to kill me.  They were trying to capture me.~
+//@2456	= ~Hmm, you may be right.~
 
 // Final conversation with the Dukes before leaving the palace for Dragonspear
-@2457	= ~Before I leave, I need to point out that Caelar's minions weren't here to kill me.~
-@2458	= ~Yes, the poison they used was far too weak to accomplish that.~
-@2459	= ~Their purpose was to capture me.  I have no idea why.~
-@2460	= ~That is disturbing news.~
-@2461	= ~Even more disturbing was the visitor I had.  It seems a mysterious hooded man is stalking me.~
-@2462	= ~Before I leave, I have some disturbing news.  I received a visitor here in the palace. It seems a mysterious hooded man is stalking me.~
-@2463	= ~Could it be the same that commissioned the theft of Sarevok's sword?~
-@2464	= ~Well, he certainly fit the description.  Mysterious...creepy is closer to the truth.  And ominous.~
-@2465	= ~I must apologize, <CHARNAME>.  It seems our palace security never ceases to fail you.~
+//@2457	= ~Before I leave, I need to point out that Caelar's minions weren't here to kill me.~
+//@2458	= ~Yes, the poison they used was far too weak to accomplish that.~
+//@2459	= ~Their purpose was to capture me.  I have no idea why.~
+//@2460	= ~That is disturbing news.~
+//@2461	= ~Even more disturbing was the visitor I had.  It seems a mysterious hooded man is stalking me.~
+//@2462	= ~Before I leave, I have some disturbing news.  I received a visitor here in the palace. It seems a mysterious hooded man is stalking me.~
+//@2463	= ~Could it be the same that commissioned the theft of Sarevok's sword?~
+//@2464	= ~Well, he certainly fit the description.  Mysterious...creepy is closer to the truth.  And ominous.~
+//@2465	= ~I must apologize, <CHARNAME>.  It seems our palace security never ceases to fail you.~
 
 // @2466 Up with game advance item dialogue
 
@@ -683,6 +582,16 @@
 // 2526-2528 up with Tamoko
 // 2529-2530 up with imoen_training
 // 2531 up with duke_liia
+// 2532 up with #LAdvGm1
+
+// Canon group say they'll stay with the group upon starting BG2
+@2550	= ~Khalid and I will join you.~
+@2551	= ~Jaheira and I will join you.~
+@2552	= ~Dynaheir, Boo and Minsc will not abandon you.~
+@2553	= ~Minsc and I shall accompany thee.~
+@2554	= ~And Boo.~
+@2555	= ~Yes, yes of course, and Boo.~
+@2556	= ~Don't think for a moment you're going anywhere without me!~
 
 /////////////////////
 // JOURNAL ENTRIES //

@@ -1,0 +1,161 @@
+/////////////////////////////////////////////////////
+// Determine the split when there's 5 in the group //
+// Distribution will happen in #LShare             //
+// Parsed via main_sod.tpa called via #LAdvGm1.d   //
+/////////////////////////////////////////////////////
+
+IF
+	PartyGoldLT(10000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",1000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(10000)
+	PartyGoldLT(15000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",2000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(15000)
+	PartyGoldLT(20000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",3000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(20000)
+	PartyGoldLT(25000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",4000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(25000)
+	PartyGoldLT(50000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",5000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(50000)
+	PartyGoldLT(100000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",10000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(100000)
+	PartyGoldLT(150000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",20000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(150000)
+	PartyGoldLT(200000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",30000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(200000)
+	PartyGoldLT(250000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",40000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(250000)
+	PartyGoldLT(375000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",50000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(375000)
+	PartyGoldLT(500000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",75000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(500000)
+	PartyGoldLT(750000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",100000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(750000)
+	PartyGoldLT(1000000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",150000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(1000000)
+	PartyGoldLT(1250000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",200000)
+		Continue()
+END
+
+IF
+	!PartyGoldLT(1250000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",250000)
+		Continue()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx(#LShare)
+END

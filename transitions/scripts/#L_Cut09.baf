@@ -65,6 +65,10 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 
+		// Set exit globals
+		SetGlobal("#L_SarvQuests","GLOBAL",100)
+		SetGlobal("EndOfBG1","GLOBAL",1)
+
 		SetGlobal("#L_CanonGroupMoved","GLOBAL",1)
 
 		SmallWait(10)

@@ -1,0 +1,896 @@
+///////////////////////////////////////////////////
+// Split the party's gold amongst it's members   //
+// Parsed via main_sod.tpa called via #LSplit2-6 //
+///////////////////////////////////////////////////
+
+IF
+	Global("#LShare","GLOBAL",1000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(1000))
+		ActionOverride(Player2,DestroyGold(500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",2000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(2000))
+		ActionOverride(Player2,DestroyGold(1000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",3000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(3000))
+		ActionOverride(Player2,DestroyGold(1500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",4000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(4000))
+		ActionOverride(Player2,DestroyGold(2000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",5000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(5000))
+		ActionOverride(Player2,DestroyGold(2500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",10000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(10000))
+		ActionOverride(Player2,DestroyGold(5000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",20000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(20000))
+		ActionOverride(Player2,DestroyGold(10000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",30000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(30000))
+		ActionOverride(Player2,DestroyGold(15000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",40000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(40000))
+		ActionOverride(Player2,DestroyGold(20000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",50000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(50000))
+		ActionOverride(Player2,DestroyGold(25000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",75000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(75000))
+		ActionOverride(Player2,DestroyGold(37500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",100000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(100000))
+		ActionOverride(Player2,DestroyGold(50000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",150000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(150000))
+		ActionOverride(Player2,DestroyGold(75000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",200000)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(200000))
+		ActionOverride(Player2,DestroyGold(100000))
+		Continue()
+END
+
+IF
+	!PartyGoldLT(500000)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,TakePartyGold(250000))
+		ActionOverride(Player2,DestroyGold(125000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",1000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(1000))
+		ActionOverride(Player3,DestroyGold(500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",2000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(2000))
+		ActionOverride(Player3,DestroyGold(1000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",3000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(3000))
+		ActionOverride(Player3,DestroyGold(1500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",4000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(4000))
+		ActionOverride(Player3,DestroyGold(2000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",5000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(5000))
+		ActionOverride(Player3,DestroyGold(2500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",10000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(10000))
+		ActionOverride(Player3,DestroyGold(5000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",20000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(20000))
+		ActionOverride(Player3,DestroyGold(10000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",30000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(30000))
+		ActionOverride(Player3,DestroyGold(15000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",40000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(40000))
+		ActionOverride(Player3,DestroyGold(20000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",50000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(50000))
+		ActionOverride(Player3,DestroyGold(25000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",75000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(75000))
+		ActionOverride(Player3,DestroyGold(37500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",100000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(100000))
+		ActionOverride(Player3,DestroyGold(50000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",150000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(150000))
+		ActionOverride(Player3,DestroyGold(75000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",200000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(200000))
+		ActionOverride(Player3,DestroyGold(100000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",250000)
+	!NumInPartyLT(3)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,TakePartyGold(250000))
+		ActionOverride(Player3,DestroyGold(125000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",1000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(1000))
+		ActionOverride(Player4,DestroyGold(500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",2000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(2000))
+		ActionOverride(Player4,DestroyGold(1000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",3000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(3000))
+		ActionOverride(Player4,DestroyGold(1500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",4000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(4000))
+		ActionOverride(Player4,DestroyGold(2000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",5000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(5000))
+		ActionOverride(Player4,DestroyGold(2500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",10000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(10000))
+		ActionOverride(Player4,DestroyGold(5000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",20000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(20000))
+		ActionOverride(Player4,DestroyGold(10000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",30000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(30000))
+		ActionOverride(Player4,DestroyGold(15000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",40000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(40000))
+		ActionOverride(Player4,DestroyGold(20000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",50000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(50000))
+		ActionOverride(Player4,DestroyGold(25000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",75000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(75000))
+		ActionOverride(Player4,DestroyGold(37500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",100000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(100000))
+		ActionOverride(Player4,DestroyGold(50000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",150000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(150000))
+		ActionOverride(Player4,DestroyGold(75000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",200000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(200000))
+		ActionOverride(Player4,DestroyGold(100000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",250000)
+	!NumInPartyLT(4)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,TakePartyGold(250000))
+		ActionOverride(Player4,DestroyGold(125000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",1000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(1000))
+		ActionOverride(Player5,DestroyGold(500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",2000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(2000))
+		ActionOverride(Player5,DestroyGold(1000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",3000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(3000))
+		ActionOverride(Player5,DestroyGold(1500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",4000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(4000))
+		ActionOverride(Player5,DestroyGold(2000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",5000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(5000))
+		ActionOverride(Player5,DestroyGold(2500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",10000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(10000))
+		ActionOverride(Player5,DestroyGold(5000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",20000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(20000))
+		ActionOverride(Player5,DestroyGold(10000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",30000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(30000))
+		ActionOverride(Player5,DestroyGold(15000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",40000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(40000))
+		ActionOverride(Player5,DestroyGold(20000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",50000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(50000))
+		ActionOverride(Player5,DestroyGold(25000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",75000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(75000))
+		ActionOverride(Player5,DestroyGold(37500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",100000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(100000))
+		ActionOverride(Player5,DestroyGold(50000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",150000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(150000))
+		ActionOverride(Player5,DestroyGold(75000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",200000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(200000))
+		ActionOverride(Player5,DestroyGold(100000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",250000)
+	!NumInPartyLT(5)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,TakePartyGold(250000))
+		ActionOverride(Player5,DestroyGold(125000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",1000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(1000))
+		ActionOverride(Player6,DestroyGold(500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",2000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(2000))
+		ActionOverride(Player6,DestroyGold(1000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",3000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(3000))
+		ActionOverride(Player6,DestroyGold(1500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",4000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(4000))
+		ActionOverride(Player6,DestroyGold(2000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",5000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(5000))
+		ActionOverride(Player6,DestroyGold(2500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",10000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(10000))
+		ActionOverride(Player6,DestroyGold(5000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",20000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(20000))
+		ActionOverride(Player6,DestroyGold(10000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",30000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(30000))
+		ActionOverride(Player6,DestroyGold(15000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",40000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(40000))
+		ActionOverride(Player6,DestroyGold(20000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",50000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(50000))
+		ActionOverride(Player6,DestroyGold(25000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",75000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(75000))
+		ActionOverride(Player6,DestroyGold(37500))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",100000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(100000))
+		ActionOverride(Player6,DestroyGold(50000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",150000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(150000))
+		ActionOverride(Player6,DestroyGold(75000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",200000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(200000))
+		ActionOverride(Player6,DestroyGold(100000))
+		Continue()
+END
+
+IF
+	Global("#LShare","GLOBAL",250000)
+	NumInParty(6)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,TakePartyGold(250000))
+		ActionOverride(Player6,DestroyGold(125000))
+		Continue()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx(#LSayBye,TRUE)
+END
