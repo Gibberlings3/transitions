@@ -4,61 +4,6 @@
 //////////////////////////////////////////////////////
 
 BEGIN ~#LFFEsc1~
-	IF ~Global("#L_QuestMsgSent","GLOBAL",1)~ THEN BEGIN QUEST_MSG
-		SAY @2294 /* ~<PROPER_SIRMAAM>, the Dukes have sent me to request your aid in rounding up the remaining supporters of Sarevok.~ */
-		++ @2295 /* ~Ok, let's go.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) ClearAllActions() StartCutSceneMode() StartCutSceneEx("#L_Cut06",TRUE)~ EXIT
-		++ @2296 /* ~I'll be there shortly.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2)~ + QUEST_HURRY
-		++ @2297 /* ~Tell the Dukes I'm not interested in being their bounty hunter.~ */ DO ~SetGlobal("#L_QuestMsgSent","GLOBAL",2) SetGlobal("#L_SarvQuestsInProg","GLOBAL",2) SetGlobal("#L_SarvQuests","GLOBAL",99) SetGlobalTimer("#L_SoDNotBefore","GLOBAL",FIFTEEN_DAYS)~ + QUEST_GIFT
-	END
-
-	IF ~~ THEN QUEST_HURRY
-		SAY @2298 /* ~Please hurry, <PROPER_SIRMAAM>.  Time is of the essence.~ */
-		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-//		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%")~ + INFORM_IMOEN_IN_TRAINING 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) InPartyAllowDead("%IMOEN_DV%") !IsValidForPartyDialogue("%IMOEN_DV%")~ + HEAL_IMOEN
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) IsValidForPartyDialogue("%IMOEN_DV%")~ + IMOEN_OFFER_TRAINING
-	END
-
-	IF ~~ THEN QUEST_GIFT
-		SAY @2300 /* ~Duke Belt wished for us to give you this token of his appreciation.~ */
-		++ @2301 /* ~Please give him my thanks. That was thoughtful.~ */ DO ~GiveItemCreate("#LAdvGm1",Player1,1,0,0)~ + QUEST_SKIP
-	END
-
-	IF ~~ THEN QUEST_SKIP
-		SAY @2299 /* ~As you wish, <PRO_SIRMAAM>.~ */
-		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-//		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%") Global("#L_LiiaInstalled","GLOBAL",1)~ + INFORM_IMOEN_CAN_TRAIN 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) !InPartyAllowDead("%IMOEN_DV%")~ + INFORM_IMOEN_IN_TRAINING 
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) InPartyAllowDead("%IMOEN_DV%") !IsValidForPartyDialogue("%IMOEN_DV%")~  + HEAL_IMOEN
-		IF ~Global("#L_TalkedToDukes","GLOBAL",0) IsValidForPartyDialogue("%IMOEN_DV%")~ + IMOEN_OFFER_TRAINING
-	END
-
-	IF ~~ THEN HEAL_IMOEN
-		SAY @2117 /* ~One moment <CHARNAME>, I need to speak with Imoen.~ */
-		IF ~~ DO ~ApplySpellRES("%IMOEN_DV%","%SPL_RESURRECT%") ApplySpellRES("%IMOEN_DV%","%SPL_DISPEL%") ApplySpellRES("%IMOEN_DV%","%SPL_CLEANAIR%")~ + IMOEN_OFFER_TRAINING
-	END
-
-	IF ~~ THEN IMOEN_OFFER_TRAINING
-		SAY @2311 /* ~Imoen, Grand Duke Jannath would like to extend an offer to train you in magic.~ */
-		= @2312 /* ~You can accompany us back to the palace, if you'd like.~ */
-		++ @2101 /* ~Go ahead, Imoen.  You've always wanted this.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",1) ActionOverride("%IMOEN_DV%",StartDialogueNoSet(Player1))~ EXIT
-		++ @2102 /* ~If you do this, Imoen, I'll have to find another to take your place in the group.  It will be...goodbye.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",2) ActionOverride("%IMOEN_DV%",StartDialogueNoSet(Player1))~ EXIT
-		++ @2123 /* ~Can you wait a few days, Imoen?  I really need you right now.~ */ DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",3) ActionOverride("%IMOEN_DV%",StartDialogueNoSet(Player1))~ EXIT
-	END
-
-//	IF ~~ THEN INFORM_IMOEN_CAN_TRAIN
-//		SAY @2315 /* ~<CHARNAME>, if you see your friend Imoen, let her know she is free to train in magic with Grand Duke Jannath, if she's interested.~ */
-//		IF ~~ THEN DO ~ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-//	END
-
-	IF ~~ THEN INFORM_IMOEN_IN_TRAINING
-		SAY @2314 /* ~<CHARNAME>, I wanted to let you know that your friend Imoen is staying at the Ducal Palace to study magic with Grand Duke Jannath.~ */
-		= @2317 /* ~You can visit her there whenever you'd like.  Her suite is on the third floor.~ */
-		++ @2114 /* ~Thank you.  I'll do that.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","%IMOEN_DV%",[960.680]) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-		++ @2115 /* ~Maybe...someday.~ */ DO ~SetGlobal("#L_ImoenInPalace","GLOBAL",1) MoveGlobal("#LBD0103","%IMOEN_DV%",[960.680]) ActionOverride("#LffEsc1",EscapeArea()) ActionOverride("#LffEsc2",EscapeArea()) ActionOverride("#LffEsc3",EscapeArea())~ EXIT
-	END
-
 	IF ~Global("#L_SarvQuests","GLOBAL",1) Dead("GALDOR") AreaCheck("%SWBaldursGate%")~ THEN BEGIN ESCORT_1
 		SAY @2194 /* ~No survivors?~ */
 		++ @2195 /* ~I'm afraid not.~ */ + ESCORT_LEAVESa
