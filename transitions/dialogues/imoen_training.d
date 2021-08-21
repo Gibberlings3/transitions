@@ -153,16 +153,6 @@ APPEND %IMOEN_JOINED%
 		IF ~~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("%IMOEN_DV%",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
 	END
 
-	IF WEIGHT #-997 ~GlobalGT("#L_StartCaelarAttack","GLOBAL",0) Global("EndofBG1","GLOBAL",1) GlobalLT("#L_StartCaelarAttack","GLOBAL",4)~ THEN BEGIN PRE_SOD_TRAIN
-		SAY @2325 /* ~I've decided to take Duke Jannath up on her offer to train me in magic.~ */
-		= @2116 /* ~Sorry <CHARNAME>.  I've wanted to do this my whole life!~ */
-//		= @2104 /* ~Oh!  Here's my equipment.  I won't need it while studying magic.~ */
-//		IF ~~ THEN DO ~ActionOverride("%IMOEN_DV%",GivePartyAllEquipment())~ + IMOEN_ITEM_4a
-//		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4) ActionOverride("%IMOEN_DV%",GivePartyAllEquipment())~ + IMOEN_LIIA_4a
-		IF ~~ THEN + IMOEN_ITEM_4a
-		IF ~InMyArea("LIIA")~ THEN DO ~SetGlobal("#L_ImTrainRsp","GLOBAL",4)~ + IMOEN_LIIA_4a
-	END
-
 	IF ~~ THEN IMOEN_ITEM_4a
 		SAY @2121 /* ~I can hardly wait to get started!  See ya!~ */
 		// 2105 = /* ~Wait Imoen!  You've earned your share of the gold.  Take this.  But spend it wisely, kid!~ */

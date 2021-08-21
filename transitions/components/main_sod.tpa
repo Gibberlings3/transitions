@@ -257,9 +257,14 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/di
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
-// Update Imoen's script to initiate pre-sod exit dialogue
-// The dialogue file is updated via main_bg1
-EXTEND_TOP ~%IMOEN_BCS%.BCS~ ~%mod_root%/scripts/imoen.baf~
+// Scripts to share profits and say goodbye during transitions
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit2.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit3.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit4.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit5.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit6.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LShare.baf~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSayBye.baf~
 
 // Other NPC exit dialogue stuff is in its own file because it was pretty huge
 INCLUDE ~%mod_root%/components/exit_dialogues.tpa~

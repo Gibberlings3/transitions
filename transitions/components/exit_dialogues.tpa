@@ -59,6 +59,11 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		OUTER_SPRINT upper_name "%npc_name%"
 		ACTION_TO_UPPER upper_name
 		OUTER_SPRINT join_file EVAL EVAL ~%%upper_name%_JOINED%~ 
+		
+		// Imoen's DV isn't her upper case name
+		ACTION_IF %npc_num% = 28 THEN BEGIN
+			OUTER_SPRINT upper_name "IMOEN2"
+		END
 
 		// These is the normal dialogue triggers for group interjections
 		OUTER_SPRINT pk_ok ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0)~ ~~~~~
@@ -288,12 +293,60 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		OUTER_SPRINT bcs_file EVAL EVAL ~%%upper_name%_BCS%~
 		OUTER_SPRINT join_file EVAL EVAL ~%%upper_name%_JOINED%~ 
 
+		// Imoen's DV isn't her upper case name
+		ACTION_IF %npc_num% = 28 THEN BEGIN
+			OUTER_SPRINT upper_name "IMOEN2"
+		END
+
 		/////////////////////////////////////
 		// BUILD THE BAF FILE FOR EACH NPC //
 		/////////////////////////////////////
 
 		// Only the first 7 on the list have post-Korlasz dialogue
-		ACTION_IF npc_num < 7 THEN BEGIN
+		// Khalid lets Jaheira initiate the dialogue if she's present and able
+		ACTION_IF npc_num = 3 THEN BEGIN
+			// Khalid let's Jaheira speak for the both of the if she's present
+			OUTER_SPRINT pk ~
+			IF
+				Global("#L_SarvQuests","GLOBAL",99)
+				Global("#L_%npc_name%Modded","GLOBAL",0)
+				Global("EndOfBG1","GLOBAL",0)
+				Global("#L_%npc_name%PK","GLOBAL",0)
+				Global("#L_NPCPK","GLOBAL",0)
+				IsValidForPartyDialogue(Myself)
+				See(Player1)
+				OR(3)
+					!IsValidForPartyDialogue("JAHEIRA")
+					!TriggerOverride("JAHEIRA",Global("#L_JaheiraModded","LOCALS",0))
+					TriggerOverride(Player1,False())
+				OR(3)
+					!InPartyAllowDead(Player2)
+					!TriggerOverride(Player2,Global("#L_PKExitModded","LOCALS",1))
+					TriggerOverride(Player1,False())
+				OR(3)
+					!InPartyAllowDead(Player3)
+					!TriggerOverride(Player3,Global("#L_PKExitModded","LOCALS",1))
+					TriggerOverride(Player1,False())
+				OR(3)
+					!InPartyAllowDead(Player4)
+					!TriggerOverride(Player4,Global("#L_PKExitModded","LOCALS",1))
+					TriggerOverride(Player1,False())
+				OR(3)
+					!InPartyAllowDead(Player5)
+					!TriggerOverride(Player5,Global("#L_PKExitModded","LOCALS",1))
+					TriggerOverride(Player1,False())
+				OR(3)
+					!InPartyAllowDead(Player6)
+					!TriggerOverride(Player6,Global("#L_PKExitModded","LOCALS",1))
+					TriggerOverride(Player1,False())
+			THEN
+				RESPONSE #100
+					ClearAllActions()
+					SetGlobal("#L_%npc_name%PK","GLOBAL",1)
+					SetGlobal("#L_NPCPK","GLOBAL",1)
+					Dialogue(Myself)
+			END~
+		END ELSE ACTION_IF npc_num < 7 THEN BEGIN
 			// Post-Korlasz while in party
 			OUTER_SPRINT pk ~
 			IF
@@ -611,7 +664,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
 			// Everyone leaves the group prior to SoD
 			CHAIN
-				IF WEIGHT #-998 ~Global("EndOfBG1","GLOBAL",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_SOD_LEAVE
+				IF WEIGHT #-998 ~OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_SOD_LEAVE
 					%sod_init%
 					%group_sod_exit%
 				END

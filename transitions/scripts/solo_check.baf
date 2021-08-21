@@ -38,10 +38,8 @@ IF
 	Global("#L_SoDStarted","GLOBAL",0)
 	!Global("#L_SoloExitTimer","GLOBAL",0)
 	GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
-	Global("#L_SarvQuests","GLOBAL",100)
 	GlobalGT("#L_StartCaelarAttack","GLOBAL",0)
 	GlobalLT("#L_StartCaelarAttack","GLOBAL",99)
-	Global("EndOfBG1","GLOBAL",1)
   Global("#L_WaitForMe","GLOBAL",0)
 THEN
 	RESPONSE #100

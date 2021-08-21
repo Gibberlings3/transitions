@@ -157,5 +157,5 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneEx(#LShare)
+		StartCutSceneEx("#LShare",TRUE)
 END

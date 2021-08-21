@@ -6,86 +6,107 @@
 
 IF
 	IsValidForPartyDialogue("JAHEIRA")
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride("JAHEIRA",See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride("JAHEIRA",Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	IsValidForPartyDialogue("DYNAHEIR")
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride("DYNAHEIR",See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride("DYNAHEIR",Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	!Name("None",Player2)
 	IsValidForPartyDialogue(Player2)
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride(Player2,Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride(Player2,See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride(Player2,Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	NumInPartyGT(2)
 	!Name("None",Player3)
 	IsValidForPartyDialogue(Player3)
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride(Player3,Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride(Player3,See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride(Player3,Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	NumInPartyGT(3)
 	!Name("None",Player4)
 	IsValidForPartyDialogue(Player4)
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride(Player4,Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride(Player4,See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride(Player4,Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	NumInPartyGT(4)
 	!Name("None",Player5)
 	IsValidForPartyDialogue(Player5)
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride(Player5,Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride(Player5,See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride(Player5,Dialogue(Myself))
+		Wait(3)
 END
 
 IF
 	IsValidForPartyDialogue(Player6)
+	Global("#L_SaidBye","GLOBAL",0)
 	TriggerOverride(Player6,Global("#L_SayGoodbye","LOCALS",1))
 	TriggerOverride(Player6,See(Player1))
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",1)
+		EndCutSceneMode()
 		ActionOverride(Player6,Dialogue(Myself))
+		Wait(3)
 END
 
 IF
@@ -93,7 +114,8 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		ExitCutSceneMode()
+		SetGlobal("#L_SaidBye","GLOBAL",0)
+		EndCutSceneMode()
 END
 
 

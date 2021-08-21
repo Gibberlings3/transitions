@@ -892,5 +892,5 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneEx(#LSayBye,TRUE)
+		StartCutSceneEx("#LSayBye",TRUE)
 END
