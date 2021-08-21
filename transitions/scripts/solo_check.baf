@@ -53,13 +53,13 @@ END
 IF
   !Global("#L_SoloExitTimer","GLOBAL",0)
   GlobalTimerExpired("#L_SoloExitTimer","GLOBAL")
-  Global("#L_SarvQuests","GLOBAL",100)
   Global("#L_StartBG2","GLOBAL",1)
   Global("#L_WaitForMe","GLOBAL",0)
 THEN
   RESPONSE #100
     ClearAllActions()
     SetGlobal("#L_StartBG2","GLOBAL",2)
+	SetGlobal("#L_SarvQuests","GLOBAL",100)
     StartCutSceneMode()
     FadeToColor([30.0],0)
     Wait(1)
