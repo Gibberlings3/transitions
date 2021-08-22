@@ -1,6 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Prep stock BG1 NPCs for comments after Korlasz quest and leaving at the beginning of SoD and BG2   //
-// Imoen is dealt with separately                                                                     //
 // Called via main_common.tpa                                                                         //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -295,7 +294,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
 		// Imoen's DV isn't her upper case name
 		ACTION_IF %npc_num% = 28 THEN BEGIN
-			OUTER_SPRINT upper_name "IMOEN2"
+			OUTER_SPRINT upper_name "%IMOEN_DV%"
 		END
 
 		/////////////////////////////////////
@@ -637,7 +636,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) OR (%npc_num% = 28) THEN BEGIN
 			OUTER_SPRINT pre_bg2 ~~~~~
 				CHAIN
-					IF WEIGHT #-996 ~Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
+					IF WEIGHT #-996 ~Global("#L_SayGoodbye","LOCALS",1) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
 						%bg2_init%
 						%group_bg2_exit%
 					END
@@ -645,7 +644,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		END ELSE BEGIN
 			OUTER_SPRINT pre_bg2 ~~~~~
 				CHAIN
-					IF WEIGHT #-996 ~Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
+					IF WEIGHT #-996 ~Global("#L_SayGoodbye","LOCALS",1) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
 						%bg2_init%
 						%group_bg2_exit%
 					END
@@ -664,7 +663,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
 			// Everyone leaves the group prior to SoD
 			CHAIN
-				IF WEIGHT #-998 ~OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_SOD_LEAVE
+				IF WEIGHT #-998 ~Global("#L_SayGoodbye","LOCALS",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_SOD_LEAVE
 					%sod_init%
 					%group_sod_exit%
 				END
