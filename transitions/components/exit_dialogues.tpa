@@ -303,7 +303,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
 		// Only the first 7 on the list have post-Korlasz dialogue
 		// Khalid lets Jaheira initiate the dialogue if she's present and able
-		ACTION_IF npc_num = 3 THEN BEGIN
+		ACTION_IF npc_num = 2 THEN BEGIN
 			// Khalid let's Jaheira speak for the both of the if she's present
 			OUTER_SPRINT pk ~
 			IF
@@ -316,7 +316,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 				See(Player1)
 				OR(3)
 					!IsValidForPartyDialogue("JAHEIRA")
-					!TriggerOverride("JAHEIRA",Global("#L_JaheiraModded","LOCALS",0))
+					!Global("#L_JaheiraModded","GLOBAL",0)
 					TriggerOverride(Player1,False())
 				OR(3)
 					!InPartyAllowDead(Player2)
@@ -640,7 +640,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 						%bg2_init%
 						%group_bg2_exit%
 					END
-					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT~~~~~
+					IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT~~~~~
 		END ELSE BEGIN
 			OUTER_SPRINT pre_bg2 ~~~~~
 				CHAIN
@@ -648,7 +648,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 						%bg2_init%
 						%group_bg2_exit%
 					END
-					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
+					IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
 		END
 
 //		PRINT "DEBUG POST_KORLASZ: %post_korlasz%"
@@ -667,7 +667,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 					%sod_init%
 					%group_sod_exit%
 				END
-				IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+				IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
 
 			%pre_bg2%
 		>>>>>>>>
