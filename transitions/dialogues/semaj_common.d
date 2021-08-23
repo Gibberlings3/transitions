@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////
-// New dialogue file for Angelo's quest        //
+// New dialogue file for Semaj's quest         //
 // Compiled and attached via quests_common.tpa //
 /////////////////////////////////////////////////
 APPEND ~SEMAJ~

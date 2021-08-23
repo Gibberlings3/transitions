@@ -6,12 +6,7 @@
 // Call the cut scene so it will evaluate triggers
 // This will allow the use of the Irenicus in hell movie as a dream
 // and give back bhaal-spawn powers if that component is installed
-ALTER_TRANS SUELLE2
-	BEGIN 5 8 END
-	BEGIN 0 END
-	BEGIN
-		"ACTION" ~ClearAllActions() StartCutSceneMode() StartCutSceneEx("cut59b",TRUE)~
-	END
+REPLACE_ACTION_TEXT SUELLE2 ~StartCutSceneEx("cut59b",FALSE)~ ~StartCutSceneEx("cut59b",TRUE)~
 
 // Keep the game open after Ellesime thanks the group
 ALTER_TRANS SUELLE2

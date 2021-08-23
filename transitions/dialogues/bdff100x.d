@@ -5,14 +5,9 @@
 
 REPLACE_TRIGGER_TEXT BDFF1000 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
 REPLACE_TRIGGER_TEXT BDFF1000 ~True()~ ~OR(3) !Global("#L_SarvQuests","GLOBAL",8) !AreaCheck("BD0130") !Global("BD_Korlasz_Fight","BD0130",2)~
-ALTER_TRANS BDFF1000 
-	BEGIN 0 END 
-	BEGIN 1 END 
-	BEGIN
-  		"TRIGGER" ~!Global("#L_SarvQuests","GLOBAL",8)~
-	END
+ADD_TRANS_TRIGGER BDFF1000 0 ~!Global("#L_SarvQuests","GLOBAL",8)~ DO 1 2
 EXTEND_BOTTOM BDFF1000 0
-	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #269735 GOTO 1b
+	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #%REPLY_EXPLORE% GOTO 1b
 	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY @2251 /* ~Thank you.  I'm heading out now.~ */ GOTO 1c
 END
 APPEND BDFF1000
@@ -34,20 +29,9 @@ APPEND BDFF1000
 END
 
 REPLACE_TRIGGER_TEXT BDFF1001 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
-ALTER_TRANS BDFF1001 
-	BEGIN 0 END 
-	BEGIN 0 END 
-	BEGIN
-  		"TRIGGER" ~!Global("#L_SarvQuests","GLOBAL",8)~
-	END
-ALTER_TRANS BDFF1001 
-	BEGIN 0 END 
-	BEGIN 1 END 
-	BEGIN
-  		"TRIGGER" ~!Global("#L_SarvQuests","GLOBAL",8)~
-	END
+ADD_TRANS_TRIGGER BDFF1001 0 ~!Global("#L_SarvQuests","GLOBAL",8)~ DO 0 1
 EXTEND_BOTTOM BDFF1001 0
-	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #269735 GOTO 1b
+	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #%REPLY_EXPLORE% GOTO 1b
 	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY @2251 /* ~Thank you.  I'm heading out now.~ */ GOTO 1c
 END
 APPEND BDFF1001
@@ -63,20 +47,9 @@ APPEND BDFF1001
 END
 
 REPLACE_TRIGGER_TEXT BDFF1002 ~Dead("%IMOEN_DV%")~ ~Dead("%IMOEN_DV%") !Global("#L_SarvQuests","GLOBAL",8)~
-ALTER_TRANS BDFF1002 
-	BEGIN 0 END 
-	BEGIN 0 END 
-	BEGIN
-  		"TRIGGER" ~!Global("#L_SarvQuests","GLOBAL",8)~
-	END
-ALTER_TRANS BDFF1002 
-	BEGIN 0 END 
-	BEGIN 1 END 
-	BEGIN
-  		"TRIGGER" ~!Global("#L_SarvQuests","GLOBAL",8)~
-	END
+ADD_TRANS_TRIGGER BDFF1002 0 ~!Global("#L_SarvQuests","GLOBAL",8)~ DO 0 1
 EXTEND_BOTTOM BDFF1002 0
-	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #269735 GOTO 1b
+	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY #%REPLY_EXPLORE% GOTO 1b
 	IF ~Global("#L_SarvQuests","GLOBAL",8)~ THEN REPLY @2251 /* ~Thank you.  I'm heading out now.~ */ GOTO 1c
 END
 APPEND BDFF1002

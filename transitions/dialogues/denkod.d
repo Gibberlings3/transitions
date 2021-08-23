@@ -66,7 +66,6 @@ CHAIN
 		== %MINSC_JOINED% IF ~PartyHasItem("MISC84")~ THEN #326865 /* ~Boo: "Squeak!"~ */ 
 		== %MINSC_JOINED% IF ~PartyHasItem("MISC84") IsValidForPartyDialogue("MINSC")~ THEN @2025 /* ~Boo!  It's not nice to laugh at the frightened little man...although it is pretty funny!~ */
 		== %DYNAHEIR_JOINED% IF ~PartyHasItem("MISC84") IsValidForPartyDialogue("MINSC") IsValidForPartyDialogue("DYNAHEIR")~ THEN @2026 /* ~For once I agree with thine rodent.~ */
-//		== DENKOD IF ~True()~ THEN @2018 /* ~I have to say, be careful with wearin' that. For a second I thought you were him! Was 'bout ta go to my dagger, I was.~ */
 	END
 	+ ~!IsValidForPartyDialogue("DORN") !IsValidForPartyDialogue("NEERA")~ + @2019 /* ~Hah!~ */ + L_EXPLAINBODIES    
 	+ ~!IsValidForPartyDialogue ("GARRICK")~ + @2020 /* ~Of course you were.~ */ + L_EXPLAINBODIES     

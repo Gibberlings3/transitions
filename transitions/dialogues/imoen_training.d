@@ -5,7 +5,7 @@
 
 REPLACE_TRIGGER_TEXT %IMOEN_JOINED% ~Global("EndofBG1","GLOBAL",0)~ ~Global("EndofBG1","GLOBAL",0) Global("#L_BG1SarevokDead","GLOBAL",0)~
 REPLACE_ACTION_TEXT %IMOEN_POST% ~!ActionOverride("imoen",JoinParty())~ ~!ActionOverride("%IMOEN_DV%",JoinParty())~
-EXTEND_BOTTOM %IMOEN_POST% 2 #2 
+EXTEND_BOTTOM %IMOEN_POST% 2
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("#L_ImoenAskedToTrain","GLOBAL",1)~ THEN REPLY @2322	/* ~I won't need you for a while.  Why don't you go see Duke Jannath for magic training. */ + IMOEN_TRAIN_1
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",2) Global("#L_ImoenAskedToTrain","GLOBAL",0)~ THEN REPLY @2529 /* ~I wanted to let you know that Duke Jannath has offered to train you in magic over at the Ducal Palace.~ */ + IMOEN_TRAIN_LEARNED
 END

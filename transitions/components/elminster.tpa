@@ -9,10 +9,15 @@ DEFINE_ACTION_FUNCTION elminster BEGIN
 	ACTION_IF !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_jastey")) AND !(MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL "c#endlessbg1.tp2" "EBG1_ElminsterAppearance_restored")) BEGIN
 		// Build a new dialogue file for Elminster using the original strrefs
 		ACTION_IF GAME_IS ~eet~ BEGIN
-			COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster.d~
+			OUTER_SET REPLY1 = 212741
+			OUTER_SET REPLY2 = 212742
+			OUTER_SET REPLY3 = 212743
 		END ELSE BEGIN
-			COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster_bg1.d~
+			OUTER_SET REPLY1 = 12741
+			OUTER_SET REPLY2 = 12742
+			OUTER_SET REPLY3 = 12743
 		END	
+		COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/elminster.d~
 
 		// Build a new Elminster with the dialogue file plugged in
 		COPY_EXISTING ~ELMIN5.cre~ ~override/#LELMN01.cre~
