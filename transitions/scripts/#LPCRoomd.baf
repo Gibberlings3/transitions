@@ -5,7 +5,7 @@
 ///////////////////////////////////////////
 
 IF
-	AreaCheck("#LBG1107")	// House in Beregost
+	AreaCheck("#LBG1107")	// House in SW BG
 	!Global("#L_PlayerChestLocation","GLOBAL",5)
 THEN
 	RESPONSE #100
@@ -15,3 +15,26 @@ THEN
 		SmallWait(1)
 		Continue()
 END
+
+IF
+	Global("EndOfBG1","GLOBAL",1)	// SOD
+	Global("#L_SetForSoD","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SetForSoD","MYAREA",1)
+		TriggerActivation("Door1100",FALSE)
+		TriggerActivation("DoorSod",TRUE)
+		Continue()
+END
+
+IF
+	!Global("EndOfBG1","GLOBAL",1)	// SOD
+	Global("#L_SetForSoD","MYAREA",1)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SetForSoD","MYAREA",0)
+		TriggerActivation("Door1100",TRUE)
+		TriggerActivation("DoorSod",FALSE)
+		Continue()
+END
+

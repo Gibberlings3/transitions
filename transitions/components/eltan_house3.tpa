@@ -45,6 +45,67 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 				GW_Script_new = ~#LKey04~
 		END
 	BUT_ONLY_IF_IT_CHANGES
+	
+	ACTION_IF GAME_INCLUDES ~sod~ THEN BEGIN
+		COPY_EXISTING ~BD0030.ARE~ ~override~
+			// Add travel triggers to house in the SoD version of the area
+			LPF ADD_AREA_REGION_TRIGGER
+				INT_VAR
+					ab_RT_Type = 2
+					ab_RT_Fbit = 256 
+					ab_RT_BbLX = 790
+					ab_RT_BbLY = 930
+					ab_RT_BbHX = 900
+					ab_RT_BbHY = 1050
+					ab_RT_VxPr = 4
+					ab_RT_Vx_X_0 = 790
+					ab_RT_Vx_Y_0 = 950
+					ab_RT_Vx_X_1 = 850
+					ab_RT_Vx_Y_1 = 930
+					ab_RT_Vx_X_2 = 900
+					ab_RT_Vx_Y_2 = 1000
+					ab_RT_Vx_X_3 = 825
+					ab_RT_Vx_Y_3 = 1050
+					ab_RT_CuId = 30
+				STR_VAR
+					ab_RT_Name = "Locked#LBG1107"
+					ab_RT_Rbcs = "#LKey04"
+			END
+			LPF ADD_AREA_REGION_TRIGGER
+				INT_VAR
+					ab_RT_Type = 2
+					ab_RT_Fbit = 256 
+					ab_RT_BbLX = 790
+					ab_RT_BbLY = 930
+					ab_RT_BbHX = 900
+					ab_RT_BbHY = 1050
+					ab_RT_VxPr = 4
+					ab_RT_Vx_X_0 = 790
+					ab_RT_Vx_Y_0 = 950
+					ab_RT_Vx_X_1 = 850
+					ab_RT_Vx_Y_1 = 930
+					ab_RT_Vx_X_2 = 900
+					ab_RT_Vx_Y_2 = 1000
+					ab_RT_Vx_X_3 = 825
+					ab_RT_Vx_Y_3 = 1050
+					ab_RT_CuId = 30
+				STR_VAR
+					ab_RT_Name = "Open#LBG1107"
+					ab_RT_Dest = "#LBG1107"
+					ab_RT_EntN = "Exit1100"
+			END
+			// Add an entrance from the house to the SoD exterior
+			LPF fj_are_structure
+				INT_VAR
+					fj_loc_x = 630
+					fj_loc_y = 950
+					fj_orientation = 6
+				STR_VAR
+					fj_structure_type = "entrance"
+					fj_name = "#Lfrom_House"
+			END
+		BUT_ONLY_IF_IT_CHANGES
+	END
 
 	// Also need to add a new area that can be attached to the door
 	// if/when it is chosen as a reward
@@ -61,6 +122,17 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 		LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
 		LPF CHANGE_CONTAINER_NAME STR_VAR old_name = ~Container 1~ new_name = ~PlayerChest00~ END
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door1108~ destination_area = ~#LBG1108~ END
+		
+		// Add a travel region that leads out to the SoD version of the exterior
+		LPF GW_CLONE_TRAVEL_TRIGGER
+			INT_VAR
+				GW_Flags_new = 256 // Deactivated
+			STR_VAR
+				GW_Name_old = ~Door1100~
+				GW_Name_new = ~DoorSod~
+				GW_Dest_new = ~BD0030~
+				GW_Entre_new = ~#Lfrom_House~
+		END
 	COPY_EXISTING ~%SWBaldursGate_House2_L2%.are~ ~override/#LBG1108.are~
 		WRITE_ASCII (AREA_SCRIPT) ~~ (8)
 		WRITE_LONG (0x0048) 128 // Allow sleeping
@@ -69,7 +141,7 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 		LPF UNLOCK_ALL_CONTAINERS END
 		LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~.+~ END
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door1107~ destination_area = ~#LBG1107~ END
-
+		
 	// Update the script used on all PC residences to include the one in front of the ducal palace
 	OUTER_SPRINT SOD_CHEST_TRANS ~~
 	ACTION_IF GAME_INCLUDES ~sod~ BEGIN
@@ -91,6 +163,12 @@ DEFINE_ACTION_FUNCTION eltan_house3 BEGIN
 			baf_location = EVAL ~%mod_root%/scripts/~
 			baf_name = ~BG1100a~
 			bcs_name = EVAL ~%SWBaldursGate%~
+	END
+	LAF UPDATE_BCS
+		STR_VAR 
+			baf_location = EVAL ~%mod_root%/scripts/~
+			baf_name = ~BG1100a~
+			bcs_name = ~BD0030~
 	END
 	
 	// Set up script that emulates a door

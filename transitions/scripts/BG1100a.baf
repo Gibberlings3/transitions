@@ -3,21 +3,47 @@
 // Parsed via eltan_house3.tpa              //
 //////////////////////////////////////////////
 
+
 IF
 	Global("#L_HouseBGate2","GLOBAL",2)
 	Global("#L_HousePrepped","MYAREA",0)
 THEN
 	RESPONSE #100
-		AddMapNote([1885.1530],@1013)
 		MoveContainerContents("%SWBaldursGate_House2_L1%*Container1","#LBG1107*PlayerChest00")
 		MoveContainerContents("%SWBaldursGate_House2_L2%*Container1","#LBG1107*PlayerChest00")
 		MoveContainerContents("%SWBaldursGate_House2_L2%*Container2","#LBG1107*PlayerChest00")
 		MoveContainerContents("%SWBaldursGate_House2_L2%*Container3","#LBG1107*PlayerChest00")
+		SetGlobal("#L_HousePrepped","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_HouseBGate2","GLOBAL",2)
+	Global("#L_BGHousePrepped","MYAREA",0)
+	!Global("EndOfBG1","GLOBAL",1)
+THEN
+	RESPONSE #100
+		AddMapNote([1885.1530],@1013)
 		SmallWait(1)
 		TriggerActivation("Door1107",FALSE)
 		TriggerActivation("Locked#LBG1107",TRUE)
 		SmallWait(1)
-		SetGlobal("#L_HousePrepped","MYAREA",1)
+		SetGlobal("#L_BGHousePrepped","MYAREA",1)
+		SetGlobal("#L_HouseLocked","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_HouseBGate2","GLOBAL",2)
+	Global("#L_SoDHousePrepped","MYAREA",0)
+	Global("EndOfBG1","GLOBAL",1)
+THEN
+	RESPONSE #100
+		AddMapNote([850.980],@1013)
+		SmallWait(1)
+		TriggerActivation("Locked#LBG1107",TRUE)
+		SmallWait(1)
+		SetGlobal("#L_SoDHousePrepped","MYAREA",1)
 		SetGlobal("#L_HouseLocked","MYAREA",1)
 		Continue()
 END
