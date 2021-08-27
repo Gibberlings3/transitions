@@ -26,6 +26,7 @@ ALWAYS
       INCLUDE ~%mod_root%/lib/alter_script.tpa~
       INCLUDE ~%mod_root%/lib/areas.tpa~
       INCLUDE ~%mod_root%/lib/update_bcs.tpa~
+	  INCLUDE ~%mod_root%/lib/ps_misc_func.tpa~
 	  INCLUDE ~%mod_root%/lib/ps_tileset_lib.tpa~
    END
 

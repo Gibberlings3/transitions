@@ -55,8 +55,9 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 	BUT_ONLY_IF_IT_CHANGES
 	
 	ACTION_IF GAME_INCLUDES ~sod~ THEN BEGIN
-		// Copy the open door graphic in the BG1 area to BD0010.tis and BD0101.tis
-		// and the night-time versions to BD0010N.tis and BD0101N.tis
+		// Add a door to the PC's residence in the SoD areas
+		
+		// Determine the SoD PVRz file the new BG1 graphics files will be copied to
 		OUTER_SPRINT source_day "A020008"
 		OUTER_SPRINT source_night "A0200N08"
 		OUTER_SPRINT page1 ~-1~
@@ -104,21 +105,45 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		
 		ACTION_IF file_1_ok = 1 AND file_2_ok AND file_3_ok = 1 THEN BEGIN	// This is sort of overkill... but ya never know
 			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0010%page1%.pvrz~
+			COPY_EXISTING ~%source_night%.PVRZ~ ~override\B0010N%page2%.pvrz~
+			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0101%page3%.pvrz~
+
 			COPY_EXISTING ~BD0010.tis~ ~override~
+				// Add closed door tiles to end of TIS
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+
+				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 			BUT_ONLY_IF_IT_CHANGES
-			COPY_EXISTING ~%source_night%.PVRZ~ ~override\B0010N%page2%.pvrz~
+
 			COPY_EXISTING ~BD0010N.tis~ ~override~
+				// Add closed door tiles to end of TIS
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+
+				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 			BUT_ONLY_IF_IT_CHANGES
-			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0101%page3%.pvrz~
+
 			COPY_EXISTING ~BD0101.tis~ ~override~
+				// Add closed door tiles to end of TIS
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+
+				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END

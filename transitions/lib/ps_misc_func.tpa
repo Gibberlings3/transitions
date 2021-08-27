@@ -1,0 +1,70 @@
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////      ps_misc_func      /////////////////////////////
+////////////////////////////          v0.0.1          ////////////////////////////
+//////////////////////////// Copyright (c) 2017 Sam.  ////////////////////////////
+////////////////////////////          WTFPL           ////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////    ps_concat_str    ///////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This pair of WeiDU functions (equivalent action and patch varieties) concatenates two strings. 
+//   STR_VAR str is appended to the end of STR_VAR var and the new var is returned.
+//   These functions have been tested to achieve the desired result as quickly as possible,
+//     at the cost of a slightly longer code length than is absolutely necessary.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_ACTION_FUNCTION ps_concat_str STR_VAR var = "" str = "" RET var BEGIN
+  OUTER_INNER_PATCH_SAVE var ~%var%~ BEGIN
+    sz = BUFFER_LENGTH
+	strsz = STRING_LENGTH ~%str%~
+	INSERT_BYTES sz strsz
+	WRITE_ASCIIE sz ~%str%~
+  END
+END
+DEFINE_PATCH_FUNCTION ps_concat_str STR_VAR var = "" str = "" RET var BEGIN
+  INNER_PATCH_SAVE var ~%var%~ BEGIN
+    sz = BUFFER_LENGTH
+	strsz = STRING_LENGTH ~%str%~
+	INSERT_BYTES sz strsz
+	WRITE_ASCIIE sz ~%str%~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////    ps_zlib_(de)compress    ///////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This pair of WeiDU patch functions can Z-lib compress and then decompress arbitrary files.
+//   Large mod files can be loslessly compressed, shipped with the mod, then uncompressed at install
+//     time (as a simple patch function) using WeiDU native code.
+//   To be compressed, the file must not already look compressed (have the string ~CV1  ~ at offset 0x3).
+//   To be decompressed, the file must look like it has already been compressed (have the string ~CV1  ~ at offset 0x3).
+//   The following restrictions also apply:  the decompressed file size must fit in a LONG, and only the first 3
+//     characters of the file extension will be stored in the compressed file's header.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_zlib_compress BEGIN
+  READ_ASCII 0x3 sgc (1) // Compressed signature flag
+  READ_ASCII 0x4 vs (4) // Version
+  PATCH_IF (~%sgc%~ STRING_EQUAL_CASE ~C~ = 1) AND (~%vs%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // File is already Z-lib compressed
+    PATCH_PRINT ~%SOURCE_FILESPEC% appears to already be Z-lib compressed.  It will not be compressed again.~
+  END ELSE BEGIN
+    dl = SOURCE_SIZE // Data length
+	SPRINT sg ~%SOURCE_EXT%   ~
+	TO_UPPER sg
+    COMPRESS_REPLACE_FILE 0 dl 9
+    INSERT_BYTES 0x0 0xc
+    WRITE_ASCIIE 0x0 ~%sg%~ #3
+	WRITE_ASCII 0x3 ~CV1  ~
+    WRITE_LONG 0x8 dl
+  END
+END
+DEFINE_PATCH_FUNCTION ps_zlib_decompress BEGIN
+  READ_ASCII 0x3 sgc (1) // Compressed signature flag
+  READ_ASCII 0x4 vs (4) // Version
+  PATCH_IF (~%sgc%~ STRING_EQUAL_CASE ~C~ = 1) AND (~%vs%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // File is Z-lib compressed
+    READ_LONG 0x8 dl //Uncompressed data length
+    DECOMPRESS_REPLACE_FILE 0xc (SOURCE_SIZE - 0xc) dl
+  END ELSE BEGIN
+    PATCH_PRINT ~%SOURCE_FILESPEC% does not appear to be Z-lib compressed.~
+  END
+END
