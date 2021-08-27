@@ -21,8 +21,8 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		WRITE_ASCII (0x0058) ~GMISC93~
 
 	COPY_EXISTING ~%NBaldursGate%.ARE~ ~override~
-		// Change the name of the region leading into BG0006
-		// or else we can't control the door object because it has the same name
+		// Change the name of the door leading into BG0006
+		// or else we can't control it because it has the same name as the region
 		LPF CHANGE_DOOR_NAME
 			STR_VAR
 				old_name = ~Door0006~
@@ -53,6 +53,159 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				door_key = ~#LKey01~
 		END
 	BUT_ONLY_IF_IT_CHANGES
+	
+	ACTION_IF GAME_INCLUDES ~sod~ THEN BEGIN
+		// Copy the open door graphic in the BG1 area to BD0010.tis and BD0101.tis
+		// and the night-time versions to BD0010N.tis and BD0101N.tis
+		OUTER_SPRINT source_day "A020008"
+		OUTER_SPRINT source_night "A0200N08"
+		OUTER_SPRINT page1 ~-1~
+		OUTER_SPRINT page2 ~-1~
+		OUTER_SPRINT page3 ~-1~
+		OUTER_SET strt_idx = 0
+		OUTER_SET file_1_ok = 0
+		OUTER_SET file_2_ok = 0
+		OUTER_SET file_3_ok = 0
+		ACTION_IF GAME_IS ~eet~ THEN BEGIN
+			OUTER_SPRINT source_day "B020008"
+			OUTER_SPRINT source_night "B0200N08"
+			OUTER_SET strt_idx = 50
+		END
+		OUTER_FOR (idx = strt_idx; idx < 99 && file_1_ok = 0; idx = idx + 1) BEGIN
+			ACTION_IF idx < 10 THEN BEGIN
+				OUTER_SPRINT page1 ~0%idx%~
+			END ELSE BEGIN
+				OUTER_SPRINT page1 ~%idx%~
+			END
+			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0010%page1%.pvrz~ THEN BEGIN
+				OUTER_SET file_1_ok = 1
+			END
+		END
+		OUTER_FOR (idx = strt_idx; idx < 99 && file_2_ok = 0; idx = idx + 1) BEGIN
+			ACTION_IF idx < 10 THEN BEGIN
+				OUTER_SPRINT page2 ~0%idx%~
+			END ELSE BEGIN
+				OUTER_SPRINT page2 ~%idx%~
+			END
+			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0010N%page2%.pvrz~ THEN BEGIN
+				OUTER_SET file_2_ok = 1
+			END
+		END
+		OUTER_FOR (idx = strt_idx; idx < 99 && file_3_ok = 0; idx = idx + 1) BEGIN
+			ACTION_IF idx < 10 THEN BEGIN
+				OUTER_SPRINT page3 ~0%idx%~
+			END ELSE BEGIN
+				OUTER_SPRINT page3 ~%idx%~
+			END
+			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0101%page3%.pvrz~ THEN BEGIN
+				OUTER_SET file_3_ok = 1
+			END
+		END
+		
+		ACTION_IF file_1_ok = 1 AND file_2_ok AND file_3_ok = 1 THEN BEGIN	// This is sort of overkill... but ya never know
+			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0010%page1%.pvrz~
+			COPY_EXISTING ~BD0010.tis~ ~override~
+				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+			BUT_ONLY_IF_IT_CHANGES
+			COPY_EXISTING ~%source_night%.PVRZ~ ~override\B0010N%page2%.pvrz~
+			COPY_EXISTING ~BD0010N.tis~ ~override~
+				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+			BUT_ONLY_IF_IT_CHANGES
+			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0101%page3%.pvrz~
+			COPY_EXISTING ~BD0101.tis~ ~override~
+				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
+			BUT_ONLY_IF_IT_CHANGES
+		END
+
+		COPY_EXISTING ~BD0010.ARE~ ~override~
+			// Add a door object leading to PC's house when in SoD
+		
+			// Add a travel trigger leading into the PC's house
+			LPF ADD_AREA_REGION_TRIGGER
+				INT_VAR
+					ab_RT_Type = 2
+					ab_RT_Fbit = 256 
+					ab_RT_BbLX = 39
+					ab_RT_BbLY = 460
+					ab_RT_BbHX = 84
+					ab_RT_BbHY = 536
+					ab_RT_VxPr = 4
+					ab_RT_Vx_X_0 = 39
+					ab_RT_Vx_Y_0 = 524
+					ab_RT_Vx_X_1 = 83
+					ab_RT_Vx_Y_1 = 536
+					ab_RT_Vx_X_2 = 84
+					ab_RT_Vx_Y_2 = 473
+					ab_RT_Vx_X_3 = 39
+					ab_RT_Vx_Y_3 = 460
+					ab_RT_CuId = 30
+				STR_VAR
+					ab_RT_Name = "Door#lbg0006"
+					ab_RT_Dest = "#LBG0006"
+					ab_RT_EntN = "Exit0200"
+			END
+			
+			// Add an entrance from the house to the SoD exteriors
+			LPF fj_are_structure
+				INT_VAR
+					fj_loc_x = 135
+					fj_loc_y = 625
+					fj_orientation = 6
+				STR_VAR
+					fj_structure_type = "entrance"
+					fj_name = "#Lfrom_House"
+			END
+		BUT_ONLY_IF_IT_CHANGES
+		
+		COPY_EXISTING ~BD0101.ARE~ ~override~
+			// Add a door object leading to PC's house when in SoD
+		
+			// Add a travel trigger leading into the PC's house
+			LPF ADD_AREA_REGION_TRIGGER
+				INT_VAR
+					ab_RT_Type = 2
+					ab_RT_Fbit = 256 
+					ab_RT_BbLX = 39
+					ab_RT_BbLY = 460
+					ab_RT_BbHX = 84
+					ab_RT_BbHY = 536
+					ab_RT_VxPr = 4
+					ab_RT_Vx_X_0 = 39
+					ab_RT_Vx_Y_0 = 524
+					ab_RT_Vx_X_1 = 83
+					ab_RT_Vx_Y_1 = 536
+					ab_RT_Vx_X_2 = 84
+					ab_RT_Vx_Y_2 = 473
+					ab_RT_Vx_X_3 = 39
+					ab_RT_Vx_Y_3 = 460
+					ab_RT_CuId = 30
+				STR_VAR
+					ab_RT_Name = "Door#lbg0006"
+					ab_RT_Dest = "#LBG0006"
+					ab_RT_EntN = "Exit0200"
+			END
+			
+			// Add an entrance from the house to the SoD exteriors
+			LPF fj_are_structure
+				INT_VAR
+					fj_loc_x = 135
+					fj_loc_y = 625
+					fj_orientation = 6
+				STR_VAR
+					fj_structure_type = "entrance"
+					fj_name = "#Lfrom_House"
+			END
+		BUT_ONLY_IF_IT_CHANGES		
+	END
 
 	// Also need to add a new area that can be attached to the door
 	// if/when it is chosen as a reward
@@ -69,6 +222,30 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		LPF CHANGE_ENTRANCE_NAME STR_VAR old_name = ~Exit0156~ new_name = ~Exit0007~ END
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door0007~ destination_area = ~#LBG0007~ entrance_name = ~Exit0006~ END
 		LPF ALTER_AREA_REGION STR_VAR region_name = ~Door0200~ destination_area = EVAL ~%NBaldursGate%~ entrance_name = ~Exit0006~ END
+		
+		PATCH_IF GAME_INCLUDES ~sod~ THEN BEGIN
+			// Add regions leading out to the SoD exteriors
+			LPF GW_CLONE_TRAVEL_TRIGGER
+				INT_VAR
+					GW_Flags_new = 256 // Deactivated
+				STR_VAR
+					GW_Name_old = ~Door0200~
+					GW_Name_new = ~DoorSoD1~
+					GW_Dest_new = ~BD0010~
+					GW_Entre_new = ~#Lfrom_House~
+			END
+		
+			LPF GW_CLONE_TRAVEL_TRIGGER
+				INT_VAR
+					GW_Flags_new = 256 // Deactivated
+				STR_VAR
+					GW_Name_old = ~Door0200~
+					GW_Name_new = ~DoorSoD2~
+					GW_Dest_new = ~BD0101~
+					GW_Entre_new = ~#Lfrom_House~
+			END
+		END
+		
 	COPY_EXISTING ~%NWBaldursGate_House2_L2%.are~ ~override/#LBG0007.are~
 		WRITE_ASCII (AREA_SCRIPT) ~~ (8)
 		WRITE_LONG (0x0048) 128 // Allow sleeping

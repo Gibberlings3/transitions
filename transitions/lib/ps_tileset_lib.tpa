@@ -1,0 +1,782 @@
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////      ps_tileset_lib      ////////////////////////////
+////////////////////////////          v0.0.4          ////////////////////////////
+//////////////////////////// Copyright (c) 2017 Sam.  ////////////////////////////
+////////////////////////////          WTFPL           ////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////////    ps_tileset_repair_header    //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that repairs a couple of uncommon errors in tileset headers caused by other programs.
+//   1) An old version of DLTCEP erroneously wrote tilesets with an invalid version string of 'V2  '.  This will be fixed.
+//   2) Old versions of Near Infinity erroneously exported tilesets without a header.  A header can be generated but it requires making
+//      some assumptions.  One assumption is that it is a palette-based tileset, but as PVRz-based tilesets did not come out until after NI
+//      was fixed, this should be a good assumption.  The second assumption is that the tile dimensions are 64x64 px, but I have never seen
+//      any other value used, so this should also be a reasonably good assumption.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_repair_header BEGIN
+  READ_ASCII 0x0 Signature (4) // Signature ("TIS ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIZ0~ = 1) OR (~%Signature%~ STRING_EQUAL_CASE ~TBC ~ = 1) OR (~%Signature%~ STRING_EQUAL_CASE ~TISC~ = 1) BEGIN // Tileset is compressed
+    PATCH_PRINT ~Tileset "%SOURCE_FILESPEC%" is compressed but compressed tilesets are not supported:  it will not be processed.~
+  END ELSE PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) BEGIN // Is an uncompressed tileset with a header
+    READ_ASCII 0x4 Version (4) // Version ("V1  ")
+    PATCH_IF (~%Version%~ STRING_EQUAL_CASE ~V2  ~ = 1) BEGIN // Tileset has invalid version
+      WRITE_ASCIIE 0x4 ~V1  ~ // Fix the version
+    END
+  END ELSE PATCH_IF (~%SOURCE_EXT%~ STRING_EQUAL_CASE ~tis~ = 1) BEGIN // Appears to be a tileset without a header.  A header can be generated but it requires making some assumptions.
+    INSERT_BYTES 0 24 // Make room for the header
+    WRITE_ASCIIE 0x0 ~TIS V1  ~             // Signature ("TIS ") + Version ("V1  ")
+    WRITE_LONG 0x8 (SOURCE_SIZE / 5120) // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    WRITE_LONG 0xc 5120                 // Length of tiles section (1024+DimensionOfTile*DimensionOfTile) - assumption
+    WRITE_LONG 0x10 24                  // Size of the header (24) - assumption, but a very good one
+    WRITE_LONG 0x14 64                  // Dimension of 1 tile in pixels (64x64) - assumption, but a good one
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_remove_tiles    //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that removes tiles from a tileset using one of two methods:
+//   1) If STR_VAR Method = "Pop" : Up to INT_VAR 'Count' number of tiles will be removed from the end of the tileset.
+//   2) If STR_VAR Method = "RemoveAt" : Up to INT_VAR 'Count' number of tiles will be removed from the tileset starting at tile INT_VAR 'Pos'.
+//   Note that tiles in the tileset are 0-indexed.  That means the 'first' tile is really tile 0.
+//   This function returns the "Count" of tiles actually removed from the tileset.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_remove_tiles INT_VAR Pos = 0 Count = 1 STR_VAR Method = "Pop" RET Count BEGIN
+  READ_ASCII 0x0 Signature (4)          // Signature ("TIS ")
+  READ_ASCII 0x4 Version (4)            // Version ("V1  ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) AND (~%Version%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // Is a valid tileset of appropriate version
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+    PATCH_IF (Count < 0) BEGIN
+      Count = 0 // Ensure Count !< 0
+    END
+    PATCH_IF (~%Method%~ STRING_EQUAL_CASE ~Pop~ = 1) BEGIN
+      PATCH_IF (Count > CountOfTiles) BEGIN
+        Count = (CountOfTiles) // Ensure Count !> CountOfTiles in tileset
+      END
+      DELETE_BYTES (SizeOfHeader + LengthOfTilesSection * (CountOfTiles - Count)) (Count * LengthOfTilesSection) // Delete Count number of tiles from the end of the tileset
+	  PATCH_PRINT ~Removed %Count% tiles from the end of "%SOURCE_FILESPEC%"~
+    END ELSE PATCH_IF (~%Method%~ STRING_EQUAL_CASE ~RemoveAt~ = 1) BEGIN
+      PATCH_IF (Pos < 0) OR (Pos > CountOfTiles) BEGIN // Ensure Pos is a valid value
+        PATCH_PRINT ~Invalid parameters passed to the function ps_tileset_remove_tiles:  Pos was %Pos% but must be between 0 and %CountOfTiles% (inclusive).  No tiles will be removed.~
+        Pos = 0
+        Count = 0
+      END ELSE PATCH_IF (Pos + Count > CountOfTiles) BEGIN // If you try to remove more tiles than there are in the tileset after Pos
+        Count = (CountOfTiles - Pos) // Adjust the Count of tiles to the number of tiles in the tileset after Pos
+      END
+      DELETE_BYTES (SizeOfHeader + LengthOfTilesSection * Pos) (Count * LengthOfTilesSection) // Delete Count number of tiles from the tileset starting with the tile at Pos
+	  PATCH_PRINT ~Removed %Count% tiles from "%SOURCE_FILESPEC%" starting with tile %Pos%~
+    END
+    CountOfTiles -= Count // Update CountOfTiles to account for the tiles that have been removed
+    WRITE_LONG 0x8 CountOfTiles // Update the tileset header with the new CountOfTiles
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////    ps_tileset_add_tiles    ///////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that adds tiles to a tileset using one of three methods:
+//   1) If STR_VAR Method = "Push" : Up to INT_VAR MaxCount tiles will be added to the end of the tileset.
+//   2) If STR_VAR Method = "InsertAt" : Up to INT_VAR MaxCount tiles will be added to the tileset before the tile at INT_VAR Pos
+//   3) If STR_VAR Method = "Replace" : Up to INT_VAR MaxCount tiles in the tileset will be replaced starting with the tile at INT_VAR Pos
+//   If the tileset is PVRz-based, the tile data can be generated from the INT_VARs PVRz_Page, PVRz_X, and PVRz_Y in which case
+//     INT_VAR MaxCount copies of this tile will be generated and added according to the Methods described above.
+//   Alternatively, up to INT_VAR MaxCount (default is 'all') tiles will be loaded from the directory-file-regexp specified by STR_VAR TileDir and
+//     STR_VAR TileRegExp and added to the tileset according to the Methods described above.
+//   INT_VAR Offset is the offset (in bytes) into the file, from which tiles are being loaded, at which tile data will start being loaded.
+//   Note that tiles in the tileset are 0-indexed.  That means the 'first' tile is really tile 0.
+//   This function returns the "Count" of tiles added to the tileset.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_add_tiles INT_VAR Pos = 0 MaxCount = 100000 Offset = 0 PVRz_Page = "-2" PVRz_X = 0 PVRz_Y = 0 STR_VAR TileDir = EVAL "%MOD_FOLDER%/tiles" TileRegExp = "^.+\.bmp$" Method = "Push" RET Count BEGIN
+  Count = 0
+  READ_ASCII 0x0 Signature (4)          // Signature ("TIS ")
+  READ_ASCII 0x4 Version (4)            // Version ("V1  ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) AND (~%Version%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // Is a valid tileset of appropriate version
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+    PATCH_IF (Pos < 0) BEGIN
+      Pos = 0 // Ensure Pos !< 0
+    END ELSE PATCH_IF (Pos > CountOfTiles) BEGIN
+      SPRINT Method ~Push~ // If Pos > CountOfTiles in the tileset, append the new tiles to the end of the tileset.
+    END
+    SPRINT NewTileData ~~
+    SET NewTilesSize = 0
+    PATCH_IF (LengthOfTilesSection = 12) AND (PVRz_Page != "-2") BEGIN // Is a PVRz-based tileset and a manual tile has been specified
+      PATCH_IF (MaxCount = 100000) BEGIN // If MaxCount is 'All'
+        MaxCount = 1 // Set MaxCount to 1 in this case (since 'All' doesn't make since in this case)
+      END
+      INNER_ACTION BEGIN
+        OUTER_INNER_PATCH_SAVE NewTileData ~%NewTileData%~ BEGIN // Load internal buffer to store new tile data in
+          FOR (j1 = MaxCount; j1 > 0; j1 -= 1) BEGIN
+            INSERT_BYTES NewTilesSize 12 // Make room for 1 new PVRz-based tile in the internal buffer
+            WRITE_LONG (NewTilesSize) PVRz_Page // PVRz page (Special: A value of -1/0xFFFFFFFF indicates to fill the whole tile with black pixels)
+            WRITE_LONG (NewTilesSize + 4) PVRz_X    // PVRz x coordinate
+            WRITE_LONG (NewTilesSize + 8) PVRz_Y    // PVRz y coordinate
+            NewTilesSize += 12 // Update internal record of size (in bytes) of new tile data in the internal buffer
+            Count += 1 // Increase the count of new tiles in the internal buffer by one
+          END
+        END
+      END
+    END ELSE BEGIN // Is a PVRz-based or palette-based tileset and tiles are being loaded from external files
+      INNER_ACTION BEGIN
+        ACTION_BASH_FOR ~%TileDir%~ ~%TileRegExp%~ BEGIN // Loop through each input file loading tiles
+		  ACTION_IF (MaxCount > 0) BEGIN
+            PRINT ~Loading tile(s) from "%BASH_FOR_FILESPEC%"~
+            LAF ps_tileset_load_tile INT_VAR Size = LengthOfTilesSection Offset MaxCount STR_VAR TilePath = "%BASH_FOR_FILESPEC%" RET Tile = fk TileDataSize = kl END // Load tile(s) from input file
+            ACTION_IF (TileDataSize >= LengthOfTilesSection) BEGIN // Ensure the tile data we loaded is of the appropriate size (compared to LengthOfTilesSection in tileset header)
+              OUTER_SET MaxCount -= (TileDataSize / LengthOfTilesSection)
+			  OUTER_INNER_PATCH_SAVE NewTileData ~%NewTileData%~ BEGIN // Load internal buffer to store new tile data in
+                INSERT_BYTES NewTilesSize (TileDataSize)  // Make room for the new tile(s) in the internal buffer
+                WRITE_ASCIIE (NewTilesSize) ~%Tile%~ // Add the Tile Data to the internal buffer
+                NewTilesSize += (TileDataSize) // Update internal record of size (in bytes) of new tile data in the internal buffer
+                Count += (TileDataSize / LengthOfTilesSection)  // Increase the count of new tiles in the internal buffer by the number of tiles that were added
+              END
+            END
+		  END
+        END
+      END
+    END
+    PATCH_IF (~%Method%~ STRING_EQUAL_CASE ~Push~ = 1) BEGIN
+      INSERT_BYTES (SizeOfHeader + CountOfTiles * LengthOfTilesSection) (NewTilesSize)
+      WRITE_ASCIIE (SizeOfHeader + CountOfTiles * LengthOfTilesSection) ~%NewTileData%~
+      CountOfTiles += Count // Update CountOfTiles to account for the tiles that have been added
+      WRITE_LONG 0x8 CountOfTiles // Update the tileset header with the new CountOfTiles
+	  PATCH_PRINT ~Added %Count% tiles to the end of "%SOURCE_FILESPEC%"~
+    END ELSE PATCH_IF (~%Method%~ STRING_EQUAL_CASE ~InsertAt~ = 1) BEGIN
+      INSERT_BYTES (SizeOfHeader + Pos * LengthOfTilesSection) (NewTilesSize)
+      WRITE_ASCIIE (SizeOfHeader + Pos * LengthOfTilesSection) ~%NewTileData%~
+      CountOfTiles += Count // Update CountOfTiles to account for the tiles that have been added
+      WRITE_LONG 0x8 CountOfTiles // Update the tileset header with the new CountOfTiles
+	  PATCH_PRINT ~Added %Count% tiles to "%SOURCE_FILESPEC%" before tile %Pos%~
+    END ELSE PATCH_IF (~%Method%~ STRING_EQUAL_CASE ~Replace~ = 1) BEGIN
+	  PATCH_PRINT ~Replaced %Count% tiles in "%SOURCE_FILESPEC%" starting with tile %Pos%~
+      PATCH_IF (Pos + Count > CountOfTiles) BEGIN
+        INSERT_BYTES (SizeOfHeader + Pos * LengthOfTilesSection) (LengthOfTilesSection * (Pos + Count - CountOfTiles) )
+        Count = (Pos + Count - CountOfTiles)
+        CountOfTiles += Count
+        WRITE_LONG 0x8 CountOfTiles // Update the tileset header with the new CountOfTiles
+      END ELSE BEGIN
+        Count = 0
+      END
+      WRITE_ASCIIE (SizeOfHeader + Pos * LengthOfTilesSection) ~%NewTileData%~
+    END
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////////    ps_tileset_create_tileset    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU action function that creates a tileset from a number of tiles.
+//   Up to INT_VAR MaxCount (default is 'all') tiles will be loaded from the directory-file-regexp specified by STR_VAR TileDir and
+//     STR_VAR TileRegExp and added to the new tileset.  The new tileset will be saved to the path and file name specified by STR_VAR OutTileset.
+//   INT_VAR LengthOfTilesSection is the number of bytes needed to store a tile in the tileset, usually (1024+DimensionOfTile*DimensionOfTile) or 12.
+//   INT_VAR DimensionOfTile is the dimension of 1 tile in pixels, usually "64" as tiles are usually 64x64 px.
+//   INT_VAR Offset is the offset (in bytes) into the file, from which tiles are being loaded, at which tile data will start being loaded.
+//   This function returns the "Count" of tiles added to the tileset.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_ACTION_FUNCTION ps_tileset_create_tileset INT_VAR LengthOfTilesSection = 5120 DimensionOfTile = 64  MaxCount = 100000 Offset = 0 STR_VAR OutTileset = "" TileDir = EVAL "%MOD_FOLDER%/tiles" TileRegExp = "^.+\.bmp$" RET Count BEGIN
+  OUTER_SET Count = 0
+  <<<<<<<< .../mymod-inlined/ps_tileset_new.tis
+>>>>>>>>
+  COPY ~.../mymod-inlined/ps_tileset_new.tis~ ~%OutTileset%~
+    PATCH_PRINT ~Creating new tileset and saving it to "%OutTileset%"~
+	INSERT_BYTES 0 24 // Make room for the header
+    WRITE_ASCIIE 0x0 ~TIS V1  ~				// Signature ("TIS ") + Version ("V1  ")
+    WRITE_LONG 0x8 0						// Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+	WRITE_LONG 0xc (LengthOfTilesSection)	// Length of tiles section (1024+DimensionOfTile*DimensionOfTile or 12)
+	WRITE_LONG 0x10 24						// Size of the header (24) - assumption, but a very good one
+	WRITE_LONG 0x14 (DimensionOfTile)		// Dimension of 1 tile in pixels (64x64)
+	LPF ps_tileset_add_tiles INT_VAR MaxCount Offset STR_VAR TileDir TileRegExp RET Count END // Add tiles to the tileset
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_export_tiles    //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that exports a number of tiles from a tileset.
+//   INT_VAR Pos specifies the first tile that will be exported while INT_VAR Count specifies the count of tiles to export.
+//     Count defaults to 'all' while Pos defaults to 0 (the first tile).
+//   STR_VAR OutType determines the format of the exported tile(s).  Currently "bmp", "raw", and "tis" are supported, but PVRz-based tilesets
+//     can not be exported as bitmaps, only raw or tis.
+//   STR_VAR OutTileDir is the directory where the tile(s) will be saved.
+//   This function returns the "Count" of tiles exported from the tileset.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_export_tiles INT_VAR Pos = 0 Count = 100000 STR_VAR OutTileDir = "" OutType = "bmp" RET Count BEGIN
+  SPRINT bn ~%SOURCE_RES%~
+  READ_ASCII 0x0 Signature (4)          // Signature ("TIS ")
+  READ_ASCII 0x4 Version (4)            // Version ("V1  ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) AND (~%Version%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // Is a valid tileset of appropriate version
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+    PATCH_IF (Pos < 0) OR (Pos > CountOfTiles) BEGIN // Ensure Pos is a valid value
+      PATCH_PRINT ~Invalid parameters passed to the function ps_tileset_export_tiles:  Pos was %Pos% but must be between 0 and %CountOfTiles% (inclusive).  No tiles will be exported.~
+      Pos = 0
+      Count = 0
+    END ELSE PATCH_IF (Pos + Count > CountOfTiles) BEGIN // If you try to export more tiles than there are in the tileset after Pos
+      Count = (CountOfTiles - Pos) // Adjust the Count of tiles to the number of tiles in the tileset after Pos
+    END
+    PATCH_PRINT ~Exporting %Count% tiles from "%SOURCE_FILESPEC%" to "%OutTileDir%/"~
+	PATCH_IF (LengthOfTilesSection = 12) AND (~%OutType%~ STRING_EQUAL_CASE ~bmp~ = 1) BEGIN
+	  SPRINT OutType ~raw~ // PVRz-based tiles can not be exported as bitmaps
+	END
+	PATCH_IF (~%OutType%~ STRING_EQUAL_CASE ~bmp~ = 1) BEGIN // If exporting as a bitmap
+	  FOR (f1 = 0; f1 < Count; f1 += 1) BEGIN // Tile loop
+	    READ_ASCII (SizeOfHeader + LengthOfTilesSection * f1) pt (1024) // Read palette for this tile
+	    READ_ASCII (SizeOfHeader + LengthOfTilesSection * f1 + 1024) fm (DimensionOfTile * DimensionOfTile) // Read tile data for this tile
+	    bm = (Pos + f1)
+	    SPRINT bm ~0000%bm%~
+	    INNER_PATCH_SAVE bm ~%bm%~ BEGIN // Format the tile number currently being exported to be exactly 4 digits (padded with 0s)
+	      DELETE_BYTES 0 (BUFFER_LENGTH - 4)
+	    END
+	    LPF ps_tileset_export_tile_BMP INT_VAR fw = DimensionOfTile fh = DimensionOfTile STR_VAR fm pt OutTilePath = EVAL ~%OutTileDir%/%bn%_%bm%.%OutType%~ END
+	  END
+    END ELSE PATCH_IF (~%OutType%~ STRING_EQUAL_CASE ~raw~ = 1) OR (~%OutType%~ STRING_EQUAL_CASE ~tis~ = 1) BEGIN // If exporting as raw or tileset
+	  READ_ASCII (SizeOfHeader + LengthOfTilesSection * Pos) fm (LengthOfTilesSection * Count) // Read full tile data (including palettes) for all tiles being exported
+	  fz = (LengthOfTilesSection * Count) // File size
+	  PATCH_IF (~%OutType%~ STRING_EQUAL_CASE ~tis~ = 1) BEGIN // If exporting as a tileset, add the TIS header
+	    INNER_PATCH_SAVE fm ~%fm%~ BEGIN
+          INSERT_BYTES 0x0 (SizeOfHeader) // Make room for the header
+          WRITE_ASCIIE 0x0 ~%Signature%~			// Signature ("TIS ")
+		  WRITE_ASCIIE 0x4 ~%Version%~			// Version ("V1  ")
+          WRITE_LONG 0x8 (Count)					// Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+          WRITE_LONG 0xc (LengthOfTilesSection)	// Length of tiles section (1024+DimensionOfTile*DimensionOfTile or 12)
+          WRITE_LONG 0x10 (SizeOfHeader)			// Size of the header (24) - assumption, but a very good one
+          WRITE_LONG 0x14 (DimensionOfTile)		// Dimension of 1 tile in pixels (64x64)
+          fz += SizeOfHeader
+        END
+	  END
+	  bm = (Pos)
+	  SPRINT bm ~0000%bm%~
+	  INNER_PATCH_SAVE bm ~%bm%~ BEGIN // Format the first tile number currently being exported to be exactly 4 digits (padded with 0s)
+	    DELETE_BYTES 0 (BUFFER_LENGTH - 4)
+	  END
+	  PATCH_IF (Count > 1) BEGIN // If exporting more than one tile
+	    bl = (Pos + Count)
+	    SPRINT bl ~0000%bl%~
+	    INNER_PATCH_SAVE bl ~%bl%~ BEGIN // Format the last tile number currently being exported to be exactly 4 digits (padded with 0s)
+	      DELETE_BYTES 0 (BUFFER_LENGTH - 4)
+	    END
+	    LPF ps_tileset_export_tile_RAW INT_VAR fz STR_VAR fm OutTilePath = EVAL ~%OutTileDir%/%bn%_%bm%-%bl%.%OutType%~ END
+	  END ELSE BEGIN
+	    LPF ps_tileset_export_tile_RAW INT_VAR fz STR_VAR fm OutTilePath = EVAL ~%OutTileDir%/%bn%_%bm%.%OutType%~ END
+	  END
+	END ELSE BEGIN
+	  PATCH_PRINT ~Invalid parameters passed to the function ps_tileset_export_tiles:  OutType = "%OutType%" not recognized.~
+	END
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_load_tile_BMP    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that loads a tile from a 256-color, uncompressed, 8-bit bitmap; BMP Version 3 (Microsoft Windows 3.x).
+//   The BMP being patched must have the same dimensions as that of a tile in the tileset.  INT_VAR Size is used to indicate the required
+//     size of this tile (in bytes) and includes Width*Height pixels plus the 1024 byte color palette.  It should be the same as
+//     LengthOfTilesSection from the tileset's header.
+//   The function returns STR_VAR fk (the tile data) and INT_VAR kl (the size in bytes of the tile data in fk).
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_load_tile_BMP INT_VAR Size = 5120 RET fk kl BEGIN
+  SPRINT fk ~~
+  SET kl = 0
+  READ_ASCII 0x0 sg (2) //Signature
+  PATCH_IF (~%sg%~ STRING_EQUAL_CASE ~BM~ = 1) BEGIN
+    READ_SHORT 0x1c bc //Bit count
+    READ_LONG 0x1e cp //Compression
+    PATCH_IF (bc = 8) AND (cp = 0) BEGIN
+      READ_LONG 0xa fd //Raster data offset
+      READ_LONG 0xE hsize //SizeOfHeader
+      READ_LONG 0x12 rw //Width
+      READ_LONG 0x16 rh //Height
+      PATCH_IF (rw * rh + 1024 = Size) BEGIN
+        READ_LONG 0x2E ColorsUsed //Number of colors in the image
+        PATCH_IF (ColorsUsed = 0) BEGIN
+          ColorsUsed = 256
+        END
+        df = (rw / 4) * 4
+        PATCH_IF df < rw BEGIN
+          lz = df + 4 //Line size
+          df = lz - rw //Byte difference
+        END ELSE BEGIN
+          df = 0
+        END
+        READ_ASCII (hsize + 14) pt (ColorsUsed * 4) //Color table
+        kl = 0 //Large BMP datasize
+        FOR (j1 = rh; j1 > 0; j1 -= 1) BEGIN //Row height loop
+          READ_ASCII (fd + (j1 - 1) * (rw + df) ) fl (%rw%) //Last row first
+          SPRINT fk ~%fk%%fl%~
+          kl += rw //Increase datasize by the 'width' number of pixels
+        END
+        INNER_PATCH_SAVE fk ~%fk%~ BEGIN
+          INSERT_BYTES 0 1024
+          WRITE_ASCIIE 0 ~%pt%~ #1024 // Insert 1024 byte Palette in front of the tile data
+          kl += 1024
+        END
+      END ELSE BEGIN
+	    PATCH_PRINT ~"%SOURCE_FILESPEC%" has improper dimenstions for this tileset - it will be skipped.~
+	  END
+    END ELSE BEGIN
+      PATCH_PRINT ~"%SOURCE_FILESPEC%" is not an uncompressed 8-bit bitmap - check the file.~
+    END
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" is not a valid bitmap - check the file.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_load_tile_BIN    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that loads binary tile data from an arbitrary file.
+//   The raw tile data is loaded from the file being patched starting at INT_VAR Offset.
+//   INT_VAR Size specifies the size of a tile (in bytes) and is 12 for PVRz-based tilesets and usually 5120 for palette-based tilesets.
+//   INT_VAR MaxCount can be used to specify the maximum count of tiles to load from the input file (assuming there are more than one).
+//   The function returns STR_VAR fk (the tile data) and INT_VAR kl (the size in bytes of the tile data in fk).
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_load_tile_BIN INT_VAR Size = 12 Offset = 0 MaxCount = 100000 RET fk kl BEGIN
+  SPRINT fk ~~
+  SET kl = 0
+  PATCH_IF (SOURCE_SIZE - Offset >= Size) BEGIN // If there is room for at least one tile in the file after Offset
+    kl = ((SOURCE_SIZE - Offset) / Size) * Size // Get the total number of whole tiles in the file after Offset
+    PATCH_IF (kl > MaxCount * Size) BEGIN
+      kl = MaxCount * Size
+    END
+    READ_ASCII (Offset) fk (kl) // Get that number of tiles
+  END ELSE BEGIN
+    esz = (SOURCE_SIZE - Offset)
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not contain valid tile data.  This file is only %esz% bytes but a tile should be %Size% bytes long.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////    ps_tileset_load_tile    ///////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU action function that loads tile data from an arbitrary file, calling the appropriate load function based on the
+//   content of the file.  Currently bitmaps (BMP), tilesets (TIS), and binary files (BIN) are supported.
+//   The tile data is loaded from the file specified by STR_VAR TilePath optionally starting at INT_VAR Offset as appropriate.
+//   INT_VAR Size specifies the size of a tile (in bytes) and is 12 for PVRz-based tilesets and usually 5120 for palette-based tilesets.
+//   INT_VAR MaxCount can be used to specify the maximum count of tiles to load from the input file (assuming there are more than one).
+//   The function returns STR_VAR fk (the tile data) and INT_VAR kl (the size in bytes of the tile data in fk).
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_ACTION_FUNCTION ps_tileset_load_tile INT_VAR Size = 12 Offset = 0 MaxCount = 100000 STR_VAR TilePath = "" RET fk kl BEGIN
+  OUTER_SPRINT fk ~~
+  OUTER_SET kl = 0
+  COPY ~%TilePath%~ ~%TilePath%~
+    PATCH_IF (SOURCE_SIZE - Offset >= Size) BEGIN
+      READ_ASCII 0x0 sg (2) // Short Signature
+      READ_ASCII 0x0 Signature (4) // Signature
+      PATCH_IF (~%sg%~ STRING_EQUAL_CASE ~BM~ = 1) BEGIN // Is a BMP file
+        LPF ps_tileset_load_tile_BMP INT_VAR Size RET fk kl END
+      END ELSE PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) BEGIN // Is a tileset with a header
+        READ_LONG 0xc LengthOfTilesSection // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+        PATCH_IF (LengthOfTilesSection = Size) BEGIN
+		  PATCH_IF (Offset = 0) BEGIN // If a reasonable offset has not been set
+            READ_LONG 0x10 Offset // Size of the header (24)
+		  END
+          LPF ps_tileset_load_tile_BIN INT_VAR Size Offset MaxCount RET fk kl END
+        END ELSE BEGIN
+          PATCH_PRINT ~Dimensions of "%SOURCE_FILESPEC%" are incorrect for this tileset.  The tile should be %Size% bytes but is %LengthOfTilesSection% bytes.~
+        END
+      END ELSE BEGIN // Is a binary file or tileset without a header
+        LPF ps_tileset_load_tile_BIN INT_VAR Size Offset MaxCount RET fk kl END
+      END
+    END ELSE BEGIN
+      esz = (SOURCE_SIZE - Offset)
+      PATCH_PRINT ~"%SOURCE_FILESPEC%" does not contain valid tile data.  This file is only %esz% bytes but a tile should be %Size% bytes long.~
+    END
+  BUT_ONLY
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_export_tile_BMP    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that exports a tile to a 256-color, uncompressed, 8-bit bitmap; BMP Version 3 (Microsoft Windows 3.x).
+//   INT_VAR fw is the tile's width (in pixels) and INT_VAR fh is the tile's height (in pixels).  They should be the same as DimensionOfTile
+//     from the tileset's header.
+//   STR_VAR fm contains the raw tile data
+//   STR_VAR pt contains the palette for the tile
+//   STR_VAR OutTilePath is the full path and file name where the tile will be saved.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_export_tile_BMP INT_VAR fw = 64 fh = 64 STR_VAR fm = "" pt = "" OutTilePath = "" BEGIN
+  READ_ASCII (19) nl (1) //Null
+  SPRINT xl ~~ //End of line
+  df = (fw / 4) * 4
+  PATCH_IF df < fw BEGIN
+    lz = df + 4 //Line size
+    df = lz - fw //Byte difference
+    FOR (g1 = 0; g1 < df; g1 += 1) BEGIN
+      SPRINT xl ~%xl%%nl%~
+    END
+  END ELSE BEGIN
+    lz = fw
+    df = 0
+  END
+  SPRINT fk ~~
+  INNER_PATCH ~%fm%~ BEGIN
+    FOR (g2 = fh; g2 > 0; g2 -= 1) BEGIN //Reverse rows for BMP
+      READ_ASCII ((g2 - 1) * fw) fl (fw) //Read frame width
+      SPRINT fk ~%fk%%fl%%xl%~ //Pad with extra nulls
+    END
+  END
+  fz = (1078 + (lz * fh)) //File size
+  INNER_ACTION BEGIN
+    <<<<<<<< .../mymod-inlined/ps_bitmap_new.bmp
+>>>>>>>>
+    COPY ~.../mymod-inlined/ps_bitmap_new.bmp~ ~%OutTilePath%~
+	  INSERT_BYTES 0 fz
+      WRITE_ASCIIE 0 ~BM~ #2	// File type, always 4D42h ("BM")
+	  WRITE_LONG 2 fz			// FileSize	Size of the file in bytes
+	  //WRITE_SHORT 6 0			// Reserved1	Always 0
+	  //WRITE_SHORT 8 0			// Reserved2	Always 0
+	  WRITE_LONG 10 1078		// BitmapOffset	Starting position of image data in bytes
+	  WRITE_LONG 14 40			// Size	Size of this header in bytes
+      WRITE_LONG 18 fw			// Width	Image width in pixels
+      WRITE_LONG 22 fh			// Height	Image height in pixels
+	  WRITE_SHORT 26 1			// Planes	Number of color planes
+	  WRITE_SHORT 28 8			// BitsPerPixel	Number of bits per pixel
+	  //WRITE_LONG 30 0			// Compression	Compression methods used
+	  //WRITE_LONG 34 0			// SizeOfBitmap	Size of bitmap in bytes
+	  //WRITE_LONG 38 0			// HorzResolution	Horizontal resolution in pixels per meter
+	  //WRITE_LONG 42 0			// VertResolution	Vertical resolution in pixels per meter
+	  //WRITE_LONG 46 0			// ColorsUsed	Number of colors in the image
+	  //WRITE_LONG 50 0			// ColorsImportant	Minimum number of important colors
+	  WRITE_ASCIIE 54 ~%pt%~ #1024 // Color table
+      WRITE_ASCIIE 1078 ~%fk%~	// Raster data
+    BUT_ONLY
+  END
+END
+  
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_export_tile_RAW    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that exports raw tile data.
+//   STR_VAR fm is the binary tile data and INT_VAR fz is the size of this data (in bytes)
+//   STR_VAR OutTilePath is the full path and file name where the tile data will be saved.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_export_tile_RAW INT_VAR fz = 0 STR_VAR fm = "" OutTilePath = "" BEGIN
+  INNER_ACTION BEGIN
+    <<<<<<<< .../mymod-inlined/ps_bitmap_new.bmp
+>>>>>>>>
+    COPY ~.../mymod-inlined/ps_bitmap_new.bmp~ ~%OutTilePath%~
+	  INSERT_BYTES 0 fz
+      WRITE_ASCIIE 0 ~%fm%~	// Tile data
+    BUT_ONLY
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////    ps_tileset_info    //////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that gathers and reports information from a tileset.
+//   Setting INT_VAR Verbose = 1 provides some basic information about the tileset while setting it to 2 provides copious
+//     amounts of information and could take a minute to run on large palette-based tilesets.
+//   If INT_VAR Log = 1 then the tileset info will be saved the the %MOD_FOLDER%/logs folder.  Otherwise the info is displayed
+//     on the console (and in the .debug file).
+//   STR_VAR nl can be set to the newline character(s) to use in the log file and console input, and defaults to %WNL% (Windows new line).
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_info INT_VAR Verbose = 1 Log = 1 STR_VAR nl = EVAL ~%WNL%~ BEGIN
+  SET nll = STRING_LENGTH ~%nl%~ // Length of NewLine character(s)
+  SPRINT info ~~
+  LPF ps_concat_str STR_VAR var = ~%info%~ str = ~Retrieving info from "%SOURCE_FILESPEC%":%nl%FileSize = %SOURCE_SIZE% bytes%nl%~ RET info = var END
+  READ_ASCII 0x0 Signature (4) // Signature ("TIS ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIZ0~ = 1) OR (~%Signature%~ STRING_EQUAL_CASE ~TBC ~ = 1) OR (~%Signature%~ STRING_EQUAL_CASE ~TISC~ = 1) BEGIN // Tileset is compressed
+    LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%Tileset "%SOURCE_FILESPEC%" is compressed but compressed tilesets are not supported:  no info can be retrieved.~ RET info = var END
+  END ELSE PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) BEGIN // Is an uncompressed tileset with a header
+    READ_ASCII 0x4 Version (4)          // Version ("V1  ")
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+  END ELSE PATCH_IF (~%SOURCE_EXT%~ STRING_EQUAL_CASE ~tis~ = 1) BEGIN // Appears to be a tileset without a header.  A header can be generated but it requires making some assumptions.
+    LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%The file appears to be a tileset, but does not have a header.  A few assumptions will be made, then any additional information will be reported based on those assumptions.~ RET info = var END
+    SPRINT Signature ~TIS ~				// Signature ("TIS ")
+	SPRINT Version ~V1  ~             	// Version ("V1  ")
+    CountOfTiles = (SOURCE_SIZE / 5120) // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    LengthOfTilesSection = 5120         // Length of tiles section (1024+DimensionOfTile*DimensionOfTile) - assumption
+    SizeOfHeader = 0                  	// Size of the header (24) - assumption, but a very good one
+    DimensionOfTile = 64                // Dimension of 1 tile in pixels (64x64) - assumption, but a good one
+  END
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) BEGIN // Has been identified as a valid tileset
+    px = (DimensionOfTile * DimensionOfTile) // Pixels per tile
+	tpx = (px * CountOfTiles) // Total pixels in the tileset
+	ct = ((SOURCE_SIZE - SizeOfHeader) / LengthOfTilesSection) // Calculated number of tiles
+	PATCH_IF (Verbose = 1) BEGIN // Display basic tileset and header info
+	  LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%Header:%nl%  Signature = "%Signature%"%nl%  Version = "%Version%"%nl%  CountOfTiles = %CountOfTiles%%nl%  LengthOfTilesSection = %LengthOfTilesSection%%nl%  SizeOfHeader = %SizeOfHeader%%nl%  DimensionOfTile = %DimensionOfTile%~ RET info = var END
+	END ELSE PATCH_IF (Verbose >= 2) BEGIN // Display basic tileset and header info plus additional info
+	  LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%Header:%nl%  Signature = "%Signature%"%nl%  Version = "%Version%"%nl%  CountOfTiles = %CountOfTiles%%nl%  LengthOfTilesSection = %LengthOfTilesSection%%nl%  SizeOfHeader = %SizeOfHeader%%nl%  DimensionOfTile = %DimensionOfTile%%nl%%nl%Extra Info:%nl%  Each tile has %px% pixels for a total of %tpx% pixels in the tileset.%nl%  The size of the tileset indicates it has %ct% tiles.~ RET info = var END
+	END
+	PATCH_IF (LengthOfTilesSection = 12) BEGIN // Is a PVRz-based tileset
+	  INNER_PATCH ~%SOURCE_RES%~ BEGIN // Get pvrz resource reference
+	    DELETE_BYTES 1 1
+		READ_ASCII 0 pvrz (BUFFER_LENGTH)
+	  END
+	  PATCH_IF (Verbose >= 1) BEGIN // Display info about tileset type
+        LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%  "%SOURCE_FILESPEC%" is a PVRz-based tileset referencing %pvrz%**.pvrz files.~ RET info = var END
+	  END
+	  PATCH_IF (Verbose >= 2) BEGIN // Display verbose info about each PVRz-based tile
+	    FOR (t1 = 0; t1 < CountOfTiles; ++t1) BEGIN // Tile loop
+		  READ_LONG (SizeOfHeader + LengthOfTilesSection * t1) PVRz_Page // PVRZ page
+		  READ_LONG (SizeOfHeader + LengthOfTilesSection * t1 + 4) PVRz_X // PVRZ texture coordinate X
+		  READ_LONG (SizeOfHeader + LengthOfTilesSection * t1 + 8) PVRz_Y // PVRZ texture coordinate Y
+		  PATCH_IF (PVRz_Page = "-1") BEGIN // Special: A value of -1/0xFFFFFFFF indicates to fill the whole tile with black pixels
+		    SPRINT pvref ~blank~
+		  END ELSE BEGIN
+		    SPRINT pg ~00%PVRz_Page%~ // PVRZ page value as a zero-padded two digits number
+	        INNER_PATCH_SAVE pg ~%pg%~ BEGIN // Format the tile number currently being exported to be exactly 2 digits (padded with 0s)
+	          DELETE_BYTES 0 (BUFFER_LENGTH - 2)
+	        END
+		    SPRINT pvref ~%pvrz%%pg%.pvrz~ // Explicit PVRZ file reference
+		  END
+		  LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%%nl%Tile %t1%:%nl%  PVRz_Page = %PVRz_Page% (%pvref%)%nl%  PVRz_X = %PVRz_X%%nl%  PVRz_Y = %PVRz_Y%~ RET info = var END
+		END
+      END
+	END ELSE BEGIN
+	  PATCH_IF (Verbose >= 1) BEGIN // Display info about tileset type
+		LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%  "%SOURCE_FILESPEC%" is a palette-based tileset.~ RET info = var END
+      END
+	  PATCH_IF (Verbose >= 2) BEGIN // Display verbose info about each palette-based tile
+	  DEFINE_ARRAY array BEGIN "  0" "  1" "  2" "  3" "  4" "  5" "  6" "  7" "  8" "  9" " 10" " 11" " 12" " 13" " 14" " 15" " 16" " 17" " 18" " 19" " 20" " 21" " 22" " 23" " 24" " 25" " 26" " 27" " 28" " 29" " 30" " 31" " 32" " 33" " 34" " 35" " 36" " 37" " 38" " 39" " 40" " 41" " 42" " 43" " 44" " 45" " 46" " 47" " 48" " 49" " 50" " 51" " 52" " 53" " 54" " 55" " 56" " 57" " 58" " 59" " 60" " 61" " 62" " 63" " 64" " 65" " 66" " 67" " 68" " 69" " 70" " 71" " 72" " 73" " 74" " 75" " 76" " 77" " 78" " 79" " 80" " 81" " 82" " 83" " 84" " 85" " 86" " 87" " 88" " 89" " 90" " 91" " 92" " 93" " 94" " 95" " 96" " 97" " 98" " 99" "100" "101" "102" "103" "104" "105" "106" "107" "108" "109" "110" "111" "112" "113" "114" "115" "116" "117" "118" "119" "120" "121" "122" "123" "124" "125" "126" "127" "128" "129" "130" "131" "132" "133" "134" "135" "136" "137" "138" "139" "140" "141" "142" "143" "144" "145" "146" "147" "148" "149" "150" "151" "152" "153" "154" "155" "156" "157" "158" "159" "160" "161" "162" "163" "164" "165" "166" "167" "168" "169" "170" "171" "172" "173" "174" "175" "176" "177" "178" "179" "180" "181" "182" "183" "184" "185" "186" "187" "188" "189" "190" "191" "192" "193" "194" "195" "196" "197" "198" "199" "200" "201" "202" "203" "204" "205" "206" "207" "208" "209" "210" "211" "212" "213" "214" "215" "216" "217" "218" "219" "220" "221" "222" "223" "224" "225" "226" "227" "228" "229" "230" "231" "232" "233" "234" "235" "236" "237" "238" "239" "240" "241" "242" "243" "244" "245" "246" "247" "248" "249" "250" "251" "252" "253" "254" "255" END
+	    FOR (t1 = 0; t1 < CountOfTiles; ++t1) BEGIN // Tile loop
+		  FOR (b0 = 0; b0 < LengthOfTilesSection; ++b0) BEGIN // Tile byte count loop
+		    READ_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + b0) da
+			SPRINT EVAL ~ps%b0%~ $array("%da%") // Store formatted byte value
+		  END
+		  INNER_PATCH_SAVE info ~%info%~ BEGIN
+		    sz = BUFFER_LENGTH
+			SPRINT line ~%nl%%nl%Tile %t1%:%nl%  Palette:~
+			linesz = STRING_LENGTH ~%line%~
+			INSERT_BYTES sz (linesz + (43 + nll) * 256)
+			WRITE_ASCIIE sz ~%line%~
+			sz += linesz
+			FOR (t2 = 0; t2 < 256; ++t2) BEGIN // Palette entry loop
+			  SPRINT pe $array("%t2%")
+			  idx = (t2 * 4)
+			  SPRINT bb EVAL "%ps%idx%%"
+			  idx += 1
+			  SPRINT gg EVAL "%ps%idx%%"
+			  idx += 1
+			  SPRINT rr EVAL "%ps%idx%%"
+			  idx += 1
+			  SPRINT aa EVAL "%ps%idx%%"
+			  WRITE_ASCIIE sz ~%nl%    PaletteEntry %pe%: rgba(%rr%,%gg%,%bb%,%aa%)~
+			  sz += (43 + nll)
+			END
+			ofs = (DimensionOfTile * 4 + 4 + nll)
+			INSERT_BYTES sz (12 + nll * 2 + ofs * DimensionOfTile)
+			WRITE_ASCIIE sz ~%nl%  Tile Data:%nl%~
+			sz += (12 + nll * 2)
+			FOR (t3 = 0; t3 < DimensionOfTile; ++t3) BEGIN // Tile height loop
+			  WRITE_ASCIIE (sz + ofs * t3) ~    ~ // 4 Chars
+		      FOR (t4 = 0; t4 < DimensionOfTile; ++t4) BEGIN // Tile width loop
+			    idx = (1024 + DimensionOfTile * t3 + t4)
+				SPRINT format EVAL "%ps%idx%%"
+                WRITE_ASCIIE (sz + ofs * t3 + t4 * 4 + 4) ~%format% ~ // 4 Chars
+			  END
+			  WRITE_ASCIIE (sz + ofs * t3 + t4 * 4 + 4) ~%nl%~ // 1 or 2 Chars
+		    END
+		  END
+		END
+      END
+	END
+  END ELSE BEGIN
+	LPF ps_concat_str STR_VAR var = ~%info%~ str = ~%nl%"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~ RET info = var END
+  END
+  PATCH_IF (Log = 1) BEGIN // Save info as a file
+    fz = STRING_LENGTH ~%info%%nl%~
+	PATCH_PRINT ~Saving Tileset Info for "%SOURCE_FILESPEC%" to "%MOD_FOLDER%/logs/%SOURCE_RES%.txt".~
+    LPF ps_tileset_export_tile_RAW INT_VAR fz STR_VAR fm = EVAL "%info%%nl%" OutTilePath = EVAL "%MOD_FOLDER%/logs/%SOURCE_RES%.txt" END
+  END ELSE BEGIN // Print info to console
+    PATCH_PRINT ~%info%%nl%~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////    ps_tileset_replace_palette_entry    /////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that replaces palette entries with a new color.
+//   Palette entries matching INT_VAR Oldcolor will be replaced with INT_VAR NewColor in up to INT_VAR Count tiles starting at tile INT_VAR Pos.
+//   Oldcolor and NewColor can most easily be expressed by a hex integer in the form 0xAARRGGBB where AA is the alpha channel,
+//     RR is the red channel, GG is the green channel, and BB is the blue channel.
+//   Note that by replacing the palette entry, every pixel in the tile using this entry will also be recolored.
+//   This function returns the INT_VAR Count of palette entries that were replaced.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_replace_palette_entry INT_VAR Pos = 0 Count = 1 Oldcolor = 0x0000FF00 NewColor = 0x0 RET Count BEGIN
+  READ_ASCII 0x0 Signature (4)          // Signature ("TIS ")
+  READ_ASCII 0x4 Version (4)            // Version ("V1  ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) AND (~%Version%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // Is a valid tileset of appropriate version
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+    PATCH_IF (LengthOfTilesSection > 12) BEGIN // Palette entries can only be replaced in palette-based tilesets
+	  PATCH_IF (Count < 0) BEGIN
+        Count = 0 // Ensure Count !< 0
+      END
+      PATCH_IF (Pos < 0) OR (Pos > CountOfTiles) BEGIN // Ensure Pos is a valid value
+        PATCH_PRINT ~Invalid parameters passed to the function ps_tileset_replace_palette_entry:  Pos was %Pos% but must be between 0 and %CountOfTiles% (inclusive).  No palette entries will be replaced.~
+        Pos = 0
+        Count = 0
+      END ELSE PATCH_IF (Pos + Count > CountOfTiles) BEGIN // If you try to modify more tiles than there are in the tileset after Pos
+        Count = (CountOfTiles - Pos) // Adjust the Count of tiles to the number of tiles in the tileset after Pos
+      END
+	  chg = 0
+      FOR (t1 = Pos; t1 < Pos + Count; ++t1) BEGIN // Tile loop
+        FOR (p1 = 0; p1 < 256; ++p1) BEGIN // Palette loop
+	      os = (SizeOfHeader + LengthOfTilesSection * t1 + p1 * 4)
+	      READ_LONG os PaletteEntry
+		  PATCH_IF (PaletteEntry = Oldcolor) BEGIN
+		    WRITE_LONG os NewColor
+		    chg += 1
+		  END
+	    END
+	  END
+	  Count = chg
+	END ELSE BEGIN
+	  PATCH_PRINT ~"%SOURCE_FILESPEC%" is a PVRz-based tileset but palette entries can only be replaced in palette-based tilesets.~
+	  Count = 0
+	END
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////    ps_tileset_recolor_pixel    /////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// This is a WeiDU patch function that recolors a pixel in a tile without changing the color of every pixel using the same palette entry.
+//   INT_VAR Pos indicates the first tile in which the specified pixel will be recolored.  INT_VAR Count can be used to specify the count of
+//     tiles in which to recolor the specified pixel, but it usually only makes since to do so for 1 tile.
+//   INT_VAR NewColor specifies the desired color for the indicated pixel and can most easily be expressed by a hex integer in the form 0xAARRGGBB
+//     where AA is the alpha channel, RR is the red channel, GG is the green channel, and BB is the blue channel.
+//   INT_VAR Pixel specifies which pixel to recolor.  In each tile, pixels are numbered left to right, top to bottom starting at 0.
+//   This function returns the INT_VAR Count of pixels that were recolored.
+//////////////////////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION ps_tileset_recolor_pixel INT_VAR Pos = 0 Count = 1 NewColor = 0x0 Pixel = 0 RET Count BEGIN
+  READ_ASCII 0x0 Signature (4)          // Signature ("TIS ")
+  READ_ASCII 0x4 Version (4)            // Version ("V1  ")
+  PATCH_IF (~%Signature%~ STRING_EQUAL_CASE ~TIS ~ = 1) AND (~%Version%~ STRING_EQUAL_CASE ~V1  ~ = 1) BEGIN // Is a valid tileset of appropriate version
+    READ_LONG 0x8 CountOfTiles          // Count of tiles within this tileset (FileSize/LengthOfTilesSection)
+    READ_LONG 0xc LengthOfTilesSection  // Length of tiles section [(1024+DimensionOfTile*DimensionOfTile) OR (12)]
+    READ_LONG 0x10 SizeOfHeader         // Size of the header (24)
+    READ_LONG 0x14 DimensionOfTile      // Dimension of 1 tile in pixels (64x64)
+    PATCH_IF (LengthOfTilesSection > 12) BEGIN // Palette entries can only be replaced in palette-based tilesets
+	  PATCH_IF (Count < 0) BEGIN
+        Count = 0 // Ensure Count !< 0
+      END
+      PATCH_IF (Pos < 0) OR (Pos > CountOfTiles) BEGIN // Ensure Pos is a valid value
+        PATCH_PRINT ~Invalid parameters passed to the function ps_tileset_recolor_pixel:  Pos was %Pos% but must be between 0 and %CountOfTiles% (inclusive).  No palette entries will be replaced.~
+        Pos = 0
+        Count = 0
+      END ELSE PATCH_IF (Pos + Count > CountOfTiles) BEGIN // If you try to modify more tiles than there are in the tileset after Pos
+        Count = (CountOfTiles - Pos) // Adjust the Count of tiles to the number of tiles in the tileset after Pos
+      END
+      FOR (t1 = Pos; t1 < Pos + Count; ++t1) BEGIN // Tile loop
+	    Success = 0
+        READ_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + Pixel) PxVal // Get pixel value
+		READ_LONG (SizeOfHeader + LengthOfTilesSection * t1 + PxVal * 4) PxColor // Get pixel color
+		PATCH_IF (PxColor = NewColor) BEGIN // The color of the pixel is already the color we want it to be
+		  Success = 1
+		  PATCH_PRINT ~The color of the pixel is already the color we want it to be.~
+		END ELSE BEGIN // The color of the pixel is not the color we want it to be
+		  FOR (p1 = 0; p1 < 256; ++p1) BEGIN // Palette loop
+	        READ_LONG (SizeOfHeader + LengthOfTilesSection * t1 + p1 * 4) PaletteEntry
+		    SPRINT EVAL ~ps%p1%~ ~%PaletteEntry%~ // Store palette entry in LUT
+			SPRINT EVAL ~used%p1%~ ~0~ // Initialize is-palette-entry-used LUT as 'not used'
+			PATCH_IF (PaletteEntry = NewColor) BEGIN // The color we need already exists in the palette!
+			  WRITE_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + Pixel) p1 // Write pixel value
+			  Success = 1
+			  PATCH_PRINT ~The color we need already exists in the palette at PaletteEntry %p1%.  The color is %PaletteEntry%.~
+			  p1 += 10000 // Break out of Palette loop
+			END
+	      END
+		  PATCH_IF (Success != 1) BEGIN // The color of the pixel is not the color we want it to be and the new color we wanted to use was not already in the palette
+		    px = (DimensionOfTile * DimensionOfTile) // Pixels per tile
+		    FOR (p2 = 0; p2 < px; ++p2) BEGIN // Pixel loop
+	          READ_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + p2) Pxl
+			  PATCH_IF (p2 != Pixel) BEGIN  // Don't consider the pixel we are replacing when determining whether a palette entry is used
+		        SPRINT EVAL ~used%Pxl%~ ~1~ // Set values in is-palette-entry-used LUT
+			  END
+	        END
+		    FOR (p1 = 0; p1 < 256; ++p1) BEGIN // Palette loop
+		      SPRINT IsUsed EVAL "%used%p1%%"
+			  PATCH_IF (IsUsed = 0) BEGIN // We found an unused palette entry!
+			    WRITE_LONG (SizeOfHeader + LengthOfTilesSection * t1 + p1 * 4) NewColor // Write new color into the unused palette entry
+			    WRITE_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + Pixel) p1 // Write pixel value
+			    Success = 1
+				PATCH_PRINT ~An unused palette entry was found at PaletteEntry %p1%.~
+			    p1 += 10000 // Break out of Palette loop
+			  END
+		    END
+		  END
+		  PATCH_IF (Success != 1) BEGIN // The color of the pixel is not already the color we want it to be and the new color we wanted to use was not already in the palette and there were no unused palette entries
+		    FOR (p1 = 0; p1 < 256; ++p1) BEGIN // Outer Palette loop
+		      SPRINT PEone EVAL "%ps%p1%%"
+			  FOR (p2 = 0; p2 < 256; ++p2) BEGIN // Inner Palette loop
+			    SPRINT PEtwo EVAL "%ps%p2%%"
+				PATCH_IF (PEone = PEtwo) AND (p1 != p2) BEGIN // We found a real duplicate and not itself
+				  FOR (p3 = 0; p3 < px; ++p3) BEGIN // Pixel loop
+				    os = (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + p3)
+				    READ_BYTE os Pxl
+				    PATCH_IF (Pxl = p2) BEGIN  // Change every pixel that was pointing to p2's palette entry to p1's palette entry
+				      WRITE_BYTE os p1
+				    END
+				  END
+				  WRITE_LONG (SizeOfHeader + LengthOfTilesSection * t1 + p2 * 4) NewColor // Write the new color to the now unused palette entry
+				  WRITE_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + Pixel) p2 // Set the pixel we are changing to point to the palette entry we just wrote our desired color to
+				  Success = 1
+				  PATCH_PRINT ~A duplicate palette entry was found at PaletteEntry %p2% and has been remapped to PaletteEntry %p1%.~
+				  p2 += 10000 // Break out of Inner Palette loop
+				  p1 += 10000 // Break out of Outer Palette loop
+				END
+			  END
+		    END
+		  END
+		  PATCH_IF (Success != 1) BEGIN // The color of the pixel is not already the color we want it to be and the new color we wanted to use was not already in the palette and there were no unused palette entries and there were no duplicate palette entries
+		    aa1 = ((NewColor >> 24) & 0xff) // high-order (leftmost) byte: bits 24-31
+		    rr1 = ((NewColor >> 16) & 0xff) // next byte, counting from left: bits 16-23
+		    gg1 = ((NewColor >>  8) & 0xff) // next byte, bits 8-15
+		    bb1 = (NewColor         & 0xff) // low-order byte: bits 0-7
+			NNdist = 1000000
+			NNval = 0
+			FOR (p1 = 0; p1 < 256; ++p1) BEGIN // Palette loop
+		      SPRINT PEone EVAL "%ps%p1%%"
+			  aa2 = ((PEone >> 24) & 0xff) // high-order (leftmost) byte: bits 24-31
+			  rr2 = ((PEone >> 16) & 0xff) // next byte, counting from left: bits 16-23
+			  gg2 = ((PEone >>  8) & 0xff) // next byte, bits 8-15
+			  bb2 = (PEone         & 0xff) // low-order byte: bits 0-7
+			  dist = ((aa2 - aa1) * (aa2 - aa1) + (rr2 - rr1) * (rr2 - rr1) + (gg2 - gg1) * (gg2 - gg1) + (bb2 - bb1) * (bb2 - bb1))
+			  PATCH_IF (dist < NNdist) BEGIN
+			    NNdist = dist
+				NNval = p1
+			  END
+			END
+			WRITE_BYTE (SizeOfHeader + LengthOfTilesSection * t1 + 1024 + Pixel) NNval // Set the pixel to the palette entry closest to our desired color
+			Success = 1
+			root = dist ** (1 2)
+			PATCH_PRINT ~The closest color to %NewColor% was at PaletteEntry %NNval% at a Euclidean distance of %root%.~
+		  END
+		END
+	  END
+	END ELSE BEGIN
+	  PATCH_PRINT ~"%SOURCE_FILESPEC%" is a PVRz-based tileset but palette entries can only be replaced in palette-based tilesets.~
+	  Count = 0
+	END
+  END ELSE BEGIN
+    PATCH_PRINT ~"%SOURCE_FILESPEC%" does not appear to be a valid tileset:  it will not be processed.~
+	  Count = 0
+  END
+END

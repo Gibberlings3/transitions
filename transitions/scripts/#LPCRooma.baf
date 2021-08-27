@@ -1,7 +1,19 @@
 ///////////////////////////////////////////////////////////////
 // Updates needed for the house in front of the Ducal Palace //
-// Patched via eltan.tpa                                     //
+// Patched via eltan_house0.tpa                                     //
 ///////////////////////////////////////////////////////////////
+
+IF
+	AreaCheck("#LBG0006")	// House in front of the palace
+	Global("#L_HousePrepped","MYAREA",0)
+THEN
+	RESPONSE #100
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container1","#LBG0006*PlayerChest00")
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container2","#LBG0006*Container2")
+		MoveContainerContents("%NBaldursGate_RinniesHouse_L1%*Container3","#LBG0006*Container3")
+		SetGlobal("#L_HousePrepped","MYAREA",1)
+		Continue()
+END
 
 IF
 	AreaCheck("#LBG0006")	// House in front of the palace

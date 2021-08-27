@@ -30,9 +30,11 @@ BEGIN
 				DELETE_BYTES offset_actor (0x110)
 				
 				// Update the header
+				// Update offsets of structures from actors on down
 				READ_SHORT (0x0058) num_actors
 				WRITE_SHORT (0x0058) (num_actors - 1)
 				
+
 				READ_LONG (0x005c) offset_regions
 				WRITE_LONG (0x005c) (offset_regions - (0x110))
 				
@@ -87,8 +89,6 @@ BEGIN
 			END
 		END
 	END
-
-	// Update offsets of structures from actors on down
 END	
 
 ////////////////////////////////////
@@ -416,4 +416,72 @@ BEGIN
 	END 			// of PATCH_IF required parameters provided
 END				// of DEFINE_PATCH_FUNCTION
 
-
+////////////////
+// ADD A DOOR //
+////////////////
+DEFINE_PATCH_FUNCTION ADD_DOOR
+	INT_VAR
+		flags = 0
+		open_bbLX = 0
+		open_bbLY = 0
+		open_bbHX = 0
+		open_bbHY = 0
+		open_X0 = 0
+		open_Y0 = 0
+		open_X1 = 0
+		open_Y1 = 0
+		open_X2 = 0
+		open_Y2 = 0
+		open_X3 = 0
+		open_Y3 = 0
+		impede_open_X0 = 0
+		impede_open_Y0 = 0
+		closed_bbLX = 0
+		closed_bbLY = 0
+		closed_bbHX = 0
+		closed_bbHY = 0
+		closed_X0 = 0
+		closed_Y0 = 0
+		closed_X1 = 0
+		closed_Y1 = 0
+		closed_X2 = 0
+		closed_Y2 = 0
+		closed_X3 = 0
+		closed_Y3 = 0
+		impede_closed_X0 = 0
+		impede_closed_Y0 = 0
+		impede_closed_X1 = 0
+		impede_closed_Y1 = 0
+		impede_closed_X2 = 0
+		impede_closed_Y2 = 0
+		impede_closed_X3 = 0
+		impede_closed_Y3 = 0
+		impede_closed_X4 = 0
+		impede_closed_Y4 = 0
+		impede_closed_X5 = 0
+		impede_closed_Y5 = 0
+		impede_closed_X6 = 0
+		impede_closed_Y6 = 0
+		impede_closed_X7 = 0
+		impede_closed_Y7 = 0
+		impede_closed_X8 = 0
+		impede_closed_Y8 = 0
+		impede_closed_X9 = 0
+		impede_closed_Y9 = 0
+		cursor_type = 30
+		launch_X = 0
+		launch_Y = 0
+		open_X = 0
+		open_Y = 0
+		close_X = 0
+		close_Y = 0
+		lock_difficulty = 100
+	STR_VAR
+		new_name = ""
+		open_sound = ""
+		close_sound = ""
+		key = ""
+		script = ""	
+		travel_trigger = ""
+BEGIN
+END
