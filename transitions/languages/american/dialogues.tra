@@ -94,7 +94,7 @@
 // duke_belt.d Duke Belt offering quests to PC
 @2130	= ~<CHARNAME>, if you have the time, I'd like your help in rounding up the last of Sarevok's supporters.~
 @2131	= ~Angelo was spotted heading down into the sewers behind the Flaming Fist Headquarters accompanied by some rogue Flaming Fist.~
-@2132	= ~We would like to hire you to being him to justice, dead or alive.~
+@2132	= ~We would like to hire you to bring him to justice, dead or alive.~
 @2133	= ~I'd prefer dead.~
 @2193	= ~Me too!~
 @2134	= ~Dead or alive!~
@@ -137,7 +137,7 @@
 @2171	= ~No, I'll be back when she's taken care of.~
 @2172	= ~Not yet.  Where was she again?~
 @2173	= ~Not a problem.  I'll be back as soon as she's taken care of.~
-@2174	= ~We would like to hire you to being her to justice, dead or alive.~
+@2174	= ~We would like to hire you to bring her to justice, dead or alive.~
 @2175	= ~I've spoken with her and let her go.  She is not a danger to anyone.~
 @2176	= ~Her freedom is not yours to give, <CHARNAME>.  The courts will decide her fate.~
 @2177	= ~Her freedom may not be up to me, but her capture will not involve me.  I pass.~
@@ -146,7 +146,7 @@
 @2180	= ~I will make sure there are Flaming Fist to escort them to a cell if they surrender.~
 @2181	= ~No, I'll be back when they're taken care of.~
 @2182	= ~Not yet.  Where were they again?~
-@2183	= ~We would like to hire you to being them to justice, dead or alive.~
+@2183	= ~We would like to hire you to bring them to justice, dead or alive.~
 @2184	= ~How do I find this crypt?~
 @2185	= ~Hold still, I'll send you there.~
 @2186	= ~I will make sure a contingent of Flaming Fist is there to back you up.~

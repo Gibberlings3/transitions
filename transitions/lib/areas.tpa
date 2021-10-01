@@ -21,7 +21,7 @@ BEGIN
 		PATCH_IF found_actor == 0 BEGIN
 			READ_ASCII offset_actor iName (32) NULL
 			PATCH_IF ~%iName%~ STR_EQ ~%actor_name%~ BEGIN
-				SET found_door = 1
+				SET found_actor = 1
 				LPF fj_are_structure
 					INT_VAR fj_delete_mode = %idx_actor%
 					STR_VAR fj_structure_type = actor
@@ -416,72 +416,300 @@ BEGIN
 	END 			// of PATCH_IF required parameters provided
 END				// of DEFINE_PATCH_FUNCTION
 
-////////////////
-// ADD A DOOR //
-////////////////
-DEFINE_PATCH_FUNCTION ADD_DOOR
+
+////////////////////////////////////////////////////
+// ADD A DOOR TO AN AREA AND ITS ASSOCIATED FILES //
+// PVRz are compressed graphic files              //
+// TIS area a series of indices pointing          //
+//   to sections (tiles) in the PVRz files        //
+// If the area has a day and night version, then  //
+//   this will need to be called twice - once     //
+//   for each TIS/WED                             //
+////////////////////////////////////////////////////
+DEFINE_ACTION_FUNCTION ADD_DOOR
 	INT_VAR
-		flags = 0
-		open_bbLX = 0
-		open_bbLY = 0
-		open_bbHX = 0
-		open_bbHY = 0
-		open_X0 = 0
-		open_Y0 = 0
-		open_X1 = 0
-		open_Y1 = 0
-		open_X2 = 0
-		open_Y2 = 0
-		open_X3 = 0
-		open_Y3 = 0
-		impede_open_X0 = 0
-		impede_open_Y0 = 0
-		closed_bbLX = 0
-		closed_bbLY = 0
-		closed_bbHX = 0
-		closed_bbHY = 0
-		closed_X0 = 0
-		closed_Y0 = 0
-		closed_X1 = 0
-		closed_Y1 = 0
-		closed_X2 = 0
-		closed_Y2 = 0
-		closed_X3 = 0
-		closed_Y3 = 0
-		impede_closed_X0 = 0
-		impede_closed_Y0 = 0
-		impede_closed_X1 = 0
-		impede_closed_Y1 = 0
-		impede_closed_X2 = 0
-		impede_closed_Y2 = 0
-		impede_closed_X3 = 0
-		impede_closed_Y3 = 0
-		impede_closed_X4 = 0
-		impede_closed_Y4 = 0
-		impede_closed_X5 = 0
-		impede_closed_Y5 = 0
-		impede_closed_X6 = 0
-		impede_closed_Y6 = 0
-		impede_closed_X7 = 0
-		impede_closed_Y7 = 0
-		impede_closed_X8 = 0
-		impede_closed_Y8 = 0
-		impede_closed_X9 = 0
-		impede_closed_Y9 = 0
-		cursor_type = 30
-		launch_X = 0
-		launch_Y = 0
-		open_X = 0
-		open_Y = 0
-		close_X = 0
-		close_Y = 0
-		lock_difficulty = 100
+		closed_x1 = 0			// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
+		closed_x2 = 0
+		closed_y1 = 0
+		closed_y2 = 0
+		open_x1 = 0
+		open_x2 = 0
+		open_y1 = 0
+		open_y2 = 0
+		open_pos1 = 0			// The tile # to be replaced
+		open_pos2 = 0
+		open_pos3 = 0
+		open_pos4 = 0
 	STR_VAR
-		new_name = ""
-		open_sound = ""
-		close_sound = ""
-		key = ""
-		script = ""	
-		travel_trigger = ""
+		source_open_pvrz = ""
+		source_closed_pvrz = ""
+		target_tis = ""
+	RET 
+		open_pvrz
+		closed_pvrz
 BEGIN
+	// There are 2 versions of the door, opened and closed
+	// Copy their respective PVRZ (source graphic) files to the override folder using
+	// names that can be associated with the target TIS file (if necessary)
+	LAF COPY_PVRZ_FILE_TO_OVERRIDE
+		STR_VAR 
+			tis_file = EVAL ~%target_tis%~
+			source_pvrz = EVAL ~%source_open_pvrz%~
+		RET 
+			open_pvrz = pvrz_file
+			open_pvrz_prefix = pvrz_prefix
+			open_pvrz_page = pvrz_suffix
+	END
+	ACTION_IF (~%source_closed_pvrz%~ STRING_EQUAL ~%source_open_pvrz%~) = 1 BEGIN
+		// Open and closed day sources are the same file
+		OUTER_SPRINT closed_pvrz ~%open_pvrz%~
+		OUTER_SPRINT closed_pvrz_prefix ~%open_pvrz_prefix%~
+		OUTER_SPRINT closed_pvrz_page ~%open_pvrz_page%~
+	END ELSE BEGIN
+		LAF COPY_PVRZ_FILE_TO_OVERRIDE
+			STR_VAR 
+				tis_file = EVAL ~%target_tis%~
+				source_pvrz = EVAL ~%source_closed_pvrz%~
+			RET 
+				closed_pvrz = pvrz_file
+				closed_pvrz_prefix = pvrz_prefix
+				closed_pvrz_page = pvrz_suffix
+		END
+	END
+	
+	// Update the target TIS file
+	COPY_EXISTING ~%target_tis%.tis~ ~override~
+		PATCH_IF (STRING_LENGTH ~%closed_pvrz%~ > 1) BEGIN
+			// Add closed door tiles to end of TIS first
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					PVRz_Page = "%closed_pvrz_page%" 
+					PVRz_X = "%closed_x1%"
+					PVRz_Y = "%closed_y1%" 
+				STR_VAR 
+					Method = "Push" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					PVRz_Page = "%closed_pvrz_page%" 
+					PVRz_X = "%closed_x2%"
+					PVRz_Y = "%closed_y1%" 
+				STR_VAR 
+					Method = "Push" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					PVRz_Page = "%closed_pvrz_page%" 
+					PVRz_X = "%closed_x1%"
+					PVRz_Y = "%closed_y2%" 
+				STR_VAR 
+					Method = "Push" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					PVRz_Page = "%closed_pvrz_page%" 
+					PVRz_X = "%closed_x2%"
+					PVRz_Y = "%closed_y2%" 
+				STR_VAR 
+					Method = "Push" 
+				RET Count
+			END
+		END
+		
+		PATCH_IF (STRING_LENGTH ~%open_pvrz%~ > 1) BEGIN
+			// These replace tiles currently in the file
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					Pos = "%open_pos1%"
+					PVRz_Page = "%open_pvrz_page%" 
+					PVRz_X = "%open_x1%"
+					PVRz_Y = "%open_y1%" 
+				STR_VAR 
+					Method = "Replace" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					Pos = "%open_pos2%"
+					PVRz_Page = "%open_pvrz_page%" 
+					PVRz_X = "%open_x2%"
+					PVRz_Y = "%open_y1%" 
+				STR_VAR 
+					Method = "Replace" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					Pos = "%open_pos3%"
+					PVRz_Page = "%open_pvrz_page%" 
+					PVRz_X = "%open_x1%"
+					PVRz_Y = "%open_y2%" 
+				STR_VAR 
+					Method = "Replace" 
+				RET Count
+			END
+			LPF ps_tileset_add_tiles 
+				INT_VAR MaxCount = 1 
+					Pos = "%open_pos4%"
+					PVRz_Page = "%open_pvrz_page%" 
+					PVRz_X = "%open_x2%"
+					PVRz_Y = "%open_y2%" 
+				STR_VAR 
+					Method = "Replace" 
+				RET Count
+			END
+		END
+	BUT_ONLY_IF_IT_CHANGES
+END
+
+////////////////////////////////////////////////////
+// Gets the name of the PVRz file and copies it   //
+// to the override folder if it's new             //
+// Returns the name of the PVRz file as well      //
+// as it's associated parts (prefix and suffix)   //
+// The PVRz file name is the TIS file name        //
+// with the 2nd letter of the file name dropped   //
+// and then a sequential number added as a suffix //
+////////////////////////////////////////////////////
+DEFINE_ACTION_FUNCTION COPY_PVRZ_FILE_TO_OVERRIDE
+	STR_VAR
+		tis_file = ~~		// target tis file name without the extension
+		source_pvrz = ~~ 	// source of the graphic without the extension
+	RET
+		pvrz_file
+		pvrz_prefix
+		pvrz_suffix
+BEGIN
+	// Set default return values
+	OUTER_SPRINT pvrz_file ~~
+	OUTER_SPRINT pvrz_prefix ~~
+	OUTER_SPRINT pvrz_suffix ~~
+	
+	ACTION_IF (STRING_LENGTH ~%tis_file%~ > 1) BEGIN
+		OUTER_INNER_PATCH_SAVE pvrz_prefix ~%tis_file%~ BEGIN DELETE_BYTES 1 1 END
+		
+		ACTION_IF ((~%source_pvrz%~ STRING_CONTAINS_REGEXP ~%pvrz_prefix%~) = 0) AND ((STRING_LENGTH ~%pvrz_prefix%~) = ((STRING_LENGTH ~%source_pvrz%~) - 2)) BEGIN
+			// The source of the graphic is already one of the TIS file's PVRz files
+			OUTER_INNER_PATCH_SAVE pvrz_suffix ~%source_pvrz%~ BEGIN DELETE_BYTES 0 ((STRING_LENGTH ~%source_pvrz%~) - 2) END
+			OUTER_SPRINT pvrz_file ~%source_pvrz%~
+			
+		END ELSE BEGIN
+			// The source of the graphic will need to be copied to a new PVRz that can be associated with the TIS
+			OUTER_SPRINT pvrz_suffix ~-1~
+			OUTER_SET file_ok = 0
+			OUTER_SET strt_idx = 0
+			ACTION_IF GAME_IS ~eet~ THEN BEGIN
+				OUTER_SET strt_idx = 50
+			END
+
+			OUTER_FOR (idx = strt_idx; idx < 99 && file_ok = 0; idx = idx + 1) BEGIN
+				ACTION_IF idx < 10 THEN BEGIN
+					OUTER_SPRINT pvrz_suffix ~0%idx%~
+				END ELSE BEGIN
+					OUTER_SPRINT pvrz_suffix ~%idx%~
+				END
+				ACTION_IF NOT FILE_EXISTS_IN_GAME ~%pvrz_prefix%%pvrz_suffix%.pvrz~ THEN BEGIN
+					OUTER_SET file_ok = 1
+					OUTER_SPRINT pvrz_file ~%pvrz_prefix%%pvrz_suffix%~
+					COPY_EXISTING ~%source_pvrz%.PVRZ~ ~override\%pvrz_file%.pvrz~
+				END
+			END
+		END
+	END
+END
+
+////////////////////////////////
+// ADD A DOOR TO THE WED FILE //
+////////////////////////////////
+DEFINE_PATCH_FUNCTION ADD_WED_DOOR
+	INT_VAR
+		tilemap_index = 0		// default if it's the first door in the area
+		Vx_Open_X_0 = 0
+		Vx_Open_Y_0 = 0
+		Vx_Open_X_1 = 0
+		Vx_Open_Y_1 = 0
+		Vx_Open_X_2 = 0
+		Vx_Open_Y_2 = 0
+		Vx_Open_X_3 = 0
+		Vx_Open_Y_3 = 0
+		Vx_Closed_X_0 = 0
+		Vx_Closed_Y_0 = 0
+		Vx_Closed_X_1 = 0
+		Vx_Closed_Y_1 = 0
+		Vx_Closed_X_2 = 0
+		Vx_Closed_Y_2 = 0
+		Vx_Closed_X_3 = 0
+		Vx_Closed_Y_3 = 0
+	STR_VAR 
+		door_id = ""			// Called name in NI, but it's the ID used in the ARE file
+	RET success
+BEGIN
+	// Only allowing for 8 new vertices, 4 for the open door and 4 for the closed
+	SET vertices_open = 4
+	SET vertices_closed = 4
+	SET open_vertices_offset = SOURCE_SIZE
+	SET closed_vertices_offset = open_vertices_offset + (vertices_open * 0x0004)
+	SET open_polygons_index = 0 //????????????????????????????????
+	
+	// Insert bytes at the end of the file for our new vertices
+	INSERT_BYTES open_vertices_offset (0x0004 * (vertices_open + vertices_closed))
+	
+	// Add the vertices to our new vertices section
+	// These are used by the door polygons
+	WRITE_SHORT open_vertices_offset %Vx_Open_X_0%
+	WRITE_SHORT (open_vertices_offset + 0x0002) %Vx_Open_Y_0%
+	WRITE_SHORT (open_vertices_offset + 0x0004) %Vx_Open_X_1%
+	WRITE_SHORT (open_vertices_offset + 0x0006) %Vx_Open_Y_1%
+	WRITE_SHORT (open_vertices_offset + 0x0008) %Vx_Open_X_2%
+	WRITE_SHORT (open_vertices_offset + 0x000a) %Vx_Open_Y_2%
+	WRITE_SHORT (open_vertices_offset + 0x000c) %Vx_Open_X_3%
+	WRITE_SHORT (open_vertices_offset + 0x000e) %Vx_Open_Y_3%
+	WRITE_SHORT closed_vertices_offset %Vx_Closed_X_0%
+	WRITE_SHORT (closed_vertices_offset + 0x0002) %Vx_Closed_Y_0%
+	WRITE_SHORT (closed_vertices_offset + 0x0004) %Vx_Closed_X_1%
+	WRITE_SHORT (closed_vertices_offset + 0x0006) %Vx_Closed_Y_1%
+	WRITE_SHORT (closed_vertices_offset + 0x0008) %Vx_Closed_X_2%
+	WRITE_SHORT (closed_vertices_offset + 0x000a) %Vx_Closed_Y_2%
+	WRITE_SHORT (closed_vertices_offset + 0x000c) %Vx_Closed_X_3%
+	WRITE_SHORT (closed_vertices_offset + 0x000e) %Vx_Closed_Y_3%	
+
+	// Need to add polygons for both open and closed doors in the separate polygon section
+	// the index of these will be added to the wed door object
+	// only allowing for 1 open and 1 closed polygon at the moment
+	SET polygons_open = 1			
+	SET polygons_closed = 1
+	
+	SET open_polygons_index = 0 //????????????????????????????????
+	SET closed_polygons_index = 0 //????????????????????????????????
+	
+	// Increment the number of doors
+	READ_LONG 0x000c num_doors
+	
+	// Find the start of the doors section
+	READ_LONG 0x0018 offset_doors
+	
+	// Calculate the start of our new door section
+	SET new_door_offset = offset_doors + (num_doors * 0x001a)
+	
+	// Insert bytes at the start of our new door section
+	INSERT_BYTES new_door_offset 0x001a
+	
+	// only allowing for 4 closed door tiles at the moment
+	SET tilemap_tiles = 4	
+	
+	// Write the door section
+	WRITE_ASCIIE new_door_offset ~%door_id%~ (8)
+	WRITE_SHORT (new_door_offset + 0x0008) 1
+	WRITE_SHORT (new_door_offset + 0x000a) %tilemap_index%
+	WRITE_SHORT (new_door_offset + 0x000c) %tilemap_tiles%
+	WRITE_SHORT (new_door_offset + 0x000e) %polygons_open%
+	WRITE_SHORT (new_door_offset + 0x0010) %polygons_closed%
+	WRITE_LONG (new_door_offset + 0x0012) %open_polygons_index%
+	WRITE_LONG (new_door_offset + 0x0016) %closed_polygons_index%
+	
+	// Update offsets and counts
+	WRITE_LONG 0x000c (num_doors + 1)
 END

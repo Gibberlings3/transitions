@@ -36,8 +36,17 @@ THEN
 		CreateCreature("#LffBad",[978.1991],SW)
 		CreateCreature("#LffBad",[1052.2192],W)
 		CreateCreature("#LffBad",[1093.2123],W)
-		ActionOverride("GALDOR",StartDialogueNoSet(Player1))
 		Continue()
+END
+
+IF
+	Global("#L_AngeloSpawned","MYAREA",1)
+	Global("#L_AngeloSpoke","MYAREA",0)
+	TriggerOverride("GALDOR",See([PC]))
+THEN
+	RESPONSE #100
+		SetGlobal("#L_AngeloSpoke","MYAREA",1)
+		ActionOverride("GALDOR",StartDialogueNoSet(Player1))
 END
 
 IF
@@ -54,6 +63,16 @@ THEN
 		CreateCreature("#LffBad",[2909.2662],NW)
 		CreateCreature("#LffBad",[2196.1960],SE)
 		CreateCreature("#LffBad",[2537.2254],SE)
-		ActionOverride("WINSKI2",StartDialogueNoSet(Player1))
 		Continue()
 END
+
+IF
+	Global("#L_WinskiSpawned","MYAREA",1)
+	Global("#L_WinskiSpoke","MYAREA",0)
+	TriggerOverride("WINSKI2",See([PC]))
+THEN
+	RESPONSE #100
+		SetGlobal("#L_WinskiSpoke","MYAREA",1)
+		ActionOverride("WINSKI2",StartDialogueNoSet(Player1))
+END
+

@@ -56,10 +56,69 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 	
 	ACTION_IF GAME_INCLUDES ~sod~ THEN BEGIN
 		// Add a door to the PC's residence in the SoD areas
+		// Will take the graphic for the open door from the BG1 area PVRz files
+		// There are 4 versions of every exterior door - open and closed during the day and night
+		OUTER_SPRINT open_source_day "A020008"
+		OUTER_SPRINT open_source_night "A0200N08"
+		OUTER_SPRINT closed_source_day "B001000"
+		OUTER_SPRINT closed_source_night "B0010N00"
+		ACTION_IF GAME_IS ~eet~ THEN BEGIN
+			OUTER_SPRINT open_source_day "B020008"
+			OUTER_SPRINT open_source_night "B0200N08"
+			OUTER_SPRINT closed_source_day "B001050"
+			OUTER_SPRINT closed_source_night "B0010N50"
+		END
+
+		// Daytime door
+		LAF ADD_DOOR
+			INT_VAR
+				closed_x1 = 0		// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
+				closed_x2 = 64
+				closed_y1 = 448
+				closed_y2 = 512
+				open_x1 = 128
+				open_x2 = 192
+				open_y1 = 704
+				open_y2 = 768
+				open_pos1 = 140		// The tile # in the target TIS to be replaced
+				open_pos2 = 141
+				open_pos3 = 160
+				open_pos4 = 161
+			STR_VAR
+				source_open_pvrz = EVAL "%open_source_day%"
+				source_closed_pvrz = EVAL "%closed_source_day%"
+				target_tis = ~BD0010~
+			RET 
+				pvrzOpenDay = open_pvrz
+				pvrzClosedDay = closed_pvrz
+		END
 		
-		// Determine the SoD PVRz file the new BG1 graphics files will be copied to
-		OUTER_SPRINT source_day "A020008"
-		OUTER_SPRINT source_night "A0200N08"
+		// Nighttime door
+		LAF ADD_DOOR
+			INT_VAR
+				closed_x1 = 0			// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
+				closed_x2 = 64
+				closed_y1 = 448
+				closed_y2 = 512
+				open_x1 = 128		
+				open_x2 = 192
+				open_y1 = 704
+				open_y2 = 768
+				open_pos1 = 140			// The tile # in the target TIS to be replaced
+				open_pos2 = 141
+				open_pos3 = 160
+				open_pos4 = 161
+			STR_VAR
+				source_open_pvrz = EVAL "%open_source_night%"
+				source_closed_pvrz = EVAL "%closed_source_night%"
+				target_tis = ~BD0010N~
+			RET 
+				pvrzOpenNight = open_pvrz
+				pvrzClosedNight = closed_pvrz
+		END
+
+/*		
+		// Determine the SoD PVRz file the BG1 graphics files will be copied to
 		OUTER_SPRINT page1 ~-1~
 		OUTER_SPRINT page2 ~-1~
 		OUTER_SPRINT page3 ~-1~
@@ -68,8 +127,6 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		OUTER_SET file_2_ok = 0
 		OUTER_SET file_3_ok = 0
 		ACTION_IF GAME_IS ~eet~ THEN BEGIN
-			OUTER_SPRINT source_day "B020008"
-			OUTER_SPRINT source_night "B0200N08"
 			OUTER_SET strt_idx = 50
 		END
 		OUTER_FOR (idx = strt_idx; idx < 99 && file_1_ok = 0; idx = idx + 1) BEGIN
@@ -80,6 +137,8 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 			END
 			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0010%page1%.pvrz~ THEN BEGIN
 				OUTER_SET file_1_ok = 1
+				// Copy the BG1 graphic source file to new SoD graphic files
+//				COPY_EXISTING ~%open_source_day%.PVRZ~ ~override\B0010%page1%.pvrz~
 			END
 		END
 		OUTER_FOR (idx = strt_idx; idx < 99 && file_2_ok = 0; idx = idx + 1) BEGIN
@@ -90,6 +149,8 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 			END
 			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0010N%page2%.pvrz~ THEN BEGIN
 				OUTER_SET file_2_ok = 1
+				// Copy the BG1 graphic source file to new SoD graphic files
+//				COPY_EXISTING ~%open_source_night%.PVRZ~ ~override\B0010N%page2%.pvrz~
 			END
 		END
 		OUTER_FOR (idx = strt_idx; idx < 99 && file_3_ok = 0; idx = idx + 1) BEGIN
@@ -100,60 +161,145 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 			END
 			ACTION_IF NOT FILE_EXISTS_IN_GAME ~B0101%page3%.pvrz~ THEN BEGIN
 				OUTER_SET file_3_ok = 1
+				// Copy the BG1 graphic source file to new SoD graphic files
+				COPY_EXISTING ~%open_source_day%.PVRZ~ ~override\B0101%page3%.pvrz~
 			END
 		END
 		
-		ACTION_IF file_1_ok = 1 AND file_2_ok AND file_3_ok = 1 THEN BEGIN	// This is sort of overkill... but ya never know
-			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0010%page1%.pvrz~
-			COPY_EXISTING ~%source_night%.PVRZ~ ~override\B0010N%page2%.pvrz~
-			COPY_EXISTING ~%source_day%.PVRZ~ ~override\B0101%page3%.pvrz~
+		COPY_EXISTING ~BD0010.tis~ ~override~
+			// Add closed door tiles to end of TIS
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
 
-			COPY_EXISTING ~BD0010.tis~ ~override~
-				// Add closed door tiles to end of TIS
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
-
+			PATCH_IF file_1_ok = 1 THEN BEGIN
 				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page1% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
-			BUT_ONLY_IF_IT_CHANGES
+			END
+		BUT_ONLY_IF_IT_CHANGES
 
-			COPY_EXISTING ~BD0010N.tis~ ~override~
-				// Add closed door tiles to end of TIS
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+		COPY_EXISTING ~BD0010N.tis~ ~override~
+			// Add closed door tiles to end of TIS
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
 
+			PATCH_IF file_2_ok = 1 THEN BEGIN
 				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page2% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
-			BUT_ONLY_IF_IT_CHANGES
+			END
+		BUT_ONLY_IF_IT_CHANGES
 
-			COPY_EXISTING ~BD0101.tis~ ~override~
-				// Add closed door tiles to end of TIS
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
-				LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+		COPY_EXISTING ~BD0101.tis~ ~override~
+			// Add closed door tiles to end of TIS
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 448 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 0 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
+			LPF ps_tileset_add_tiles INT_VAR MaxCount = 1 PVRz_Page = "%strt_idx%" PVRz_X = 64 PVRz_Y = 512 STR_VAR Method = "Push" RET Count END
 
+			PATCH_IF file_3_ok = 1 THEN BEGIN
 				// Replace original closed door tiles with open door tiles from BG1
 				LPF ps_tileset_add_tiles INT_VAR Pos = 140 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 141 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 704 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 160 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 128 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
-			BUT_ONLY_IF_IT_CHANGES
-		END
+			END
+		BUT_ONLY_IF_IT_CHANGES
+*/		
+		// Add door details to the WED files
+		// Using BG0200 X - 1151 for SoD X vertices
+		// Using BG0200 Y - 2306 for SoD Y vertices
+/*		COPY_EXISTING ~BD0010.WED~ ~override~
+			LPF ADD_WED_DOOR
+				INT_VAR
+					Vx_Open_X_0 = 16
+					Vx_Open_Y_0 = 553
+					Vx_Open_X_1 = 39
+					Vx_Open_Y_1 = 522
+					Vx_Open_X_2 = 39
+					Vx_Open_Y_2 = 455
+					Vx_Open_X_3 = 16
+					Vx_Open_Y_3 = 484
+					Vx_Closed_X_0 = 39		
+					Vx_Closed_Y_0 = 524
+					Vx_Closed_X_1 = 87		
+					Vx_Closed_Y_1 = 535
+					Vx_Closed_X_2 = 87
+					Vx_Closed_Y_2 = 469
+					Vx_Closed_X_3 = 39
+					Vx_Closed_Y_3 = 457
+				STR_VAR
+					door_id = "door0006"
+			END1111111
+		BUT_ONLY_IF_IT_CHANGES
 
+		COPY_EXISTING ~BD0010N.WED~ ~override~
+			LPF ADD_WED_DOOR
+				INT_VAR
+					Vx_Open_X_0 = 16
+					Vx_Open_Y_0 = 553
+					Vx_Open_X_1 = 39
+					Vx_Open_Y_1 = 522
+					Vx_Open_X_2 = 39
+					Vx_Open_Y_2 = 455
+					Vx_Open_X_3 = 16
+					Vx_Open_Y_3 = 484
+					Vx_Closed_X_0 = 39		
+					Vx_Closed_Y_0 = 524
+					Vx_Closed_X_1 = 87		
+					Vx_Closed_Y_1 = 535
+					Vx_Closed_X_2 = 87
+					Vx_Closed_Y_2 = 469
+					Vx_Closed_X_3 = 39
+					Vx_Closed_Y_3 = 457
+				STR_VAR
+					door_id = "door0006"
+			END
+		BUT_ONLY_IF_IT_CHANGES
+
+		COPY_EXISTING ~BD0101.WED~ ~override~
+			LPF ADD_WED_DOOR
+				INT_VAR
+					Vx_Open_X_0 = 16
+					Vx_Open_Y_0 = 553
+					Vx_Open_X_1 = 39
+					Vx_Open_Y_1 = 522
+					Vx_Open_X_2 = 39
+					Vx_Open_Y_2 = 455
+					Vx_Open_X_3 = 16
+					Vx_Open_Y_3 = 484
+					Vx_Closed_X_0 = 39		
+					Vx_Closed_Y_0 = 524
+					Vx_Closed_X_1 = 87		
+					Vx_Closed_Y_1 = 535
+					Vx_Closed_X_2 = 87
+					Vx_Closed_Y_2 = 469
+					Vx_Closed_X_3 = 39
+					Vx_Closed_Y_3 = 457
+				STR_VAR
+					door_id = "door0006"
+			END
+		BUT_ONLY_IF_IT_CHANGES
+*/
+		// Add door, region, and entrance objects to the area files
 		COPY_EXISTING ~BD0010.ARE~ ~override~
 			// Add a door object leading to PC's house when in SoD
-		
+/*			LPF fj_are_structure
+				INT_VAR
+					fj_flags = 256
+				STR_VAR
+					fj_name = "Port0006"
+					fj_door_wed_id  = "Door0006"
+			END
+*/		
 			// Add a travel trigger leading into the PC's house
 			LPF ADD_AREA_REGION_TRIGGER
 				INT_VAR

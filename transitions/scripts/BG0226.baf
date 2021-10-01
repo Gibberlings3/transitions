@@ -32,6 +32,16 @@ THEN
 		CreateCreature("#LBandit",[3369.1609],N)  // Bandit
 		CreateCreature("#LBandit",[2944.1441],E)  // Bandit
 		CreateCreature("#LBandit",[2993.1473],E)  // Bandit
-		ActionOverride("Tazok",StartDialogNoSet(Player1))
 		Continue()
 END
+
+IF
+	Global("#L_TazokSpawned","MYAREA",1)
+	Global("#L_TazokSpoke","MYAREA",0)
+	TriggerOverride("Tazok",See([PC]))
+THEN
+	RESPONSE #100
+		SetGlobal("#L_TazokSpoke","MYAREA",1)
+		ActionOverride("Tazok",StartDialogueNoSet(Player1))
+END
+
