@@ -99,7 +99,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				v_open_x0 = 16			
 				v_open_y0 = 553			
 				v_open_x1 = 39			
-				v_open_y1 = 552
+				v_open_y1 = 522
 				v_open_x2 = 39
 				v_open_y2 = 455
 				v_open_x3 = 16
@@ -144,7 +144,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				v_open_x0 = 16			
 				v_open_y0 = 553			
 				v_open_x1 = 39			
-				v_open_y1 = 552
+				v_open_y1 = 522
 				v_open_x2 = 39
 				v_open_y2 = 455
 				v_open_x3 = 16
@@ -189,7 +189,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				v_open_x0 = 16			
 				v_open_y0 = 553			
 				v_open_x1 = 39			
-				v_open_y1 = 552
+				v_open_y1 = 522
 				v_open_x2 = 39
 				v_open_y2 = 455
 				v_open_x3 = 16
@@ -198,8 +198,8 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				source_open_pvrz = EVAL "%open_source_day%"
 				source_closed_pvrz = EVAL "%closed_source_day%"
 				target_tis = ~BD0101~
-				target_wed = ~BD0010~
-				target_are = ~BD0010~
+				target_wed = ~BD0101~
+				target_are = ~BD0101~
 				door_name = "Port0006"
 				door_id = "door0006"
 			RET 
@@ -219,30 +219,23 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 					fj_structure_type = "entrance"
 					fj_name = "#Lfrom_House"
 			END
-
-			// Add a travel trigger leading into the PC's house
-			LPF ADD_AREA_REGION_TRIGGER
+			
+			// Change the current info trigger into a travel trigger
+			LPF ALTER_AREA_REGION
 				INT_VAR
-					ab_RT_Type = 2
-					ab_RT_Fbit = 256			// deactivated
-					ab_RT_BbLX = 39
-					ab_RT_BbLY = 460
-					ab_RT_BbHX = 84
-					ab_RT_BbHY = 536
-					ab_RT_VxPr = 4
-					ab_RT_Vx_X_0 = 39
-					ab_RT_Vx_Y_0 = 524
-					ab_RT_Vx_X_1 = 83
-					ab_RT_Vx_Y_1 = 536
-					ab_RT_Vx_X_2 = 84
-					ab_RT_Vx_Y_2 = 473
-					ab_RT_Vx_X_3 = 39
-					ab_RT_Vx_Y_3 = 460
-					ab_RT_CuId = 30
+					type = 2
+					cursor = 30
+					flag_connect_to_door = 1
+					flag_activation_point = 1
+					info_point = ~-1~
+					launch_x = 51
+					launch_y = 566
+					activate_x = 51
+					activate_y = 566
 				STR_VAR
-					ab_RT_Name = "Door#lbg0006"
-					ab_RT_Dest = "#LBG0006"
-					ab_RT_EntN = "Exit0200"
+					region_name = ~Infopoint08~
+					destination_area = ~#LBG0006~
+					entrance_name = "Exit0200"
 			END
 			
 			// Update the door object
@@ -250,14 +243,15 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				INT_VAR
 					flag_locked = 1
 					lock_difficulty = 100
-					launch_x = 21
-					launch_y = 466
+					launch_x = 51
+					launch_y = 566
 					open_x = 48
 					open_y = 570
 					close_x = 48
 					close_y = 570
 				STR_VAR
 					door_name = ~Port0006~
+					travel_trigger = ~Infopoint08~
 					door_open_sound = ~AMB_D21D~
 					door_key = ~#LKey01~
 			END
@@ -279,7 +273,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 			LPF ADD_AREA_REGION_TRIGGER
 				INT_VAR
 					ab_RT_Type = 2
-					ab_RT_Fbit = 256 
+					ab_RT_Fbit = 3072		// connected to door and use alternate activation point
 					ab_RT_BbLX = 39
 					ab_RT_BbLY = 460
 					ab_RT_BbHX = 84
@@ -294,6 +288,10 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 					ab_RT_Vx_X_3 = 39
 					ab_RT_Vx_Y_3 = 460
 					ab_RT_CuId = 30
+					ab_RT_LPoX = 51
+					ab_RT_LPoY = 566
+					ab_RT_ALPX = 51
+					ab_RT_ALPY = 566
 				STR_VAR
 					ab_RT_Name = "Door#lbg0006"
 					ab_RT_Dest = "#LBG0006"
@@ -305,8 +303,8 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				INT_VAR
 					flag_locked = 1
 					lock_difficulty = 100
-					launch_x = 21
-					launch_y = 466
+					launch_x = 51
+					launch_y = 566
 					open_x = 48
 					open_y = 570
 					close_x = 48
@@ -314,6 +312,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				STR_VAR
 					door_name = ~Port0006~
 					door_open_sound = ~AMB_D21D~
+					travel_trigger = ~Door#lbg0006~
 					door_key = ~#LKey01~
 			END
 		BUT_ONLY_IF_IT_CHANGES		
