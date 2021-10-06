@@ -31,15 +31,15 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 
 		// Clone the travel trigger leading into the house so we can 
 		// have the door lead to a custom area
-		LPF GW_CLONE_TRAVEL_TRIGGER
+		LPF CLONE_TRAVEL_TRIGGER
 			INT_VAR
-				GW_Flags_new = 256 // Deactivated
+				flags_new = 256 // Deactivated
 			STR_VAR
-				GW_Name_old = ~Door0006~
-				GW_Name_new = ~Door#lbg0006~
-				GW_Dest_new = ~#LBG0006~
-				GW_Key_new = ~~      // Clear out the key if one exists
-				GW_Script_new = ~~   // Clear out the script if one exists
+				name_old = ~Door0006~
+				name_new = ~Door#lbg0006~
+				dest_new = ~#LBG0006~
+				key_new = ~~      // Clear out the key if one exists
+				script_new = ~~   // Clear out the script if one exists
 		END
 
 		// Need to modify the door object in BG0200 leading to the house in front 
@@ -72,22 +72,43 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		// Daytime door
 		LAF ADD_DOOR
 			INT_VAR
-				closed_x1 = 0		// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
-				closed_x2 = 64
-				closed_y1 = 448
-				closed_y2 = 512
-				open_x1 = 128
-				open_x2 = 192
-				open_y1 = 704
-				open_y2 = 768
-				open_pos1 = 140		// The tile # in the target TIS to be replaced
-				open_pos2 = 141
-				open_pos3 = 160
-				open_pos4 = 161
+				is_day = 1
+				g_closed_x1 = 0		// X,Y coordinates from within the source PVRz file
+				g_closed_x2 = 64
+				g_closed_y1 = 448
+				g_closed_y2 = 512
+				g_open_x1 = 128
+				g_open_x2 = 192
+				g_open_y1 = 704
+				g_open_y2 = 768
+				t_open_pos1 = 140		// The tile # in the target TIS to be replaced
+				t_open_pos2 = 141
+				t_open_pos3 = 160
+				t_open_pos4 = 161
+				v_closed_x0 = 39				// X/Y pairs (vertices) of the actual door object - only allowing 4 per door state
+				v_closed_y0 = 524				// Must be given in clockwise order starting with the one furthest to the right
+				v_closed_x1 = 87				// If 2 tie for rightmost - use the lower of the two
+				v_closed_y1 = 535
+				v_closed_x2 = 87
+				v_closed_y2 = 469
+				v_closed_x3 = 39
+				v_closed_y3 = 457
+				v_open_x0 = 16			
+				v_open_y0 = 553			
+				v_open_x1 = 39			
+				v_open_y1 = 552
+				v_open_x2 = 39
+				v_open_y2 = 455
+				v_open_x3 = 16
+				v_open_y3 = 484
 			STR_VAR
 				source_open_pvrz = EVAL "%open_source_day%"
 				source_closed_pvrz = EVAL "%closed_source_day%"
 				target_tis = ~BD0010~
+				target_wed = ~BD0010~
+				target_are = ~BD0010~
+				door_name = "Port0006"
+				door_id = "door0006"
 			RET 
 				pvrzOpenDay = open_pvrz
 				pvrzClosedDay = closed_pvrz
@@ -96,22 +117,43 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 		// Nighttime door
 		LAF ADD_DOOR
 			INT_VAR
-				closed_x1 = 0			// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
-				closed_x2 = 64
-				closed_y1 = 448
-				closed_y2 = 512
-				open_x1 = 128		
-				open_x2 = 192
-				open_y1 = 704
-				open_y2 = 768
-				open_pos1 = 140			// The tile # in the target TIS to be replaced
-				open_pos2 = 141
-				open_pos3 = 160
-				open_pos4 = 161
+				is_day = 0
+				g_closed_x1 = 0			// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
+				g_closed_x2 = 64
+				g_closed_y1 = 448
+				g_closed_y2 = 512
+				g_open_x1 = 128		
+				g_open_x2 = 192
+				g_open_y1 = 704
+				g_open_y2 = 768
+				t_open_pos1 = 140			// The tile # in the target TIS to be replaced
+				t_open_pos2 = 141
+				t_open_pos3 = 160
+				t_open_pos4 = 161
+				v_closed_x0 = 39				// X/Y pairs (vertices) of the actual door object - only allowing 4 per door state
+				v_closed_y0 = 524				// Must be given in clockwise order starting with the one furthest to the right
+				v_closed_x1 = 87				// If 2 tie for rightmost - use the lower of the two
+				v_closed_y1 = 535
+				v_closed_x2 = 87
+				v_closed_y2 = 469
+				v_closed_x3 = 39
+				v_closed_y3 = 457
+				v_open_x0 = 16			
+				v_open_y0 = 553			
+				v_open_x1 = 39			
+				v_open_y1 = 552
+				v_open_x2 = 39
+				v_open_y2 = 455
+				v_open_x3 = 16
+				v_open_y3 = 484
 			STR_VAR
 				source_open_pvrz = EVAL "%open_source_night%"
 				source_closed_pvrz = EVAL "%closed_source_night%"
 				target_tis = ~BD0010N~
+				target_wed = ~BD0010N~
+				target_are = ~BD0010~
+				door_name = "Port0006"
+				door_id = "door0006"
 			RET 
 				pvrzOpenNight = open_pvrz
 				pvrzClosedNight = closed_pvrz
@@ -213,11 +255,11 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 				LPF ps_tileset_add_tiles INT_VAR Pos = 161 MaxCount = 1 PVRz_Page = %page3% PVRz_X = 192 PVRz_Y = 768 STR_VAR Method = "Replace" RET Count END
 			END
 		BUT_ONLY_IF_IT_CHANGES
-*/		
+		
 		// Add door details to the WED files
 		// Using BG0200 X - 1151 for SoD X vertices
 		// Using BG0200 Y - 2306 for SoD Y vertices
-/*		COPY_EXISTING ~BD0010.WED~ ~override~
+		COPY_EXISTING ~BD0010.WED~ ~override~
 			LPF ADD_WED_DOOR
 				INT_VAR
 					Vx_Open_X_0 = 16
@@ -238,7 +280,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 					Vx_Closed_Y_3 = 457
 				STR_VAR
 					door_id = "door0006"
-			END1111111
+			END
 		BUT_ONLY_IF_IT_CHANGES
 
 		COPY_EXISTING ~BD0010N.WED~ ~override~
@@ -288,18 +330,18 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 					door_id = "door0006"
 			END
 		BUT_ONLY_IF_IT_CHANGES
-*/
+
 		// Add door, region, and entrance objects to the area files
 		COPY_EXISTING ~BD0010.ARE~ ~override~
 			// Add a door object leading to PC's house when in SoD
-/*			LPF fj_are_structure
+			LPF fj_are_structure
 				INT_VAR
 					fj_flags = 256
 				STR_VAR
 					fj_name = "Port0006"
 					fj_door_wed_id  = "Door0006"
 			END
-*/		
+		
 			// Add a travel trigger leading into the PC's house
 			LPF ADD_AREA_REGION_TRIGGER
 				INT_VAR
@@ -376,7 +418,7 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 					fj_name = "#Lfrom_House"
 			END
 		BUT_ONLY_IF_IT_CHANGES		
-	END
+*/	END
 
 	// Also need to add a new area that can be attached to the door
 	// if/when it is chosen as a reward
