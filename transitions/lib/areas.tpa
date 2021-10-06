@@ -244,38 +244,12 @@ BEGIN
 	END
 END
 
-///////////////////////////////////////////////////////////////////////////////////
-//                                                                               //
-// F O N C T I O N S   A P P E L É E S   P A R   L A   P R O C É D U R E   T P 2 //
-// by Gwendolyne                                                                 //
-// modified by Lauriel                                                           //
-//                                                                               //
-///////////////////////////////////////////////////////////////////////////////////
-
-/* ====================================================================================== *
- * FONCTION GW_REINCLUDE : INTÉGRATION d'une sous-routine tp2 dans une routine existante. *
- * ====================================================================================== */
-
-DEFINE_PATCH_FUNCTION GW_REINCLUDE
-	STR_VAR	GW_input = ""		// Liste de commandes ou de fonctions à effectuer.
-BEGIN
-	
-	INNER_ACTION BEGIN
-		<<<<<<<< temp_file
-			%GW_input%
-		>>>>>>>>
-		COPY temp_file ~temp_file2~ EVALUATE_BUFFER
-	END
-
-	PATCH_REINCLUDE ~temp_file2~
-
-END	// of DEFINE_PATCH_FUNCTION
-
-
 /* ================================================================================ *
  * FONCTION GW_CLONE_TRAVEL_TRIGGER : RECHERCHE d'UN TRAVEL TRIGGER POUR LE CLONER. *
+ *
+ * DEPRICATED
+ * USE CLONE_TRAVEL_TRIGGER INSTEAD
  * ================================================================================ */
-
 DEFINE_PATCH_FUNCTION ~GW_CLONE_TRAVEL_TRIGGER~
 	INT_VAR 
 		GW_Flags_new = 9999	// Optional Added by Lauriel - default is to use whatever is in the original
@@ -291,159 +265,313 @@ DEFINE_PATCH_FUNCTION ~GW_CLONE_TRAVEL_TRIGGER~
 		GW_clone_trigger		// Variable définissant si on clone un trigger ==> 0 = Non - 1 = Oui
 		GW_add_trigger			// Chaîne de caractères définissant la fonction ADD_AREA_REGION
 BEGIN
-	SET GW_clone_trigger = 0
-	SET GW_Name_len = 8
-	SPRINT GW_ab_RT_Vx ""
-	SPRINT GW_add_trigger ""
-	READ_SHORT 0x5a "GW_region_num"			// Count of regions
-	READ_LONG  0x5c "GW_region_off"			// Offset to regions
-	READ_LONG  0x7c "GW_vert_off"			// Offset to vertices
-	READ_SHORT 0x80 "GW_vert_num"			// Count of vertices
-
-	PATCH_IF ("%GW_Name_old%" STR_EQ "" = 0) THEN BEGIN   // They provided a region name
-		SET GW_Name_len = STRING_LENGTH ~%GW_Name_old%~
+	PATCH_IF GW_Flags_new = 9999 BEGIN
+		SET GW_Flags_new = ~-1~
 	END
+	SET GW_clone_trigger = 0
+	SPRINT GW_add_trigger ""
+	LPF CLONE_TRAVEL_TRIGGER
+		INT_VAR
+			flags_new = GW_Flags_new			// Optional - default is to use whatever is in the original
+		STR_VAR 
+			name_old = EVAL "%GW_Name_old%"				// Required - name of region to copy
+			name_new = EVAL "%GW_Name_new%"				// Required - name of new region
+			dest_new = EVAL "%GW_Dest_new%"				// Required - name of the new destination area
+			entre_new = EVAL "%GW_Entre_new%"				// Optional - entrance name (in the new destination)
+			key_new = EVAL "%GW_Key_new%"		// Optional - default is to use the original
+			script_new = EVAL "%GW_Script_new%" 	// Optional - default is to use the original
+		RET new_region = offset_new_region
+	END
+	PATCH_IF new_region > 0 BEGIN
+		SET GW_clone_trigger = 1
+	END
+END
 
-	// Added by Lauriel
-	// Either region name or destination needs to be provided
-	// On réduit le temps de traitement de la fonction.
-	PATCH_IF (("%GW_Name_old%" STR_EQ "" = 0) OR ("%GW_Dest_old%" STR_EQ "" = 0)) THEN BEGIN
-		FOR (i = 0 ; ((i < GW_region_num) AND (GW_clone_trigger = 0)); ++i) BEGIN		// Pour chaque région
-			// Section added by Lauriel
-			// There are cases where there is more than one region leading to the same destination
-			// Need to also optionally include the name of the region in this case
-			READ_ASCII ("%GW_region_off%" + 0x00 + (0xC4 * i)) "region_name" (%GW_Name_len%)  // Region Name
-			READ_ASCII ("%GW_region_off%" + 0x38 + (0xC4 * i)) "destination" (8) NULL	// Destination area (for travel regions)
+////////////////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION CLONE_TRAVEL_TRIGGER
+////////////////////////////////////////////////////////////////
+	INT_VAR 
+		flags_new = ~-1~			// Optional - default is to use whatever is in the original
+	STR_VAR 
+ 		name_old = ""				// Required - name of region to copy
+		name_new = ""				// Required - name of new region
+		dest_new = ""				// Required - name of the new destination area
+        entre_new = ""				// Optional - entrance name (in the new destination)
+        key_new = "NO CHANGE"		// Optional - default is to use the original
+        script_new = "NO CHANGE" 	// Optional - default is to use the original
+	RET
+		offset_old_region
+		offset_new_region
+BEGIN
+	READ_SHORT 0x005a num_regions
+	READ_LONG 0x005c offset_regions
+	
+	SET offset_old_region = 0
+	SET offset_new_region = 0
+	
+	PATCH_IF (STRING_LENGTH ~%name_old%~ > 1) AND (STRING_LENGTH ~%name_new%~ > 1) AND (STRING_LENGTH ~%dest_new%~ > 1) BEGIN
+		FOR (idx = 0; ((idx < num_regions) AND (offset_old_region = 0)); idx = idx + 1) BEGIN
+			READ_ASCII (offset_regions + (0x00c4 * idx)) region_name
+			PATCH_IF ~%region_name%~ STR_EQ ~%name_old%~ = 1 BEGIN
+				offset_old_region = (offset_regions + (0x00c4 * idx))
+			END
+		END
+		
+		PATCH_IF (offset_old_region > 0) BEGIN
+			READ_SHORT (offset_old_region + 0x0020) old_type
+			READ_SHORT (offset_old_region + 0x0022) old_left
+			READ_SHORT (offset_old_region + 0x0024) old_top
+			READ_SHORT (offset_old_region + 0x0026) old_right
+			READ_SHORT (offset_old_region + 0x0028) old_bottom
+			READ_SHORT (offset_old_region + 0x002a) old_num_vertices
+			READ_LONG (offset_old_region + 0x002c) old_first_vertex
+			READ_LONG (offset_old_region + 0x0030) old_trigger
+			READ_LONG (offset_old_region + 0x0034) old_cursor
+//			READ_ASCII (offset_old_region + 0x0038) old_destination		NOT USED
+			READ_ASCII (offset_old_region + 0x0040) use_entrance
+			READ_LONG (offset_old_region + 0x0060) old_flags
+			READ_LONG (offset_old_region + 0x0064) old_info_strref
+			READ_SHORT (offset_old_region + 0x0068) old_trap_detect
+			READ_SHORT (offset_old_region + 0x006a) old_trap_removal
+			READ_SHORT (offset_old_region + 0x006c) old_trap_set
+			READ_SHORT (offset_old_region + 0x006e) old_trap_detected
+			READ_SHORT (offset_old_region + 0x0070) old_trap_launch_x
+			READ_SHORT (offset_old_region + 0x0072) old_trap_launch_y
+			READ_ASCII (offset_old_region + 0x0074) use_key
+			READ_ASCII (offset_old_region + 0x007c) use_script
+			READ_SHORT (offset_old_region + 0x0084) old_alt_launch_x
+			READ_SHORT (offset_old_region + 0x0086) old_alt_launch_y
 
-			// Modified by Lauriel to test both the name and the destination
-			PATCH_IF (("%region_name%" STR_EQ "%GW_Name_old%" = 1) OR ("%GW_Name_old%" STR_EQ "" = 1)) AND (("%destination%" STRING_COMPARE_CASE "%GW_Dest_old%" = 0) OR ("%GW_Dest_old%" STR_EQ "" = 1)) THEN BEGIN	// Si on a trouvé un travel trigger mentionnant la variable %GW_Dest_old%, on lit les valeurs de ses champs
-
-				READ_SHORT ("%GW_region_off%" + 0x20 + (i * 0xC4)) region_type
-				READ_SHORT ("%GW_region_off%" + 0x22 + (i * 0xC4)) box_left			// Minimum bounding box of this point LEFT
-				READ_SHORT ("%GW_region_off%" + 0x24 + (i * 0xC4)) box_top			// Minimum bounding box of this point TOP
-				READ_SHORT ("%GW_region_off%" + 0x26 + (i * 0xC4)) box_right		// Minimum bounding box of this point RIGHT
-				READ_SHORT ("%GW_region_off%" + 0x28 + (i * 0xC4)) box_bottom		// Minimum bounding box of this point BOTTOM
-				READ_SHORT ("%GW_region_off%" + 0x2a + (i * 0xC4)) nb_vertices		// Count of vertices composing the perimeter of this region
-				READ_LONG  ("%GW_region_off%" + 0x2c + (i * 0xC4)) first_vertex		// Index of first vertex for this region
-				READ_LONG  ("%GW_region_off%" + 0x34 + (i * 0xC4)) cursor			// Cursor index (cursors.bam)
-				READ_ASCII ("%GW_region_off%" + 0x40 + (i * 0xC4)) entrance			// Entrance name in destination area (for travel regions)
-				READ_LONG  ("%GW_region_off%" + 0x60 + (i * 0xC4)) flags
-				READ_LONG  ("%GW_region_off%" + 0x64 + (i * 0xC4)) info_text		// Information text (for info points)
-				READ_SHORT ("%GW_region_off%" + 0x68 + (i * 0xC4)) trap_det			// Trap detection difficulty (%)
-				READ_SHORT ("%GW_region_off%" + 0x6a + (i * 0xC4)) trap_rem			// Trap removal difficulty (%)
-				READ_SHORT ("%GW_region_off%" + 0x6c + (i * 0xC4)) trap_set			// Region is trapped (0=No, 1=Yes)
-				READ_SHORT ("%GW_region_off%" + 0x6e + (i * 0xC4)) trap_detected	// Trap detection difficulty (%)
-				READ_SHORT ("%GW_region_off%" + 0x70 + (i * 0xC4)) launch_X			// Trap launch location X
-				READ_SHORT ("%GW_region_off%" + 0x72 + (i * 0xC4)) launch_Y			// Trap launch location Y
-				READ_ASCII ("%GW_region_off%" + 0x74 + (i * 0xC4)) key (8) NULL		// Key item
-				READ_ASCII ("%GW_region_off%" + 0x7c + (i * 0xC4)) script (8) NULL	// Region script
-				READ_SHORT ("%GW_region_off%" + 0x84 + (i * 0xC4)) alt_X			// Alternative use point X coordinate
-				READ_SHORT ("%GW_region_off%" + 0x86 + (i * 0xC4)) alt_Y			// Alternative use point Y coordinate
-
-				SPRINT GW_ab_RT_Vx ""
-				FOR (j = 0 ; j < nb_vertices ; ++j) BEGIN	// Pour chaque vertex du trigger, on stocke ses coordonnées X et Y.
-					SET vertex_offset = ("%GW_vert_off%" +        ((j + first_vertex) * 0x04))
-					READ_SHORT ("%GW_vert_off%" +        ((j + first_vertex) * 0x04))	vertex_X
-					READ_SHORT ("%GW_vert_off%" + 0x02 + ((j + first_vertex) * 0x04))	vertex_Y
-
-					SPRINT ab_RT_Vx_X_j EVAL "ab_RT_Vx_X_%j%"
-					SPRINT ab_RT_Vx_Y_j EVAL "ab_RT_Vx_Y_%j%"
-
-					SPRINT GW_ab_RT_Vertex EVAL "ab_RT_Vx_X_%j% = %vertex_X% ab_RT_Vx_Y_%j% = %vertex_Y% "
-					SPRINT GW_ab_RT_Vx EVAL "%GW_ab_RT_Vx%%GW_ab_RT_Vertex%"
-
-				END	// of Looping through vertex
-				SET GW_clone_trigger = 1		// On a trouvé un travel trigger à cloner.
-
-			END		// of PATCH_IF ("%destination%" STRING_COMPARE_CASE "%GW_Destination%" = 0)
-
-		END		// of Looping through Regions
-
-		// On a trouvé un travel trigger à cloner : on stocke ses variables pour le cloner.
-		PATCH_IF (GW_clone_trigger = 1) THEN BEGIN	
-
-			SPRINT GW_add_trigger "LPF ~ADD_AREA_REGION_TRIGGER~ INT_VAR ab_RT_Type = %region_type% ab_RT_BbLX = %box_left% ab_RT_BbLY = %box_top% ab_RT_BbHX = %box_right% ab_RT_BbHY = %box_bottom% ab_RT_VxPr = %nb_vertices% ab_RT_CuId = %cursor%"
-
-			// This section added by Lauriel to allow for adding in
-			// the new region in an inactive state
-			PATCH_IF (GW_Flags_new < 9999) THEN BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Fbit = %GW_Flags_new%"
-			END ELSE BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Fbit = %flags%"
+			PATCH_IF (STRING_LENGTH ~%entre_new%~ > 1) BEGIN
+				SPRINT use_entrance EVAL ~%entre_new%~
+			END
+			
+			PATCH_IF ~%key_new%~ STR_EQ ~NO CHANGE~ = 0 BEGIN
+				SPRINT use_key EVAL ~%key_new%~
 			END
 
-			SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Itxt = ~%info_text%~ ab_RT_TDtD = %trap_det% ab_RT_TRmD = %trap_rem% ab_RT_TSet = %trap_set% ab_RT_TDet = %trap_detected% ab_RT_LPoX = %launch_X% ab_RT_LPoY = %launch_Y% ab_RT_ALPX = %alt_X% ab_RT_ALPY = %alt_Y%"
-
-			SPRINT GW_add_trigger EVAL "%GW_add_trigger% %GW_ab_RT_Vx% STR_VAR ab_RT_Name = ~%GW_Name_new%~ ab_RT_Dest = ~%GW_Dest_new%~"
-
-			// Modified by Lauriel to allow for new entrance
-			PATCH_IF ("%GW_Entre_new%" STR_EQ "" = 0) THEN BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_EntN = ~%GW_Entre_new%~"
-			END ELSE BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_EntN = ~%entrance%~"
+			PATCH_IF ~%script_new%~ STR_EQ ~NO CHANGE~ = 0 BEGIN
+				SPRINT use_script EVAL ~%script_new%~
+			END
+			
+			// Update the offsets (and count of regions) in the header
+			SET size_region = 0x00c4
+			
+			READ_LONG (0x0054) offset_actors
+			PATCH_IF offset_actors > offset_regions BEGIN
+				WRITE_LONG (0x0054) (offset_spawnpoints + (size_region))
 			END
 
-			// Modified by Lauriel to allow for new keys or clearing out a key
-			// Cas particulier : si la variable %key% est vide, on ne la prend pas un compte pour éviter ) la fonction ADD_AREA_TRIGGER de bugger.
-			PATCH_IF (("%key%" STRING_COMPARE_CASE "") AND ("%GW_Key_new%" STR_EQ "NO CHANGE" = 1)) 
-			THEN BEGIN	
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_KeyI = ~%key%~"
-			END ELSE PATCH_IF (("%GW_Key_new%" STR_EQ "" = 0) AND ("%GW_Key_new%" STR_EQ "NO CHANGE" = 0)) 
-			THEN BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_KeyI = ~%GW_Key_new%~"
+			// Update embedded CRE offsets in ACTORS section
+			READ_SHORT (0x0058) num_actors
+			SET size_actor = 0x0110 
+			FOR (idx = 0; idx < num_actors; idx = idx + 1) BEGIN
+				READ_LONG (offset_actors + (idx * size_actor) + 0x0088) offset_cre
+				PATCH_IF offset_cre > offset_regions BEGIN
+					WRITE_LONG (offset_actors + (idx * size_actor) + 0x0088) (offset_cre + size_region)
+				END
+			END
+			
+			WRITE_SHORT (0x005a) (num_regions + 1)
+			
+			READ_LONG (0x0060) offset_spawnpoints
+			PATCH_IF offset_spawnpoints > offset_regions BEGIN
+				WRITE_LONG (0x0060) (offset_spawnpoints + (size_region))
+			END
+				
+			READ_LONG (0x0068) offset_entrances
+			PATCH_IF offset_entrances > offset_regions BEGIN
+				WRITE_LONG (0x0068) (offset_entrances + (size_region))
+			END
+				
+			READ_LONG (0x0070) offset_containers
+			PATCH_IF offset_containers > offset_regions BEGIN
+				WRITE_LONG (0x0070) (offset_containers + (size_region))
+			END
+				
+			READ_LONG (0x0078) offset_items
+			PATCH_IF offset_items > offset_regions BEGIN
+				WRITE_LONG (0x0078) (offset_items + (size_region))
+			END
+				
+			READ_LONG (0x007c) offset_vertices
+			PATCH_IF offset_vertices > offset_regions BEGIN
+				WRITE_LONG (0x007c) (offset_vertices + (size_region))
+			END
+				
+			READ_LONG (0x0084) offset_ambients
+			PATCH_IF offset_ambients > offset_regions BEGIN
+				WRITE_LONG (0x0084) (offset_ambients  + (size_region))
+			END
+				
+			READ_LONG (0x0088) offset_variables
+			PATCH_IF offset_variables > offset_regions BEGIN
+				WRITE_LONG (0x0088) (offset_variables + (size_region))
+			END
+				
+			READ_LONG (0x0090) offset_tile_flags
+			PATCH_IF offset_tile_flags > offset_regions BEGIN
+				WRITE_LONG (0x0090) (offset_tile_flags + (size_region))
+			END
+				
+			READ_LONG (0x00a0) offset_bitmask
+			PATCH_IF offset_bitmask > offset_regions BEGIN
+				WRITE_LONG (0x00a0) (offset_bitmask + (size_region))
+			END
+				
+			READ_LONG (0x00a8) offset_doors
+			PATCH_IF offset_doors > offset_regions BEGIN
+				WRITE_LONG (0x00a8) (offset_doors + (size_region))
+			END
+				
+			READ_LONG (0x00b0) offset_animation
+			PATCH_IF offset_animation > offset_regions BEGIN
+				WRITE_LONG (0x00b0) (offset_animation + (size_region))
+			END
+				
+			READ_LONG (0x00b8) offset_tiles
+			PATCH_IF offset_tiles > offset_regions BEGIN
+				WRITE_LONG (0x00b8) (offset_tiles + (size_region))
+			END
+				
+			// Update open and closed search square offsets in the TILED OBJECTS section
+			READ_LONG (0x00b4) num_tiles
+			SET size_tile = 0x006C 
+			FOR (idx = 0; idx < num_tiles; idx = idx + 1) BEGIN
+				READ_LONG (offset_tiles + (idx * size_tile) + 0x002c) offset_open_tiles
+				READ_LONG (offset_tiles + (idx * size_tile) + 0x0038) offset_closed_tiles
+				PATCH_IF offset_open_tiles > offset_regions BEGIN
+					WRITE_LONG (offset_tiles + (idx * size_tile) + 0x002c) (offset_open_tiles + size_region)
+				END
+				PATCH_IF offset_closed_tiles > offset_regions BEGIN
+					WRITE_LONG (offset_tiles + (idx * size_tile) + 0x0038) (offset_closed_tiles + size_region)
+				END
 			END
 
-			// Modified by Lauriel to allow for new script or clearing the old one
-			// Cas particulier : si la variable %script% est vide, on ne la prend pas un compte pour éviter ) la fonction ADD_AREA_TRIGGER de bugger.
-			PATCH_IF (("%script%" STRING_COMPARE_CASE "") AND ("%GW_Script_new%" STR_EQ "NO CHANGE" = 1))
-			THEN BEGIN	
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Rbcs = ~%script%~"
-			END ELSE PATCH_IF (("%GW_Script_new%" STR_EQ "" = 0) AND ("%GW_Script_new%" STR_EQ "NO CHANGE" = 0)) 
-			THEN BEGIN
-				SPRINT GW_add_trigger EVAL "%GW_add_trigger% ab_RT_Rbcs = ~%GW_Script_new%~"
+			READ_LONG (0x00bc) offset_songs
+			PATCH_IF offset_songs > offset_regions BEGIN
+				WRITE_LONG (0x00bc) (offset_songs + (size_region))
 			END
-
-			SPRINT GW_add_trigger EVAL "%GW_add_trigger% END"
-//			PATCH_PRINT ~%GW_add_trigger%~
-
-			// Lauriel added call to reinclude
-			// To make it easier to use
-			LPF GW_REINCLUDE
-				STR_VAR GW_input = EVAL ~%GW_add_trigger%~
+				
+			READ_LONG (0x00c0) offset_rests
+			PATCH_IF offset_rests > offset_regions BEGIN
+				WRITE_LONG (0x00c0) (offset_rests + (size_region))
 			END
-
-		END				// of PATCH_IF (GW_clone_trigger = 1)
-	END 			// of PATCH_IF required parameters provided
-END				// of DEFINE_PATCH_FUNCTION
+				
+			READ_LONG (0x00c4) offset_maps
+			PATCH_IF offset_maps > offset_regions BEGIN
+				WRITE_LONG (0x00c4) (offset_maps + (size_region))
+			END
+				
+			READ_LONG (0x00cc) offset_projtrap
+			PATCH_IF offset_projtrap > offset_regions BEGIN
+				WRITE_LONG (0x00cc) (offset_projtrap + (size_region))
+			END
+	
+			// Update effect block offsets in the PROJECTILE TRAPS section
+			READ_LONG (0x00d0) num_tiles
+			SET size_projtrap = 0x001c
+			FOR (idx = 0; idx < num_tiles; idx = idx + 1) BEGIN
+				READ_LONG (offset_projtrap + (idx * size_projtrap) + 0x0008) offset_effect_block
+				PATCH_IF offset_effect_block > offset_regions BEGIN
+					WRITE_LONG (offset_projtrap + (idx * size_projtrap) + 0x0008) (offset_effect_block + size_region)
+				END
+			END
+			
+			// Add the region structure to the ARE after all offsets are updated
+			// Can't use stock functions because they require vertices and there is an unknown number of them
+			SET offset_new_region = offset_regions + (num_regions * size_region)
+			INSERT_BYTES offset_new_region size_region
+			WRITE_ASCIIE offset_new_region ~%name_new%~ (32)
+			WRITE_SHORT (offset_new_region + 0x0020) old_type
+			WRITE_SHORT (offset_new_region + 0x0022) old_left
+			WRITE_SHORT (offset_new_region + 0x0024) old_top
+			WRITE_SHORT (offset_new_region + 0x0026) old_right
+			WRITE_SHORT (offset_new_region + 0x0028) old_bottom
+			WRITE_SHORT (offset_new_region + 0x002a) old_num_vertices
+			WRITE_LONG (offset_new_region + 0x002c) old_first_vertex
+			WRITE_LONG (offset_new_region + 0x0030) old_trigger
+			WRITE_LONG (offset_new_region + 0x0034) old_cursor
+			WRITE_ASCIIE (offset_new_region + 0x0038) ~%dest_new%~ (8)
+			WRITE_ASCIIE (offset_new_region + 0x0040) ~%use_entrance%~ (32)
+			WRITE_LONG (offset_new_region + 0x0060) old_flags
+			WRITE_LONG (offset_new_region + 0x0064) old_info_strref
+			WRITE_SHORT (offset_new_region + 0x0068) old_trap_detect
+			WRITE_SHORT (offset_new_region + 0x006a) old_trap_removal
+			WRITE_SHORT (offset_new_region + 0x006c) old_trap_set
+			WRITE_SHORT (offset_new_region + 0x006e) old_trap_detected
+			WRITE_SHORT (offset_new_region + 0x0070) old_trap_launch_x
+			WRITE_SHORT (offset_new_region + 0x0072) old_trap_launch_y
+			WRITE_ASCIIE (offset_new_region + 0x0074) ~%use_key%~ (8)
+			WRITE_ASCIIE (offset_new_region + 0x007c) ~%use_script%~ (8)
+			WRITE_SHORT (offset_new_region + 0x0084) old_alt_launch_x
+			WRITE_SHORT (offset_new_region + 0x0086) old_alt_launch_y
+		END
+	END
+END
 
 
 ////////////////////////////////////////////////////
 // ADD A DOOR TO AN AREA AND ITS ASSOCIATED FILES //
 // PVRz are compressed graphic files              //
-// TIS area a series of indices pointing          //
-//   to sections (tiles) in the PVRz files        //
+// TIS are a series of indices pointing to        //
+//   sections (tiles) in the PVRz files           //
+// An area can have two TIS/WED files associated  //
+//   with it. One for day, one for night.         //
 // If the area has a day and night version, then  //
 //   this will need to be called twice - once     //
 //   for each TIS/WED                             //
+//                                                //
+// THIS IS NOT A GENERIC FUNCTION                 //
+// IT WAS BUILT FOR A VERY SPECIFIC CASE          //
+// MUCH WORK WOULD NEED TO BE DONE TO MAKE IT     //
+//   FIT ALL USE CASES                            //
 ////////////////////////////////////////////////////
+// To get the x/y of the open and closed tiles (g_closed_... and g_open_...) use:
+// COPY_EXISTING ~<your source tis file>.tis~ ~override~
+//   LPF ps_tileset_info INT_VAR Verbose = 2 Log = 1 END // Log verbose output of PVRz-based tileset to file
+// BUT_ONLY
+// Then open up the log file it generates, search for your tile #s and it'll list and the X/Ys needed to use in his other functions
+// I could probably automate that process...but I don't feel much inclined to do so
 DEFINE_ACTION_FUNCTION ADD_DOOR
 	INT_VAR
-		closed_x1 = 0			// X,Y coordinates from within the source PVRz file (use DLTCEP to determine)
-		closed_x2 = 0
-		closed_y1 = 0
-		closed_y2 = 0
-		open_x1 = 0
-		open_x2 = 0
-		open_y1 = 0
-		open_y2 = 0
-		open_pos1 = 0			// The tile # to be replaced
-		open_pos2 = 0
-		open_pos3 = 0
-		open_pos4 = 0
+		is_day = 0
+		g_closed_x1 = 0			// X,Y coordinates of the graphic within the source PVRz file (use ps_tileset_info to determine)
+		g_closed_x2 = 0
+		g_closed_y1 = 0
+		g_closed_y2 = 0
+		g_open_x1 = 0
+		g_open_x2 = 0
+		g_open_y1 = 0
+		g_open_y2 = 0
+		t_open_pos1 = 0			// The tile # in the target TIS to be replaced (closed are added to the end of the file, not replaced)
+		t_open_pos2 = 0
+		t_open_pos3 = 0
+		t_open_pos4 = 0
+		v_closed_x0 = 0			// X/Y pairs (vertices) of the actual door object - only allowing 4 per door state
+		v_closed_y0 = 0			// Must be given in clockwise order starting with the one furthest to the right
+		v_closed_x1 = 0			// If 2 tie for rightmost - use the lower of the two
+		v_closed_y1 = 0
+		v_closed_x2 = 0
+		v_closed_y2 = 0
+		v_closed_x3 = 0
+		v_closed_y3 = 0
+		v_open_x0 = 0
+		v_open_y0 = 0
+		v_open_x1 = 0
+		v_open_y1 = 0
+		v_open_x2 = 0
+		v_open_y2 = 0
+		v_open_x3 = 0
+		v_open_y3 = 0
 	STR_VAR
 		source_open_pvrz = ""
 		source_closed_pvrz = ""
 		target_tis = ""
+		target_wed = ""
+		target_are = ""
+		door_name = ""
+		door_id = ""
 	RET 
 		open_pvrz
 		closed_pvrz
@@ -457,13 +585,11 @@ BEGIN
 			source_pvrz = EVAL ~%source_open_pvrz%~
 		RET 
 			open_pvrz = pvrz_file
-			open_pvrz_prefix = pvrz_prefix
 			open_pvrz_page = pvrz_suffix
 	END
 	ACTION_IF (~%source_closed_pvrz%~ STRING_EQUAL ~%source_open_pvrz%~) = 1 BEGIN
 		// Open and closed day sources are the same file
 		OUTER_SPRINT closed_pvrz ~%open_pvrz%~
-		OUTER_SPRINT closed_pvrz_prefix ~%open_pvrz_prefix%~
 		OUTER_SPRINT closed_pvrz_page ~%open_pvrz_page%~
 	END ELSE BEGIN
 		LAF COPY_PVRZ_FILE_TO_OVERRIDE
@@ -472,20 +598,22 @@ BEGIN
 				source_pvrz = EVAL ~%source_closed_pvrz%~
 			RET 
 				closed_pvrz = pvrz_file
-				closed_pvrz_prefix = pvrz_prefix
 				closed_pvrz_page = pvrz_suffix
 		END
 	END
 	
 	// Update the target TIS file
 	COPY_EXISTING ~%target_tis%.tis~ ~override~
+		// Will need to know where the closed tiles were added in order to update the WED
+		READ_LONG 0x0008 new_closed_tile // The count of the current tiles will be the index to the new one
+
 		PATCH_IF (STRING_LENGTH ~%closed_pvrz%~ > 1) BEGIN
 			// Add closed door tiles to end of TIS first
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
 					PVRz_Page = "%closed_pvrz_page%" 
-					PVRz_X = "%closed_x1%"
-					PVRz_Y = "%closed_y1%" 
+					PVRz_X = "%g_closed_x1%"
+					PVRz_Y = "%g_closed_y1%" 
 				STR_VAR 
 					Method = "Push" 
 				RET Count
@@ -493,8 +621,8 @@ BEGIN
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
 					PVRz_Page = "%closed_pvrz_page%" 
-					PVRz_X = "%closed_x2%"
-					PVRz_Y = "%closed_y1%" 
+					PVRz_X = "%g_closed_x2%"
+					PVRz_Y = "%g_closed_y1%" 
 				STR_VAR 
 					Method = "Push" 
 				RET Count
@@ -502,8 +630,8 @@ BEGIN
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
 					PVRz_Page = "%closed_pvrz_page%" 
-					PVRz_X = "%closed_x1%"
-					PVRz_Y = "%closed_y2%" 
+					PVRz_X = "%g_closed_x1%"
+					PVRz_Y = "%g_closed_y2%" 
 				STR_VAR 
 					Method = "Push" 
 				RET Count
@@ -511,8 +639,8 @@ BEGIN
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
 					PVRz_Page = "%closed_pvrz_page%" 
-					PVRz_X = "%closed_x2%"
-					PVRz_Y = "%closed_y2%" 
+					PVRz_X = "%g_closed_x2%"
+					PVRz_Y = "%g_closed_y2%" 
 				STR_VAR 
 					Method = "Push" 
 				RET Count
@@ -523,46 +651,144 @@ BEGIN
 			// These replace tiles currently in the file
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
-					Pos = "%open_pos1%"
+					Pos = "%t_open_pos1%"
 					PVRz_Page = "%open_pvrz_page%" 
-					PVRz_X = "%open_x1%"
-					PVRz_Y = "%open_y1%" 
+					PVRz_X = "%g_open_x1%"
+					PVRz_Y = "%g_open_y1%" 
 				STR_VAR 
 					Method = "Replace" 
 				RET Count
 			END
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
-					Pos = "%open_pos2%"
+					Pos = "%t_open_pos2%"
 					PVRz_Page = "%open_pvrz_page%" 
-					PVRz_X = "%open_x2%"
-					PVRz_Y = "%open_y1%" 
+					PVRz_X = "%g_open_x2%"
+					PVRz_Y = "%g_open_y1%" 
 				STR_VAR 
 					Method = "Replace" 
 				RET Count
 			END
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
-					Pos = "%open_pos3%"
+					Pos = "%t_open_pos3%"
 					PVRz_Page = "%open_pvrz_page%" 
-					PVRz_X = "%open_x1%"
-					PVRz_Y = "%open_y2%" 
+					PVRz_X = "%g_open_x1%"
+					PVRz_Y = "%g_open_y2%" 
 				STR_VAR 
 					Method = "Replace" 
 				RET Count
 			END
 			LPF ps_tileset_add_tiles 
 				INT_VAR MaxCount = 1 
-					Pos = "%open_pos4%"
+					Pos = "%t_open_pos4%"
 					PVRz_Page = "%open_pvrz_page%" 
-					PVRz_X = "%open_x2%"
-					PVRz_Y = "%open_y2%" 
+					PVRz_X = "%g_open_x2%"
+					PVRz_Y = "%g_open_y2%" 
 				STR_VAR 
 					Method = "Replace" 
 				RET Count
 			END
 		END
 	BUT_ONLY_IF_IT_CHANGES
+	
+	// WED file changes
+	COPY_EXISTING ~%target_wed%.WED~ ~override~
+		LPF ADD_WED_DOOR
+			INT_VAR
+				v_open_x0 = %v_open_x0%			// X/Y pairs (vertices) of the actual door object - only allowing 4 per door state
+				v_open_y0 = %v_open_y0%			// Must be given in clockwise order starting with the one furthest to the right
+				v_open_x1 = %v_open_x1%			// Start with the lowest if two are tied for the rightmost
+				v_open_y1 = %v_open_y1%
+				v_open_x2 = %v_open_x2%
+				v_open_y2 = %v_open_y2%
+				v_open_x3 = %v_open_x3%
+				v_open_y3 = %v_open_y3%
+				v_closed_x0 = %v_closed_x0%
+				v_closed_y0 = %v_closed_y0%
+				v_closed_x1 = %v_closed_x1%
+				v_closed_y1 = %v_closed_y1%
+				v_closed_x2 = %v_closed_x2%
+				v_closed_y2 = %v_closed_y2%
+				v_closed_x3 = %v_closed_x3%
+				v_closed_y3 = %v_closed_y3%
+				t_open_pos1 = %t_open_pos1%			// The tile # in the target TIS that was replaced
+				t_open_pos2 = %t_open_pos2%
+				t_open_pos3 = %t_open_pos3%
+				t_open_pos4 = %t_open_pos4%
+				t_closed_pos1 = %new_closed_tile%	// The tile # of the first new closed graphic that was added to the target TIS ... rest are sequential
+			STR_VAR 
+				door_id = EVAL ~%door_id%~			// Called name in NI, but it's the ID used in the ARE file
+		END
+	BUT_ONLY_IF_IT_CHANGES
+	
+	// I'm just putting it in to connect it to the WED
+	// Any details like scripts, flags, travel regions, keys, etc will have to be done elsewhere
+	ACTION_IF is_day = 1 BEGIN
+		COPY_EXISTING ~%target_are%.ARE~ ~override~
+			// Set defaults
+			SET door_cursor = 30
+			
+			// Calculate the min/max x/y for both open/closed
+			LPF GET_BOUNDING_BOX
+				INT_VAR
+					v_x0 = %v_open_x0%
+					v_y0 = %v_open_y0%
+					v_x1 = %v_open_x1%
+					v_y1 = %v_open_y1%
+					v_x2 = %v_open_x2%
+					v_y2 = %v_open_y2%
+					v_x3 = %v_open_x3%
+					v_y3 = %v_open_y3%
+				RET
+					min_open_x = min_x
+					max_open_x = max_x
+					min_open_y = min_y
+					max_open_y = max_y
+			END
+			LPF GET_BOUNDING_BOX
+				INT_VAR
+					v_x0 = %v_closed_x0%
+					v_y0 = %v_closed_y0%
+					v_x1 = %v_closed_x1%
+					v_y1 = %v_closed_y1%
+					v_x2 = %v_closed_x2%
+					v_y2 = %v_closed_y2%
+					v_x3 = %v_closed_x3%
+					v_y3 = %v_closed_y3%
+				RET
+					min_closed_x = min_x
+					max_closed_x = max_x
+					min_closed_y = min_y
+					max_closed_y = max_y
+			END
+			
+			LPF fj_are_structure
+				INT_VAR
+					fj_open_box_left       = min_open_x
+					fj_open_box_top        = min_open_y
+					fj_open_box_right      = max_open_x
+					fj_open_box_bottom     = max_open_y
+					fj_closed_box_left     = min_closed_x
+					fj_closed_box_top      = min_closed_y
+					fj_closed_box_right    = max_closed_x
+					fj_closed_box_bottom   = max_closed_y
+					fj_cursor_idx          = door_cursor
+					fj_door_open_vert_0    = v_open_x0 + (v_open_y0 << 16)
+					fj_door_open_vert_1    = v_open_x1 + (v_open_y1 << 16)
+					fj_door_open_vert_2    = v_open_x2 + (v_open_y2 << 16)
+					fj_door_open_vert_3    = v_open_x3 + (v_open_y3 << 16)
+					fj_door_closed_vert_0  = v_closed_x0 + (v_closed_y0 << 16)
+					fj_door_closed_vert_1  = v_closed_x1 + (v_closed_y1 << 16)
+					fj_door_closed_vert_2  = v_closed_x2 + (v_closed_y2 << 16)
+					fj_door_closed_vert_3  = v_closed_x3 + (v_closed_y3 << 16)
+				STR_VAR
+					fj_structure_type = ~door~
+					fj_name = EVAL ~%door_name%~
+					fj_door_wed_id = EVAL ~%door_id%~
+			END
+		BUT_ONLY_IF_IT_CHANGES
+	END
 END
 
 ////////////////////////////////////////////////////
@@ -621,95 +847,402 @@ BEGIN
 	END
 END
 
-////////////////////////////////
-// ADD A DOOR TO THE WED FILE //
-////////////////////////////////
+/////////////////////////////////////////////////////
+// Determine the bounding box for polygon vertices //
+// Expects there to be four                        //
+/////////////////////////////////////////////////////
+DEFINE_PATCH_FUNCTION GET_BOUNDING_BOX
+	INT_VAR
+		v_x0 = 0
+		v_y0 = 0
+		v_x1 = 0
+		v_y1 = 0
+		v_x2 = 0
+		v_y2 = 0
+		v_x3 = 0
+		v_y3 = 0
+	RET
+		min_x
+		max_x
+		min_y
+		max_y
+BEGIN
+	SET min_x = v_x0
+	SET max_x = v_x0
+	SET min_y = v_y0
+	SET max_y = v_y0
+	
+	// Calculate the min/max x/y
+	PATCH_IF v_x1 < min_x BEGIN
+		SET min_x = v_x1
+	END
+	PATCH_IF v_x2 < min_x BEGIN
+		SET min_x = v_x2
+	END
+	PATCH_IF v_x3 < min_x BEGIN
+		SET min_x = v_x3
+	END
+
+	PATCH_IF v_x1 > max_x BEGIN
+		SET max_x = v_x1
+	END
+	PATCH_IF v_x2 > max_x  BEGIN
+		SET max_x = v_x2
+	END
+	PATCH_IF v_x3 > max_x  BEGIN
+		SET max_x = v_x3
+	END
+	
+	PATCH_IF v_y1 < min_y  BEGIN
+		SET min_y = v_y1
+	END
+	PATCH_IF v_y2 < min_y  BEGIN
+		SET min_y = v_y2
+	END
+	PATCH_IF v_y3 < min_y  BEGIN
+		SET min_y = v_y3
+	END
+
+	PATCH_IF v_y1 > max_y  BEGIN
+		SET max_y = v_y1
+	END
+	PATCH_IF v_y2 > max_y  BEGIN
+		SET max_y = v_y2
+	END
+	PATCH_IF v_y3 > max_y  BEGIN
+		SET max_y = v_y3
+	END
+END
+
+//////////////////////////////////////////
+// ADD A DOOR TO THE WED FILE           //
+// It'll be easier to insert bytes at   //
+//   the proper places starting from    //
+//   the bottom of the file, recalc all //
+//   the offsets, then add objects that //
+//   reference those offsets.           //
+// Those sections that don't reference  //
+//   offsets can be written right away. //
+//////////////////////////////////////////
 DEFINE_PATCH_FUNCTION ADD_WED_DOOR
 	INT_VAR
-		tilemap_index = 0		// default if it's the first door in the area
-		Vx_Open_X_0 = 0
-		Vx_Open_Y_0 = 0
-		Vx_Open_X_1 = 0
-		Vx_Open_Y_1 = 0
-		Vx_Open_X_2 = 0
-		Vx_Open_Y_2 = 0
-		Vx_Open_X_3 = 0
-		Vx_Open_Y_3 = 0
-		Vx_Closed_X_0 = 0
-		Vx_Closed_Y_0 = 0
-		Vx_Closed_X_1 = 0
-		Vx_Closed_Y_1 = 0
-		Vx_Closed_X_2 = 0
-		Vx_Closed_Y_2 = 0
-		Vx_Closed_X_3 = 0
-		Vx_Closed_Y_3 = 0
+		v_open_x0 = 0			// X/Y pairs (vertices) of the actual door object - only allowing 4 per door state
+		v_open_y0 = 0			// Must be given in clockwise order starting with the one furthest to the right
+		v_open_x1 = 0			// Start with the lowest if two are tied for the rightmost
+		v_open_y1 = 0
+		v_open_x2 = 0
+		v_open_y2 = 0
+		v_open_x3 = 0
+		v_open_y3 = 0
+		v_closed_x0 = 0
+		v_closed_y0 = 0
+		v_closed_x1 = 0
+		v_closed_y1 = 0
+		v_closed_x2 = 0
+		v_closed_y2 = 0
+		v_closed_x3 = 0
+		v_closed_y3 = 0
+		t_open_pos1 = 0			// The tile # in the target TIS that was replaced (closed were added to the end of the file, not replaced)
+		t_open_pos2 = 0
+		t_open_pos3 = 0
+		t_open_pos4 = 0
+		t_closed_pos1 = 0		// The tile # of the first new closed graphic that was added to the target TIS ... rest are sequential
 	STR_VAR 
 		door_id = ""			// Called name in NI, but it's the ID used in the ARE file
-	RET success
 BEGIN
+	///////////////////////////////////////////
+	// Read in offsets and counts from the headers
+	///////////////////////////////////////////
+	READ_LONG 0x0008 num_overlays
+	READ_LONG 0x000c num_doors
+	READ_LONG 0x0010 offset_overlays
+	READ_LONG 0x0014 offset_header2
+	READ_LONG 0x0018 offset_doors
+	READ_LONG 0x001c offset_door_tile_cells
+	READ_LONG (offset_header2) num_polygons
+	READ_LONG (offset_header2 + 0x0004) offset_polygons
+	READ_LONG (offset_header2 + 0x0008) offset_vertices
+	READ_LONG (offset_header2 + 0x000c) offset_wallgroups
+	READ_LONG (offset_header2 + 0x0010) offset_polygon_indices
+	READ_LONG (offset_overlays + 0x0010) offset_overlay_tilemap	// if it's not the first overlay - this will need to change
+	
+	///////////////////////////////////////////
+	// Set up the size of objects
+	///////////////////////////////////////////
+	SET size_overlay = 0x0018
+	SET size_door = 0x001a
+	SET size_tilemap = 0x000a
+	SET size_door_tile_cell = 0x0002
+	SET size_polygon = 0x0012
+	SET size_index = 0x0002
+	SET size_vertex = 0x0004			// X,Y
+	
+	//////////////////////////////////
+	//                              //
+	//  ******** VERTICES ********  //
+	//                              //
+	//////////////////////////////////
 	// Only allowing for 8 new vertices, 4 for the open door and 4 for the closed
-	SET vertices_open = 4
-	SET vertices_closed = 4
-	SET open_vertices_offset = SOURCE_SIZE
-	SET closed_vertices_offset = open_vertices_offset + (vertices_open * 0x0004)
-	SET open_polygons_index = 0 //????????????????????????????????
+	SET new_vertices_open = 4
+	SET new_vertices_closed = 4
+	
+	// New vertices can just be added at the end of the file (hopefully)
+	// We'll add the open ones first then the closed ones
+	SET new_open_vertices_offset = SOURCE_SIZE
+	SET new_closed_vertices_offset = new_open_vertices_offset + (new_vertices_open * size_vertex)
 	
 	// Insert bytes at the end of the file for our new vertices
-	INSERT_BYTES open_vertices_offset (0x0004 * (vertices_open + vertices_closed))
+	INSERT_BYTES new_open_vertices_offset (size_vertex * (new_vertices_open + new_vertices_closed))
 	
 	// Add the vertices to our new vertices section
-	// These are used by the door polygons
-	WRITE_SHORT open_vertices_offset %Vx_Open_X_0%
-	WRITE_SHORT (open_vertices_offset + 0x0002) %Vx_Open_Y_0%
-	WRITE_SHORT (open_vertices_offset + 0x0004) %Vx_Open_X_1%
-	WRITE_SHORT (open_vertices_offset + 0x0006) %Vx_Open_Y_1%
-	WRITE_SHORT (open_vertices_offset + 0x0008) %Vx_Open_X_2%
-	WRITE_SHORT (open_vertices_offset + 0x000a) %Vx_Open_Y_2%
-	WRITE_SHORT (open_vertices_offset + 0x000c) %Vx_Open_X_3%
-	WRITE_SHORT (open_vertices_offset + 0x000e) %Vx_Open_Y_3%
-	WRITE_SHORT closed_vertices_offset %Vx_Closed_X_0%
-	WRITE_SHORT (closed_vertices_offset + 0x0002) %Vx_Closed_Y_0%
-	WRITE_SHORT (closed_vertices_offset + 0x0004) %Vx_Closed_X_1%
-	WRITE_SHORT (closed_vertices_offset + 0x0006) %Vx_Closed_Y_1%
-	WRITE_SHORT (closed_vertices_offset + 0x0008) %Vx_Closed_X_2%
-	WRITE_SHORT (closed_vertices_offset + 0x000a) %Vx_Closed_Y_2%
-	WRITE_SHORT (closed_vertices_offset + 0x000c) %Vx_Closed_X_3%
-	WRITE_SHORT (closed_vertices_offset + 0x000e) %Vx_Closed_Y_3%	
-
-	// Need to add polygons for both open and closed doors in the separate polygon section
-	// the index of these will be added to the wed door object
+	// These define the door polygons
+	WRITE_SHORT new_open_vertices_offset %v_open_x0%
+	WRITE_SHORT (new_open_vertices_offset + 0x0002) %v_open_y0%
+	WRITE_SHORT (new_open_vertices_offset + 0x0004) %v_open_x1%
+	WRITE_SHORT (new_open_vertices_offset + 0x0006) %v_open_y1%
+	WRITE_SHORT (new_open_vertices_offset + 0x0008) %v_open_x2%
+	WRITE_SHORT (new_open_vertices_offset + 0x000a) %v_open_y2%
+	WRITE_SHORT (new_open_vertices_offset + 0x000c) %v_open_x3%
+	WRITE_SHORT (new_open_vertices_offset + 0x000e) %v_open_y3%
+	WRITE_SHORT new_closed_vertices_offset %v_closed_x0%
+	WRITE_SHORT (new_closed_vertices_offset + 0x0002) %v_closed_y0%
+	WRITE_SHORT (new_closed_vertices_offset + 0x0004) %v_closed_x1%
+	WRITE_SHORT (new_closed_vertices_offset + 0x0006) %v_closed_y1%
+	WRITE_SHORT (new_closed_vertices_offset + 0x0008) %v_closed_x2%
+	WRITE_SHORT (new_closed_vertices_offset + 0x000a) %v_closed_y2%
+	WRITE_SHORT (new_closed_vertices_offset + 0x000c) %v_closed_x3%
+	WRITE_SHORT (new_closed_vertices_offset + 0x000e) %v_closed_y3%
+	
+	////////////////////////////////////////////////////
+	//                                                //
+	//  ******** POLYGON INDEX LOOKUP TABLE ********  //
+	//                                                //
+	////////////////////////////////////////////////////
+	// I think this is only used for walls - not doors
+	
+	//////////////////////////////////
+	//                              //
+	//  ******** POLYGONS ********  //
+	//                              //
+	//////////////////////////////////
+	// Need to add polygons for both open and closed doors in the polygon section
+	// the offset to and count of these will be added to the door object
 	// only allowing for 1 open and 1 closed polygon at the moment
-	SET polygons_open = 1			
-	SET polygons_closed = 1
+	SET new_polygons_open = 1			
+	SET new_polygons_closed = 1
+	SET new_open_polygon_flags = 129 // Shade wall + door
+	SET new_closed_polygon_flags = 129
 	
-	SET open_polygons_index = 0 //????????????????????????????????
-	SET closed_polygons_index = 0 //????????????????????????????????
+	// New entries will go at the bottom of the current section
+	SET new_polygons_open_offset = offset_polygons + (num_polygons * size_polygon)
+	SET new_polygons_closed_offset = new_polygons_open_offset + (new_polygons_open * size_polygon)
 	
-	// Increment the number of doors
-	READ_LONG 0x000c num_doors
+	// Determine the next vertex index to use
+	READ_LONG (offset_polygons + ((num_polygons - 1) * size_polygon)) last_vertex_index
+	READ_LONG (offset_polygons + ((num_polygons - 1) * size_polygon) + 0x0004) num_last_vertices_used
+	SET new_vertex_index = last_vertex_index + num_last_vertices_used
 	
-	// Find the start of the doors section
-	READ_LONG 0x0018 offset_doors
+	// Calculate the min/max x/y for both open/closed
+	LPF GET_BOUNDING_BOX
+		INT_VAR
+			v_x0 = %v_open_x0%
+			v_y0 = %v_open_y0%
+			v_x1 = %v_open_x1%
+			v_y1 = %v_open_y1%
+			v_x2 = %v_open_x2%
+			v_y2 = %v_open_y2%
+			v_x3 = %v_open_x3%
+			v_y3 = %v_open_y3%
+		RET
+			min_open_x = min_x
+			max_open_x = max_x
+			min_open_y = min_y
+			max_open_y = max_y
+	END
+	LPF GET_BOUNDING_BOX
+		INT_VAR
+			v_x0 = %v_closed_x0%
+			v_y0 = %v_closed_y0%
+			v_x1 = %v_closed_x1%
+			v_y1 = %v_closed_y1%
+			v_x2 = %v_closed_x2%
+			v_y2 = %v_closed_y2%
+			v_x3 = %v_closed_x3%
+			v_y3 = %v_closed_y3%
+		RET
+			min_closed_x = min_x
+			max_closed_x = max_x
+			min_closed_y = min_y
+			max_closed_y = max_y
+	END
 	
-	// Calculate the start of our new door section
-	SET new_door_offset = offset_doors + (num_doors * 0x001a)
+	// Insert bytes at the end of the current section for our new polygons
+	INSERT_BYTES new_polygons_open_offset (size_polygon * (new_polygons_open + new_polygons_closed))
+	
+	// Can add polygons now since they only reference indices, not offsets
+	WRITE_LONG new_polygons_open_offset %new_vertex_index%
+	WRITE_LONG (new_polygons_open_offset + 0x0004) %new_vertices_open%
+	WRITE_BYTE (new_polygons_open_offset + 0x0008) %new_open_polygon_flags%
+	WRITE_BYTE (new_polygons_open_offset + 0x0009) 0xff
+	WRITE_SHORT (new_polygons_open_offset + 0x000a) %min_open_x%
+	WRITE_SHORT (new_polygons_open_offset + 0x000c) %max_open_x%
+	WRITE_SHORT (new_polygons_open_offset + 0x000e) %min_open_y%
+	WRITE_SHORT (new_polygons_open_offset + 0x0010) %max_open_y%
+	
+	WRITE_LONG new_polygons_closed_offset (%new_vertex_index% + %new_vertices_open%)
+	WRITE_LONG (new_polygons_closed_offset + 0x0004) %new_vertices_closed%
+	WRITE_BYTE (new_polygons_closed_offset + 0x0008) %new_closed_polygon_flags%
+	WRITE_BYTE (new_polygons_closed_offset + 0x0009) 0xff
+	WRITE_SHORT (new_polygons_closed_offset + 0x000a) %min_closed_x%
+	WRITE_SHORT (new_polygons_closed_offset + 0x000c) %max_closed_x%
+	WRITE_SHORT (new_polygons_closed_offset + 0x000e) %min_closed_y%
+	WRITE_SHORT (new_polygons_closed_offset + 0x0010) %max_closed_y%
+
+	/////////////////////////////////////
+	//                                 //
+	//  ******** WALL GROUPS ********  //
+	//                                 //
+	/////////////////////////////////////
+	// I don't think I need to do anything here
+
+	/////////////////////////////////////////////////
+	//                                             //
+	//  ******** TILE INDEX LOOKUP TABLE ********  //
+	//                                             //
+	/////////////////////////////////////////////////
+	// I don't think I need to do anything with these
+	
+	/////////////////////////////////////////
+	//                                     //
+	//  ******** DOOR TILE CELLS ********  //
+	//                                     //
+	/////////////////////////////////////////
+	// Need to add 4 entries into this table for the 4 graphic tiles used by the open door
+	// It'll point to tiles defined in the Tile Map Structure and will also associate them with their closed graphics
+	SET new_door_tile_cells = 4
+
+	// Find the last tilemap index to calculate the next and determine the offset to the next
+	SET last_door_tile_index = 0
+	SET last_door_tile_count = 0
+	PATCH_IF num_doors > 0 BEGIN
+		SET last_door_offset  = offset_doors + ((num_doors - 1) * size_door)
+		READ_SHORT (last_door_offset + 0x000a) last_door_tile_index
+		READ_SHORT (last_door_offset + 0x000c) last_door_tile_count
+	END
+	SET new_door_tile_index = (last_door_tile_index + last_door_tile_count)
+	
+	// Calculate where the new door tile cells are inserted
+	SET new_door_tile_cell_offset = offset_door_tile_cells + (new_door_tile_index * size_door_tile_cell)
+	
+	// Insert bytes at the end of the current section for our new door tile cells
+	INSERT_BYTES new_door_tile_cell_offset (size_door_tile_cell * new_door_tile_cells)
+	
+	// Door tile cells only reference indices, not offsets, so we can add them right away
+	WRITE_SHORT new_door_tile_cell_offset %t_open_pos1%
+	WRITE_SHORT (new_door_tile_cell_offset + size_door_tile_cell) %t_open_pos2%
+	WRITE_SHORT (new_door_tile_cell_offset + (2 * size_door_tile_cell)) %t_open_pos3%
+	WRITE_SHORT (new_door_tile_cell_offset + (3 * size_door_tile_cell)) %t_open_pos4%
+	
+	/////////////////////////////////////////////
+	//                                         //
+	//  ******** TILE MAP STRUCTURES ********  //
+	//                                         //
+	/////////////////////////////////////////////
+	// Need to find and update the tiles associated with the open door
+	// and update their secondary values to point to the new closed door graphics
+	WRITE_SHORT (offset_overlay_tilemap + (t_open_pos1 * size_tilemap) + 0x0004) %t_closed_pos1%
+	WRITE_SHORT (offset_overlay_tilemap + (t_open_pos2 * size_tilemap) + 0x0004) (%t_closed_pos1% + 1)
+	WRITE_SHORT (offset_overlay_tilemap + (t_open_pos3 * size_tilemap) + 0x0004) (%t_closed_pos1% + 2)
+	WRITE_SHORT (offset_overlay_tilemap + (t_open_pos4 * size_tilemap) + 0x0004) (%t_closed_pos1% + 3)
+
+	///////////////////////////////
+	//                           //
+	//  ******** DOORS ********  //
+	//                           //
+	///////////////////////////////
+	// Calculate the start of our new door object
+	SET new_door_offset = offset_doors + (num_doors * size_door)
+	
+	// Only allowing for 4 door tiles (per state) at the moment
+	// Only the open ones need to be linked to the door structure
+	SET new_tilemap_tiles = 4
 	
 	// Insert bytes at the start of our new door section
-	INSERT_BYTES new_door_offset 0x001a
+	INSERT_BYTES new_door_offset size_door
 	
-	// only allowing for 4 closed door tiles at the moment
-	SET tilemap_tiles = 4	
+	// Write the door section after all offsets are updated
 	
-	// Write the door section
+	/////////////////////////////////////////////
+	//                                         //
+	//  ******** RECALCULATE OFFSETS ********  //
+	//                                         //
+	/////////////////////////////////////////////
+	SET add_size = size_door
+	SET offset_door_tile_cells = offset_door_tile_cells + add_size
+	
+	SET add_size = add_size + (size_door_tile_cell * new_door_tile_cells)
+	SET offset_wallgroups = offset_wallgroups + add_size	
+	SET offset_polygons = offset_polygons + add_size
+	SET new_polygons_open_offset = new_polygons_open_offset + add_size
+	SET new_polygons_closed_offset = new_polygons_open_offset + (size_polygon * new_polygons_open)
+	
+	SET add_size = add_size + (size_polygon * (new_polygons_open + new_polygons_closed))
+	SET offset_polygon_indices = offset_polygon_indices + add_size
+	SET offset_vertices = offset_vertices + add_size
+	SET new_open_vertices_offset = new_open_vertices_offset + add_size
+	SET new_closed_vertices_offset = new_closed_vertices_offset + add_size
+
+	///////////////////////////////////////////////////////////////
+	//                                                           //
+	//  ******** WRITE TO SECTIONS REFERENCING OFFSETS ********  //
+	//                                                           //
+	///////////////////////////////////////////////////////////////
+	// VERTICES - already written
+
+	// POLYGON INDEX LOOKUP TABLE - no changes
+	
+	// POLYGONS - already written
+
+	// WALL GROUPS - no changes
+	
+	// TILE INDEX LOOKUP TABLE - no changes
+	
+	// DOOR TILE CELLS - already written
+
+	// TILE MAP STRUCTURES - already written
+
+	// DOORS
 	WRITE_ASCIIE new_door_offset ~%door_id%~ (8)
-	WRITE_SHORT (new_door_offset + 0x0008) 1
-	WRITE_SHORT (new_door_offset + 0x000a) %tilemap_index%
-	WRITE_SHORT (new_door_offset + 0x000c) %tilemap_tiles%
-	WRITE_SHORT (new_door_offset + 0x000e) %polygons_open%
-	WRITE_SHORT (new_door_offset + 0x0010) %polygons_closed%
-	WRITE_LONG (new_door_offset + 0x0012) %open_polygons_index%
-	WRITE_LONG (new_door_offset + 0x0016) %closed_polygons_index%
-	
-	// Update offsets and counts
-	WRITE_LONG 0x000c (num_doors + 1)
+	WRITE_SHORT (new_door_offset + 0x0008) 1					// Is door?
+	WRITE_SHORT (new_door_offset + 0x000a) %new_door_tile_index%
+	WRITE_SHORT (new_door_offset + 0x000c) %new_tilemap_tiles%
+	WRITE_SHORT (new_door_offset + 0x000e) %new_polygons_open%
+	WRITE_SHORT (new_door_offset + 0x0010) %new_polygons_closed%
+	WRITE_LONG (new_door_offset + 0x0012) %new_polygons_open_offset%
+	WRITE_LONG (new_door_offset + 0x0016) %new_polygons_closed_offset%
+
+	// SECONDARY HEADER
+	WRITE_LONG (offset_header2) (num_polygons + new_polygons_open + new_polygons_closed)
+	WRITE_LONG (offset_header2 + 0x0004) %offset_polygons%
+	WRITE_LONG (offset_header2 + 0x0008) %offset_vertices%
+	WRITE_LONG (offset_header2 + 0x000c) %offset_wallgroups%
+	WRITE_LONG (offset_header2 + 0x0010) %offset_polygon_indices%
+
+	// OVERLAYS - offset to this section doesn't change
+	// Update offsets to tilemaps and tile index lookups referenced by the overlays
+	FOR (idx = 0; idx < num_overlays; idx = idx + 1) BEGIN
+		READ_LONG (offset_overlays + (idx * size_overlay) + 0x0010) offset_overlay_tilemap
+		READ_LONG (offset_overlays + (idx * size_overlay) + 0x0014) offset_overlay_tile_lookup
+		SET add_size = size_door
+		SET new_offset_overlay_tilemap = offset_overlay_tilemap + add_size
+		SET add_size = add_size + (new_door_tile_cells * size_door_tile_cell)
+		SET new_offset_overlay_tile_lookup = offset_overlay_tile_lookup + add_size
+		WRITE_LONG (offset_overlays + (idx * size_overlay) + 0x0010) %new_offset_overlay_tilemap%
+		WRITE_LONG (offset_overlays + (idx * size_overlay) + 0x0014) %new_offset_overlay_tile_lookup%
+	END
+
+	// HEADER
+	// Update the header section with new number of doors and offset to door tile cell indices
+	WRITE_LONG (0x000c) (num_doors + 1)
+	WRITE_LONG (0x001c) %offset_door_tile_cells%
 END
