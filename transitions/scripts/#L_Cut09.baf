@@ -67,6 +67,7 @@ THEN
 
 		// Set exit globals
 		SetGlobal("#L_SarvQuests","GLOBAL",100)
+		SetGlobal("#L_StartBG2","GLOBAL",2)
 		SetGlobal("EndOfBG1","GLOBAL",1)
 
 		SetGlobal("#L_CanonGroupMoved","GLOBAL",1)
