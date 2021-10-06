@@ -480,6 +480,7 @@ BEGIN
 			
 			// Add the region structure to the ARE after all offsets are updated
 			// Can't use stock functions because they require vertices and there is an unknown number of them
+			// besides, there's no need to duplicate vertices
 			SET offset_new_region = offset_regions + (num_regions * size_region)
 			INSERT_BYTES offset_new_region size_region
 			WRITE_ASCIIE offset_new_region ~%name_new%~ (32)
@@ -509,7 +510,6 @@ BEGIN
 		END
 	END
 END
-
 
 ////////////////////////////////////////////////////
 // ADD A DOOR TO AN AREA AND ITS ASSOCIATED FILES //
