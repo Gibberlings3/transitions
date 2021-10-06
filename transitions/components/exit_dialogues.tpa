@@ -640,7 +640,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 						%bg2_init%
 						%group_bg2_exit%
 					END
-					IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT~~~~~
+					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT~~~~~
 		END ELSE BEGIN
 			OUTER_SPRINT pre_bg2 ~~~~~
 				CHAIN
@@ -648,7 +648,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 						%bg2_init%
 						%group_bg2_exit%
 					END
-					IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
+					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
 		END
 
 //		PRINT "DEBUG POST_KORLASZ: %post_korlasz%"
@@ -667,7 +667,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 					%sod_init%
 					%group_sod_exit%
 				END
-				IF ~~ THEN DO ~SetGlobal("#L_SaidBye","GLOBAL",1) SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
+				IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
 
 			%pre_bg2%
 		>>>>>>>>
