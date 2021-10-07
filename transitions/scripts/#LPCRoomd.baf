@@ -17,6 +17,7 @@ THEN
 END
 
 IF
+	AreaCheck("#LBG1107")	// House in SW BG
 	Global("EndOfBG1","GLOBAL",1)	// SOD
 	Global("#L_SetForSoD","MYAREA",0)
 THEN
@@ -28,6 +29,7 @@ THEN
 END
 
 IF
+	AreaCheck("#LBG1107")	// House in SW BG
 	!Global("EndOfBG1","GLOBAL",1)	// SOD
 	Global("#L_SetForSoD","MYAREA",1)
 THEN

@@ -384,7 +384,19 @@ DEFINE_ACTION_FUNCTION eltan_house0 BEGIN
 
 	// Prep PC's house in front of the Ducal Palace
 	EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200c.baf~ EVAL
-
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = ~SoDPalaceExterior~			// like my_new_BG0146
+			bcs_name = ~BD0010~			// like BG0146
+	END
+	LAF UPDATE_BCS
+		STR_VAR
+			baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
+			baf_name = ~SoDPalaceExterior~			// like my_new_BG0146
+			bcs_name = ~BD0101~			// like BG0146
+	END
+	
 	// If PC ever meets Rinnie in the original BG0006, set her up as
 	// a global so we can try to move her if the PC picks her house
 	// as their residence

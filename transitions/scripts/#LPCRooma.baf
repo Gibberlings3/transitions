@@ -26,3 +26,49 @@ THEN
 		SmallWait(1)
 		Continue()
 END
+
+IF
+	AreaCheck("#LBG0006")	// House in front of the palace
+	Global("#L_FromBG0200","GLOBAL",1)	// SoD area 1
+	Global("#L_SetForBG","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SetForBG","MYAREA",1)
+		SetGlobal("#L_SetForSoD1","MYAREA",0)
+		SetGlobal("#L_SetForSoD2","MYAREA",0)
+		TriggerActivation("Door0200",TRUE)
+		TriggerActivation("DoorSoD1",FALSE)
+		TriggerActivation("DoorSoD2",FALSE)
+		Continue()
+END
+
+IF
+	AreaCheck("#LBG0006")	// House in front of the palace
+	Global("#L_FromBD0010","GLOBAL",1)	// SoD area 1
+	Global("#L_SetForSoD1","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SetForBG","MYAREA",0)
+		SetGlobal("#L_SetForSoD1","MYAREA",1)
+		SetGlobal("#L_SetForSoD2","MYAREA",0)
+		TriggerActivation("Door0200",FALSE)
+		TriggerActivation("DoorSoD1",TRUE)
+		TriggerActivation("DoorSoD2",FALSE)
+		Continue()
+END
+
+IF
+	AreaCheck("#LBG0006")	// House in front of the palace
+	Global("#L_FromBD0101","GLOBAL",1)	// SoD area 2
+	Global("#L_SetForSoD2","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_SetForBG","MYAREA",0)
+		SetGlobal("#L_SetForSoD1","MYAREA",0)
+		SetGlobal("#L_SetForSoD2","MYAREA",1)
+		TriggerActivation("Door0200",FALSE)
+		TriggerActivation("DoorSoD1",FALSE)
+		TriggerActivation("DoorSoD2",TRUE)
+		Continue()
+END
+
