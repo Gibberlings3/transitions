@@ -72,6 +72,7 @@ END
 // Or busy servants ... who knows.
 IF
 	AreaCheck("#LBD0103")	// Room in the palace
+	Global("#L_AcceptedRoom","GLOBAL",1)
 	!Global("#L_PlayerChestLocation","GLOBAL",1)
 THEN
 	RESPONSE #100
