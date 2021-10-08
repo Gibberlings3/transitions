@@ -7,18 +7,19 @@
 ///////////////////////////////////
 DEFINE_PATCH_FUNCTION REMOVE_ACTOR
 	INT_VAR
-		found_actor = 0
+		remove_all = 0
 	STR_VAR
 		actor_name = ""	// required
 	RET
 		found_actor
 BEGIN
+	SET found_actor = 0
 	PATCH_IF STRING_LENGTH ~%actor_name%~ == 0 BEGIN
     	PATCH_FAIL ~fun REMOVE_ACTOR called with argument actor_name:"%actor_name%"~
   	END
 	GET_OFFSET_ARRAY array_off_actors ARE_V10_ACTORS
 	PHP_EACH array_off_actors AS idx_actor => offset_actor BEGIN
-		PATCH_IF found_actor == 0 BEGIN
+		PATCH_IF found_actor == 0 OR remove_all == 1 BEGIN
 			READ_ASCII offset_actor iName (32) NULL
 			PATCH_IF ~%iName%~ STR_EQ ~%actor_name%~ BEGIN
 				SET found_actor = 1
