@@ -4,14 +4,18 @@
 // Patched via eltan_house2.tpa             //
 //////////////////////////////////////////////
 
+// Transfer doesn't happen during SoD
 IF
 	AreaCheck("#LBG3347")	// House in Beregost
 	!Global("#L_PlayerChestLocation","GLOBAL",4)
+	OR(2)
+		GlobalLT("#L_PlayerChestLocation","GLOBAL",10)
+		GlobalGT("#L_PlayerChestLocation","GLOBAL",19)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",4)
 		MoveContainerContents("#LBD0103*PlayerChest00","#LBG3347*PlayerChest00") // #1 BG1 Room in Palace
-		%SOD_CHEST_TRANS%
+//		%SOD_CHEST_TRANS%
 		SmallWait(1)
 		Continue()
 END

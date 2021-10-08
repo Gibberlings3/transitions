@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////
 // Common elements to the component that adds in Duke Eltan's reward and romance //
-// Included via eltan_house0-2 tpa files                                         //
+// Included via eltan_house0-3 tpa files                                         //
 // Item strings are in game.tra                                                  //
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -26,4 +26,20 @@ LAF UPDATE_BCS
 		baf_location = EVAL ~%mod_root%/scripts/~		// like ~mymod/bafs/~
 		baf_name = ~BG0702~			// like my_new_BG0146
 		bcs_name = EVAL ~%BaldursGateDocks_Harbormaster%~			// like BG0146
+END
+
+// Update SoD's handling of the chest
+ACTION_IF GAME_INCLUDES ~sod~ BEGIN
+	COPY_EXISTING ~BD1000.BCS~ ~Override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",1)~ ~SetGlobal("BD_PlayerChest","GLOBAL",1) SetGlobal("#L_PlayerChestLocation","GLOBAL",11)~
+		END
+	COPY_EXISTING ~BD7100.BCS~ ~Override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",2)~ ~SetGlobal("BD_PlayerChest","GLOBAL",2) SetGlobal("#L_PlayerChestLocation","GLOBAL",12)~
+		END
+	COPY_EXISTING ~BD3000.BCS~ ~Override~
+		DECOMPILE_AND_PATCH BEGIN
+			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",3)~ ~SetGlobal("BD_PlayerChest","GLOBAL",3) SetGlobal("#L_PlayerChestLocation","GLOBAL",13)~
+		END
 END
