@@ -83,7 +83,7 @@ DEFINE_ACTION_FUNCTION eltan_house2 BEGIN
 	// Update the script used on all PC residences to include the one in front of the ducal palace
 	OUTER_SPRINT SOD_CHEST_TRANS ~~
 	ACTION_IF GAME_INCLUDES ~sod~ BEGIN
-		OUTER_SPRINT SOD_CHEST_TRANS ~MoveContainerContents("BD0103*PlayerChest00","#LBG3347*PlayerChest00")~
+		OUTER_SPRINT SOD_CHEST_TRANS ~MoveContainerContents("BD0103*PlayerChest00","#LBG3347*PlayerChest00") MoveContainerContents("BD1000*PlayerChest00","#LBG3347*PlayerChest00") MoveContainerContents("BD7100*PlayerChest00","#LBG3347*PlayerChest00") MoveContainerContents("BD3000*PlayerChest00","#LBG3347*PlayerChest00")~
 	END
 	COPY_EXISTING ~#LPCRoom.BCS~ ~override~
 	   DECOMPILE_AND_PATCH BEGIN 

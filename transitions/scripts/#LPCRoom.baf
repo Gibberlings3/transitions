@@ -70,18 +70,18 @@ END
 // Will need to update this for every possible house award
 // OMG!  SAPIENT PEARWOOD!
 // Or busy servants ... who knows.
-// Transfer doesn't happen during SoD
+// Transfer doesn't happen during SoD but afterwards the SoD chest needs to 'come home'
 IF
 	AreaCheck("#LBD0103")	// Room in the palace
 	Global("#L_AcceptedRoom","GLOBAL",1)
 	!Global("#L_PlayerChestLocation","GLOBAL",1)
 	OR(2)
 		GlobalLT("#L_PlayerChestLocation","GLOBAL",10)
-		GlobalGT("#L_PlayerChestLocation","GLOBAL",19)
+		Global("EndBG1","GLOBAL",2)
 THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",1)
-//		%SOD_CHEST_TRANS%
+		%SOD_CHEST_TRANS%
 		SmallWait(1)
 		Continue()
 END
