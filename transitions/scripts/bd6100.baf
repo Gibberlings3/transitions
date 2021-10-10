@@ -1,0 +1,11 @@
+///////////////////////////////////
+// Use abbreviated scene instead //
+///////////////////////////////////
+
+IF
+	Global("#L_AbbrCapture","GLOBAL",1)	
+THEN
+	RESPONSE #100
+		StartCutSceneMode()
+		StartCutSceneEx("#L_Cut08",TRUE)
+END

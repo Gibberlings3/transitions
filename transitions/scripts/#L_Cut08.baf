@@ -1,0 +1,65 @@
+///////////////////////////////
+// Abbreviated capture scene //
+///////////////////////////////
+
+
+IF
+	TRUE()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_AbbrCapture","GLOBAL",2)
+
+		Wait(2)
+		DisplayStringWait("%IMOEN_DV%",239786)  // Hey, do you feel a little... off?
+
+		Wait(1)
+		DisplayStringWait("DYNAHEIR",239791)  // The mist—it is more than mist. It dulls the senses...
+
+		Wait(1)
+		FadeToColor([40.0],0)
+
+		Wait(1)
+		StartMovie("sodcin05")
+
+		HideGUI()
+
+		// Put everyone to sleep so no random remarks
+		ApplySpellRES("bdsleep",Player1)
+		ApplySpellRES("bdsleep",Player2)
+		ApplySpellRES("bdsleep",Player3)
+		ApplySpellRES("bdsleep",Player4)
+		ApplySpellRES("bdsleep",Player5)
+		ApplySpellRES("bdsleep",Player6)
+
+		SetSequence(SEQ_SLEEP)
+		ActionOverride(Player2,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player3,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player4,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player5,SetSequence(SEQ_SLEEP))
+		ActionOverride(Player6,SetSequence(SEQ_SLEEP))
+		ApplySpellRES("K#REST",Player1)  // No such index
+		ApplySpellRES("K#REST",Player2)  // No such index
+		ApplySpellRES("K#REST",Player3)  // No such index
+		ApplySpellRES("K#REST",Player4)  // No such index
+		ApplySpellRES("K#REST",Player5)  // No such index
+		ApplySpellRES("K#REST",Player6)  // No such index
+		Wait(1)
+
+		SmallWait(40)
+		SoundActivate("AMB_Main",FALSE)
+		SoundActivate("Amb_day1",FALSE)
+		SoundActivate("Amb_day2",FALSE)
+		SoundActivate("Amb_night1",FALSE)
+		SoundActivate("Amb_night2",FALSE)
+		SetMusic(NIGHT,G3Blank)
+		SetMusic(COMBAT_WIN,G3Blank)
+		SetMusic(COMBAT_NORMAL,G3Blank)
+		SetMusic(COMBAT_LOSE,G3Blank)
+		SetMusic(MISC0,G3Blank)
+		SmallWait(25)
+		SoundActivate("Amb_dungeon",TRUE)
+		Wait(2)
+		EndCutSceneMode()
+		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
+END

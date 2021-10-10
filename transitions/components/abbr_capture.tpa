@@ -4,8 +4,10 @@
 ////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION abbr_capture BEGIN
-	EXTEND_TOP ~bg0125.BCS~ ~%mod_root%/scripts/bg0125_abbr_cap.baf~
-
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
+	EXTEND_TOP ~BD0103.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
+	EXTEND_TOP ~BD6100.BCS~ ~%mod_root%/scripts/bd6100.baf~
+	
 	// Stop the actual pre-BG2 capture scene from happening
 	COPY_EXISTING ~BD6100.bcs~ ~override~
    		DECOMPILE_AND_PATCH BEGIN

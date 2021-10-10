@@ -1,0 +1,201 @@
+IF
+	NumInPartyLT(6)
+	!InPartyAllowDead("%IMOEN_DV%")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("%IMOEN_DV%",JoinParty())
+		SmallWait(10)
+END
+
+IF
+	NumInPartyLT(5)
+	!InPartyAllowDead("JAHEIRA")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("JAHEIRA",JoinParty())
+		SmallWait(10)
+END
+
+IF
+	NumInPartyLT(4)
+	!InPartyAllowDead("KHALID")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("KHALID",JoinParty())
+		SmallWait(10)
+END
+
+IF
+	NumInPartyLT(3)
+	!InPartyAllowDead("DYNAHEIR")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("DYNAHEIR",JoinParty())
+		SmallWait(10)
+END
+
+IF
+	NumInPartyLT(2)
+	!InPartyAllowDead("MINSC")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("MINSC",JoinParty())
+		SmallWait(10)
+END
+
+IF
+	Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,LeaveAreaLUA("bd6100","",[535.340],SE))
+		Continue()
+END
+
+IF
+	Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,LeaveAreaLUA("bd6100","",[565.280],SE))
+		Continue()
+END
+
+IF
+	Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,LeaveAreaLUA("bd6100","",[505.300],SE))
+		Continue()
+END
+
+IF
+	Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,LeaveAreaLUA("bd6100","",[535.230],SE))
+		Continue()
+END
+
+IF
+	Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,LeaveAreaLUA("bd6100","",[470.270],SE))
+		Continue()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+
+		// Poof the group to outside of Baldur's gate as in end of SoD
+		LeaveAreaLUA("BD6100","",[600.330],SE)
+		MultiPlayerSync()		
+		Wait(1)
+
+		SetGlobal("chapter","global",13) // Done normally in BD0112
+		SetGlobal("FOG_TYPE","GLOBAL",4)
+
+		Weather(FOG)
+		PlaySound("EFF_M87")
+		Continue()
+END
+
+IF
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		EndCutSceneMode()
+END
+
+IF
+	!Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+
+		FadeFromColor([30.0],0)
+		Explore()
+
+		Wait(2)
+
+		MoveViewPoint([890.815],BD_WALK)
+		Continue()
+END
+
+IF
+	Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player2,MoveToPoint([890.805])
+		Continue()
+END
+
+IF
+	Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player3,MoveToPoint([990.805])
+		Continue()
+END
+
+IF
+	Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player4,MoveToPoint([840.805])
+		Continue()
+END
+
+IF
+	Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player5,MoveToPoint([940.805])
+		Continue()
+END
+
+IF
+	Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride(Player6,MoveToPoint([950.800])
+		Continue()
+END
+
+IF
+	!Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("%IMOEN_DV%",MoveToPoint([835.835]))
+		ActionOverride("JAHEIRA",MoveToPoint([895.770]))
+		ActionOverride("KHALID",MoveToPoint([805.795]))
+//		ActionOverride("DYNAHEIR",MoveToPoint([840.740]))
+		ActionOverride("DYNAHEIR",MoveToPoint([940.805]))
+		ActionOverride("MINSC",MoveToPoint([780.765]))
+		FadeFromColor([30.0],0)
+//		MoveToPoint([940.805])
+		MoveToPoint([840.740])
+
+		MultiPlayerSync()		
+
+		StartCutSceneEx("#L_Cut08",TRUE)
+END
