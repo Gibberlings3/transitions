@@ -35,6 +35,16 @@ THEN
 END
 
 IF
+	Global("#L_KeyStashed","MYAREA",0)
+	PartyHasItem("#LKey04")
+THEN
+	RESPONSE #100
+		SetGlobal("#L_KeyStashed","MYAREA",1)
+		ActionOverride("Picture1",TakePartyItem("#LKey04"))
+		Continue()
+END
+
+IF
 	Global("#L_BeltGiftStashed","MYAREA",0)
 	PartyHasItem("#LMSC01")	
 THEN
