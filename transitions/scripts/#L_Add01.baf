@@ -1,3 +1,60 @@
+/////////////////////////////////////////////////////////////
+// Adds as many of the canon NCPs to the group as possible //
+// Compiled via main_eet, called via #L_Cut09              //
+/////////////////////////////////////////////////////////////
+
+// The long fight requires only party members be in the area
+IF
+	NumInPartyGT(1)
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("MINSC",DestroySelf())
+		Continue()
+END
+
+IF
+	NumInPartyGT(2)
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("DYNAHEIR",DestroySelf())
+		Continue()
+END
+
+IF
+	NumInPartyGT(3)
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("KHALID",DestroySelf())
+		Continue()
+END
+
+IF
+	NumInPartyGT(4)
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("JAHEIRA",DestroySelf())
+		Continue()
+END
+
+IF
+	NumInPartyGT(5)
+	Global("#L_AbbrCapture","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		ActionOverride("%IMOEN_DV%",DestroySelf())
+		Continue()
+END
+
+// Add as many of the canon group as possible to the party
 IF
 	NumInPartyLT(6)
 	!InPartyAllowDead("%IMOEN_DV%")
@@ -49,66 +106,17 @@ THEN
 END
 
 IF
-	Name("None",Player2)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player2,LeaveAreaLUA("bd6100","",[535.340],SE))
-		Continue()
-END
-
-IF
-	Name("None",Player3)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player3,LeaveAreaLUA("bd6100","",[565.280],SE))
-		Continue()
-END
-
-IF
-	Name("None",Player4)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player4,LeaveAreaLUA("bd6100","",[505.300],SE))
-		Continue()
-END
-
-IF
-	Name("None",Player5)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player5,LeaveAreaLUA("bd6100","",[535.230],SE))
-		Continue()
-END
-
-IF
-	Name("None",Player6)
-THEN
-	RESPONSE #100
-		CutSceneId(Player1)
-		ActionOverride(Player6,LeaveAreaLUA("bd6100","",[470.270],SE))
-		Continue()
-END
-
-IF
 	True()
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 
-		// Poof the group to outside of Baldur's gate as in end of SoD
-		LeaveAreaLUA("BD6100","",[600.330],SE)
-		MultiPlayerSync()		
-		Wait(1)
-
-		SetGlobal("chapter","global",13) // Done normally in BD0112
+		// Set the stage
 		SetGlobal("FOG_TYPE","GLOBAL",4)
-
 		Weather(FOG)
 		PlaySound("EFF_M87")
+
+		SetGlobal("chapter","global",13) // Done normally in BD0112
 		Continue()
 END
 
@@ -137,6 +145,7 @@ END
 
 IF
 	Name("None",Player2)
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -146,6 +155,7 @@ END
 
 IF
 	Name("None",Player3)
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -155,6 +165,7 @@ END
 
 IF
 	Name("None",Player4)
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -164,6 +175,7 @@ END
 
 IF
 	Name("None",Player5)
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -173,6 +185,7 @@ END
 
 IF
 	Name("None",Player6)
+	!Global("#L_AbbrCapture","GLOBAL",0)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -195,7 +208,6 @@ THEN
 //		MoveToPoint([940.805])
 		MoveToPoint([840.740])
 
-		MultiPlayerSync()		
-
-		StartCutSceneEx("#L_Cut08",TRUE)
+		MultiPlayerSync()
+		EndCutSceneMode()
 END

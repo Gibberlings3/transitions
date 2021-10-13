@@ -1,5 +1,7 @@
 ///////////////////////////////
 // Abbreviated capture scene //
+// Compiled via abbr_capture //
+// Called by BD6100.bcs      //
 ///////////////////////////////
 
 
@@ -9,6 +11,12 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#L_AbbrCapture","GLOBAL",2)
+		SetGlobal("#L_StartBG2","GLOBAL",2)
+
+		AddAreaType(WEATHER)
+		SetGlobal("FOG_TYPE","GLOBAL",4)
+		Weather(FOG)
+		PlaySound("EFF_M87")
 
 		Wait(2)
 		DisplayStringWait("%IMOEN_DV%",239786)  // Hey, do you feel a little... off?
@@ -19,10 +27,8 @@ THEN
 		Wait(1)
 		FadeToColor([40.0],0)
 
-		Wait(1)
+		SmallWait(10)
 		StartMovie("sodcin05")
-
-		HideGUI()
 
 		// Put everyone to sleep so no random remarks
 		ApplySpellRES("bdsleep",Player1)
@@ -31,6 +37,11 @@ THEN
 		ApplySpellRES("bdsleep",Player4)
 		ApplySpellRES("bdsleep",Player5)
 		ApplySpellRES("bdsleep",Player6)
+		ApplySpellRES("bdsleep","%IMOEN_DV%")
+		ApplySpellRES("bdsleep","JAHEIRA")
+		ApplySpellRES("bdsleep","KHALID")
+		ApplySpellRES("bdsleep","DYNAHEIR")
+		ApplySpellRES("bdsleep","MINSC")
 
 		SetSequence(SEQ_SLEEP)
 		ActionOverride(Player2,SetSequence(SEQ_SLEEP))
@@ -38,13 +49,23 @@ THEN
 		ActionOverride(Player4,SetSequence(SEQ_SLEEP))
 		ActionOverride(Player5,SetSequence(SEQ_SLEEP))
 		ActionOverride(Player6,SetSequence(SEQ_SLEEP))
-		ApplySpellRES("K#REST",Player1)  // No such index
-		ApplySpellRES("K#REST",Player2)  // No such index
-		ApplySpellRES("K#REST",Player3)  // No such index
-		ApplySpellRES("K#REST",Player4)  // No such index
-		ApplySpellRES("K#REST",Player5)  // No such index
-		ApplySpellRES("K#REST",Player6)  // No such index
-		Wait(1)
+		ActionOverride("%IMOEN_DV%",SetSequence(SEQ_SLEEP))
+		ActionOverride("JAHEIRA",SetSequence(SEQ_SLEEP))
+		ActionOverride("KHALID",SetSequence(SEQ_SLEEP))
+		ActionOverride("DYNAHEIR",SetSequence(SEQ_SLEEP))
+		ActionOverride("MINSC",SetSequence(SEQ_SLEEP))
+
+		MakeUnselectable(3600000)
+		ActionOverride(Player2,MakeUnselectable(3600000))
+		ActionOverride(Player3,MakeUnselectable(3600000))
+		ActionOverride(Player4,MakeUnselectable(3600000))
+		ActionOverride(Player5,MakeUnselectable(3600000))
+		ActionOverride(Player6,MakeUnselectable(3600000))
+		ActionOverride("%IMOEN_DV%",MakeUnselectable(3600000))
+		ActionOverride("JAHEIRA",MakeUnselectable(3600000))
+		ActionOverride("KHALID",MakeUnselectable(3600000))
+		ActionOverride("DYNAHEIR",MakeUnselectable(3600000))
+		ActionOverride("MINSC",MakeUnselectable(3600000))
 
 		SmallWait(40)
 		SoundActivate("AMB_Main",FALSE)
@@ -59,7 +80,7 @@ THEN
 		SetMusic(MISC0,G3Blank)
 		SmallWait(25)
 		SoundActivate("Amb_dungeon",TRUE)
-		Wait(2)
+		SmallWait(2)
 		EndCutSceneMode()
 		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
 END

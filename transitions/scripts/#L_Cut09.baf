@@ -1,5 +1,7 @@
 ///////////////////////////////////////////////////////////////////////
-// Travel to area outside of Baldur's Gate for pre-BG2 capture scene //
+// Removes all NPCs from the group                                   //
+// Sends the rest of the group (player characters) and canon group   //
+//   to area outside of Baldur's Gate for pre-BG2 capture scene      //
 // Parsed via main_eet.tpa                                           //
 // Called via solo exit timer in solo_check.baf                      //
 ///////////////////////////////////////////////////////////////////////
@@ -67,13 +69,19 @@ THEN
 
 		// Set exit globals
 		SetGlobal("#L_SarvQuests","GLOBAL",100)
-		SetGlobal("#L_StartBG2","GLOBAL",2)
 		SetGlobal("EndOfBG1","GLOBAL",1)
 		SetGlobal("bd_player_exiled","GLOBAL",2) // To indicate that we had nothing to do with it (since we're cutting out before it happened)
 
 		SetGlobal("#L_CanonGroupMoved","GLOBAL",1)
 
 		SmallWait(10)
+
+		DisableAI(Player1,TRUE)
+		DisableAI(Player2,TRUE)
+		DisableAI(Player3,TRUE)
+		DisableAI(Player4,TRUE)
+		DisableAI(Player5,TRUE)
+		DisableAI(Player6,TRUE)
 
 		MoveGlobal("BD6100","%IMOEN_DV%",[515.320])  // Imoen
 		ReallyForceSpellDeadRES("bdrejuve","%IMOEN_DV%")  // No such index
@@ -83,9 +91,10 @@ THEN
 		ActionOverride("%IMOEN_DV%",ChangeAIScript("",GENERAL))
 		ActionOverride("%IMOEN_DV%",ChangeAIScript("",DEFAULT))
 		ActionOverride("%IMOEN_DV%",SetDialogue("BDIMOEN"))
+		DisableAI("%IMOEN_DV%",TRUE)
 
-		ChangeEnemyAlly("%IMOEN_DV%",NEUTRAL)  // Imoen
-		ChangeSpecifics("%IMOEN_DV%",ALLIES)  // Imoen
+		ChangeEnemyAlly("%IMOEN_DV%",NEUTRAL)
+		ChangeSpecifics("%IMOEN_DV%",ALLIES)
 
 		MoveGlobal("bd6100","MINSC",[545.260])  // Minsc
 		ReallyForceSpellDeadRES("bdrejuve","minsc")  // No such index
@@ -95,9 +104,10 @@ THEN
 		ActionOverride("minsc",ChangeAIScript("BDFIGH01",GENERAL))
 		ActionOverride("minsc",ChangeAIScript("",DEFAULT))
 		ActionOverride("minsc",SetDialogue("bdminsc"))
+		DisableAI("MINSC",TRUE)
 
-		ChangeEnemyAlly("MINSC",NEUTRAL)  // Imoen
-		ChangeSpecifics("MINSC",ALLIES)  // Imoen
+		ChangeEnemyAlly("MINSC",NEUTRAL)
+		ChangeSpecifics("MINSC",ALLIES)
 
 		MoveGlobal("bd6100","DYNAHEIR",[485.280])  // Dynaheir
 		ReallyForceSpellRES("bdrejuve","dynaheir")  // No such index
@@ -107,9 +117,10 @@ THEN
 		ActionOverride("dynaheir",ChangeAIScript("BDMAGE01",GENERAL))
 		ActionOverride("dynaheir",ChangeAIScript("",DEFAULT))
 		ActionOverride("dynaheir",SetDialogue("bddynahe"))
+		DisableAI("DYNAHEIR",TRUE)
 
-		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)  // Imoen
-		ChangeSpecifics("DYNAHEIR",ALLIES)  // Imoen
+		ChangeEnemyAlly("DYNAHEIR",NEUTRAL)
+		ChangeSpecifics("DYNAHEIR",ALLIES)
 
 		MoveGlobal("bd6100","KHALID",[515.210])  // Khalid
 		ReallyForceSpellDeadRES("bdrejuve","khalid")  // No such index
@@ -119,6 +130,7 @@ THEN
 		ActionOverride("khalid",ChangeAIScript("BDFIGH01",GENERAL))
 		ActionOverride("khalid",ChangeAIScript("",DEFAULT))
 		ActionOverride("khalid",SetDialogue("bdkhalid"))
+		DisableAI("KHALID",TRUE)
 
 		ChangeEnemyAlly("KHALID",NEUTRAL)  // Imoen
 		ChangeSpecifics("KHALID",ALLIES)  // Imoen
@@ -131,12 +143,22 @@ THEN
 		ActionOverride("jaheira",ChangeAIScript("bddrui01",GENERAL))
 		ActionOverride("jaheira",ChangeAIScript("",DEFAULT))
 		ActionOverride("jaheira",SetDialogue("bdjaheir"))
+		DisableAI("JAHEIRA",TRUE)
 
 		ChangeEnemyAlly("JAHEIRA",NEUTRAL)  // Imoen
 		ChangeSpecifics("JAHEIRA",ALLIES)  // Imoen
 
 		SmallWait(10)
 
+		// If anyone is left in the group, they'll be player characters
+		ActionOverride(Player2,LeaveAreaLUA("bd6100","",[535.340],SE))
+		ActionOverride(Player3,LeaveAreaLUA("bd6100","",[565.280],SE))
+		ActionOverride(Player4,LeaveAreaLUA("bd6100","",[505.300],SE))
+		ActionOverride(Player5,LeaveAreaLUA("bd6100","",[535.230],SE))
+		ActionOverride(Player6,LeaveAreaLUA("bd6100","",[600.330],SE))
+		LeaveAreaLUA("BD6100","",[470.270],SE)
+		MultiPlayerSync()		
+		
 		StartCutSceneEx("#L_Add01",TRUE)
 END
 

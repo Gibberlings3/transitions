@@ -4,11 +4,7 @@
 ////////////////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION abbr_capture BEGIN
-	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
-	EXTEND_TOP ~BD0103.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
-	EXTEND_TOP ~BD6100.BCS~ ~%mod_root%/scripts/bd6100.baf~
-	
-	// Stop the actual pre-BG2 capture scene from happening
+	// Stop the long drawn-out pre-BG2 capture scene from happening when the abbreviated one is requested
 	COPY_EXISTING ~BD6100.bcs~ ~override~
    		DECOMPILE_AND_PATCH BEGIN
       		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~GlobalLT("bd_plot","global",680)~ ~Global("#L_AbbrCapture","GLOBAL",0) GlobalLT("bd_plot","global",680)~
@@ -17,4 +13,14 @@ DEFINE_ACTION_FUNCTION abbr_capture BEGIN
 		    REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~_down","bd6100",0)~ ~_down","bd6100",0) Global("#L_AbbrCapture","GLOBAL",0)~
 		END
 	BUT_ONLY_IF_IT_CHANGES
+
+	// Set the global indicating the abbreviated scene should play
+	EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
+	EXTEND_TOP ~BD0103.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
+
+	// The abbreviated capture scene...
+	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~ EVAL
+
+	// Add the call to the abbreviated scene to the final SoD area
+	EXTEND_BOTTOM ~BD6100.BCS~ ~%mod_root%/scripts/bd6100.baf~
 END

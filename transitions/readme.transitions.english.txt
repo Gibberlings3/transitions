@@ -140,7 +140,7 @@ Will use EBG1's version if available
 Use abbreviated capture scene leading to BG2EE
 ------------------------------------------------------------------------
 Requires Main Component and EET
-Cut out the long fight scene leading to capture prior to BG2EE and just show a brief cut-scene.  Only available when skipping ahead via the item given by Duke Belt,   
+Cut out the long fight scene leading to capture prior to BG2EE and just show a brief cut-scene.
 
 ------------------------------------------------------------------------
 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
