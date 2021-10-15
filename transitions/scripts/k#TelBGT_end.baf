@@ -45,6 +45,7 @@ THEN
 		ActionOverride(Player5,LeaveAreaLUA("AR0602","",[3824.2447],E))  // Irenicus's Dungeon 1st Floor
 		ActionOverride(Player6,LeaveAreaLUA("AR0602","",[3889.2479],SSE))  // Irenicus's Dungeon 1st Floor
 		MultiPlayerSync()
+		FadeToColor([0.0],0)
 		ActionOverride(Player1,MakeUnselectable(1000))
 		DestroySelf()
 END
