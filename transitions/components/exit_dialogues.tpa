@@ -54,7 +54,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		Corwin
 		Glint
 		MKhiin
-		Voghin
+		Voghiln
 	END
 	
 	OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $bg1_npc_list(~%npc_num%~); ++npc_num) BEGIN 
@@ -85,7 +85,7 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		OUTER_SPRINT npc_name $sod_npc_list("%npc_num%")
 		OUTER_SPRINT upper_name "%npc_name%"
 		ACTION_TO_UPPER upper_name
-		OUTER_SPRINT bcs_file EVAL ~BD%upper_name%.BCS~
+		OUTER_SPRINT bcs_file EVAL ~BD%upper_name%~
 		
 		ACTION_IF ~%npc_name%~ STRING_EQUAL ~Jaheira~ BEGIN
 			OUTER_SPRINT bcs_file ~BDJAHEIR~
@@ -95,6 +95,8 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 			OUTER_SPRINT bcs_file ~BDDYNAHE~
 		END ELSE ACTION_IF ~%npc_name%~ STRING_EQUAL ~Viconia~ BEGIN
 			OUTER_SPRINT bcs_file ~BDVICONI~
+		END ELSE ACTION_IF ~%npc_name%~ STRING_EQUAL ~Voghiln~ BEGIN
+			OUTER_SPRINT bcs_file ~BDVOGHIL~
 		END
 			
 		/////////////////////////////////////

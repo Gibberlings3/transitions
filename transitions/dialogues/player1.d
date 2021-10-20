@@ -16,7 +16,7 @@ APPEND ~player1~
 	
 	IF ~~ THEN BEGIN ShareGold
 		SAY @2378 // ~Before we do, take your share of the gold. You've earned it.~
-		IF ~~ THEN DO ~SetGlobal("#L_TransTalk","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#LShare",TRUE)~	EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_TransTalk","GLOBAL",1) SetGlobal("#L_SoloExitTimer","GLOBAL",0) StartCutSceneMode() StartCutSceneEx("#LShare",TRUE)~	EXIT
 	END
 END
 

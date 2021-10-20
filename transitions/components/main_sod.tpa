@@ -276,6 +276,7 @@ LAF exit_dialogues END
 
 // Timer put in BALDUR so it'll transition to SoD or BG2 when everyone leaves no matter if AI is on or not
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/solo_check.baf~
+EXTEND_TOP ~BDBALDUR.BCS~ ~%mod_root%/scripts/solo_check.baf~
 
 // Cut scene that starts SoD
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut07.baf~ EVAL
