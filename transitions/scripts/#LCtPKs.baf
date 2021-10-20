@@ -96,6 +96,6 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		EndCutSceneMode()
-		StartDialog("player1",Player1)
+		StartDialog("#LPLayer",Player1)
 END
 

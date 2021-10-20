@@ -158,6 +158,6 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LNeedToShare","GLOBAL",1)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 //		StartCutSceneEx("#LShare",TRUE)
 END

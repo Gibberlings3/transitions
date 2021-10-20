@@ -270,7 +270,7 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit6.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LShare.baf~
 
 // Exit dialogues
-COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/player1.d~ USING ~%tra_loc%/%s/dialogues.tra~
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LPlayer.d~ USING ~%tra_loc%/%s/dialogues.tra~
 INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
 LAF exit_dialogues END
 

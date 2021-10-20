@@ -968,6 +968,6 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 		EndCutSceneMode()
 END

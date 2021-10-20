@@ -1,11 +1,12 @@
 /////////////////////////////////////////////////////////////
-// Additions to Player1's dialogue                         //
+// New ~#LPlayer~ dialogue in place of Player1             //
 // Used during transitions between campaigns to split gold //
 //   and allow NPCs to say their goodbyes                  //
+// Put in a custom file so mods can modify it easier       //
 // Compiled via main_sod.tpa                               //
 /////////////////////////////////////////////////////////////
 
-APPEND ~player1~
+BEGIN ~#LPlayer~
 	IF ~Global("#L_TransTalk","GLOBAL",0) OR(4) Global("#L_StartBG2","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN BEGIN TransTalk_1
 		SAY @2379 // ~I guess it's time we go our separate ways.~
 		IF ~Global("#LNeedToShare","GLOBAL",1)~ THEN GOTO ShareGold
@@ -18,11 +19,11 @@ APPEND ~player1~
 		SAY @2378 // ~Before we do, take your share of the gold. You've earned it.~
 		IF ~~ THEN DO ~SetGlobal("#L_TransTalk","GLOBAL",1) SetGlobal("#L_SoloExitTimer","GLOBAL",0) StartCutSceneMode() StartCutSceneEx("#LShare",TRUE)~	EXIT
 	END
-END
+// END OF NEW DIALOGUE FILE
 
 // BG1 => SoD
 CHAIN
-	IF ~Global("#L_TransTalk","GLOBAL",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN Player1 BG1_To_SoD
+	IF ~Global("#L_TransTalk","GLOBAL",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN ~#LPlayer~ BG1_To_SoD
 		@2570 // ~Thank you for your help. I can finally relax a little.~
 		== %JAHEIRA_JOINED%	IF ~IsValidForPartyDialogue("JAHEIRA") TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2328 /* Take care of yourself. */ DO ~ActionOverride("JAHEIRA",LeaveParty()) ActionOverride("JAHEIRA",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("JAHEIRA",EscapeArea())~
 		== %KHALID_JOINED% IF ~IsValidForPartyDialogue("KHALID") TriggerOverride("KHALID",Global("#L_SayGoodbye","LOCALS",1))~ @2334 /* Goodbye.*/ DO ~ActionOverride("KHALID",LeaveParty()) ActionOverride("KHALID",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("KHALID",EscapeArea())~
@@ -64,7 +65,7 @@ CHAIN
 
 // BG1 => BG2
 CHAIN
-	IF ~GlobalLT("BD_Plot","GLOBAL",50) Global("#L_TransTalk","GLOBAL",1) Global("#L_StartBG2","GLOBAL",1)~ THEN PLAYER1 BG1_To_BG2
+	IF ~GlobalLT("BD_Plot","GLOBAL",50) Global("#L_TransTalk","GLOBAL",1) Global("#L_StartBG2","GLOBAL",1)~ THEN ~#LPlayer~ BG1_To_BG2
 		@2572 // ~Thank you for your help, but now I'm heading south to see what adventures await me there.~
 		== %JAHEIRA_JOINED%	IF ~IsValidForPartyDialogue("JAHEIRA") TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2550 // Khalid and I will join you.
 		== %KHALID_JOINED% IF ~IsValidForPartyDialogue("KHALID") TriggerOverride("KHALID",Global("#L_SayGoodbye","LOCALS",1)) OR(2) !IsValidForPartyDialogue("JAHEIRA") !TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2551 // Jaheira and I will join you.
@@ -102,7 +103,7 @@ CHAIN
 
 // SoD => BG2
 CHAIN
-	IF ~GlobalGT("BD_Plot","GLOBAL",50) Global("#L_TransTalk","GLOBAL",1) Global("#L_StartBG2","GLOBAL",1)~ THEN PLAYER1 SoD_To_BG2
+	IF ~GlobalGT("BD_Plot","GLOBAL",50) Global("#L_TransTalk","GLOBAL",1) Global("#L_StartBG2","GLOBAL",1)~ THEN ~#LPlayer~ SoD_To_BG2
 		@2571 // ~Thank you for your help, but I need to get as far away from here as I can.~
 		== BDJAHEIJ	IF ~IsValidForPartyDialogue("JAHEIRA") TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2550 // Khalid and I will join you.
 		== BDKHALIJ IF ~IsValidForPartyDialogue("KHALID") TriggerOverride("KHALID",Global("#L_SayGoodbye","LOCALS",1)) OR(2) !IsValidForPartyDialogue("JAHEIRA") !TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2551 // Jaheira and I will join you.
@@ -126,7 +127,7 @@ CHAIN
 
 // Post-Korlasz
 CHAIN
-	IF ~Global("#L_CountedPKs","GLOBAL",1) Global("#L_NumPKs","GLOBAL",0) Global("#L_DidPostKorlasz","GLOBAL",0)~ THEN PLAYER1 BELT_FUN_NO_PK
+	IF ~Global("#L_CountedPKs","GLOBAL",1) Global("#L_NumPKs","GLOBAL",0) Global("#L_DidPostKorlasz","GLOBAL",0)~ THEN ~#LPlayer~ BELT_FUN_NO_PK
 		@2270 // I have stuff to do
 		== BELT IF ~~ @2275 /* ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~ */
 	END
@@ -134,7 +135,7 @@ CHAIN
     + ~!Dead("DEATHK")~ + @2277 /* ~Sounds like fun.  I'll check it out.~ */ DO ~SetGlobal("#L_LetsHaveFun","GLOBAL",1) SetGlobal("#L_DidPostKorlasz","GLOBAL",1)~ EXIT
 	
 CHAIN
-	IF ~Global("#L_CountedPKs","GLOBAL",1) GlobalGT("#L_NumPKs","GLOBAL",0) Global("#L_DidPostKorlasz","GLOBAL",0)~ THEN PLAYER1 BELT_FUN_PK
+	IF ~Global("#L_CountedPKs","GLOBAL",1) GlobalGT("#L_NumPKs","GLOBAL",0) Global("#L_DidPostKorlasz","GLOBAL",0)~ THEN ~#LPlayer~ BELT_FUN_PK
 		@2270 // I have stuff to do
 		== BELT IF ~~ @2275 /* ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~ */
 	END
@@ -142,7 +143,7 @@ CHAIN
     IF ~!Dead("DEATHK")~ DO ~SetGlobal("#L_LetsHaveFun","GLOBAL",1) SetGlobal("#L_DidPostKorlasz","GLOBAL",1)~ GOTO PK_2
 
 CHAIN
-	IF ~~ THEN PLAYER1 PK_1
+	IF ~~ THEN ~#LPlayer~ PK_1
 		@2276 /* ~I've already been there.  Interesting is ... one way to describe it.~ */
 		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2278 // I am eager to present our accomplishments ...
 		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2330
@@ -168,7 +169,7 @@ CHAIN
 	+ ~Global("#L_UsePK","GLOBAL",7)~ + @2281 /* ~Of course you may leave, but not with that equipment.~ */  EXTERN %KHALID_JOINED% PK_STAY
 	
 CHAIN
-	IF ~~ THEN PLAYER1 PK_2
+	IF ~~ THEN ~#LPlayer~ PK_2
 		@2277 /* ~Sounds like fun.  I'll check it out.~ */	
 		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2278 // I am eager to present our accomplishments ...
 		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2330
