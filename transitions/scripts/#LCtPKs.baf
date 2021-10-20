@@ -1,0 +1,101 @@
+//////////////////////////////////////////////////////////
+// Calculates the number of party members that are able //
+//   to chime in after Korlasz dungeon is complete      //
+//////////////////////////////////////////////////////////
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_NumPKs","GLOBAL",0)
+		SetGlobal("#L_CountedPKs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Dorn")
+	Global("#L_DornModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",7)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Baeloth")
+	Global("#L_BaelothModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",6)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Edwin")
+	Global("#L_EdwinModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",5)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Neera")
+	Global("#L_NeeraModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",4)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Ajantis")
+	Global("#L_AjantisModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",3)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Khalid")
+	Global("#L_KhalidModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",2)
+		Continue()
+END
+
+IF
+	IsValidForPartyDialogue("Jaheira")
+	Global("#L_JaheiraModded","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPKs","GLOBAL",1)
+		SetGlobal("#L_UsePK","GLOBAL",1)
+		Continue()
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		EndCutSceneMode()
+		StartDialog("player1",Player1)
+END
+

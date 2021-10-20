@@ -1,0 +1,330 @@
+/////////////////////////////////////////////////////////
+// Calculates the number of HUMANOID NPCs in the group //
+// Needed for splitting gold and exit dialogues        //
+// Parsed via main_sod.tpa                             //
+// Called via #LAdvG1.d (Belt item's dialogue)         //
+// Calls the next appropriate step based upon party    // 
+/////////////////////////////////////////////////////////
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_NumNPCs","GLOBAL",0)
+		SetGlobal("#L_NumPCs","GLOBAL",0)	// Not used yet, but might be helpful in MP games in the future
+		SetGlobal("#L_NumHums","GLOBAL",0)
+		SetGlobal("#LNeedToShare","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player2,HUMANOID)
+	!Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumNPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player2,HUMANOID)
+	Name("None",Player2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player2,HUMANOID)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumHums","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player3,HUMANOID)
+	!Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumNPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player3,HUMANOID)
+	Name("None",Player3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player3,HUMANOID)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumHums","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player4,HUMANOID)
+	!Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumNPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player4,HUMANOID)
+	Name("None",Player4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player4,HUMANOID)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumHums","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player5,HUMANOID)
+	!Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumNPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player5,HUMANOID)
+	Name("None",Player5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player5,HUMANOID)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumHums","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player6,HUMANOID)
+	!Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumNPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player6,HUMANOID)
+	Name("None",Player6)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumPCs","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+	General(Player6,HUMANOID)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("#L_NumHums","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",1) 
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#L_RecountParty","GLOBAL",2) 
+		StartCutSceneEx("#LCtNPCs",TRUE)
+END
+
+// If there's not enough gold for at least a 1k split between humanoid party members, go right to ending dialogues
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	PartyGoldLT(2000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",0)
+		StartDialog("player1",Player1)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	PartyGoldLT(3000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",0)
+		StartDialog("player1",Player1)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	PartyGoldLT(4000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",0)
+		StartDialog("player1",Player1)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	PartyGoldLT(5000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",0)
+		StartDialog("player1",Player1)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	PartyGoldLT(6000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("#LShare","GLOBAL",0)
+		StartDialog("player1",Player1)
+END
+
+// Give each humanoid NPC their split
+// The protagonist always gets a share
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	!PartyGoldLT(2000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#LSplit2",TRUE)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	!PartyGoldLT(3000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",2)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#LSplit3",TRUE)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	!PartyGoldLT(4000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#LSplit4",TRUE)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	!PartyGoldLT(5000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",4)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#LSplit5",TRUE)
+END
+
+IF
+	Global("#L_RecountParty","GLOBAL",2)
+	!PartyGoldLT(6000) 
+	GlobalGT("#L_NumNPCs","GLOBAL",0)
+	Global("#L_NumHums","GLOBAL",5)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#LSplit6",TRUE)
+END
+
+// If no humanoid NPCs in the group, just start next campaign
+IF
+	Global("#L_NumNPCs","GLOBAL",0)
+	Global("#L_RecountParty","GLOBAL",2)
+	OR(3)
+		Global("#L_StartCaelarAttack","GLOBAL",1)
+		Global("#L_StartCaelarAttack","GLOBAL",2)
+		Global("#L_StartCaelarAttack","GLOBAL",3)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#L_Cut07",TRUE)
+END
+
+IF
+	Global("#L_NumNPCs","GLOBAL",0)
+	Global("#L_RecountParty","GLOBAL",2)
+	Global("#L_StartBG2","GLOBAL",1) 
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		StartCutSceneEx("#L_Cut09",TRUE)
+END

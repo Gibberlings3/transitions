@@ -195,21 +195,9 @@ APPEND BELT
 		+ ~GlobalLT("#L_SarvQuests","GLOBAL",8) OR(2) Global("#L_SkipQuest2","MYAREA",1) Dead("Tazok") OR(2) Global("#L_SkipQuest3","MYAREA",1) Dead("SEMAJ")  OR(2) Global("#L_SkipQuest4","MYAREA",1) Dead("winski2") OR(3) Global("#L_SkipQuest5","MYAREA",1) Dead("Cythan") Global("#L_CythanSurrend","GLOBAL",1) OR(3) Global("#L_SkipQuest6","MYAREA",1) Dead("Tamoko") Global("#L_TamokoSurrend","GLOBAL",1) OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ZHALIMAR") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("GARDUSH") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("NAAMAN") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("DIYAB") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("AASIM") OR(2) Global("#L_SkipQuest7","MYAREA",1) Dead("ALAI")~ + @2200 /* ~I'm ready to go now.  What's the job?~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",8)~ + BELT_QUEST_8a
 	END
 
-	IF ~Global("#L_SoD","GLOBAL",0) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_NOW_WHAT
+	IF ~Global("#L_SoD","GLOBAL",0) Global("#L_CountedPKs","GLOBAL",0) Global("#L_TalkedToDukes","GLOBAL",3) Global("#L_SarvQuests","GLOBAL",0) Global("#L_QuestsAvailable","MYAREA",0)~ THEN BEGIN BELT_NOW_WHAT
 		SAY @2264 /* ~So, <CHARNAME>, what are your plans now?~ */
-		++ @2270 /* ~I have places to go, things to do, people to see.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",99)~ + BELT_FUN
-//		+ ~Global("#L_AcceptedRoom","GLOBAL",1)~ + @2265 /* ~I think I'll go up stairs and sleep for a week.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",1) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-//		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2268 /* ~I'm going to settle into my new home, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-//		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2269 /* ~I'm going to the Elfsong and celebrate, but I'll be back in a couple weeks to visit Imoen.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",2) SetGlobal("#L_SkipFirstHalfCA","GLOBAL",1) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-//		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) OR(3) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03")~ + @2266 /* ~I'm going to settle into my new house and sleep for a week.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",3) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-//		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03")~ + @2267 /* ~I think I'll go to Elfsong and celebrate for a week.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",3) SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-//		++ @2271 /* ~I think I'll gather up a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_SarvQuests","GLOBAL",100) SetGlobal("EndOfBG1","GLOBAL",2) SetGlobal("#L_StartBG2","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT
-	END
-
-	IF ~~ THEN BEGIN BELT_FUN
-		SAY @2275 /* ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  I hear it's quite interesting.~ */
-		+ ~Dead("DEATHK")~ + @2276 /* ~I've already been there.  Interesting is ... one way to describe it.~ */ EXIT
-	    + ~!Dead("DEATHK")~ + @2277 /* ~Sounds like fun.  I'll check it out.~ */ DO ~SetGlobal("#L_LetsHaveFun","GLOBAL",1)~ EXIT
+		IF ~~ DO ~StartCutSceneMode() StartCutSceneEx("#LCtPKs",TRUE)~ EXIT
 	END
 
 	//////////////////////////////////////////////////////////////////////////

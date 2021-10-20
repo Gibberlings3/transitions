@@ -6,6 +6,7 @@
 IF
 	Global("#LShare","GLOBAL",1000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -17,6 +18,7 @@ END
 IF
 	Global("#LShare","GLOBAL",2000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -28,6 +30,7 @@ END
 IF
 	Global("#LShare","GLOBAL",3000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -39,6 +42,7 @@ END
 IF
 	Global("#LShare","GLOBAL",4000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -50,6 +54,7 @@ END
 IF
 	Global("#LShare","GLOBAL",5000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -61,6 +66,7 @@ END
 IF
 	Global("#LShare","GLOBAL",10000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -72,6 +78,7 @@ END
 IF
 	Global("#LShare","GLOBAL",20000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -83,6 +90,7 @@ END
 IF
 	Global("#LShare","GLOBAL",30000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -94,6 +102,7 @@ END
 IF
 	Global("#LShare","GLOBAL",40000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -105,6 +114,7 @@ END
 IF
 	Global("#LShare","GLOBAL",50000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -116,6 +126,7 @@ END
 IF
 	Global("#LShare","GLOBAL",75000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -127,6 +138,7 @@ END
 IF
 	Global("#LShare","GLOBAL",100000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -138,6 +150,7 @@ END
 IF
 	Global("#LShare","GLOBAL",150000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -149,6 +162,7 @@ END
 IF
 	Global("#LShare","GLOBAL",200000)
 	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -158,7 +172,9 @@ THEN
 END
 
 IF
-	!PartyGoldLT(500000)
+	Global("#LShare","GLOBAL",250000)
+	!Name("None",Player2)
+	General(Player2,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -171,6 +187,7 @@ IF
 	Global("#LShare","GLOBAL",1000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -183,6 +200,7 @@ IF
 	Global("#LShare","GLOBAL",2000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -195,6 +213,7 @@ IF
 	Global("#LShare","GLOBAL",3000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -207,6 +226,7 @@ IF
 	Global("#LShare","GLOBAL",4000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -219,6 +239,7 @@ IF
 	Global("#LShare","GLOBAL",5000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -231,6 +252,7 @@ IF
 	Global("#LShare","GLOBAL",10000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -243,6 +265,7 @@ IF
 	Global("#LShare","GLOBAL",20000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -255,6 +278,7 @@ IF
 	Global("#LShare","GLOBAL",30000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -267,6 +291,7 @@ IF
 	Global("#LShare","GLOBAL",40000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -279,6 +304,7 @@ IF
 	Global("#LShare","GLOBAL",50000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -291,6 +317,7 @@ IF
 	Global("#LShare","GLOBAL",75000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -303,6 +330,7 @@ IF
 	Global("#LShare","GLOBAL",100000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -315,6 +343,7 @@ IF
 	Global("#LShare","GLOBAL",150000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -327,6 +356,7 @@ IF
 	Global("#LShare","GLOBAL",200000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -339,6 +369,7 @@ IF
 	Global("#LShare","GLOBAL",250000)
 	!NumInPartyLT(3)
 	!Name("None",Player3)
+	General(Player3,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -351,6 +382,7 @@ IF
 	Global("#LShare","GLOBAL",1000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -363,6 +395,7 @@ IF
 	Global("#LShare","GLOBAL",2000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -375,6 +408,7 @@ IF
 	Global("#LShare","GLOBAL",3000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -387,6 +421,7 @@ IF
 	Global("#LShare","GLOBAL",4000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -399,6 +434,7 @@ IF
 	Global("#LShare","GLOBAL",5000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -411,6 +447,7 @@ IF
 	Global("#LShare","GLOBAL",10000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -423,6 +460,7 @@ IF
 	Global("#LShare","GLOBAL",20000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -435,6 +473,7 @@ IF
 	Global("#LShare","GLOBAL",30000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -447,6 +486,7 @@ IF
 	Global("#LShare","GLOBAL",40000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -459,6 +499,7 @@ IF
 	Global("#LShare","GLOBAL",50000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -471,6 +512,7 @@ IF
 	Global("#LShare","GLOBAL",75000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -483,6 +525,7 @@ IF
 	Global("#LShare","GLOBAL",100000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -495,6 +538,7 @@ IF
 	Global("#LShare","GLOBAL",150000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -507,6 +551,7 @@ IF
 	Global("#LShare","GLOBAL",200000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -519,6 +564,7 @@ IF
 	Global("#LShare","GLOBAL",250000)
 	!NumInPartyLT(4)
 	!Name("None",Player4)
+	General(Player4,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -531,6 +577,7 @@ IF
 	Global("#LShare","GLOBAL",1000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -543,6 +590,7 @@ IF
 	Global("#LShare","GLOBAL",2000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -555,6 +603,7 @@ IF
 	Global("#LShare","GLOBAL",3000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -567,6 +616,7 @@ IF
 	Global("#LShare","GLOBAL",4000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -579,6 +629,7 @@ IF
 	Global("#LShare","GLOBAL",5000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -591,6 +642,7 @@ IF
 	Global("#LShare","GLOBAL",10000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -603,6 +655,7 @@ IF
 	Global("#LShare","GLOBAL",20000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -615,6 +668,7 @@ IF
 	Global("#LShare","GLOBAL",30000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -627,6 +681,7 @@ IF
 	Global("#LShare","GLOBAL",40000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -639,6 +694,7 @@ IF
 	Global("#LShare","GLOBAL",50000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -651,6 +707,7 @@ IF
 	Global("#LShare","GLOBAL",75000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -663,6 +720,7 @@ IF
 	Global("#LShare","GLOBAL",100000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -675,6 +733,7 @@ IF
 	Global("#LShare","GLOBAL",150000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -687,6 +746,7 @@ IF
 	Global("#LShare","GLOBAL",200000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -699,6 +759,7 @@ IF
 	Global("#LShare","GLOBAL",250000)
 	!NumInPartyLT(5)
 	!Name("None",Player5)
+	General(Player5,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -711,6 +772,7 @@ IF
 	Global("#LShare","GLOBAL",1000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -723,6 +785,7 @@ IF
 	Global("#LShare","GLOBAL",2000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -735,6 +798,7 @@ IF
 	Global("#LShare","GLOBAL",3000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -747,6 +811,7 @@ IF
 	Global("#LShare","GLOBAL",4000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -759,6 +824,7 @@ IF
 	Global("#LShare","GLOBAL",5000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -771,6 +837,7 @@ IF
 	Global("#LShare","GLOBAL",10000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -783,6 +850,7 @@ IF
 	Global("#LShare","GLOBAL",20000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -795,6 +863,7 @@ IF
 	Global("#LShare","GLOBAL",30000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -807,6 +876,7 @@ IF
 	Global("#LShare","GLOBAL",40000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -819,6 +889,7 @@ IF
 	Global("#LShare","GLOBAL",50000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -831,6 +902,7 @@ IF
 	Global("#LShare","GLOBAL",75000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -843,6 +915,7 @@ IF
 	Global("#LShare","GLOBAL",100000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -855,6 +928,7 @@ IF
 	Global("#LShare","GLOBAL",150000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -867,6 +941,7 @@ IF
 	Global("#LShare","GLOBAL",200000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -879,6 +954,7 @@ IF
 	Global("#LShare","GLOBAL",250000)
 	NumInParty(6)
 	!Name("None",Player6)
+	General(Player6,HUMANOID)
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
@@ -892,5 +968,6 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneEx("#LSayBye",TRUE)
+		StartDialog("player1",Player1)
+		EndCutSceneMode()
 END

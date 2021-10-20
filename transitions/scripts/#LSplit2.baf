@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////
 // Determine the split when there's 2 in the group //
 // Distribution will happen in #LShare             //
-// Parsed via main_sod.tpa called via #LAdvGm1.d   //
+// Parsed via main_sod.tpa called via #LCtNPCs     //
 /////////////////////////////////////////////////////
 
 IF
@@ -157,5 +157,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		StartCutSceneEx("#LShare",TRUE)
+		SetGlobal("#LNeedToShare","GLOBAL",1)
+		StartDialog("player1",Player1)
+//		StartCutSceneEx("#LShare",TRUE)
 END

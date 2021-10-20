@@ -253,6 +253,7 @@ EXTEND_BOTTOM ~%NBaldursGate%.BCS~ ~%mod_root%/scripts/BG0200a.baf~
 
 // Update Duke Belt's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_belt.d~ USING ~%tra_loc%/%s/dialogues.tra~
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LCtPKs.baf~
 
 // Update Duke Liia's dialogue file
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/duke_liia.d~ USING ~%tra_loc%/%s/dialogues.tra~

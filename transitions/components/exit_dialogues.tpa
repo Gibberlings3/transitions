@@ -4,11 +4,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Making this a function since there are so many variables
+// This is now greatly simplified
 DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 
-	// Keep the order - I'm depending upon certain NPCs being in certain places in the list
-	// I could fix that but I'm ok with not rearranging the order
-	ACTION_DEFINE_ARRAY npc_list BEGIN
+	ACTION_DEFINE_ARRAY bg1_npc_list BEGIN
 		Ajantis
 		Jaheira
 		Khalid
@@ -40,362 +39,36 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		Imoen
 	END
 
-	////////////////////////////
-	// PREP THE INTERJECTIONS //
-	////////////////////////////
-
-	/////////////////////////////////////////////////////
-	// Interjections
-	// Everyone in the group chimes in
-	// So we'll loop through all NPCs twice
-	// Once to set up the interjections, once to build the dialogue and baf files
-	// Building each line every time will make the install go slower
-	// However it'll help ensure each is done properly
-	// Each line of dialogue gets put into a variable
-	/////////////////////////////////////////////////////
-	OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
-		OUTER_SPRINT npc_name $npc_list("%npc_num%")
-		OUTER_SPRINT upper_name "%npc_name%"
-		ACTION_TO_UPPER upper_name
-		OUTER_SPRINT join_file EVAL EVAL ~%%upper_name%_JOINED%~ 
-		
-		// Imoen's DV isn't her upper case name
-		ACTION_IF %npc_num% = 28 THEN BEGIN
-			OUTER_SPRINT upper_name "IMOEN2"
-		END
-
-		// These is the normal dialogue triggers for group interjections
-		OUTER_SPRINT pk_ok ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0)~ ~~~~~
-		OUTER_SPRINT bye_ok ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1))~ ~~~~~
-
-		// This is the normal DO after the group's "leaving" dialogues 
-		OUTER_SPRINT exit_do ~~~~~DO ~ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ ~~~~~
-
-		// NOTE: Only the first 7 do the post_Korlasz (PK) dialogues
-		ACTION_MATCH %npc_num% WITH
-			0 BEGIN     // AJANTIS
-				// Initial PK: Me as well.
-				OUTER_SPRINT pk_i0 ~%pk_ok% @2340~
-
-				// Staying PK: As you wish.  I owe you that at least.
-				OUTER_SPRINT pk_s0 ~%pk_ok% @2283~
-
-				// Leaving pre-SoD/BG2: It has been an honor.  Farewell.
-				OUTER_SPRINT sod_0 ~%bye_ok% @2284 %exit_do%~
-				OUTER_SPRINT bg2_0 ~%bye_ok% @2284 %exit_do%~
-			END
-			1 BEGIN     // JAHEIRA
-				// Initial: Khalid and I have other places to be.
-				OUTER_SPRINT pk_i1 ~%pk_ok% @2326~
-
-				// Staying: So be it.
-				OUTER_SPRINT pk_s1 ~%pk_ok% @2327~
-
-				// Leaving pre-SoD: Take care of yourself.
-				OUTER_SPRINT sod_1 ~%bye_ok% @2328 %exit_do%~
-			 
-				// Staying pre-BG2: Khalid and I will join you.
-				OUTER_SPRINT bg2_1 ~%bye_ok% @2550~
-			END
-			2 BEGIN     // KHALID
-				// Initial: Jaheira and I should be going as well.
-				OUTER_SPRINT pk_i2 ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") Global("#L_%npc_name%Modded","GLOBAL",0) OR(2) !IsValidForPartyDialogue("JAHEIRA") !Global("#L_JaheriaModded","GLOBAL",0)~ @2332~~~~~
-
-				// Staying: If you insist.
-				OUTER_SPRINT pk_s2 ~%pk_ok% @2333~
-
-				// Leaving pre-SoD: Goodbye
-				OUTER_SPRINT sod_2 ~%bye_ok% @2334 %exit_do%~
-
-				// Staying pre-BG2: Jaheira and I will join you.
-				OUTER_SPRINT bg2_2 ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1))  OR(2) !IsValidForPartyDialogue("JAHEIRA") !TriggerOverride("JAHEIRA",Global("#L_SayGoodbye","LOCALS",1))~ @2551~~~~~
-			END
-			3 BEGIN     // DORN
-				// Initial: Me as well.
-				OUTER_SPRINT pk_i3 ~%pk_ok% @2340~
-
-				// Staying: I can stay for a little while.
-				OUTER_SPRINT pk_s3 ~%pk_ok% @2341~
-
-				// Leaving pre-SoD/BG2:  Until we meet again.
-				OUTER_SPRINT sod_3 ~%bye_ok% @2346 %exit_do%~
-				OUTER_SPRINT bg2_3 ~%bye_ok% @2346 %exit_do%~
-			END
-			4 BEGIN     // EDWIN
-				// Initial: (gives you an exaggerated yawn)
-				OUTER_SPRINT pk_i4 ~%pk_ok% @2347~
-
-				// Staying: Fine. (sigh)
-				OUTER_SPRINT pk_s4 ~%pk_ok% @2348~
-
-				// Leaving pre-SoD/BG2: I'm outta here!
-				OUTER_SPRINT sod_4 ~%bye_ok% @2353 %exit_do%~
-				OUTER_SPRINT bg2_4 ~%bye_ok% @2353 %exit_do%~
-			END
-			5 BEGIN     // NEERA
-				// Initial: I do have plans, yes.
-				OUTER_SPRINT pk_i5 ~%pk_ok% @2354~
-
-				// Staying: Ok, for a little while.
-				OUTER_SPRINT pk_s5 ~%pk_ok% @2355~
-
-				// Leaving pre-SoD/BG2: See ya!  Good luck and all.
-				OUTER_SPRINT sod_5 ~%bye_ok% @2356 %exit_do%~
-				OUTER_SPRINT bg2_5 ~%bye_ok% @2356 %exit_do%~
-			END
-			6 BEGIN     // BAELOTH
-				// Initial: You hog all the limelight.
-				OUTER_SPRINT pk_i6 ~%pk_ok% @2360~
-
-				// Staying: Have it your way, as always!
-				OUTER_SPRINT pk_s6 ~%pk_ok% @2361~
-
-				// Leaving pre-SoD/BG2: Look for my name in lights, I'm bowing out of this dump!
-				OUTER_SPRINT sod_6 ~%bye_ok% @2362 %exit_do%~
-				OUTER_SPRINT bg2_6 ~%bye_ok% @2362 %exit_do%~
-			END
-			7 BEGIN     // GARRICK
-				// Leaving pre-SoD/BG2: Farewell, <CHARNAME>.  I shall immortalize your name in song!
-				OUTER_SPRINT sod_7 ~%bye_ok% @2368 %exit_do%~
-				OUTER_SPRINT bg2_7 ~%bye_ok% @2368 %exit_do%~
-			END
-			8 BEGIN     // XAN
-				// Leaving pre-SoD/BG2: Farewell though I certainly shall not.
-				OUTER_SPRINT sod_8 ~%bye_ok% @2374 %exit_do%~
-				OUTER_SPRINT bg2_8 ~%bye_ok% @2374 %exit_do%~
-			END
-			9 BEGIN     // DYNAHEIR
-				// Leaving pre-SoD: If thou hast need of me, I shall be lodging at the Three Old Kegs.
-				// There's a banter between Dynaheir and Minsc before she leaves, so we make sure he's not in the group to do her exit
-				// Staying pre-BG2: Minsc and I shall accompany thee.
-				OUTER_SPRINT sod_9 ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) OR(2)!IsValidForPartyDialogue("MINSC") !TriggerOverride("MINSC",Global("#L_SayGoodbye","LOCALS",1))~ @2382 %exit_do% ~~~~~
-				OUTER_SPRINT bg2_9 ~%bye_ok% @2553~
-			END
-			10 BEGIN     // MINSC
-				// Leaving pre-SoD: If you need us, look for us at the Three Old Kegs.
-				OUTER_SPRINT sod_10 ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) OR(2) !IsValidForPartyDialogue("DYNAHEIR") !TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2377 %exit_do%
-				== DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2382
-				== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2377
-				== DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2384 /* ~I just said that.~ */
-				== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2385 /* ~Oh, sorry, I didn't hear you.  I was talking to Boo.~ */
-				== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2386 /* ~He said to make sure to pick up some fresh pumpkin seeds.~ */ %exit_do%
-				== DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2387 DO ~ActionOverride("Dynaheir",LeaveParty()) ActionOverride("Dynaheir",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("Dynaheir",EscapeArea())~ /* ~sigh~ */~~~~~
-				
-				OUTER_SPRINT bg2_10 ~~~~~== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2554 /* And boo */
-				== DYNAHJ IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1)) IsValidForPartyDialogue("DYNAHEIR") TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2555 /* Yes yes of course */
-				== %join_file% IF ~IsValidForPartyDialogue("%upper_name%") TriggerOverride("%upper_name%",Global("#L_SayGoodbye","LOCALS",1))  OR(2) !IsValidForPartyDialogue("DYNAHEIR") !TriggerOverride("DYNAHEIR",Global("#L_SayGoodbye","LOCALS",1))~ @2552 /* Dynaheir, Boo, and I will not abandon you. */~~~~~
-			END
-			11 BEGIN     // ALORA
-				// Leaving pre-SoD/BG2: See ya 'round!
-				OUTER_SPRINT sod_11 ~%bye_ok% @2391 %exit_do%~
-				OUTER_SPRINT bg2_11 ~%bye_ok% @2391 %exit_do%~
-			END
-			12 BEGIN	// BRANWEN
-				// Leaving pre-SoD/BG2: Tempus watch over you!
-				OUTER_SPRINT sod_12 ~%bye_ok% @2394 %exit_do%~
-				OUTER_SPRINT bg2_12 ~%bye_ok% @2394 %exit_do%~
-			END
-			13 BEGIN     // CORAN
-				// Leaving pre-SoD/BG2: Farewell my friend.
-				OUTER_SPRINT sod_13 ~%bye_ok% @2397 %exit_do%~
-				OUTER_SPRINT bg2_13 ~%bye_ok% @2397 %exit_do%~
-			END
-			14 BEGIN     // ELDOTH
-				// Leaving pre-SoD/BG2: Ta ta!
-				OUTER_SPRINT sod_14 ~%bye_ok% @2400 %exit_do%~
-				OUTER_SPRINT bg2_14 ~%bye_ok% @2400 %exit_do%~
-			END
-			15 BEGIN     // MONTARON
-				// Leaving pre-SoD/BG2: Watch yur back!
-				OUTER_SPRINT sod_15 ~%bye_ok% @2403 %exit_do%~
-				OUTER_SPRINT bg2_15 ~%bye_ok% @2403 %exit_do%~
-			END
-			16 BEGIN     // XZAR
-				// Leaving pre-SoD/BG2: Fare ye well!
-				OUTER_SPRINT sod_16 ~%bye_ok% @2406 %exit_do%~
-				OUTER_SPRINT bg2_16 ~%bye_ok% @2406 %exit_do%~
-			END
-			17 BEGIN     // FALDORN
-				// Leaving pre-SoD/BG2: Oakfather watch over you.
-				OUTER_SPRINT sod_17 ~%bye_ok% @2409 %exit_do%~
-				OUTER_SPRINT bg2_17 ~%bye_ok% @2409 %exit_do%~
-			END
-			18 BEGIN     // KAGAIN
-				// Leaving pre-SoD/BG2: Yeah bye.
-				OUTER_SPRINT sod_18 ~%bye_ok% @2412 %exit_do%~
-				OUTER_SPRINT bg2_18 ~%bye_ok% @2412 %exit_do%~
-			END
-			19 BEGIN     // KIVAN
-				// Leaving pre-SoD/BG2: Farewell, mellonamin.
-				OUTER_SPRINT sod_19 ~%bye_ok% @2415 %exit_do%~
-				OUTER_SPRINT bg2_19 ~%bye_ok% @2415 %exit_do%~
-			END
-			20 BEGIN     // QUAYLE
-				// Leaving pre-SoD/BG2: Try to use your brain now that I won't be here to help you.
-				OUTER_SPRINT sod_20 ~%bye_ok% @2418 %exit_do%~
-				OUTER_SPRINT bg2_20 ~%bye_ok% @2418 %exit_do%~
-			END
-			21 BEGIN     // RASAAD
-				// Leaving pre-SoD/BG2: Farewell, my friend.  May Selûne's light guide you on your path.
-				OUTER_SPRINT sod_21 ~%bye_ok% @2421 %exit_do%~
-				OUTER_SPRINT bg2_21 ~%bye_ok% @2421 %exit_do%~
-			END
-			22 BEGIN     // SAFANA
-				// Leaving pre-SoD/BG2: Goodbye.  It's been...interesting.
-				OUTER_SPRINT sod_22 ~%bye_ok% @2424 %exit_do%~
-				OUTER_SPRINT bg2_22 ~%bye_ok% @2424 %exit_do%~
-			END
-			23 BEGIN     // SHARTEEL
-				// Leaving pre-SoD/BG2: Farewell and stay strong!
-				OUTER_SPRINT sod_23 ~%bye_ok% @2427 %exit_do%~
-				OUTER_SPRINT bg2_23 ~%bye_ok% @2427 %exit_do%~
-			END
-			24 BEGIN     // SKIE
-				// Leaving pre-SoD/BG2: See ya!  I'm outta here!
-				OUTER_SPRINT sod_24 ~%bye_ok% @2430 %exit_do%~
-				OUTER_SPRINT bg2_24 ~%bye_ok% @2430 %exit_do%~
-			END
-			25 BEGIN     // TIAX
-				// Leaving pre-SoD/BG2: Tiax may...or may not...look well upon you when he rules all.
-				OUTER_SPRINT sod_25 ~%bye_ok% @2433 %exit_do%~
-				OUTER_SPRINT bg2_25 ~%bye_ok% @2433 %exit_do%~
-			END
-			26 BEGIN     // VICONIA
-				// Leaving pre-SoD/BG2: Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.
-				OUTER_SPRINT sod_26 ~%bye_ok% @2436 %exit_do%~
-				OUTER_SPRINT bg2_26 ~%bye_ok% @2436 %exit_do%~
-			END
-			27 BEGIN     // YESLICK
-				// Leaving pre-SoD/BG2: You take care of yourself, ya hear <PRO_BOYGIRL>?!
-				OUTER_SPRINT sod_27 ~%bye_ok% @2439 %exit_do%~
-				OUTER_SPRINT bg2_27 ~%bye_ok% @2439 %exit_do%~
-			END
-			28 BEGIN     // IMOEN
-				// Leaving pre-SoD: I've decided to take Duke Jannath up on her offer to train me in magic. Come see me when I've had a chance to settled in.
-				// Staying pre-BG2: Don't think for a moment you're going anywhere without me!
-				OUTER_SPRINT sod_28 ~%bye_ok% @2325 %exit_do%~
-				OUTER_SPRINT bg2_28 ~%bye_ok% @2556~
-			END
-			DEFAULT
-				// Nothing
-		END
+	ACTION_DEFINE_ARRAY sod_npc_list BEGIN
+		Jaheira
+		Khalid
+		Dorn
+		Edwin
+		Neera
+		Baeloth
+		Dynaheir
+		Minsc
+		Rasaad
+		Safana
+		Viconia
+		Corwin
+		Glint
+		MKhiin
+		Voghin
 	END
-
-	/////////////////////////////////////////////////
-	// 2nd and final loop
-	/////////////////////////////////////////////////
-	OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $npc_list(~%npc_num%~); ++npc_num) BEGIN 
-
-		OUTER_SPRINT npc_name $npc_list("%npc_num%")
+	
+	OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $bg1_npc_list(~%npc_num%~); ++npc_num) BEGIN 
+		OUTER_SPRINT npc_name $bg1_npc_list("%npc_num%")
 		OUTER_SPRINT upper_name "%npc_name%"
 		ACTION_TO_UPPER upper_name
 		OUTER_SPRINT bcs_file EVAL EVAL ~%%upper_name%_BCS%~
-		OUTER_SPRINT join_file EVAL EVAL ~%%upper_name%_JOINED%~ 
-
-		// Imoen's DV isn't her upper case name
-		ACTION_IF %npc_num% = 28 THEN BEGIN
-			OUTER_SPRINT upper_name "%IMOEN_DV%"
-		END
 
 		/////////////////////////////////////
 		// BUILD THE BAF FILE FOR EACH NPC //
 		/////////////////////////////////////
-
-		// Only the first 7 on the list have post-Korlasz dialogue
-		// Khalid lets Jaheira initiate the dialogue if she's present and able
-		ACTION_IF npc_num = 2 THEN BEGIN
-			// Khalid let's Jaheira speak for the both of the if she's present
-			OUTER_SPRINT pk ~
-			IF
-				Global("#L_SarvQuests","GLOBAL",99)
-				Global("#L_%npc_name%Modded","GLOBAL",0)
-				Global("EndOfBG1","GLOBAL",0)
-				Global("#L_%npc_name%PK","GLOBAL",0)
-				Global("#L_NPCPK","GLOBAL",0)
-				IsValidForPartyDialogue(Myself)
-				See(Player1)
-				OR(3)
-					!IsValidForPartyDialogue("JAHEIRA")
-					!Global("#L_JaheiraModded","GLOBAL",0)
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player2)
-					!TriggerOverride(Player2,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player3)
-					!TriggerOverride(Player3,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player4)
-					!TriggerOverride(Player4,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player5)
-					!TriggerOverride(Player5,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player6)
-					!TriggerOverride(Player6,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-			THEN
-				RESPONSE #100
-					ClearAllActions()
-					SetGlobal("#L_%npc_name%PK","GLOBAL",1)
-					SetGlobal("#L_NPCPK","GLOBAL",1)
-					Dialogue(Myself)
-			END~
-		END ELSE ACTION_IF npc_num < 7 THEN BEGIN
-			// Post-Korlasz while in party
-			OUTER_SPRINT pk ~
-			IF
-				Global("#L_SarvQuests","GLOBAL",99)
-				Global("#L_%npc_name%Modded","GLOBAL",0)
-				Global("EndOfBG1","GLOBAL",0)
-				Global("#L_%npc_name%PK","GLOBAL",0)
-				Global("#L_NPCPK","GLOBAL",0)
-				IsValidForPartyDialogue(Myself)
-				See(Player1)
-				OR(3)
-					!InPartyAllowDead(Player2)
-					!TriggerOverride(Player2,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player3)
-					!TriggerOverride(Player3,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player4)
-					!TriggerOverride(Player4,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player5)
-					!TriggerOverride(Player5,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-				OR(3)
-					!InPartyAllowDead(Player6)
-					!TriggerOverride(Player6,Global("#L_PKExitModded","LOCALS",1))
-					TriggerOverride(Player1,False())
-			THEN
-				RESPONSE #100
-					ClearAllActions()
-					SetGlobal("#L_%npc_name%PK","GLOBAL",1)
-					SetGlobal("#L_NPCPK","GLOBAL",1)
-					Dialogue(Myself)
-			END~
-		END ELSE BEGIN
-			OUTER_SPRINT pk ~~
-		END
-
-
-//		PRINT "DEBUG PK FOR BAF: %pk%"
-
-		<<<<<<<< .../npc_add.baf
-		// Post-Korlasz - only the first 7 on the list want to leave after Korlasz
-		%pk%
-
-		// Set the NPCs up for saying goodbye or they'll stay before moving to SoD and BG2
+		// Set the NPCs up for saying goodbye or they'll be staying before moving to SoD and BG2
 		// Modders can set this to 0 if they don't want them to chime in
+		<<<<<<<< .../npc_add.baf
 		IF
 			Global("#L_SayGoodbye","LOCALS",0)
 			Global("#L_SayGoodbyeSet","LOCALS",0)
@@ -406,273 +79,40 @@ DEFINE_ACTION_FUNCTION exit_dialogues BEGIN
 		END
 		>>>>>>>>
 		EXTEND_TOP ~%bcs_file%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
+	END // BG1 Loop
 
-		// Initiating Exit dialogues - these are for the NPC that starts it off
-		OUTER_SPRINT pk_init ~~
-		OUTER_SPRINT pk_stay ~~
-		OUTER_SPRINT sod_init ~~
-		OUTER_SPRINT bg2_init ~~
-		ACTION_MATCH %npc_num% WITH
-			0 BEGIN
-				// Ajantis
-				OUTER_SPRINT pk_init ~@2278~ // I am eager to present our accomplishments before my superiors, but I will stay if you need me.
-				OUTER_SPRINT pk_stay ~@2283~ // As you wish.  I owe you that at least.
-				OUTER_SPRINT sod_init ~@2284~ // It has been an honor.  Farewell.
-				OUTER_SPRINT bg2_init ~@2284~ // It has been an honor.  Farewell.
-			END
-			1 BEGIN
-				// Jaheira
-				OUTER_SPRINT pk_init ~@2330~ // <CHARNAME>, you are safe now and I have places I should be, but I will stay if you have need of me.
-				OUTER_SPRINT pk_stay ~@2327~ // So be it.
-				OUTER_SPRINT sod_init ~@2328~ // Take care of yourself.
-				OUTER_SPRINT bg2_init ~@2550~ // Khalid and I will join you.
-			END
-			2 BEGIN
-				// Khalid
-				OUTER_SPRINT pk_init ~@2336~ // <CHARNAME>, you are s-safe now and I have p-places I should be, but I will s-stay if you have need of me.
-				OUTER_SPRINT pk_stay ~@2333~ // If you insist.
-				OUTER_SPRINT sod_init ~@2334~ // Goodbye.
-				OUTER_SPRINT bg2_init ~@2551~ // Jaheira and I will join you.
-			END
-			3 BEGIN
-				// Dorn
-				OUTER_SPRINT pk_init ~@2344~ // <CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.
-				OUTER_SPRINT pk_stay ~@2341~ // I can stay for a little while.
-				OUTER_SPRINT sod_init ~@2346~ // Until we meet again.
-				OUTER_SPRINT bg2_init ~@2346~ // Until we meet again.
-			END
-			4 BEGIN
-				// Edwin
-				OUTER_SPRINT pk_init ~@2351~ // I've just about had all I can take of this.  Are we just about done?
-				OUTER_SPRINT pk_stay ~@2348~ // Fine. (sigh)
-				OUTER_SPRINT sod_init ~@2353~ // I'm outta here!
-				OUTER_SPRINT bg2_init ~@2353~ // I'm outta here!
-			END
-			5 BEGIN
-				// Neera
-				OUTER_SPRINT pk_init ~@2358~ // You're in the clear now, right?  Can I go?
-				OUTER_SPRINT pk_stay ~@2355~ // Ok, for a little while.
-				OUTER_SPRINT sod_init ~@2356~ // See ya!  Good luck and all.
-				OUTER_SPRINT bg2_init ~@2356~ // See ya!  Good luck and all.
-			END
-			6 BEGIN
-				// Baeloth
-				OUTER_SPRINT pk_init ~@2364~ // This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!
-				OUTER_SPRINT pk_stay ~@2361~ // Have it your way, as always!~
-				OUTER_SPRINT sod_init ~@2362~ // Look for my name in lights, I'm bowing out of this dump!  
-				OUTER_SPRINT bg2_init ~@2362~ // Look for my name in lights, I'm bowing out of this dump!  
-			END
-			7 BEGIN
-				// Garrick
-				OUTER_SPRINT sod_init ~@2368~ // Farewell, <CHARNAME>.  I shall immortalize your name in song!
-				OUTER_SPRINT bg2_init ~@2368~ // Farewell, <CHARNAME>.  I shall immortalize your name in song!
-			END
-			8 BEGIN
-				// Xan
-				OUTER_SPRINT sod_init ~@2374~ // Farewell though I certainly shall not.
-				OUTER_SPRINT bg2_init ~@2374~ // Farewell though I certainly shall not.
-			END
-			9 BEGIN
-				// Dynaheir
-				OUTER_SPRINT sod_init ~@2382~ // If thou hast need of us, weshall be lodging at the Three Old Kegs.
-				OUTER_SPRINT bg2_init ~@2553~ // Minsc and I shall accompany thee.
-			END
-			10 BEGIN
-				// Minsc
-				OUTER_SPRINT sod_init ~@2377~ // If you need us, look for us at the Three Old Kegs.
-				OUTER_SPRINT bg2_init ~@2552~ // Dynaheir, Boo and Minsc will not abandon you.
-			END
-			11 BEGIN
-				// Alora
-				OUTER_SPRINT sod_init ~@2391~ // See ya 'round!
-				OUTER_SPRINT bg2_init ~@2391~ // See ya 'round!
-			END
-			12 BEGIN
-				// Branwen
-				OUTER_SPRINT sod_init ~@2394~ // Tempus watch over you!
-				OUTER_SPRINT bg2_init ~@2394~ // Tempus watch over you!
-			END
-			13 BEGIN
-				// Coran
-				OUTER_SPRINT sod_init ~@2397~ // Farewell my friend.
-				OUTER_SPRINT bg2_init ~@2397~ // Farewell my friend.
-			END
-			14 BEGIN
-				// Eldoth
-				OUTER_SPRINT sod_init ~@2400~ // Ta ta!
-				OUTER_SPRINT bg2_init ~@2400~ // Ta ta!
-			END
-			15 BEGIN
-				// Montaron
-				OUTER_SPRINT sod_init ~@2403~ // Watch yur back!
-				OUTER_SPRINT bg2_init ~@2403~ // Watch yur back!
-			END
-			16 BEGIN
-				// Xzar
-				OUTER_SPRINT sod_init ~@2406~ // Fare ye well!
-				OUTER_SPRINT bg2_init ~@2406~ // Fare ye well!
-			END
-			17 BEGIN
-				// Faldorn
-				OUTER_SPRINT sod_init ~@2409~ // Oakfather watch over you.
-				OUTER_SPRINT bg2_init ~@2409~ // Oakfather watch over you.
-			END
-			18 BEGIN
-				// Kagain
-				OUTER_SPRINT sod_init ~@2412~ // Yeah bye.
-				OUTER_SPRINT bg2_init ~@2412~ // Yeah bye.
-			END
-			19 BEGIN
-				// Kivan
-				OUTER_SPRINT sod_init ~@2415~ // Farewell, mellonamin.
-				OUTER_SPRINT bg2_init ~@2415~ // Farewell, mellonamin.
-			END
-			20 BEGIN
-				// Quayle
-				OUTER_SPRINT sod_init ~@2418~ // Try to use your brain now that I won't be here to help you.
-				OUTER_SPRINT bg2_init ~@2418~ // Try to use your brain now that I won't be here to help you.
-			END
-			21 BEGIN
-				// Rasaad
-				OUTER_SPRINT sod_init ~@2421~ // Farewell, my friend.  May Selune's light guide you on your path.
-				OUTER_SPRINT bg2_init ~@2421~ // Farewell, my friend.  May Selune's light guide you on your path.
-			END
-			22 BEGIN
-				// Safana
-				OUTER_SPRINT sod_init ~@2424~ // Goodbye.  It's been...interesting.
-				OUTER_SPRINT bg2_init ~@2424~ // Goodbye.  It's been...interesting.
-			END
-			23 BEGIN
-				// Sharteel
-				OUTER_SPRINT sod_init ~@2427~ // Farewell and stay strong!
-				OUTER_SPRINT bg2_init ~@2427~ // Farewell and stay strong!
-			END
-			24 BEGIN
-				// Skie
-				OUTER_SPRINT sod_init ~@2430~ // See ya!  I'm outta here!
-				OUTER_SPRINT bg2_init ~@2430~ // See ya!  I'm outta here!
-			END
-			25 BEGIN
-				// Tiax
-				OUTER_SPRINT sod_init ~@2433~ // Tiax may...or may not...look well upon you when he rules all.
-				OUTER_SPRINT bg2_init ~@2433~ // Tiax may...or may not...look well upon you when he rules all.
-			END
-			26 BEGIN
-				// Viconia
-				OUTER_SPRINT sod_init ~@2436~ // Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.
-				OUTER_SPRINT bg2_init ~@2436~ // Farewell Hero of Baldur's Gate.  Do not trust them, they will turn on you...they always do.
-			END
-			27 BEGIN
-				// Yeslick
-				OUTER_SPRINT sod_init ~@2439~ // You take care of yourself, ya hear <PRO_BOYGIRL>?!
-				OUTER_SPRINT bg2_init ~@2439~ // You take care of yourself, ya hear <PRO_BOYGIRL>?!
-			END
-			28 BEGIN     // IMOEN
-				// Leaving pre-SoD: I've decided to take Duke Jannath up on her offer to train me in magic. Come see me when I've had a chance to settled in.
-				// Staying pre-BG2: Don't think for a moment you're going anywhere without me!
-				OUTER_SPRINT sod_init ~@2325~
-				OUTER_SPRINT bg2_init ~@2556~
-			END
-			DEFAULT
-				// Do nothing
-		END
-
-		// Get rid of duplicate post_Korlasz exit interjections
-		OUTER_SPRINT pk_group_i ~~
-		OUTER_SPRINT pk_group_s ~~
-		ACTION_IF npc_num < 7 BEGIN
-			OUTER_FOR ( x = 0; x < 7; ++x ) BEGIN
-				ACTION_IF (x != npc_num ) BEGIN
-					OUTER_SPRINT pk_group_i ~~~~~%pk_group_i%
-					%pk_i%x%%~~~~~
-					OUTER_SPRINT pk_group_s ~~~~~%pk_group_s%
-					%pk_s%x%%~~~~~
-				END
-			END
-		END
-
-		OUTER_SPRINT pk_group_init EVAL EVAL ~%pk_group_i%~
-		OUTER_SPRINT pk_group_stay EVAL EVAL ~%pk_group_s%~
-
-		// Start building the optional sections of the dialogue file
-		OUTER_SPRINT post_korlasz ~~
-		ACTION_IF npc_num < 7 THEN BEGIN
-			// Only the first seven in our list would prefer to leave after Korlasz
-			OUTER_SPRINT post_korlasz ~~~~~
-			CHAIN
-				IF WEIGHT #-999 ~Global("#L_%npc_name%Modded","GLOBAL",0) Global("EndOfBG1","GLOBAL",0) Global("#L_SarvQuests","GLOBAL",99) GlobalLT("#L_NPCPK","GLOBAL",2)~ THEN %join_file% POST_KORLASZ_ASK
-					%pk_init%
-					%pk_group_init%
-				END
-				+ ~!Global("#L_LetsHaveFun","GLOBAL",1)~ + @2279 /* ~Please don't go yet.  I still need you, for just a few more days.~ */ + POST_KORLASZ_STAY
-				+ ~Global("#L_LetsHaveFun","GLOBAL",1)~ + @2280 /* ~Please let me treat you to a little fun before you go.  Will a day or two make that much difference?~ */  + POST_KORLASZ_STAY
-				++ @2281 /* ~Of course you may leave, but not with that equipment.~ */  + POST_KORLASZ_STAY
-
-			CHAIN
-				IF ~~ THEN %join_file% POST_KORLASZ_STAY
-					%pk_stay%
-					%pk_group_stay%
-				END
-				IF ~~ THEN DO ~SetGlobal("#L_NPCPK","GLOBAL",2)~ EXIT
-			~~~~~
-		END
-
-		// Get rid of the duplicate pre-SoD/BG2 exit interjections
-		OUTER_SPRINT group_sod_exit_x ~~
-		OUTER_SPRINT group_bg2_exit_x ~~
-		OUTER_FOR ( x = 0; VARIABLE_IS_SET $npc_list(~%x%~); ++x ) BEGIN
-			ACTION_IF (x != npc_num ) BEGIN
-				OUTER_SPRINT group_sod_exit_x ~~~~~%group_sod_exit_x%
-				%sod_%x%%~~~~~
-				OUTER_SPRINT group_bg2_exit_x ~~~~~%group_bg2_exit_x%
-				%bg2_%x%%~~~~~
-			END
-		END
-
-		OUTER_SPRINT group_sod_exit EVAL EVAL ~%group_sod_exit_x%~
-		OUTER_SPRINT group_bg2_exit EVAL EVAL ~%group_bg2_exit_x%~
-
-		// Not everyone leaves the group when going to BG2
-		ACTION_IF (%npc_num% = 1) OR (%npc_num% = 2) OR (%npc_num% = 9) OR (%npc_num% = 10) OR (%npc_num% = 28) THEN BEGIN
-			OUTER_SPRINT pre_bg2 ~~~~~
-				CHAIN
-					IF WEIGHT #-996 ~Global("#L_SayGoodbye","LOCALS",1) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
-						%bg2_init%
-						%group_bg2_exit%
-					END
-					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND)~ EXIT~~~~~
-		END ELSE BEGIN
-			OUTER_SPRINT pre_bg2 ~~~~~
-				CHAIN
-					IF WEIGHT #-996 ~Global("#L_SayGoodbye","LOCALS",1) Global("#L_StartBG2","GLOBAL",1)~ THEN %join_file% EXIT_TO_BG2
-						%bg2_init%
-						%group_bg2_exit%
-					END
-					IF ~~ THEN DO ~SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT~~~~~
-		END
-
-//		PRINT "DEBUG POST_KORLASZ: %post_korlasz%"
-//		PRINT "DEBUG SOD_INIT: %sod_init%"
-//		PRINT "DEBUG GROUUP_SOD_EXIT: %group_sod_exit%"
-//		PRINT "DEBUG PRE_BG2: %pre_bg2%"
-//		PRINT "DEBUG GROUUP_BG2_EXIT: %group_bg2_exit%"
+	OUTER_FOR (npc_num = 0; VARIABLE_IS_SET $sod_npc_list(~%npc_num%~); ++npc_num) BEGIN 
+		OUTER_SPRINT npc_name $sod_npc_list("%npc_num%")
+		OUTER_SPRINT upper_name "%npc_name%"
+		ACTION_TO_UPPER upper_name
+		OUTER_SPRINT bcs_file EVAL ~BD%upper_name%.BCS~
 		
-		// Put it all together
-		<<<<<<<< .../npc_add.d
-			%post_korlasz%
-
-			// Everyone leaves the group prior to SoD
-			CHAIN
-				IF WEIGHT #-998 ~Global("#L_SayGoodbye","LOCALS",1) OR(3) Global("#L_StartCaelarAttack","GLOBAL",1) Global("#L_StartCaelarAttack","GLOBAL",2) Global("#L_StartCaelarAttack","GLOBAL",3)~ THEN %join_file% PRE_SOD_LEAVE
-					%sod_init%
-					%group_sod_exit%
-				END
-				IF ~~ THEN DO ~SetGlobal("#L_ExitTimerLeft","GLOBAL",1) SetGlobalTimer("#L_SoloExitTimer","GLOBAL",ONE_ROUND) ActionOverride("%upper_name%",LeaveParty()) ActionOverride("%upper_name%",SetGlobal("KickedOut","LOCALS",1)) ActionOverride("%upper_name%",EscapeArea())~ EXIT
-
-			%pre_bg2%
+		ACTION_IF ~%npc_name%~ STRING_EQUAL ~Jaheira~ BEGIN
+			OUTER_SPRINT bcs_file ~BDJAHEIR~
+		END ELSE ACTION_IF ~%npc_name%~ STRING_EQUAL ~Baeloth~ BEGIN
+			OUTER_SPRINT bcs_file ~BDBAELOT~
+		END ELSE ACTION_IF ~%npc_name%~ STRING_EQUAL ~Dynaheir~ BEGIN
+			OUTER_SPRINT bcs_file ~BDDYNAHE~
+		END ELSE ACTION_IF ~%npc_name%~ STRING_EQUAL ~Viconia~ BEGIN
+			OUTER_SPRINT bcs_file ~BDVICONI~
+		END
+			
+		/////////////////////////////////////
+		// BUILD THE BAF FILE FOR EACH NPC //
+		/////////////////////////////////////
+		// Set the NPCs up for saying goodbye or that they'll stay before moving to BG2
+		// Modders can set this to 0 if they don't want them to chime in
+		<<<<<<<< .../npc_add.baf
+		IF
+			Global("#L_SayGoodbye","LOCALS",0)
+			Global("#L_SayGoodbyeSet","LOCALS",0)
+		THEN
+			RESPONSE #100
+				SetGlobal("#L_SayGoodbye","LOCALS",1)
+				SetGlobal("#L_SayGoodbyeSet","LOCALS",1)
+		END
 		>>>>>>>>
-		COMPILE EVALUATE_BUFFER ~.../npc_add.d~ USING ~%tra_loc%/%s/dialogues.tra~
-
-	END // Loop
+		EXTEND_TOP ~%bcs_file%.bcs~ ~.../npc_add.baf~ EVALUATE_BUFFER
+	END // SoD Loop
 
 END // Function

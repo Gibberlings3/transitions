@@ -397,16 +397,16 @@
 // #LAdvGm1.d
 @2302	= ~You hear a voice, remarkably similar to Duke Belt's, echo strangely in your mind~ [BD69824]
 @2303	= ~So, <CHARNAME>, what would you like to do?~
-@2304	= ~I'd like to go to my room in the palace. (Start SoD)~
-@2305	= ~I'd like to go home. (Start SoD)~
-@2306	= ~I'd like to go to the Helm & Cloak Tavern. (Start SoD)~
+@2304	= ~I'd like to settle into my room in the palace. (Start SoD)~
+@2305	= ~I'd like to settle into my new home. (Start SoD)~
+@2306	= ~I'd like to find some inn somewhere to settle into. (Start SoD)~
 @2307	= ~I'd like to visit Imoen. (Start SoD)~
 @2308	= ~Nothing at this time.~
 @2309	= ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel. (Start BG2)~
 @2310	= ~May I suggest the tour of Durlag's Tower that is offered in Ulgoth's Beard?  It could prove quite interesting.~
 @2466	= ~I want to gather a group and head as far away from here as possible. (Start BG2)~
-@2378	= ~Before we go our separate ways, take your share of the gold. You've earned it.~
-@2379	= ~I guess it's time we go our separate ways. Thank you for your help. I can finally relax a little.~
+@2378	= ~Before we do, take your share of the gold. You've earned it.~
+@2379	= ~I guess it's time we go our separate ways.~
 @2532	= ~As you wish.~ // without the sound since it's used at the beginning of the conversation
 
 // Imoen leaves to go into training at the beginning of SoD
@@ -426,25 +426,26 @@
 @2336	= ~<CHARNAME>, you are s-safe now and Jaheira and I have p-places we should be, but we will s-stay if you have need of either of us.~
 
 // Dorn's post Korlasz and Pre-Sod exit dialogues and interjections
-@2340	= ~Me as well.~	 // Used by Ajantis as well since they probably aren't both in the group together
+@2340	= ~I cannot join you, <CHARNAME>. My patron commands me to be elsewhere.~
 @2341	= ~I can stay for a little while.~
 @2344	= ~<CHARNAME>, my patron would have me be elsewhere soon, but I can stay for short while if you need me.~
 @2346	= ~Until we meet again.~
 
 // Edwin's post Korlasz and Pre-Sod exit dialogues and interjections
-@2347	= ~(gives you an exaggerated yawn)~
+@2347	= ~Whatever. (As if I would care!)~
 @2348	= ~Fine. (sigh)~
 @2351	= ~I've just about had all I can take of this.  Are we done yet?~
 @2353	= ~I'm outta here!~
 
 // Neera's post Korlasz and Pre-Sod exit dialogues and interjections
-@2354	= ~I do have plans, yes.~
+@2354	= ~Well...goodluck I guess.~
 @2355	= ~Ok, for a little while.~
 @2356	= ~See ya!  Good luck and all.~
 @2358	= ~You're in the clear now, right?  Can I go?~
 
 // Baeloth's post Korlasz and Pre-Sod exit dialogues and interjections
-@2360	= ~You hog all the limelight.~
+@2360	= ~You're heading in the wrong direction. Again! I'll find the Underdark on my own...apparently. Look me up if you're ever in the neighhood. Or better yet, DON'T!~
+~You hog all the limelight.~
 @2361	= ~Have it your way, as always!~
 @2362	= ~Look for my name in lights, I'm bowing out of this dump!~
 @2364	= ~This bantering about Baldur's Gate is beyond boring! I have plans.  Huge plans!~
@@ -458,7 +459,7 @@
 @2374	= ~Farewell though I certainly shall not.~
 
 // Minsc's pre-SoD exit dialogue and interjections
-@2377	= ~If you need us, look for us at the Three Old Kegs.~
+@2377	= ~If you need Dynaheir and me and Boo, look for us at the Three Old Kegs.~
 @2385	= ~Oh, sorry, I didn't hear you.  I was talking to Boo.~
 @2386	= ~He said to make sure to pick up some fresh pumpkin seeds.~
 
@@ -499,7 +500,7 @@
 @2418	= ~Try to use your brain now that I won't be here to help you.~
 
 // Rasaad's pre-SoD/BG2 exit dialogue
-@2421	= ~Farewell, my friend.  May Selûne's light guide you on your path.~
+@2421	= ~Farewell, my friend.  May Selune's light guide you on your path.~
 
 // Safana's pre-SoD/BG2 exit dialogue
 @2424	= ~Goodbye.  It's been...interesting.~ 
@@ -592,6 +593,20 @@
 @2554	= ~And Boo.~
 @2555	= ~Yes, yes of course, and Boo.~
 @2556	= ~Don't think for a moment you're going anywhere without me!~
+
+// SoD NPCs say their goodbyes
+@2560	= ~You're leaving? Now? I should have known...~
+@2561	= ~It's been fun. Really fun! Really!~
+@2562	= ~Take care, <CHARNAME>...the fates can be fickle.~ 
+@2563	= ~A worthy tale our time together will make and I'll not tire of telling it.~
+@2564	= ~Then we must part ways once again. Selune watch over you.~
+@2565	= ~Just when things were getting interesting. Whatever.~
+@2566	= ~I will not be joining you, <CHARNAME>. I need to keep a lower profile that traveling with you allows.~
+
+// New lead-in line to the exit dialogues
+@2570	= ~Thank you for your help. I can finally relax a little.~
+@2571	= ~Thank you for your help, but I need to get as far away from here as I can.~
+@2572	= ~Thank you for your help, but now I'm heading south to see what adventures await me there.~
 
 /////////////////////
 // JOURNAL ENTRIES //

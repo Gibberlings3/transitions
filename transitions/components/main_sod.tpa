@@ -241,7 +241,6 @@ COPY_EXISTING ~BDSHCUT0.bcs~ ~override~
 BUT_ONLY_IF_IT_CHANGES
 
 // The 'magic' item given by Duke Belt that will allow for game advancement
-//   and getting to the SoD version of the palace
 // PC will find unusable broken remnants of it in Chateau Irenicus
 //   if it's in their inventory at the time of capture
 // PC will find a 'drained' unusable version of it in their personal chest
@@ -261,20 +260,21 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/#LAdvGm1.d~ USING ~%tra_loc%/%s/di
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAdvGm1 %UseMe% #LAdvGm1~ UNLESS ~#LAdvGm1~
 
-// Scripts to share profits and say goodbye during transitions
+// Scripts to share profits during transitions
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LCtNPCs.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit2.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit3.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit4.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit5.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSplit6.baf~
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LShare.baf~
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#LSayBye.baf~
 
-// Other NPC exit dialogue stuff is in its own file because it was pretty huge
+// Exit dialogues
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/player1.d~ USING ~%tra_loc%/%s/dialogues.tra~
 INCLUDE ~%mod_root%/components/exit_dialogues.tpa~
 LAF exit_dialogues END
 
-// Timer put in BALDUR so it'll transition to SoD or BG2 when solo no matter if AI is on or not
+// Timer put in BALDUR so it'll transition to SoD or BG2 when everyone leaves no matter if AI is on or not
 EXTEND_TOP ~BALDUR.BCS~ ~%mod_root%/scripts/solo_check.baf~
 
 // Cut scene that starts SoD
