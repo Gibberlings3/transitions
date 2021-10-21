@@ -197,7 +197,7 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LShare","GLOBAL",0)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 END
 
 IF
@@ -209,7 +209,7 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LShare","GLOBAL",0)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 END
 
 IF
@@ -221,7 +221,7 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LShare","GLOBAL",0)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 END
 
 IF
@@ -233,7 +233,7 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LShare","GLOBAL",0)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 END
 
 IF
@@ -245,7 +245,7 @@ THEN
 	RESPONSE #100
 		CutSceneId(Player1)
 		SetGlobal("#LShare","GLOBAL",0)
-		StartDialog("player1",Player1)
+		StartDialog("#LPlayer",Player1)
 END
 
 // Give each humanoid NPC their split
