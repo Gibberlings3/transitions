@@ -968,6 +968,7 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
+		SmallWait(10)
 		StartDialog("#LPlayer",Player1)
 		EndCutSceneMode()
 END

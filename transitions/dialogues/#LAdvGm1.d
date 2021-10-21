@@ -34,6 +34,6 @@ BEGIN ~#LAdvGm1~
 
 	IF ~~ THEN SPLIT_GOLD
 		SAY @2532 // ~As you wish.~
-		IF ~~ THEN DO ~SetGlobal("#L_TransTalk","GLOBAL",0) SetGlobal("#L_RecountParty","GLOBAL",1) StartCutSceneMode() StartCutSceneEx("#LCtNPCs",TRUE)~ EXIT
+		IF ~~ THEN DO ~SetGlobal("#L_TransTalk","GLOBAL",0) SetGlobal("#L_RecountParty","GLOBAL",1) StartCutSceneEx("#LCtNPCs",TRUE)~ EXIT
 	END
 	
