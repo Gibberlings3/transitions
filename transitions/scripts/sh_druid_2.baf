@@ -1,0 +1,100 @@
+////////////////////////////////////////////////////////////////
+// Updates the contents of PC's chest (inside the storehouse) //
+// Patched via main_eet.tpa                                   //
+////////////////////////////////////////////////////////////////
+
+// Activate the chest the first time the PC walks into the storehouse after obtaining their stronghold
+IF
+	Global("DruidStronghold","GLOBAL",1)
+	Global("#L_ChestActivated","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ChestActivated","MYAREA",1)
+		MoveContainerContents("AR0411*ToolCT2","AR1902*#LPlayerChest")
+		ContainerEnable("#LPlayerChest",TRUE)
+		ContainerEnable("Container 1",FALSE)
+    	Continue()
+END
+
+// Move everything from the PC's chest whereever it is at the moment
+// to their chest whereever they are located now
+// Will need to update this for every possible house award
+// OMG!  SAPIENT PEARWOOD!
+// Or busy servants ... who knows.
+// Transfer doesn't happen during SoD but afterwards the SoD chest needs to 'come home'
+IF
+	Global("#L_ChestActivated","MYAREA",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",27)
+	Global("#L_HouseBGate1","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG0006*PlayerChest00","AR1902*#LPlayerChest")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ChestActivated","MYAREA",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",27)
+	Global("#L_HouseBGate2","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG1107*PlayerChest00","AR1902*#LPlayerChest")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ChestActivated","MYAREA",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",27)
+	Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG3201*PlayerChest00","AR1902*#LPlayerChest")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ChestActivated","MYAREA",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",27)
+	Global("#L_HouseBeregost","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG3347*PlayerChest00","AR1902*#LPlayerChest")
+		SmallWait(1)
+		Continue()
+END
+
+// Allowing for multiple strongholds
+IF
+	Global("#L_ChestActivated","MYAREA",1)
+	!Global("#L_PlayerChestLocation","GLOBAL",27)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",27)
+		MoveContainerContents("#LBD0103*PlayerChest00","AR1902*#LPlayerChest")		// BG1 Room in Palace
+		MoveContainerContents("BD0103*PlayerChest00","AR1902*#LPlayerChest") 		// SoD Room in Palace
+		MoveContainerContents("BD1000*PlayerChest00","AR1902*#LPlayerChest") 		// 1st SoD Camp
+		MoveContainerContents("BD7100*PlayerChest00","AR1902*#LPlayerChest") 		// 2nd SoD Camp
+		MoveContainerContents("BD3000*PlayerChest00","AR1902*#LPlayerChest")		// 3rd SoD Camp
+		MoveContainerContents("AR0523*container4',"AR1902*#LPlayerChest")			// Bard Stronghold
+		MoveContainerContents("AR1306*container11","AR1902*#LPlayerChest")			// Fighter Stronghold
+		MoveContainerContents("AR0322*container5","AR1902*#LPlayerChest")			// Thief Stronghold
+		MoveContainerContents("AR1107*#LPlayerChest","AR1902*#LPlayerChest")		// Ranger Stronghold
+		MoveContainerContents("AR0903*#LPlayerChest","AR1902*#LPlayerChest")		// Paladin Stronghold
+		MoveContainerContents("AR0411*#LPlayerChest","AR1902*#LPlayerChest")		// Mage Stronghold
+		MoveContainerContents("AR0901*#LPlayerChest","AR1902*#LPlayerChest")		// Neutral Cleric Stronghold
+		MoveContainerContents("AR0902*#LPlayerChest","AR1902*#LPlayerChest")		// Good Cleric Stronghold
+		MoveContainerContents("AR0904*#LPlayerChest","AR1902*#LPlayerChest")		// Evil Cleric Stronghold
+		SmallWait(1)
+		Continue()
+END
+

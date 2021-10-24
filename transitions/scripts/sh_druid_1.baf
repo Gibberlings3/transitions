@@ -1,0 +1,33 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Spawn servant near the protagonist's stronghold (druid - outdoor druid area by the storehouse) //
+// A separate script is needed to update the PC's chest inside the storehouse                     //
+// Patched via main_eet.tpa                                                                       //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Spawn the servant the first time the PC is in the grove area after obtaining their stronghold
+IF
+	Global("DruidStronghold","GLOBAL",1)
+	Global("#L_ServantSpawned","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[4405.975],W)
+    	Continue()
+END
+
+// Have the servant welcome the PC
+IF
+	Exists("#LDPSrv1")
+	TriggerOverride("#LDPSrv1",Range(Player1,15))
+THEN
+	RESPONSE #100
+		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
+END
+
