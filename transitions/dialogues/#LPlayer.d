@@ -226,8 +226,6 @@ CHAIN
 CHAIN
 	IF ~~ THEN %AJANTIS_JOINED% PK_STAY
 		@2283 // As you wish.  I owe you that at least.
-		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2327
-		== %KHALID_JOINED% IF ~Global("#L_KhalidModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") OR(2) GlobalGT("#L_JaheiraModded","GLOBAL",0) !IsValidForPartyDialogue("Jaheira")~ @2333
 		== %DORN_JOINED% IF ~Global("#L_DornModded","GLOBAL",0) IsValidForPartyDialogue("Dorn")~ @2341
 		== %EDWIN_JOINED% IF ~Global("#L_EdwinModded","GLOBAL",0) IsValidForPartyDialogue("Edwin")~ @2348
 		== %NEERA_JOINED% IF ~Global("#L_NeeraModded","GLOBAL",0) IsValidForPartyDialogue("Neera")~ @2355
@@ -238,9 +236,6 @@ CHAIN
 CHAIN
 	IF ~~ THEN %NEERA_JOINED% PK_STAY
 		@2355
-		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2283 // As you wish.  I owe you that at least.
-		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2327
-		== %KHALID_JOINED% IF ~Global("#L_KhalidModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") OR(2) GlobalGT("#L_JaheiraModded","GLOBAL",0) !IsValidForPartyDialogue("Jaheira")~ @2333
 		== %DORN_JOINED% IF ~Global("#L_DornModded","GLOBAL",0) IsValidForPartyDialogue("Dorn")~ @2341
 		== %EDWIN_JOINED% IF ~Global("#L_EdwinModded","GLOBAL",0) IsValidForPartyDialogue("Edwin")~ @2348
 		== %BAELOTH_JOINED% IF ~Global("#L_BaelothModded","GLOBAL",0) IsValidForPartyDialogue("Baeloth")~ @2361
@@ -250,11 +245,7 @@ CHAIN
 CHAIN
 	IF ~~ THEN %EDWIN_JOINED% PK_STAY
 		@2348
-		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2283 // As you wish.  I owe you that at least.
-		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2327
-		== %KHALID_JOINED% IF ~Global("#L_KhalidModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") OR(2) GlobalGT("#L_JaheiraModded","GLOBAL",0) !IsValidForPartyDialogue("Jaheira")~ @2333
 		== %DORN_JOINED% IF ~Global("#L_DornModded","GLOBAL",0) IsValidForPartyDialogue("Dorn")~ @2341
-		== %NEERA_JOINED% IF ~Global("#L_NeeraModded","GLOBAL",0) IsValidForPartyDialogue("Neera")~ @2355
 		== %BAELOTH_JOINED% IF ~Global("#L_BaelothModded","GLOBAL",0) IsValidForPartyDialogue("Baeloth")~ @2361
 	END
 	IF ~~ EXIT
@@ -262,24 +253,13 @@ CHAIN
 CHAIN
 	IF ~~ THEN %BAELOTH_JOINED% PK_STAY
 		@2361
-		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2283 // As you wish.  I owe you that at least.
-		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2327
-		== %KHALID_JOINED% IF ~Global("#L_KhalidModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") OR(2) GlobalGT("#L_JaheiraModded","GLOBAL",0) !IsValidForPartyDialogue("Jaheira")~ @2333
 		== %DORN_JOINED% IF ~Global("#L_DornModded","GLOBAL",0) IsValidForPartyDialogue("Dorn")~ @2341
-		== %EDWIN_JOINED% IF ~Global("#L_EdwinModded","GLOBAL",0) IsValidForPartyDialogue("Edwin")~ @2348
-		== %NEERA_JOINED% IF ~Global("#L_NeeraModded","GLOBAL",0) IsValidForPartyDialogue("Neera")~ @2355
 	END
 	IF ~~ EXIT
 
-CHAIN
-	IF ~~ THEN %DORN_JOINED% PK_STAY
-		@2341
-		== %AJANTIS_JOINED% IF ~Global("#L_AjantisModded","GLOBAL",0) IsValidForPartyDialogue("AJANTIS")~ @2283 // As you wish.  I owe you that at least.
-		== %JAHEIRA_JOINED% IF ~Global("#L_JaheiraModded","GLOBAL",0) IsValidForPartyDialogue("Jaheira")~ @2327
-		== %KHALID_JOINED% IF ~Global("#L_KhalidModded","GLOBAL",0) IsValidForPartyDialogue("KHALID") OR(2) GlobalGT("#L_JaheiraModded","GLOBAL",0) !IsValidForPartyDialogue("Jaheira")~ @2333
-		== %EDWIN_JOINED% IF ~Global("#L_EdwinModded","GLOBAL",0) IsValidForPartyDialogue("Edwin")~ @2348
-		== %NEERA_JOINED% IF ~Global("#L_NeeraModded","GLOBAL",0) IsValidForPartyDialogue("Neera")~ @2355
-		== %BAELOTH_JOINED% IF ~Global("#L_BaelothModded","GLOBAL",0) IsValidForPartyDialogue("Baeloth")~ @2361
+APPEND %DORN_JOINED%
+	IF ~~ THEN BEGIN PK_STAY
+		SAY @2341
+		IF ~~ EXIT
 	END
-	IF ~~ EXIT
-
+END
