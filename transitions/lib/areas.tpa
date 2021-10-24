@@ -173,24 +173,23 @@ BEGIN
 	END
 END
 
-//////////////////////////////////////////
-// Make a copy of an existing container //
-//////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Make a copy of an existing container              //
+// Will wipe out items, owner, traps, locks and keys //
+///////////////////////////////////////////////////////
 DEFINE_PATCH_FUNCTION CLONE_CONTAINER
 	INT_VAR
 		flags_new = ~-1~			// Optional - default is to use whatever is in the original
 	STR_VAR
  		name_old = ""				// Required - name of container to copy
 		name_new = ""				// Required - name of new container
-        key_new = "NO CHANGE"		// Optional - default is to use the original
-        script_new = "NO CHANGE" 	// Optional - default is to use the original
 	RET
 		offset_old_container
 		offset_new_container
 BEGIN
 	SET offset_old_container = 0
 	SET offset_new_container = 0
-
+	
 	PATCH_IF STRING_LENGTH ~%name_old%~ == 0 || STRING_LENGTH ~%name_new%~ == 0 BEGIN
 		PATCH_FAIL ~fun CLONE_CONTAINER called with arguments name_old:"%name_old%" and name_new:"%name_new%"~
   	END
@@ -205,6 +204,188 @@ BEGIN
 	END
 	
 	PATCH_IF offset_old_container > 0 BEGIN
+		// Update the offsets (and count of containers) in the header
+		SET size_container = 0x00c0
+
+		READ_SHORT 0x0074 num_containers
+		WRITE_SHORT 0x0074 (num_containers + 1)
+		
+		READ_LONG 0x0070 offset_containers
+
+		READ_LONG (0x0054) offset_actors
+		PATCH_IF offset_actors > offset_containers BEGIN
+			WRITE_LONG (0x0054) (offset_actors + (size_container))
+		END
+
+		// Update embedded CRE offsets in ACTORS section
+		READ_SHORT (0x0058) num_actors
+		SET size_actor = 0x0110 
+		FOR (idx = 0; idx < num_actors; idx = idx + 1) BEGIN
+			READ_LONG (offset_actors + (idx * size_actor) + 0x0088) offset_cre
+			PATCH_IF offset_cre > offset_containers BEGIN
+				WRITE_LONG (offset_actors + (idx * size_actor) + 0x0088) (offset_cre + size_container)
+			END
+		END
+		
+		READ_LONG (0x0060) offset_spawnpoints
+		PATCH_IF offset_spawnpoints > offset_containers BEGIN
+			WRITE_LONG (0x0060) (offset_spawnpoints + (size_container))
+		END
+			
+		READ_LONG (0x0068) offset_entrances
+		PATCH_IF offset_entrances > offset_containers BEGIN
+			WRITE_LONG (0x0068) (offset_entrances + (size_container))
+		END
+			
+		READ_LONG (0x005c) offset_regions
+		PATCH_IF offset_regions > offset_containers BEGIN
+			WRITE_LONG (0x0070) (offset_regions + (size_container))
+		END
+			
+		READ_LONG (0x0078) offset_items
+		PATCH_IF offset_items > offset_containers BEGIN
+			WRITE_LONG (0x0078) (offset_items + (size_container))
+		END
+			
+		READ_LONG (0x007c) offset_vertices
+		PATCH_IF offset_vertices > offset_containers BEGIN
+			WRITE_LONG (0x007c) (offset_vertices + (size_container))
+		END
+			
+		READ_LONG (0x0084) offset_ambients
+		PATCH_IF offset_ambients > offset_containers BEGIN
+			WRITE_LONG (0x0084) (offset_ambients  + (size_container))
+		END
+			
+		READ_LONG (0x0088) offset_variables
+		PATCH_IF offset_variables > offset_containers BEGIN
+			WRITE_LONG (0x0088) (offset_variables + (size_container))
+		END
+			
+		READ_LONG (0x0090) offset_tile_flags
+		PATCH_IF offset_tile_flags > offset_containers BEGIN
+			WRITE_LONG (0x0090) (offset_tile_flags + (size_container))
+		END
+			
+		READ_LONG (0x00a0) offset_bitmask
+		PATCH_IF offset_bitmask > offset_containers BEGIN
+			WRITE_LONG (0x00a0) (offset_bitmask + (size_container))
+		END
+			
+		READ_LONG (0x00a8) offset_doors
+		PATCH_IF offset_doors > offset_containers BEGIN
+			WRITE_LONG (0x00a8) (offset_doors + (size_container))
+		END
+			
+		READ_LONG (0x00b0) offset_animation
+		PATCH_IF offset_animation > offset_containers BEGIN
+			WRITE_LONG (0x00b0) (offset_animation + (size_container))
+		END
+			
+		READ_LONG (0x00b8) offset_tiles
+		PATCH_IF offset_tiles > offset_containers BEGIN
+			WRITE_LONG (0x00b8) (offset_tiles + (size_container))
+		END
+			
+		// Update open and closed search square offsets in the TILED OBJECTS section
+		READ_LONG (0x00b4) num_tiles
+		SET size_tile = 0x006C 
+		FOR (idx = 0; idx < num_tiles; idx = idx + 1) BEGIN
+			READ_LONG (offset_tiles + (idx * size_tile) + 0x002c) offset_open_tiles
+			READ_LONG (offset_tiles + (idx * size_tile) + 0x0038) offset_closed_tiles
+			PATCH_IF offset_open_tiles > offset_containers BEGIN
+				WRITE_LONG (offset_tiles + (idx * size_tile) + 0x002c) (offset_open_tiles + size_container)
+			END
+			PATCH_IF offset_closed_tiles > offset_containers BEGIN
+				WRITE_LONG (offset_tiles + (idx * size_tile) + 0x0038) (offset_closed_tiles + size_container)
+			END
+		END
+
+		READ_LONG (0x00bc) offset_songs
+		PATCH_IF offset_songs > offset_containers BEGIN
+			WRITE_LONG (0x00bc) (offset_songs + (size_container))
+		END
+			
+		READ_LONG (0x00c0) offset_rests
+		PATCH_IF offset_rests > offset_containers BEGIN
+			WRITE_LONG (0x00c0) (offset_rests + (size_container))
+		END
+			
+		READ_LONG (0x00c4) offset_maps
+		PATCH_IF offset_maps > offset_containers BEGIN
+			WRITE_LONG (0x00c4) (offset_maps + (size_container))
+		END
+			
+		READ_LONG (0x00cc) offset_projtrap
+		PATCH_IF offset_projtrap > offset_containers BEGIN
+			WRITE_LONG (0x00cc) (offset_projtrap + (size_container))
+		END
+
+		// Update effect block offsets in the PROJECTILE TRAPS section
+		READ_LONG (0x00d0) num_tiles
+		SET size_projtrap = 0x001c
+		FOR (idx = 0; idx < num_tiles; idx = idx + 1) BEGIN
+			READ_LONG (offset_projtrap + (idx * size_projtrap) + 0x0008) offset_effect_block
+			PATCH_IF offset_effect_block > offset_containers BEGIN
+				WRITE_LONG (offset_projtrap + (idx * size_projtrap) + 0x0008) (offset_effect_block + size_container)
+			END
+		END
+		
+		// Read in the values of the container to be cloned
+		READ_SHORT (offset_old_container + 0x0020) x_coord
+		READ_SHORT (offset_old_container + 0x0022) y_coord
+		READ_SHORT (offset_old_container + 0x0024) old_type
+		READ_SHORT (offset_old_container + 0x0026) lock_diff
+		READ_LONG (offset_old_container + 0x0028) use_flags
+		READ_SHORT (offset_old_container + 0x002c) trap_det_diff
+		READ_SHORT (offset_old_container + 0x002e) trap_rem
+		READ_SHORT (offset_old_container + 0x0032) trap_detected
+		READ_SHORT (offset_old_container + 0x0034) trap_x
+		READ_SHORT (offset_old_container + 0x0036) trap_y
+		READ_SHORT (offset_old_container + 0x0038) bb_left
+		READ_SHORT (offset_old_container + 0x003a) bb_top
+		READ_SHORT (offset_old_container + 0x003c) bb_right
+		READ_SHORT (offset_old_container + 0x003e) bb_bottom
+		READ_LONG (offset_old_container + 0x0050) first_vertex
+		READ_SHORT (offset_old_container + 0x0054) num_vertices
+		READ_SHORT (offset_old_container + 0x0056) trigger_range
+		READ_LONG (offset_old_container + 0x0080) break_diff
+		
+		PATCH_IF flags_new > ~-1~ BEGIN
+			SET use_flags = flags_new
+		END
+		
+		// Add the container structure to the ARE after all offsets are updated
+		// Can't use stock functions because they require vertices and there is an unknown number of them
+		// besides, there's no need to duplicate vertices
+		SET offset_new_container = offset_containers + (num_containers * size_container)
+		INSERT_BYTES offset_new_container size_container
+		WRITE_ASCIIE offset_new_container ~%name_new%~ (32)
+		WRITE_SHORT (offset_new_container + 0x0020) x_coord
+		WRITE_SHORT (offset_new_container + 0x0022) y_coord
+		WRITE_SHORT (offset_new_container + 0x0024) old_type
+		WRITE_SHORT (offset_new_container + 0x0026) lock_diff
+		WRITE_LONG (offset_new_container + 0x0028) use_flags
+		WRITE_SHORT (offset_new_container + 0x002c) trap_det_diff
+		WRITE_SHORT (offset_new_container + 0x002e) trap_rem
+		WRITE_SHORT (offset_new_container + 0x0030) 0 // Not trapped
+		WRITE_SHORT (offset_new_container + 0x0032) trap_detected
+		WRITE_SHORT (offset_new_container + 0x0034) trap_x
+		WRITE_SHORT (offset_new_container + 0x0036) trap_y
+		WRITE_SHORT (offset_new_container + 0x0038) bb_left
+		WRITE_SHORT (offset_new_container + 0x003a) bb_top
+		WRITE_SHORT (offset_new_container + 0x003c) bb_right
+		WRITE_SHORT (offset_new_container + 0x003e) bb_bottom
+		WRITE_LONG (offset_new_container + 0x0040) 0 // No items
+		WRITE_LONG (offset_new_container + 0x0044) 0
+		WRITE_ASCII (offset_new_container + 0x0048) ~~ (8) // No trap script
+		WRITE_LONG (offset_new_container + 0x0050) first_vertex
+		WRITE_SHORT (offset_new_container + 0x0054) num_vertices
+		WRITE_SHORT (offset_new_container + 0x0056) trigger_range
+		WRITE_ASCII (offset_new_container + 0x0058) ~~ (32) // No owner
+		WRITE_ASCII (offset_new_container + 0x0078) ~~ (8) // No key
+		WRITE_LONG (offset_new_container + 0x0080) break_diff
+		WRITE_LONG (offset_new_container + 0x0084) ~-1~ // No lockpick strref
 	END
 END
 
@@ -395,7 +576,7 @@ BEGIN
 			
 			READ_LONG (0x0054) offset_actors
 			PATCH_IF offset_actors > offset_regions BEGIN
-				WRITE_LONG (0x0054) (offset_spawnpoints + (size_region))
+				WRITE_LONG (0x0054) (offset_actors + (size_region))
 			END
 
 			// Update embedded CRE offsets in ACTORS section
