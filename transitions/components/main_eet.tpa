@@ -17,5 +17,12 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Add01.baf~ EVAL
 // Servant dialogue
 COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/sh_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
 
-// Bard Stronghold - use the chest by the 'ticket taker' desk
+// Bard Stronghold - use the chest by the 'ticket taker' desk	(Chest location 21 = AR0523*container4)
 EXTEND_TOP ~AR0523.BCS~ ~%mod_root%/scripts/sh_bard.baf~
+
+// Fighter Stronghold - use the chest next to the butler		(Chest location 22 = AR1306*container11)
+EXTEND_TOP ~AR1306.BCS~ ~%mod_root%/scripts/sh_fighter.baf~
+
+// Thief Stronghold - use the chest next to the vendor/fence	(Chest location 23 = AR0322*container5)
+EXTEND_TOP ~AR0322.BCS~ ~%mod_root%/scripts/ah_thief.baf~
+
