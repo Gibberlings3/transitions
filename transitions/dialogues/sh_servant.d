@@ -3,7 +3,7 @@
 // Compiled via main_eet.tpa                     //
 ///////////////////////////////////////////////////
 APPEND ~#LDPSrv1~
-	IF ~AreaCheck("AR0523")~ THEN stronghold
+	IF ~OR(2) AreaCheck("AR0523") AreaCheck("AR1306") AreaCheck("AR1107") AreaCheck("AR0322") AreaCheck("AR0411") AreaCheck("AR1902") AreaCheck("AR0902") AreaCheck("AR0901") AreaCheck("AR0904") AreaCheck("AR0903")~ THEN stronghold
 		SAY @2580 /* ~Excuse me, <PRO_SIRMAAM>. The Dukes of Baldurs Gate send their greetings and best wishes as well the chest here containing your possessions.~ */
 		IF ~GlobalLT("bd_plot","GLOBAL",586)~ GOTO hero_bg
 		IF ~!GlobalLT("bd_plot","GLOBAL",586)~ GOTO hero_sc
