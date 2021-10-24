@@ -1,0 +1,67 @@
+////////////////////////////////////////////////////////////////////////////////
+// Spawn servant near the protagonist's stronghold (cleric - temple district) //
+// Separate scripts are needed to update the PC's chest inside their temples  //
+// Patched via main_eet.tpa                                                   //
+////////////////////////////////////////////////////////////////////////////////
+
+// Spawn the servant the first time the PC is in the temple district area after obtaining their stronghold
+IF
+	Global("JoinLathander","GLOBAL",1)
+	Global("#L_ServantSpawned","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[2940.1600],NW)
+    	Continue()
+END
+
+IF
+	Global("JoinHelm","GLOBAL",1)
+	Global("#L_ServantSpawned","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[1935.997],SE)
+    	Continue()
+END
+
+IF
+	Global("JoinTalos","GLOBAL",1)
+	Global("#L_ServantSpawned","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[2110.2350],NW)
+    	Continue()
+END
+
+// Have the servant welcome the PC
+IF
+	Exists("#LDPSrv1")
+	TriggerOverride("#LDPSrv1",Range(Player1,15))
+THEN
+	RESPONSE #100
+		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
+END
+

@@ -101,3 +101,40 @@ COPY_EXISTING ~AR1902.ARE~ ~override~
 EXTEND_TOP ~AR1900.BCS~ ~%mod_root%/scripts/sh_druid_1.baf~	// Servant is spawned outside the storehouse
 EXTEND_TOP ~AR1902.BCS~ ~%mod_root%/scripts/sh_druid_2.baf~
 
+// Cleric Strongholds
+// Servant is spawned in the temple district near but outside of their respective temples
+EXTEND_TOP ~AR0900.BCS~ ~%mod_root%/scripts/sh_cleric_1.baf~
+
+// Lathander
+COPY_EXISTING ~AR0902.ARE~ ~override~
+	LPF CLONE_CONTAINER
+		INT_VAR
+			flags_new = 32	// Disabled until the player receives the stronghold
+		STR_VAR
+			name_old = "Chest 1"					// Required - name of container to copy
+			name_new = "#LPlayerChest"				// Required - name of new container
+	END
+EXTEND_TOP ~AR0902.BCS~ ~%mod_root%/scripts/sh_cleric_good.baf~
+
+// Helm
+COPY_EXISTING ~AR0901.ARE~ ~override~
+	LPF CLONE_CONTAINER
+		INT_VAR
+			flags_new = 32	// Disabled until the player receives the stronghold
+		STR_VAR
+			name_old = "Chest 1"					// Required - name of container to copy
+			name_new = "#LPlayerChest"				// Required - name of new container
+	END
+EXTEND_TOP ~AR0901.BCS~ ~%mod_root%/scripts/sh_cleric_neutral.baf~
+
+// Talos
+COPY_EXISTING ~AR0904.ARE~ ~override~
+	LPF CLONE_CONTAINER
+		INT_VAR
+			flags_new = 32	// Disabled until the player receives the stronghold
+		STR_VAR
+			name_old = "Chest 1"					// Required - name of container to copy
+			name_new = "#LPlayerChest"				// Required - name of new container
+	END
+EXTEND_TOP ~AR0904.BCS~ ~%mod_root%/scripts/sh_cleric_evil.baf~
+
