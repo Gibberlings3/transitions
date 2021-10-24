@@ -24,5 +24,30 @@ EXTEND_TOP ~AR0523.BCS~ ~%mod_root%/scripts/sh_bard.baf~
 EXTEND_TOP ~AR1306.BCS~ ~%mod_root%/scripts/sh_fighter.baf~
 
 // Thief Stronghold - use the chest next to the vendor/fence	(Chest location 23 = AR0322*container5)
-EXTEND_TOP ~AR0322.BCS~ ~%mod_root%/scripts/ah_thief.baf~
+EXTEND_TOP ~AR0322.BCS~ ~%mod_root%/scripts/sh_thief.baf~
 
+// Ranger Stronghold - use new chest							(Chest location 24 = AR1107*PlayerChest00)
+COPY_EXISTING ~AR1107.ARE~ ~override~
+	WRITE_ASCII AREA_SCRIPT ~AR1107~ (8)	// Need to fix the area's script - it's using the wrong one
+	LPF fj_are_structure
+		INT_VAR
+			fj_type  = 2
+			fj_loc_x = 705
+			fj_loc_y = 385
+			fj_trap_loc_x = 755
+			fj_loc_y = 435
+			fj_vertex_0 = 702 + (361 << 16)
+			fj_vertex_1 = 685 + (358 << 16)
+			fj_vertex_2 = 684 + (345 << 16)
+			fj_vertex_3 = 691 + (330 << 16)
+			fj_vertex_4 = 708 + (334 << 16)
+			fj_vertex_5 = 709 + (346 << 16)
+			fj_box_left = 684
+			fj_box_top = 330
+			fj_box_right = 709
+			fj_box_bottom = 361			
+		STR_VAR
+			fj_structure_type = ~container~
+			fj_name = ~PlayerChest00~
+	END
+EXTEND_TOP ~AR1107.BCS~ ~%mod_root%/scripts/sh_ranger.baf~
