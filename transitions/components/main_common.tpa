@@ -3,21 +3,20 @@
 ////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION main_common BEGIN
-	ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
-		INCLUDE ~%mod_root%/components/main_sod.tpa~
-	END
-
-	ACTION_IF GAME_IS ~eet~ BEGIN
-		INCLUDE ~%mod_root%/components/main_eet.tpa~
-	END
-
 	ACTION_IF (GAME_IS ~bgee eet~) BEGIN
 		INCLUDE ~%mod_root%/components/main_bg1.tpa~
+	END
+
+	ACTION_IF (GAME_INCLUDES ~sod~) BEGIN
+		INCLUDE ~%mod_root%/components/main_sod.tpa~
 	END
 
 	ACTION_IF (GAME_IS ~bg2ee eet~) BEGIN
 		INCLUDE ~%mod_root%/components/main_bg2.tpa~
 	END
 
+	ACTION_IF GAME_IS ~eet~ BEGIN
+		INCLUDE ~%mod_root%/components/main_eet.tpa~
+	END
 END
 
