@@ -137,4 +137,3 @@ COPY_EXISTING ~AR0904.ARE~ ~override~
 			name_new = "#LPlayerChest"				// Required - name of new container
 	END
 EXTEND_TOP ~AR0904.BCS~ ~%mod_root%/scripts/sh_cleric_evil.baf~
-
