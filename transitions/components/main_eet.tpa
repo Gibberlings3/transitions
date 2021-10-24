@@ -11,3 +11,11 @@ EXTEND_TOP ~BD0103.bcs~ ~%mod_root%/scripts/main_eet.baf~ EVAL
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~ EVAL
 COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Add01.baf~ EVAL
 
+////////////////////////////////////////////
+// BG2 Stronghold chests
+////////////////////////////////////////////
+// Servant dialogue
+COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/sh_servant.d~ USING ~%tra_loc%/%s/dialogues.tra~
+
+// Bard Stronghold - use the chest by the 'ticket taker' desk
+EXTEND_TOP ~AR0523.BCS~ ~%mod_root%/scripts/sh_bard.baf~

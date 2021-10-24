@@ -309,3 +309,16 @@ COMPILE EVALUATE_BUFFER ~%mod_root%/dialogues/sod_palace.d~ USING ~%tra_loc%/%s/
 // For now, just get rid of Ophyllis if PC didn't lose their gold
 EXTEND_TOP ~BD0116.BCS~ ~%mod_root%/scripts/BD0116_skip_treasurer.baf~
 
+// Update SoD's handling of the chest
+COPY_EXISTING ~BD1000.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",1)~ ~SetGlobal("BD_PlayerChest","GLOBAL",1) SetGlobal("#L_PlayerChestLocation","GLOBAL",11)~
+	END
+COPY_EXISTING ~BD7100.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",2)~ ~SetGlobal("BD_PlayerChest","GLOBAL",2) SetGlobal("#L_PlayerChestLocation","GLOBAL",12)~
+	END
+COPY_EXISTING ~BD3000.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",3)~ ~SetGlobal("BD_PlayerChest","GLOBAL",3) SetGlobal("#L_PlayerChestLocation","GLOBAL",13)~
+	END

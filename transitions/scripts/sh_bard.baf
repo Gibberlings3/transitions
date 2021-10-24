@@ -1,0 +1,97 @@
+//////////////////////////////////////////////////////////
+// Spawn servant in the protagonist's stronghold (bard) //
+// Updates the contents of PC's chest                   //
+// Patched via main_eet.tpa                             //
+//////////////////////////////////////////////////////////
+
+// Spawn the servant the first time the PC enters their stronghold
+IF
+	Global("#L_ServantSpawned","MYAREA",0)
+	GlobalGT("bd_player_exiled","GLOBAL",0)		// Must be on friendly terms with the dukes
+	OR(5)										// Must have a chest somewhere in BG1/SoD
+		Global("#L_AcceptedRoom","GLOBAL",1)
+		Global("#L_HouseBGate1","GLOBAL",2)
+		Global("#L_HouseBGate2","GLOBAL",2)
+		Global("#L_HouseBeregost","GLOBAL",2)
+		Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_ServantSpawned","MYAREA",1)
+    	CreateCreature("#LDPSrv1",[290.1100],S)
+    	Continue()
+END
+
+// Have the servant welcome the PC
+IF
+	Exists("#LDPSrv1")
+	TriggerOverride("#LDPSrv1",Range(Player1,15))
+THEN
+	RESPONSE #100
+		ActionOverride("#LDPSrv1",StartDialogueNoSet(Player1))
+END
+
+// Move everything from the PC's chest whereever it is at the moment
+// to their chest whereever they are located now
+// Will need to update this for every possible house award
+// OMG!  SAPIENT PEARWOOD!
+// Or busy servants ... who knows.
+// Transfer doesn't happen during SoD but afterwards the SoD chest needs to 'come home'
+IF
+	Global("#L_ServantSpawned","MYAREA",2)
+	!Global("#L_PlayerChestLocation","GLOBAL",21)
+	Global("#L_HouseBGate1","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG0006*PlayerChest00","AR0523*container4")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ServantSpawned","MYAREA",2)
+	!Global("#L_PlayerChestLocation","GLOBAL",21)
+	Global("#L_HouseBGate2","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG1107*PlayerChest00","AR0523*container4")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ServantSpawned","MYAREA",2)
+	!Global("#L_PlayerChestLocation","GLOBAL",21)
+	Global("#L_HouseHHedge","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG3201*PlayerChest00","AR0523*container4")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ServantSpawned","MYAREA",2)
+	!Global("#L_PlayerChestLocation","GLOBAL",21)
+	Global("#L_HouseBeregost","GLOBAL",2)
+THEN
+	RESPONSE #100
+		MoveContainerContents("#LBG3347*PlayerChest00","AR0523*container4")
+		SmallWait(1)
+		Continue()
+END
+
+IF
+	Global("#L_ServantSpawned","MYAREA",2)
+	!Global("#L_PlayerChestLocation","GLOBAL",21)
+THEN
+	RESPONSE #100
+		SetGlobal("#L_PlayerChestLocation","GLOBAL",21)
+		MoveContainerContents("#LBD0103*PlayerChest00","AR0523*container4")	// BG1 Room in Palace
+		MoveContainerContents("BD0103*PlayerChest00","AR0523*container4") 	// SoD Room in Palace
+		MoveContainerContents("BD1000*PlayerChest00","AR0523*container4") 	// 1st SoD Camp
+		MoveContainerContents("BD7100*PlayerChest00","AR0523*container4") 	// 2nd SoD Camp
+		MoveContainerContents("BD3000*PlayerChest00","AR0523*container4")	// 3rd SoD Camp
+		SmallWait(1)
+		Continue()
+END
+

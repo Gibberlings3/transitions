@@ -27,19 +27,3 @@ LAF UPDATE_BCS
 		baf_name = ~BG0702~			// like my_new_BG0146
 		bcs_name = EVAL ~%BaldursGateDocks_Harbormaster%~			// like BG0146
 END
-
-// Update SoD's handling of the chest
-ACTION_IF GAME_INCLUDES ~sod~ BEGIN
-	COPY_EXISTING ~BD1000.BCS~ ~Override~
-		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",1)~ ~SetGlobal("BD_PlayerChest","GLOBAL",1) SetGlobal("#L_PlayerChestLocation","GLOBAL",11)~
-		END
-	COPY_EXISTING ~BD7100.BCS~ ~Override~
-		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",2)~ ~SetGlobal("BD_PlayerChest","GLOBAL",2) SetGlobal("#L_PlayerChestLocation","GLOBAL",12)~
-		END
-	COPY_EXISTING ~BD3000.BCS~ ~Override~
-		DECOMPILE_AND_PATCH BEGIN
-			REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("BD_PlayerChest","GLOBAL",3)~ ~SetGlobal("BD_PlayerChest","GLOBAL",3) SetGlobal("#L_PlayerChestLocation","GLOBAL",13)~
-		END
-END

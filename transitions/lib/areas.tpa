@@ -173,6 +173,41 @@ BEGIN
 	END
 END
 
+//////////////////////////////////////////
+// Make a copy of an existing container //
+//////////////////////////////////////////
+DEFINE_PATCH_FUNCTION CLONE_CONTAINER
+	INT_VAR
+		flags_new = ~-1~			// Optional - default is to use whatever is in the original
+	STR_VAR
+ 		name_old = ""				// Required - name of container to copy
+		name_new = ""				// Required - name of new container
+        key_new = "NO CHANGE"		// Optional - default is to use the original
+        script_new = "NO CHANGE" 	// Optional - default is to use the original
+	RET
+		offset_old_container
+		offset_new_container
+BEGIN
+	SET offset_old_container = 0
+	SET offset_new_container = 0
+
+	PATCH_IF STRING_LENGTH ~%name_old%~ == 0 || STRING_LENGTH ~%name_new%~ == 0 BEGIN
+		PATCH_FAIL ~fun CLONE_CONTAINER called with arguments name_old:"%name_old%" and name_new:"%name_new%"~
+  	END
+  	GET_OFFSET_ARRAY array_off_containers ARE_V10_CONTAINERS
+	PHP_EACH array_off_containers AS idx_container => offset_container BEGIN
+    	PATCH_IF offset_old_container == 0 BEGIN
+    		READ_ASCII offset_container container_name (32) NULL
+      		PATCH_IF ~%container_name%~ STR_EQ ~%name_old%~ BEGIN
+        		SET offset_old_container = offset_container
+      		END
+    	END
+	END
+	
+	PATCH_IF offset_old_container > 0 BEGIN
+	END
+END
+
 //////////////////////////////////////
 // Unlock all containers in an area //
 //////////////////////////////////////

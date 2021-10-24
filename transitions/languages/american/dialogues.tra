@@ -608,6 +608,11 @@
 @2571	= ~Thank you for your help, but I need to get as far away from here as I can.~
 @2572	= ~Thank you for your help, but now I'm heading south to see what adventures await me there.~
 
+// New servant lines when delivering possessions to the PC's stronghold
+@2580	= ~Excuse me, <PRO_SIRMAAM>. The Dukes of Baldurs Gate send their greetings and best wishes as well the chest here containing your possessions.~
+@2581	= ~M'<PROPER_LORDLADY>, it has been an real honor to serve the Hero of the Sword Coast.~
+
+
 /////////////////////
 // JOURNAL ENTRIES //
 /////////////////////

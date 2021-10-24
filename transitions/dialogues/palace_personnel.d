@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 // Give ducal palace personell some new things to say //
 // Modified version of jastey's Endless BG1 mod       //
-// Compiled via main_common.tpa                       //
+// Compiled via main_bg1.tpa                          //
 ////////////////////////////////////////////////////////
 
 // Give the new palace gate guards some random things to say
