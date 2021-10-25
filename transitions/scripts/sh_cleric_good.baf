@@ -19,6 +19,8 @@ THEN
 		SetGlobal("#L_ChestActivated","MYAREA",1)
 		MoveContainerContents("AR0902*Chest1","AR0902*#LPlayerChest")
 		ContainerEnable("#LPlayerChest",TRUE)
+		ActionOverride("Chest 1",RemoveTraps(Myself))
+		SetGlobal("Chest_1","MYAREA",-1)	// x-Mod Traps Overhaul
 		ContainerEnable("Chest 1",FALSE)
     	Continue()
 END
