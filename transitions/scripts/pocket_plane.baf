@@ -25,6 +25,16 @@ END
 IF
 	GlobalGT("#L_PCChest","MYAREA",1)
 	!Global("#L_PlayerChestLocation","GLOBAL",30)
+	Global("#L_MoveContents","MYAREA",0)
+	TriggerOverride("#LPlayerChest",Range([PC],30))
+THEN
+	RESPONSE #100
+		SetGlobal("#L_MoveContents","MYAREA",1)
+		Continue()
+END
+
+IF
+	Global("#L_MoveContents","MYAREA",1)
 	Global("#L_HouseBGate1","GLOBAL",2)
 THEN
 	RESPONSE #100
@@ -34,8 +44,7 @@ THEN
 END
 
 IF
-	GlobalGT("#L_PCChest","MYAREA",1)
-	!Global("#L_PlayerChestLocation","GLOBAL",30)
+	Global("#L_MoveContents","MYAREA",1)
 	Global("#L_HouseBGate2","GLOBAL",2)
 THEN
 	RESPONSE #100
@@ -45,8 +54,7 @@ THEN
 END
 
 IF
-	GlobalGT("#L_PCChest","MYAREA",1)
-	!Global("#L_PlayerChestLocation","GLOBAL",30)
+	Global("#L_MoveContents","MYAREA",1)
 	Global("#L_HouseHHedge","GLOBAL",2)
 THEN
 	RESPONSE #100
@@ -56,8 +64,7 @@ THEN
 END
 
 IF
-	GlobalGT("#L_PCChest","MYAREA",1)
-	!Global("#L_PlayerChestLocation","GLOBAL",30)
+	Global("#L_MoveContents","MYAREA",1)
 	Global("#L_HouseBeregost","GLOBAL",2)
 THEN
 	RESPONSE #100
@@ -67,10 +74,10 @@ THEN
 END
 
 IF
-	GlobalGT("#L_PCChest","MYAREA",1)
-	!Global("#L_PlayerChestLocation","GLOBAL",30)
+	Global("#L_MoveContents","MYAREA",1)
 THEN
 	RESPONSE #100
+		SetGlobal("#L_MoveContents","MYAREA",0)
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",30)
 		MoveContainerContents("#LBD0103*PlayerChest00","AR4500*#LPlayerChest")	// BG1 Room in Palace
 		MoveContainerContents("BD0103*PlayerChest00","AR4500*#LPlayerChest") 	// SoD Room in Palace
