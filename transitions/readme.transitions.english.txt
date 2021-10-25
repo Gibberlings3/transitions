@@ -30,7 +30,7 @@ Prevents the end of game transition to ToB after Irenicus's death
 Allows access to Duke Belt in the Ducal Palace for game advancement  
 To remain consistent with SoD, the protagonist is offered the room on the 3rd floor, which may be turned down
 Also to remain consistent with SoD, after Sarevok is defeated Liia offers to recruit Imoen for magic training, the timing of which is up to the player
-If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest (which can also be skipped), with no tour-guide Imoen, and allowing you to come and go as you please
+If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
 In EET, Duke Belt's item allows for skipping all or the remainder of SoD at almost any time during the campaign (there is a point of no escape toward the end)
 
