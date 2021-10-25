@@ -13,7 +13,7 @@ APPEND ~BOTSMITH~
 	END
 	
 	IF WEIGHT #-1 ~Global("#L_PCChest","MYAREA",2)~ THEN BEGIN found_it
-		SAY @2590 // ~<PROPER_MASTERMISTRISS> <PROPER_MASTERMISTRISS>! I found your stuff! It's all in the middle chest, it is! Every last thing.~ 
+		SAY @2590 // ~<PROPER_MASTERMISTRESS> <PROPER_MASTERMISTRESS>! I found your stuff! It's all in the middle chest, it is! Every last thing.~ 
 		IF ~~ DO ~SetGlobal("#L_PCChest","MYAREA",3)~ EXIT
 	END
 END
