@@ -100,6 +100,7 @@ THEN
 		MoveContainerContents("AR0902*#LPlayerChest","AR0322*container5")		// Good Cleric Stronghold
 		MoveContainerContents("AR0903*#LPlayerChest","AR0322*container5")		// Paladin Stronghold
 		MoveContainerContents("AR0904*#LPlayerChest","AR0322*container5")		// Evil Cleric Stronghold
+		MoveContainerContents("AR4500*#LPlayerChest","AR0322*container5")		// Pocket Plane
 		SmallWait(1)
 		Continue()
 END
