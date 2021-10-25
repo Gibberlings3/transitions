@@ -42,7 +42,7 @@ IF
 	Global("#L_HouseBGate1","GLOBAL",2)
 THEN
 	RESPONSE #100
-		MoveContainerContents("#LBG0006*PlayerChest00","AR0322*container5")
+		MoveContainerContents("#LBG0006*PlayerChest00","AR0322*container6")
 		SmallWait(1)
 		Continue()
 END
@@ -53,7 +53,7 @@ IF
 	Global("#L_HouseBGate2","GLOBAL",2)
 THEN
 	RESPONSE #100
-		MoveContainerContents("#LBG1107*PlayerChest00","AR0322*container5")
+		MoveContainerContents("#LBG1107*PlayerChest00","AR0322*container6")
 		SmallWait(1)
 		Continue()
 END
@@ -64,7 +64,7 @@ IF
 	Global("#L_HouseHHedge","GLOBAL",2)
 THEN
 	RESPONSE #100
-		MoveContainerContents("#LBG3201*PlayerChest00","AR0322*container5")
+		MoveContainerContents("#LBG3201*PlayerChest00","AR0322*container6")
 		SmallWait(1)
 		Continue()
 END
@@ -75,7 +75,7 @@ IF
 	Global("#L_HouseBeregost","GLOBAL",2)
 THEN
 	RESPONSE #100
-		MoveContainerContents("#LBG3347*PlayerChest00","AR0322*container5")
+		MoveContainerContents("#LBG3347*PlayerChest00","AR0322*container6")
 		SmallWait(1)
 		Continue()
 END
@@ -86,21 +86,21 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("#L_PlayerChestLocation","GLOBAL",23)
-		MoveContainerContents("#LBD0103*PlayerChest00","AR0322*container5")		// BG1 Room in Palace
-		MoveContainerContents("BD0103*PlayerChest00","AR0322*container5") 		// SoD Room in Palace
-		MoveContainerContents("BD1000*PlayerChest00","AR0322*container5") 		// 1st SoD Camp
-		MoveContainerContents("BD7100*PlayerChest00","AR0322*container5") 		// 2nd SoD Camp
-		MoveContainerContents("BD3000*PlayerChest00","AR0322*container5")		// 3rd SoD Camp
-		MoveContainerContents("AR0523*container4","AR0322*container5")			// Bard Stronghold
-		MoveContainerContents("AR1306*container11","AR0322*container5")			// Fighter Stronghold
-		MoveContainerContents("AR1107*#LPlayerChest","AR0322*container5")		// Ranger Stronghold
-		MoveContainerContents("AR0411*#LPlayerChest","AR0322*container5")		// Mage Stronghold
-		MoveContainerContents("AR1902*#LPlayerChest","AR0322*container5")		// Druid Stronghold
-		MoveContainerContents("AR0901*#LPlayerChest","AR0322*container5")		// Neutral Cleric Stronghold
-		MoveContainerContents("AR0902*#LPlayerChest","AR0322*container5")		// Good Cleric Stronghold
-		MoveContainerContents("AR0903*#LPlayerChest","AR0322*container5")		// Paladin Stronghold
-		MoveContainerContents("AR0904*#LPlayerChest","AR0322*container5")		// Evil Cleric Stronghold
-		MoveContainerContents("AR4500*#LPlayerChest","AR0322*container5")		// Pocket Plane
+		MoveContainerContents("#LBD0103*PlayerChest00","AR0322*container6")		// BG1 Room in Palace
+		MoveContainerContents("BD0103*PlayerChest00","AR0322*container6") 		// SoD Room in Palace
+		MoveContainerContents("BD1000*PlayerChest00","AR0322*container6") 		// 1st SoD Camp
+		MoveContainerContents("BD7100*PlayerChest00","AR0322*container6") 		// 2nd SoD Camp
+		MoveContainerContents("BD3000*PlayerChest00","AR0322*container6")		// 3rd SoD Camp
+		MoveContainerContents("AR0523*container4","AR0322*container6")			// Bard Stronghold
+		MoveContainerContents("AR1306*container11","AR0322*container6")			// Fighter Stronghold
+		MoveContainerContents("AR1107*#LPlayerChest","AR0322*container6")		// Ranger Stronghold
+		MoveContainerContents("AR0411*#LPlayerChest","AR0322*container6")		// Mage Stronghold
+		MoveContainerContents("AR1902*#LPlayerChest","AR0322*container6")		// Druid Stronghold
+		MoveContainerContents("AR0901*#LPlayerChest","AR0322*container6")		// Neutral Cleric Stronghold
+		MoveContainerContents("AR0902*#LPlayerChest","AR0322*container6")		// Good Cleric Stronghold
+		MoveContainerContents("AR0903*#LPlayerChest","AR0322*container6")		// Paladin Stronghold
+		MoveContainerContents("AR0904*#LPlayerChest","AR0322*container6")		// Evil Cleric Stronghold
+		MoveContainerContents("AR4500*#LPlayerChest","AR0322*container6")		// Pocket Plane
 		SmallWait(1)
 		Continue()
 END

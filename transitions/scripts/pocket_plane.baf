@@ -79,7 +79,7 @@ THEN
 		MoveContainerContents("BD3000*PlayerChest00","AR4500*#LPlayerChest")	// 3rd SoD Camp
 		MoveContainerContents("AR0523*container4","AR4500*#LPlayerChest")		// Bard Stronghold
 		MoveContainerContents("AR1306*container11","AR4500*#LPlayerChest")		// Fighter Stronghold
-		MoveContainerContents("AR0322*container5","AR4500*#LPlayerChest")		// Thief Stronghold
+		MoveContainerContents("AR0322*container6","AR4500*#LPlayerChest")		// Thief Stronghold
 		MoveContainerContents("AR1107*#LPlayerChest","AR4500*#LPlayerChest")	// Ranger Stronghold
 		MoveContainerContents("AR0411*#LPlayerChest","AR4500*#LPlayerChest")	// Mage Stronghold
 		MoveContainerContents("AR1902*#LPlayerChest","AR4500*#LPlayerChest")	// Druid Stronghold

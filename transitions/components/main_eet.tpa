@@ -23,7 +23,7 @@ EXTEND_TOP ~AR0523.BCS~ ~%mod_root%/scripts/sh_bard.baf~
 // Fighter Stronghold - use the chest next to the butler		(Chest location 22 = AR1306*container11)
 EXTEND_TOP ~AR1306.BCS~ ~%mod_root%/scripts/sh_fighter.baf~
 
-// Thief Stronghold - use the chest next to the vendor/fence	(Chest location 23 = AR0322*container5)
+// Thief Stronghold - use the chest next to the vendor/fence	(Chest location 23 = AR0322*container6)
 EXTEND_TOP ~AR0322.BCS~ ~%mod_root%/scripts/sh_thief.baf~
 
 // Ranger Stronghold - use new chest							(Chest location 24 = AR1107*#LPlayerChest)
