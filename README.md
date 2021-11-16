@@ -14,3 +14,8 @@ After Sarevok has been defeated, the protagonist can take up residence at the Du
 In order to plug the plot hole dealing with Sarevok's sword, he can be given his equipment, either equipped or just in his inventory, so that it can be looted and confiscated after his death.  If you choose to equip his items, the final fight with him might be slightly more difficult.
 
 There is an option for a new bhaal-spawn ability that will be added during the first rest period after defeating Sarevok.  Good and neutral aligned protagonists will receive the equivalent of Greenstone Amulet's Mind Shield, evil receives Algernon's Cloak Charm Creature.
+
+-------------------------------------------------
+---              Future Features              ---
+-------------------------------------------------
+* Allow for skipping to the end of SoD (capture scene) from anywhere in SoD
