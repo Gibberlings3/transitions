@@ -23,7 +23,7 @@ APPEND DELTAN
 	// Cross-mod content with BG1RE
 	IF ~GlobalGT("#L_TalkedToDukes","GLOBAL",0) Global("C#RE1_ScarRetrieval","GLOBAL",15)~ THEN BEGIN SHOO
 		SAY @2098 /* ~I have nothing more to say to you.~ */
-		IF ~~ THEN DO ~SetGlobal("#L_TalkedToDukes","GLOBAL",2) SetGlobal("#L_EltanLoveMatch","GLOBAL",0) EscapeArea()~ EXIT
+		IF ~~ THEN DO ~IncrementGlobal("#L_TalkedToDukes","GLOBAL",1) SetGlobal("#L_EltanLoveMatch","GLOBAL",0) EscapeArea()~ EXIT
 	END
 
 	// Cross-mod content with BG1RE
