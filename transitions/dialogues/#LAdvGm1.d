@@ -16,7 +16,7 @@ BEGIN ~#LAdvGm1~
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",1)~ + @2307	/* ~I'd like to visit Imoen.~ */  DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",2)~ + SPLIT_GOLD
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) OR(4) PartyHasItem("#LKey01") PartyHasItem("#LKey02") PartyHasItem("#LKey03") PartyHasItem("#LKey04")~ + @2305 /* ~I'd like to go home.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",3)~ + SPLIT_GOLD
 		+ ~Global("#L_AcceptedRoom","GLOBAL",0) Global("#L_ImoenInPalace","GLOBAL",0) !PartyHasItem("#LKey01") !PartyHasItem("#LKey02") !PartyHasItem("#LKey03") !PartyHasItem("#LKey04")~ + @2306 /* ~I'd like to go to the Elfsong Tavern.~ */ DO ~SetGlobal("#L_StartCaelarAttack","GLOBAL",3)~ + SPLIT_GOLD
-		+ ~Global("#L_EET","GLOBAL",1)~ + @2309 /* ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_StartBG2","GLOBAL",1)~ + SPLIT_GOLD
+		+ ~Global("#L_SoD","GLOBAL",1)~ + @2309 /* ~I'd like to gather a group and explore a bit, maybe see what's south of Nashkel.~ */ DO ~SetGlobal("#L_StartBG2","GLOBAL",1)~ + SPLIT_GOLD
 	END
 
 	IF ~GlobalGT("BD_Plot","GLOBAL",1) Global("#L_StartBG2","GLOBAL",0)~ THEN BEGIN ITEM_SoD
@@ -24,7 +24,7 @@ BEGIN ~#LAdvGm1~
 		= @2303 /* ~So, <CHARNAME>, what would you like to do?~ */
 		+ ~!Global("#L_LetsHaveFun","GLOBAL",1) !Dead("DEATHK")~ + @2308 /* ~Nothing at this time.~ */ + ITEM_FUN
 		+ ~OR(2) Global("#L_LetsHaveFun","GLOBAL",1) Dead("DEATHK")~ + @2308 /* ~Nothing at this time.~ */ EXIT
-		+ ~Global("#L_EET","GLOBAL",1)~ + @2466 /* ~I want to gather a group and head as far away from here as possible.~ */ DO ~SetGlobal("#L_StartBG2","GLOBAL",1)~ + SPLIT_GOLD
+		+ ~Global("#L_SoD","GLOBAL",1)~ + @2466 /* ~I want to gather a group and head as far away from here as possible.~ */ DO ~SetGlobal("#L_StartBG2","GLOBAL",1)~ + SPLIT_GOLD
 	END
 
 	IF ~~ THEN ITEM_FUN
