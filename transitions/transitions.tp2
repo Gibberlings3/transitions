@@ -305,7 +305,7 @@ LAF timers_common END
 BEGIN @23   // MOD 130
 DESIGNATED 130
 LABEL "#L-TRANSITIONS-ABBR_CAPTURE"
-REQUIRE_PREDICATE (GAME_IS ~eet~) @4
+REQUIRE_PREDICATE (GAME_INCLUDES ~sod~) @4
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~transitions.tp2~ 0) @8
 INCLUDE ~transitions/components/abbr_capture.tpa~
 LAF abbr_capture END

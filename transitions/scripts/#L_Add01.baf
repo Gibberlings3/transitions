@@ -125,6 +125,8 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
+		SetGlobal("bd_plot","global",675)
+		DestroyItem("imoenhp1")
 		EndCutSceneMode()
 END
 

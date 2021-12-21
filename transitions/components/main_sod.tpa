@@ -14,6 +14,10 @@ ACTION_IF (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ 0) BEGIN
    END
 END
 
+// Cut scene that starts BG2 when EET is installed ----- MOVED FROM main_eet.tpa
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~ EVAL
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Add01.baf~ EVAL
+
 //////////////////////////////////////////////
 // MOVED the PC's room in the palace to BG1 //
 //////////////////////////////////////////////

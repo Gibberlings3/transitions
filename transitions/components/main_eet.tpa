@@ -7,10 +7,6 @@
 EXTEND_TOP ~%NBaldursGate_DucalPalace_L1%.bcs~ ~%mod_root%/scripts/main_eet.baf~ EVAL
 EXTEND_TOP ~BD0103.bcs~ ~%mod_root%/scripts/main_eet.baf~ EVAL
 
-// Cut scene that starts BG2 when EET is installed
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut09.baf~ EVAL
-COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Add01.baf~ EVAL
-
 ////////////////////////////////////////////
 // BG2 Stronghold chests
 ////////////////////////////////////////////

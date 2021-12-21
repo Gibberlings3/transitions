@@ -8,7 +8,7 @@ DEFINE_ACTION_FUNCTION abbr_capture BEGIN
 	COPY_EXISTING ~BD6100.bcs~ ~override~
    		DECOMPILE_AND_PATCH BEGIN
       		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~GlobalLT("bd_plot","global",680)~ ~Global("#L_AbbrCapture","GLOBAL",0) GlobalLT("bd_plot","global",680)~
-      		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Switch("bd_finale","bd6100")~ ~Global("#L_AbbrCapture","GLOBAL",0) Switch("bd_finale","bd6100")~
+      		REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~!GlobalTimerNotExpired("bd_ambush_timer","bd6100")~ ~!GlobalTimerNotExpired("bd_ambush_timer","bd6100") OR(2) Global("#L_AbbrCapture","GLOBAL",0) Global("#L_AbbrEnd","bd6100",1)~
 	    	REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~_sleep","bd6100",0)~ ~_sleep","bd6100",0) Global("#L_AbbrCapture","GLOBAL",0)~
 		    REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~_down","bd6100",0)~ ~_down","bd6100",0) Global("#L_AbbrCapture","GLOBAL",0)~
 		END
@@ -19,6 +19,12 @@ DEFINE_ACTION_FUNCTION abbr_capture BEGIN
 	EXTEND_TOP ~BD0103.BCS~ ~%mod_root%/scripts/abbr_cap.baf~
 
 	// The abbreviated capture scene...
+	OUTER_SET LINE_IMOEN = 39786
+	OUTER_SET LINE_DYNAHEIR = 39791
+	ACTION_IF GAME_IS ~eet~ BEGIN
+		OUTER_SET LINE_IMOEN = 239786
+		OUTER_SET LINE_DYNAHEIR = 239791
+	END
 	COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut08.baf~ EVAL
 
 	// Add the call to the abbreviated scene to the final SoD area

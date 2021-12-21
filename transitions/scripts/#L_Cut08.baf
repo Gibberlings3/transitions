@@ -19,10 +19,10 @@ THEN
 		PlaySound("EFF_M87")
 
 		Wait(2)
-		DisplayStringWait("%IMOEN_DV%",239786)  // Hey, do you feel a little... off?
+		DisplayStringWait("%IMOEN_DV%",%LINE_IMOEN%)  // Hey, do you feel a little... off?
 
 		Wait(1)
-		DisplayStringWait("DYNAHEIR",239791)  // The mist—it is more than mist. It dulls the senses...
+		DisplayStringWait("DYNAHEIR",%LINE_DYNAHEIR%)  // The mist—it is more than mist. It dulls the senses...
 
 		Wait(1)
 		FadeToColor([40.0],0)
@@ -81,6 +81,24 @@ THEN
 		SmallWait(25)
 		SoundActivate("Amb_dungeon",TRUE)
 		SmallWait(2)
+END
+
+IF
+	Global("#L_EET","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
 		EndCutSceneMode()
 		CreateCreatureObjectEffect("K#TELBGT","",Player1)  // No such index
 END
+
+IF
+	!Global("#L_EET","GLOBAL",1)
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		SetGlobal("bd_finale",bd6100,5)
+		SetGlobal("#L_AbbrEnd",bd6100,1)
+		EndCutSceneMode()
+END
+
