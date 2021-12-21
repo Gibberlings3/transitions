@@ -32,7 +32,7 @@ To remain consistent with SoD, the protagonist is offered the room on the 3rd fl
 Also to remain consistent with SoD, after Sarevok is defeated Liia offers to recruit Imoen for magic training, the timing of which is up to the player
 If SoD is installed, the Korlasz dungeon quest will be a regular skippable clean-up quest, with no tour-guide Imoen, and allowing you to come and go as you please
 NOTE: Your party will not be given a key ring when doing the Korlasz quest.  If you want one, you can buy one at various merchants in Baldur's Gate when SoD is present
-In EET, Duke Belt's item allows for skipping all or the remainder of SoD at almost any time during the campaign (there is a point of no escape toward the end)
+If SoD is installed, Duke Belt's item allows for skipping all or the remainder of SoD at almost any time during the campaign (there is a point of no escape toward the end)
 
 ------------------------------------------------------------------------
 New Bhaal-spawn power
@@ -139,8 +139,8 @@ Will use EBG1's version if available
 ------------------------------------------------------------------------
 Use abbreviated capture scene leading to BG2EE
 ------------------------------------------------------------------------
-Requires Main Component and EET
-Cut out the long fight scene leading to capture prior to BG2EE and just show a brief cut-scene.
+Requires Main Component and SoD
+Cut out the long fight scene leading to capture prior to BG2EE (EET onlly) and just show a brief cut-scene. It's not For non-EET games, the ending is actually a little longer, showing the final brief cut-scene with the parties captors.
 
 ------------------------------------------------------------------------
 Use Irenicus in hell movie to restore Bhaal-spawn powers when he is defeated
@@ -209,6 +209,7 @@ CREDITS
 * Gwendolyne, Bartimaeus and kjeron for the help on my first custom innate spell
 * Sam. for getting me over the hurdle on swapping out TIS tiles and for his amazing ps_tileset_lib
 * Mike1072 for help with the legal stuff
+* Baptor for the idea of allowing the transition to the end of SoD even when EET isn't loaded
 * Thank you beta testers and proofreaders!: jastey and igi :)
 * The folks at The Gibberlings Three forums: for never failing to answer my many many questions
 
@@ -243,6 +244,7 @@ HISTORY
 v1.0 - initial production release
 v1.1 - added compat library for SoD
 v2.0 - various fixes and all planned enhancements completed
+v2.1 - allows quick transition to end of SoD even when EET isn't loaded (thank you Baptor for the idea) and a small update to accommodate BG1RE changes
 
 ------------------------------------------------------------------------
 LEGAL INFORMATION
