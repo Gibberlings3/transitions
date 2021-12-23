@@ -520,7 +520,6 @@ DEFINE_PATCH_FUNCTION CLONE_TRAVEL_TRIGGER
 		offset_old_region
 		offset_new_region
 BEGIN
-	SET name_len = STRING_LENGTH ~%name_old%~
 	READ_SHORT 0x005a num_regions
 	READ_LONG 0x005c offset_regions
 	
@@ -529,7 +528,7 @@ BEGIN
 	
 	PATCH_IF (STRING_LENGTH ~%name_old%~ > 1) AND (STRING_LENGTH ~%name_new%~ > 1) AND (STRING_LENGTH ~%dest_new%~ > 1) BEGIN
 		FOR (idx = 0; ((idx < num_regions) AND (offset_old_region = 0)); idx = idx + 1) BEGIN
-			READ_ASCII (offset_regions + (0x00c4 * idx)) region_name (%name_len%)
+			READ_ASCII (offset_regions + (0x00c4 * idx)) region_name (32) NULL
 			PATCH_IF ~%region_name%~ STR_EQ ~%name_old%~ = 1 BEGIN
 				offset_old_region = (offset_regions + (0x00c4 * idx))
 			END
