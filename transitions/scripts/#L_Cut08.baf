@@ -97,8 +97,8 @@ IF
 THEN
 	RESPONSE #100
 		CutSceneId(Player1)
-		SetGlobal("bd_finale",bd6100,5)
-		SetGlobal("#L_AbbrEnd",bd6100,1)
+		SetGlobal("bd_finale","bd6100",5)
+		SetGlobal("#L_AbbrEnd","bd6100",1)
 		EndCutSceneMode()
 END
 
