@@ -245,6 +245,7 @@ v1.0 - initial production release
 v1.1 - added compat library for SoD
 v2.0 - various fixes and all planned enhancements completed
 v2.1 - allows quick transition to end of SoD even when EET isn't loaded (thank you Baptor for the idea) and a small update to accommodate BG1RE changes
+v2.2 - fixed bugs with regions and global setting
 
 ------------------------------------------------------------------------
 LEGAL INFORMATION

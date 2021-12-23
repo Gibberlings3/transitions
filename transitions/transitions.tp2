@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/transitions~
 SUPPORT ~For help troubleshooting installation problems, go to the Transitions forum at https://www.gibberlings3.net/forums/forum/227-transitions/ ~
-VERSION ~v2.1~
+VERSION ~v2.2~
 
 README ~transitions/readme.transitions.%LANGUAGE%.txt~ ~transitions/readme.transitions.english.txt~
 
