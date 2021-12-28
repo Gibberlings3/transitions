@@ -17,6 +17,8 @@ THEN
 		ActionOverride(Player4,DestroyItem("#LAMUL27"))
 		ActionOverride(Player5,DestroyItem("#LAMUL27"))
 		ActionOverride(Player6,DestroyItem("#LAMUL27"))
+		
+		CreateItem("AMUL27",1,0,0) 
 
 		LeaveAreaLUA("AR4000","",[1300.1840],W)
 		ActionOverride(Player2,LeaveAreaLUA("AR4000","",[1300.1840],W))

@@ -23,6 +23,9 @@ COPY_EXISTING ~AMUL27.ITM~ ~override/#LAMUL27.itm~
 OUTER_SET UseMe = RESOLVE_STR_REF (@1033)
 APPEND itemdial.2da ~#LAMUL27 %UseMe% #LAMUL27~ UNLESS ~#LAMUL27~
 
+// Compile script called by amulet to transfer to the grove
+COMPILE EVALUATE_BUFFER ~%mod_root%/scripts/#L_Cut10.baf~
+
 // Add key ring to Adventure Mart
 COPY ~%mod_root%/objects/BDKEYR.ITM~ ~override/#LKEYR06.ITM~ 
 	SAY NAME1 @1019 /* ~Copper Key Ring~ */

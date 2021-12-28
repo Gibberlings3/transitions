@@ -7,6 +7,7 @@
 // This will allow the use of the Irenicus in hell movie as a dream
 // and give back bhaal-spawn powers if that component is installed
 REPLACE_ACTION_TEXT SUELLE2 ~StartCutSceneEx("cut59b",FALSE)~ ~StartCutSceneEx("cut59b",TRUE)~
+REPLACE_ACTION_TEXT SUELLE2 ~StartCutScene("cut59b")~ ~StartCutSceneEx("cut59b",TRUE)~
 
 // Keep the game open after Ellesime thanks the group
 ALTER_TRANS SUELLE2
@@ -22,6 +23,7 @@ ALTER_TRANS SUELLE2
 	BEGIN 0 END 
 	BEGIN
 		"TRIGGER" ~ReputationLT(Player1,10) Global("#L_Snark","GLOBAL",0)~
+		"ACTION" ~~
 		"EPILOGUE" ~GOTO 19~
 	END
 
@@ -30,6 +32,7 @@ ALTER_TRANS SUELLE2
 	BEGIN 1 END 
 	BEGIN
 		"TRIGGER" ~ReputationGT(Player1,9) Global("#L_Snark","GLOBAL",0)~
+		"ACTION" ~~
 		"EPILOGUE" ~GOTO 20~
 	END
 
