@@ -3,6 +3,10 @@
 ////////////////////////////////////////////
 
 DEFINE_ACTION_FUNCTION main_common BEGIN
+	ACTION_IF (GAME_INCLUDES ~sod~) AND (MOD_IS_INSTALLED ~c#endlessbg1.tp2~ (ID_OF_LABEL ~c#endlessbg1.tp2~ ~EBG1_KorlaszDungeonBG1~)) BEGIN
+		UNINSTALL ~c#endlessbg1.tp2~ (ID_OF_LABEL ~c#endlessbg1.tp2~ ~EBG1_KorlaszDungeonBG1~)
+	END
+
 	ACTION_IF (GAME_IS ~bgee eet~) BEGIN
 		INCLUDE ~%mod_root%/components/main_bg1.tpa~
 	END

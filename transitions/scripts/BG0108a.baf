@@ -5,6 +5,14 @@
 //////////////////////////////////////////////////////////////
 
 IF
+	Global("C#st_PlaceFenster","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("C#st_PlaceFenster","MYAREA",99)
+		Continue()
+END
+
+IF
 	Global("#L_BG1SarevokDead","GLOBAL",1)
 	Global("#L_FensterSpawned","MYAREA",0)
 THEN
