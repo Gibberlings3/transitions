@@ -151,7 +151,7 @@ While recuperating in Suldanessellar, the Irenicus in hell movie will be shown a
 ------------------------------------------------------------------------
 COMPATIBILITY NOTES
 ------------------------------------------------------------------------
-There are no known compatability issues at this time
+When SoD is present, Transition isn't compatible with EndlessBG1's Korlasz in BG1 component so that component will be removed if SoD is present. Also, Transitions will override EBG1's handling of Fenster.
 
 ------------------------------------------------------------------------
 INSTALLATION
@@ -247,6 +247,7 @@ v2.0 - various fixes and all planned enhancements completed
 v2.1 - allows quick transition to end of SoD even when EET isn't loaded (thank you Baptor for the idea) and a small update to accommodate BG1RE changes
 v2.2 - fixed bugs with regions and global setting
 v2.3 - BG2 fix of 2.6 changes and one script omission
+v2.4 - Fix for Belt's dialogue when Kivan is present and resolution of compatibility issues with EndlessBG1
 
 ------------------------------------------------------------------------
 LEGAL INFORMATION
