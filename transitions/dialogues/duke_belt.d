@@ -498,7 +498,7 @@ CHAIN
 		== BELT IF ~IsValidForPartyDialogue("KIVAN")~ THEN @2142 /* ~Dead or ALIVE!~ */
 	END
 	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2141 /* ~I doubt that will be necessary.~ */ UNSOLVED_JOURNAL @3003 + BELT_QUESTS_WARNING
-	+ ~!IsValidForPartyDialogue("KIVAN")~ + @2140 /* ~Thank you.~ */ UNSOLVED_JOURNAL @3003 EXIT
+	+ ~~ + @2140 /* ~Thank you.~ */ UNSOLVED_JOURNAL @3003 EXIT
 
 //////////////////////////////////////////////////////////////////////////////
 // Cloudwulfe et al specific
