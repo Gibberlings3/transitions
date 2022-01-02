@@ -63,5 +63,7 @@ END
 // Spawn flaming fist healers when they exit the temple
 // if they still have the sword
 // Can happen ... 
-EXTEND_BOTTOM ~%Undercity%.BCS~ ~%mod_root%/scripts/BG0123.baf~
+// Needed to put in the actual area name in the script because MYAREA was coming out MYAREA# for some reason
+OUTER_SPRINT myarea ~%Undercity%~
+EXTEND_BOTTOM ~%Undercity%.BCS~ ~%mod_root%/scripts/BG0123.baf~ EVAL
 
