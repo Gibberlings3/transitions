@@ -6,13 +6,13 @@
 ///////////////////////////////////////////////////////////////////
 IF
 	Dead("Sarevok")
-	Global("#L_FFHealersSpawned","MYAREA",0)
+	Global("#L_FFHealersSpawned","%myarea%",0)
 	PartyHasItem("SW2H16")
 	CombatCounter(0)
 	!ActuallyInCombat()
 THEN
 	RESPONSE #100
-		SetGlobal("#L_FFHealersSpawned","MYAEA",1)
+		SetGlobal("#L_FFHealersSpawned","%myarea%",1)
 		SetGlobal("C#st_FFHealerSpawn","GLOBAL",1)
 		CreateCreature("#LffHlr1",[1893.1531],6)
 		CreateCreature("#LffHlr2",[1848.1585],6)
