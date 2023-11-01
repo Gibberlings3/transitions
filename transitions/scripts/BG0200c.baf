@@ -49,7 +49,9 @@ THEN
 END
 
 IF
-	True()
+	!Global("L_FromBG0200","GLOBAL",1)
+	!Global("L_FromBD0010","GLOBAL",0)
+	!Global("L_FromBD0101","GLOBAL",0)
 THEN
 	RESPONSE #100
 		SetGlobal("L_FromBG0200","GLOBAL",1)
